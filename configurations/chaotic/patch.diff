@@ -1,0 +1,56 @@
+diff --git a/Makefile b/Makefile
+index bffa553..6ae611a 100644
+--- a/Makefile
++++ b/Makefile
+@@ -43,7 +43,7 @@ $(DESTDIR)$(PREFIX)/bin/chaotic.sh: src/chaotic.sh
+ 
+ $(DESTDIR)$(PREFIX)/bin/chaotic: build/chaotic.elf
+ 	$(dir_guard)
+-	install -o root -g chaotic_op -m4750 $< $@
++	install -m755 $< $@
+ 
+ $(DESTDIR)$(PREFIX)/lib/chaotic/%.sh: src/lib/%.sh
+ 	$(dir_guard)
+@@ -57,17 +57,6 @@ $(DESTDIR)$(PREFIX)/lib/chaotic/guest/bin/%: guest/bin/%
+ 	$(dir_guard)
+ 	install -m755 $< $@
+ 
+-$(DESTDIR)/var/lib/chaotic/interfere:
+-	$(dir_guard)
+-	cd "$(@D)" && git clone 'https://github.com/chaotic-aur/interfere.git' interfere
+-
+-$(DESTDIR)/var/lib/chaotic/packages:
+-	$(dir_guard)
+-	cd "$(@D)" && git clone 'https://github.com/chaotic-aur/packages.git' packages
+-
+-$(DESTDIR)/var/cache/chaotic:
+-	@install -dm755 $@
+-
+ $(DESTDIR)/usr/lib/systemd/system/%: services/%
+ 	install -o root -g root -m755 $< $@
+ 
+@@ -78,10 +67,7 @@ install: \
+ 	$(foreach l, $(GUEST_ETC), $(DESTDIR)$(PREFIX)/lib/chaotic/guest/etc/${l}) \
+ 	$(foreach l, $(GUEST_BIN), $(DESTDIR)$(PREFIX)/lib/chaotic/guest/bin/${l}) \
+ 	$(DESTDIR)$(PREFIX)/bin/chaotic.sh \
+-	$(DESTDIR)$(PREFIX)/bin/chaotic \
+-	$(DESTDIR)/var/lib/chaotic/interfere \
+-	$(DESTDIR)/var/lib/chaotic/packages \
+-	$(DESTDIR)/var/cache/chaotic
++	$(DESTDIR)$(PREFIX)/bin/chaotic
+ 
+ install-services: \
+ 	$(foreach s, $(ROUTINES), $(DESTDIR)/usr/lib/systemd/system/chaotic-${s}.service) \
+diff --git a/src/chaotic.sh b/src/chaotic.sh
+index 456af81..8a81100 100755
+--- a/src/chaotic.sh
++++ b/src/chaotic.sh
+@@ -1,6 +1,8 @@
+ #!/usr/bin/env bash
+ # shellcheck disable=SC2034,SC2164
+ 
++export PATH=/run/current-system/sw/bin
++
+ pushd() { command pushd "$@" >/dev/null; }
+ popd() { command popd >/dev/null; }
+ stee() { command tee "$@" >/dev/null; }
