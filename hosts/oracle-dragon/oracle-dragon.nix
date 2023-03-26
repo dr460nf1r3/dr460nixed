@@ -115,18 +115,4 @@
     owner = config.users.users.cloudflared.name;
     path = "/run/secrets/cloudflared/oracle-dragon/cred";
   };
-
-  # The key needed for using oracle-dragon as remote builder
-  home-manager.users."root".programs.ssh.matchBlocks = {
-    "oracle-dragon" = {
-      HostName = "oracle-dragon";
-      IdentityFile = config.sops.secrets."ssh_keys/deploy_ed25519".path;
-      User = "root";
-    };
-  };
-  sops.secrets."ssh_keys/deploy_ed25519" = {
-    mode = "0600";
-    owner = config.users.users.root.name;
-    path = "/run/secrets/ssh_keys/deploy_ed25519";
-  };
 }

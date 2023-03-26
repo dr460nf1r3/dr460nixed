@@ -143,6 +143,7 @@
       # My Raspberry Pi 4B
       rpi-dragon = {
         deployment = {
+          buildOnTarget = true;
           tags = ["rpi" "servers"];
         };
         imports = [./hosts/rpi-dragon/rpi-dragon.nix];
@@ -192,7 +193,6 @@
         defaultModules
         ++ [
           ./hosts/rpi-dragon/rpi-dragon.nix
-          <nixpkgs/nixos/modules/profiles/hardened.nix>
         ];
       specialArgs = specialArgs;
     };

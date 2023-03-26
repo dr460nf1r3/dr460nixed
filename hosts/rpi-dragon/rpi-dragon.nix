@@ -14,6 +14,7 @@
     ../../configurations/servers.nix
     "${builtins.fetchGit {
       url = "https://github.com/NixOS/nixos-hardware.git";
+      rev = "f38f9a4c9b2b6f89a5778465e0afd166a8300680";
     }}/raspberry-pi/4"
     ./hardware-configuration.nix
   ];
@@ -89,6 +90,15 @@
     mode = "0600";
     owner = config.users.users.root.name;
     path = "/root/.ssh/id_ed25519";
+  };
+
+  # The key needed for using oracle-dragon as remote builder
+  home-manager.users."root".programs.ssh.matchBlocks = {
+    "oracle-dragon" = {
+      HostName = "oracle-dragon";
+      IdentityFile = config.sops.secrets."ssh_keys/deploy_ed25519".path;
+      User = "deploy";
+    };
   };
 
   # NixOS stuff

@@ -69,8 +69,8 @@
     home.file.".config/monitors.xml".source = ./monitors.xml;
   };
 
-  # I can't be bothered to upgrade this manually
-  system.autoUpgrade.enable = true;
+  # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   # A few secrets
   sops.secrets."gsconnect/tv-nixos/private" = {
