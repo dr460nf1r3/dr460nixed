@@ -7,6 +7,10 @@
   # Individual settings
   imports = [
     ../../configurations/common.nix
+    ../../configurations/desktops/connectivity.nix
+    ../../configurations/desktops/networking.nix
+    ../../configurations/desktops/performance.nix
+    ../../configurations/desktops/pi-dragon.nix
     ../../configurations/servers.nix
     "${builtins.fetchGit {
       url = "https://github.com/NixOS/nixos-hardware.git";

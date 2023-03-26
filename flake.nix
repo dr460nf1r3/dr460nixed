@@ -107,7 +107,6 @@
       defaults = {
         imports = defaultModules;
         deployment = {
-          tags = ["all"];
           targetUser = "deploy";
         };
       };
@@ -193,6 +192,7 @@
         defaultModules
         ++ [
           ./hosts/rpi-dragon/rpi-dragon.nix
+          <nixpkgs/nixos/modules/profiles/hardened.nix>
         ];
       specialArgs = specialArgs;
     };

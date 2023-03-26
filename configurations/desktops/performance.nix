@@ -1,7 +1,4 @@
 {pkgs, ...}: {
-  # Use bleeding edge mesa - to do
-  # imports = ../../pkgs/mesa/mesa.nix;
-
   # Automatically tune nice levels
   services.ananicy = {
     enable = true;
