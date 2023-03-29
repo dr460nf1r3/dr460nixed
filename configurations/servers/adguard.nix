@@ -116,7 +116,7 @@
         use_private_ptr_resolvers = true;
         local_ptr_upstreams = [];
         dns64_prefixes = [];
-        serve_http3 = false;
+        serve_http3 = true;
         use_http3_upstreams = true;
       };
       querylog = {
