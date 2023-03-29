@@ -74,11 +74,11 @@ in {
     bubblemail
     dconf2nix
     evince
-    fractal
     gnome.gnome-tweaks
     gnomeExtensions.bubblemail
     gnomeExtensions.expandable-notifications
     gnomeExtensions.gsconnect
+    gnomeExtensions.one-drive-resurrect
     gnomeExtensions.unite
     librsvg
     tilix

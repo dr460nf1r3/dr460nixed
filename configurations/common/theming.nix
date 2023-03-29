@@ -32,4 +32,7 @@ in {
       name = "Noto Color Emoji";
     };
   };
+
+  # This is false by default for some reason
+  stylix.targets.gnome.enable = true;
 }

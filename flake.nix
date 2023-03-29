@@ -8,6 +8,12 @@
     # Automated system themes
     stylix.url = "github:danth/stylix";
 
+    # Chaotic-AUR Nyx!
+    chaotic-nyx = {
+      inputs.mesa-git-src.follows = "mesa-git-src";
+      url = "github:chaotic-aur/nyx";
+    };
+
     # Smooth-criminal bleeding-edge Mesa3D
     mesa-git-src = {
       url = "github:chaotic-aur/mesa-mirror/22.3";
@@ -56,6 +62,7 @@
   };
 
   outputs = {
+    chaotic-nyx,
     home-manager,
     impermanence,
     lanzaboote,
@@ -85,6 +92,7 @@
       ];
     };
     defaultModules = [
+      chaotic-nyx.nixosModules.default
       home-manager.nixosModules.home-manager
       nur.nixosModules.nur
       overlay-unstable

@@ -50,6 +50,9 @@
   networking.hostName = "slim-lair";
   networking.hostId = "9c8011ee";
 
+  # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
+  systemd.services.NetworkManager-wait-online.enable = false;
+
   # SSD
   services.fstrim.enable = true;
 
@@ -62,6 +65,9 @@
     rocm-opencl-icd
     rocm-opencl-runtime
   ];
+
+  # Bleeding edge Mesa - once tag 22.3 is no longer needed
+  # chaotic.mesa-git.enable = true;
 
   # Workaround to enable HIP
   systemd.tmpfiles.rules = [
