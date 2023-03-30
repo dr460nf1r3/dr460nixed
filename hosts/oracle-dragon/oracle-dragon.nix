@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   # These are the services I use on this machine
   imports = [
     ../../configurations/common.nix
@@ -94,6 +98,9 @@
       dockerSocket.enable = true;
     };
   };
+
+  # Slows down write operations considerably
+  nix.settings.auto-optimise-store = lib.mkForce false;
 
   # Cloudflared tunnel configurations
   services.cloudflared = {

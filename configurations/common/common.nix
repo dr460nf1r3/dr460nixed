@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    ./auto-upgrade.nix
     ./boot.nix
     ./hardening.nix
     ./locales.nix
