@@ -10,8 +10,8 @@
 
     # Chaotic-AUR Nyx!
     chaotic-nyx = {
-      inputs.mesa-git-src.follows = "mesa-git-src";
-      url = "github:chaotic-aur/nyx/sway-git-init";
+      #inputs.mesa-git-src.follows = "mesa-git-src";
+      url = "github:chaotic-aur/nyx";
     };
 
     # Smooth-criminal bleeding-edge Mesa3D
