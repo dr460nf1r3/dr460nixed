@@ -78,7 +78,6 @@ in {
     gnomeExtensions.bubblemail
     gnomeExtensions.expandable-notifications
     gnomeExtensions.gsconnect
-    gnomeExtensions.one-drive-resurrect
     gnomeExtensions.unite
     librsvg
     tilix
