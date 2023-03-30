@@ -1,4 +1,4 @@
-name: "Build config"
+name: "Build arm64"
 
 on:
   pull_request:

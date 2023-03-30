@@ -1,4 +1,4 @@
-name: "Build config"
+name: "Build x86"
 
 on:
   pull_request:

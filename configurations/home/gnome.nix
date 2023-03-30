@@ -107,7 +107,7 @@ in {
       folder-children = ["Utilities"];
     };
     "org/gnome/desktop/input-sources" = {
-      mru-sources = [(lib.hm.gvariant.mkTuple ["ibus" "typing-booster"]) (lib.hm.gvariant.mkTuple ["xkb" "de"])];
+      mru-sources = [(lib.hm.gvariant.mkTuple ["xkb" "de"]) (lib.hm.gvariant.mkTuple ["ibus" "typing-booster"])];
       sources = [(lib.hm.gvariant.mkTuple ["ibus" "typing-booster"]) (lib.hm.gvariant.mkTuple ["xkb" "de"])];
       xkb-options = ["terminate:ctrl_alt_bksp"];
     };
