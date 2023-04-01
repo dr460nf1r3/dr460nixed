@@ -1,15 +1,11 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   # Import individual configuration snippets
   imports = [
     ./chromium.nix
     ./connectivity.nix
     ./fonts.nix
     ./hardening.nix
-    ./gnome.nix
+    ./kde.nix
     ./mozilla.nix
     ./networking.nix
     ./performance.nix

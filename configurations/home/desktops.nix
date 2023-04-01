@@ -3,7 +3,8 @@
   imports = [
     ./default-apps.nix
     ./email.nix
-    ./gnome.nix
+    ./kde.nix
+    ./nico.nix
     ./theming.nix
   ];
 }

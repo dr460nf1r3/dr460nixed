@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }: let
@@ -34,5 +35,17 @@ in {
   };
 
   # This is false by default for some reason
-  stylix.targets.gnome.enable = true;
+  stylix.targets.gnome.enable =
+    lib.mkIf config.services.xserver.desktopManager.gnome.enable true;
+
+  # These are not set by Stylix
+  home-manager.users."nico".dconf.settings = lib.mkIf config.stylix.targets.gnome.enable {
+    "org/gnome/desktop/wm/preferences" = {
+      titlebar-font = "Fira Sans Bold 11";
+    };
+    "org/gnome/desktop/interface" = {
+      document-font-name = "Fira Sans 11";
+      monospace-font-name = "JetBrainsMono Nerd Font 10";
+    };
+  };
 }

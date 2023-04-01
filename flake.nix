@@ -35,6 +35,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Plasma Manager
+    plasma-manager.url = "github:pjones/plasma-manager";
+    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
+    plasma-manager.inputs.home-manager.follows = "home-manager";
+
     # Prismlauncher
     nix-minecraft = {
       url = "github:misterio77/nix-minecraft";
@@ -68,12 +73,14 @@
     lanzaboote,
     nixpkgs,
     nur,
+    plasma-manager,
     sops-nix,
     stylix,
     ...
   } @ attrs: let
     nixos = nixpkgs;
     system = "x86_64-linux";
+    user = "nico";
     specialArgs = {
       sources = {
         chaotic-toolbox = attrs.src-chaotic-toolbox;
@@ -157,6 +164,23 @@
         imports = [./hosts/rpi-dragon/rpi-dragon.nix];
         nixpkgs.system = "aarch64-linux";
       };
+    };
+
+    # Home-manager configs
+    homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
+      # Ensure Plasma Manager is available:
+      pkgs = nixpkgs.legacyPackages.${system};
+      modules = [
+        ./configurations/home/desktops.nix
+        plasma-manager.homeManagerModules.plasma-manager
+        {
+          home = {
+            username = "${user}";
+            homeDirectory = "/home/${user}";
+            stateVersion = "22.11";
+          };
+        }
+      ];
     };
 
     # All the system configurations (flake)

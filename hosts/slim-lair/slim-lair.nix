@@ -13,7 +13,7 @@
     ../../configurations/desktops/games.nix
     ../../configurations/desktops/impermanence.nix
     ../../configurations/desktops/school.nix
-    ../../configurations/desktops/slim-lair.nix
+    #../../configurations/desktops/slim-lair.nix
     ./hardware-configuration.nix
   ];
 

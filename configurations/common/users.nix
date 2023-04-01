@@ -68,8 +68,8 @@ in {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    users."nico" = import ../home/nico.nix;
-    users."root" = import ../home/root.nix;
+    #users."nico" = import ../home/nico.nix;
+    #users."root" = import ../home/root.nix;
   };
 
   # Allow pushing to Cachix

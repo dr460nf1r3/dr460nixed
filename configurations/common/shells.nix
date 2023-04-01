@@ -19,6 +19,7 @@
     direnv
     duf
     exa
+    home-manager
     jq
     killall
     micro
