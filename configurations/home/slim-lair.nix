@@ -1,11 +1,9 @@
 {lib, ...}: {
-  # My git repos
-  imports = [
-    ./spicetify.nix
-  ];
+  # This is a desktop
+  imports = [./desktops.nix];
 
   # These need to be configured individually
-  dconf.settings = {
+  dconf.settings = lib.mkIf config.services.xserver.desktopManager.gnome.enable {
     "org/gnome/shell/extensions/gsconnect" = {
       devices = ["a81d0073-3760-45a8-93af-7933d83f748c" "c9b46110e36de16a"];
       enabled = true;

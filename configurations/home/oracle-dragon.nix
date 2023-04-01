@@ -1,5 +1,0 @@
-{
-  # My git repos
-  imports = [
-  ];
-}

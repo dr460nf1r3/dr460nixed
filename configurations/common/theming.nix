@@ -12,10 +12,10 @@
   };
 in {
   # Style the operating system using Stylix - gruvbox-dark-medium on GNOME
-  stylix.base16Scheme = "${base16-schemes}/dracula.yaml";
+  stylix.base16Scheme = "${base16-schemes}/nebula.yaml";
   stylix.image = builtins.fetchurl {
-    url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/garuda-wallpapers/-/raw/master/src/garuda-wallpapers/Malefor.jpg";
-    sha256 = "sha256-0r6b33k24kq4i3vzp41bxx7gqmw20klakcmw4qy7zana4f3pfnw6";
+    url = "https://images.pling.com/img/00/00/36/61/48/1309907/67dee71cfa2a80d3990373ce12365557fd6a.png";
+    sha256 = "sha256:0xnjiv1lsavk2gligzaq8jjma60sm3hd1xs19c86cnqcgnkd1a07";
   };
   stylix.polarity = "dark";
   stylix.fonts = {

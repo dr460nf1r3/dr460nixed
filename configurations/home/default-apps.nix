@@ -277,10 +277,10 @@
       ];
     in
       (lib.genAttrs code (_: ["code.desktop"]))
-      // (lib.genAttrs images (_: ["org.gnome.eog.desktop"]))
+      // (lib.genAttrs images (_: ["gwenview.desktop"]))
       // (lib.genAttrs urls (_: ["chromium-browser.desktop"]))
-      // (lib.genAttrs documents (_: ["org.gnome.Evince.desktop"]))
-      // (lib.genAttrs audioVideo (_: ["mpv.desktop"]))
-      // (lib.genAttrs archives (_: ["org.gnome.FileRoller.desktop"]));
+      // (lib.genAttrs documents (_: ["okular.desktop"]))
+      // (lib.genAttrs audioVideo (_: ["vlc.desktop"]))
+      // (lib.genAttrs archives (_: ["ark.desktop"]));
   };
 }

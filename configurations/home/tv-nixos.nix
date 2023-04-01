@@ -1,9 +1,9 @@
 {lib, ...}: {
-  # I use Spotify on this machine
-  imports = [./spicetify.nix];
+  # This is a TV, so we need a desktop
+  imports = [./desktops];
 
   # These need to be configured individually
-  dconf.settings = {
+  dconf.settings = lib.mkIf config.services.xserver.desktopManager.gnome.enable {
     "org/gnome/shell/extensions/gsconnect" = {
       devices = ["c9b46110e36de16a" "b7e645a0-b149-48a0-8fd8-81ab6bc5ef11"];
       enabled = true;
