@@ -11,7 +11,7 @@
     # Chaotic-AUR Nyx!
     chaotic-nyx = {
       #inputs.mesa-git-src.follows = "mesa-git-src";
-      url = "github:chaotic-aur/nyx";
+      url = "github:chaotic-aur/nyx/sweet-kde";
     };
 
     # Smooth-criminal bleeding-edge Mesa3D
@@ -90,7 +90,7 @@
       };
       keys = {nico = attrs.keys_nico;};
     };
-    overlay-unstable = {...}: {
+    overlays = {...}: {
       nixpkgs.overlays = [
         (final: prev: {
           unstable = nixpkgs.legacyPackages.${prev.system};
@@ -102,7 +102,7 @@
       chaotic-nyx.nixosModules.default
       home-manager.nixosModules.home-manager
       nur.nixosModules.nur
-      overlay-unstable
+      overlays
       sops-nix.nixosModules.sops
       stylix.nixosModules.stylix
     ];
@@ -168,7 +168,6 @@
 
     # Home-manager configs
     homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
-      # Ensure Plasma Manager is available:
       pkgs = nixpkgs.legacyPackages.${system};
       modules = [
         ./configurations/home/desktops.nix

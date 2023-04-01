@@ -2,7 +2,7 @@
   # Override applications with useful things I want to have
   nixpkgs.overlays = let
     thisConfigsOverlay = final: prev: {
-      # Obs with plugins
+      # OBS with plugins
       obs-studio-wrapped = final.wrapOBS.override {inherit (final) obs-studio;} {
         plugins = with final.obs-studio-plugins; [
           obs-gstreamer
@@ -11,6 +11,7 @@
           obs-vkcapture
         ];
       };
+      # Telegram Desktop using actual system fonts
       tdesktop-userfonts = prev.tdesktop.overrideDerivation (oa: {
         cmakeFlags =
           [
@@ -20,6 +21,7 @@
           ]
           ++ oa.cmakeFlags;
       });
+      # This is quite obvious I guess
       prismlauncher-mod = prev.prismlauncher.overrideDerivation (oa: {
         patches =
           [

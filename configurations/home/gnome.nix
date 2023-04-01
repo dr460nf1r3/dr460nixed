@@ -137,6 +137,11 @@ in {
     };
     "org/gnome/desktop/wm/preferences" = {
       button-layout = "close,minimize:appmenu";
+      titlebar-font = "Fira Sans Bold 11";
+    };
+    "org/gnome/desktop/interface" = {
+      document-font-name = "Fira Sans 11";
+      monospace-font-name = "JetBrainsMono Nerd Font 10";
     };
     "org/gnome/evolution-data-server" = {
       limit-operations-in-power-saver-mode = true;
@@ -373,6 +378,30 @@ in {
     ".config/easyeffects/irs/movie.irs".source = movie;
     ".config/easyeffects/irs/music.irs".source = music;
     ".config/easyeffects/irs/voice.irs".source = voice;
+  };
+
+  # Icon themes & GTK
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "oomox-gruvbox-dark";
+      package = pkgs.gruvbox-dark-icons-gtk;
+    };
+  };
+
+  # Configure Qt theming
+  qt = {
+    enable = true;
+    platformTheme = "adwaita";
+    style.name = "adwaita-dark";
+  };
+
+  # Our cursor theme
+  home.pointerCursor = {
+    name = "Capitaine-cursors";
+    package = pkgs.capitaine-cursors;
+    size = 32;
+    gtk.enable = true;
   };
 
   # Enhance audio output

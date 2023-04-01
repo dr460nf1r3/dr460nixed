@@ -11,11 +11,11 @@
     sha256 = "U9pfie3qABp5sTr3M9ga/jX8C807FeiXlmEZnC4ZM58=";
   };
 in {
-  # Style the operating system using Stylix
-  stylix.base16Scheme = "${base16-schemes}/gruvbox-dark-medium.yaml";
+  # Style the operating system using Stylix - gruvbox-dark-medium on GNOME
+  stylix.base16Scheme = "${base16-schemes}/dracula.yaml";
   stylix.image = builtins.fetchurl {
-    url = "https://gruvbox-wallpapers.onrender.com/wallpapers/anime/wall.jpg";
-    sha256 = "sha256-Dt5A3cA5M+g82RiZn1cbD7CVzAz/b8c1nTEpkp273/s=";
+    url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/garuda-wallpapers/-/raw/master/src/garuda-wallpapers/Malefor.jpg";
+    sha256 = "sha256-0r6b33k24kq4i3vzp41bxx7gqmw20klakcmw4qy7zana4f3pfnw6";
   };
   stylix.polarity = "dark";
   stylix.fonts = {
@@ -37,15 +37,4 @@ in {
   # This is false by default for some reason
   stylix.targets.gnome.enable =
     lib.mkIf config.services.xserver.desktopManager.gnome.enable true;
-
-  # These are not set by Stylix
-  home-manager.users."nico".dconf.settings = lib.mkIf config.stylix.targets.gnome.enable {
-    "org/gnome/desktop/wm/preferences" = {
-      titlebar-font = "Fira Sans Bold 11";
-    };
-    "org/gnome/desktop/interface" = {
-      document-font-name = "Fira Sans 11";
-      monospace-font-name = "JetBrainsMono Nerd Font 10";
-    };
-  };
 }

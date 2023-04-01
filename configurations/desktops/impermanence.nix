@@ -1,10 +1,5 @@
 # ZFS-based impermanence but instead of rolling back on every start, roll back on safe shutdown/halt/reboot
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{config, ...}: let
   cfgZfs = config.boot.zfs;
 in {
   # Reset rootfs on shutdown - keeping the sops-nix keys available in rootfs
@@ -65,17 +60,18 @@ in {
         ".config/GitKraken"
         ".config/JetBrains"
         ".config/Nextcloud"
-        ".config/PulseEffects"
         ".config/Termius"
         ".config/asciinema"
-        ".config/bubblemail"
+        #".config/bubblemail"
         ".config/chromium"
-        ".config/evolution"
-        ".config/goa-1.0"
-        ".config/gsconnect"
+        #".config/evolution"
+        #".config/goa-1.0"
+        #".config/gsconnect"
+        ".config/kdeconnect"
         ".config/lutris"
         ".config/obs-studio"
         ".config/onedrive"
+        ".config/session"
         ".config/sops/age"
         ".config/spotify"
         ".config/teams-for-linux"
@@ -87,15 +83,25 @@ in {
         ".local/share/Steam"
         ".local/share/TelegramDesktop"
         ".local/share/Vorta"
+        ".local/share/applications"
+        ".local/share/baloo"
         ".local/share/containers"
-        ".local/share/evolution"
+        ".local/share/dolphin"
+        ".local/share/kactivitymanagerd"
+        ".local/share/klipper"
+        ".local/share/knewstuff3"
+        ".local/share/konsole"
+        ".local/share/kscreen"
+        ".local/share/kwalletd"
+        ".local/share/plasma"
+        #".local/share/evolution"
         ".local/share/fish"
-        ".local/share/gnome-photos"
-        ".local/share/gvfs-metadata"
+        #".local/share/gnome-photos"
+        #".local/share/gvfs-metadata"
         ".local/share/heroku"
-        ".local/share/ibus-typing-booster"
+        #".local/share/ibus-typing-booster"
         ".local/share/lutris"
-        ".local/share/nautilus"
+        #".local/share/nautilus"
         ".local/share/tor-browser"
         ".mozilla"
         ".thunderbird"
@@ -132,6 +138,26 @@ in {
           mode = "0700";
         }
       ];
+      # These files are used by Plasma for saving state
+      files = [
+        ".config/gwenviewrc"
+        ".config/kactivitymanagerd-statsrc"
+        ".config/kateschemarc"
+        ".config/kconf_updaterc"
+        ".config/kglobalshortcutsrc"
+        ".config/khotkeysrc"
+        ".config/konsolesshconfig"
+        ".config/ksmserverrc"
+        ".config/ktimedrc"
+        ".config/kwinrulesrc"
+        ".config/kxkbrc"
+        ".config/okularpartrc"
+        ".config/plasma-org.kde.plasma.desktop-appletsrc"
+        ".config/plasmanotifyrn"
+        ".config/plasmashellrc"
+        ".local/share/krunnerstaterc"
+        ".local/share/recently-used.xbel"
+      ];
     };
   };
 
@@ -144,17 +170,20 @@ in {
     ];
     users.nico = {
       directories = [
-        ".cache/bubblemail"
+        ".cache/bookmarksrunner"
+        #".cache/bubblemail"
         ".cache/chromium"
-        ".cache/evolution"
-        ".cache/gsconnect"
-        ".cache/keybase"
+        #".cache/evolution"
+        #".cache/gsconnect"
+        #".cache/keybase"
+        ".cache/konsole"
         ".cache/lutris"
         ".cache/mesa_shader_cache"
+        ".cache/mozilla"
         ".cache/nix-index"
         ".cache/spotify"
         ".cache/thunderbird"
-        ".cache/tracker3"
+        #".cache/tracker3"
         ".local/share/Trash"
         ".local/state/wireplumber"
         ".steam"

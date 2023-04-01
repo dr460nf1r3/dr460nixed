@@ -8,7 +8,6 @@
   imports = [
     ../../configurations/common.nix
     ../../configurations/desktops.nix
-    ../../configurations/desktops/tv-nixos.nix
     ../../configurations/servers/monitoring.nix
     ../../configurations/servers/motd.nix
     ./hardware-configuration.nix
@@ -65,9 +64,9 @@
   environment.systemPackages = with pkgs; [libinput];
 
   # Fix the monitor setup
-  home-manager.users.nico = {...}: {
-    home.file.".config/monitors.xml".source = ./monitors.xml;
-  };
+  # home-manager.users.nico = {...}: {
+  #   home.file.".config/monitors.xml".source = ./monitors.xml;
+  # };
 
   # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
   systemd.services.NetworkManager-wait-online.enable = false;

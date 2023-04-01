@@ -10,7 +10,6 @@
     ../../configurations/servers/adguard.nix
     ../../configurations/servers/code-server.nix
     ../../configurations/servers/github-runner.nix
-    ../../configurations/servers/oracle-dragon.nix
     ./hardware-configuration.nix
   ];
 

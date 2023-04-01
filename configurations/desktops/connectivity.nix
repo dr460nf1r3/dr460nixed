@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{...}: {
   # LAN discovery
   services.avahi = {
     enable = true;

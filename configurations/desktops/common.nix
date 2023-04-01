@@ -13,9 +13,6 @@
     ./yubikey.nix
   ];
 
-  # Load desktop specific configurations
-  home-manager.users."nico".imports = [../home/desktops.nix];
-
   # Power profiles daemon
   services.power-profiles-daemon.enable = true;
 
@@ -57,6 +54,7 @@
     aspell
     aspellDicts.de
     aspellDicts.en
+    chromium
     ffmpegthumbnailer
     gimp
     helvum

@@ -24,27 +24,36 @@
     ventoy-bin-full
     virt-manager
     (vscode-with-extensions.override {
-      vscodeExtensions = with vscode-extensions; [
-        bbenoist.nix
-        eamodio.gitlens
-        esbenp.prettier-vscode
-        foxundermoon.shell-format
-        github.codespaces
-        github.copilot
-        jdinhlife.gruvbox
-        kamadorueda.alejandra
-        ms-azuretools.vscode-docker
-        ms-python.python
-        ms-python.vscode-pylance
-        ms-vscode.hexeditor
-        ms-vsliveshare.vsliveshare
-        njpwerner.autodocstring
-        pkief.material-icon-theme
-        redhat.vscode-xml
-        redhat.vscode-yaml
-        timonwong.shellcheck
-        tyriar.sort-lines
-      ];
+      vscodeExtensions = with vscode-extensions;
+        [
+          bbenoist.nix
+          eamodio.gitlens
+          esbenp.prettier-vscode
+          foxundermoon.shell-format
+          github.codespaces
+          github.copilot
+          #jdinhlife.gruvbox
+          kamadorueda.alejandra
+          ms-azuretools.vscode-docker
+          ms-python.python
+          ms-python.vscode-pylance
+          ms-vscode.hexeditor
+          ms-vsliveshare.vsliveshare
+          njpwerner.autodocstring
+          pkief.material-icon-theme
+          redhat.vscode-xml
+          redhat.vscode-yaml
+          timonwong.shellcheck
+          tyriar.sort-lines
+        ]
+        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            name = "sweet-vscode";
+            publisher = "eliverlara";
+            version = "1.1.1";
+            sha256 = "sha256-kJgqMEJHyYF3GDxe1rnpTEmbfJE01tyyOFjRUp4SOds=";
+          }
+        ];
     })
     xdg-utils
     yarn
@@ -91,28 +100,6 @@
       enable = true;
       dockerCompat = true;
       dockerSocket.enable = true;
-    };
-  };
-
-  # Virt-manager settings
-  home-manager.users."nico".dconf.settings = {
-    "org/virt-manager/virt-manager" = {
-      manager-window-height = 550;
-      manager-window-width = 550;
-    };
-    "org/virt-manager/virt-manager/confirm" = {
-      unapplied-dev = true;
-    };
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
-    };
-    "org/virt-manager/virt-manager/details" = {
-      show-toolbar = true;
-    };
-    "org/virt-manager/virt-manager/vmlist-fields" = {
-      disk-usage = true;
-      network-traffic = true;
     };
   };
 

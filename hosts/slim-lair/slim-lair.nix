@@ -13,7 +13,6 @@
     ../../configurations/desktops/games.nix
     ../../configurations/desktops/impermanence.nix
     ../../configurations/desktops/school.nix
-    #../../configurations/desktops/slim-lair.nix
     ./hardware-configuration.nix
   ];
 
@@ -97,23 +96,23 @@
   boot.bootspec.enable = true;
 
   # Fix the monitor setup
-  home-manager.users.nico.home.file.".config/monitors.xml".source = ./monitors.xml;
+  # home-manager.users.nico.home.file.".config/monitors.xml".source = ./monitors.xml;
 
   # A few secrets
   sops.secrets."machine-id/slim-lair" = {
     path = "/etc/machine-id";
     mode = "0600";
   };
-  sops.secrets."gsconnect/slim-lair/private" = {
-    path = "/home/nico/.config/gsconnect/private.pem";
-    mode = "0600";
-    owner = config.users.users.nico.name;
-  };
-  sops.secrets."gsconnect/slim-lair/certificate" = {
-    path = "/home/nico/.config/gsconnect/certificate.pem";
-    mode = "0600";
-    owner = config.users.users.nico.name;
-  };
+  # sops.secrets."gsconnect/slim-lair/private" = {
+  #   path = "/home/nico/.config/gsconnect/private.pem";
+  #   mode = "0600";
+  #   owner = config.users.users.nico.name;
+  # };
+  # sops.secrets."gsconnect/slim-lair/certificate" = {
+  #   path = "/home/nico/.config/gsconnect/certificate.pem";
+  #   mode = "0600";
+  #   owner = config.users.users.nico.name;
+  # };
   sops.secrets."ssh_keys/id_rsa" = {
     mode = "0600";
     owner = config.users.users.nico.name;

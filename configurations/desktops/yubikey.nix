@@ -17,10 +17,4 @@
     yubikey-personalization
     yubioath-flutter
   ];
-
-  # Enable the smartcard daemon for commit signing
-  home-manager.users."nico".services.gpg-agent = {
-    enableExtraSocket = true;
-    enableScDaemon = true;
-  };
 }
