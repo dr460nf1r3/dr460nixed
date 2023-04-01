@@ -1,4 +1,4 @@
-{pkgs, ...}: let
+{...}: let
   mailserver = "mail.garudalinux.net";
   key = "D245D484F3578CB17FD6DA6B67DB29BFF3C96757";
 in {

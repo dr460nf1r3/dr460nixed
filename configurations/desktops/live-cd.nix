@@ -1,4 +1,4 @@
-{config, ...}: {
+{...}: {
   environment.systemPackages = with pkgs; [
     age
     btrfs-progs

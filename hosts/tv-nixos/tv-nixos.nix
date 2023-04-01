@@ -65,7 +65,7 @@
   environment.systemPackages = with pkgs; [libinput];
 
   # Fix the monitor setup
-  home-manager.users.nico = {lib, ...}: {
+  home-manager.users.nico = {...}: {
     home.file.".config/monitors.xml".source = ./monitors.xml;
   };
 

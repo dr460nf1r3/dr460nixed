@@ -1,10 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  sources,
-  ...
-}: let
+{pkgs, ...}: let
   monitorsXmlContent = builtins.readFile ../../hosts/slim-lair/monitors.xml;
   monitorsConfig = pkgs.writeText "gdm_monitors.xml" monitorsXmlContent;
 in {

@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   # This was for some reason needed to get it working and I don't know why
   flake-compat = builtins.fetchTarball {
     url = "https://github.com/edolstra/flake-compat/archive/master.tar.gz";

@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   # Enable the smartcard daemon
   hardware.gpgSmartcards.enable = true;
   services.pcscd.enable = true;

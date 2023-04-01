@@ -8,12 +8,12 @@
   cfgZfs = config.boot.zfs;
 in {
   # Reset rootfs on shutdown - keeping the sops-nix keys available in rootfs
-  systemd.shutdownRamfs.contents."/etc/systemd/system-shutdown/zpool".source =
-    lib.mkForce
-    (pkgs.writeShellScript "zpool-sync-shutdown" ''
-      ${cfgZfs.package}/bin/zfs rollback -r zroot/ROOT/empty@keys
-      exec ${cfgZfs.package}/bin/zpool sync
-    '');
+  # systemd.shutdownRamfs.contents."/etc/systemd/system-shutdown/zpool".source =
+  #   lib.mkForce
+  #   (pkgs.writeShellScript "zpool-sync-shutdown" ''
+  #     ${cfgZfs.package}/bin/zfs rollback -r zroot/ROOT/empty@keys
+  #     exec ${cfgZfs.package}/bin/zpool sync
+  #   '');
 
   # Declare permanent path's
   systemd.shutdownRamfs.storePaths = ["${cfgZfs.package}/bin/zfs"];

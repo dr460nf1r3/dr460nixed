@@ -1,8 +1,4 @@
-{
-  outputs,
-  inputs,
-  ...
-}: {
+{...}: {
   # Override applications with useful things I want to have
   nixpkgs.overlays = let
     thisConfigsOverlay = final: prev: {

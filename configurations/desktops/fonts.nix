@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   # Font configuration
   fonts = {
     enableDefaultFonts = true;

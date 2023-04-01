@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+{lib, ...}: {
   # My git repos
   imports = [
     ./spicetify.nix
