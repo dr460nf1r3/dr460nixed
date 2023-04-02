@@ -62,9 +62,11 @@
     hunspellDicts.de_DE
     hunspellDicts.en_US
     inkscape
+    libreoffice-qt
     libsecret
     libva-utils
     lm_sensors
+    nextcloud-client
     obs-studio-wrapped
     tdesktop-userfonts
     spotify

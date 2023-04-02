@@ -6,6 +6,7 @@
   # List all of the packages
   environment.systemPackages = with pkgs; [
     alejandra
+    androidStudioPackages.canary
     ansible
     bind.dnsutils
     gitkraken
@@ -19,10 +20,11 @@
     nur.repos.yes.archlinux.paru
     shellcheck
     shfmt
+    speedcrunch
     teamviewer
     termius
     ventoy-bin-full
-    virt-manager
+    virt-manager-qt
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions;
         [

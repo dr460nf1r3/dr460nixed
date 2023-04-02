@@ -30,6 +30,7 @@
 
   # Additional KDE packages not included by default
   environment.systemPackages = with pkgs; [
+    applets-window-appmenu
     applets-window-title
     beautyline-icons
     dr460nized-kde-theme
@@ -38,13 +39,17 @@
     libinput-gestures
     libsForQt5.applet-window-buttons
     libsForQt5.kdegraphics-thumbnailers
+    libsForQt5.kdenlive
     libsForQt5.kimageformats
     libsForQt5.krdc
     libsForQt5.krfb
     libsForQt5.qtstyleplugin-kvantum
+    movit
+    qbittorrent
     resvg
     sshfs
     sweet-nova
+    vlc
     xdg-desktop-portal
   ];
 
