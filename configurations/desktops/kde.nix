@@ -1,9 +1,4 @@
 {pkgs, ...}: {
-  # Import custom packages
-  # imports = [
-  #   ../../pkgs/sweet-kde/default.nix
-  # ];
-
   # Enable KDE Plasma desktop environment
   services.xserver = {
     enable = true;
@@ -35,11 +30,17 @@
 
   # Additional KDE packages not included by default
   environment.systemPackages = with pkgs; [
+    applets-window-title
+    beautyline-icons
+    dr460nized-kde-theme
     jamesdsp
+    krita
     libinput-gestures
     libsForQt5.applet-window-buttons
     libsForQt5.kdegraphics-thumbnailers
     libsForQt5.kimageformats
+    libsForQt5.krdc
+    libsForQt5.krfb
     libsForQt5.qtstyleplugin-kvantum
     resvg
     sshfs
@@ -47,7 +48,7 @@
     xdg-desktop-portal
   ];
 
-  # KDE Connect to connect my phone
+  # KDE Connect to connect my phone & Partition Manager
   programs.kdeconnect.enable = true;
   programs.partition-manager.enable = true;
 

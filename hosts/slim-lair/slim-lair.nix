@@ -28,7 +28,7 @@
     # The new AMD Pstate driver & needed modules
     extraModulePackages = with config.boot.kernelPackages; [acpi_call zenpower];
     kernelModules = ["acpi_call" "amdgpu" "amd-pstate=passive"];
-    kernelPackages = pkgs.linuxPackages_xanmod;
+    kernelPackages = pkgs.recurseIntoAttrs (pkgs.linuxPackagesFor pkgs.linux-cachyos);
     kernelParams = ["initcall_blacklist=acpi_cpufreq_init"];
     lanzaboote = {
       configurationLimit = 20;
@@ -54,6 +54,9 @@
 
   # SSD
   services.fstrim.enable = true;
+
+  # ZFS scrubbing
+  services.zfs.autoScrub.enable = true;
 
   # AMD device
   services.xserver.videoDrivers = ["amdgpu"];
@@ -95,14 +98,8 @@
   # Neeeded for lzbt
   boot.bootspec.enable = true;
 
-  # Fix the monitor setup
+  # Fix the monitor setup on GNOME & GSConnect certs
   # home-manager.users.nico.home.file.".config/monitors.xml".source = ./monitors.xml;
-
-  # A few secrets
-  sops.secrets."machine-id/slim-lair" = {
-    path = "/etc/machine-id";
-    mode = "0600";
-  };
   # sops.secrets."gsconnect/slim-lair/private" = {
   #   path = "/home/nico/.config/gsconnect/private.pem";
   #   mode = "0600";
@@ -113,6 +110,12 @@
   #   mode = "0600";
   #   owner = config.users.users.nico.name;
   # };
+
+  # A few secrets
+  sops.secrets."machine-id/slim-lair" = {
+    path = "/etc/machine-id";
+    mode = "0600";
+  };
   sops.secrets."ssh_keys/id_rsa" = {
     mode = "0600";
     owner = config.users.users.nico.name;

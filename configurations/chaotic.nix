@@ -1,4 +1,4 @@
-{...}: {
+{
   # Import the Chaotic module
   imports = [./chaotic/chaotic.nix];
 

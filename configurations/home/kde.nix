@@ -1,6 +1,8 @@
 {pkgs, ...}:
 with builtins; let
+  configDir = ".config";
   kvantumDir = ".config/Kvantum";
+  localDir = ".local/share";
 
   # The Sweet Kvantum theme
   sweet-kvantum-theme = pkgs.stdenv.mkDerivation {
@@ -29,28 +31,32 @@ in {
   # GTK theme configuration
   gtk = {
     enable = true;
-    # iconTheme = {
-    #   name = "";
-    #   package = pkgs.sweet;
-    # };
+    iconTheme = {
+      name = "BeautyLine";
+      #package = pkgs.beautyline-icons;
+    };
     theme = {
       package = pkgs.sweet;
       name = "Sweet-Dark";
     };
   };
 
-  # Enable Kvantum theme
+  # Enable Kvantum theme & place a few bigger files
   home.file = {
+    "${configDir}/powermanagementprofilesrc".source = ./kde-static/powermanagementprofilesrc;
     "${kvantumDir}/Sweet-transparent-toolbar".source = sweet-kvantum-theme;
     "${kvantumDir}/kvantum.kvconfig".text = ''
       [General]
       theme=Sweet-transparent-toolbar
     '';
+    "${localDir}/konsole/Dr460nized.profile".source = ./kde-static/Dr460nized.profile;
+    "${localDir}/user-places.xbel".source = ./kde-static/user-places.xbel;
+    "${localDir}/wallpapers/Malefor.jpg".source = wallpaper;
   };
 
   # Our cursor theme
   home.pointerCursor = {
-    name = "Capitaine-cursors";
+    name = "Sweet-cursors";
     package = pkgs.capitaine-cursors;
     size = 32;
     gtk.enable = true;
@@ -226,6 +232,13 @@ in {
       "kdeglobals"."WM"."inactiveBlend" = "47,52,63";
       "kdeglobals"."WM"."inactiveForeground" = "102,106,115";
       "kgammarc"."ConfigFile"."use" = "kgammarc";
+      "konsolerc"."Desktop Entry"."DefaultProfile" = "Dr460nized.profile";
+      "konsolerc"."General"."ConfigVersion" = 1;
+      "konsolerc"."KonsoleWindow"."RememberWindowSize" = false;
+      "konsolerc"."KonsoleWindow"."ShowMenuBarByDefault" = false;
+      "konsolerc"."MainWindow"."MenuBar" = "Disabled";
+      "konsolerc"."MainWindow"."State" = "wAAAAD9AAAAAAAAA4EAAAIEAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAwAAAAIAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgAAAAAA==";
+      "konsolerc"."MainWindow"."StatusBar" = "Disabled";
       "kscreenlockerrc"."Daemon"."LockGrace" = 60;
       "kscreenlockerrc"."Daemon"."Timeout" = 20;
       "kscreenlockerrc"."Greeter"."WallpaperPlugin" = "org.kde.image";
