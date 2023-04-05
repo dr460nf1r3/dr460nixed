@@ -48,6 +48,7 @@
     qbittorrent
     resvg
     sshfs
+    sweet
     sweet-nova
     vlc
     xdg-desktop-portal

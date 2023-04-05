@@ -28,22 +28,16 @@ in {
   # Compatibility for GNOME apps
   dconf.enable = true;
 
-  # GTK theme configuration
-  gtk = {
-    enable = true;
-    iconTheme = {
-      name = "BeautyLine";
-      #package = pkgs.beautyline-icons;
-    };
-    theme = {
-      package = pkgs.sweet;
-      name = "Sweet-Dark";
-    };
-  };
-
-  # Enable Kvantum theme & place a few bigger files
+  # Enable Kvantum theme and GTK & place a few bigger files
   home.file = {
+    "${configDir}/gtk-3.0/colors.css".source = ./kde-static/gtk-3.0/colors.css;
+    "${configDir}/gtk-3.0/gtk.css".source = ./kde-static/gtk-3.0/gtk.css;
+    "${configDir}/gtk-3.0/settings.ini".source = ./kde-static/gtk-3.0/settings.ini;
+    "${configDir}/gtk-4.0/colors.css".source = ./kde-static/gtk-4.0/colors.css;
+    "${configDir}/gtk-4.0/gtk.css".source = ./kde-static/gtk-4.0/gtk.css;
+    "${configDir}/gtk-4.0/settings.ini".source = ./kde-static/gtk-4.0/settings.ini;
     "${configDir}/powermanagementprofilesrc".source = ./kde-static/powermanagementprofilesrc;
+    "${configDir}/plasma-org.kde.plasma.desktop-appletsrc".source = ./kde-static/plasma-org.kde.plasma.desktop-appletsrc;
     "${kvantumDir}/Sweet-transparent-toolbar".source = sweet-kvantum-theme;
     "${kvantumDir}/kvantum.kvconfig".text = ''
       [General]
@@ -52,14 +46,6 @@ in {
     "${localDir}/konsole/Dr460nized.profile".source = ./kde-static/Dr460nized.profile;
     "${localDir}/user-places.xbel".source = ./kde-static/user-places.xbel;
     "${localDir}/wallpapers/Malefor.jpg".source = wallpaper;
-  };
-
-  # Our cursor theme
-  home.pointerCursor = {
-    name = "Sweet-cursors";
-    package = pkgs.capitaine-cursors;
-    size = 32;
-    gtk.enable = true;
   };
 
   # Plasma-manager configuration (most KDE -rc files)
@@ -237,8 +223,9 @@ in {
       "konsolerc"."KonsoleWindow"."RememberWindowSize" = false;
       "konsolerc"."KonsoleWindow"."ShowMenuBarByDefault" = false;
       "konsolerc"."MainWindow"."MenuBar" = "Disabled";
-      "konsolerc"."MainWindow"."State" = "wAAAAD9AAAAAAAAA4EAAAIEAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAwAAAAIAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgAAAAAA==";
+      "konsolerc"."MainWindow"."State" = "AAAA/wAAAAD9AAAAAQAAAAAAAAAAAAAAAPwCAAAAAvsAAAAiAFEAdQBpAGMAawBDAG8AbQBtAGEAbgBkAHMARABvAGMAawAAAAAA/////wAAAWMA////+wAAABwAUwBTAEgATQBhAG4AYQBnAGUAcgBEAG8AYwBrAAAAAAD/////AAABAQD///8AAASkAAADCwAAAAQAAAAEAAAACAAAAAj8AAAAAQAAAAIAAAACAAAAFgBtAGEAaQBuAFQAbwBvAGwAQgBhAHIAAAAAAP////8AAAAAAAAAAAAAABwAcwBlAHMAcwBpAG8AbgBUAG8AbwBsAGIAYQByAAAAAAD/////AAAAAAAAAAA=";
       "konsolerc"."MainWindow"."StatusBar" = "Disabled";
+      "konsolerc"."Notification Messages"."ShowPasteHugeTextWarning" = false;
       "kscreenlockerrc"."Daemon"."LockGrace" = 60;
       "kscreenlockerrc"."Daemon"."Timeout" = 20;
       "kscreenlockerrc"."Greeter"."WallpaperPlugin" = "org.kde.image";
@@ -271,7 +258,7 @@ in {
       "kwinrc"."org.kde.kdecoration2"."ButtonsOnRight" = "";
       "kwinrc"."Tiling"."padding" = 4;
       "plasma-localerc"."Formats"."LANG" = "en_US.UTF-8";
-      "plasmarc"."Theme"."name" = "Sweet";
+      "plasmarc"."Theme"."name" = "Dr460nizedc";
       "plasmarc"."Wallpapers"."usersWallpapers" = "/usr/share/wallpapers/";
       "spectaclerc"."General"."autoSaveImage" = true;
       "spectaclerc"."General"."clipboardGroup" = "PostScreenshotCopyImage";

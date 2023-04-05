@@ -57,6 +57,10 @@
     wantedBy = ["nix-gc.service"];
   };
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "openssh-with-hpn-9.2p1"
+  ];
+
   # Print a diff when running system updates
   system.activationScripts.diff = ''
     if [[ -e /run/current-system ]]; then

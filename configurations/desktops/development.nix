@@ -24,7 +24,7 @@
     teamviewer
     termius
     ventoy-bin-full
-    virt-manager-qt
+    virt-manager
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions;
         [
