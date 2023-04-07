@@ -1,0 +1,26 @@
+[ContextMenu]
+ShowCopyMoveMenu=true
+
+[General]
+AutoExpandFolders=true
+BrowseThroughArchives=true
+ShowFullPath=true
+ShowFullPathInTitlebar=true
+ShowToolTips=true
+ShowZoomSlider=false
+
+[KFileDialog Settings]
+Places Icons Auto-resize=true
+
+[MainWindow]
+MenuBar=Disabled
+ToolBarsMovable=Disabled
+
+[Notification Messages]
+ConfirmEmptyTrash=true
+
+[PreviewSettings]
+Plugins=audiothumbnail,blenderthumbnail,comicbookthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,mobithumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,ffmpegthumbs
+
+[VersionControl]
+enabledPlugins=Git

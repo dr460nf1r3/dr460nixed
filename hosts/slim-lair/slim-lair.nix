@@ -5,7 +5,10 @@
   ...
 }: let
   # For managing my battery levels
-  ipman-source = builtins.fetchurl "https://raw.githubusercontent.com/Lenovsky/ipman/master/ipman";
+  ipman-source = builtins.fetchurl {
+    url = "https://raw.githubusercontent.com/Lenovsky/ipman/master/ipman";
+    sha256 = "14l9g7nwnl7x1wlacaswz854k7qw72jyb86fzqs1jayyza36hwqy";
+  };
   ipman = pkgs.writeScriptBin "ipman" "${ipman-source}";
 in {
   # Individual settings
@@ -102,18 +105,16 @@ in {
   # Neeeded for lzbt
   boot.bootspec.enable = true;
 
-  # Fix the monitor setup on GNOME & GSConnect certs
+  # Fix the monitor setup on GNOME
   # home-manager.users.nico.home.file.".config/monitors.xml".source = ./monitors.xml;
   # sops.secrets."gsconnect/slim-lair/private" = {
   #   path = "/home/nico/.config/gsconnect/private.pem";
   #   mode = "0600";
   #   owner = config.users.users.nico.name;
   # };
-  # sops.secrets."gsconnect/slim-lair/certificate" = {
-  #   path = "/home/nico/.config/gsconnect/certificate.pem";
-  #   mode = "0600";
-  #   owner = config.users.users.nico.name;
-  # };
+
+  # Home-manager desktop configuration
+  home-manager.users."nico" = import ../../configurations/home/desktops.nix;
 
   # A few secrets
   sops.secrets."machine-id/slim-lair" = {

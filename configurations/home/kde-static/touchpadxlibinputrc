@@ -1,0 +1,5 @@
+[ELAN0634:00 04F3:3124 Touchpad]
+tapToClick=true
+
+[SynPS/2 Synaptics TouchPad]
+tapToClick=true

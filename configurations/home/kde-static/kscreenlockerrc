@@ -1,0 +1,9 @@
+[Daemon]
+LockGrace=60
+Timeout=20
+
+[Greeter]
+WallpaperPlugin=org.kde.image
+
+[Greeter][Wallpaper][org][kde][image][General]
+Image=/home/nico/.local/share/wallpapers/Malefor.jpg

@@ -35,11 +35,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Plasma Manager
-    plasma-manager.url = "github:pjones/plasma-manager";
-    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
-    plasma-manager.inputs.home-manager.follows = "home-manager";
-
     # Prismlauncher
     nix-minecraft = {
       url = "github:misterio77/nix-minecraft";
@@ -73,7 +68,6 @@
     lanzaboote,
     nixpkgs,
     nur,
-    plasma-manager,
     sops-nix,
     stylix,
     ...
@@ -166,12 +160,11 @@
       };
     };
 
-    # Home-manager configs
+    # Home-manager standalone configs (in case I use another system with Nix)
     homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.${system};
       modules = [
-        ./configurations/home/desktops.nix
-        plasma-manager.homeManagerModules.plasma-manager
+        ./configurations/home/common.nix
         {
           home = {
             username = "${user}";

@@ -113,6 +113,7 @@ in {
         ".local/share/tor-browser"
         ".mozilla"
         ".thunderbird"
+        ".tldrc"
         ".yubico"
         "Documents"
         "Downloads"

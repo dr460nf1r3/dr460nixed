@@ -68,6 +68,9 @@
   #   home.file.".config/monitors.xml".source = ./monitors.xml;
   # };
 
+  # Home-manager desktop configuration
+  home-manager.users."nico" = import ../../configurations/home/desktops.nix;
+
   # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
   systemd.services.NetworkManager-wait-online.enable = false;
 

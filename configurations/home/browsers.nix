@@ -23,17 +23,18 @@
     profiles.default = {
       id = 0;
       name = "Nico";
-      # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      #   darkreader
-      #   flagfox
-      #   grammarly
-      #   gsconnect
-      #   libredirect
-      #   localcdn
-      #   privacy-pass
-      #   tabliss
-      #   ublock-origin
-      # ];
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        darkreader
+        flagfox
+        grammarly
+        #gsconnect
+        libredirect
+        localcdn
+        plasma-integration
+        privacy-pass
+        tabliss
+        ublock-origin
+      ];
       extraConfig = builtins.fetchurl {
         url = "https://raw.githubusercontent.com/dr460nf1r3/firedragon-browser/master/firedragon.cfg";
         sha256 = "sha256:0s81cabb4d3cvbqk4cymq5bcxx816dsdfx10lmb4wywd1m2vx1wd";
