@@ -11,7 +11,16 @@
       sddm = {
         autoNumlock = true;
         enable = true;
-        theme = "sweet";
+        settings = {
+          Autologin = {
+            Session = "plasma.desktop";
+            User = "nico";
+          };
+          General = {
+            Font = "Fira Sans";
+          };
+        };
+        theme = "Sweet";
       };
     };
   };
@@ -24,6 +33,7 @@
     hicolor-icon-theme
     libsForQt5.breeze-gtk
     libsForQt5.breeze-icons
+    libsForQt5.kcrash
     libsForQt5.plasma-workspace-wallpapers
     libsForQt5.sddm-kcm
   ];

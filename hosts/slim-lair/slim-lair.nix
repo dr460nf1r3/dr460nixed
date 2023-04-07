@@ -3,7 +3,11 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+  # For managing my battery levels
+  ipman-source = builtins.fetchurl "https://raw.githubusercontent.com/Lenovsky/ipman/master/ipman";
+  ipman = pkgs.writeScriptBin "ipman" "${ipman-source}";
+in {
   # Individual settings
   imports = [
     ../../configurations/chaotic.nix
@@ -93,7 +97,7 @@
   };
 
   # Enable the touchpad & secure boot
-  environment.systemPackages = with pkgs; [libinput sbctl zenmonitor];
+  environment.systemPackages = with pkgs; [libinput sbctl zenmonitor] ++ [ipman];
 
   # Neeeded for lzbt
   boot.bootspec.enable = true;

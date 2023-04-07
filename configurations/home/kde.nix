@@ -46,6 +46,7 @@ in {
     "${localDir}/konsole/Dr460nized.profile".source = ./kde-static/Dr460nized.profile;
     "${localDir}/user-places.xbel".source = ./kde-static/user-places.xbel;
     "${localDir}/wallpapers/Malefor.jpg".source = wallpaper;
+    ".gtkrc-2.0".source = ./kde-static/gtkrc-2.0;
   };
 
   # Plasma-manager configuration (most KDE -rc files)
@@ -229,7 +230,7 @@ in {
       "kscreenlockerrc"."Daemon"."LockGrace" = 60;
       "kscreenlockerrc"."Daemon"."Timeout" = 20;
       "kscreenlockerrc"."Greeter"."WallpaperPlugin" = "org.kde.image";
-      "kscreenlockerrc"."Greeter.Wallpaper.org.kde.image.General"."Image" = wallpaper;
+      "kscreenlockerrc"."Greeter.Wallpaper.org.kde.image.General"."Image" = "${localDir} /wallpapers/Malefor.jpg";
       "kwalletrc"."Wallet"."First Use" = false;
       "kwinrc"."Desktops"."Id_1" = "3fc51d4c-1b38-4ddb-86b8-1811d01b9dbf";
       "kwinrc"."Desktops"."Id_2" = "f1fd248b-991d-40c1-97f3-9a3cd41c0333";
@@ -258,7 +259,7 @@ in {
       "kwinrc"."org.kde.kdecoration2"."ButtonsOnRight" = "";
       "kwinrc"."Tiling"."padding" = 4;
       "plasma-localerc"."Formats"."LANG" = "en_US.UTF-8";
-      "plasmarc"."Theme"."name" = "Dr460nizedc";
+      "plasmarc"."Theme"."name" = "Dr460nized";
       "plasmarc"."Wallpapers"."usersWallpapers" = "/usr/share/wallpapers/";
       "spectaclerc"."General"."autoSaveImage" = true;
       "spectaclerc"."General"."clipboardGroup" = "PostScreenshotCopyImage";
