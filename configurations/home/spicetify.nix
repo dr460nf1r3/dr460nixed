@@ -22,7 +22,7 @@ in {
   # Fancy Gruvbox themed, enhanced Spotify
   programs.spicetify = {
     enable = true;
-    theme = spicePkgs.themes.Onepunch;
+    theme = spicePkgs.themes.Comfy;
     enabledExtensions = with spicePkgs.extensions; [
       autoSkipVideo
       fixEnhance
@@ -40,7 +40,7 @@ in {
     replaceColors = true;
     overwriteAssets = true;
     sidebarConfig = true;
-    colorScheme = "Gruvbox";
+    colorScheme = "Sakura";
     enabledCustomApps = with spicePkgs.apps; [
       lyrics-plus
       marketplace

@@ -1,6 +1,6 @@
 [parameters]
 InvertHorizScroll=LeftButton
-InvertVertScroll=true
+InvertVertScroll=false
 OneFingerTapButton=true
 Tapping=true
 ThreeFingerTapButton=MiddleButton

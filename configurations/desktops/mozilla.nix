@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   # System-wide policies
   programs.firefox = {
     enable = true;
@@ -26,9 +26,9 @@
     };
   };
 
-  # Enable Wayland
-  # environment.sessionVariables = {
-  #  MOZ_ENABLE_WAYLAND = "1";
-  #  MOZ_USE_XINPUT2 = "1";
-  # };
+  # Enable Wayland & better touchpad
+  environment.sessionVariables = {
+    #  MOZ_ENABLE_WAYLAND = "1";
+    MOZ_USE_XINPUT2 = "1";
+  };
 }
