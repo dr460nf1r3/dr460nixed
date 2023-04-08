@@ -99,19 +99,11 @@ in {
     };
   };
 
-  # Enable the touchpad & secure boot
+  # Enable the touchpad & secure boot, as well as add the ipman script
   environment.systemPackages = with pkgs; [libinput sbctl zenmonitor] ++ [ipman];
 
   # Neeeded for lzbt
   boot.bootspec.enable = true;
-
-  # Fix the monitor setup on GNOME
-  # home-manager.users.nico.home.file.".config/monitors.xml".source = ./monitors.xml;
-  # sops.secrets."gsconnect/slim-lair/private" = {
-  #   path = "/home/nico/.config/gsconnect/private.pem";
-  #   mode = "0600";
-  #   owner = config.users.users.nico.name;
-  # };
 
   # Home-manager desktop configuration
   home-manager.users."nico" = import ../../configurations/home/desktops.nix;

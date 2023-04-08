@@ -126,4 +126,7 @@ in {
   systemd.tmpfiles.rules = [
     "L+ /run/gdm/.config/monitors.xml - - - - ${monitorsConfig}"
   ];
+
+  # Fix the monitor setup on GNOME
+  home-manager.users.nico.home.file.".config/monitors.xml".source = ./monitors.xml;
 }

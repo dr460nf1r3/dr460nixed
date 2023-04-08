@@ -1,6 +1,6 @@
 [Appearance]
 ColorScheme=Sweet
-Font=FiraCode Nerd Font Mono,11,-1,5,50,0,0,0,0,0
+Font=JetBrains Mono Nerd Font,11,-1,5,50,0,0,0,0,0
 UseFontLineChararacters=true
 
 [Cursor Options]

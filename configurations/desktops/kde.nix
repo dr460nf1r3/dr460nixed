@@ -33,7 +33,11 @@
     hicolor-icon-theme
     libsForQt5.breeze-gtk
     libsForQt5.breeze-icons
+    libsForQt5.breeze-qt5
     libsForQt5.kcrash
+    libsForQt5.oxygen
+    libsForQt5.plasma-browser-integration
+    libsForQt5.plasma-welcome
     libsForQt5.plasma-workspace-wallpapers
     libsForQt5.sddm-kcm
   ];
