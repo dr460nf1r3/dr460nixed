@@ -3,6 +3,6 @@
   environment.systemPackages = with pkgs; [
     speedcrunch
     teams-for-linux
-    virt-manager-qt
+    virt-manager
   ];
 }

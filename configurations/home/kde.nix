@@ -8,22 +8,6 @@ with builtins; let
   kvantumDir = ".config/Kvantum";
   localDir = ".local/share";
 
-  # The Sweet Kvantum theme
-  sweet-kvantum-theme = pkgs.stdenv.mkDerivation {
-    name = "sweet-kvantum-theme";
-    src = pkgs.fetchFromGitHub {
-      owner = "EliverLara";
-      repo = "Sweet";
-      rev = "6cf0966616c20a877a3d3422ea4c482cc1fd9246";
-      sha256 = "EXTz268tmtBcO47oxshOU9Vj3+JfSzbq4twJOMm5iH4=";
-    };
-    installPhase = ''
-      mkdir $out
-      cp kde/kvantum/Sweet-transparent-toolbar.kvconfig $out
-      cp kde/kvantum/Sweet.svg $out/Sweet-transparent-toolbar.svg
-    '';
-  };
-
   wallpaper = builtins.fetchurl {
     url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/garuda-wallpapers/-/raw/master/src/garuda-wallpapers/Malefor.jpg";
     sha256 = "0r6b33k24kq4i3vzp41bxx7gqmw20klakcmw4qy7zana4f3pfnw6";
@@ -61,7 +45,6 @@ in {
     "${configDir}/startkderc".source = ./kde-static/startkderc;
     "${configDir}/touchpadrc".source = ./kde-static/touchpadrc;
     "${configDir}/touchpadxlibinputrc".source = ./kde-static/touchpadxlibinputrc;
-    "${kvantumDir}/Sweet-transparent-toolbar".source = sweet-kvantum-theme;
     "${kvantumDir}/kvantum.kvconfig".text = ''
       [General]
       theme=Sweet-transparent-toolbar
