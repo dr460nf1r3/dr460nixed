@@ -1,8 +1,0 @@
-[General]
-autoSaveImage=true
-clipboardGroup=PostScreenshotCopyImage
-onLaunchAction=UseLastUsedCapturemode
-useReleaseToCapture=true
-
-[Save]
-defaultSaveLocation=file:///home/nico/Pictures/Screenshots/

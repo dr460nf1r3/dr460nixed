@@ -5,6 +5,10 @@
     package = pkgs.ananicy-cpp;
   };
 
+  environment.systemPackages = with pkgs; [
+    #ananicy-cpp-rules
+  ];
+
   # 90% ZRAM as swap
   zramSwap = {
     enable = true;
