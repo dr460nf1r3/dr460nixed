@@ -48,6 +48,7 @@
     applets-window-title
     beautyline-icons
     dr460nized-kde-theme
+    firedragon
     jamesdsp
     krita
     libinput-gestures
