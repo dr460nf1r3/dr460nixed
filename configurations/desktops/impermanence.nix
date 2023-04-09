@@ -27,7 +27,7 @@ in {
       "/etc/secureboot"
       "/etc/ssh"
       "/var/cache/chaotic"
-      "/var/cache/locatedb"
+      "/var/lib/AccountsService/icons"
       "/var/lib/bluetooth"
       "/var/lib/chaotic"
       "/var/lib/containers"
@@ -43,7 +43,9 @@ in {
         mode = "u=rwx,g=,o=";
       }
     ];
-    files = ["/var/lib/dbus/machine-id"];
+    files = [
+      "/var/lib/dbus/machine-id"
+    ];
     users."root" = {
       home = "/root";
       directories = [
@@ -82,6 +84,7 @@ in {
         ".config/sops/age"
         ".config/spotify"
         ".config/teams-for-linux"
+        ".config/vlc"
         ".gitkraken"
         ".java"
         ".local/share/JetBrains"

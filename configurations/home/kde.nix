@@ -8,6 +8,25 @@ with builtins; let
   kvantumDir = ".config/Kvantum";
   localDir = ".local/share";
 
+  # JamesDSP Dolby presets
+  game = builtins.fetchurl {
+    url = https://cloud.garudalinux.org/s/eimgmWmN485tHGw/download/game.irs;
+    sha256 = "0d1lfbzca6wqfqxd6knzshc00khhgfqmk36s5xf1wyh703sdxk79";
+  };
+  movie = builtins.fetchurl {
+    url = https://cloud.garudalinux.org/s/K8CpHZYTiLyXLSd/download/movie.irs;
+    sha256 = "1r3s8crbmvzm71yqrkp8d8x4xyd3najz82ck6vbh1v9kq6jclc0w";
+  };
+  music = builtins.fetchurl {
+    url = https://cloud.garudalinux.org/s/cbPLFeAMeJazKxC/download/music-balanced.irs;
+    sha256 = "1szssbqk3dnaqhg3syrzq9zqfb18phph5yy5m3xfnjgllj2yphy0";
+  };
+  voice = builtins.fetchurl {
+    url = https://cloud.garudalinux.org/s/wJSs9gckrNidTBo/download/voice.irs;
+    sha256 = "1b643m8v7j15ixi2g6r2909vwkq05wi74ybccbdnp4rkms640y4w";
+  };
+
+  # The allmighty Malefor wallpaper
   wallpaper = builtins.fetchurl {
     url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/garuda-wallpapers/-/raw/master/src/garuda-wallpapers/Malefor.jpg";
     sha256 = "0r6b33k24kq4i3vzp41bxx7gqmw20klakcmw4qy7zana4f3pfnw6";
@@ -27,6 +46,10 @@ in {
       only basic indexing=true
     '';
     "${configDir}/dolphinrc".source = ./kde-static/dolphinrc;
+    "${configDir}/jamesdsp/irs/game.irs".source = game;
+    "${configDir}/jamesdsp/irs/movie.irs".source = movie;
+    "${configDir}/jamesdsp/irs/music.irs".source = music;
+    "${configDir}/jamesdsp/irs/voice.irs".source = voice;
     "${configDir}/gtk-3.0/colors.css".source = ./kde-static/gtk-3.0/colors.css;
     "${configDir}/gtk-3.0/gtk.css".text = ''
       @import 'colors.css';
