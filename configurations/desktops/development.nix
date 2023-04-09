@@ -4,7 +4,6 @@
 }: {
   # List all of the packages
   environment.systemPackages = with pkgs; [
-    alejandra
     androidStudioPackages.canary
     ansible
     bind.dnsutils
@@ -14,6 +13,9 @@
     jetbrains.pycharm-professional
     keybase-gui
     nixos-generators
+    nixpkgs-fmt
+    nixpkgs-lint
+    nixpkgs-review
     nur.repos.yes.archlinux.asp
     nur.repos.yes.archlinux.devtools
     nur.repos.yes.archlinux.paru
@@ -27,6 +29,7 @@
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions;
         [
+          b4dm4n.vscode-nixpkgs-fmt
           bbenoist.nix
           eamodio.gitlens
           esbenp.prettier-vscode
@@ -34,7 +37,6 @@
           github.codespaces
           github.copilot
           #jdinhlife.gruvbox
-          kamadorueda.alejandra
           ms-azuretools.vscode-docker
           ms-python.python
           ms-python.vscode-pylance
