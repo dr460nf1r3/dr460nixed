@@ -1,8 +1,7 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
+{ lib
+, pkgs
+, config
+, ...
 }: {
   # Enable the Netdata daemon
   services.netdata.enable = true;
@@ -11,7 +10,7 @@
       "memory mode" = "none";
       "update every" = "2";
     };
-    ml = {"enabled" = "yes";};
+    ml = { "enabled" = "yes"; };
   };
   services.netdata.configDir = {
     "go.d.conf" = pkgs.writeText "go.d.conf" ''
@@ -26,16 +25,16 @@
     '';
     "go.d/nginx.conf" =
       lib.mkIf config.services.nginx.enable
-      (pkgs.writeText "nginx.conf" ''
-        jobs:
-          - name: local
-            url: http://localhost/nginx_status
-      '');
+        (pkgs.writeText "nginx.conf" ''
+          jobs:
+            - name: local
+              url: http://localhost/nginx_status
+        '');
   };
 
   # Extra Python & system packages required for Netdata to function
-  services.netdata.python.extraPackages = ps: [ps.psycopg2];
-  systemd.services.netdata = {path = with pkgs; [jq];};
+  services.netdata.python.extraPackages = ps: [ ps.psycopg2 ];
+  systemd.services.netdata = { path = with pkgs; [ jq ]; };
 
   # Let Netdata poll Nginx' status page
   services.nginx.statusPage = true;

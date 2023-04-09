@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # System-wide policies
   programs.firefox = {
     enable = true;

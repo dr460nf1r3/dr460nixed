@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   services.code-server = {
     auth = "none";
     enable = true;

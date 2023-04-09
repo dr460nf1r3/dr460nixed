@@ -61,184 +61,187 @@
     };
   };
 
-  outputs = {
-    chaotic-nyx,
-    home-manager,
-    impermanence,
-    lanzaboote,
-    nixpkgs,
-    nur,
-    sops-nix,
-    stylix,
-    ...
-  } @ attrs: let
-    nixos = nixpkgs;
-    system = "x86_64-linux";
-    user = "nico";
-    specialArgs = {
-      sources = {
-        chaotic-toolbox = attrs.src-chaotic-toolbox;
-        mesa-git-src = attrs.mesa-git-src;
-        nixpkgs = attrs.nixpkgs;
-        repoctl = attrs.src-repoctl;
-      };
-      keys = {nico = attrs.keys_nico;};
-    };
-    overlays = {...}: {
-      nixpkgs.overlays = [
-        (final: prev: {
-          unstable = nixpkgs.legacyPackages.${prev.system};
-        })
-        nur.overlay
-      ];
-    };
-    defaultModules = [
-      chaotic-nyx.nixosModules.default
-      home-manager.nixosModules.home-manager
-      nur.nixosModules.nur
-      overlays
-      sops-nix.nixosModules.sops
-      stylix.nixosModules.stylix
-    ];
-  in {
-    # Defines a formatter for "nix fmt"
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
-
-    # Colmena profiles for easy deployment
-    colmena = {
-      meta = {
-        nixpkgs = import nixpkgs {
-          system = "x86_64-linux";
-          overlays = [];
+  outputs =
+    { chaotic-nyx
+    , home-manager
+    , impermanence
+    , lanzaboote
+    , nixpkgs
+    , nur
+    , sops-nix
+    , stylix
+    , ...
+    } @ attrs:
+    let
+      nixos = nixpkgs;
+      system = "x86_64-linux";
+      user = "nico";
+      specialArgs = {
+        sources = {
+          chaotic-toolbox = attrs.src-chaotic-toolbox;
+          mesa-git-src = attrs.mesa-git-src;
+          nixpkgs = attrs.nixpkgs;
+          repoctl = attrs.src-repoctl;
         };
+        keys = { nico = attrs.keys_nico; };
+      };
+      overlays = { ... }: {
+        nixpkgs.overlays = [
+          (final: prev: {
+            unstable = nixpkgs.legacyPackages.${prev.system};
+          })
+          nur.overlay
+        ];
+      };
+      defaultModules = [
+        chaotic-nyx.nixosModules.default
+        home-manager.nixosModules.home-manager
+        nur.nixosModules.nur
+        overlays
+        sops-nix.nixosModules.sops
+        stylix.nixosModules.stylix
+      ];
+    in
+    {
+      # Defines a formatter for "nix fmt"
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
+      formatter.aarch64-linux = nixpkgs.legacyPackages.aarch64-linux.nixpkgs-fmt;
+
+      # Colmena profiles for easy deployment
+      colmena = {
+        meta = {
+          nixpkgs = import nixpkgs {
+            system = "x86_64-linux";
+            overlays = [ ];
+          };
+          specialArgs = specialArgs;
+        };
+        defaults = {
+          imports = defaultModules;
+          deployment = {
+            targetUser = "deploy";
+          };
+        };
+        # My main device (Lenovo Slim 7)
+        slim-lair = {
+          deployment = {
+            allowLocalDeployment = true;
+            tags = [ "laptops" "main" ];
+          };
+          imports = [
+            ./hosts/slim-lair/slim-lair.nix
+            ./pkgs/mesa/mesa.nix
+            impermanence.nixosModules.impermanence
+            lanzaboote.nixosModules.lanzaboote
+          ];
+        };
+        # My old laptop serving as TV
+        tv-nixos = {
+          deployment = {
+            tags = [ "servers" "tv" ];
+          };
+          imports = [ ./hosts/tv-nixos/tv-nixos.nix ];
+        };
+        # Free Tier Oracle aarch64 VM
+        oracle-dragon = {
+          deployment = {
+            buildOnTarget = true;
+            tags = [ "oracle" "servers" ];
+            targetHost = "130.61.136.149";
+          };
+          imports = [ ./hosts/oracle-dragon/oracle-dragon.nix ];
+          nixpkgs.system = "aarch64-linux";
+        };
+        # My Raspberry Pi 4B
+        rpi-dragon = {
+          deployment = {
+            buildOnTarget = true;
+            tags = [ "rpi" "servers" ];
+          };
+          imports = [ ./hosts/rpi-dragon/rpi-dragon.nix ];
+          nixpkgs.system = "aarch64-linux";
+        };
+      };
+
+      # Home-manager standalone configs (in case I use another system with Nix)
+      homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
+        modules = [
+          ./configurations/home/common.nix
+          {
+            home = {
+              username = "${user}";
+              homeDirectory = "/home/${user}";
+              stateVersion = "22.11";
+            };
+          }
+        ];
+      };
+
+      # All the system configurations (flake)
+      # My old laptop serving as TV
+      nixosConfigurations."tv-nixos" = nixos.lib.nixosSystem {
+        inherit system;
+        modules =
+          defaultModules
+          ++ [
+            ./hosts/tv-nixos/tv-nixos.nix
+          ];
         specialArgs = specialArgs;
       };
-      defaults = {
-        imports = defaultModules;
-        deployment = {
-          targetUser = "deploy";
-        };
-      };
       # My main device (Lenovo Slim 7)
-      slim-lair = {
-        deployment = {
-          allowLocalDeployment = true;
-          tags = ["laptops" "main"];
-        };
-        imports = [
-          ./hosts/slim-lair/slim-lair.nix
-          ./pkgs/mesa/mesa.nix
-          impermanence.nixosModules.impermanence
-          lanzaboote.nixosModules.lanzaboote
-        ];
-      };
-      # My old laptop serving as TV
-      tv-nixos = {
-        deployment = {
-          tags = ["servers" "tv"];
-        };
-        imports = [./hosts/tv-nixos/tv-nixos.nix];
+      nixosConfigurations."slim-lair" = nixos.lib.nixosSystem {
+        inherit system;
+        modules =
+          defaultModules
+          ++ [
+            ./hosts/slim-lair/slim-lair.nix
+            ./pkgs/mesa/mesa.nix
+            impermanence.nixosModules.impermanence
+            lanzaboote.nixosModules.lanzaboote
+          ];
+        specialArgs = specialArgs;
       };
       # Free Tier Oracle aarch64 VM
-      oracle-dragon = {
-        deployment = {
-          buildOnTarget = true;
-          tags = ["oracle" "servers"];
-          targetHost = "130.61.136.149";
-        };
-        imports = [./hosts/oracle-dragon/oracle-dragon.nix];
-        nixpkgs.system = "aarch64-linux";
+      nixosConfigurations."oracle-dragon" = nixos.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules =
+          defaultModules
+          ++ [
+            ./hosts/oracle-dragon/oracle-dragon.nix
+            <nixpkgs/nixos/modules/profiles/hardened.nix>
+          ];
+        specialArgs = specialArgs;
       };
       # My Raspberry Pi 4B
-      rpi-dragon = {
-        deployment = {
-          buildOnTarget = true;
-          tags = ["rpi" "servers"];
-        };
-        imports = [./hosts/rpi-dragon/rpi-dragon.nix];
-        nixpkgs.system = "aarch64-linux";
+      nixosConfigurations."rpi-dragon" = nixos.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules =
+          defaultModules
+          ++ [
+            ./hosts/rpi-dragon/rpi-dragon.nix
+          ];
+        specialArgs = specialArgs;
+      };
+      # For WSL, mostly used at work only
+      nixosConfigurations."nixos-wsl" = nixos.lib.nixosSystem {
+        inherit system;
+        modules =
+          defaultModules
+          ++ [
+            ./hosts/nixos-wsl/nixos-wsl.nix
+          ];
+        specialArgs = specialArgs;
+      };
+      # To-do for installations
+      nixosConfigurations."live-usb" = nixos.lib.nixosSystem {
+        inherit system;
+        modules =
+          defaultModules
+          ++ [
+            ./hosts/live-usb/live-usb.nix
+          ];
+        specialArgs = specialArgs;
       };
     };
-
-    # Home-manager standalone configs (in case I use another system with Nix)
-    homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
-      pkgs = nixpkgs.legacyPackages.${system};
-      modules = [
-        ./configurations/home/common.nix
-        {
-          home = {
-            username = "${user}";
-            homeDirectory = "/home/${user}";
-            stateVersion = "22.11";
-          };
-        }
-      ];
-    };
-
-    # All the system configurations (flake)
-    # My old laptop serving as TV
-    nixosConfigurations."tv-nixos" = nixos.lib.nixosSystem {
-      inherit system;
-      modules =
-        defaultModules
-        ++ [
-          ./hosts/tv-nixos/tv-nixos.nix
-        ];
-      specialArgs = specialArgs;
-    };
-    # My main device (Lenovo Slim 7)
-    nixosConfigurations."slim-lair" = nixos.lib.nixosSystem {
-      inherit system;
-      modules =
-        defaultModules
-        ++ [
-          ./hosts/slim-lair/slim-lair.nix
-          ./pkgs/mesa/mesa.nix
-          impermanence.nixosModules.impermanence
-          lanzaboote.nixosModules.lanzaboote
-        ];
-      specialArgs = specialArgs;
-    };
-    # Free Tier Oracle aarch64 VM
-    nixosConfigurations."oracle-dragon" = nixos.lib.nixosSystem {
-      system = "aarch64-linux";
-      modules =
-        defaultModules
-        ++ [
-          ./hosts/oracle-dragon/oracle-dragon.nix
-          <nixpkgs/nixos/modules/profiles/hardened.nix>
-        ];
-      specialArgs = specialArgs;
-    };
-    # My Raspberry Pi 4B
-    nixosConfigurations."rpi-dragon" = nixos.lib.nixosSystem {
-      system = "aarch64-linux";
-      modules =
-        defaultModules
-        ++ [
-          ./hosts/rpi-dragon/rpi-dragon.nix
-        ];
-      specialArgs = specialArgs;
-    };
-    # For WSL, mostly used at work only
-    nixosConfigurations."nixos-wsl" = nixos.lib.nixosSystem {
-      inherit system;
-      modules =
-        defaultModules
-        ++ [
-          ./hosts/nixos-wsl/nixos-wsl.nix
-        ];
-      specialArgs = specialArgs;
-    };
-    # To-do for installations
-    nixosConfigurations."live-usb" = nixos.lib.nixosSystem {
-      inherit system;
-      modules =
-        defaultModules
-        ++ [
-          ./hosts/live-usb/live-usb.nix
-        ];
-      specialArgs = specialArgs;
-    };
-  };
 }

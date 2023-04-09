@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # Use micro as editor
   environment.sessionVariables = {
     EDITOR = "${pkgs.micro}/bin/micro";

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # Import individual configuration snippets
   imports = [
     ./chromium.nix

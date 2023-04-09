@@ -1,12 +1,11 @@
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   # Enable our own GitHub runner
   services.github-runners.oracle-dragon = {
     enable = true;
-    extraLabels = ["aarch64" "oracle"];
+    extraLabels = [ "aarch64" "oracle" ];
     extraPackages = with pkgs; [
       colmena
       nix
@@ -24,7 +23,7 @@
     createHome = false;
     isSystemUser = true;
   };
-  users.groups.github-runner = {};
+  users.groups.github-runner = { };
 
   sops.secrets."api_keys/github-runner" = {
     mode = "0600";

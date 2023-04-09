@@ -1,6 +1,6 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # Import individual configuration snippets
-  imports = [./shells.nix];
+  imports = [ ./shells.nix ];
 
   # Always needed home-manager settings - don't touch!
   home.homeDirectory = "/home/nico";
@@ -11,9 +11,9 @@
   programs.git = {
     enable = true;
     extraConfig = {
-      core = {editor = "micro";};
-      init = {defaultBranch = "main";};
-      pull = {rebase = true;};
+      core = { editor = "micro"; };
+      init = { defaultBranch = "main"; };
+      pull = { rebase = true; };
     };
     signing = {
       key = "D245D484F3578CB17FD6DA6B67DB29BFF3C96757";
@@ -153,7 +153,7 @@
           disabled = false;
           map_symbol = true;
         };
-        sudo = {disabled = false;};
+        sudo = { disabled = false; };
         cmd_duration = {
           disabled = false;
           format = "took [$duration]($style)";

@@ -1,11 +1,13 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   monitorsXmlContent = builtins.readFile ../../hosts/slim-lair/monitors.xml;
   monitorsConfig = pkgs.writeText "gdm_monitors.xml" monitorsXmlContent;
-in {
+in
+{
   # Enable GNOME desktop environment
   services.xserver = {
     enable = true;
-    excludePackages = [pkgs.xterm];
+    excludePackages = [ pkgs.xterm ];
     desktopManager.gnome.enable = true;
     displayManager = {
       gdm = {
@@ -76,9 +78,9 @@ in {
     librsvg
     tilix
   ];
-  services.dbus.packages = [pkgs.dconf pkgs.gnomeExtensions.pano];
+  services.dbus.packages = [ pkgs.dconf pkgs.gnomeExtensions.pano ];
   services.geoclue2.enable = true;
-  services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+  services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
 
   # Allow using online accounts
   services.gnome.glib-networking.enable = true;
@@ -96,7 +98,7 @@ in {
   # Evolution for mail
   programs.evolution = {
     enable = true;
-    plugins = [pkgs.evolution-ews];
+    plugins = [ pkgs.evolution-ews ];
   };
 
   # Enable the GNOME keyring
@@ -109,17 +111,17 @@ in {
   # Activate typing booster
   i18n.inputMethod = {
     enabled = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [typing-booster];
+    ibus.engines = with pkgs.ibus-engines; [ typing-booster ];
   };
 
   # Corrently enable the bubblemail daemon
   systemd.user.services.bubblemaild = {
     description = "The bubblemail service";
     enable = true;
-    path = with pkgs; [bubblemail];
+    path = with pkgs; [ bubblemail ];
     script = "bubblemaild";
     serviceConfig.PassEnvironment = "DISPLAY";
-    wantedBy = ["default.target"];
+    wantedBy = [ "default.target" ];
   };
 
   # Apply monitor config on GDM

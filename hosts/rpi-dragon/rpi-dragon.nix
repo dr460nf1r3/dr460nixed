@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, ...
 }: {
   # Individual settings
   imports = [
@@ -25,7 +24,7 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_rpi4;
     tmpOnTmpfs = true;
-    initrd.availableKernelModules = ["usbhid" "usb_storage"];
+    initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
     # Fix https://github.com/NixOS/nixpkgs/pull/207969
     initrd.systemd.enable = lib.mkForce false;
     # ttyAMA0 is the serial console broken out to the GPIO
@@ -78,8 +77,8 @@
       system = "aarch64-linux";
       maxJobs = 4;
       speedFactor = 2;
-      supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
-      mandatoryFeatures = [];
+      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      mandatoryFeatures = [ ];
     }
   ];
   nix.distributedBuilds = true;

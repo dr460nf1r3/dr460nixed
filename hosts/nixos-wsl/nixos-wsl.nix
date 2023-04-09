@@ -1,12 +1,12 @@
-{
-  lib,
-  pkgs,
-  modulesPath,
-  ...
+{ lib
+, pkgs
+, modulesPath
+, ...
 }:
 with lib; let
   nixos-wsl = import ./nixos-wsl;
-in {
+in
+{
   # Slimmed down configurations
   imports = [
     ../../configurations/common/common.nix

@@ -1,7 +1,6 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, ...
 }: {
   # Own systemd config using a custom user
   systemd.services.adguardhome = {
@@ -13,13 +12,13 @@
   # The custom adguard user & group
   users.users."adguard" = {
     group = "adguard";
-    extraGroups = ["nginx"];
+    extraGroups = [ "nginx" ];
     home = "/var/lib/AdGuardHome";
     description = "Adguard DNS";
     createHome = false;
     isSystemUser = true;
   };
-  users.groups.adguard = {};
+  users.groups.adguard = { };
 
   # Complete Adguard configuration
   services.adguardhome = {
@@ -37,7 +36,7 @@
       auth_attempts = 5;
       block_auth_min = 15;
       dns = {
-        bind_hosts = ["10.241.1.3"];
+        bind_hosts = [ "10.241.1.3" ];
         port = 53;
         statistics_interval = 90;
         querylog_enabled = true;
@@ -53,9 +52,9 @@
         parental_block_host = "family-block.dns.adguard.com";
         safebrowsing_block_host = "standard-block.dns.adguard.com";
         ratelimit = 20;
-        ratelimit_whitelist = [];
+        ratelimit_whitelist = [ ];
         refuse_any = true;
-        upstream_dns = ["https://cloudflare-dns.com/dns-query"];
+        upstream_dns = [ "https://cloudflare-dns.com/dns-query" ];
         upstream_dns_file = "";
         bootstrap_dns = [
           "1.1.1.1"
@@ -74,7 +73,7 @@
           "10.241.1.5"
           "127.0.0.1"
         ];
-        disallowed_clients = [];
+        disallowed_clients = [ ];
         blocked_hosts = [
           "hostname.bind"
         ];
@@ -85,12 +84,12 @@
         cache_ttl_min = 0;
         cache_ttl_max = 0;
         cache_optimistic = true;
-        bogus_nxdomain = [];
+        bogus_nxdomain = [ ];
         aaaa_disabled = false;
         enable_dnssec = true;
         edns_client_subnet = false;
         max_goroutines = 300;
-        ipset = [];
+        ipset = [ ];
         filtering_enabled = true;
         filters_update_interval = 1;
         parental_enabled = false;
@@ -100,7 +99,7 @@
         safesearch_cache_size = 1048576;
         parental_cache_size = 1048576;
         cache_time = 30;
-        rewrites = [];
+        rewrites = [ ];
         blocked_services = [
           "facebook"
           "instagram"
@@ -112,10 +111,10 @@
           "whatsapp"
         ];
         upstream_timeout = "10s";
-        private_networks = [];
+        private_networks = [ ];
         use_private_ptr_resolvers = true;
-        local_ptr_upstreams = [];
-        dns64_prefixes = [];
+        local_ptr_upstreams = [ ];
+        dns64_prefixes = [ ];
         serve_http3 = true;
         use_http3_upstreams = true;
       };
@@ -124,12 +123,12 @@
         file_enabled = true;
         interval = "2160h";
         size_memory = 1000;
-        ignored = [];
+        ignored = [ ];
       };
       statistics = {
         enabled = true;
         interval = 90;
-        ignored = [];
+        ignored = [ ];
       };
       filters = [
         {

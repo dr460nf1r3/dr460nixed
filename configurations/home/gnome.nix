@@ -1,8 +1,8 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
+{ lib
+, pkgs
+, ...
+}:
+let
   game = builtins.fetchurl {
     url = https://cloud.garudalinux.org/s/eimgmWmN485tHGw/download/game.irs;
     sha256 = "0d1lfbzca6wqfqxd6knzshc00khhgfqmk36s5xf1wyh703sdxk79";
@@ -19,7 +19,8 @@
     url = https://cloud.garudalinux.org/s/wJSs9gckrNidTBo/download/voice.irs;
     sha256 = "1b643m8v7j15ixi2g6r2909vwkq05wi74ybccbdnp4rkms640y4w";
   };
-in {
+in
+{
   # Enable dconf
   dconf.enable = true;
   # Configure everything in dconf
@@ -98,18 +99,18 @@ in {
     "org/gnome/calendar" = {
       active-view = "month";
       window-maximized = false;
-      window-size = lib.hm.gvariant.mkTuple [768 600];
+      window-size = lib.hm.gvariant.mkTuple [ 768 600 ];
     };
     "org/gnome/Connections" = {
       first-run = false;
     };
     "org/gnome/desktop/app-folders" = {
-      folder-children = ["Utilities"];
+      folder-children = [ "Utilities" ];
     };
     "org/gnome/desktop/input-sources" = {
-      mru-sources = [(lib.hm.gvariant.mkTuple ["xkb" "de"]) (lib.hm.gvariant.mkTuple ["ibus" "typing-booster"])];
-      sources = [(lib.hm.gvariant.mkTuple ["ibus" "typing-booster"]) (lib.hm.gvariant.mkTuple ["xkb" "de"])];
-      xkb-options = ["terminate:ctrl_alt_bksp"];
+      mru-sources = [ (lib.hm.gvariant.mkTuple [ "xkb" "de" ]) (lib.hm.gvariant.mkTuple [ "ibus" "typing-booster" ]) ];
+      sources = [ (lib.hm.gvariant.mkTuple [ "ibus" "typing-booster" ]) (lib.hm.gvariant.mkTuple [ "xkb" "de" ]) ];
+      xkb-options = [ "terminate:ctrl_alt_bksp" ];
     };
     "org/gnome/desktop/notifications" = {
       application-children = [
@@ -193,7 +194,7 @@ in {
       composer-magic-smileys = true;
       composer-mode = "markdown";
       composer-request-receipt = true;
-      composer-spell-languages = ["de_DE" "en_US"];
+      composer-spell-languages = [ "de_DE" "en_US" ];
       composer-unicode-smileys = false;
       composer-use-outbox = false;
       composer-visually-wrap-long-lines = false;
@@ -238,7 +239,7 @@ in {
       file-under-as-first-last = true;
     };
     "org/gnome/evolution/plugin/email-custom-header" = {
-      custom-header = [];
+      custom-header = [ ];
     };
     "org/gnome/evolution/plugin/external-editor" = {
       command = "code";
@@ -265,16 +266,16 @@ in {
       show-dependencies = true;
       show-whose-processes = "user";
       update-interval = 1000;
-      window-state = lib.hm.gvariant.mkTuple [900 600];
+      window-state = lib.hm.gvariant.mkTuple [ 900 600 ];
     };
     "org/gnome/maps" = {
-      last-viewed-location = [51.349622329439484 7.0764894345799405];
+      last-viewed-location = [ 51.349622329439484 7.0764894345799405 ];
       map-type = "MapsStreetSource";
       osm-username-oauth2 = "dr460nf1r3";
       show-scale = false;
       transportation-type = "pedestrian";
       window-maximized = false;
-      window-size = [1300 750];
+      window-size = [ 1300 750 ];
       zoom-level = 8;
     };
     "org/gnome/mutter" = {
@@ -293,7 +294,7 @@ in {
       show-delete-permanently = true;
     };
     "org/gnome/nautilus/window-state" = {
-      initial-size = lib.hm.gvariant.mkTuple [1300 750];
+      initial-size = lib.hm.gvariant.mkTuple [ 1300 750 ];
     };
     "org/gnome/settings-daemon/peripherals/keyboard" = {
       numlock-state = "true";
@@ -334,7 +335,7 @@ in {
       enabled = true;
     };
     "org/gnome/shell/extensions/gsconnect/preferences" = {
-      window-size = lib.hm.gvariant.mkTuple [640 440];
+      window-size = lib.hm.gvariant.mkTuple [ 640 440 ];
     };
     "org/gnome/shell/extensions/unite" = {
       desktop-name-text = "Nixed GNOME 🔥";
@@ -410,6 +411,6 @@ in {
   # Actually enable the gnome-keyring for ssh keys
   services.gnome-keyring = {
     enable = true;
-    components = ["secrets" "ssh"];
+    components = [ "secrets" "ssh" ];
   };
 }

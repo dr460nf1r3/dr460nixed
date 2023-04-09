@@ -1,9 +1,8 @@
-{
-  lib,
-  pkgs,
-  config,
-  sources,
-  ...
+{ lib
+, pkgs
+, config
+, sources
+, ...
 }:
 with lib; let
   cfg = config.services.chaotic-mirror;
@@ -29,18 +28,19 @@ with lib; let
     '';
     system = pkgs.hostPlatform.system;
   };
-in {
+in
+{
   options.services.chaotic-mirror = {
     enable = mkEnableOption "Chaotic Mirror service";
-    domain = mkOption {type = types.str;};
-    email = mkOption {type = types.str;};
+    domain = mkOption { type = types.str; };
+    email = mkOption { type = types.str; };
   };
 
   config = mkIf cfg.enable {
     systemd.services.chaotic-mirror = {
-      wantedBy = ["multi-user.target"];
+      wantedBy = [ "multi-user.target" ];
       description = "Start the chaotic-aur mirror";
-      path = with pkgs; [rsync docker-compose docker bash gawk];
+      path = with pkgs; [ rsync docker-compose docker bash gawk ];
       serviceConfig = {
         CacheDirectory = "chaotic-mirror";
         CacheDirectoryMode = "0755";

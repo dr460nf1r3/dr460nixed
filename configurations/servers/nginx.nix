@@ -1,14 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }: {
   # The Nginx QUIC package with Brotli modules
   services.nginx.package = pkgs.nginxQuic.override {
     doCheck = false;
   };
-  services.nginx.additionalModules = with pkgs; [nginxModules.brotli];
+  services.nginx.additionalModules = with pkgs; [ nginxModules.brotli ];
 
   # Recommended settings replacing custom configuration
   services.nginx = {
@@ -22,7 +21,7 @@
 
   # Upstream resolvers
   services.nginx.resolver = {
-    addresses = ["10.241.1.3"];
+    addresses = [ "10.241.1.3" ];
     valid = "60s";
   };
 
@@ -57,13 +56,13 @@
   security.dhparams = lib.mkIf config.services.nginx.enable {
     defaultBitSize = 3072;
     enable = true;
-    params.nginx = {};
+    params.nginx = { };
   };
   services.nginx.sslDhparam = config.security.dhparams.params.nginx.path;
 
   # Need to explicitly open our web server ports
   networking.firewall = lib.mkIf config.services.nginx.enable {
-    allowedTCPPorts = [80 443];
-    allowedUDPPorts = [443];
+    allowedTCPPorts = [ 80 443 ];
+    allowedUDPPorts = [ 443 ];
   };
 }

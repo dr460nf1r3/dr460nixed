@@ -1,6 +1,6 @@
-{modulesPath, ...}: {
+{ modulesPath, ... }: {
   # This is a QEMU machine
-  imports = [(modulesPath + "/profiles/qemu-guest.nix")];
+  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
   # Bootloader
   boot.loader.grub = {
@@ -20,6 +20,6 @@
   };
 
   # Early needed kernel modules
-  boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "xen_blkfront"];
-  boot.initrd.kernelModules = ["nvme"];
+  boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "xen_blkfront" ];
+  boot.initrd.kernelModules = [ "nvme" ];
 }

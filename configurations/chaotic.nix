@@ -1,6 +1,6 @@
 {
   # Import the Chaotic module
-  imports = [./chaotic/chaotic.nix];
+  imports = [ ./chaotic/chaotic.nix ];
 
   # Enable Chaotic-AUR building
   services.chaotic.enable = true;
@@ -25,6 +25,6 @@
 
   # Let my user build packages
   users.users.nico = {
-    extraGroups = ["chaotic-op"];
+    extraGroups = [ "chaotic-op" ];
   };
 }

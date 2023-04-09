@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # Create system-wide executables firefox and chromium
   programs.firejail.wrappedBinaries = {
     firefox = {

@@ -1,16 +1,15 @@
-{
-  config,
-  lib,
-  modulesPath,
-  ...
+{ config
+, lib
+, modulesPath
+, ...
 }: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   # Boot konfiguration
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "usbhid" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
 
   # Our ZFS pools
   fileSystems."/" = {
@@ -37,7 +36,7 @@
   };
 
   # ZFS doesn't support SWAP
-  swapDevices = [];
+  swapDevices = [ ];
 
   # Generic stuff
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

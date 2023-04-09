@@ -1,8 +1,8 @@
-{...}: {
+{ ... }: {
   # File synchronization between my devices
   services.syncthing = {
     enable = true;
-    extraOptions = ["--no-browser"];
+    extraOptions = [ "--no-browser" ];
     tray.enable = true;
   };
 }

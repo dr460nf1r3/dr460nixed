@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # Automatically tune nice levels
   services.ananicy = {
     enable = true;

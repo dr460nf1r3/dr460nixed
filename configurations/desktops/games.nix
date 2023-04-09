@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # Gaming packages
   environment.systemPackages = with pkgs; [
     bottles

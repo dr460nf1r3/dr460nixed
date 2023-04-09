@@ -1,7 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   imports = [
     ./auto-upgrade.nix
@@ -17,7 +16,7 @@
   ];
 
   ## Enable BBR & cake
-  boot.kernelModules = ["tcp_bbr"];
+  boot.kernelModules = [ "tcp_bbr" ];
   boot.kernel.sysctl = {
     "kernel.nmi_watchdog" = 0;
     "kernel.printks" = "3 3 3 3";
@@ -38,7 +37,7 @@
       Defaults pwfeedback
       deploy ALL=(ALL) NOPASSWD:ALL
     '';
-    package = pkgs.sudo.override {withInsults = true;};
+    package = pkgs.sudo.override { withInsults = true; };
   };
 
   # Programs I always need
@@ -79,7 +78,7 @@
   services.systembus-notify.enable = true;
 
   # Environment
-  environment.variables = {MOSH_SERVER_NETWORK_TMOUT = "604800";};
+  environment.variables = { MOSH_SERVER_NETWORK_TMOUT = "604800"; };
 
   # Enable all the firmwares
   hardware.enableRedistributableFirmware = true;
@@ -94,16 +93,16 @@
   };
 
   # Zerotier network to connect the devices
-  networking.firewall.trustedInterfaces = ["ztnfaljg5n"];
+  networking.firewall.trustedInterfaces = [ "ztnfaljg5n" ];
   services.zerotierone = {
     enable = true;
-    joinNetworks = ["a84ac5c10a715aa7"];
+    joinNetworks = [ "a84ac5c10a715aa7" ];
   };
 
   # Zerotier hosts for easy access
   networking.hosts = {
-    "10.241.1.1" = ["slim-lair"];
-    "10.241.1.2" = ["tv-nixos"];
+    "10.241.1.1" = [ "slim-lair" ];
+    "10.241.1.2" = [ "tv-nixos" ];
     "10.241.1.3" = [
       "adguard.dragons.lair"
       "code.dragons.lair"
@@ -112,8 +111,8 @@
       "netdata.dragons.lair"
       "oracle-dragon"
     ];
-    "10.241.1.4" = ["rpi-dragon"];
-    "10.241.1.5" = ["pixel"];
+    "10.241.1.4" = [ "rpi-dragon" ];
+    "10.241.1.5" = [ "pixel" ];
   };
 
   # Trust our self signed certificate for local services

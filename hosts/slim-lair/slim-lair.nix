@@ -1,16 +1,17 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: let
+{ config
+, pkgs
+, lib
+, ...
+}:
+let
   # For managing my battery levels
   ipman-source = builtins.fetchurl {
     url = "https://raw.githubusercontent.com/Lenovsky/ipman/master/ipman";
     sha256 = "14l9g7nwnl7x1wlacaswz854k7qw72jyb86fzqs1jayyza36hwqy";
   };
   ipman = pkgs.writeScriptBin "ipman" "${ipman-source}";
-in {
+in
+{
   # Individual settings
   imports = [
     ../../configurations/chaotic.nix
@@ -25,18 +26,18 @@ in {
 
   # Use Lanzaboote for secure boot
   boot = {
-    supportedFilesystems = ["zfs"];
+    supportedFilesystems = [ "zfs" ];
     zfs = {
       enableUnstable = true;
       requestEncryptionCredentials = false;
     };
     # Needed to get the touchpad to work
-    blacklistedKernelModules = ["elan_i2c"];
+    blacklistedKernelModules = [ "elan_i2c" ];
     # The new AMD Pstate driver & needed modules
-    extraModulePackages = with config.boot.kernelPackages; [acpi_call zenpower];
-    kernelModules = ["acpi_call" "amdgpu" "amd-pstate=passive"];
+    extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
+    kernelModules = [ "acpi_call" "amdgpu" "amd-pstate=passive" ];
     kernelPackages = pkgs.linuxPackages_xanmod;
-    kernelParams = ["initcall_blacklist=acpi_cpufreq_init"];
+    kernelParams = [ "initcall_blacklist=acpi_cpufreq_init" ];
     lanzaboote = {
       configurationLimit = 20;
       enable = true;
@@ -49,7 +50,7 @@ in {
   specialisation.safe.configuration = {
     boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
     boot.zfs.enableUnstable = lib.mkForce false;
-    system.nixos.tags = ["lts" "zfs-stable"];
+    system.nixos.tags = [ "lts" "zfs-stable" ];
   };
 
   # Network configuration & id for ZFS
@@ -66,7 +67,7 @@ in {
   services.zfs.autoScrub.enable = true;
 
   # AMD device
-  services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.videoDrivers = [ "amdgpu" ];
   services.hardware.bolt.enable = false;
 
   # Enable OpenCL using rocm
@@ -100,7 +101,7 @@ in {
   };
 
   # Enable the touchpad & secure boot, as well as add the ipman script
-  environment.systemPackages = with pkgs; [libinput sbctl zenmonitor] ++ [ipman];
+  environment.systemPackages = with pkgs; [ libinput sbctl zenmonitor ] ++ [ ipman ];
 
   # Neeeded for lzbt
   boot.bootspec.enable = true;

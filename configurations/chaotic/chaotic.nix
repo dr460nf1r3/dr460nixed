@@ -1,9 +1,8 @@
-{
-  lib,
-  pkgs,
-  config,
-  sources,
-  ...
+{ lib
+, pkgs
+, config
+, sources
+, ...
 }:
 with lib; let
   cfg = config.services.chaotic;
@@ -11,7 +10,7 @@ with lib; let
     buildFlags = "PREFIX=${placeholder "out"}";
     installFlags = "PREFIX=${placeholder "out"}";
     name = "chaotic-toolbox";
-    patches = [./patch.diff] ++ cfg.patches;
+    patches = [ ./patch.diff ] ++ cfg.patches;
     postFixup = ''
       "${pkgs.rsync}/bin/rsync" -a "${sources.chaotic-toolbox}/guest/bin/" "$out/lib/chaotic/guest/bin/"
     '';
@@ -36,21 +35,24 @@ with lib; let
       appdirs
       colorama
       # Pinned python-telegram-bot 13.15
-      (callPackage (builtins.fetchurl {
-        url = "https://raw.githubusercontent.com/NixOS/nixpkgs/a0389fe5c691f80bb794a0aa9731d5e4ad6752ac/pkgs/development/python-modules/python-telegram-bot/default.nix";
-        sha256 = "sha256:1xz49dzydfyv1xksm8apj9v6r2px15339xznkr8zqjgzzhvarjbg";
-      }) {})
+      (callPackage
+        (builtins.fetchurl {
+          url = "https://raw.githubusercontent.com/NixOS/nixpkgs/a0389fe5c691f80bb794a0aa9731d5e4ad6752ac/pkgs/development/python-modules/python-telegram-bot/default.nix";
+          sha256 = "sha256:1xz49dzydfyv1xksm8apj9v6r2px15339xznkr8zqjgzzhvarjbg";
+        })
+        { })
     ];
   };
   repodir = "${cfg.repos-dir}/${cfg.db-name}";
-in {
+in
+{
   options.services.chaotic = {
     enable = mkEnableOption "Chaotic-AUR";
     db-name = mkOption {
       type = types.str;
       default = "chaotic-aur";
     };
-    cluster-name = mkOption {type = types.str;};
+    cluster-name = mkOption { type = types.str; };
     repos-dir = mkOption {
       type = types.str;
       default = "/srv/http/repos/";
@@ -89,19 +91,19 @@ in {
     };
     routines = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
     };
     patches = mkOption {
       type = types.listOf types.path;
       description = "Any extra patches to be applied to the chaotic toolbox.";
-      default = [];
+      default = [ ];
     };
-    useACMEHost = mkOption {default = null;};
-    cluster = mkOption {default = false;};
+    useACMEHost = mkOption { default = null; };
+    cluster = mkOption { default = false; };
   };
 
   config = mkIf cfg.enable {
-    users.groups = {"chaotic_op" = {};};
+    users.groups = { "chaotic_op" = { }; };
     environment.systemPackages = [
       pkgs.git
       pkgs.gnupg
@@ -177,10 +179,10 @@ in {
     systemd.services = lib.mkMerge [
       {
         chaotic-setup = {
-          wantedBy = ["multi-user.target"];
-          after = ["network-online.target"];
+          wantedBy = [ "multi-user.target" ];
+          after = [ "network-online.target" ];
           description = "Chaotic setup";
-          path = [pkgs.git pkgs.pacman pkgs.gnupg];
+          path = [ pkgs.git pkgs.pacman pkgs.gnupg ];
           serviceConfig = {
             Type = "oneshot";
             ExecStart = pkgs.writeShellScript "execstart" ''
@@ -195,7 +197,8 @@ in {
           };
         };
       }
-      (builtins.listToAttrs (builtins.map (x: {
+      (builtins.listToAttrs (builtins.map
+        (x: {
           name = "chaotic-" + x;
           value = {
             description = "Chaotic's ${x} routine";
@@ -213,15 +216,16 @@ in {
         })
         cfg.routines))
     ];
-    systemd.timers = builtins.listToAttrs (builtins.map (x: {
+    systemd.timers = builtins.listToAttrs (builtins.map
+      (x: {
         name = "chaotic-" + x;
         value = {
           description = "Chaotic's ${x} routine";
-          wantedBy = ["timers.target"];
+          wantedBy = [ "timers.target" ];
           timerConfig = {
             OnCalendar =
-              lib.attrByPath [x] (abort "Routine not defined in calendarmap")
-              cfg.calendarmap;
+              lib.attrByPath [ x ] (abort "Routine not defined in calendarmap")
+                cfg.calendarmap;
             Persistent = false;
           };
         };
@@ -245,7 +249,7 @@ in {
       root = cfg.repos-dir;
       useACMEHost = cfg.useACMEHost;
     };
-    networking.hosts = mkIf (!cfg.cluster) {"127.0.0.1" = [cfg.host];};
+    networking.hosts = mkIf (!cfg.cluster) { "127.0.0.1" = [ cfg.host ]; };
 
     # Handy aliases for our maintainers
     programs.bash = {
@@ -268,5 +272,5 @@ in {
       };
     };
   };
-  imports = [./chaotic-mirror.nix];
+  imports = [ ./chaotic-mirror.nix ];
 }

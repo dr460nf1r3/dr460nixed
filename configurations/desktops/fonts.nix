@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # Font configuration
   fonts = {
     enableDefaultFonts = true;
@@ -16,9 +16,9 @@
     fontconfig = {
       cache32Bit = true;
       defaultFonts = {
-        monospace = ["JetBrains Mono Nerd Font"];
-        sansSerif = ["Fira"];
-        serif = ["Fira"];
+        monospace = [ "JetBrains Mono Nerd Font" ];
+        sansSerif = [ "Fira" ];
+        serif = [ "Fira" ];
       };
     };
   };

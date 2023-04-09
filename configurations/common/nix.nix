@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  sources,
-  ...
+{ config
+, pkgs
+, sources
+, ...
 }: {
   # General nix settings
   nix = {
@@ -18,7 +17,7 @@
     };
     settings = {
       # Only allow the wheel group to handle Nix
-      allowed-users = ["@wheel"];
+      allowed-users = [ "@wheel" ];
       # Allow using flakes
       auto-optimise-store = true;
       # A few extra binary caches
@@ -39,12 +38,12 @@
         "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
       ];
       # This is a flake after all
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [ "nix-command" "flakes" ];
       max-jobs = "auto";
-      system-features = ["kvm" "big-parallel"];
-      trusted-users = ["root" "nico" "deploy"];
+      system-features = [ "kvm" "big-parallel" ];
+      trusted-users = [ "root" "nico" "deploy" ];
     };
-    nixPath = ["nixpkgs=${sources.nixpkgs}"];
+    nixPath = [ "nixpkgs=${sources.nixpkgs}" ];
   };
 
   # Allow unfree packages
@@ -57,8 +56,8 @@
     script = ''
       "${config.nix.package.out}/bin/nix-store" --gc --print-roots | "${pkgs.gawk}/bin/awk" 'match($0, /^(.*\/result) -> \/nix\/store\/[^-]+-nixos-system/, a) { print a[1] }' | xargs -r -d\\n rm
     '';
-    before = ["nix-gc.service"];
-    wantedBy = ["nix-gc.service"];
+    before = [ "nix-gc.service" ];
+    wantedBy = [ "nix-gc.service" ];
   };
 
   nixpkgs.config.permittedInsecurePackages = [

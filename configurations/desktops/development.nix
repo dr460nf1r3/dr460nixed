@@ -1,7 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   # List all of the packages
   environment.systemPackages = with pkgs; [
@@ -97,7 +96,7 @@
     podman = {
       autoPrune = {
         enable = true;
-        flags = ["--all"];
+        flags = [ "--all" ];
       };
       enable = true;
       dockerCompat = true;
@@ -126,16 +125,16 @@
       Capability = "all";
     };
     filesConfig = {
-      Bind = ["/home/nico:/home/nico"];
+      Bind = [ "/home/nico:/home/nico" ];
     };
   };
   systemd.services."systemd-nspawn@garuda-dev" = {
     overrideStrategy = "asDropin";
-    wantedBy = ["machines.target"];
-    environment = {SYSTEMD_NSPAWN_UNIFIED_HIERARCHY = "1";};
+    wantedBy = [ "machines.target" ];
+    environment = { SYSTEMD_NSPAWN_UNIFIED_HIERARCHY = "1"; };
     enable = true;
   };
 
   # Allow to cross-compile to aarch64
-  boot.binfmt.emulatedSystems = ["aarch64-linux"];
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }

@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   # Common used configurations
   imports = [
     ./monitoring.nix

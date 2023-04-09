@@ -1,7 +1,6 @@
-{
-  lib,
-  pkgs,
-  ...
+{ lib
+, pkgs
+, ...
 }:
 with builtins; let
   configDir = ".config";
@@ -31,7 +30,8 @@ with builtins; let
     url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/garuda-wallpapers/-/raw/master/src/garuda-wallpapers/Malefor.jpg";
     sha256 = "0r6b33k24kq4i3vzp41bxx7gqmw20klakcmw4qy7zana4f3pfnw6";
   };
-in {
+in
+{
   # Compatibility for GNOME apps
   dconf.enable = true;
 

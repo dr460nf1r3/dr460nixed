@@ -4,23 +4,22 @@
 
 This repo contains my NixOS dotfiles. All of my personal devices are going to be added here over time.
 
-![desktop](https://i.imgur.com/Ghbgwht.png)
-![vscode](https://i.imgur.com/T24G1Tk.png)
-![browser](https://i.imgur.com/DlEVFxs.png)
-
+![desktop-kde](https://i.imgur.com/hZQj0fi.png)
+![desktop-gnome](https://i.imgur.com/Ghbgwht.png)
 
 **What is inside?**:
 
 - Multiple **NixOS configurations**, including **desktop**, **server**, **nixos-wsl** & **live-usb**
+- A fully ported & configured **Garuda dr460nized KDE** setup as well as a **Gruvbox themed GNOME** desktop
 - **Opt-in persistence** through impermanence + ZFS snapshots
-- **Mesh networked** hosts with **zerotier**
-- Fully Gruvbox themed & configured operating system using **Stylix** & the **GNOME desktop**
+- **Mesh networked** hosts with **Zerotier**
+- Additional packages not existing in Nixpkgs (yet) via **chaotic-nyx**
 - Secrets are managed via **nix-sops**
 - Automated flake building when pushing to main & pushing to **Cachix** via **GitHub Actions**
 - Easy building of configurations & deployment via **Colmena**
 
 Other, smaller tweaks I particularly like about this setup include:
-- A much enhanced, Gruvbox themed Spotify **via spicetify-cli**
+- A much enhanced, fancy themed Spotify **via spicetify-cli**
 - No password prompts when having my **Yubikey** connected to my laptop
 - Being able to easily remote-control my machines via **KDEConnect**
 - Having custom, (sometimes too) **bleeding-edge Mesa** builds
@@ -29,8 +28,9 @@ Other, smaller tweaks I particularly like about this setup include:
 
 - `flake.nix`: Entrypoint for hosts and home configurations. Also exposes a
   devshell for boostrapping (`nix develop` or `nix-shell`) as well as Colmena configs.
+- `apps`: Packages built from source.
+- `configurations`: All the Nix configurations
 - `hosts`: NixOS Configurations, accessible via `nixos-rebuild --flake`.
-- `apps`: Packages built from source
 - `overlays`: Patches and version overrides for some packages.
 - `pkgs`: My custom packages.
 

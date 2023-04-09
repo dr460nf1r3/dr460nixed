@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   # Basic chromium settings (system-wide)
   programs.chromium = {
     defaultSearchProviderEnabled = true;

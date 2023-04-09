@@ -52,7 +52,7 @@ PreloadWeight=42
 [Containments][106][Applets][107][Configuration][General]
 fill=false
 iconSpacing=2
-launchers=applications:org.kde.konsole.desktop,preferred://browser,preferred://filemanager,applications:org.kde.plasma-systemmonitor.desktop,applications:systemsettings.desktop,applications:thunderbird.desktop,applications:code.desktop,applications:chromium-browser.desktop,applications:gitkraken.desktop,applications:spotify.desktop,applications:org.telegram.desktop.desktop
+launchers=applications:org.kde.konsole.desktop,preferred://browser,preferred://filemanager,applications:org.kde.plasma-systemmonitor.desktop,applications:systemsettings.desktop,applications:thunderbird.desktop,applications:code.desktop,applications:chromium-browser.desktop,applications:gitkraken.desktop,applications:spotify.desktop,applications:org.telegram.desktop.desktop,applications:virt-manager.desktop
 maxStripes=1
 showOnlyCurrentDesktop=false
 
@@ -499,7 +499,7 @@ plugin=org.kde.plasma.icontasks
 [Containments][136][Applets][137][Configuration][General]
 fill=false
 iconSpacing=2
-launchers=applications:org.kde.konsole.desktop,preferred://browser,preferred://filemanager,applications:org.kde.plasma-systemmonitor.desktop,applications:systemsettings.desktop,applications:thunderbird.desktop,applications:chromium-browser.desktop,applications:gitkraken.desktop,applications:spotify.desktop,applications:org.telegram.desktop.desktop
+launchers=applications:org.kde.konsole.desktop,preferred://browser,preferred://filemanager,applications:org.kde.plasma-systemmonitor.desktop,applications:systemsettings.desktop,applications:thunderbird.desktop,applications:code.desktop,applications:chromium-browser.desktop,applications:gitkraken.desktop,applications:spotify.desktop,applications:org.telegram.desktop.desktop,applications:virt-manager.desktop
 maxStripes=1
 showOnlyCurrentDesktop=false
 showOnlyCurrentScreen=false
@@ -634,7 +634,7 @@ PreloadWeight=42
 [Containments][58][Applets][59][Configuration][General]
 fill=false
 iconSpacing=2
-launchers=applications:org.kde.konsole.desktop,preferred://browser,preferred://filemanager,applications:org.kde.plasma-systemmonitor.desktop,applications:systemsettings.desktop,applications:thunderbird.desktop,applications:code.desktop,applications:chromium-browser.desktop,applications:gitkraken.desktop,applications:spotify.desktop,applications:org.telegram.desktop.desktop
+launchers=applications:org.kde.konsole.desktop,preferred://browser,preferred://filemanager,applications:org.kde.plasma-systemmonitor.desktop,applications:systemsettings.desktop,applications:thunderbird.desktop,applications:code.desktop,applications:chromium-browser.desktop,applications:gitkraken.desktop,applications:spotify.desktop,applications:org.telegram.desktop.desktop,applications:virt-manager.desktop
 maxStripes=1
 showOnlyCurrentDesktop=false
 

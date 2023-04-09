@@ -1,4 +1,4 @@
-{lib, ...}: {
+{ lib, ... }: {
   # Make the boot sequence quiet & enable the systemd initrd
   boot = {
     consoleLogLevel = 0;

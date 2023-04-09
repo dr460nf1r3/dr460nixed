@@ -1,11 +1,12 @@
-{
-  keys,
-  config,
-  home-manager,
-  ...
-}: let
+{ keys
+, config
+, home-manager
+, ...
+}:
+let
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in {
+in
+{
   # All users are immuntable; if a password is required it needs to be set via passwordFile
   users.mutableUsers = false;
 
@@ -19,12 +20,12 @@ in {
 
   # This is for easy configuration roll-out
   users.users.deploy = {
-    extraGroups = ["wheel"];
+    extraGroups = [ "wheel" ];
     home = "/home/deploy";
     isNormalUser = true;
     openssh.authorizedKeys = {
-      keyFiles = [keys.nico];
-      keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBa5YB2FSxQZLFn2OraC0U+UGVaurOgQThC+yYz+3OE+"];
+      keyFiles = [ keys.nico ];
+      keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBa5YB2FSxQZLFn2OraC0U+UGVaurOgQThC+yYz+3OE+" ];
     };
     password = "*";
     uid = 2000;
@@ -59,7 +60,7 @@ in {
       ];
     home = "/home/nico";
     isNormalUser = true;
-    openssh.authorizedKeys.keyFiles = [keys.nico];
+    openssh.authorizedKeys.keyFiles = [ keys.nico ];
     passwordFile = config.sops.secrets."passwords/nico".path;
     uid = 1000;
   };

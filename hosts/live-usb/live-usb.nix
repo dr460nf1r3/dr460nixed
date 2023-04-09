@@ -1,7 +1,6 @@
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 }: {
   isoImage.volumeID = lib.mkForce "id-live";
   isoImage.isoName = lib.mkForce "id-live.iso";
@@ -23,7 +22,7 @@
   boot.loader.timeout = lib.mkForce 10;
 
   # Needed for https://github.com/NixOS/nixpkgs/issues/58959
-  boot.supportedFilesystems = lib.mkForce ["btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "zfs"];
+  boot.supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "zfs" ];
 
   # This is a live USB
   networking.hostName = "live-usb";
@@ -48,7 +47,7 @@
         user = "nico";
       };
     };
-    videoDrivers = ["nvidia" "amdgpu" "vesa" "modesetting"];
+    videoDrivers = [ "nvidia" "amdgpu" "vesa" "modesetting" ];
   };
 
   # Override default iso configuration

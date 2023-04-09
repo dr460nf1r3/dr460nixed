@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   # LAN discovery
   services.avahi = {
     enable = true;

@@ -1,14 +1,15 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
+{ lib
+, pkgs
+, ...
+}:
+let
   initscript = pkgs.writeShellScript "motdscript" ''
     ${pkgs.fancy-motd}/bin/motd
     echo -e ""
     echo -e "              Welcome to the dragon's infra! 🐉              "
   '';
-in {
+in
+{
   # Add fancy MOTD to shell logins
   environment.interactiveShellInit = "${initscript}";
 

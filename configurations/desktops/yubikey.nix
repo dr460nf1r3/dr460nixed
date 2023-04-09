@@ -1,8 +1,8 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # Enable the smartcard daemon
   hardware.gpgSmartcards.enable = true;
   services.pcscd.enable = true;
-  services.udev.packages = [pkgs.yubikey-personalization];
+  services.udev.packages = [ pkgs.yubikey-personalization ];
 
   # Configure as challenge-response for instant login,
   # can't provide the secrets as the challenge gets updated

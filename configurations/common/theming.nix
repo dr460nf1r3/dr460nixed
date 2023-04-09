@@ -1,16 +1,17 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   base16-schemes = pkgs.fetchFromGitHub {
     owner = "tinted-theming";
     repo = "base16-schemes";
     rev = "cf6bc89";
     sha256 = "U9pfie3qABp5sTr3M9ga/jX8C807FeiXlmEZnC4ZM58=";
   };
-in {
+in
+{
   # Style the operating system using Stylix - gruvbox-dark-medium on GNOME
   stylix.base16Scheme = "${base16-schemes}/shades-of-purple.yaml";
   stylix.image = builtins.fetchurl {

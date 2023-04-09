@@ -1,8 +1,8 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   # Enable KDE Plasma desktop environment
   services.xserver = {
     enable = true;
-    excludePackages = [pkgs.xterm];
+    excludePackages = [ pkgs.xterm ];
     desktopManager.plasma5 = {
       enable = true;
       notoPackage = pkgs.noto-fonts;

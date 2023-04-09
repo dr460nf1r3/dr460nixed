@@ -1,4 +1,5 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   # This was for some reason needed to get it working and I don't know why
   flake-compat = builtins.fetchTarball {
     url = "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
@@ -10,10 +11,10 @@
         url = "https://github.com/the-argus/spicetify-nix/archive/master.tar.gz";
         sha256 = "1ri60f2v1sz6wwqcp97hqhb0bbynfkg5155kxp7kmchhp4g8ayz8";
       };
-    })
-    .defaultNix;
+    }).defaultNix;
   spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
-in {
+in
+{
   # Import the spicetify-cli home-manager module
   imports = [
     spicetify-nix.homeManagerModule

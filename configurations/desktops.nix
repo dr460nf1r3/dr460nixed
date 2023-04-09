@@ -1,4 +1,4 @@
 {
   # Common configuration snippets
-  imports = [./desktops/common.nix];
+  imports = [ ./desktops/common.nix ];
 }

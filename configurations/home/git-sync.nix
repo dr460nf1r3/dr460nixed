@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   # Enable the git-sync service
   services.git-sync.enable = true;
 

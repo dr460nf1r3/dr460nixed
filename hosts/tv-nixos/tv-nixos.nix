@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, ...
 }: {
   # Individual settings
   imports = [
@@ -26,8 +25,8 @@
         efiSysMountPoint = "/boot/efi";
       };
     };
-    supportedFilesystems = ["btrfs"];
-    extraModulePackages = with config.boot.kernelPackages; [acpi_call];
+    supportedFilesystems = [ "btrfs" ];
+    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
   };
 
@@ -40,7 +39,7 @@
       options bbswitch use_acpi_to_detect_card_state=1
       options thinkpad_acpi force_load=1 fan_control=1
     '';
-    kernelModules = ["tpm-rng" "i915"];
+    kernelModules = [ "tpm-rng" "i915" ];
   };
   environment.variables = {
     VDPAU_DRIVER =
@@ -61,7 +60,7 @@
   services.hardware.bolt.enable = false;
 
   # Enable the touchpad
-  environment.systemPackages = with pkgs; [libinput];
+  environment.systemPackages = with pkgs; [ libinput ];
 
   # Fix the monitor setup
   # home-manager.users.nico = {...}: {
