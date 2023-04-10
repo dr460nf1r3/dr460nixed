@@ -6,7 +6,6 @@
     ./fonts.nix
     ./hardening.nix
     ./kde.nix
-    ./mozilla.nix
     ./networking.nix
     ./performance.nix
     ./sound.nix
@@ -75,6 +74,11 @@
     vorta
     vulkan-tools
   ];
+
+  # Set environment variables
+  environment.variables = {
+    MOZ_USE_XINPUT2 = "1";
+  };
 
   # For out-of-box packages using GNOME software
   services.flatpak.enable = true;

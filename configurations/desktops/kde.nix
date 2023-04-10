@@ -60,6 +60,7 @@
     libsForQt5.krfb
     libsForQt5.qtstyleplugin-kvantum
     movit
+    nheko
     qbittorrent
     resvg
     sshfs
