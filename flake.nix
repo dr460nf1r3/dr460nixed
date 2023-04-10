@@ -147,7 +147,6 @@
           deployment = {
             buildOnTarget = true;
             tags = [ "oracle" "servers" ];
-            targetHost = "130.61.136.149";
           };
           imports = [ ./hosts/oracle-dragon/oracle-dragon.nix ];
           nixpkgs.system = "aarch64-linux";
@@ -161,21 +160,6 @@
           imports = [ ./hosts/rpi-dragon/rpi-dragon.nix ];
           nixpkgs.system = "aarch64-linux";
         };
-      };
-
-      # Home-manager standalone configs (in case I use another system with Nix)
-      homeConfigurations.${user} = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
-        modules = [
-          ./configurations/home/common.nix
-          {
-            home = {
-              username = "${user}";
-              homeDirectory = "/home/${user}";
-              stateVersion = "22.11";
-            };
-          }
-        ];
       };
 
       # All the system configurations (flake)
