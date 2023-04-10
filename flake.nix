@@ -11,7 +11,7 @@
     # Chaotic-AUR Nyx!
     chaotic-nyx = {
       #inputs.mesa-git-src.follows = "mesa-git-src";
-      url = "github:chaotic-aur/nyx/sweet-kde";
+      url = "github:chaotic-aur/nyx/IHaveToUseThisBecauseNoPRReview";
     };
 
     # Smooth-criminal bleeding-edge Mesa3D

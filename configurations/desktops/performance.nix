@@ -6,7 +6,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    #ananicy-cpp-rules
+    ananicy-cpp-rules
   ];
 
   # 90% ZRAM as swap
