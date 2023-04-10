@@ -39,6 +39,9 @@
   # Enable hardware acceleration
   hardware.raspberry-pi."4".fkms-3d.enable = true;
 
+  # Slows down write operations considerably
+  nix.settings.auto-optimise-store = lib.mkForce false;
+
   # Custom garbage collection defaults
   nix = {
     # Free up to 1GiB whenever there is less than 100MiB left & allow remote-building
@@ -89,15 +92,6 @@
     owner = config.users.users.root.name;
     path = "/root/.ssh/id_ed25519";
   };
-
-  # The key needed for using oracle-dragon as remote builder
-  # home-manager.users."root".programs.ssh.matchBlocks = {
-  #   "oracle-dragon" = {
-  #     HostName = "oracle-dragon";
-  #     IdentityFile = config.sops.secrets."ssh_keys/deploy_ed25519".path;
-  #     User = "deploy";
-  #   };
-  # };
 
   # NixOS stuff
   system.stateVersion = "22.11";

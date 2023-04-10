@@ -7,7 +7,8 @@
   services.netdata.enable = true;
   services.netdata.config = {
     global = {
-      "memory mode" = "none";
+      "dbengine disk space" = "256";
+      "memory mode" = "dbengine";
       "update every" = "2";
     };
     ml = { "enabled" = "yes"; };
@@ -28,7 +29,7 @@
         (pkgs.writeText "nginx.conf" ''
           jobs:
             - name: local
-              url: http://localhost/nginx_status
+              url: http://127.0.0.1/nginx_status
         '');
   };
 

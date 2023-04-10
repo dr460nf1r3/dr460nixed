@@ -3,7 +3,6 @@
     auth = "none";
     enable = true;
     extraPackages = with pkgs; [
-      alejandra
       ansible
       bash
       bind.dnsutils
@@ -13,6 +12,8 @@
       heroku
       hugo
       nixos-generators
+      nixpkgs-fmt
+      nixpkgs-review
       nodejs
       nur.repos.yes.archlinux.asp
       nur.repos.yes.archlinux.devtools

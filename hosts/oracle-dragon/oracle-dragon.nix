@@ -9,6 +9,7 @@
     ../../configurations/servers/adguard.nix
     ../../configurations/servers/code-server.nix
     ../../configurations/servers/github-runner.nix
+    ../../configurations/servers/searxng.nix
     ./hardware-configuration.nix
   ];
 

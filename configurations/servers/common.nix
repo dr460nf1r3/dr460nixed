@@ -11,7 +11,7 @@
   services.fail2ban = {
     enable = true;
     ignoreIP = [
-      "10.241.1.0/24"
+      "100.0.0.0/8"
       "127.0.0.1/8"
     ];
   };
