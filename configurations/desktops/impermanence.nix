@@ -28,6 +28,7 @@ in
       "/etc/secureboot"
       "/etc/ssh"
       "/var/cache/chaotic"
+      "/var/cache/tailscale"
       "/var/lib/AccountsService/icons"
       "/var/lib/bluetooth"
       "/var/lib/chaotic"
@@ -36,9 +37,9 @@ in
       "/var/lib/libvirt"
       "/var/lib/machines"
       "/var/lib/systemd"
+      "/var/lib/tailscale"
       "/var/lib/upower"
       "/var/lib/vnstat"
-      "/var/lib/zerotier-one"
       {
         directory = "/var/lib/iwd";
         mode = "u=rwx,g=,o=";
@@ -86,6 +87,7 @@ in
         ".config/spotify"
         ".config/teams-for-linux"
         ".config/vlc"
+        ".firedragon"
         ".gitkraken"
         ".java"
         ".local/share/JetBrains"
@@ -186,6 +188,7 @@ in
         #".cache/bubblemail"
         ".cache/chromium"
         #".cache/evolution"
+        ".cache/firedragon"
         #".cache/gsconnect"
         #".cache/keybase"
         ".cache/konsole"

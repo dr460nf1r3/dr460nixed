@@ -36,7 +36,10 @@
       auth_attempts = 5;
       block_auth_min = 15;
       dns = {
-        bind_hosts = [ "10.241.1.3" ];
+        bind_hosts = [
+          "100.86.102.115"
+          "fd7a:115c:a1e0:ab12:4843:cd96:6256:6673"
+        ];
         port = 53;
         statistics_interval = 90;
         querylog_enabled = true;
@@ -65,14 +68,7 @@
         all_servers = false;
         fastest_addr = false;
         fastest_timeout = "1s";
-        allowed_clients = [
-          "10.241.1.1"
-          "10.241.1.2"
-          "10.241.1.3"
-          "10.241.1.4"
-          "10.241.1.5"
-          "127.0.0.1"
-        ];
+        allowed_clients = [ ];
         disallowed_clients = [ ];
         blocked_hosts = [
           "hostname.bind"

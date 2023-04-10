@@ -93,37 +93,9 @@
   };
 
   # Zerotier network to connect the devices
-  networking.firewall.trustedInterfaces = [ "ztnfaljg5n" ];
-  services.zerotierone = {
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
+  services.tailscale = {
     enable = true;
-    joinNetworks = [ "a84ac5c10a715aa7" ];
+    permitCertUid = "nico";
   };
-
-  # Zerotier hosts for easy access
-  networking.hosts = {
-    "10.241.1.1" = [ "slim-lair" ];
-    "10.241.1.2" = [ "tv-nixos" ];
-    "10.241.1.3" = [
-      "adguard.dragons.lair"
-      "code.dragons.lair"
-      "dns.dragons.lair"
-      "home.dragons.lair"
-      "netdata.dragons.lair"
-      "oracle-dragon"
-    ];
-    "10.241.1.4" = [ "rpi-dragon" ];
-    "10.241.1.5" = [ "pixel" ];
-  };
-
-  # Trust our self signed certificate for local services
-  sops.secrets."ssl/home-dragon-ca" = {
-    mode = "0644";
-    owner = config.users.users.root.name;
-    path = "/run/secrets/ssl/home-dragon-ca";
-  };
-
-  # Override certificate store with my custom home-dragon certificate
-  security.pki.certificateFiles = [
-    config.sops.secrets."ssl/home-dragon-ca".path
-  ];
 }

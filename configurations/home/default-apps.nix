@@ -279,7 +279,7 @@
       in
       (lib.genAttrs code (_: [ "code.desktop" ]))
       // (lib.genAttrs images (_: [ "gwenview.desktop" ]))
-      // (lib.genAttrs urls (_: [ "chromium-browser.desktop" ]))
+      // (lib.genAttrs urls (_: [ "firedragon.desktop" ]))
       // (lib.genAttrs documents (_: [ "okular.desktop" ]))
       // (lib.genAttrs audioVideo (_: [ "vlc.desktop" ]))
       // (lib.genAttrs archives (_: [ "ark.desktop" ]));

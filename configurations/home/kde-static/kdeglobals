@@ -92,7 +92,7 @@ ForegroundVisited=179,13,191
 
 [General]
 AllowKDEAppsToRememberWindowPositions=true
-BrowserApplication=firefox.desktop
+BrowserApplication=firedragon.desktop
 XftHintStyle=hintslight
 XftSubPixel=none
 fixed=JetBrains Mono Nerd Font,10,-1,5,50,0,0,0,0,0
