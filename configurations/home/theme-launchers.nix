@@ -62,7 +62,7 @@ in
   home.file."${appdir}/com.yubico.authenticator.desktop".text = ''
     [Desktop Entry]
     Categories=Utility;
-    Comment=
+    Comment=Use the Yubikey for OTP's
     Exec=${pkgs.yubioath-flutter}/bin/yubioath-flutter
     GenericName=Yubico Authenticator
     Icon=keysmith
@@ -80,7 +80,7 @@ in
   home.file."${appdir}/keybase.desktop".text = ''
     [Desktop Entry]
     Categories=Network;
-    Comment=
+    Comment=An Electron GUI for Keybase
     Exec=${pkgs.keybase}/bin/keybase-gui %u
     Icon=keyring-manager
     MimeType=x-scheme-handler/web+stellar;x-scheme-handler/keybase;application/x-saltpack;
@@ -146,6 +146,60 @@ in
     Path=
     StartupNotify=false
     Terminal=true
+    TerminalOptions=
+    Type=Application
+    X-KDE-SubstituteUID=false
+    X-KDE-Username=
+  '';
+  home.file."${appdir}/teams-for-linux.desktop".text = ''
+    [Desktop Entry]
+    Categories=Network;InstantMessaging;Chat
+    Comment=Unofficial Microsoft Teams client for Linux
+    Exec=${pkgs.teams-for-linux}/bin/teams-for-linux
+    Icon=teams-for-linux
+    Name=Microsoft Teams
+    NoDisplay=false
+    Path=
+    StartupNotify=true
+    Terminal=false
+    TerminalOptions=
+    Type=Application
+    Version=1.4
+    X-KDE-SubstituteUID=false
+    X-KDE-Username=
+  '';
+  home.file."${appdir}/org.prismlauncher.PrismLauncher.desktop".text = ''
+    [Desktop Entry]
+    Categories=Game;ActionGame;AdventureGame;Simulation;
+    Comment=A custom launcher for Minecraft that allows you to easily manage multiple installations of Minecraft at once.
+    Exec=${pkgs.prismlauncher-mod}/bin/prismlauncher
+    Icon=minecraft
+    Keywords=game;minecraft;launcher;mc;multimc;polymc;
+    MimeType=application/zip;application/x-modrinth-modpack+zip
+    Name=Prism Launcher
+    NoDisplay=false
+    Path=
+    StartupNotify=true
+    StartupWMClass=PrismLauncher
+    Terminal=false
+    TerminalOptions=
+    Type=Application
+    Version=1.0
+    X-KDE-SubstituteUID=false
+    X-KDE-Username=
+  '';
+  home.file."${appdir}/org.pipewire.Helvum.desktop".text = ''
+    [Desktop Entry]
+    Categories=AudioVideo;Audio;Video;Midi;Settings;GNOME;GTK;
+    Comment=A patchbay for pipewire
+    Exec=${pkgs.helvum}/bin/helvum
+    GenericName=Patchbay
+    Icon=gnome-sound-properties
+    Name=Helvum
+    NoDisplay=false
+    Path=
+    StartupNotify=true
+    Terminal=false
     TerminalOptions=
     Type=Application
     X-KDE-SubstituteUID=false
