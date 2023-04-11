@@ -1,8 +1,8 @@
 { ... }: {
   # We want to use NetworkManager
   networking = {
-    # Point to our Adguard instance
-    nameservers = [ "100.100.100.100" ];
+    # Pointing to our Adguard instance via Tailscale
+    nameservers = [ "1.1.1.1" ];
     networkmanager = {
       dns = "none";
       enable = true;

@@ -33,11 +33,11 @@
         "wlroots-git-src": "wlroots-git-src"
       },
       "locked": {
-        "lastModified": 1681194919,
-        "narHash": "sha256-/GnPC/aQT07Lj4ZsEjH5KsB3+T90XWWU/sj/9Q20L1E=",
+        "lastModified": 1681220276,
+        "narHash": "sha256-gR80FAPIf4Ok8ajYEOg2nbZh33B9qJ7YPq/wTODPOTI=",
         "owner": "chaotic-aur",
         "repo": "nyx",
-        "rev": "d09f058a07afbb30fa9a9b2f9eb45ee1f531a67e",
+        "rev": "7c82087ccb265ab63020396620c99f7122768e55",
         "type": "github"
       },
       "original": {
@@ -633,11 +633,11 @@
         "nixpkgs-stable": "nixpkgs-stable_2"
       },
       "locked": {
-        "lastModified": 1681008913,
-        "narHash": "sha256-6C4BknF+cwCnl/A2fFdlAnc3LMV7f7XqOL09UhLZ9tA=",
+        "lastModified": 1681209176,
+        "narHash": "sha256-wyQokPpkNZnsl/bVf8m1428tfA0hJ0w/qexq4EizhTc=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "ddc6f124cb9be22d2ba066064c28bc19039a6bce",
+        "rev": "00d5fd73756d424de5263b92235563bc06f2c6e1",
         "type": "github"
       },
       "original": {

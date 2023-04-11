@@ -35,7 +35,7 @@ in
     # The new AMD Pstate driver & needed modules
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
     kernelModules = [ "acpi_call" "amdgpu" "amd-pstate=passive" ];
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     kernelParams = [ "initcall_blacklist=acpi_cpufreq_init" ];
     lanzaboote = {
       configurationLimit = 20;
@@ -48,9 +48,6 @@ in
   # Network configuration & id for ZFS
   networking.hostName = "slim-lair";
   networking.hostId = "9c8011ee";
-
-  # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
-  # systemd.services.NetworkManager-wait-online.enable = false;
 
   # SSD
   services.fstrim.enable = true;

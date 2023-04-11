@@ -53,6 +53,7 @@
     libsForQt5.kdegraphics-thumbnailers
     libsForQt5.kdenlive
     libsForQt5.kimageformats
+    libsForQt5.kleopatra
     libsForQt5.krdc
     libsForQt5.krfb
     libsForQt5.qtstyleplugin-kvantum

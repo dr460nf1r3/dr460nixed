@@ -22,7 +22,7 @@
     };
     # We need to override Stylix here to keep the splash
     plymouth = lib.mkForce {
-      enable = true;
+      enable = false;
       theme = "bgrt";
     };
   };

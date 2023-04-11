@@ -23,45 +23,49 @@
   # Provide a reverse proxy for our services
   services.nginx = {
     enable = true;
-    virtualHosts."code.dragons.lair" = {
+    virtualHosts."oracle-dragon.emperor-mercat.ts.net" = {
+      extraConfig = ''
+        location = /netdata {
+              return 301 /netdata/;
+        }
+        location ~ /netdata/(?<ndpath>.*) {
+          proxy_redirect off;
+          proxy_set_header Host $host;
+          proxy_set_header X-Forwarded-Host $host;
+          proxy_set_header X-Forwarded-Server $host;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_http_version 1.1;
+          proxy_pass_request_headers on;
+          proxy_set_header Connection "keep-alive";
+          proxy_store off;
+          proxy_pass http://127.0.0.1:19999/$ndpath$is_args$args;
+
+          gzip on;
+          gzip_proxied any;
+          gzip_types *;
+        }
+      '';
       forceSSL = true;
       http3 = true;
       locations."/" = {
-        proxyPass = "http://127.0.0.1:4444";
+        proxyPass = "http://127.0.0.1:3000";
         proxyWebsockets = true;
       };
-      sslCertificate = config.sops.secrets."ssl/home-dragon-cert".path;
-      sslCertificateKey = config.sops.secrets."ssl/home-dragon-key".path;
-    };
-    virtualHosts."dns.dragons.lair" = {
-      forceSSL = true;
-      http3 = true;
-      locations."/".proxyPass = "http://127.0.0.1:3000";
-      sslCertificate = config.sops.secrets."ssl/home-dragon-cert".path;
-      sslCertificateKey = config.sops.secrets."ssl/home-dragon-key".path;
-    };
-    virtualHosts."netdata.dragons.lair" = {
-      forceSSL = true;
-      http3 = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:19999";
-        proxyWebsockets = true;
-      };
-      sslCertificate = config.sops.secrets."ssl/home-dragon-cert".path;
-      sslCertificateKey = config.sops.secrets."ssl/home-dragon-key".path;
+      sslCertificate = config.sops.secrets."ssl/oracle-dragon-cert".path;
+      sslCertificateKey = config.sops.secrets."ssl/oracle-dragon-key".path;
     };
   };
 
-  # Make the SSL secret key & cert available, CA already globally trusted
-  sops.secrets."ssl/home-dragon-key" = {
+  # Make the SSL secret key & cert available (aquired via Tailscale)
+  sops.secrets."ssl/oracle-dragon-key" = {
     mode = "0600";
     owner = "nginx";
-    path = "/run/secrets/ssl/home-dragon-key";
+    path = "/run/secrets/ssl/oracle-dragon-key";
   };
-  sops.secrets."ssl/home-dragon-cert" = {
+  sops.secrets."ssl/oracle-dragon-cert" = {
     mode = "0600";
     owner = "nginx";
-    path = "/run/secrets/ssl/home-dragon-cert";
+    path = "/run/secrets/ssl/oracle-dragon-cert";
   };
 
   # This is my remote development machine

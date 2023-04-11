@@ -1,4 +1,4 @@
 { ... }: {
-  # Use Systemd-resolved
-  networking.nameservers = [ "100.100.100.100" ];
+  # Pointing to our Adguard instance via Tailscale
+  networking.nameservers = [ "1.1.1.1" ];
 }

@@ -177,14 +177,14 @@
       ];
       tls = {
         enabled = true;
-        server_name = "10.241.1.3";
+        server_name = "100.86.102.115";
         force_https = false;
         port_https = 3001;
         port_dns_over_tls = 853;
         port_dns_over_quic = 853;
         allow_unencrypted_doh = true;
-        certificate_path = config.sops.secrets."ssl/home-dragon-cert".path;
-        private_key_path = config.sops.secrets."ssl/home-dragon-key".path;
+        certificate_path = config.sops.secrets."ssl/oracle-dragon-cert".path;
+        private_key_path = config.sops.secrets."ssl/oracle-dragon-key".path;
       };
       schema_version = 14;
     };

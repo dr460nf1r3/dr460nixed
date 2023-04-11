@@ -21,7 +21,7 @@
 
   # Upstream resolvers
   services.nginx.resolver = {
-    addresses = [ "10.241.1.3" ];
+    addresses = [ "100.100.100.100" ];
     valid = "60s";
   };
 
@@ -32,10 +32,6 @@
 
   # Logformat to use for Netdata & extra config that doesn't exist as separate key in NixOS
   services.nginx.commonHttpConfig = ''
-    # Recommended configuration
-    #ssl_ecdh_curve          X25519:secp521r1:secp384r1:prime256v1;
-    #resolver_timeout        2s;
-
     # Custom log format for Netdata to analyze
     log_format              custom '"$http_referer" "$http_user_agent" '
                             '$remote_addr - $remote_user [$time_local] '
