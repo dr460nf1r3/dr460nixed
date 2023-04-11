@@ -1,5 +1,4 @@
-{ lib
-, pkgs
+{ pkgs
 , ...
 }:
 with builtins; let
@@ -32,6 +31,9 @@ with builtins; let
   };
 in
 {
+  # Theme our desktop launchers
+  imports = [ ./theme-launchers.nix ];
+
   # Compatibility for GNOME apps
   dconf.enable = true;
 
@@ -124,7 +126,7 @@ in
       WallpaperPlugin=org.kde.image
 
       [Greeter][Wallpaper][org][kde][image][General]
-      Image=/home/nico/.local/share/wallpapers/Malefor.jpg
+      Image=${wallpaper}
     '';
     "${configDir}/kwalletrc".text = ''
       [Wallet]

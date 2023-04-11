@@ -22,7 +22,6 @@
       auto-optimise-store = true;
       # A few extra binary caches
       extra-substituters = [
-        "https://chaotic-nyx.cachix.org"
         "https://colmena.cachix.org"
         "https://dr460nf1r3.cachix.org"
         "https://garuda-linux.cachix.org"

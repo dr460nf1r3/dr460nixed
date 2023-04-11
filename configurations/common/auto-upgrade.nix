@@ -7,6 +7,6 @@ in
     enable = true;
     dates = "hourly";
     flags = [ "--refresh" ];
-    flake = "github:dr460nf1r3/device-configurations";
+    flake = "github:dr460nf1r3/device-configurations#${hostName}";
   };
 }

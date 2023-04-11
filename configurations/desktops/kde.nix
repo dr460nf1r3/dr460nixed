@@ -25,9 +25,6 @@
     };
   };
 
-  # KDE Master branch overlay - needs patches fixed
-  # nixpkgs.overlays = import ../../overlays/kde-nix-overlay/overlays.nix;
-
   # Remove a few applications that I don't like
   environment.plasma5.excludePackages = with pkgs; [
     hicolor-icon-theme
@@ -44,8 +41,8 @@
 
   # Additional KDE packages not included by default
   environment.systemPackages = with pkgs; [
-    applets-window-appmenu
-    applets-window-title
+    applet-window-appmenu
+    applet-window-title
     beautyline-icons
     dr460nized-kde-theme
     firedragon

@@ -1,6 +1,5 @@
 { config
 , pkgs
-, lib
 , ...
 }:
 let
@@ -36,7 +35,7 @@ in
     # The new AMD Pstate driver & needed modules
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
     kernelModules = [ "acpi_call" "amdgpu" "amd-pstate=passive" ];
-    kernelPackages = pkgs.linuxPackages_xanmod;
+    kernelPackages = pkgs.linuxPackages_cachyos;
     kernelParams = [ "initcall_blacklist=acpi_cpufreq_init" ];
     lanzaboote = {
       configurationLimit = 20;
@@ -46,19 +45,12 @@ in
     loader.efi.canTouchEfiVariables = true;
   };
 
-  # Creates a second boot entry with LTS kernel and stable ZFS
-  specialisation.safe.configuration = {
-    boot.kernelPackages = lib.mkForce pkgs.linuxPackages;
-    boot.zfs.enableUnstable = lib.mkForce false;
-    system.nixos.tags = [ "lts" "zfs-stable" ];
-  };
-
   # Network configuration & id for ZFS
   networking.hostName = "slim-lair";
   networking.hostId = "9c8011ee";
 
   # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
-  systemd.services.NetworkManager-wait-online.enable = false;
+  # systemd.services.NetworkManager-wait-online.enable = false;
 
   # SSD
   services.fstrim.enable = true;

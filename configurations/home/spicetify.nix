@@ -41,7 +41,6 @@ in
     replaceColors = true;
     overwriteAssets = true;
     sidebarConfig = true;
-    colorScheme = "Sakura";
     enabledCustomApps = with spicePkgs.apps; [
       lyrics-plus
       marketplace
