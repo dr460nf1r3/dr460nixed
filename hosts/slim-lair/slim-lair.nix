@@ -42,8 +42,8 @@ in
   };
 
   # Network configuration & id for ZFS
-  networking.hostName = "slim-lair";
   networking.hostId = "9c8011ee";
+  networking.hostName = "slim-lair";
 
   # SSD
   services.fstrim.enable = true;
@@ -52,8 +52,8 @@ in
   services.zfs.autoScrub.enable = true;
 
   # AMD device
-  services.xserver.videoDrivers = [ "amdgpu" ];
   services.hardware.bolt.enable = false;
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Enable OpenCL using rocm
   hardware.opengl.extraPackages = with pkgs; [
@@ -65,13 +65,16 @@ in
   # chaotic.mesa-git.enable = true;
 
   # Enable a few selected custom settings
+  dr460nixed.chromium = true;
+  dr460nixed.common.enable = true;
   dr460nixed.desktops.enable = true;
   dr460nixed.development.enable = true;
   dr460nixed.gaming.enable = true;
   dr460nixed.performance-tweaks.enable = true;
-  dr460nixed.yubikey = true;
-  dr460nixed.chromium = true;
   dr460nixed.school = true;
+  dr460nixed.shells.enable = true;
+  dr460nixed.boot.enable = true;
+  dr460nixed.yubikey = true;
 
   # Workaround to enable HIP
   systemd.tmpfiles.rules = [

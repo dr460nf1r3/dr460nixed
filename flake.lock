@@ -68,11 +68,11 @@
         "wlroots-git-src": "wlroots-git-src"
       },
       "locked": {
-        "lastModified": 1681312985,
-        "narHash": "sha256-sprVIyT5oEIQGmb97Ny08iYZC5QYdX5J4ugVYehQiSk=",
+        "lastModified": 1681314649,
+        "narHash": "sha256-sPCbu/Cu32J1dQLt34CGB5WBI/2IQr8wk41ypso/9kE=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "d17357dd9ded9f8060c03ef75d344e45f1f3a776",
+        "rev": "5b96deb11c2aa0c7a8e761663bb42a8a47f1a8d4",
         "type": "github"
       },
       "original": {
