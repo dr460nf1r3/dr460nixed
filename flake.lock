@@ -68,11 +68,11 @@
         "wlroots-git-src": "wlroots-git-src"
       },
       "locked": {
-        "lastModified": 1681282183,
-        "narHash": "sha256-5P8ESE1Az78q+6tU3NwVSuRympRE+QlNgqdBlt7uDmk=",
+        "lastModified": 1681311202,
+        "narHash": "sha256-U6ZvI5zEAuMEDcn0nl9PyLD5rVoIboAtM/vT2BfBgG4=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "24a6baa697e6ec683905a173458488b3a893c3c5",
+        "rev": "84c747d66ae1334a588fbd92fb82ccc2df681751",
         "type": "github"
       },
       "original": {
@@ -395,11 +395,11 @@
     "mesa-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1681272886,
-        "narHash": "sha256-OXdAh2gew+h+MQx45JRQ0epzrVJje47S/J/DFz8BU5k=",
+        "lastModified": 1681303633,
+        "narHash": "sha256-+7oxH1c3EB+n+ANzfRdEvHmi8Nz3wqU0z6gB5kyv60U=",
         "owner": "chaotic-cx",
         "repo": "mesa-mirror",
-        "rev": "117ace3b14ff757a7f3375244db0f279e15befb1",
+        "rev": "d689a72bc5d5107e26948471f08b24b8a7984ae6",
         "type": "github"
       },
       "original": {
@@ -547,11 +547,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1681215634,
-        "narHash": "sha256-dI0SsSWb7ksK3OtTCf61vdlBhok838aIpwQ2EUM+jhY=",
+        "lastModified": 1681272286,
+        "narHash": "sha256-9X5p+gwYrowgbsRgkf14HFI0fkr6UikuwRIQAMlF1yI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5a156c2e89c1eca09b40bcdcee86760e0e4d79a9",
+        "rev": "6b70761ea8c896aff8994eb367d9526686501860",
         "type": "github"
       },
       "original": {
@@ -595,11 +595,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1681278261,
-        "narHash": "sha256-hXJGXX9WMI4iW5I3YH8aal8xQqtVt42AF3KI/wXEKqk=",
+        "lastModified": 1681304433,
+        "narHash": "sha256-2Q2S8bZ6q9PCH7f/+P0e/eJbP7rcXXm4icxD38D0PLQ=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "4962f643d0656e3c65e03901baf0316598e6da2d",
+        "rev": "656c719f30abacb72dc391248e26625abf55b86f",
         "type": "github"
       },
       "original": {
@@ -700,11 +700,11 @@
     "src-chaotic-toolbox": {
       "flake": false,
       "locked": {
-        "lastModified": 1680779916,
-        "narHash": "sha256-Q/6ZShEimqNCm15j+pbESqoY0gOBUJrr/3g7nCqQbxg=",
+        "lastModified": 1681303270,
+        "narHash": "sha256-UbnlYoZdhg7J2ujb/dHr0+fT86gAUZ+ATqFpWY1BtHU=",
         "owner": "chaotic-aur",
         "repo": "toolbox",
-        "rev": "1290b69482267cd60bf6b183090eaf7f2b3ba04f",
+        "rev": "beef29aa73870135e869ba5e497b00519ff4ed1d",
         "type": "github"
       },
       "original": {

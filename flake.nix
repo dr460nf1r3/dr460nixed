@@ -83,7 +83,7 @@
       };
       overlays = { ... }: {
         nixpkgs.overlays = [
-          (prev: {
+          (final: prev: {
             unstable = nixpkgs.legacyPackages.${prev.system};
           })
           nur.overlay
