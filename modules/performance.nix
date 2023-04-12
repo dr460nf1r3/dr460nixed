@@ -25,7 +25,7 @@ in
 
     # Supply fitting rules for ananicy-cpp 
     environment.systemPackages = with pkgs; [
-      ananicy-cpp-rules-git
+      ananicy-cpp-rules
     ];
 
     # Get notifications about earlyoom actions

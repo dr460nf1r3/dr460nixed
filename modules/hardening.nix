@@ -16,7 +16,6 @@ in
       };
 
     config = mkIf cfg.enable {
-      # Gaming packages
       # Disable coredumps
       systemd.coredump.enable = false;
 

@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Chaotic Nyx!
-    chaotic-nyx.url = "github:chaotic-cx/nyx/nicosworkarea";
+    chaotic-nyx.url = "github:chaotic-cx/nyx/linux-cachyos";
 
     # Home configuration management
     home-manager = {
@@ -25,12 +25,6 @@
 
     # Secure boot support
     lanzaboote.url = "github:nix-community/lanzaboote";
-
-    # Smooth-criminal bleeding-edge Mesa3D
-    mesa-git-src = {
-      url = "github:chaotic-aur/mesa-mirror/22.3";
-      flake = false;
-    };
 
     # Prismlauncher
     nix-minecraft = {
@@ -127,7 +121,6 @@
           };
           imports = [
             ./hosts/slim-lair/slim-lair.nix
-            ./pkgs/mesa/mesa.nix
             impermanence.nixosModules.impermanence
             lanzaboote.nixosModules.lanzaboote
           ];
@@ -177,7 +170,6 @@
           defaultModules
           ++ [
             ./hosts/slim-lair/slim-lair.nix
-            ./pkgs/mesa/mesa.nix
             impermanence.nixosModules.impermanence
             lanzaboote.nixosModules.lanzaboote
           ];

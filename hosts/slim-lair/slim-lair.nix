@@ -31,7 +31,7 @@ in
     # The new AMD Pstate driver & needed modules
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
     kernelModules = [ "acpi_call" "amdgpu" "amd-pstate=passive" ];
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = pkgs.linuxPackages_cachyos;
     kernelParams = [ "initcall_blacklist=acpi_cpufreq_init" ];
     lanzaboote = {
       configurationLimit = 20;
@@ -61,20 +61,22 @@ in
     rocm-opencl-runtime
   ];
 
-  # Bleeding edge Mesa - once tag 22.3 is no longer needed
-  # chaotic.mesa-git.enable = true;
+  # Bleeding edge Mesa
+  chaotic.mesa-git.enable = true;
 
   # Enable a few selected custom settings
-  dr460nixed.chromium = true;
-  dr460nixed.common.enable = true;
-  dr460nixed.desktops.enable = true;
-  dr460nixed.development.enable = true;
-  dr460nixed.gaming.enable = true;
-  dr460nixed.performance-tweaks.enable = true;
-  dr460nixed.school = true;
-  dr460nixed.shells.enable = true;
-  dr460nixed.boot.enable = true;
-  dr460nixed.yubikey = true;
+  dr460nixed = {
+    chromium = true;
+    common.enable = true;
+    desktops.enable = true;
+    development.enable = true;
+    gaming.enable = true;
+    performance-tweaks.enable = true;
+    school = true;
+    shells.enable = true;
+    boot.enable = true;
+    yubikey = true;
+  };
 
   # Workaround to enable HIP
   systemd.tmpfiles.rules = [

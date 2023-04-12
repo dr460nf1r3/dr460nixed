@@ -56,6 +56,15 @@
   # This is not supported
   services.hardware.bolt.enable = false;
 
+ # Enable a few selected custom settings
+  dr460nixed = {
+    common.enable = true;
+    desktops.enable = true;
+    performance-tweaks.enable = true;
+    shells.enable = true;
+    boot.enable = true;
+  };
+
   # Enable the touchpad
   environment.systemPackages = with pkgs; [ libinput ];
 
