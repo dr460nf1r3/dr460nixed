@@ -6,7 +6,6 @@
   # Individual settings
   imports = [
     ../../configurations/common.nix
-    ../../configurations/desktops.nix
     ../../configurations/servers/monitoring.nix
     ./hardware-configuration.nix
   ];

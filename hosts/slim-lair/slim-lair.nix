@@ -15,10 +15,7 @@ in
   imports = [
     ../../configurations/chaotic.nix
     ../../configurations/common.nix
-    ../../configurations/desktops.nix
-    ../../configurations/desktops/development.nix
     ../../configurations/desktops/impermanence.nix
-    ../../configurations/desktops/school.nix
     ./hardware-configuration.nix
   ];
 
@@ -69,12 +66,18 @@ in
 
   # Enable a few selected custom settings
   dr460nixed.common.enable = true;
+  dr460nixed.desktop = true;
+  dr460nixed.development = true;
   dr460nixed.gaming.enable = true;
   dr460nixed.hardening.enable = true;
   dr460nixed.nix-tweaks.enable = true;
   dr460nixed.performance-tweaks.enable = true;
   dr460nixed.shells.enable = true;
   dr460nixed.systemd-boot.enable = true;
+  dr460nixed.theming.enable = true;
+  dr460nixed.yubikey = true;
+  dr460nixed.chromium = true;
+  dr460nixed.school = true; 
 
   # Workaround to enable HIP
   systemd.tmpfiles.rules = [

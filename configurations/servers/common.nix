@@ -2,7 +2,6 @@
   # Common used configurations
   imports = [
     ./monitoring.nix
-    ./networking.nix
     ./nginx.nix
   ];
 

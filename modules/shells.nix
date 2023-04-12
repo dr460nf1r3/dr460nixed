@@ -15,36 +15,6 @@ in
       VISUAL = "${pkgs.micro}/bin/micro";
     };
 
-    # These are the packages I always want in a shell
-    environment.systemPackages = with pkgs; [
-      age
-      bind
-      bitwarden-cli
-      btop
-      cached-nix-shell
-      cachix
-      cloudflared
-      colmena
-      curl
-      direnv
-      duf
-      exa
-      home-manager
-      jq
-      killall
-      micro
-      nettools
-      nmap
-      nur.repos.federicoschonborn.fastfetch
-      python3
-      sops
-      tldr
-      traceroute
-      ugrep
-      wget
-      whois
-    ];
-
     # Programs & global config
     programs = {
       bash.shellAliases = {
@@ -116,7 +86,7 @@ in
         };
         shellInit = ''
           set fish_greeting
-          fastfetch --load-config neofetch
+          fastfetch -l nixos --load-config neofetch
         '';
       };
     };

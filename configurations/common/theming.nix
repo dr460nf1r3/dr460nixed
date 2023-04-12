@@ -54,8 +54,4 @@ in
       name = "Noto Color Emoji";
     };
   };
-
-  # This is false by default for some reason
-  stylix.targets.gnome.enable =
-    lib.mkIf config.services.xserver.desktopManager.gnome.enable true;
 }
