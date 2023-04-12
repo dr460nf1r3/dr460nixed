@@ -46,8 +46,8 @@ in
     environment.systemPackages = with pkgs; [
       applet-window-appmenu
       applet-window-title
-      beautyline-icons
-      dr460nized-kde-theme
+      beautyline-icons-git
+      dr460nized-kde-theme-git
       firedragon
       jamesdsp
       libinput-gestures

@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = cfg;
+  cfg = config.dr460nixed;
 in
 {
   options.dr460nixed = {
@@ -9,7 +9,6 @@ in
       {
         default = false;
         type = types.bool;
-        internal = true;
         description = lib.mdDoc ''
           Whether this is live CD.
         '';
@@ -18,7 +17,6 @@ in
       {
         default = false;
         type = types.bool;
-        internal = true;
         description = lib.mdDoc ''
           Whether this device uses a Yubikey.
         '';
@@ -27,7 +25,6 @@ in
       {
         default = false;
         type = types.bool;
-        internal = true;
         description = lib.mdDoc ''
           Whether this device uses should use Chromium.
         '';
@@ -36,7 +33,6 @@ in
       {
         default = false;
         type = types.bool;
-        internal = true;
         description = lib.mdDoc ''
           Whether this device uses should be used for school.
         '';
