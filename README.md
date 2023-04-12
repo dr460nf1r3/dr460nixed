@@ -10,9 +10,9 @@ This repo contains my NixOS dotfiles. All of my personal devices are going to be
 **What is inside?**:
 
 - Multiple **NixOS configurations**, including **desktop**, **server**, **nixos-wsl** & **live-usb**
-- A fully ported & configured **Garuda dr460nized KDE** setup as well as a **Gruvbox themed GNOME** desktop
+- A fully ported & configured **Garuda dr460nized KDE** setup: **Dr460nixed** !
 - **Opt-in persistence** through impermanence + ZFS snapshots
-- **Mesh networked** hosts with **Zerotier**
+- **Mesh networked** hosts with **Tailscale**
 - Additional packages not existing in Nixpkgs (yet) via **chaotic-nyx**
 - Secrets are managed via **nix-sops**
 - Automated flake building when pushing to main & pushing to **Cachix** via **GitHub Actions**
@@ -29,10 +29,28 @@ Other, smaller tweaks I particularly like about this setup include:
 - `flake.nix`: Entrypoint for hosts and home configurations. Also exposes a
   devshell for boostrapping (`nix develop` or `nix-shell`) as well as Colmena configs.
 - `apps`: Packages built from source.
-- `configurations`: All the Nix configurations
+- `configurations`: All the Nix configurations not available via modules
 - `hosts`: NixOS Configurations, accessible via `nixos-rebuild --flake`.
+- `modules`: The major part of the system configurations, exposes `dr460nixed.*` options
 - `overlays`: Patches and version overrides for some packages.
 - `pkgs`: My custom packages.
+
+## Module options
+```
+dr460nixed.common.enable = mkDefault true - common options for every system
+dr460nixed.desktops.enable = mkDefault false - options for desktop systems
+dr460nixed.development.enable = mkDefault false - enables a development environment
+dr460nixed.gaming.enable = mkDefault false - gaming related apps & options
+dr460nixed.hardening.enable = mkDefault true - system hardening
+dr460nixed.live-cd = mkDefault false - live CD applications
+dr460nixed.performance-tweaks = mkDefault false - performance enhancing options
+dr460nixed.rpi = mkDefault false - Raspberry Pi related things
+dr460nixed.school = mkDefault false - things I need for school
+dr460nixed.servers.enable = mkDefault false - common server options
+dr460nixed.shells = mkDefault true - enables common shell aliases & theming
+dr460nixed.systemd-boot = mkDefault true - a quiet systemd-boot configuration
+dr460nixed.yubikey = mkDefault false - options for using the Yubikey as login
+```
 
 ## How to bootstrap
 
