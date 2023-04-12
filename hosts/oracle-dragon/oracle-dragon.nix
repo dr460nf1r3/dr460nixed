@@ -56,6 +56,14 @@
     };
   };
 
+  # Enable a few selected custom settings
+  dr460nixed.common.enable = true;
+  dr460nixed.hardening.enable = true;
+  dr460nixed.nix-tweaks.enable = true;
+  dr460nixed.performance-tweaks.enable = true;
+  dr460nixed.shells.enable = true;
+  dr460nixed.systemd-boot.enable = true;
+
   # Make the SSL secret key & cert available (aquired via Tailscale)
   sops.secrets."ssl/oracle-dragon-key" = {
     mode = "0600";

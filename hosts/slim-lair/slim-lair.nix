@@ -17,7 +17,6 @@ in
     ../../configurations/common.nix
     ../../configurations/desktops.nix
     ../../configurations/desktops/development.nix
-    ../../configurations/desktops/games.nix
     ../../configurations/desktops/impermanence.nix
     ../../configurations/desktops/school.nix
     ./hardware-configuration.nix
@@ -67,6 +66,15 @@ in
 
   # Bleeding edge Mesa - once tag 22.3 is no longer needed
   # chaotic.mesa-git.enable = true;
+
+  # Enable a few selected custom settings
+  dr460nixed.common.enable = true;
+  dr460nixed.gaming.enable = true;
+  dr460nixed.hardening.enable = true;
+  dr460nixed.nix-tweaks.enable = true;
+  dr460nixed.performance-tweaks.enable = true;
+  dr460nixed.shells.enable = true;
+  dr460nixed.systemd-boot.enable = true;
 
   # Workaround to enable HIP
   systemd.tmpfiles.rules = [

@@ -27,7 +27,6 @@
       "--disable-telemetry"
       "--proxy-domain=code.dr460nf1r3.org"
     ];
-    #hashedPassword = "";
     host = "127.0.0.1";
     port = 4444;
     user = "nico";

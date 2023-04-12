@@ -1,8 +1,7 @@
-{ ... }: {
+{ lib, ... }: {
   # Common used configurations
   imports = [
     ./monitoring.nix
-    ./motd.nix
     ./networking.nix
     ./nginx.nix
   ];
@@ -15,4 +14,10 @@
       "127.0.0.1/8"
     ];
   };
+
+  # The common used config is not available
+  programs.fish.shellInit = lib.mkForce ''
+    set fish_greeting
+    fastfetch -l nixos
+  '';
 }

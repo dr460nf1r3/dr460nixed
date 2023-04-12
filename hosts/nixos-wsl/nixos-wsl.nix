@@ -11,8 +11,6 @@ in
   imports = [
     ../../configurations/common/common.nix
     ../../configurations/common/locales.nix
-    ../../configurations/common/nix.nix
-    ../../configurations/common/shells.nix
     ../../configurations/common/theming.nix
     ../../overlays/default.nix
     "${modulesPath}/profiles/minimal.nix"
@@ -39,6 +37,11 @@ in
     useUserPackages = true;
     users."nico" = import ../../configurations/home/nico.nix;
   };
+
+  # Enable a few selected custom settings
+  dr460nixed.common.enable = true;
+  dr460nixed.nix-tweaks.enable = true;
+  dr460nixed.shells.enable = true;
 
   # Override this to always run fish & workaround fastfetch error
   programs.fish.shellInit = lib.mkForce ''

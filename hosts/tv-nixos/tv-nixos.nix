@@ -8,7 +8,6 @@
     ../../configurations/common.nix
     ../../configurations/desktops.nix
     ../../configurations/servers/monitoring.nix
-    ../../configurations/servers/motd.nix
     ./hardware-configuration.nix
   ];
 
@@ -52,6 +51,13 @@
     libvdpau-va-gl
     vaapiIntel
   ];
+
+  # Enable a few selected performance enhancing tweaks
+  dr460nixed.common.enable = true;
+  dr460nixed.hardening.enable = true;
+  dr460nixed.nix-tweaks.enable = true;
+  dr460nixed.shells.enable = true;
+  dr460nixed.systemd-boot.enable = true;
 
   # SSD
   services.fstrim.enable = true;

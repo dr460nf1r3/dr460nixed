@@ -1,38 +1,35 @@
 {
-  description = "Nico's Nix flake";
+  description = "Dr460nixed NixOS configuration";
 
   inputs = {
     # We roll unstable, as usual
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    # Automated system themes
-    stylix.url = "github:danth/stylix";
+    # Chaotic Nyx!
+    chaotic-nyx.url = "github:chaotic-cx/nyx/nicosworkarea";
 
-    # Chaotic-AUR Nyx!
-    chaotic-nyx = {
-      #inputs.mesa-git-src.follows = "mesa-git-src";
-      url = "github:chaotic-aur/nyx/IHaveToUseThisBecauseNoPRReview";
+    # Home configuration management
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Smooth-criminal bleeding-edge Mesa3D
-    mesa-git-src = {
-      url = "github:chaotic-aur/mesa-mirror/22.3";
+    # Reset rootfs every reboot vis ZFS snapshots
+    impermanence.url = "github:nix-community/impermanence";
+
+    # My SSH keys
+    keys_nico = {
+      url = "https://github.com/dr460nf1r3.keys";
       flake = false;
     };
 
     # Secure boot support
     lanzaboote.url = "github:nix-community/lanzaboote";
 
-    # Secrets management
-    sops-nix.url = "github:Mic92/sops-nix";
-
-    # Reset rootfs every reboot vis ZFS snapshots
-    impermanence.url = "github:nix-community/impermanence";
-
-    # Home configuration management
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
+    # Smooth-criminal bleeding-edge Mesa3D
+    mesa-git-src = {
+      url = "github:chaotic-aur/mesa-mirror/22.3";
+      flake = false;
     };
 
     # Prismlauncher
@@ -44,11 +41,8 @@
     # Nix user repository
     nur.url = github:nix-community/NUR;
 
-    # My SSH keys
-    keys_nico = {
-      url = "https://github.com/dr460nf1r3.keys";
-      flake = false;
-    };
+    # Secrets management
+    sops-nix.url = "github:Mic92/sops-nix";
 
     # The Chaotic toolbox
     src-chaotic-toolbox = {
@@ -59,6 +53,9 @@
       url = "github:cassava/repoctl";
       flake = false;
     };
+
+    # Automated system themes
+    stylix.url = "github:danth/stylix";
   };
 
   outputs =
@@ -94,6 +91,7 @@
         ];
       };
       defaultModules = [
+        ./modules/default.nix
         chaotic-nyx.nixosModules.default
         home-manager.nixosModules.home-manager
         nur.nixosModules.nur

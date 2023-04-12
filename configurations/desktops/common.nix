@@ -7,7 +7,6 @@
     ./hardening.nix
     ./kde.nix
     ./networking.nix
-    ./performance.nix
     ./sound.nix
     ./yubikey.nix
   ];
