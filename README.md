@@ -5,7 +5,6 @@
 This repo contains my NixOS dotfiles. All of my personal devices are going to be added here over time.
 
 ![desktop-kde](https://i.imgur.com/hZQj0fi.png)
-![desktop-gnome](https://i.imgur.com/Ghbgwht.png)
 
 **What is inside?**:
 
@@ -19,6 +18,7 @@ This repo contains my NixOS dotfiles. All of my personal devices are going to be
 - Easy building of configurations & deployment via **Colmena**
 
 Other, smaller tweaks I particularly like about this setup include:
+
 - A much enhanced, fancy themed Spotify **via spicetify-cli**
 - No password prompts when having my **Yubikey** connected to my laptop
 - Being able to easily remote-control my machines via **KDEConnect**
@@ -36,21 +36,20 @@ Other, smaller tweaks I particularly like about this setup include:
 - `pkgs`: My custom packages.
 
 ## Module options
-```
-dr460nixed.common.enable = mkDefault true - common options for every system
-dr460nixed.desktops.enable = mkDefault false - options for desktop systems
-dr460nixed.development.enable = mkDefault false - enables a development environment
-dr460nixed.gaming.enable = mkDefault false - gaming related apps & options
-dr460nixed.hardening.enable = mkDefault true - system hardening
-dr460nixed.live-cd = mkDefault false - live CD applications
-dr460nixed.performance-tweaks = mkDefault false - performance enhancing options
-dr460nixed.rpi = mkDefault false - Raspberry Pi related things
-dr460nixed.school = mkDefault false - things I need for school
-dr460nixed.servers.enable = mkDefault false - common server options
-dr460nixed.shells = mkDefault true - enables common shell aliases & theming
-dr460nixed.systemd-boot = mkDefault true - a quiet systemd-boot configuration
-dr460nixed.yubikey = mkDefault false - options for using the Yubikey as login
-```
+
+- `dr460nixed.common.enable` = mkDefault true - common options for every system
+- `dr460nixed.desktops.enable` = mkDefault false - options for desktop systems
+- `dr460nixed.development.enable` = mkDefault false - enables a development environment
+- `dr460nixed.gaming.enable` = mkDefault false - gaming related apps & options
+- `dr460nixed.hardening.enable` = mkDefault true - system hardening
+- `dr460nixed.live-cd` = mkDefault false - live CD applications
+- `dr460nixed.performance-tweaks` = mkDefault false - performance enhancing options
+- `dr460nixed.rpi` = mkDefault false - Raspberry Pi related things
+- `dr460nixed.school` = mkDefault false - things I need for school
+- `dr460nixed.servers.enable` = mkDefault false - common server options
+- `dr460nixed.shells` = mkDefault true - enables common shell aliases & theming
+- `dr460nixed.systemd-boot` = mkDefault true - a quiet systemd-boot configuration
+- `dr460nixed.yubikey` = mkDefault false - options for using the Yubikey as login
 
 ## How to bootstrap
 
