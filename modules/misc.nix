@@ -7,7 +7,7 @@ in
   options.dr460nixed = {
     live-cd = lib.mkOption
       {
-        default = true;
+        default = false;
         type = types.bool;
         internal = true;
         description = lib.mdDoc ''
@@ -16,7 +16,7 @@ in
       };
     yubikey = lib.mkOption
       {
-        default = true;
+        default = false;
         type = types.bool;
         internal = true;
         description = lib.mdDoc ''
@@ -25,7 +25,7 @@ in
       };
     chromium = lib.mkOption
       {
-        default = true;
+        default = false;
         type = types.bool;
         internal = true;
         description = lib.mdDoc ''
@@ -34,7 +34,7 @@ in
       };
     school = lib.mkOption
       {
-        default = true;
+        default = false;
         type = types.bool;
         internal = true;
         description = lib.mdDoc ''

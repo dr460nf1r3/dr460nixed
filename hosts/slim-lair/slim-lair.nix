@@ -77,7 +77,7 @@ in
   dr460nixed.theming.enable = true;
   dr460nixed.yubikey = true;
   dr460nixed.chromium = true;
-  dr460nixed.school = true; 
+  dr460nixed.school = true;
 
   # Workaround to enable HIP
   systemd.tmpfiles.rules = [

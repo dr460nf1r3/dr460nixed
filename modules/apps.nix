@@ -20,7 +20,6 @@ in
         direnv
         duf
         exa
-        home-manager
         jq
         killall
         micro
@@ -37,7 +36,7 @@ in
       ];
     in
     required-packages
-    ++ lib.optionals config.dr460nixed.desktop (with pkgs; [
+    ++ lib.optionals cfg.desktop (with pkgs; [
       acpi
       asciinema
       aspell
@@ -71,43 +70,39 @@ in
       usbutils
       vorta
       vulkan-tools
-    ]) ++ lib.optionals config.dr460nixed.yubikey (with pkgs; [
+    ]) ++ lib.optionals cfg.yubikey (with pkgs; [
       yubikey-personalization
       yubioath-flutter
-    ]) ++ lib.optionals config.dr460nixed.school (with pkgs; [
+    ]) ++ lib.optionals cfg.school (with pkgs; [
       speedcrunch
       teams-for-linux
       virt-manager
+    ]) ++ lib.optionals cfg.live-cd (with pkgs; [
+      btrfs-progs
+      chntpw
+      cryptsetup
+      dosfstools
+      e2fsprogs
+      efibootmgr
+      flashrom
+      gnutar
+      gparted
+      hexedit
+      home-manager
+      hwinfo
+      inxi
+      memtest86-efi
+      ntfs3g
+      nvme-cli
+      p7zip
+      pciutils
+      perl
+      qemu-utils
+      rsync
+      tcpdump
+      testdisk
+      util-linux
+      wipe
+      xfsprogs
     ]);
-  # ++ lib.optionals cfg.live-cd (with pkgs; [
-  #   age
-  #   btrfs-progs
-  #   chntpw
-  #   cryptsetup
-  #   dosfstools
-  #   e2fsprogs
-  #   efibootmgr
-  #   flashrom
-  #   gnome.ghex
-  #   gnutar
-  #   gparted
-  #   hexedit
-  #   home-manager
-  #   hwinfo
-  #   inxi
-  #   memtest86-efi
-  #   ntfs3g
-  #   nvme-cli
-  #   p7zip
-  #   pciutils
-  #   perl
-  #   python
-  #   qemu-utils
-  #   rsync
-  #   tcpdump
-  #   testdisk
-  #   util-linux
-  #   wipe
-  #   xfsprogs
-  # ]);
 }
