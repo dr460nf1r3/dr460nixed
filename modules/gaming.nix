@@ -5,7 +5,15 @@ let
 in
 {
   options.dr460nixed.gaming = {
-    enable = mkEnableOption "All the things needed to play games";
+    enable = lib.mkOption
+      {
+        default = false;
+        type = types.bool;
+        internal = true;
+        description = lib.mdDoc ''
+          Enables gaming related apps and services.
+        '';
+      };
   };
 
   config = mkIf cfg.enable {

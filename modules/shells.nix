@@ -4,9 +4,15 @@ let
   cfg = config.dr460nixed.shells;
 in
 {
-  options.dr460nixed.shells = {
-    enable = mkEnableOption "Basic shell aliases";
-  };
+  options.dr460nixed.shells.enable = lib.mkOption
+    {
+      default = true;
+      type = types.bool;
+      internal = true;
+      description = lib.mdDoc ''
+        Whether the shell should receive our aliases and themes.
+      '';
+    };
 
   config = mkIf cfg.enable {
     # Use micro as editor

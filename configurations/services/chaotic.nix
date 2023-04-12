@@ -1,7 +1,4 @@
 {
-  # Import the Chaotic module
-  imports = [ ./chaotic/chaotic.nix ];
-
   # Enable Chaotic-AUR building
   services.chaotic.enable = true;
   services.chaotic.cluster-name = "dragons-ryzen";

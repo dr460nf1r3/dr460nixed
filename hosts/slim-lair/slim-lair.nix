@@ -13,9 +13,9 @@ in
 {
   # Individual settings
   imports = [
-    ../../configurations/chaotic.nix
     ../../configurations/common.nix
     ../../configurations/desktops/impermanence.nix
+    ../../configurations/services/chaotic.nix
     ./hardware-configuration.nix
   ];
 
@@ -65,16 +65,10 @@ in
   # chaotic.mesa-git.enable = true;
 
   # Enable a few selected custom settings
-  dr460nixed.common.enable = true;
-  dr460nixed.desktop = true;
-  dr460nixed.development = true;
+  dr460nixed.desktops.enable = true;
+  dr460nixed.development.enable = true;
   dr460nixed.gaming.enable = true;
-  dr460nixed.hardening.enable = true;
-  dr460nixed.nix-tweaks.enable = true;
   dr460nixed.performance-tweaks.enable = true;
-  dr460nixed.shells.enable = true;
-  dr460nixed.systemd-boot.enable = true;
-  dr460nixed.theming.enable = true;
   dr460nixed.yubikey = true;
   dr460nixed.chromium = true;
   dr460nixed.school = true;

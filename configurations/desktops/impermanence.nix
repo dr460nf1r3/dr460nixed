@@ -121,17 +121,6 @@ in
         "Pictures"
         "Sync"
         "Videos"
-        # Following some GNOME stuff
-        #".config/bubblemail"
-        #".config/evolution"
-        #".config/goa-1.0"
-        #".config/gsconnect
-        #".config/onedrive"
-        #".local/share/evolution"
-        #".local/share/gnome-photos"
-        #".local/share/gvfs-metadata"
-        #".local/share/ibus-typing-booster"
-        #".local/share/nautilus"
         {
           directory = ".config/Bitwarden CLI";
           mode = "0700";
@@ -201,12 +190,6 @@ in
         ".local/share/Trash"
         ".local/state/wireplumber"
         ".steam"
-        # Following some GNOME stuff
-        #".cache/bubblemail"
-        #".cache/evolution"
-        #".cache/gsconnect"
-        #".cache/keybase"
-        #".cache/tracker3"
       ];
     };
   };

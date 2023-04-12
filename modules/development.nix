@@ -4,19 +4,19 @@ let
   cfg = config.dr460nixed.development;
 in
 {
-  options.dr460nixed = {
-    development = lib.mkOption
+  options.dr460nixed.development = {
+    enable = lib.mkOption
       {
-        default = true;
+        default = false;
         type = types.bool;
         internal = true;
         description = lib.mdDoc ''
-          Whether this is a desktop device.
+          Enables commonly used development tools.
         '';
       };
   };
 
-  config = mkIf cfg
+  config = mkIf cfg.enable
     {
       # List all of the packages
       environment.systemPackages = with pkgs; [

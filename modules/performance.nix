@@ -5,7 +5,15 @@ let
 in
 {
   options.dr460nixed.performance-tweaks = {
-    enable = mkEnableOption "Enables a few performance tweaks";
+    enable = lib.mkOption
+      {
+        default = false;
+        type = types.bool;
+        internal = true;
+        description = lib.mdDoc ''
+          Enables performance tweaks like ananicy-cpp.
+        '';
+      };
   };
 
   config = mkIf cfg.enable {

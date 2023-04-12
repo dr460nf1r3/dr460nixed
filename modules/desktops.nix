@@ -1,20 +1,21 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.dr460nixed.desktop;
+  cfg = config.dr460nixed.desktops;
 in
 {
-  options.dr460nixed.theming = lib.mkOption
-    {
-      default = false;
-      type = types.bool;
-      internal = true;
-      description = lib.mdDoc ''
-        Whether to enable basic system theming.
-      '';
-    };
+  options.dr460nixed.desktops = {
+    enable = lib.mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = lib.mdDoc ''
+          Whether to enable basic dr460nized desktop theming.
+        '';
+      };
+  };
 
-  config = mkIf cfg {
+  config = mkIf cfg.enable {
     services.xserver = {
       enable = true;
       excludePackages = [ pkgs.xterm ];
@@ -136,5 +137,19 @@ in
       systemWide = false;
       wireplumber.enable = true;
     };
+
+    # # Kernel paramters & settings
+    boot.kernelParams = [
+      # Disable all mitigations
+      "mitigations=off"
+      "nopti"
+      "tsx=on"
+      # Laptops and desktops don't need watchdog
+      "nowatchdog"
+      # https://github.com/NixOS/nixpkgs/issues/35681#issuecomment-370202008
+      "systemd.gpt_auto=0"
+      # https://www.phoronix.com/news/Linux-Splitlock-Hurts-Gaming
+      "split_lock_detect=off"
+    ];
   };
 }

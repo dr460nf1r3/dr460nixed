@@ -6,22 +6,13 @@
   isoImage.isoName = lib.mkForce "id-live.iso";
 
   imports = [
-    ../../configurations/chaotic.nix
     ../../configurations/common.nix
     <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-base.nix>
   ];
 
   # Enable a few selected custom settings
-  dr460nixed.common.enable = true;
-  dr460nixed.desktop = true;
-  dr460nixed.development = true;
-  dr460nixed.hardening.enable = true;
-  dr460nixed.nix-tweaks.enable = true;
-  dr460nixed.performance-tweaks.enable = true;
-  dr460nixed.shells.enable = true;
-  dr460nixed.systemd-boot.enable = true;
-  dr460nixed.theming.enable = true;
-
+  dr460nixed.desktops.enable = true;
+  dr460nixed.development.enable = true;
 
   # This seems to be needed for not getting "root account locked"
   users.mutableUsers = lib.mkForce true;

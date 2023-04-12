@@ -72,7 +72,6 @@
     let
       nixos = nixpkgs;
       system = "x86_64-linux";
-      user = "nico";
       specialArgs = {
         sources = {
           chaotic-toolbox = attrs.src-chaotic-toolbox;
@@ -84,7 +83,7 @@
       };
       overlays = { ... }: {
         nixpkgs.overlays = [
-          (final: prev: {
+          (prev: {
             unstable = nixpkgs.legacyPackages.${prev.system};
           })
           nur.overlay

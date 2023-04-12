@@ -1,24 +1,24 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, sources, ... }:
 with lib;
 let
   cfg = config.dr460nixed;
 in
 {
   options.dr460nixed = {
-    desktop = lib.mkOption
-      {
-        default = true;
-        type = types.bool;
-        internal = true;
-        description = lib.mdDoc ''
-          Whether this is a desktop device.
-        '';
-      };
+    common = {
+      enable = lib.mkOption
+        {
+          default = true;
+          type = types.bool;
+          description = lib.mdDoc ''
+            Whether to enable common system configurations.
+          '';
+        };
+    };
     rpi = lib.mkOption
       {
-        default = true;
+        default = false;
         type = types.bool;
-        internal = true;
         description = lib.mdDoc ''
           Whether this is a Raspberry Pi.
         '';
@@ -27,22 +27,10 @@ in
       {
         default = true;
         type = types.bool;
-        internal = true;
         description = lib.mdDoc ''
           Whether to disable the documentation.
         '';
       };
-    common = {
-      enable = lib.mkOption
-        {
-          default = true;
-          type = types.bool;
-          internal = true;
-          description = lib.mdDoc ''
-            Whether to enable common system configurations.
-          '';
-        };
-    };
   };
 
   config = mkIf cfg.common.enable
@@ -51,7 +39,7 @@ in
       networking = {
         # Pointing to our Adguard instance via Tailscale
         nameservers = [ "1.1.1.1" ];
-        networkmanager = lib.mkIf config.dr460nixed.desktop or config.dr460nixed.rpi {
+        networkmanager = lib.mkIf cfg.desktops.enable or cfg.rpi {
           dns = "none";
           enable = true;
           wifi.backend = "iwd";
@@ -84,22 +72,6 @@ in
         enableRedistributableFirmware = true;
       };
       services.fwupd.enable = true;
-
-      # # Kernel paramters & settings
-      # boot = lib.mkIf config.dr460nixed.desktop {
-      #   kernelParams = [
-      #     # Disable all mitigations
-      #     "mitigations=off"
-      #     "nopti"
-      #     "tsx=on"
-      #     # Laptops and desktops don't need watchdog
-      #     "nowatchdog"
-      #     # https://github.com/NixOS/nixpkgs/issues/35681#issuecomment-370202008
-      #     "systemd.gpt_auto=0"
-      #     # https://www.phoronix.com/news/Linux-Splitlock-Hurts-Gaming
-      #     "split_lock_detect=off"
-      #   ];
-      # };
 
       # We want to be insulted on wrong passwords
       security.sudo = {
@@ -158,7 +130,7 @@ in
       environment.variables = { MOSH_SERVER_NETWORK_TMOUT = "604800"; };
 
       # Who needs documentation when there is the internet? #bl04t3d
-      documentation = lib.mkIf config.dr460nixed.nodocs {
+      documentation = lib.mkIf cfg.nodocs {
         doc.enable = false;
         enable = false;
         info.enable = false;

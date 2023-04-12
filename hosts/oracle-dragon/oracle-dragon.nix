@@ -5,11 +5,10 @@
   # These are the services I use on this machine
   imports = [
     ../../configurations/common.nix
-    ../../configurations/servers.nix
-    ../../configurations/servers/adguard.nix
-    ../../configurations/servers/code-server.nix
-    ../../configurations/servers/github-runner.nix
-    ../../configurations/servers/searxng.nix
+    ../../configurations/services/adguard.nix
+    ../../configurations/services/code-server.nix
+    ../../configurations/services/github-runner.nix
+    ../../configurations/services/searxng.nix
     ./hardware-configuration.nix
   ];
 
@@ -57,12 +56,9 @@
   };
 
   # Enable a few selected custom settings
-  dr460nixed.common.enable = true;
-  dr460nixed.hardening.enable = true;
-  dr460nixed.nix-tweaks.enable = true;
   dr460nixed.performance-tweaks.enable = true;
-  dr460nixed.shells.enable = true;
-  dr460nixed.systemd-boot.enable = true;
+  dr460nixed.servers.enable = true;
+  dr460nixed.servers.monitoring = true;
 
   # Make the SSL secret key & cert available (aquired via Tailscale)
   sops.secrets."ssl/oracle-dragon-key" = {

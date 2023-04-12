@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 with lib;
 let
-  cfg = config.dr460nixed;
+  cfg = cfg;
 in
 {
   options.dr460nixed = {
@@ -45,20 +45,20 @@ in
 
   config = {
     # Enable the smartcard daemon
-    hardware.gpgSmartcards.enable = lib.mkIf config.dr460nixed.yubikey true;
-    services.pcscd.enable = lib.mkIf config.dr460nixed.yubikey true;
-    services.udev.packages = lib.mkIf config.dr460nixed.yubikey [ pkgs.yubikey-personalization ];
+    hardware.gpgSmartcards.enable = lib.mkIf cfg.yubikey true;
+    services.pcscd.enable = lib.mkIf cfg.yubikey true;
+    services.udev.packages = lib.mkIf cfg.yubikey [ pkgs.yubikey-personalization ];
 
     # Configure as challenge-response for instant login,
     # can't provide the secrets as the challenge gets updated
-    security.pam.yubico = lib.mkIf config.dr460nixed.yubikey {
+    security.pam.yubico = lib.mkIf cfg.yubikey {
       debug = false;
       enable = true;
       mode = "challenge-response";
     };
 
     # Basic chromium settings (system-wide)
-    programs.chromium = lib.mkIf config.dr460nixed.chromium {
+    programs.chromium = lib.mkIf cfg.chromium {
       defaultSearchProviderEnabled = true;
       defaultSearchProviderSearchURL = "https://search.dr460nf1r3.org/search?q=%s";
       defaultSearchProviderSuggestURL = "https://search.dr460nf1r3.org/autocomplete?q=%s";
@@ -82,6 +82,6 @@ in
     };
 
     # SUID Sandbox
-    security.chromiumSuidSandbox.enable = lib.mkIf config.dr460nixed.chromium true;
+    security.chromiumSuidSandbox.enable = lib.mkIf cfg.chromium true;
   };
 }

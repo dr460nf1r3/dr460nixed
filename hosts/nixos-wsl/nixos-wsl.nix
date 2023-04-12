@@ -10,8 +10,6 @@ in
   # Slimmed down configurations
   imports = [
     ../../configurations/common/common.nix
-    ../../configurations/common/locales.nix
-    ../../configurations/common/theming.nix
     ../../overlays/default.nix
     "${modulesPath}/profiles/minimal.nix"
     nixos-wsl.nixosModules.wsl
@@ -40,7 +38,6 @@ in
 
   # Enable a few selected custom settings
   dr460nixed.common.enable = true;
-  dr460nixed.nix-tweaks.enable = true;
   dr460nixed.shells.enable = true;
 
   # Override this to always run fish & workaround fastfetch error

@@ -1,15 +1,16 @@
 {
   imports = [
     ./apps.nix
+    ./chaotic/chaotic.nix
     ./common.nix
+    ./desktops.nix
+    ./development.nix
     ./gaming.nix
     ./hardening.nix
-    ./nix.nix
     ./misc.nix
     ./performance.nix
+    ./servers.nix
     ./shells.nix
     ./systemd-boot.nix
-    ./desktop.nix
-    ./development.nix
   ];
 }

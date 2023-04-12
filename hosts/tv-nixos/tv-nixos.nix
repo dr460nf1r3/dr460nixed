@@ -6,7 +6,6 @@
   # Individual settings
   imports = [
     ../../configurations/common.nix
-    ../../configurations/servers/monitoring.nix
     ./hardware-configuration.nix
   ];
 
@@ -51,13 +50,6 @@
     vaapiIntel
   ];
 
-  # Enable a few selected performance enhancing tweaks
-  dr460nixed.common.enable = true;
-  dr460nixed.hardening.enable = true;
-  dr460nixed.nix-tweaks.enable = true;
-  dr460nixed.shells.enable = true;
-  dr460nixed.systemd-boot.enable = true;
-
   # SSD
   services.fstrim.enable = true;
 
@@ -66,11 +58,6 @@
 
   # Enable the touchpad
   environment.systemPackages = with pkgs; [ libinput ];
-
-  # Fix the monitor setup
-  # home-manager.users.nico = {...}: {
-  #   home.file.".config/monitors.xml".source = ./monitors.xml;
-  # };
 
   # Home-manager desktop configuration
   home-manager.users."nico" = import ../../configurations/home/desktops.nix;

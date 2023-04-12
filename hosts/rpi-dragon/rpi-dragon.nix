@@ -6,7 +6,6 @@
   # Individual settings
   imports = [
     ../../configurations/common.nix
-    ../../configurations/servers.nix
     "${builtins.fetchGit {
       url = "https://github.com/NixOS/nixos-hardware.git";
       rev = "f38f9a4c9b2b6f89a5778465e0afd166a8300680";
@@ -71,11 +70,9 @@
   };
 
   # Enable a few selected custom settings
-  dr460nixed.common.enable = true;
-  dr460nixed.hardening.enable = true;
-  dr460nixed.nix-tweaks.enable = true;
-  dr460nixed.shells.enable = true;
   dr460nixed.rpi = true;
+  dr460nixed.servers.enable = true;
+  dr460nixed.servers.monitoring = true;
 
   # Add remote build machine
   nix.buildMachines = [

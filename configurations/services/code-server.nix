@@ -1,28 +1,7 @@
-{ pkgs, ... }: {
+{
   services.code-server = {
     auth = "none";
     enable = true;
-    extraPackages = with pkgs; [
-      ansible
-      bash
-      bind.dnsutils
-      code-server
-      fish
-      git
-      heroku
-      hugo
-      nixos-generators
-      nixpkgs-fmt
-      nixpkgs-review
-      nodejs
-      nur.repos.yes.archlinux.asp
-      nur.repos.yes.archlinux.devtools
-      nur.repos.yes.archlinux.paru
-      python3
-      shellcheck
-      shfmt
-      yarn
-    ];
     extraArguments = [
       "--disable-telemetry"
       "--proxy-domain=code.dr460nf1r3.org"

@@ -36,7 +36,7 @@ in
       ];
     in
     required-packages
-    ++ lib.optionals cfg.desktop (with pkgs; [
+    ++ lib.optionals cfg.desktops.enable (with pkgs; [
       acpi
       asciinema
       aspell
