@@ -56,9 +56,13 @@
   };
 
   # Enable a few selected custom settings
-  dr460nixed.performance-tweaks.enable = true;
-  dr460nixed.servers.enable = true;
-  dr460nixed.servers.monitoring = true;
+  dr460nixed = {
+    common.enable = true;
+    performance-tweaks.enable = true;
+    servers.enable = true;
+    servers.monitoring = true;
+    shells.enable = true;
+  };
 
   # Make the SSL secret key & cert available (aquired via Tailscale)
   sops.secrets."ssl/oracle-dragon-key" = {

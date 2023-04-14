@@ -37,8 +37,10 @@ in
   };
 
   # Enable a few selected custom settings
-  dr460nixed.common.enable = true;
-  dr460nixed.shells.enable = true;
+  dr460nixed = {
+    common.enable = true;
+    shells.enable = true;
+  };
 
   # Override this to always run fish & workaround fastfetch error
   programs.fish.shellInit = lib.mkForce ''

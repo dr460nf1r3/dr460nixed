@@ -62,19 +62,19 @@ in
   ];
 
   # Bleeding edge Mesa
-  chaotic.mesa-git.enable = true;
+  # chaotic.mesa-git.enable = true;
 
   # Enable a few selected custom settings
   dr460nixed = {
+    boot.enable = true;
     chromium = true;
     common.enable = true;
     desktops.enable = true;
     development.enable = true;
-    gaming.enable = true;
+    gaming.enable = false;
     performance-tweaks.enable = true;
     school = true;
     shells.enable = true;
-    boot.enable = true;
     yubikey = true;
   };
 

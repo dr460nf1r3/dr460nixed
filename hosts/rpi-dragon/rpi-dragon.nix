@@ -69,10 +69,15 @@
     path = "/run/secrets/cloudflared/rpi/cred";
   };
 
-  # Enable a few selected custom settings
-  dr460nixed.rpi = true;
-  dr460nixed.servers.enable = true;
-  dr460nixed.servers.monitoring = true;
+ # Enable a few selected custom settings
+  dr460nixed = {
+    common.enable = true;
+    performance-tweaks.enable = true;
+    rpi = true;
+    servers.enable = true;
+    servers.monitoring = true;
+    shells.enable = true;
+  };
 
   # Add remote build machine
   nix.buildMachines = [

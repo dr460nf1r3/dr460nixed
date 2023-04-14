@@ -11,8 +11,12 @@
   ];
 
   # Enable a few selected custom settings
-  dr460nixed.desktops.enable = true;
-  dr460nixed.development.enable = true;
+  dr460nixed = {
+    common.enable = true;
+    desktops.enable = true;
+    shells.enable = true;
+    boot.enable = true;
+  };
 
   # This seems to be needed for not getting "root account locked"
   users.mutableUsers = lib.mkForce true;

@@ -58,11 +58,11 @@
 
  # Enable a few selected custom settings
   dr460nixed = {
+    boot.enable = true;
     common.enable = true;
     desktops.enable = true;
     performance-tweaks.enable = true;
     shells.enable = true;
-    boot.enable = true;
   };
 
   # Enable the touchpad
