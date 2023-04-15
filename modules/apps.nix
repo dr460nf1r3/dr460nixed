@@ -1,4 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config
+, lib
+, pkgs
+, ...
+}:
 with lib;
 let
   cfg = config.dr460nixed;
@@ -62,7 +66,6 @@ in
       movit
       nextcloud-client
       nheko
-      noto-fonts-emoji
       obs-studio-wrapped
       qbittorrent
       spotify

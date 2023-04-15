@@ -1,4 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config
+, lib
+, pkgs
+, ...
+}:
 with lib;
 let
   cfg = config.dr460nixed.desktops;
@@ -46,6 +50,7 @@ in
     environment.systemPackages = with pkgs; [
       applet-window-appmenu
       applet-window-title
+      appmenu-gtk3-module
       beautyline-icons
       dr460nized-kde-theme
       firedragon
@@ -74,14 +79,15 @@ in
         })
         noto-fonts
         noto-fonts-cjk
+        noto-fonts-emoji
       ];
       # My beloved Fira Sans & JetBrains Mono
       fontconfig = {
         cache32Bit = true;
         defaultFonts = {
-          monospace = [ "JetBrains Mono Nerd Font" ];
-          sansSerif = [ "Fira" ];
-          serif = [ "Fira" ];
+          monospace = [ "JetBrains Mono Nerd Font" "Noto Fonts Emoji" ];
+          sansSerif = [ "Fira" "Noto Fonts Emoji" ];
+          serif = [ "Fira" "Noto Fonts Emoji" ];
         };
       };
     };

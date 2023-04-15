@@ -56,7 +56,7 @@
   # This is not supported
   services.hardware.bolt.enable = false;
 
- # Enable a few selected custom settings
+  # Enable a few selected custom settings
   dr460nixed = {
     boot.enable = true;
     common.enable = true;

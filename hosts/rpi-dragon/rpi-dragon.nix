@@ -55,11 +55,6 @@
       "a2da25c2-eaec-43a4-8a7e-d5c49f9ac6ae" = {
         credentialsFile = config.sops.secrets."cloudflared/rpi/cred".path;
         default = "http_status:404";
-        #ingress = {
-        #"code.dr460nf1r3.org" = {
-        #  service = "http://localhost:4444";
-        #};
-        #};
       };
     };
   };
@@ -69,7 +64,7 @@
     path = "/run/secrets/cloudflared/rpi/cred";
   };
 
- # Enable a few selected custom settings
+  # Enable a few selected custom settings
   dr460nixed = {
     common.enable = true;
     performance-tweaks.enable = true;

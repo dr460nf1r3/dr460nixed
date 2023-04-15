@@ -1,4 +1,9 @@
-{ config, lib, pkgs, sources, ... }:
+{ config
+, lib
+, pkgs
+, sources
+, ...
+}:
 with lib;
 let
   cfg = config.dr460nixed;
@@ -35,32 +40,11 @@ in
 
   config = mkIf cfg.common.enable
     {
-      # We want to use NetworkManager
-      networking = {
-        # Pointing to our Adguard instance via Tailscale
-        nameservers = [ "1.1.1.1" ];
-        networkmanager = lib.mkIf cfg.desktops.enable or cfg.rpi {
-          dns = "none";
-          enable = true;
-          wifi.backend = "iwd";
-        };
-        # Disable non-NetworkManager
-        useDHCP = lib.mkDefault false;
-      };
-      ## Enable BBR & cake
-      boot.kernelModules = [ "tcp_bbr" ];
+      ## A few kernel tweaks
       boot.kernel.sysctl = {
-        "kernel.nmi_watchdog" = 0;
         "kernel.printks" = "3 3 3 3";
-        "kernel.sched_cfs_bandwidth_slice_us" = 3000;
         "kernel.sysrq" = 1;
         "kernel.unprivileged_userns_clone" = 1;
-        "net.core.default_qdisc" = "cake";
-        "net.core.rmem_max" = 2500000;
-        "net.ipv4.tcp_congestion_control" = "bbr";
-        "net.ipv4.tcp_fin_timeout" = 5;
-        "vm.max_map_count" = 16777216; # helps with Wine ESYNC/FSYNC
-        "vm.swappiness" = 60;
       };
 
       # Microcode and firmware updates
@@ -74,6 +58,7 @@ in
       services.fwupd.enable = true;
 
       # We want to be insulted on wrong passwords
+      # & allow deployment of configurations via Colmena
       security.sudo = {
         execWheelOnly = true;
         extraConfig = ''
@@ -99,7 +84,7 @@ in
         }
       ];
 
-      # Programs I always need
+      # Always needed applications
       programs = {
         git = {
           enable = true;
@@ -107,27 +92,15 @@ in
         };
         # The GnuPG agent
         gnupg.agent.enable = true;
-        # Use the performant openssh
-        ssh.package = pkgs.openssh_hpn;
       };
 
-      # Always needed services
-      services = {
-        locate = {
-          enable = true;
-          localuser = null;
-          locate = pkgs.plocate;
-        };
-        openssh = {
-          enable = true;
-          startWhenNeeded = true;
-        };
-        vnstat.enable = true;
+      # Enable locating files via locate
+      services.locate = {
+        enable = true;
+        interval = "hourly";
+        localuser = null;
+        locate = pkgs.plocate;
       };
-
-      # Better for mobile device SSH
-      programs.mosh.enable = true;
-      environment.variables = { MOSH_SERVER_NETWORK_TMOUT = "604800"; };
 
       # Who needs documentation when there is the internet? #bl04t3d
       documentation = lib.mkIf cfg.nodocs {
@@ -136,13 +109,6 @@ in
         info.enable = false;
         man.enable = false;
         nixos.enable = false;
-      };
-
-      # Zerotier network to connect the devices
-      networking.firewall.trustedInterfaces = [ "tailscale0" ];
-      services.tailscale = {
-        enable = true;
-        permitCertUid = "nico";
       };
 
       # General nix settings
@@ -200,10 +166,6 @@ in
         before = [ "nix-gc.service" ];
         wantedBy = [ "nix-gc.service" ];
       };
-
-      nixpkgs.config.permittedInsecurePackages = [
-        "openssh-with-hpn-9.2p1"
-      ];
 
       # Print a diff when running system updates
       system.activationScripts.diff = ''
