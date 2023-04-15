@@ -9,7 +9,6 @@ in
       {
         default = true;
         type = types.bool;
-        internal = true;
         description = lib.mdDoc ''
           Whether the operating system should be hardened.
         '';

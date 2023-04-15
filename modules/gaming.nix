@@ -9,7 +9,6 @@ in
       {
         default = false;
         type = types.bool;
-        internal = true;
         description = lib.mdDoc ''
           Enables gaming related apps and services.
         '';

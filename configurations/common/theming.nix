@@ -11,7 +11,7 @@ let
   };
 in
 {
-  # Style the operating system using Stylix - gruvbox-dark-medium on GNOME
+  # Style the operating system using Stylix
   stylix.base16Scheme = "${base16-schemes}/shades-of-purple.yaml";
   stylix.image = builtins.fetchurl {
     url = "https://images.pling.com/img/00/00/36/61/48/1309907/67dee71cfa2a80d3990373ce12365557fd6a.png";

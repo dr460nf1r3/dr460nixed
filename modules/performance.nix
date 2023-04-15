@@ -9,7 +9,6 @@ in
       {
         default = false;
         type = types.bool;
-        internal = true;
         description = lib.mdDoc ''
           Enables performance tweaks like ananicy-cpp.
         '';

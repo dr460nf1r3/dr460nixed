@@ -1,4 +1,5 @@
 { config
+, lib
 , pkgs
 , ...
 }:
@@ -31,7 +32,7 @@ in
     # The new AMD Pstate driver & needed modules
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
     kernelModules = [ "acpi_call" "amdgpu" "amd-pstate=passive" ];
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     kernelParams = [ "initcall_blacklist=acpi_cpufreq_init" ];
     lanzaboote = {
       configurationLimit = 20;
@@ -71,7 +72,7 @@ in
     common.enable = true;
     desktops.enable = true;
     development.enable = true;
-    gaming.enable = false;
+    gaming.enable = true;
     performance-tweaks.enable = true;
     school = true;
     shells.enable = true;
@@ -82,6 +83,9 @@ in
   systemd.tmpfiles.rules = [
     "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}"
   ];
+
+  # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # RADV video decode
   environment.variables.RADV_VIDEO_DECODE = "1";

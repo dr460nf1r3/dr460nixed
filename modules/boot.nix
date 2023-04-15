@@ -12,7 +12,6 @@ in
       {
         default = true;
         type = types.bool;
-        internal = true;
         description = lib.mdDoc ''
           Configures common options for a quiet systemd-boot.
         '';
@@ -41,7 +40,7 @@ in
       };
       # We need to override Stylix here to keep the splash
       plymouth = lib.mkForce {
-        enable = false;
+        enable = true;
         theme = "bgrt";
       };
     };

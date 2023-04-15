@@ -62,6 +62,7 @@ in
       movit
       nextcloud-client
       nheko
+      noto-fonts-emoji
       obs-studio-wrapped
       qbittorrent
       spotify

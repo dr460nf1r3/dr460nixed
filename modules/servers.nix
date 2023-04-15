@@ -9,7 +9,6 @@ in
       {
         default = false;
         type = types.bool;
-        internal = true;
         description = lib.mdDoc ''
           Whether this device is a server.
         '';
@@ -18,7 +17,6 @@ in
       {
         default = false;
         type = types.bool;
-        internal = true;
         description = lib.mdDoc ''
           Whether to enable monitoring via Netdata.
         '';

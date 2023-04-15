@@ -8,7 +8,6 @@ in
     {
       default = true;
       type = types.bool;
-      internal = true;
       description = lib.mdDoc ''
         Whether the shell should receive our aliases and themes.
       '';
