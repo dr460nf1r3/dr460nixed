@@ -247,9 +247,4 @@ in
       RestartSec = 5;
     };
   };
-
-  # KDE Portal for GTK apps
-  home.sessionVariables = {
-    GTK_USE_PORTAL = "1";
-  };
 }

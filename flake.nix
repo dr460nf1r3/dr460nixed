@@ -1,5 +1,5 @@
 {
-  description = "Dr460nixed NixOS configuration";
+  description = "Dr460nixed NixOS flake ❄️";
 
   inputs = {
     # We roll unstable, as usual
@@ -182,7 +182,6 @@
           defaultModules
           ++ [
             ./hosts/oracle-dragon/oracle-dragon.nix
-            <nixpkgs/nixos/modules/profiles/hardened.nix>
           ];
         specialArgs = specialArgs;
       };

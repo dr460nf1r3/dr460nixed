@@ -3,6 +3,9 @@
 , pkgs
 , ...
 }:
+let 
+  cfg = config.dr460nixed;
+in
 {
   # We want to use NetworkManager on desktops
   networking = {
@@ -48,5 +51,5 @@
 
   # Lightweight bandwidth usage tracking
   services.vnstat.enable = true;
-};
+}
 

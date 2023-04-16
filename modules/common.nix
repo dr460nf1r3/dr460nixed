@@ -183,11 +183,11 @@ in
       '';
 
       # Automatic system upgrades
-      system.autoUpgrade = {
-        enable = true;
-        dates = "hourly";
-        flags = [ "--refresh" ];
-        flake = "github:dr460nf1r3/device-configurations";
-      };
+      # system.autoUpgrade = {
+      #   enable = false;
+      #   dates = "hourly";
+      #   flags = [ "--refresh" ];
+      #   flake = "github:dr460nf1r3/device-configurations";
+      # };
     };
-}
+} 

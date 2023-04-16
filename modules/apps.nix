@@ -109,4 +109,9 @@ in
       wipe
       xfsprogs
     ]);
+
+  xdg.mime.defaultApplications = {
+    "application/pdf" = "okular.desktop";
+    "image/png" = "okular.desktop";
+  };
 }

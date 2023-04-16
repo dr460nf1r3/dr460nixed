@@ -9,6 +9,7 @@
     ./gaming.nix
     ./hardening.nix
     ./misc.nix
+    ./networking.nix
     ./performance.nix
     ./servers.nix
     ./shells.nix

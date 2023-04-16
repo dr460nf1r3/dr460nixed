@@ -133,22 +133,22 @@ in
 
       # This is a containerized version of Garuda Linux from nspawn.org
       systemd.nspawn."garuda-dev" = {
-        enable = false;
+        enable = true;
         execConfig = {
           Boot = "yes";
-          ResolvConf = "off";
+          ResolvConf = "on";
           PrivateUsers = 0;
           Capability = "all";
         };
         filesConfig = {
-          Bind = [ "/home/nico:/home/nico" ];
+          Bind = [ "/home/nico:/home/root" ];
         };
       };
       systemd.services."systemd-nspawn@garuda-dev" = {
         overrideStrategy = "asDropin";
         wantedBy = [ "machines.target" ];
         environment = { SYSTEMD_NSPAWN_UNIFIED_HIERARCHY = "1"; };
-        enable = true;
+        enable = false;
       };
 
       # Allow to cross-compile to aarch64

@@ -101,14 +101,8 @@
     path = "/home/nico/.ssh/id_rsa";
   };
 
-  # In case I need containers
-  virtualisation = {
-    podman = {
-      enable = true;
-      dockerCompat = true;
-      dockerSocket.enable = true;
-    };
-  };
+  # Needed for KASM workspaces
+  virtualisation.oci-containers.backend = "docker";
 
   # Slows down write operations considerably
   nix.settings.auto-optimise-store = lib.mkForce false;
@@ -124,6 +118,9 @@
           "code.dr460nf1r3.org" = {
             service = "http://localhost:4444";
           };
+          "kasm.dr460nf1r3.org" = {
+            service = "https://localhost:443";
+          };
         };
       };
     };
@@ -132,5 +129,11 @@
     mode = "0600";
     owner = config.users.users.cloudflared.name;
     path = "/run/secrets/cloudflared/oracle-dragon/cred";
+  };
+
+  # This is needed as the packages are marked unsupported
+  hardware.cpu = {
+    amd.updateMicrocode = lib.mkForce false;
+    intel.updateMicrocode = lib.mkForce false;
   };
 }

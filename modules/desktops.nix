@@ -40,6 +40,14 @@ in
       };
     };
 
+    # This ensures GTK applications can load appmenu-gtk-module
+    environment.profileRelativeSessionVariables = {
+      XDG_DATA_DIRS = [ "/share/gsettings-schemas/appmenu-gtk3-module-0.7.6" ];
+    };
+
+    # Once its available, this replaces the previous option
+    # chaotic.appmenu-gtk3-module.enable = true;
+
     # Remove a few applications that aren't needed
     environment.plasma5.excludePackages = with pkgs; with libsForQt5; [
       oxygen
@@ -68,6 +76,7 @@ in
       xdg-desktop-portal
     ];
 
+    # Define the default fonts Fira Sans & Jetbrains Mono Nerd Fonts
     fonts = {
       enableDefaultFonts = true;
       fonts = with pkgs; [
@@ -81,7 +90,6 @@ in
         noto-fonts-cjk
         noto-fonts-emoji
       ];
-      # My beloved Fira Sans & JetBrains Mono
       fontconfig = {
         cache32Bit = true;
         defaultFonts = {
@@ -91,6 +99,9 @@ in
         };
       };
     };
+
+    # Open apps using the Portal
+    xdg.portal.xdgOpenUsePortal = true;
 
     # KDE Connect to connect my phone & Partition Manager
     programs = {
@@ -146,16 +157,12 @@ in
 
     # # Kernel paramters & settings
     boot.kernelParams = [
-      # Disable all mitigations
       "mitigations=off"
       "nopti"
-      "tsx=on"
-      # Laptops and desktops don't need watchdog
       "nowatchdog"
-      # https://github.com/NixOS/nixpkgs/issues/35681#issuecomment-370202008
-      "systemd.gpt_auto=0"
-      # https://www.phoronix.com/news/Linux-Splitlock-Hurts-Gaming
-      "split_lock_detect=off"
+      "split_lock_detect=off" # https://www.phoronix.com/news/Linux-Splitlock-Hurts-Gaming
+      "systemd.gpt_auto=0" # https://github.com/NixOS/nixpkgs/issues/35681#issuecomment-370202008
+      "tsx=on"
     ];
   };
 }
