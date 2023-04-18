@@ -102,6 +102,9 @@
   };
 
   # Needed for KASM workspaces
+  virtualisation.docker.enable = true;
+  virtualisation.docker.autoPrune.enable = true;
+  virtualisation.docker.autoPrune.dates = "2d";
   virtualisation.oci-containers.backend = "docker";
 
   # Slows down write operations considerably
@@ -119,7 +122,7 @@
             service = "http://localhost:4444";
           };
           "kasm.dr460nf1r3.org" = {
-            service = "https://localhost:443";
+            service = "https://localhost:8443";
           };
         };
       };
@@ -129,6 +132,12 @@
     mode = "0600";
     owner = config.users.users.cloudflared.name;
     path = "/run/secrets/cloudflared/oracle-dragon/cred";
+  };
+
+  # Need to explicitly open our web server ports
+  networking.firewall = {
+    allowedTCPPorts = [ 8443 3001 ];
+    allowedUDPPorts = [ 8443 3001 ];
   };
 
   # This is needed as the packages are marked unsupported

@@ -21,65 +21,6 @@ in
 
   config = mkIf cfg.enable
     {
-      # List all of the packages
-      environment.systemPackages = with pkgs; [
-        androidStudioPackages.canary
-        ansible
-        bind.dnsutils
-        gitkraken
-        heroku
-        hugo
-        jetbrains.pycharm-professional
-        keybase-gui
-        nixos-generators
-        nixpkgs-fmt
-        nixpkgs-lint
-        nixpkgs-review
-        nur.repos.yes.archlinux.asp
-        nur.repos.yes.archlinux.devtools
-        nur.repos.yes.archlinux.paru
-        shellcheck
-        shfmt
-        speedcrunch
-        teamviewer
-        termius
-        ventoy-bin-full
-        virt-manager
-        (vscode-with-extensions.override {
-          vscodeExtensions = with vscode-extensions;
-            [
-              b4dm4n.vscode-nixpkgs-fmt
-              bbenoist.nix
-              eamodio.gitlens
-              esbenp.prettier-vscode
-              foxundermoon.shell-format
-              github.codespaces
-              github.copilot
-              ms-azuretools.vscode-docker
-              ms-python.python
-              ms-python.vscode-pylance
-              ms-vscode.hexeditor
-              ms-vsliveshare.vsliveshare
-              njpwerner.autodocstring
-              pkief.material-icon-theme
-              redhat.vscode-xml
-              redhat.vscode-yaml
-              timonwong.shellcheck
-              tyriar.sort-lines
-            ]
-            ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-              {
-                name = "sweet-vscode";
-                publisher = "eliverlara";
-                version = "1.1.1";
-                sha256 = "sha256-kJgqMEJHyYF3GDxe1rnpTEmbfJE01tyyOFjRUp4SOds=";
-              }
-            ];
-        })
-        xdg-utils
-        yarn
-      ];
-
       # Import secrets needed for development
       sops.secrets."api_keys/sops" = {
         mode = "0600";

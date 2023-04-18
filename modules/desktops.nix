@@ -23,7 +23,7 @@ in
     services.xserver = {
       enable = true;
       excludePackages = [ pkgs.xterm ];
-      desktopManager.plasma5 = { enable = true; };
+      desktopManager.plasma5.enable = true;
       displayManager = {
         sddm = {
           autoNumlock = true;
@@ -94,8 +94,8 @@ in
         cache32Bit = true;
         defaultFonts = {
           monospace = [ "JetBrains Mono Nerd Font" "Noto Fonts Emoji" ];
-          sansSerif = [ "Fira" "Noto Fonts Emoji" ];
-          serif = [ "Fira" "Noto Fonts Emoji" ];
+          sansSerif = [ "Noto Fonts Emoji" "Fira" ];
+          serif = [ "Noto Fonts Emoji" "Fira" ];
         };
       };
     };

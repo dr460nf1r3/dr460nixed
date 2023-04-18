@@ -3,7 +3,7 @@
 , pkgs
 , ...
 }:
-let 
+let
   cfg = config.dr460nixed;
 in
 {
