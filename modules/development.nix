@@ -9,11 +9,11 @@ let
 in
 {
   options.dr460nixed.development = {
-    enable = lib.mkOption
+    enable = mkOption
       {
         default = false;
         type = types.bool;
-        description = lib.mdDoc ''
+        description = mdDoc ''
           Enables commonly used development tools.
         '';
       };
@@ -46,10 +46,18 @@ in
 
       # Libvirt & Podman with docker alias
       virtualisation = {
+        kvmgt.enable = true;
         libvirtd = {
           enable = true;
           parallelShutdown = 2;
+          qemu = {
+            ovmf.enable = true;
+            ovmf.packages = [ pkgs.OVMFFull.fd ];
+            swtpm.enable = true;
+            package = pkgs.qemu_kvm;
+          };
         };
+        lxd.enable = false;
         podman = {
           autoPrune = {
             enable = true;
@@ -60,6 +68,7 @@ in
           dockerSocket.enable = true;
         };
       };
+
 
       # Needed for makepkg to work
       environment.etc = {

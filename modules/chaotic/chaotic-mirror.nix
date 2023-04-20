@@ -26,7 +26,7 @@ with lib; let
             cp "$envfile" "$out/.env"
             rsync -a "$src/" "$out"
     '';
-    system = pkgs.hostPlatform.system;
+    inherit (pkgs.hostPlatform) system;
   };
 in
 {

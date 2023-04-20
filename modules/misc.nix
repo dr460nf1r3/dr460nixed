@@ -9,56 +9,105 @@ let
 in
 {
   options.dr460nixed = {
-    live-cd = lib.mkOption
+    live-cd = mkOption
       {
         default = false;
         type = types.bool;
-        description = lib.mdDoc ''
+        description = mdDoc ''
           Whether this is live CD.
         '';
       };
-    yubikey = lib.mkOption
+    yubikey = mkOption
       {
         default = false;
         type = types.bool;
-        description = lib.mdDoc ''
+        description = mdDoc ''
           Whether this device uses a Yubikey.
         '';
       };
-    chromium = lib.mkOption
+    chromium = mkOption
       {
         default = false;
         type = types.bool;
-        description = lib.mdDoc ''
+        description = mdDoc ''
           Whether this device uses should use Chromium.
         '';
       };
-    school = lib.mkOption
+    school = mkOption
       {
         default = false;
         type = types.bool;
-        description = lib.mdDoc ''
+        description = mdDoc ''
           Whether this device uses should be used for school.
+        '';
+      };
+    tor = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether this device should be using the tor network.
         '';
       };
   };
 
   config = {
+    # run appimages with appimage-run
+    boot.binfmt.registrations = genAttrs [ "appimage" "AppImage" ] (ext: {
+      recognitionType = "extension";
+      magicOrExtension = ext;
+      interpreter = "/run/current-system/sw/bin/appimage-run";
+    });
+
+    # run unpatched linux binaries with nix-ld
+    programs.nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc
+        openssl
+        curl
+        glib
+        util-linux
+        glibc
+        icu
+        libunwind
+        libuuid
+        zlib
+        libsecret
+        # graphical
+        freetype
+        libglvnd
+        libnotify
+        SDL2
+        vulkan-loader
+        gdk-pixbuf
+        xorg.libX11
+      ];
+    };
+
+    # Enable the tor network
+    services.tor = mkIf cfg.tor {
+      enable = true;
+      client.enable = true;
+      client.dns.enable = true;
+      torsocks.enable = true;
+    };
+
     # Enable the smartcard daemon
-    hardware.gpgSmartcards.enable = lib.mkIf cfg.yubikey true;
-    services.pcscd.enable = lib.mkIf cfg.yubikey true;
-    services.udev.packages = lib.mkIf cfg.yubikey [ pkgs.yubikey-personalization ];
+    hardware.gpgSmartcards.enable = mkIf cfg.yubikey true;
+    services.pcscd.enable = mkIf cfg.yubikey true;
+    services.udev.packages = mkIf cfg.yubikey [ pkgs.yubikey-personalization ];
 
     # Configure as challenge-response for instant login,
     # can't provide the secrets as the challenge gets updated
-    security.pam.yubico = lib.mkIf cfg.yubikey {
+    security.pam.yubico = mkIf cfg.yubikey {
       debug = false;
       enable = true;
       mode = "challenge-response";
     };
 
     # Basic chromium settings (system-wide)
-    programs.chromium = lib.mkIf cfg.chromium {
+    programs.chromium = mkIf cfg.chromium {
       defaultSearchProviderEnabled = true;
       defaultSearchProviderSearchURL = "https://search.dr460nf1r3.org/search?q=%s";
       defaultSearchProviderSuggestURL = "https://search.dr460nf1r3.org/autocomplete?q=%s";
@@ -82,6 +131,6 @@ in
     };
 
     # SUID Sandbox
-    security.chromiumSuidSandbox.enable = lib.mkIf cfg.chromium true;
+    security.chromiumSuidSandbox.enable = mkIf cfg.chromium true;
   };
 }

@@ -37,19 +37,19 @@ Other, smaller tweaks I particularly like about this setup include:
 
 ## Module options
 
-- `dr460nixed.common.enable` = mkDefault true - common options for every system
-- `dr460nixed.desktops.enable` = mkDefault false - options for desktop systems
-- `dr460nixed.development.enable` = mkDefault false - enables a development environment
-- `dr460nixed.gaming.enable` = mkDefault false - gaming related apps & options
-- `dr460nixed.hardening.enable` = mkDefault true - system hardening
-- `dr460nixed.live-cd` = mkDefault false - live CD applications
-- `dr460nixed.performance-tweaks` = mkDefault false - performance enhancing options
-- `dr460nixed.rpi` = mkDefault false - Raspberry Pi related things
-- `dr460nixed.school` = mkDefault false - things I need for school
-- `dr460nixed.servers.enable` = mkDefault false - common server options
-- `dr460nixed.shells` = mkDefault true - enables common shell aliases & theming
-- `dr460nixed.systemd-boot` = mkDefault true - a quiet systemd-boot configuration
-- `dr460nixed.yubikey` = mkDefault false - options for using the Yubikey as login
+- `dr460nixed.common.enable` = true - common options for every system
+- `dr460nixed.desktops.enable` = false - options for desktop systems
+- `dr460nixed.development.enable` = false - enables a development environment
+- `dr460nixed.gaming.enable` = false - gaming related apps & options
+- `dr460nixed.hardening.enable` = true - system hardening
+- `dr460nixed.live-cd` = false - live CD applications
+- `dr460nixed.performance-tweaks` = false - performance enhancing options
+- `dr460nixed.rpi` = false - Raspberry Pi related things
+- `dr460nixed.school` = false - things I need for school
+- `dr460nixed.servers.enable` = false - common server options
+- `dr460nixed.shells` = true - enables common shell aliases & theming
+- `dr460nixed.systemd-boot` = true - a quiet systemd-boot configuration
+- `dr460nixed.yubikey` = false - options for using the Yubikey as login
 
 ## How to bootstrap
 
@@ -70,6 +70,4 @@ nix develop
 
 ## Credits
 
-A special thanks to [PedroHLC](https://github.com/pedrohlc)
-and [Mysterio77](https://github.com/Misterio77), their Nix
-configurations helped tremendously while setting all of this up.
+A special thanks to [PedroHLC](https://github.com/pedrohlc) and [Mysterio77](https://github.com/Misterio77), as well as to [NotAShelf](https://github.com/NotAShelf) - their Nix configurations helped tremendously while setting all of this up.

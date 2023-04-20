@@ -9,11 +9,11 @@ let
 in
 {
   options.dr460nixed.gaming = {
-    enable = lib.mkOption
+    enable = mkOption
       {
         default = false;
         type = types.bool;
-        description = lib.mdDoc ''
+        description = mdDoc ''
           Enables gaming related apps and services.
         '';
       };

@@ -9,33 +9,33 @@ let
 in
 {
   options.dr460nixed.servers = {
-    enable = lib.mkOption
+    enable = mkOption
       {
         default = false;
         type = types.bool;
-        description = lib.mdDoc ''
+        description = mdDoc ''
           Whether this device is a server.
         '';
       };
-    monitoring = lib.mkOption
+    monitoring = mkOption
       {
         default = false;
         type = types.bool;
-        description = lib.mdDoc ''
+        description = mdDoc ''
           Whether to enable monitoring via Netdata.
         '';
       };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     # The common used config is not available
-    programs.fish.shellInit = lib.mkForce ''
+    programs.fish.shellInit = mkForce ''
       set fish_greeting
       fastfetch -l nixos
     '';
 
     # Enable the Netdata daemon
-    services.netdata.enable = lib.mkIf cfg.monitoring true;
+    services.netdata.enable = mkIf cfg.monitoring true;
     services.netdata.config = {
       global = {
         "dbengine disk space" = "256";
@@ -56,7 +56,7 @@ in
         web_log: no
       '';
       "go.d/nginx.conf" =
-        lib.mkIf config.services.nginx.enable
+        mkIf config.services.nginx.enable
           (pkgs.writeText "nginx.conf" ''
             jobs:
               - name: local
@@ -114,7 +114,7 @@ in
     '';
 
     # Diffie-Hellman parameter for DHE ciphersuites
-    security.dhparams = lib.mkIf config.services.nginx.enable {
+    security.dhparams = mkIf config.services.nginx.enable {
       defaultBitSize = 3072;
       enable = true;
       params.nginx = { };
@@ -122,7 +122,7 @@ in
     services.nginx.sslDhparam = config.security.dhparams.params.nginx.path;
 
     # Need to explicitly open our web server ports
-    networking.firewall = lib.mkIf config.services.nginx.enable {
+    networking.firewall = mkIf config.services.nginx.enable {
       allowedTCPPorts = [ 80 443 ];
       allowedUDPPorts = [ 443 ];
     };

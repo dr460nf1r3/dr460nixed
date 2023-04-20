@@ -33,7 +33,7 @@
     };
 
     # Nix user repository
-    nur.url = github:nix-community/NUR;
+    nur.url = "github:nix-community/NUR";
 
     # Secrets management
     sops-nix.url = "github:Mic92/sops-nix";
@@ -62,20 +62,20 @@
     , sops-nix
     , stylix
     , ...
-    } @ attrs:
+    } @ inputs:
     let
       nixos = nixpkgs;
       system = "x86_64-linux";
       specialArgs = {
         sources = {
-          chaotic-toolbox = attrs.src-chaotic-toolbox;
-          mesa-git-src = attrs.mesa-git-src;
-          nixpkgs = attrs.nixpkgs;
-          repoctl = attrs.src-repoctl;
+          chaotic-toolbox = inputs.src-chaotic-toolbox;
+          inherit (inputs) mesa-git-src;
+          inherit (inputs) nixpkgs;
+          repoctl = inputs.src-repoctl;
         };
-        keys = { nico = attrs.keys_nico; };
+        keys = { nico = inputs.keys_nico; };
       };
-      overlays = { ... }: {
+      overlays = _: {
         nixpkgs.overlays = [
           (final: prev: {
             unstable = nixpkgs.legacyPackages.${prev.system};
@@ -92,20 +92,40 @@
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
       ];
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          tarball-ttl = 0;
+        };
+      };
     in
     {
+
+      checks.${system} = import ./lib/checks { inherit pkgs; };
+
+      devShells.${system}.default = pkgs.mkShell {
+        name = "dr460nixed";
+        packages = with pkgs; [
+          nil
+          git
+          glow
+          nixpkgs-fmt
+          statix
+          deadnix
+        ];
+      };
+
       # Defines a formatter for "nix fmt"
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
-      formatter.aarch64-linux = nixpkgs.legacyPackages.aarch64-linux.nixpkgs-fmt;
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
 
       # Colmena profiles for easy deployment
       colmena = {
         meta = {
           nixpkgs = import nixpkgs {
-            system = "x86_64-linux";
+            system = "${system}";
             overlays = [ ];
           };
-          specialArgs = specialArgs;
+          inherit specialArgs;
         };
         defaults = {
           imports = defaultModules;
@@ -161,7 +181,7 @@
           ++ [
             ./hosts/tv-nixos/tv-nixos.nix
           ];
-        specialArgs = specialArgs;
+        inherit specialArgs;
       };
       # My main device (Lenovo Slim 7)
       nixosConfigurations."slim-lair" = nixos.lib.nixosSystem {
@@ -173,7 +193,7 @@
             impermanence.nixosModules.impermanence
             lanzaboote.nixosModules.lanzaboote
           ];
-        specialArgs = specialArgs;
+        inherit specialArgs;
       };
       # Free Tier Oracle aarch64 VM
       nixosConfigurations."oracle-dragon" = nixos.lib.nixosSystem {
@@ -183,7 +203,7 @@
           ++ [
             ./hosts/oracle-dragon/oracle-dragon.nix
           ];
-        specialArgs = specialArgs;
+        inherit specialArgs;
       };
       # My Raspberry Pi 4B
       nixosConfigurations."rpi-dragon" = nixos.lib.nixosSystem {
@@ -193,7 +213,7 @@
           ++ [
             ./hosts/rpi-dragon/rpi-dragon.nix
           ];
-        specialArgs = specialArgs;
+        inherit specialArgs;
       };
       # For WSL, mostly used at work only
       nixosConfigurations."nixos-wsl" = nixos.lib.nixosSystem {
@@ -203,7 +223,7 @@
           ++ [
             ./hosts/nixos-wsl/nixos-wsl.nix
           ];
-        specialArgs = specialArgs;
+        inherit specialArgs;
       };
       # To-do for installations
       nixosConfigurations."live-usb" = nixos.lib.nixosSystem {
@@ -213,7 +233,7 @@
           ++ [
             ./hosts/live-usb/live-usb.nix
           ];
-        specialArgs = specialArgs;
+        inherit specialArgs;
       };
     };
 }

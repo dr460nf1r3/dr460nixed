@@ -8,11 +8,11 @@ let
   cfg = config.dr460nixed.shells;
 in
 {
-  options.dr460nixed.shells.enable = lib.mkOption
+  options.dr460nixed.shells.enable = mkOption
     {
       default = true;
       type = types.bool;
-      description = lib.mdDoc ''
+      description = mdDoc ''
         Whether the shell should receive our aliases and themes.
       '';
     };

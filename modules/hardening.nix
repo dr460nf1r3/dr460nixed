@@ -9,16 +9,73 @@ let
 in
 {
   options.dr460nixed.hardening = {
-    enable = lib.mkOption
+    enable = mkOption
       {
         default = true;
         type = types.bool;
-        description = lib.mdDoc ''
+        description = mdDoc ''
           Whether the operating system should be hardened.
         '';
       };
 
     config = mkIf cfg.enable {
+      boot.kernel.sysctl = {
+        # The Magic SysRq key is a key combo that allows users connected to the
+        # system console of a Linux kernel to perform some low-level commands.
+        # Disable it, since we don't need it, and is a potential security concern.
+        "kernel.sysrq" = 0;
+        # Restrict ptrace() usage to processes with a pre-defined relationship
+        # (e.g., parent/child)
+        "kernel.yama.ptrace_scope" = 2;
+        # Hide kptrs even for processes with CAP_SYSLOG
+        "kernel.kptr_restrict" = 2;
+        # Disable bpf() JIT (to eliminate spray attacks)
+        "net.core.bpf_jit_enable" = false;
+        # Disable ftrace debugging
+        "kernel.ftrace_enabled" = false;
+      };
+
+      boot.blacklistedKernelModules =
+        [
+          # Obscure network protocols
+          "ax25"
+          "netrom"
+          "rose"
+          # Old or rare or insufficiently audited filesystems
+          "adfs"
+          "affs"
+          "bfs"
+          "befs"
+          "cramfs"
+          "efs"
+          "erofs"
+          "exofs"
+          "freevxfs"
+          "f2fs"
+          "vivid"
+          "gfs2"
+          "ksmbd"
+          "nfsv4"
+          "nfsv3"
+          "cifs"
+          "nfs"
+          "cramfs"
+          "freevxfs"
+          "jffs2"
+          "hfs"
+          "hfsplus"
+          "udf"
+          "btusb"
+          "hpfs"
+          "jfs"
+          "minix"
+          "nilfs2"
+          "omfs"
+          "qnx4"
+          "qnx6"
+          "sysv"
+        ];
+
       # Disable coredumps
       systemd.coredump.enable = false;
 
@@ -32,8 +89,11 @@ in
           Protocol 2
         '';
         settings = {
-          PermitRootLogin = "no";
+          kbdInteractiveAuthentication = mkDefault false;
           PasswordAuthentication = false;
+          PermitRootLogin = "no";
+          useDns = false;
+          X11Forwarding = false;
         };
       };
 
@@ -63,11 +123,11 @@ in
       };
 
       # Enable Firejail
-      programs.firejail = lib.mkIf config.dr460nixed.desktops.enable {
+      programs.firejail = mkIf config.dr460nixed.desktops.enable {
         enable = true;
         wrappedBinaries = {
           chromium = {
-            executable = "${pkgs.lib.getBin pkgs.chromium}/bin/chromium";
+            executable = "${pkgs.getBin pkgs.chromium}/bin/chromium";
             profile = "${pkgs.firejail}/etc/firejail/chromium.profile";
             extraArgs = [
               "--ignore=private-dev"
@@ -79,7 +139,7 @@ in
       };
 
       # Technically we don't need this as we use pubkey authentication
-      services.fail2ban = lib.mkIf config.dr460nixed.servers.enable {
+      services.fail2ban = mkIf config.dr460nixed.servers.enable {
         enable = true;
         ignoreIP = [
           "100.0.0.0/8"

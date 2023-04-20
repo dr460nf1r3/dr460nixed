@@ -9,11 +9,11 @@ let
 in
 {
   options.dr460nixed.performance-tweaks = {
-    enable = lib.mkOption
+    enable = mkOption
       {
         default = false;
         type = types.bool;
-        description = lib.mdDoc ''
+        description = mdDoc ''
           Enables performance tweaks like ananicy-cpp.
         '';
       };
@@ -36,6 +36,7 @@ in
 
     # 90% ZRAM as swap
     zramSwap = {
+      algorithm = "zstd";
       enable = true;
       memoryPercent = 90;
     };

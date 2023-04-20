@@ -1,4 +1,4 @@
-{ ... }: {
+_: {
   # The root filesystem has a label by default
   fileSystems = {
     "/" = {

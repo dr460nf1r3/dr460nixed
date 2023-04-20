@@ -8,10 +8,12 @@
     ./development.nix
     ./gaming.nix
     ./hardening.nix
+    ./locales.nix
     ./misc.nix
     ./networking.nix
     ./performance.nix
     ./servers.nix
     ./shells.nix
+    ./xdg-ninja
   ];
 }

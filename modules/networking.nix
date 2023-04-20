@@ -3,6 +3,7 @@
 , pkgs
 , ...
 }:
+with lib;
 let
   cfg = config.dr460nixed;
 in
@@ -10,18 +11,28 @@ in
   # We want to use NetworkManager on desktops
   networking = {
     # Pointing to our Adguard instance via Tailscale
-    nameservers = [ "1.1.1.1" ];
-    networkmanager = lib.mkIf cfg.desktops.enable or cfg.rpi {
+    nameservers = [ "1.1.1.1" "1.0.0.1" ];
+    networkmanager = mkIf cfg.desktops.enable or cfg.rpi {
       dns = "none";
       enable = true;
-      unmanaged = [ "lo" ];
-      wifi.backend = "iwd";
+      unmanaged = [ "lo" "docker0" ];
+      wifi = {
+        backend = "iwd";
+        macAddress = "random";
+        powersave = true;
+      };
+
     };
+    # Enable nftables instead of iptables
+    nftables.enable = true;
     # Disable non-NetworkManager
-    useDHCP = lib.mkDefault false;
+    useDHCP = mkDefault false;
   };
 
-  ## Enable BBR & cake
+  # Enable wireless database
+  hardware.wirelessRegulatoryDatabase = true;
+
+  # Enable BBR & cake
   boot.kernelModules = [ "tcp_bbr" ];
   boot.kernel.sysctl = {
     "net.core.default_qdisc" = "cake";
@@ -51,5 +62,6 @@ in
 
   # Lightweight bandwidth usage tracking
   services.vnstat.enable = true;
+
 }
 

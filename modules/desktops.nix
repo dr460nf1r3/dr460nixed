@@ -9,11 +9,11 @@ let
 in
 {
   options.dr460nixed.desktops = {
-    enable = lib.mkOption
+    enable = mkOption
       {
         default = false;
         type = types.bool;
-        description = lib.mdDoc ''
+        description = mdDoc ''
           Whether to enable basic dr460nized desktop theming.
         '';
       };
@@ -78,7 +78,7 @@ in
 
     # Define the default fonts Fira Sans & Jetbrains Mono Nerd Fonts
     fonts = {
-      enableDefaultFonts = true;
+      enableDefaultFonts = false;
       fonts = with pkgs; [
         fira
         (nerdfonts.override {
@@ -93,10 +93,17 @@ in
       fontconfig = {
         cache32Bit = true;
         defaultFonts = {
+          emoji = [ "Noto Color Emoji" ];
           monospace = [ "JetBrains Mono Nerd Font" "Noto Fonts Emoji" ];
-          sansSerif = [ "Noto Fonts Emoji" "Fira" ];
-          serif = [ "Noto Fonts Emoji" "Fira" ];
+          sansSerif = [ "Fira" "Noto Fonts Emoji" ];
+          serif = [ "Fira" "Noto Fonts Emoji" ];
         };
+        # this fixes emoji stuff
+        enable = true;
+      };
+      fontDir = {
+        enable = true;
+        decompressFonts = true;
       };
     };
 

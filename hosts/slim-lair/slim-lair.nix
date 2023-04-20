@@ -56,14 +56,19 @@ in
   services.hardware.bolt.enable = false;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  # Enable OpenCL using rocm
+  # enables AMDVLK & OpenCL support
   hardware.opengl.extraPackages = with pkgs; [
+    amdvlk
+    # opencl drivers
     rocm-opencl-icd
     rocm-opencl-runtime
   ];
+  hardware.opengl.extraPackages32 = with pkgs; [
+    driversi686Linux.amdvlk
+  ];
 
   # Bleeding edge Mesa
-  # chaotic.mesa-git.enable = true;
+  chaotic.mesa-git.enable = true;
 
   # Enable a few selected custom settings
   dr460nixed = {
@@ -89,6 +94,9 @@ in
 
   # RADV video decode
   environment.variables.RADV_VIDEO_DECODE = "1";
+
+  # force use of RADV, can be unset if AMDVLK should be used
+  environment.variables.AMD_VULKAN_ICD = "RADV";
 
   # Virtualisation / Containerization
   virtualisation.containers.storage.settings = {

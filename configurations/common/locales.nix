@@ -26,11 +26,7 @@
   # Timezone
   time.timeZone = "Europe/Berlin";
 
-  # X11 keyboard layout
-  services.xserver = {
-    layout = "de";
-    xkbVariant = "";
-  };
+
 
   # Supply dictionary for typing booster
   environment.systemPackages = with pkgs; [
@@ -39,10 +35,5 @@
     hunspellDicts.en_US
   ];
 
-  # Console setup
-  console = lib.mkForce {
-    earlySetup = false;
-    font = "Lat2-Terminus16";
-    keyMap = "de";
-  };
+
 }

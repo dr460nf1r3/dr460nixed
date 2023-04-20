@@ -1,4 +1,4 @@
-{ ... }: {
+_: {
   # Override applications with useful things I want to have
   nixpkgs.overlays =
     let

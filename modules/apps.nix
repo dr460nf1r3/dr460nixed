@@ -40,7 +40,7 @@ in
       ];
     in
     required-packages
-    ++ lib.optionals cfg.desktops.enable (with pkgs; [
+    ++ optionals cfg.desktops.enable (with pkgs; [
       acpi
       asciinema
       aspell
@@ -74,7 +74,7 @@ in
       usbutils
       vorta
       vulkan-tools
-    ]) ++ lib.optionals cfg.development.enable (with pkgs; [
+    ]) ++ optionals cfg.development.enable (with pkgs; [
       androidStudioPackages.canary
       ansible
       bind.dnsutils
@@ -90,6 +90,7 @@ in
       nur.repos.yes.archlinux.asp
       nur.repos.yes.archlinux.devtools
       nur.repos.yes.archlinux.paru
+      ruff
       shellcheck
       shfmt
       speedcrunch
@@ -126,18 +127,24 @@ in
               version = "1.1.1";
               sha256 = "sha256-kJgqMEJHyYF3GDxe1rnpTEmbfJE01tyyOFjRUp4SOds=";
             }
+            {
+              name = "ruff";
+              publisher = "charliermarsh";
+              version = "2023.13.10931546";
+              sha256 = "sha256-2FAq5jEbnQbfXa7O9O231aun/pJ8mkoBf1u4ekkBQu8=";
+            }
           ];
       })
       xdg-utils
       yarn
-    ]) ++ lib.optionals cfg.yubikey (with pkgs; [
+    ]) ++ optionals cfg.yubikey (with pkgs; [
       yubikey-personalization
       yubioath-flutter
-    ]) ++ lib.optionals cfg.school (with pkgs; [
+    ]) ++ optionals cfg.school (with pkgs; [
       speedcrunch
       teams-for-linux
       virt-manager
-    ]) ++ lib.optionals cfg.live-cd (with pkgs; [
+    ]) ++ optionals cfg.live-cd (with pkgs; [
       btrfs-progs
       chntpw
       cryptsetup

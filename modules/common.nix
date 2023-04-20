@@ -1,4 +1,5 @@
 { config
+, inputs
 , lib
 , pkgs
 , sources
@@ -11,28 +12,28 @@ in
 {
   options.dr460nixed = {
     common = {
-      enable = lib.mkOption
+      enable = mkOption
         {
           default = true;
           type = types.bool;
-          description = lib.mdDoc ''
+          description = mdDoc ''
             Whether to enable common system configurations.
           '';
         };
     };
-    rpi = lib.mkOption
+    rpi = mkOption
       {
         default = false;
         type = types.bool;
-        description = lib.mdDoc ''
+        description = mdDoc ''
           Whether this is a Raspberry Pi.
         '';
       };
-    nodocs = lib.mkOption
+    nodocs = mkOption
       {
         default = true;
         type = types.bool;
-        description = lib.mdDoc ''
+        description = mdDoc ''
           Whether to disable the documentation.
         '';
       };
@@ -43,7 +44,7 @@ in
       ## A few kernel tweaks
       boot.kernel.sysctl = {
         "kernel.printks" = "3 3 3 3";
-        "kernel.sysrq" = 1;
+        "kernel.sysrq" = 0;
         "kernel.unprivileged_userns_clone" = 1;
       };
 
@@ -55,7 +56,20 @@ in
         };
         enableRedistributableFirmware = true;
       };
-      services.fwupd.enable = true;
+
+      services = {
+        # handle ACPI events
+        acpid.enable = true;
+        # discard blocks that are not in use by the filesystem, good for SSDs
+        fstrim.enable = true;
+        # firmware updater for machine hardware
+        fwupd.enable = true;
+        # limit systemd journal size
+        journald.extraConfig = ''
+          SystemMaxUse=50M
+          RuntimeMaxUse=10M
+        '';
+      };
 
       # We want to be insulted on wrong passwords
       # & allow deployment of configurations via Colmena
@@ -92,6 +106,8 @@ in
         };
         # The GnuPG agent
         gnupg.agent.enable = true;
+        # type "fuck" to fix the last command that made you go "fuck"
+        thefuck.enable = true;
       };
 
       # Enable locating files via locate
@@ -103,9 +119,10 @@ in
       };
 
       # Who needs documentation when there is the internet? #bl04t3d
-      documentation = lib.mkIf cfg.nodocs {
+      documentation = mkIf cfg.nodocs {
+        dev.enable = false;
         doc.enable = false;
-        enable = false;
+        enable = true;
         info.enable = false;
         man.enable = false;
         nixos.enable = false;
@@ -113,27 +130,42 @@ in
 
       # General nix settings
       nix = {
+        # Make builds run with low priority so my system stays responsive
+        daemonCPUSchedPolicy = "idle";
+        daemonIOSchedClass = "idle";
+
         # Do garbage collections whenever there is less than 1GB free space left
         extraOptions = ''
-          min-free = ${toString (1024 * 1024 * 1024)}
+          min-free = ${toString (100 * 1024 * 1024)}
+          max-free = ${toString (1024 * 1024 * 1024)}
+          accept-flake-config = true
+          http-connections = 0
+          warn-dirty = false
         '';
+
         # Do daily garbage collections
         gc = {
           automatic = true;
           dates = "daily";
-          options = "--delete-older-than 7d";
+          options = "--delete-older-than 5d";
         };
+
         settings = {
           # Only allow the wheel group to handle Nix
           allowed-users = [ "@wheel" ];
           # Allow using flakes
           auto-optimise-store = true;
+          # use binary cache, its not gentoo
+          # this also allows us to use remote builders to reduce build times and batter usage
+          builders-use-substitutes = true;
+
           # A few extra binary caches
           extra-substituters = [
             "https://colmena.cachix.org"
             "https://dr460nf1r3.cachix.org"
             "https://garuda-linux.cachix.org"
             "https://nix-community.cachix.org"
+            "https://nixpkgs-unfree.cachix.org"
             "https://nyx.chaotic.cx"
           ];
           extra-trusted-public-keys = [
@@ -142,15 +174,36 @@ in
             "dr460nf1r3.cachix.org-1:ujkI5l3i3m6Jh3J8phRXtnUbKdrn7JIxb/dPAO3ePbI="
             "garuda-linux.cachix.org-1:tWw7YBE6qZae0L6BbyNrHo8G8L4sHu5QoDp0OXv70bg="
             "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+            "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
             "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
           ];
-          # This is a flake after all
-          experimental-features = [ "nix-command" "flakes" ];
+          # enable new nix command and flakes
+          # and also "unintended" recursion as well as content addresssed nix
+          extra-experimental-features = [ "flakes" "nix-command" "recursive-nix" "ca-derivations" ];
+
+          # continue building derivations if one fails
+          keep-going = true;
+          # show more log lines for failed builds
+          log-lines = 20;
+
+          # for direnv GC roots
+          keep-derivations = true;
+          keep-outputs = true;
           max-jobs = "auto";
-          system-features = [ "kvm" "big-parallel" ];
-          trusted-users = [ "root" "nico" "deploy" ];
+          system-features = [ "big-parallel" "kvm" "recursive-nix" ];
+          trusted-users = [ "@wheel" "deploy" ];
         };
-        nixPath = [ "nixpkgs=${sources.nixpkgs}" ];
+        # pin the registry to avoid downloading and evalıationg a new nixpkgs
+        # version everytime
+        # this will add each flake input as a registry
+        # to make nix3 commands consistent with your flake
+        # registry = mapAttrs (_: v: { flake = v; }) inputs;
+
+        # This will additionally add your inputs to the system's legacy channels
+        # Making legacy nix commands consistent as well, awesome!
+        nixPath = mapAttrsToList (key: _: "${key}=flake:${key}") config.nix.registry;
+
+        package = pkgs.nixUnstable;
       };
 
       # Allow unfree packages
