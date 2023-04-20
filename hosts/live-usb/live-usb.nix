@@ -7,7 +7,6 @@
 
   imports = [
     ../../configurations/common.nix
-    <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-base.nix>
   ];
 
   # Enable a few selected custom settings
@@ -22,7 +21,10 @@
   users.mutableUsers = lib.mkForce true;
 
   # Use the latest Linux kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    zfs.enableUnstable = true;
+  };
 
   # Increase timeout
   boot.loader.timeout = lib.mkForce 10;

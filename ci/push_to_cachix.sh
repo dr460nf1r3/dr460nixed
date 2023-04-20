@@ -1,16 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-FLAKE_DIR="$(pwd)"
-TARGETS_X86=("tv" "main")
+TARGETS_X86=("main" "tv")
 TARGETS_AARCH64=("oracle" "rpi")
-
-# Build every variation of the flake
-cd "$FLAKE_DIR"
-
-# Stolen from https://github.com/easimon/maximize-build-space
-# Save about 50GB of space by removing things we don't need anyways
-sudo rm -rf /usr/share /usr/local /opt || true
 
 # Determine system architecture
 if [[ "$(uname -m)" == "x86_64" ]]; then
@@ -24,7 +16,9 @@ fi
 
 # Build the corresponding system configurations
 for system in "${TARGETS[@]}"; do
-    nix develop -c colmena build --on "$system"
+    echo "Started building variation $system ❄️!"
+    echo ""
+    nix develop -c colmena build --on "@$system"
     echo ""
     echo "Done building variation $system ❄️!"
     echo ""

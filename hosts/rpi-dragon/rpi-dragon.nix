@@ -19,7 +19,7 @@
   # Kernel defaults
   boot = {
     kernelPackages = pkgs.linuxPackages_rpi4;
-    tmpOnTmpfs = true;
+    tmp.useTmpfs = true;
     initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
     # Fix https://github.com/NixOS/nixpkgs/pull/207969
     initrd.systemd.enable = lib.mkForce false;
@@ -34,6 +34,12 @@
 
   # Enable hardware acceleration
   hardware.raspberry-pi."4".fkms-3d.enable = true;
+
+  # This is needed as the packages are marked unsupported
+  hardware.cpu = {
+    amd.updateMicrocode = lib.mkForce false;
+    intel.updateMicrocode = lib.mkForce false;
+  };
 
   # Slows down write operations considerably
   nix.settings.auto-optimise-store = lib.mkForce false;

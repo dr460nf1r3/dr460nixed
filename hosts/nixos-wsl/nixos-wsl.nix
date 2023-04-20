@@ -43,7 +43,7 @@ in
   };
 
   # Override this to always run fish & workaround fastfetch error
-  programs.fish.shellInit = lib.mkForce ''
+  programs.bash.shellInit = lib.mkForce ''
     exec "${pkgs.fish}/bin/fish"
   '';
   programs.fish.shellInit = lib.mkForce ''
