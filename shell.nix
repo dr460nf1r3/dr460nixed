@@ -15,11 +15,13 @@
     nativeBuildInputs = with pkgs; [
       age
       colmena
+      deadnix
       git
       gnupg
-      home-manager
       nix
+      nixpkgs-fmt
       sops
+      statix
     ];
   };
 }

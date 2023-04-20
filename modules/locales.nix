@@ -29,7 +29,7 @@ in
       i18n =
         let
           defaultLocale = "en_US.UTF-8";
-          tr = "de_DE.UTF-8";
+          de = "de_DE.UTF-8";
         in
         {
           inherit defaultLocale;
@@ -40,15 +40,15 @@ in
             LC_CTYPE = defaultLocale;
             LC_MESSAGES = defaultLocale;
 
-            LC_ADDRESS = tr;
-            LC_IDENTIFICATION = tr;
-            LC_MEASUREMENT = tr;
-            LC_MONETARY = tr;
-            LC_NAME = tr;
-            LC_NUMERIC = tr;
-            LC_PAPER = tr;
-            LC_TELEPHONE = tr;
-            LC_TIME = tr;
+            LC_ADDRESS = de;
+            LC_IDENTIFICATION = de;
+            LC_MEASUREMENT = de;
+            LC_MONETARY = de;
+            LC_NAME = de;
+            LC_NUMERIC = de;
+            LC_PAPER = de;
+            LC_TELEPHONE = de;
+            LC_TIME = de;
           };
 
           supportedLocales = mkDefault [
@@ -68,7 +68,7 @@ in
         };
 
       # X11 keyboard layout
-      services.xserver = mkIf config.dr460nixed.desktop.enable {
+      services.xserver = mkIf config.dr460nixed.desktops.enable {
         layout = "de";
         xkbVariant = "";
       };

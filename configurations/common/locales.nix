@@ -1,4 +1,5 @@
-{ lib
+{ config
+, lib
 , pkgs
 , ...
 }: {
@@ -26,8 +27,6 @@
   # Timezone
   time.timeZone = "Europe/Berlin";
 
-
-
   # Supply dictionary for typing booster
   environment.systemPackages = with pkgs; [
     hunspell
@@ -35,5 +34,18 @@
     hunspellDicts.en_US
   ];
 
+  # X11 keyboard layout
+  services.xserver = lib.mkIf config.dr460nixed.desktops.enable {
+    layout = "de";
+    xkbVariant = "";
+  };
 
+  console =
+    let
+      variant = "116n";
+    in
+    {
+      font = "${pkgs.terminus_font}/share/consolefonts/ter-${variant}.psf.gz";
+      keyMap = "de";
+    };
 }

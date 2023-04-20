@@ -2,11 +2,14 @@
 set -euo pipefail
 
 FLAKE_DIR="$(pwd)"
-TARGETS_X86=("tv-nixos" "slim-lair")
-TARGETS_AARCH64=("oracle-dragon" "pi-dragon")
+TARGETS_X86=("tv" "main")
+TARGETS_AARCH64=("oracle" "rpi")
 
 # Build every variation of the flake
 cd "$FLAKE_DIR"
+
+# Activate devshell
+nix develop
 
 # Stolen from https://github.com/easimon/maximize-build-space
 # Save about 50GB of space by removing things we don't need anyways
@@ -24,7 +27,7 @@ fi
 
 # Build the corresponding system configurations
 for system in "${TARGETS[@]}"; do
-    nix build -L ".#nixosConfigurations.$system.config.system.build.toplevel"
+    colmena build --on "$system"
     echo ""
     echo "Done building variation $system ❄️!"
     echo ""

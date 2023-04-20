@@ -77,7 +77,7 @@
       };
       overlays = _: {
         nixpkgs.overlays = [
-          (final: prev: {
+          (_final: prev: {
             unstable = nixpkgs.legacyPackages.${prev.system};
           })
           nur.overlay
@@ -100,18 +100,22 @@
       };
     in
     {
-
+      # The default checks to run on Nix files
       checks.${system} = import ./lib/checks { inherit pkgs; };
 
+      # The devshell exposed by .envrc
       devShells.${system}.default = pkgs.mkShell {
         name = "dr460nixed";
         packages = with pkgs; [
-          nil
-          git
-          glow
-          nixpkgs-fmt
-          statix
+          age
+          colmena
           deadnix
+          git
+          gnupg
+          nix
+          nixpkgs-fmt
+          sops
+          statix
         ];
       };
 

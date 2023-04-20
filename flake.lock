@@ -32,11 +32,11 @@
         "wlroots-git-src": "wlroots-git-src"
       },
       "locked": {
-        "lastModified": 1681923707,
-        "narHash": "sha256-lYd6Qk/iFtQ9qPdFvbaxaR9sAdKz3YZDtDfjA1jr7NM=",
+        "lastModified": 1682006904,
+        "narHash": "sha256-6DMAApWKibHpV4mNM3jKR4NuXJ4FZBiCubYF0qUWuKU=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "db364f5e27c48890455007b5561ca934f980b039",
+        "rev": "93e80d6bad596a2740f371bc9c5186a6b5d4464c",
         "type": "github"
       },
       "original": {
@@ -477,11 +477,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1681871374,
-        "narHash": "sha256-HOSx4H7umAYoMj0UjBs+wgW/8TI6R10DDd2L/W4DDZY=",
+        "lastModified": 1681903854,
+        "narHash": "sha256-U3vbSEdct4aUu+vk3YsBiwokN3th4Jvde7S8gnVmeAA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "986a0a1a1905b3227b28db009619321105c62464",
+        "rev": "bb2009ca185d97813e75736c2b8d1d8bb81bde05",
         "type": "github"
       },
       "original": {
@@ -525,11 +525,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1681991086,
-        "narHash": "sha256-3/cxF4vxTjDNmuWw1zfkPNHxVG5E6jvEfgDpYCkfcMo=",
+        "lastModified": 1681994115,
+        "narHash": "sha256-O/7AVL1iKq4G4Zyf0k71Ki5OOP3U4gH5ms1ZLMPuG1I=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "0decfbe099053679bd97a3be47735a449ea3b851",
+        "rev": "5ea4cf7eafb21011352a3cf857edc2d7c5ccdf70",
         "type": "github"
       },
       "original": {

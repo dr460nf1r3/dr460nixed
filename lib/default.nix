@@ -4,7 +4,7 @@
 }:
 with lib;
 nixpkgs.lib.extend (
-  final: prev: {
+  _final: _prev: {
     # Filter files that have the .nix suffix
     filterNixFiles = k: v: v == "regular" && hasSuffix ".nix" k;
     # Import files that are selected by filterNixFiles

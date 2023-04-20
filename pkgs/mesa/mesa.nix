@@ -5,7 +5,6 @@
 }:
 let
   # future = nixpkgs-staging.legacyPackages.${pkgs.system};
-  dropN = n: list: lib.lists.take (builtins.length list - n) list;
 
   mesaGitApplier = base:
     base.mesa.overrideAttrs (fa: {

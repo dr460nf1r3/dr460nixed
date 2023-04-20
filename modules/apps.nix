@@ -69,11 +69,12 @@ in
       obs-studio-wrapped
       qbittorrent
       spotify
-      tdesktop-userfonts
+      tdesktop #-userfonts
       tor-browser-bundle-bin
       usbutils
       vorta
       vulkan-tools
+      xdg-ninja
     ]) ++ optionals cfg.development.enable (with pkgs; [
       androidStudioPackages.canary
       ansible
@@ -94,6 +95,7 @@ in
       shellcheck
       shfmt
       speedcrunch
+      statix
       teamviewer
       termius
       ventoy-full

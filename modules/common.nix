@@ -1,8 +1,6 @@
 { config
-, inputs
 , lib
 , pkgs
-, sources
 , ...
 }:
 with lib;
@@ -177,7 +175,7 @@ in
             "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
             "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
           ];
-          # enable new nix command and flakes
+          # Enable new nix command and flakes
           # and also "unintended" recursion as well as content addresssed nix
           extra-experimental-features = [ "flakes" "nix-command" "recursive-nix" "ca-derivations" ];
 
@@ -189,13 +187,12 @@ in
           # for direnv GC roots
           keep-derivations = true;
           keep-outputs = true;
-          max-jobs = "auto";
+          max-jobs = 4;
           system-features = [ "big-parallel" "kvm" "recursive-nix" ];
           trusted-users = [ "@wheel" "deploy" ];
         };
-        # pin the registry to avoid downloading and evalıationg a new nixpkgs
-        # version everytime
-        # this will add each flake input as a registry
+        # Pin the registry to avoid downloading and evalıationg a new nixpkgs
+        # version everytime - this will add each flake input as a registry
         # to make nix3 commands consistent with your flake
         # registry = mapAttrs (_: v: { flake = v; }) inputs;
 
@@ -234,13 +231,5 @@ in
           )
         fi
       '';
-
-      # Automatic system upgrades
-      # system.autoUpgrade = {
-      #   enable = false;
-      #   dates = "hourly";
-      #   flags = [ "--refresh" ];
-      #   flake = "github:dr460nf1r3/device-configurations";
-      # };
     };
 } 
