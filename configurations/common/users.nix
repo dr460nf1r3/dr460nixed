@@ -51,6 +51,7 @@ in
         "docker"
         "flatpak"
         "git"
+        "kvm"
         "libvirtd"
         "mysql"
         "network"

@@ -8,9 +8,6 @@ TARGETS_AARCH64=("oracle" "rpi")
 # Build every variation of the flake
 cd "$FLAKE_DIR"
 
-# Activate devshell
-nix develop
-
 # Stolen from https://github.com/easimon/maximize-build-space
 # Save about 50GB of space by removing things we don't need anyways
 sudo rm -rf /usr/share /usr/local /opt || true
@@ -27,7 +24,7 @@ fi
 
 # Build the corresponding system configurations
 for system in "${TARGETS[@]}"; do
-    colmena build --on "$system"
+    nix develop -c colmena build --on "$system"
     echo ""
     echo "Done building variation $system ❄️!"
     echo ""

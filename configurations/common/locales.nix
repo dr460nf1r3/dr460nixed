@@ -35,17 +35,12 @@
   ];
 
   # X11 keyboard layout
-  services.xserver = lib.mkIf config.dr460nixed.desktops.enable {
+  services.xserver = {
     layout = "de";
     xkbVariant = "";
   };
-
-  console =
-    let
-      variant = "116n";
-    in
-    {
-      font = "${pkgs.terminus_font}/share/consolefonts/ter-${variant}.psf.gz";
-      keyMap = "de";
-    };
+  console = {
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-116n.psf.gz";
+    keyMap = "de";
+  };
 }
