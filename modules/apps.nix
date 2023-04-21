@@ -69,7 +69,7 @@ in
       obs-studio-wrapped
       qbittorrent
       spotify
-      tdesktop #-userfonts
+      tdesktop
       tor-browser-bundle-bin
       usbutils
       vorta

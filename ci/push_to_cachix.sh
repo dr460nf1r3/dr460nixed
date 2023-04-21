@@ -26,7 +26,7 @@ fi
 for system in "${TARGETS[@]}"; do
     echo "Started building variation $system ❄️!"
     echo ""
-    nix build -L ".#nixosConfigurations.$system.config.system.build.toplevel"
+    nix build -L ".#nixosConfigurations.$system.config.system.build.toplevel" --impure
     echo ""
     echo "Done building variation $system ❄️!"
     echo ""
