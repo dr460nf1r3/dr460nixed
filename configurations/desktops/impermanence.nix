@@ -165,6 +165,7 @@ in
         ".config/plasmashellrc"
         ".local/share/krunnerstaterc"
         ".local/share/recently-used.xbel"
+        ".opencommit"
       ];
     };
   };
