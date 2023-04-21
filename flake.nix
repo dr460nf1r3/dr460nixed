@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Chaotic Nyx!
-    chaotic-nyx.url = "github:chaotic-cx/nyx/appmenu-gtk3-module";
+    chaotic-nyx.url = "github:chaotic-cx/nyx/fix-appmenu-module";
 
     # Home configuration management
     home-manager = {

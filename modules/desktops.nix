@@ -40,13 +40,8 @@ in
       };
     };
 
-    # This ensures GTK applications can load appmenu-gtk-module
-    environment.profileRelativeSessionVariables = {
-      XDG_DATA_DIRS = [ "/share/gsettings-schemas/appmenu-gtk3-module-0.7.6" ];
-    };
-
-    # Once its available, this replaces the previous option
-    # chaotic.appmenu-gtk3-module.enable = true;
+    # Allow GTK applications to disable an appmenu on KDE
+    chaotic.appmenu-gtk3-module.enable = true;
 
     # Remove a few applications that aren't needed
     environment.plasma5.excludePackages = with pkgs; with libsForQt5; [
@@ -58,7 +53,6 @@ in
     environment.systemPackages = with pkgs; [
       applet-window-appmenu
       applet-window-title
-      appmenu-gtk3-module
       beautyline-icons
       dr460nized-kde-theme
       firedragon
