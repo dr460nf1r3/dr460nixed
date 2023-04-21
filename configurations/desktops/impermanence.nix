@@ -83,6 +83,7 @@ in
         ".config/sops/age"
         ".config/spotify"
         ".config/teams-for-linux"
+        ".config/thefuck"
         ".config/vlc"
         ".firedragon"
         ".gitkraken"

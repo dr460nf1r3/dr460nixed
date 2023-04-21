@@ -192,7 +192,7 @@ in
       [General]
       autoSaveImage=true
       clipboardGroup=PostScreenshotCopyImage
-      onLaunchAction=UseLastUsedCapturemode
+      onLaunchAction=DoNotTakeScreenshot
       useReleaseToCapture=true
 
       [Save]

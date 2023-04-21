@@ -1,2 +1,3 @@
 overlays/kde-nix-overlay
+node_modules/
 .direnv
