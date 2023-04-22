@@ -3,7 +3,6 @@
   imports = [
     ./browsers.nix
     ./common.nix
-    ./default-apps.nix
     ./development.nix
     ./email.nix
     ./kde.nix
