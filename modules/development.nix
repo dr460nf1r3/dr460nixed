@@ -69,6 +69,9 @@ in
         };
       };
 
+      # This is supposed to fix "The name org.freedesktop.secret 
+      # was not provided by any .service files" in VSCode (from NixOS wiki)
+      services.gnome.gnome-keyring.enable = true;
 
       # Needed for makepkg to work
       environment.etc = {

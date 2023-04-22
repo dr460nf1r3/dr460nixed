@@ -29,10 +29,6 @@ in
           autoNumlock = true;
           enable = true;
           settings = {
-            Autologin = {
-              Session = "plasma.desktop";
-              User = "nico";
-            };
             General = { Font = "Fira Sans"; };
           };
           theme = "Sweet";

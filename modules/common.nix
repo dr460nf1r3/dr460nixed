@@ -151,13 +151,16 @@ in
         settings = {
           # Only allow the wheel group to handle Nix
           allowed-users = [ "@wheel" ];
-          # Allow using flakes
+          trusted-users = [ "@wheel" "deploy" ];
+
+          # Automatically optimise the store
           auto-optimise-store = true;
-          # use binary cache, its not gentoo
+
+          # Use available binary caches, this is not Gentoo
           # this also allows us to use remote builders to reduce build times and batter usage
           builders-use-substitutes = true;
 
-          # A few extra binary caches
+          # A few extra binary caches and their public keys
           extra-substituters = [
             "https://colmena.cachix.org"
             "https://dr460nf1r3.cachix.org"
@@ -175,26 +178,24 @@ in
             "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
             "nyx.chaotic.cx-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
           ];
-          # Enable new nix command and flakes
+
+          # Enable new nix command, flakes and system features
           # and also "unintended" recursion as well as content addresssed nix
           extra-experimental-features = [ "flakes" "nix-command" "recursive-nix" "ca-derivations" ];
+          system-features = [ "big-parallel" "kvm" "recursive-nix" ];
 
-          # continue building derivations if one fails
+          # Continue building derivations if one fails
           keep-going = true;
-          # show more log lines for failed builds
+          # Show more log lines for failed builds
           log-lines = 20;
 
-          # for direnv GC roots
+          # For direnv GC roots
           keep-derivations = true;
           keep-outputs = true;
-          max-jobs = 4;
-          system-features = [ "big-parallel" "kvm" "recursive-nix" ];
-          trusted-users = [ "@wheel" "deploy" ];
+
+          # Max number of parallel jobs
+          max-jobs = "auto";
         };
-        # Pin the registry to avoid downloading and evalıationg a new nixpkgs
-        # version everytime - this will add each flake input as a registry
-        # to make nix3 commands consistent with your flake
-        # registry = mapAttrs (_: v: { flake = v; }) inputs;
 
         # This will additionally add your inputs to the system's legacy channels
         # Making legacy nix commands consistent as well, awesome!
