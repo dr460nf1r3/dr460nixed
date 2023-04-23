@@ -12,23 +12,9 @@ _: {
             obs-vkcapture
           ];
         };
-        # Telegram Desktop using actual system fonts
-        tdesktop-userfonts = prev.tdesktop.overrideDerivation (oa: {
-          cmakeFlags =
-            [
-              "-DDESKTOP_APP_QT6=OFF"
-              "-DDESKTOP_APP_USE_PACKAGED_FONTS=OFF"
-              "-DTDESKTOP_API_TEST=ON"
-            ]
-            ++ oa.cmakeFlags;
-        });
         # This is quite obvious I guess
         prismlauncher-mod = prev.prismlauncher.overrideDerivation (oa: {
-          patches =
-            [
-              ./offline-mode-prism-launcher.diff
-            ]
-            ++ oa.patches;
+          patches = [ ./offline-mode-prism-launcher.diff ] ++ oa.patches;
         });
       };
     in
