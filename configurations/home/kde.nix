@@ -44,11 +44,12 @@ in
   home.file = {
     "${configDir}/autostart/nextcloud-client.desktop".text = ''
       [Desktop Entry]
-      Name=Nextcloud
       Exec=nextcloud --background
-      Terminal=false
       Icon=Nextcloud
+      Name=Nextcloud
       StartupNotify=false
+      Terminal=false
+      Type=Application
     '';
     "${configDir}/baloofilerc".text = ''
       [General]
@@ -88,14 +89,15 @@ in
       X11LibInputXAccelProfileFlat=false
       cursorTheme=Sweet-cursors
     '';
-    "${configDir}/kded5rc".text = ''
-      [Module-device_automounter]
-      autoload=true
-    '';
+    "${configDir}/kded5rc".source = ./kde-static/kded5rc;
     "${configDir}/kdeglobals".source = ./kde-static/kdeglobals;
     "${configDir}/kgammarc".text = ''
       [ConfigFile]
       use=kgammarc
+    '';
+    "${configDir}/kiorc".text = ''
+      [Confirmations]
+      ConfirmEmptyTrash=false
     '';
     "${configDir}/konsolerc".text = ''
       [Desktop Entry]
