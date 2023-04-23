@@ -127,14 +127,14 @@ in
             {
               name = "sweet-vscode";
               publisher = "eliverlara";
-              version = "1.1.1";
               sha256 = "sha256-kJgqMEJHyYF3GDxe1rnpTEmbfJE01tyyOFjRUp4SOds=";
+              version = "1.1.1";
             }
             {
               name = "ruff";
               publisher = "charliermarsh";
-              version = "2023.13.10931546";
               sha256 = "sha256-2FAq5jEbnQbfXa7O9O231aun/pJ8mkoBf1u4ekkBQu8=";
+              version = "2023.13.10931546";
             }
           ];
       })
@@ -452,9 +452,9 @@ in
       ];
     in
     (lib.genAttrs code (_: [ "code.desktop" ]))
-    // (lib.genAttrs images (_: [ "gwenview.desktop" ]))
-    // (lib.genAttrs urls (_: [ "firedragon.desktop" ]))
-    // (lib.genAttrs documents (_: [ "okular.desktop" ]))
+    // (lib.genAttrs archives (_: [ "ark.desktop" ]))
     // (lib.genAttrs audioVideo (_: [ "vlc.desktop" ]))
-    // (lib.genAttrs archives (_: [ "ark.desktop" ]));
+    // (lib.genAttrs documents (_: [ "okular.desktop" ]))
+    // (lib.genAttrs images (_: [ "gwenview.desktop" ]))
+    // (lib.genAttrs urls (_: [ "firedragon.desktop" ]));
 }

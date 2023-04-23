@@ -59,7 +59,6 @@ in
   # enables AMDVLK & OpenCL support
   hardware.opengl.extraPackages = with pkgs; [
     amdvlk
-    # opencl drivers
     rocm-opencl-icd
     rocm-opencl-runtime
   ];
@@ -92,11 +91,11 @@ in
   # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
-  # RADV video decode
-  environment.variables.RADV_VIDEO_DECODE = "1";
-
-  # force use of RADV, can be unset if AMDVLK should be used
-  environment.variables.AMD_VULKAN_ICD = "RADV";
+  # RADV video decode & general usage
+  environment.variables = {
+    AMD_VULKAN_ICD = "RADV";
+    RADV_VIDEO_DECODE = "1";
+  };
 
   # Virtualisation / Containerization
   virtualisation.containers.storage.settings = {

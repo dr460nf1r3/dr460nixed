@@ -53,8 +53,8 @@ in
           qemu = {
             ovmf.enable = true;
             ovmf.packages = [ pkgs.OVMFFull.fd ];
-            swtpm.enable = true;
             package = pkgs.qemu_kvm;
+            swtpm.enable = true;
           };
         };
         lxd.enable = false;
@@ -63,9 +63,9 @@ in
             enable = true;
             flags = [ "--all" ];
           };
-          enable = true;
           dockerCompat = true;
           dockerSocket.enable = true;
+          enable = true;
         };
       };
 
@@ -89,19 +89,19 @@ in
         enable = true;
         execConfig = {
           Boot = "yes";
-          ResolvConf = "on";
-          PrivateUsers = 0;
           Capability = "all";
+          PrivateUsers = 0;
+          ResolvConf = "on";
         };
         filesConfig = {
           Bind = [ "/home/nico:/home/root" ];
         };
       };
       systemd.services."systemd-nspawn@garuda-dev" = {
+        enable = false;
+        environment = { SYSTEMD_NSPAWN_UNIFIED_HIERARCHY = "1"; };
         overrideStrategy = "asDropin";
         wantedBy = [ "machines.target" ];
-        environment = { SYSTEMD_NSPAWN_UNIFIED_HIERARCHY = "1"; };
-        enable = false;
       };
 
       # Allow to cross-compile to aarch64

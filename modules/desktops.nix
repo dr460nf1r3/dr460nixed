@@ -21,8 +21,6 @@ in
 
   config = mkIf cfg.enable {
     services.xserver = {
-      enable = true;
-      excludePackages = [ pkgs.xterm ];
       desktopManager.plasma5.enable = true;
       displayManager = {
         sddm = {
@@ -30,10 +28,13 @@ in
           enable = true;
           settings = {
             General = { Font = "Fira Sans"; };
+            # Autologin = { User = "nico"; Session = "plasma"; };
           };
           theme = "Sweet";
         };
       };
+      enable = true;
+      excludePackages = [ pkgs.xterm ];
     };
 
     # Allow GTK applications to disable an appmenu on KDE

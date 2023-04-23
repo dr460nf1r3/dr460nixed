@@ -44,36 +44,36 @@ in
           # Old or rare or insufficiently audited filesystems
           "adfs"
           "affs"
-          "bfs"
           "befs"
+          "bfs"
+          "btusb"
+          "cifs"
+          "cramfs"
           "cramfs"
           "efs"
           "erofs"
           "exofs"
-          "freevxfs"
           "f2fs"
-          "vivid"
-          "gfs2"
-          "ksmbd"
-          "nfsv4"
-          "nfsv3"
-          "cifs"
-          "nfs"
-          "cramfs"
           "freevxfs"
-          "jffs2"
+          "freevxfs"
+          "gfs2"
           "hfs"
           "hfsplus"
-          "udf"
-          "btusb"
           "hpfs"
+          "jffs2"
           "jfs"
+          "ksmbd"
           "minix"
+          "nfs"
+          "nfsv3"
+          "nfsv4"
           "nilfs2"
           "omfs"
           "qnx4"
           "qnx6"
           "sysv"
+          "udf"
+          "vivid"
         ];
 
       # Disable coredumps
@@ -89,11 +89,11 @@ in
           Protocol 2
         '';
         settings = {
-          kbdInteractiveAuthentication = mkDefault false;
           PasswordAuthentication = false;
           PermitRootLogin = "no";
-          useDns = false;
           X11Forwarding = false;
+          kbdInteractiveAuthentication = mkDefault false;
+          useDns = false;
         };
       };
 
@@ -115,7 +115,6 @@ in
         github-rsa.publicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==";
         github-ed25519.hostNames = [ "github.com" ];
         github-ed25519.publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
-
         gitlab-rsa.hostNames = [ "gitlab.com" ];
         gitlab-rsa.publicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9";
         gitlab-ed25519.hostNames = [ "gitlab.com" ];
@@ -130,9 +129,9 @@ in
             executable = "${pkgs.getBin pkgs.chromium}/bin/chromium";
             profile = "${pkgs.firejail}/etc/firejail/chromium.profile";
             extraArgs = [
-              "--ignore=private-dev"
-              "--env=GTK_THEME=Sweet-dark:dark"
               "--dbus-user.talk=org.freedesktop.Notifications"
+              "--env=GTK_THEME=Sweet-dark:dark"
+              "--ignore=private-dev"
             ];
           };
         };

@@ -57,8 +57,8 @@ in
       fish = {
         enable = true;
         vendor = {
-          config.enable = true;
           completions.enable = true;
+          config.enable = true;
         };
         shellAbbrs = {
           "cls" = "clear";
@@ -71,10 +71,10 @@ in
           "reb" = " sudo nixos-rebuild switch -L";
           "roll" = "sudo nixos-rebuild switch --rollback";
           "su" = "sudo su -";
-          "use" = "nix shell nixpkgs#";
           "tarnow" = "tar acf ";
           "test" = "sudo nixos-rebuild switch --test";
           "untar" = "tar zxvf ";
+          "use" = "nix shell nixpkgs#";
         };
         shellAliases = {
           "bat" = "bat --style header --style snip --style changes";

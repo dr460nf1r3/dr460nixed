@@ -134,10 +134,10 @@ in
 
         # Do garbage collections whenever there is less than 1GB free space left
         extraOptions = ''
-          min-free = ${toString (100 * 1024 * 1024)}
-          max-free = ${toString (1024 * 1024 * 1024)}
           accept-flake-config = true
           http-connections = 0
+          max-free = ${toString (1024 * 1024 * 1024)}
+          min-free = ${toString (100 * 1024 * 1024)}
           warn-dirty = false
         '';
 
@@ -186,6 +186,7 @@ in
 
           # Continue building derivations if one fails
           keep-going = true;
+
           # Show more log lines for failed builds
           log-lines = 20;
 
@@ -198,7 +199,7 @@ in
         };
 
         # This will additionally add your inputs to the system's legacy channels
-        # Making legacy nix commands consistent as well, awesome!
+        # making legacy nix commands consistent as well, awesome!
         nixPath = mapAttrsToList (key: _: "${key}=flake:${key}") config.nix.registry;
 
         package = pkgs.nixUnstable;
@@ -209,8 +210,8 @@ in
 
       # Clean results periodically
       systemd.services.nix-clean-result = {
-        serviceConfig.Type = "oneshot";
         description = "Auto clean all result symlinks created by nixos-rebuild test";
+        serviceConfig.Type = "oneshot";
         script = ''
           "${config.nix.package.out}/bin/nix-store" --gc --print-roots | "${pkgs.gawk}/bin/awk" 'match($0, /^(.*\/result) -> \/nix\/store\/[^-]+-nixos-system/, a) { print a[1] }' | xargs -r -d\\n rm
         '';

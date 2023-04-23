@@ -10,8 +10,8 @@
 
     # Home configuration management
     home-manager = {
-      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager/master";
     };
 
     # Reset rootfs every reboot vis ZFS snapshots
@@ -19,8 +19,8 @@
 
     # My SSH keys
     keys_nico = {
-      url = "https://github.com/dr460nf1r3.keys";
       flake = false;
+      url = "https://github.com/dr460nf1r3.keys";
     };
 
     # Secure boot support
@@ -28,8 +28,8 @@
 
     # Prismlauncher
     nix-minecraft = {
-      url = "github:misterio77/nix-minecraft";
       inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:misterio77/nix-minecraft";
     };
 
     # Nix user repository
@@ -40,12 +40,12 @@
 
     # The Chaotic toolbox
     src-chaotic-toolbox = {
-      url = "github:chaotic-aur/toolbox";
       flake = false;
+      url = "github:chaotic-aur/toolbox";
     };
     src-repoctl = {
-      url = "github:cassava/repoctl";
       flake = false;
+      url = "github:cassava/repoctl";
     };
 
     # Automated system themes
@@ -94,9 +94,7 @@
       ];
       pkgs = import nixpkgs {
         inherit system;
-        config = {
-          tarball-ttl = 0;
-        };
+        config = { tarball-ttl = 0; };
       };
     in
     {
@@ -126,16 +124,16 @@
       colmena = {
         meta = {
           nixpkgs = import nixpkgs {
-            system = "${system}";
             overlays = [ ];
+            system = "${system}";
           };
           inherit specialArgs;
         };
         defaults = {
-          imports = defaultModules;
           deployment = {
             targetUser = "deploy";
           };
+          imports = defaultModules;
         };
         # My main device (Lenovo Slim 7)
         slim-lair = {
@@ -180,64 +178,50 @@
       # My old laptop serving as TV
       nixosConfigurations."tv-nixos" = nixos.lib.nixosSystem {
         inherit system;
-        modules =
-          defaultModules
-          ++ [
-            ./hosts/tv-nixos/tv-nixos.nix
-          ];
+        modules = defaultModules
+          ++ [ ./hosts/tv-nixos/tv-nixos.nix ];
         inherit specialArgs;
       };
       # My main device (Lenovo Slim 7)
       nixosConfigurations."slim-lair" = nixos.lib.nixosSystem {
         inherit system;
-        modules =
-          defaultModules
+        modules = defaultModules
           ++ [
-            ./hosts/slim-lair/slim-lair.nix
-            impermanence.nixosModules.impermanence
-            lanzaboote.nixosModules.lanzaboote
-          ];
+          ./hosts/slim-lair/slim-lair.nix
+          impermanence.nixosModules.impermanence
+          lanzaboote.nixosModules.lanzaboote
+        ];
         inherit specialArgs;
       };
       # Free Tier Oracle aarch64 VM
       nixosConfigurations."oracle-dragon" = nixos.lib.nixosSystem {
         system = "aarch64-linux";
-        modules =
-          defaultModules
-          ++ [
-            ./hosts/oracle-dragon/oracle-dragon.nix
-          ];
+        modules = defaultModules
+          ++ [ ./hosts/oracle-dragon/oracle-dragon.nix ];
         inherit specialArgs;
       };
       # My Raspberry Pi 4B
       nixosConfigurations."rpi-dragon" = nixos.lib.nixosSystem {
         system = "aarch64-linux";
-        modules =
-          defaultModules
-          ++ [
-            ./hosts/rpi-dragon/rpi-dragon.nix
-          ];
+        modules = defaultModules
+          ++ [ ./hosts/rpi-dragon/rpi-dragon.nix ];
         inherit specialArgs;
       };
       # For WSL, mostly used at work only
       nixosConfigurations."nixos-wsl" = nixos.lib.nixosSystem {
         inherit system;
-        modules =
-          defaultModules
-          ++ [
-            ./hosts/nixos-wsl/nixos-wsl.nix
-          ];
+        modules = defaultModules
+          ++ [ ./hosts/nixos-wsl/nixos-wsl.nix ];
         inherit specialArgs;
       };
       # To-do for installations
       nixosConfigurations."live-usb" = nixos.lib.nixosSystem {
         inherit system;
-        modules =
-          defaultModules
+        modules = defaultModules
           ++ [
-            ./hosts/live-usb/live-usb.nix
-            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-          ];
+          ./hosts/live-usb/live-usb.nix
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+        ];
         inherit specialArgs;
       };
     };

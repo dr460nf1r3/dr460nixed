@@ -20,7 +20,6 @@ in
         macAddress = "random";
         powersave = true;
       };
-
     };
     # Enable nftables instead of iptables
     nftables.enable = true;

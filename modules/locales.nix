@@ -28,8 +28,8 @@ in
       # Common locale settings
       i18n =
         let
-          defaultLocale = "en_US.UTF-8";
           de = "de_DE.UTF-8";
+          defaultLocale = "en_US.UTF-8";
         in
         {
           inherit defaultLocale;
@@ -50,10 +50,9 @@ in
             LC_TELEPHONE = de;
             LC_TIME = de;
           };
-
           supportedLocales = mkDefault [
-            "en_US.UTF-8/UTF-8"
             "de_DE.UTF-8/UTF-8"
+            "en_US.UTF-8/UTF-8"
           ];
         };
 

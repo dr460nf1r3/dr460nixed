@@ -104,8 +104,8 @@ in
         theme = "bgrt";
       };
       tmp = {
-        # /tmp on tmpfs, lets it live on your ram
-        useTmpfs = mkDefault true;
+        # /tmp not on tmpfs, I can't build kernels otherwise
+        useTmpfs = mkDefault false;
 
         # If not using tmpfs, which is naturally purged on reboot, we must clean
         # /tmp ourselves. /tmp should be volatile storage!

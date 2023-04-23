@@ -54,42 +54,41 @@ in
   config = {
     # run appimages with appimage-run
     boot.binfmt.registrations = genAttrs [ "appimage" "AppImage" ] (ext: {
-      recognitionType = "extension";
-      magicOrExtension = ext;
       interpreter = "/run/current-system/sw/bin/appimage-run";
+      magicOrExtension = ext;
+      recognitionType = "extension";
     });
 
     # run unpatched linux binaries with nix-ld
     programs.nix-ld = {
       enable = true;
       libraries = with pkgs; [
-        stdenv.cc.cc
-        openssl
+        SDL2
         curl
+        freetype
+        gdk-pixbuf
         glib
-        util-linux
         glibc
         icu
-        libunwind
-        libuuid
-        zlib
-        libsecret
-        # graphical
-        freetype
         libglvnd
         libnotify
-        SDL2
+        libsecret
+        libunwind
+        libuuid
+        openssl
+        stdenv.cc.cc
+        util-linux
         vulkan-loader
-        gdk-pixbuf
         xorg.libX11
+        zlib
       ];
     };
 
     # Enable the tor network
     services.tor = mkIf cfg.tor {
-      enable = true;
-      client.enable = true;
       client.dns.enable = true;
+      client.enable = true;
+      enable = true;
       torsocks.enable = true;
     };
 

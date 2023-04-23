@@ -4,10 +4,10 @@ let
 in
 {
   environment = {
-    variables = template.glEnv;
-    sessionVariables = template.sysEnv;
     etc = {
       inherit (template) pythonrc npmrc;
     };
+    sessionVariables = template.sysEnv;
+    variables = template.glEnv;
   };
 }

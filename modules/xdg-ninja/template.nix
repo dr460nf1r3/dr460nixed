@@ -1,19 +1,19 @@
 system:
 let
   # copy paste done right
-  XDG_DATA_HOME = "\$HOME/.local/share";
-  XDG_CONFIG_HOME = "\$HOME/.config";
   XDG_CACHE_HOME = "\$HOME/.cache";
+  XDG_CONFIG_HOME = "\$HOME/.config";
+  XDG_DATA_HOME = "\$HOME/.local/share";
   XDG_RUNTIME_DIR = "/run/user/\${UID}";
 in
 {
   glEnv = rec {
+    PATH = [ "\${XDG_BIN_HOME}" ];
+    XDG_BIN_HOME = "\${HOME}/.local/bin";
     XDG_CACHE_HOME = "\${HOME}/.cache";
     XDG_CONFIG_HOME = "\${HOME}/.config";
-    XDG_STATE_HOME = "\${HOME}/.local/state";
     XDG_DATA_HOME = "\${HOME}/.local/share";
-    XDG_BIN_HOME = "\${HOME}/.local/bin";
-    PATH = [ "\${XDG_BIN_HOME}" ];
+    XDG_STATE_HOME = "\${HOME}/.local/state";
   };
   sysEnv = {
     ANDROID_HOME = "${XDG_DATA_HOME}/android";
@@ -31,25 +31,25 @@ in
       if system == "nixos"
       then "/etc/pythonrc"
       else "${XDG_CONFIG_HOME}/python/pythonrc";
-    STEPPATH = "${XDG_DATA_HOME}/step";
-    WAKATIME_HOME = "${XDG_DATA_HOME}/wakatime";
-    XCOMPOSECACHE = "${XDG_CACHE_HOME}/X11/xcompose";
-    INPUTRC = "${XDG_CONFIG_HOME}/readline/inputrc";
-    GOPATH = "${XDG_DATA_HOME}/go";
     CARGO_HOME = "${XDG_DATA_HOME}/cargo";
+    GOPATH = "${XDG_DATA_HOME}/go";
+    INPUTRC = "${XDG_CONFIG_HOME}/readline/inputrc";
     NODE_REPL_HISTORY = "${XDG_DATA_HOME}/node_repl_history";
     PLATFORMIO_CORE_DIR = "${XDG_DATA_HOME}/platformio";
-    WINEPREFIX = "${XDG_DATA_HOME}/wine";
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = [
       "\${HOME}/.steam/root/compatibilitytools.d"
     ];
+    STEPPATH = "${XDG_DATA_HOME}/step";
+    WAKATIME_HOME = "${XDG_DATA_HOME}/wakatime";
+    WINEPREFIX = "${XDG_DATA_HOME}/wine";
+    XCOMPOSECACHE = "${XDG_CACHE_HOME}/X11/xcompose";
   };
 
   npmrc.text = ''
-    prefix=''${XDG_DATA_HOME}/npm
     cache=''${XDG_CACHE_HOME}/npm
-    tmp=''${XDG_RUNTIME_DIR}/npm
     init-module=''${XDG_CONFIG_HOME}/npm/config/npm-init.js
+    prefix=''${XDG_DATA_HOME}/npm
+    tmp=''${XDG_RUNTIME_DIR}/npm
   '';
 
   pythonrc.text = ''
