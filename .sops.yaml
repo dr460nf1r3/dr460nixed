@@ -11,6 +11,6 @@ creation_rules:
       - age:
           - *nico
           - *oracle-dragon
+          - *rpi-dragon
           - *slim-lair
           - *tv-nixos
-          - *rpi-dragon

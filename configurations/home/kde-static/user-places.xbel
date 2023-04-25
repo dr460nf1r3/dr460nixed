@@ -268,4 +268,15 @@
    </metadata>
   </info>
  </separator>
+ <bookmark href="kdeconnect://c9b46110e36de16a/">
+  <title>Pixel 6</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="kdeconnect"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1682260464/0</ID>
+   </metadata>
+  </info>
+ </bookmark>
 </xbel>
