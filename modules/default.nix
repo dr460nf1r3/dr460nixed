@@ -14,6 +14,7 @@
     ./performance.nix
     ./servers.nix
     ./shells.nix
+    ./theming.nix
     ./xdg-ninja
   ];
 }

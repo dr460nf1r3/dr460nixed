@@ -11,7 +11,7 @@ let
     rev = "cf6bc89";
     sha256 = "U9pfie3qABp5sTr3M9ga/jX8C807FeiXlmEZnC4ZM58=";
   };
-  base16-theme = shades-of-purple;
+  base16-theme = "shades-of-purple";
 
   cfg = config.dr460nixed.theming;
 

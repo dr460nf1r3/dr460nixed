@@ -64,16 +64,12 @@
 
   # Enable a few selected custom settings
   dr460nixed = {
-    boot.enable = true;
     chromium = true;
-    common.enable = true;
     desktops.enable = true;
     development.enable = true;
     gaming.enable = true;
-    locales.enable = true;
     performance-tweaks.enable = true;
     school = true;
-    shells.enable = true;
     yubikey = true;
   };
 
