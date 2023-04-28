@@ -1,9 +1,14 @@
 name: "Build x86"
 
 on:
-  pull_request:
+  pull_request_target:
+    types: [labeled]
   push:
   workflow_call:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
   build-cachix-x86:
@@ -13,7 +18,7 @@ jobs:
 
       - uses: cachix/install-nix-action@v20
         with:
-          extra_nix_config: system-features = big-parallel kvm
+          extra_nix_config: "system-features = big-parallel kvm\naccept-flake-config = true"
           nix_path: nixpkgs=channel:nixos-unstable
 
       - uses: cachix/cachix-action@v12

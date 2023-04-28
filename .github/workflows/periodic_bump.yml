@@ -1,44 +1,37 @@
-name: Periodic version bump
+name: Periodic bump
 
 on:
+  # Trigger this workflow every day at midnight
   schedule:
-    - cron: "00 00 * * 1"
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+concurrency:
+  group: nixpkgs-bump
+
 jobs:
-  version-bump:
-    name: Bump versions
+  bump:
     runs-on: ubuntu-latest
-    outputs:
-      sha: ${{ steps.create-pr.pull-request-head-sha }}
-
     steps:
+      - name: Install Nix
+        uses: cachix/install-nix-action@v20
+        with:
+          extra_nix_config: "accept-flake-config = true"
       - uses: actions/checkout@v3
-
-      - uses: cachix/install-nix-action@v13
-        with:
-          nix_path: nixpkgs=channel:nixpkgs-unstable
-          extra_nix_config: |
-            experimental-features = nix-command flakes
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
-      - name: Bump flake versions
-        run: cd nix; GC_DONT_GC=1 nix flake update
-
-      - name: Create pull request
-        uses: peter-evans/create-pull-request@v3
-        id: create-pr
-        with:
-          title: Periodic flake bump ${{ github.run_number }}
-          branch: auto/flake-bump-${{ github.run_number }}
-          commit-message: |
-            nix: Bump flake versions (run ${{ github.run_number }})
-
-            See https://github.com/dr460nf1r3/device-configurations/actions/workflows/periodic_bump.yml for more details.
-          delete-branch: true
-
-  trigger-builds:
-    name: "Push to Cachix"
-    needs: version-bump
-    uses: dr460nf1r3/device-configurations/.github/workflows/cachix.yml@main
-    with:
-      sha: ${{ needs.version-bump.outputs.sha }}
+      - name: Update nixpkgs flake
+        run: nix flake update || exit 1; git diff --exit-code flake.lock && exit 1 || exit 0
+        continue-on-error: true
+        id: bump
+      - name: Commit nixpkgs bump
+        if: steps.bump.outcome == 'success'
+        run: |
+          set -e
+          git config --global user.name 'Github Actions'
+          git config --global user.email 'actions@chaotic.cx'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git add flake.lock
+          git commit -m "nixpkgs: bump to $(date +%Y%m%d)"
+          git push
