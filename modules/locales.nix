@@ -6,6 +6,10 @@
 with lib;
 let
   cfg = config.dr460nixed.locales;
+  cfgDesktops = config.dr460nixed.desktops;
+  de = "de_DE.UTF-8";
+  defaultLocale = "en_US.UTF-8";
+  terminus-variant = "116n";
 in
 {
   options.dr460nixed.locales = {
@@ -17,60 +21,54 @@ in
           Whether the operating system be having a default set of locales set.
         '';
       };
+  };
 
-    config = mkIf cfg.enable {
-      # Timezone
-      time = {
-        timeZone = "Europe/Berlin";
-        hardwareClockInLocalTime = true;
+  config = mkIf cfg.enable {
+    # Timezone
+    time = {
+      hardwareClockInLocalTime = true;
+      timeZone = "Europe/Berlin";
+    };
+
+    # Common locale settings
+    i18n = {
+      inherit defaultLocale;
+
+      extraLocaleSettings = {
+        LANG = defaultLocale;
+        LC_COLLATE = defaultLocale;
+        LC_CTYPE = defaultLocale;
+        LC_MESSAGES = defaultLocale;
+
+        LC_ADDRESS = de;
+        LC_IDENTIFICATION = de;
+        LC_MEASUREMENT = de;
+        LC_MONETARY = de;
+        LC_NAME = de;
+        LC_NUMERIC = de;
+        LC_PAPER = de;
+        LC_TELEPHONE = de;
+        LC_TIME = de;
       };
 
-      # Common locale settings
-      i18n =
-        let
-          de = "de_DE.UTF-8";
-          defaultLocale = "en_US.UTF-8";
-        in
-        {
-          inherit defaultLocale;
+      supportedLocales = [
+        "de_DE.UTF-8/UTF-8"
+        "en_GB.UTF-8/UTF-8"
+        "en_US.UTF-8/UTF-8"
+      ];
+    };
 
-          extraLocaleSettings = {
-            LANG = defaultLocale;
-            LC_COLLATE = defaultLocale;
-            LC_CTYPE = defaultLocale;
-            LC_MESSAGES = defaultLocale;
+    # Console font
+    console = {
+      font = "${pkgs.terminus_font}/share/consolefonts/ter-${terminus-variant}.psf.gz";
+      keyMap = "de";
+    };
 
-            LC_ADDRESS = de;
-            LC_IDENTIFICATION = de;
-            LC_MEASUREMENT = de;
-            LC_MONETARY = de;
-            LC_NAME = de;
-            LC_NUMERIC = de;
-            LC_PAPER = de;
-            LC_TELEPHONE = de;
-            LC_TIME = de;
-          };
-          supportedLocales = mkDefault [
-            "de_DE.UTF-8/UTF-8"
-            "en_US.UTF-8/UTF-8"
-          ];
-        };
-
-      # Console font
-      console =
-        let
-          variant = "116n";
-        in
-        {
-          font = "${pkgs.terminus_font}/share/consolefonts/ter-${variant}.psf.gz";
-          keyMap = "de";
-        };
-
-      # X11 keyboard layout
-      services.xserver = mkIf config.dr460nixed.desktops.enable {
-        layout = "de";
-        xkbVariant = "";
-      };
+    # X11 keyboard layout
+    services.xserver = mkIf cfgDesktops.enable {
+      layout = "de";
+      xkbVariant = "";
     };
   };
 }
+

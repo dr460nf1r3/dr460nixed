@@ -58,7 +58,8 @@
     driversi686Linux.amdvlk
   ];
 
-  # Bleeding edge Mesa
+  # Bleeding edge Mesa - current broken on my flake, 
+  # investiations are going on
   # chaotic.mesa-git.enable = true;
 
   # Enable a few selected custom settings
