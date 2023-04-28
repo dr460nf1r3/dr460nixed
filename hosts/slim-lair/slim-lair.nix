@@ -3,14 +3,6 @@
 , pkgs
 , ...
 }:
-let
-  # For managing my battery levels
-  ipman-source = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/Lenovsky/ipman/master/ipman";
-    sha256 = "14l9g7nwnl7x1wlacaswz854k7qw72jyb86fzqs1jayyza36hwqy";
-  };
-  ipman = pkgs.writeScriptBin "ipman" "${ipman-source}";
-in
 {
   # Individual settings
   imports = [
@@ -67,7 +59,7 @@ in
   ];
 
   # Bleeding edge Mesa
-  chaotic.mesa-git.enable = true;
+  # chaotic.mesa-git.enable = true;
 
   # Enable a few selected custom settings
   dr460nixed = {
@@ -77,6 +69,7 @@ in
     desktops.enable = true;
     development.enable = true;
     gaming.enable = true;
+    locales.enable = true;
     performance-tweaks.enable = true;
     school = true;
     shells.enable = true;
@@ -111,7 +104,7 @@ in
   };
 
   # Enable the touchpad & secure boot, as well as add the ipman script
-  environment.systemPackages = with pkgs; [ libinput sbctl zenmonitor ] ++ [ ipman ];
+  environment.systemPackages = with pkgs; [ libinput sbctl zenmonitor ];
 
   # Neeeded for lzbt
   boot.bootspec.enable = true;

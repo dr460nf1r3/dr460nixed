@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Chaotic Nyx!
-    chaotic-nyx.url = "github:chaotic-cx/nyx/main";
+    chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # Home configuration management
     home-manager = {
@@ -69,19 +69,12 @@
       specialArgs = {
         sources = {
           chaotic-toolbox = inputs.src-chaotic-toolbox;
-          inherit (inputs) mesa-git-src;
-          inherit (inputs) nixpkgs;
           repoctl = inputs.src-repoctl;
         };
         keys = { nico = inputs.keys_nico; };
       };
       overlays = _: {
-        nixpkgs.overlays = [
-          (_final: prev: {
-            unstable = nixpkgs.legacyPackages.${prev.system};
-          })
-          nur.overlay
-        ];
+        nixpkgs.overlays = [ nur.overlay ];
       };
       defaultModules = [
         ./modules/default.nix

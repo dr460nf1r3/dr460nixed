@@ -105,11 +105,11 @@ in
   config = mkIf cfg.enable {
     users.groups = { "chaotic_op" = { }; };
     environment.systemPackages = [
+      pkgs.arch-install-scripts
       pkgs.git
       pkgs.gnupg
+      pkgs.pacman
       pkgs.screen
-      pkgs.unstable.arch-install-scripts
-      pkgs.unstable.pacman
       repoctl
       telegram-send
       toolbox
@@ -182,7 +182,7 @@ in
           wantedBy = [ "multi-user.target" ];
           after = [ "network-online.target" ];
           description = "Chaotic setup";
-          path = [ pkgs.git pkgs.pacman pkgs.gnupg ];
+          path = with pkgs; [ git gnupg pacman ];
           serviceConfig = {
             Type = "oneshot";
             ExecStart = pkgs.writeShellScript "execstart" ''
