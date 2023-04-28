@@ -6,61 +6,18 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Chaotic Nyx!
-    chaotic-nyx.url = "github:chaotic-cx/nyx/main";
-
-    # Home configuration management
-    home-manager = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/home-manager/master";
-    };
-
-    # Reset rootfs every reboot vis ZFS snapshots
-    impermanence.url = "github:nix-community/impermanence";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # My SSH keys
     keys_nico = {
       flake = false;
       url = "https://github.com/dr460nf1r3.keys";
     };
-
-    # Secure boot support
-    lanzaboote.url = "github:nix-community/lanzaboote";
-
-    # Prismlauncher
-    nix-minecraft = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:misterio77/nix-minecraft";
-    };
-
-    # Nix user repository
-    nur.url = "github:nix-community/NUR";
-
-    # Secrets management
-    sops-nix.url = "github:Mic92/sops-nix";
-
-    # The Chaotic toolbox
-    src-chaotic-toolbox = {
-      flake = false;
-      url = "github:chaotic-aur/toolbox";
-    };
-    src-repoctl = {
-      flake = false;
-      url = "github:cassava/repoctl";
-    };
-
-    # Automated system themes
-    stylix.url = "github:danth/stylix";
   };
 
   outputs =
-    { chaotic-nyx
-    , home-manager
-    , impermanence
-    , lanzaboote
+    { chaotic
     , nixpkgs
-    , nur
-    , sops-nix
-    , stylix
     , ...
     } @ inputs:
     let
@@ -69,57 +26,22 @@
       specialArgs = {
         sources = {
           chaotic-toolbox = inputs.src-chaotic-toolbox;
-          inherit (inputs) mesa-git-src;
-          inherit (inputs) nixpkgs;
           repoctl = inputs.src-repoctl;
         };
         keys = { nico = inputs.keys_nico; };
       };
-      overlays = _: {
-        nixpkgs.overlays = [
-          (_final: prev: {
-            unstable = nixpkgs.legacyPackages.${prev.system};
-          })
-          nur.overlay
-        ];
-      };
+      #overlays = _: { nixpkgs.overlays = [ nur.overlay ]; };
       defaultModules = [
-        ./modules/default.nix
-        chaotic-nyx.nixosModules.default
-        home-manager.nixosModules.home-manager
-        nur.nixosModules.nur
-        overlays
-        sops-nix.nixosModules.sops
-        stylix.nixosModules.stylix
+        #./modules/default.nix
+        chaotic.nixosModules.default
+        #nur.nixosModules.nur
+        #overlays
+        #sops-nix.nixosModules.sops
+        #stylix.nixosModules.stylix
       ];
-      pkgs = import nixpkgs {
-        inherit system;
-        config = { tarball-ttl = 0; };
-      };
+
     in
     {
-      # The default checks to run on Nix files
-      checks.${system} = import ./lib/checks { inherit pkgs; };
-
-      # The devshell exposed by .envrc
-      devShells.${system}.default = pkgs.mkShell {
-        name = "dr460nixed";
-        packages = with pkgs; [
-          age
-          colmena
-          deadnix
-          git
-          gnupg
-          nix
-          nixpkgs-fmt
-          sops
-          statix
-        ];
-      };
-
-      # Defines a formatter for "nix fmt"
-      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
-
       # Colmena profiles for easy deployment
       colmena = {
         meta = {
@@ -143,8 +65,6 @@
           };
           imports = [
             ./hosts/slim-lair/slim-lair.nix
-            impermanence.nixosModules.impermanence
-            lanzaboote.nixosModules.lanzaboote
           ];
         };
         # My old laptop serving as TV
@@ -188,8 +108,7 @@
         modules = defaultModules
           ++ [
           ./hosts/slim-lair/slim-lair.nix
-          impermanence.nixosModules.impermanence
-          lanzaboote.nixosModules.lanzaboote
+          #impermanence.nixosModules.impermanence
         ];
         inherit specialArgs;
       };

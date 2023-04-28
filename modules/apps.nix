@@ -29,7 +29,7 @@ in
         micro
         nettools
         nmap
-        nur.repos.federicoschonborn.fastfetch
+        #nur.repos.federicoschonborn.fastfetch
         python3
         sops
         tldr
@@ -66,7 +66,7 @@ in
       movit
       nextcloud-client
       nheko
-      obs-studio-wrapped
+      obs-studio
       qbittorrent
       spotify
       tdesktop
@@ -89,9 +89,9 @@ in
       nixpkgs-lint
       nixpkgs-review
       nodejs
-      nur.repos.yes.archlinux.asp
-      nur.repos.yes.archlinux.devtools
-      nur.repos.yes.archlinux.paru
+      #nur.repos.yes.archlinux.asp
+      #nur.repos.yes.archlinux.devtools
+      #nur.repos.yes.archlinux.paru
       ruff
       shellcheck
       shfmt

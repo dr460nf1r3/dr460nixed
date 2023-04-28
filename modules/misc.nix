@@ -52,14 +52,14 @@ in
   };
 
   config = {
-    # run appimages with appimage-run
+    # Run appimages with appimage-run
     boot.binfmt.registrations = genAttrs [ "appimage" "AppImage" ] (ext: {
       interpreter = "/run/current-system/sw/bin/appimage-run";
       magicOrExtension = ext;
       recognitionType = "extension";
     });
 
-    # run unpatched linux binaries with nix-ld
+    # Run unpatched linux binaries with nix-ld
     programs.nix-ld = {
       enable = true;
       libraries = with pkgs; [

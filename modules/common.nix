@@ -181,7 +181,7 @@ in
 
           # Enable new nix command, flakes and system features
           # and also "unintended" recursion as well as content addresssed nix
-          extra-experimental-features = [ "flakes" "nix-command" "recursive-nix" "ca-derivations" ];
+          extra-experimental-features = [ "flakes" "nix-command" "recursive-nix" ];
           system-features = [ "big-parallel" "kvm" "recursive-nix" ];
 
           # Continue building derivations if one fails

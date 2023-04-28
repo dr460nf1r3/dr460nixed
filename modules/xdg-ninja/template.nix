@@ -36,9 +36,6 @@ in
     INPUTRC = "${XDG_CONFIG_HOME}/readline/inputrc";
     NODE_REPL_HISTORY = "${XDG_DATA_HOME}/node_repl_history";
     PLATFORMIO_CORE_DIR = "${XDG_DATA_HOME}/platformio";
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = [
-      "\${HOME}/.steam/root/compatibilitytools.d"
-    ];
     STEPPATH = "${XDG_DATA_HOME}/step";
     WAKATIME_HOME = "${XDG_DATA_HOME}/wakatime";
     WINEPREFIX = "${XDG_DATA_HOME}/wine";

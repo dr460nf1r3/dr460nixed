@@ -11,12 +11,12 @@ in
   users.mutableUsers = false;
 
   # This is needed for early set up of user accounts
-  sops.secrets."passwords/nico" = {
-    neededForUsers = true;
-  };
-  sops.secrets."passwords/root" = {
-    neededForUsers = true;
-  };
+  #sops.secrets."passwords/nico" = {
+  #  neededForUsers = true;
+  #};
+  #sops.secrets."passwords/root" = {
+  #  neededForUsers = true;
+  #};
 
   # This is for easy configuration roll-out
   users.users.deploy = {
@@ -32,7 +32,7 @@ in
   };
   # Lock root password
   users.users.root = {
-    passwordFile = config.sops.secrets."passwords/root".path;
+    #  passwordFile = config.sops.secrets."passwords/root".path;
   };
   # My user
   users.users.nico = {
@@ -62,21 +62,11 @@ in
     home = "/home/nico";
     isNormalUser = true;
     openssh.authorizedKeys.keyFiles = [ keys.nico ];
-    passwordFile = config.sops.secrets."passwords/nico".path;
+    #passwordFile = config.sops.secrets."passwords/nico".path;
     uid = 1000;
   };
 
-  # Load my home-manager configurations
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users."nico" = import ../home/common.nix;
-  };
 
-  # Allow pushing to Cachix
-  sops.secrets."api_keys/cachix" = {
-    mode = "0600";
-    owner = config.users.users.nico.name;
-    path = "/home/nico/.config/cachix/cachix.dhall";
-  };
+
+
 }
