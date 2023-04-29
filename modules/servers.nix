@@ -34,6 +34,9 @@ in
       fastfetch -l nixos
     '';
 
+    # Automatic server upgrades
+    dr460nixed.auto-upgrade = true;
+
     # Enable the Netdata daemon
     services.netdata.enable = mkIf cfg.monitoring true;
     services.netdata.config = {

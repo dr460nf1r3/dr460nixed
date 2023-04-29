@@ -9,20 +9,12 @@ let
 in
 {
   options.dr460nixed = {
-    live-cd = mkOption
+    auto-upgrade = mkOption
       {
         default = false;
         type = types.bool;
         description = mdDoc ''
-          Whether this is live CD.
-        '';
-      };
-    yubikey = mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this device uses a Yubikey.
+          Whether this device automatically upgrades.
         '';
       };
     chromium = mkOption
@@ -31,6 +23,14 @@ in
         type = types.bool;
         description = mdDoc ''
           Whether this device uses should use Chromium.
+        '';
+      };
+    live-cd = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether this is live CD.
         '';
       };
     school = mkOption
@@ -47,6 +47,14 @@ in
         type = types.bool;
         description = mdDoc ''
           Whether this device should be using the tor network.
+        '';
+      };
+    yubikey = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether this device uses a Yubikey.
         '';
       };
   };
@@ -82,6 +90,26 @@ in
         xorg.libX11
         zlib
       ];
+    };
+
+    # Automatic system upgrades via git and flakes
+    system.autoUpgrade = mkIf cfg.auto-upgrade {
+      allowReboot = true;
+      dates = "04:00";
+      enable = true;
+      flags = [
+        "--option"
+        "extra-binary-caches"
+        "https://colmena.cachix.org"
+        "https://dr460nf1r3.cachix.org"
+        "https://garuda-linux.cachix.org"
+        "https://nix-community.cachix.org"
+        "https://nixpkgs-unfree.cachix.org"
+        "https://nyx.chaotic.cx"
+      ];
+      flake = "github:dr460nf1r3/dr460nixed";
+      randomizedDelaySec = "1h";
+      rebootWindow = { lower = "00:00"; upper = "06:00"; };
     };
 
     # Enable the tor network
@@ -131,5 +159,8 @@ in
 
     # SUID Sandbox
     security.chromiumSuidSandbox.enable = mkIf cfg.chromium true;
+
+
+
   };
 }
