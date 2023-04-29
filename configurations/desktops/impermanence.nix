@@ -114,6 +114,7 @@ in
         ".mozilla"
         ".thunderbird"
         ".tldrc"
+        ".var"
         ".yubico"
         "Documents"
         "Downloads"
