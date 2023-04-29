@@ -98,9 +98,6 @@ in
       };
     };
 
-    # Open apps using the Portal
-    xdg.portal.xdgOpenUsePortal = true;
-
     # KDE Connect to connect my phone & Partition Manager
     programs = {
       kdeconnect.enable = true;

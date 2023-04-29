@@ -68,6 +68,7 @@ in
       nheko
       obs-studio-wrapped
       qbittorrent
+      rustdesk
       spotify
       tdesktop
       tor-browser-bundle-bin
