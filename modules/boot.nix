@@ -17,6 +17,7 @@ in
         '';
       };
   };
+
   config = mkIf cfg.enable {
     boot = {
       consoleLogLevel = 0;

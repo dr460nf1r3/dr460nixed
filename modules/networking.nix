@@ -45,7 +45,7 @@ in
     permitCertUid = "root";
   };
 
-  # OpenSSH for remote accessing via Tailscale
+  # OpenSSH for remote accessing, hardened via ssh-audit suggestions
   services.openssh = {
     enable = true;
     startWhenNeeded = true;
@@ -53,10 +53,6 @@ in
 
   # Use the performant openssh (currently marked insecure)
   # programs.ssh.package = pkgs.openssh_hpn;
-
-  # Better for mobile device SSH
-  programs.mosh.enable = true;
-  environment.variables = { MOSH_SERVER_NETWORK_TMOUT = "604800"; };
 
   # Lightweight bandwidth usage tracking
   services.vnstat.enable = true;

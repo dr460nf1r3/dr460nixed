@@ -7,12 +7,18 @@
   imports = [
     ../../configurations/common.nix
     ./hardware-configuration.nix
+    "${builtins.fetchGit {
+      url = "https://github.com/NixOS/nixos-hardware.git";
+      rev = "f38f9a4c9b2b6f89a5778465e0afd166a8300680";
+    }}/lenovo/thinkpad/t470s"
+    ./hardware-configuration.nix
   ];
 
   # Bootloader
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
     kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
     loader = {
       systemd-boot = {
         consoleMode = "max";
@@ -30,31 +36,8 @@
   # Hostname
   networking.hostName = "tv-nixos";
 
-  # Correct configurations to use on this device, taken from the hardware repo
-  boot = {
-    extraModprobeConfig = ''
-      options bbswitch use_acpi_to_detect_card_state=1
-      options thinkpad_acpi force_load=1 fan_control=1
-    '';
-    kernelModules = [ "tpm-rng" "i915" ];
-  };
-  environment.variables = {
-    VDPAU_DRIVER =
-      lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
-  };
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.opengl.extraPackages = with pkgs; [
-    intel-media-driver
-    libvdpau-va-gl
-    vaapiIntel
-  ];
-
   # SSD
   services.fstrim.enable = true;
-
-  # This is not supported
-  services.hardware.bolt.enable = false;
 
   # Enable a few selected custom settings
   dr460nixed = {
