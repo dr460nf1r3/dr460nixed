@@ -5,6 +5,7 @@ networks:
     external: false
 
 services:
+  # RustDesk server related containers - Tailscale net only
   hbbs:
     image: rustdesk/rustdesk-server:latest-arm64v8
     container_name: rustdesk_hbbs
@@ -40,3 +41,26 @@ services:
     networks:
       - rustdesk-net
     restart: unless-stopped
+
+  # Kasm Remote Desktop
+  kasm:
+    image: lscr.io/linuxserver/kasm:latest
+    container_name: kasm
+    privileged: true
+    environment:
+      - KASM_PORT=8443
+    volumes:
+      - ./kasm/data:/opt
+      - ./kasm/profiles:/profiles
+    ports:
+      - 3001:3000
+      - 8443:8443
+    restart: unless-stopped
+
+  # Automatic container updates
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: hhbr hhbs kasm watchtower
