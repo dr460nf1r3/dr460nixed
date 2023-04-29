@@ -51,15 +51,15 @@ in
     # Closes I found to Sweet as of now
     stylix.override = {
       scheme = "Catpuccin Mocha";
-      base00 = "24273a";
-      base01 = "1e2030";
+      base00 = "222235";
+      base01 = "181b28";
       base02 = "363a4f";
       base03 = "494d64";
       base04 = "5b6078";
       base05 = "cad3f5";
       base06 = "f4dbd6";
       base07 = "b7bdf8";
-      base08 = "ed8796";
+      base08 = "ed254e";
       base09 = "f5a97f";
       base0A = "eed49f";
       base0B = "a6da95";
