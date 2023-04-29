@@ -1,3 +1,14 @@
+# To-do: eventually replace static files with Nix expressions, like
+# desktopItems = [ (makeDesktopItem {
+#   name = "rustdesk";
+#   exec = meta.mainProgram;
+#   icon = "rustdesk";
+#   desktopName = "RustDesk";
+#   comment = meta.description;
+#   genericName = "Remote Desktop";
+#   categories = ["Network"];
+# }) ];
+
 { pkgs, ... }:
 let
   appdir = ".local/share/applications";

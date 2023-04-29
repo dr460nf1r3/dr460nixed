@@ -40,6 +40,9 @@ in
     # Allow GTK applications to disable an appmenu on KDE
     chaotic.appmenu-gtk3-module.enable = true;
 
+    # Currently needed to obtain nightly Rustdesk
+    services.flatpak.enable = true;
+
     # Remove a few applications that aren't needed
     environment.plasma5.excludePackages = with pkgs; with libsForQt5; [
       oxygen
@@ -89,7 +92,7 @@ in
           sansSerif = [ "Fira" "Noto Fonts Emoji" ];
           serif = [ "Fira" "Noto Fonts Emoji" ];
         };
-        # this fixes emoji stuff
+        # This fixes emoji stuff
         enable = true;
       };
       fontDir = {

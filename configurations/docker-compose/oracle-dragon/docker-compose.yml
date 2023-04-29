@@ -16,7 +16,7 @@ services:
     command: hbbs
     environment:
       ENCRYPTED_ONLY: 1
-      RELAY_SERVERS: "rd.dr460nf1r3.org:21117"
+      RELAY_SERVERS: "100.86.102.115:21117"
     volumes:
       - ./rustdesk:/root
     networks:
@@ -33,7 +33,7 @@ services:
       - 21119:21119
     environment:
       ENCRYPTED_ONLY: 1
-      RELAY_SERVERS: "rd.dr460nf1r3.org:21117"
+      RELAY_SERVERS: "100.86.102.115:21117"
     command: hbbr
     volumes:
       - ./rustdesk:/root
