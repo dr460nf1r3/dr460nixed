@@ -53,15 +53,18 @@ in
     '';
     "${configDir}/autostart/com.rustdesk.RustDesk.desktop".text = ''    
       [Desktop Entry]
+      Name=RustDesk
       Exec=flatpak run --branch=master --arch=x86_64 --command=rustdesk --file-forwarding com.rustdesk.RustDesk @@u %u @@
       Icon=com.rustdesk.RustDesk
-      Name=RustDesk Nightly
-      NoDisplay=false
-      StartupNotify=true
       Terminal=false
       Type=Application
-      X-Desktop-File-Install-Version=0.23
+      StartupNotify=true
+      Actions=new-window;
       X-Flatpak=com.rustdesk.RustDesk
+
+      [Desktop Action new-window]
+      Name=Open a New Window
+      Exec=flatpak run --branch=master --arch=x86_64 --command=rustdesk --file-forwarding com.rustdesk.RustDesk @@u %u @@
     '';
     "${configDir}/baloofilerc".text = ''
       [General]
