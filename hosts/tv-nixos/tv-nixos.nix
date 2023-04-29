@@ -11,11 +11,13 @@
 
   # Bootloader
   boot = {
+    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     loader = {
       systemd-boot = {
-        enable = true;
         consoleMode = "max";
         editor = false;
+        enable = true;
       };
       efi = {
         canTouchEfiVariables = true;
@@ -23,8 +25,6 @@
       };
     };
     supportedFilesystems = [ "btrfs" ];
-    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
   };
 
   # Hostname
@@ -58,11 +58,9 @@
 
   # Enable a few selected custom settings
   dr460nixed = {
-    boot.enable = true;
-    common.enable = true;
+    auto-upgrade = true;
     desktops.enable = true;
     performance-tweaks.enable = true;
-    shells.enable = true;
   };
 
   # Enable the touchpad
@@ -73,18 +71,6 @@
 
   # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
   systemd.services.NetworkManager-wait-online.enable = false;
-
-  # A few secrets
-  sops.secrets."gsconnect/tv-nixos/private" = {
-    path = "/home/nico/.config/gsconnect/private.pem";
-    mode = "0600";
-    owner = config.users.users.nico.name;
-  };
-  sops.secrets."gsconnect/tv-nixos/certificate" = {
-    path = "/home/nico/.config/gsconnect/certificate.pem";
-    mode = "0600";
-    owner = config.users.users.nico.name;
-  };
 
   # NixOS stuff
   system.stateVersion = "22.11";

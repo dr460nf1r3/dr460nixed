@@ -36,7 +36,7 @@ in
         default = true;
         type = types.bool;
         description = mdDoc ''
-          Whether the operating system be having a default set of locales set.
+          Enables customizing the system colors & fonts via Stylix.
         '';
       };
   };
