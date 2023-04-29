@@ -193,6 +193,7 @@
   # Supply non-RDNS found hostnames via /etc/hosts
   networking.hosts = {
     "100.116.167.11" = [ "dragon-pixel" ];
+    "100.120.171.12" = [ "tv-nixos" ];
     "100.85.210.126" = [ "rpi-dragon" ];
     "100.86.102.115" = [ "oracle-dragon" ];
     "100.96.236.126" = [ "slim-lair" ];
@@ -200,5 +201,6 @@
     "fd7a:115c:a1e0:ab12:4843:cd96:6256:6673" = [ "rpi-dragon" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:6260:ec7e" = [ "slim-lair" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:6274:a70b" = [ "dragon-pixel" ];
+    "fd7a:115c:a1e0:ab12:4843:cd96:6278:ab0c" = [ "tv-nixos"];
   };
 }
