@@ -1,16 +1,13 @@
-name: Periodic bump
+name: Periodic flake bump
 
 on:
-  # Trigger this workflow every day at midnight
+  # Trigger this workflow every 6 hours
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0,6,12,18 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
-
-concurrency:
-  group: nixpkgs-bump
 
 jobs:
   bump:
@@ -30,8 +27,8 @@ jobs:
         run: |
           set -e
           git config --global user.name 'Github Actions'
-          git config --global user.email 'actions@chaotic.cx'
+          git config --global user.email 'actions@dr460nf1r3.org'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git add flake.lock
-          git commit -m "nixpkgs: bump to $(date +%Y%m%d)"
+          git commit -m "❄️ chore(flake.lock): bump inputs to $(date +%Y%m%d)"
           git push

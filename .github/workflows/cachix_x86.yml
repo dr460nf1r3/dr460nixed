@@ -4,7 +4,12 @@ on:
   pull_request_target:
     types: [labeled]
   push:
-  workflow_call:
+    branches:
+      - main
+  workflow_run:
+    workflows: ["Periodic flake bump"]
+    types:
+      - completed
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
