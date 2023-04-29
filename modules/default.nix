@@ -5,6 +5,7 @@
     ./chaotic/chaotic.nix
     ./common.nix
     ./desktops.nix
+    ./docker-compose-runner.nix
     ./development.nix
     ./gaming.nix
     ./hardening.nix
