@@ -77,7 +77,6 @@ in
       vulkan-tools
       xdg-ninja
     ]) ++ optionals cfg.development.enable (with pkgs; [
-      androidStudioPackages.canary
       ansible
       bind.dnsutils
       gitkraken
