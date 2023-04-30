@@ -18,11 +18,10 @@
 
   # Kernel defaults
   boot = {
-    kernelPackages = pkgs.linuxPackages_rpi4;
-    tmp.useTmpfs = true;
     initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
     # Fix https://github.com/NixOS/nixpkgs/pull/207969
     initrd.systemd.enable = lib.mkForce false;
+    kernelPackages = pkgs.linuxPackages_rpi4;
     # ttyAMA0 is the serial console broken out to the GPIO
     kernelParams = [
       "8250.nr_uarts=1"
@@ -30,6 +29,7 @@
       "console=tty1"
       "console=ttyAMA0,115200"
     ];
+    tmp.useTmpfs = true;
   };
 
   # Enable hardware acceleration
@@ -48,9 +48,9 @@
   nix = {
     # Free up to 1GiB whenever there is less than 100MiB left & allow remote-building
     extraOptions = lib.mkForce ''
-      min-free = ${toString (100 * 1024 * 1024)}
-      max-free = ${toString (1024 * 1024 * 1024)}
       builders-use-substitutes = true
+      max-free = ${toString (1024 * 1024 * 1024)}
+      min-free = ${toString (100 * 1024 * 1024)}
     '';
   };
 

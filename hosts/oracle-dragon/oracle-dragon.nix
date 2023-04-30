@@ -105,10 +105,16 @@
   };
 
   # Needed for KASM workspaces
-  virtualisation.docker.enable = true;
-  virtualisation.docker.autoPrune.enable = true;
-  virtualisation.docker.autoPrune.dates = "2d";
-  virtualisation.oci-containers.backend = "docker";
+  virtualisation = {
+    docker = {
+      autoPrune = {
+        dates = "2d";
+        enable = true;
+      };
+      enable = true;
+    };
+    oci-containers.backend = "docker";
+  };
 
   # Slows down write operations considerably
   nix.settings.auto-optimise-store = lib.mkForce false;
@@ -135,12 +141,6 @@
     mode = "0600";
     owner = config.users.users.cloudflared.name;
     path = "/run/secrets/cloudflared/oracle-dragon/cred";
-  };
-
-  # Need to explicitly open our web server ports
-  networking.firewall = {
-    allowedTCPPorts = [ 8443 3001 ];
-    allowedUDPPorts = [ 8443 3001 ];
   };
 
   # This is needed as the packages are marked unsupported
