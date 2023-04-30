@@ -5,7 +5,7 @@ let
 in
 {
   options.dr460nixed.docker-compose-runner = mkOption {
-    type = types.attrsOf (types.submodule ({
+    type = types.attrsOf (types.submodule {
       options = {
         source = mkOption {
           default = null;
@@ -18,7 +18,7 @@ in
           type = types.nullOr types.path;
         };
       };
-    }));
+    });
     default = { };
   };
 
@@ -36,7 +36,7 @@ in
             '';
             name = "docker-compose-runner-" + name;
             src = value.source;
-            system = pkgs.hostPlatform.system;
+            inherit (pkgs.hostPlatform) system;
           };
           statepath = "/var/docker-compose-runner/${name}";
         in

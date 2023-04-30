@@ -201,6 +201,6 @@
     "fd7a:115c:a1e0:ab12:4843:cd96:6256:6673" = [ "rpi-dragon" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:6260:ec7e" = [ "slim-lair" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:6274:a70b" = [ "dragon-pixel" ];
-    "fd7a:115c:a1e0:ab12:4843:cd96:6278:ab0c" = [ "tv-nixos"];
+    "fd7a:115c:a1e0:ab12:4843:cd96:6278:ab0c" = [ "tv-nixos" ];
   };
 }

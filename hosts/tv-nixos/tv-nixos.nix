@@ -23,7 +23,7 @@
       efi = {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot/efi";
-      };      
+      };
       systemd-boot = {
         consoleMode = "max";
         editor = false;
