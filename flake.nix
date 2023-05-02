@@ -17,6 +17,9 @@
     # Reset rootfs every reboot vis ZFS snapshots
     impermanence.url = "github:nix-community/impermanence";
 
+    # Archlinux tools
+    archix.url = "github:SamLukeYes/archix";
+
     # My SSH keys
     keys_nico = {
       flake = false;
@@ -53,7 +56,8 @@
   };
 
   outputs =
-    { chaotic-nyx
+    { archix
+    , chaotic-nyx
     , home-manager
     , impermanence
     , lanzaboote
@@ -78,6 +82,7 @@
       };
       defaultModules = [
         ./modules/default.nix
+        archix.nixosModules.default
         chaotic-nyx.nixosModules.default
         home-manager.nixosModules.home-manager
         nur.nixosModules.nur

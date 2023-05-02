@@ -68,17 +68,6 @@ in
       };
     };
 
-    # Needed for makepkg to work
-    environment.etc = {
-      "makepkg.conf" = {
-        mode = "0644";
-        source = builtins.fetchurl {
-          url = "https://gitlab.com/garuda-linux/tools/garuda-tools/-/raw/master/data/makepkg.conf";
-          sha256 = "1irycfzkx6mfyrq8av3jmxsm139xgw93yn57vz8fl0lz3lsbjvnl";
-        };
-      };
-    };
-
     # This is a containerized version of Garuda Linux from nspawn.org
     systemd.nspawn."garuda-dev" = {
       enable = true;

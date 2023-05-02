@@ -89,9 +89,6 @@ in
       nixpkgs-lint
       nixpkgs-review
       nodejs
-      nur.repos.yes.archlinux.asp
-      nur.repos.yes.archlinux.devtools
-      nur.repos.yes.archlinux.paru
       ruff
       shellcheck
       shfmt

@@ -115,7 +115,7 @@ in
       toolbox
     ];
     environment.etc = {
-      "pacman.conf".text = ''
+      "pacman.conf".text = lib.mkForce ''
         [options]
         Architecture = x86_64
         SigLevel = Never
