@@ -24,8 +24,8 @@
 		// All devices tag:other can access devices with the same tag
 		{
 			"action": "accept",
-			"src":    ["tag:other"],
-			"dst":    ["tag:other:*"],
+			"src":    ["tag:others"],
+			"dst":    ["tag:others:*"],
 		},	
 		// All invited members can access devices tagged tag:others
 		{
