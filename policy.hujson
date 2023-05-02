@@ -3,20 +3,38 @@
 	// Define access control lists for users, groups, autogroups, tags,
 	// Tailscale IP addresses, and subnet ranges
 	"acls": [
-		// all members can access their own devices
+		// All members can access their own devices
 		{
 			"action": "accept",
 			"src":    ["autogroup:members"],
 			"dst":    ["autogroup:self:*"],
 		},
-		// all regular members can access devices tagged tag:others
+		// All regular members can access devices tagged tag:others
 		{
 			"action": "accept",
 			"src":    ["autogroup:members"],
 			"dst":    ["tag:others:*"],
 		},
-		// all Tailscale admins can access devices tagged tag:dragons
-		{"action": "accept", "src": ["autogroup:admin"], "dst": ["tag:dragons:*"]},
+		// All devices tag:dragons can access devices with the same tag
+		{
+			"action": "accept",
+			"src":    ["tag:dragons"],
+			"dst":    ["tag:dragons:*"],
+		},	
+		// All devices tag:other can access devices with the same tag
+		{
+			"action": "accept",
+			"src":    ["tag:other"],
+			"dst":    ["tag:other:*"],
+		},	
+		// All invited members can access devices tagged tag:others
+		{
+			"action": "accept",
+			"src":    ["autogroup:shared"],
+			"dst":    ["tag:others:*"],
+		},	
+		// All Tailscale admins can access everything
+		{"action": "accept", "src": ["autogroup:admin"], "dst": ["*:*"]},
 	],
 
 	// Define tagOwners via autogroups

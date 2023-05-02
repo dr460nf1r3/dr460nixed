@@ -60,7 +60,7 @@
 
   # Bleeding edge Mesa - current broken on my flake, 
   # investiations are going on
-  # chaotic.mesa-git.enable = true;
+  chaotic.mesa-git.enable = true;
 
   # Enable a few selected custom settings
   dr460nixed = {

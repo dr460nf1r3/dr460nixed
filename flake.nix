@@ -82,7 +82,6 @@
       };
       defaultModules = [
         ./modules/default.nix
-        archix.nixosModules.default
         chaotic-nyx.nixosModules.default
         home-manager.nixosModules.home-manager
         nur.nixosModules.nur
@@ -141,6 +140,7 @@
           };
           imports = [
             ./hosts/slim-lair/slim-lair.nix
+            archix.nixosModules.default
             impermanence.nixosModules.impermanence
             lanzaboote.nixosModules.lanzaboote
           ];
@@ -186,6 +186,7 @@
         modules = defaultModules
           ++ [
           ./hosts/slim-lair/slim-lair.nix
+          archix.nixosModules.default
           impermanence.nixosModules.impermanence
           lanzaboote.nixosModules.lanzaboote
         ];
