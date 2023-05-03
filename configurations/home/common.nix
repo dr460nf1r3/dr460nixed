@@ -49,11 +49,16 @@
     };
   };
 
-  # Don't forget to always load my .profile
+  # Don't forget to always load my .profile & configure caches
+  # for Colmena to use (it wasn't used before)
   home.file = {
     ".bash_profile".text = ''
       [[ -f ~/.bashrc ]] && . ~/.bashrc
       [[ -f ~/.profile ]] && . ~/.profile
+    '';
+    ".config/nix/nix.conf".text = ''
+      substituters = https://cache.nixos.org https://cache.nixos.org/ https://chaotic-nyx.cachix.org https://dr460nf1r3.cachix.org https://nix-community.cachix.org https://garuda-linux.cachix.org https://nixpkgs-unfree.cachix.org https://colmena.cachix.org
+      trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8= dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= garuda-linux.cachix.org-1:tWw7YBE6qZae0L6BbyNrHo8G8L4sHu5QoDp0OXv70bg= nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs= colmena.cachix.org-1:7BzpDnjjH8ki2CT3f6GdOk7QAzPOl+1t3LvTLXqYcSg=
     '';
   };
 
