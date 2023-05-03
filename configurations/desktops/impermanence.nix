@@ -3,7 +3,7 @@
 , lib
 , pkgs
 , ...
-}:{
+}: {
   # This was recently added to Chaotic Nyx
   chaotic.zfs-impermanence-on-shutdown = {
     enable = true;

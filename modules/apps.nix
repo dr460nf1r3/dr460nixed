@@ -24,12 +24,12 @@ in
         direnv
         duf
         exa
+        fastfetch
         jq
         killall
         micro
         nettools
         nmap
-        nur.repos.federicoschonborn.fastfetch
         python3
         sops
         tldr

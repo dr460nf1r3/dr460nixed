@@ -54,11 +54,11 @@
         "yuzu-ea-git-src": "yuzu-ea-git-src"
       },
       "locked": {
-        "lastModified": 1683112102,
-        "narHash": "sha256-3GBZlpDUd+7YgzTdmVtDe9G3eEUQ2Zi4asXeP3ek6ig=",
+        "lastModified": 1683120175,
+        "narHash": "sha256-ggqbVhU8LtHOKkeH70S9KXv9F1VohatFKm3ORCSApRA=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "1b8ac16d290d57b1fd7a71395c4dad9938ef85bc",
+        "rev": "b0de523e6e2d649d0ab7238fe7f6a97f0969f2a2",
         "type": "github"
       },
       "original": {
@@ -558,21 +558,6 @@
         "type": "github"
       }
     },
-    "nur": {
-      "locked": {
-        "lastModified": 1683110772,
-        "narHash": "sha256-3tNSq5FWu5wU2td5NzYBoA+J+kjFUKUO42j9LfK7pG4=",
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "948b8e3ee6aa175f99ac00d56f318178651c3ccf",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "NUR",
-        "type": "github"
-      }
-    },
     "pre-commit-hooks-nix": {
       "inputs": {
         "flake-compat": [
@@ -614,7 +599,6 @@
         "lanzaboote": "lanzaboote",
         "nix-minecraft": "nix-minecraft",
         "nixpkgs": "nixpkgs_4",
-        "nur": "nur",
         "sops-nix": "sops-nix",
         "src-chaotic-toolbox": "src-chaotic-toolbox",
         "src-repoctl": "src-repoctl",

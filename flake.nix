@@ -35,9 +35,6 @@
       url = "github:misterio77/nix-minecraft";
     };
 
-    # Nix user repository
-    nur.url = "github:nix-community/NUR";
-
     # Secrets management
     sops-nix.url = "github:Mic92/sops-nix";
 
@@ -62,7 +59,6 @@
     , impermanence
     , lanzaboote
     , nixpkgs
-    , nur
     , sops-nix
     , stylix
     , ...
@@ -77,15 +73,10 @@
         };
         keys = { nico = inputs.keys_nico; };
       };
-      overlays = _: {
-        nixpkgs.overlays = [ nur.overlay ];
-      };
       defaultModules = [
         ./modules/default.nix
         chaotic-nyx.nixosModules.default
         home-manager.nixosModules.home-manager
-        nur.nixosModules.nur
-        overlays
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
       ];
