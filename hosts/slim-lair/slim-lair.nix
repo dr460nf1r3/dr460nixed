@@ -22,9 +22,9 @@
     # Needed to get the touchpad to work
     blacklistedKernelModules = [ "elan_i2c" ];
     # The new AMD Pstate driver & needed modules
-    extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
+    extraModulePackages = with config.boot.kernelPackages; [ amdgpu-pro acpi_call zenpower ];
     kernelModules = [ "acpi_call" "amdgpu" "amd-pstate=passive" ];
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    kernelPackages = pkgs.linuxPackages_xanmod_latest;
     kernelParams = [ "initcall_blacklist=acpi_cpufreq_init" ];
     lanzaboote = {
       configurationLimit = 20;
@@ -101,7 +101,7 @@
   };
 
   # Enable the touchpad & secure boot, as well as add the ipman script
-  environment.systemPackages = with pkgs; [ libinput sbctl zenmonitor ];
+  environment.systemPackages = with pkgs; [ libinput radeontop rocm-smi sbctl zenmonitor ];
 
   # Neeeded for lzbt
   boot.bootspec.enable = true;
