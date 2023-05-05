@@ -32,16 +32,4 @@
 		// all others own devices with tag:others
 		"tag:others": ["autogroup:admin"],
 	},
-
-	// Define users and devices that can use Tailscale SSH
-	"ssh": [
-		// Allow all users to SSH into their own devices in check mode
-		// Comment this section out if you want to define specific restrictions
-		{
-			"action": "check",
-			"src":    ["*:*"],
-			"dst":    ["*:*"],
-			"users":  ["root"],
-		},
-	],
 }
