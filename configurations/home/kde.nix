@@ -1,33 +1,31 @@
-{ pkgs
+{ config,
+lib
+, pkgs
 , ...
 }:
 with builtins; let
+  immutable = false;
+
   configDir = ".config";
   kvantumDir = ".config/Kvantum";
   localDir = ".local/share";
 
   # JamesDSP Dolby presets
-  game = builtins.fetchurl {
+  game = fetchurl {
     url = "https://cloud.garudalinux.org/s/eimgmWmN485tHGw/download/game.irs";
     sha256 = "0d1lfbzca6wqfqxd6knzshc00khhgfqmk36s5xf1wyh703sdxk79";
   };
-  movie = builtins.fetchurl {
+  movie = fetchurl {
     url = "https://cloud.garudalinux.org/s/K8CpHZYTiLyXLSd/download/movie.irs";
     sha256 = "1r3s8crbmvzm71yqrkp8d8x4xyd3najz82ck6vbh1v9kq6jclc0w";
   };
-  music = builtins.fetchurl {
+  music = fetchurl {
     url = "https://cloud.garudalinux.org/s/cbPLFeAMeJazKxC/download/music-balanced.irs";
     sha256 = "1szssbqk3dnaqhg3syrzq9zqfb18phph5yy5m3xfnjgllj2yphy0";
   };
-  voice = builtins.fetchurl {
+  voice = fetchurl {
     url = "https://cloud.garudalinux.org/s/wJSs9gckrNidTBo/download/voice.irs";
     sha256 = "1b643m8v7j15ixi2g6r2909vwkq05wi74ybccbdnp4rkms640y4w";
-  };
-
-  # The allmighty Malefor wallpaper
-  wallpaper = builtins.fetchurl {
-    url = "https://gitlab.com/garuda-linux/themes-and-settings/artwork/garuda-wallpapers/-/raw/master/src/garuda-wallpapers/Malefor.jpg";
-    sha256 = "0r6b33k24kq4i3vzp41bxx7gqmw20klakcmw4qy7zana4f3pfnw6";
   };
 in
 {
@@ -41,7 +39,7 @@ in
   stylix.targets.gtk.enable = false;
 
   # Enable Kvantum theme and GTK & place a few bigger files
-  home.file = {
+  home.file = lib.mkIf immutable {
     "${configDir}/autostart/nextcloud-client.desktop".text = ''
       [Desktop Entry]
       Exec=nextcloud --background

@@ -18,7 +18,7 @@
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = pkgs.linuxPackages_cachyos;
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -47,6 +47,14 @@
     servers = {
       enable = true;
       monitoring = true;
+    };
+  };
+
+  # Yes, autologin on this one
+  services.xserver.displayManager.sddm.settings = {
+    Autologin = {
+      User = "nico";
+      Session = "plasma";
     };
   };
 

@@ -14,9 +14,6 @@
       url = "github:nix-community/home-manager/master";
     };
 
-    # Reset rootfs every reboot vis ZFS snapshots
-    impermanence.url = "github:nix-community/impermanence";
-
     # Archlinux tools
     archix.url = "github:SamLukeYes/archix";
 
@@ -25,9 +22,6 @@
       flake = false;
       url = "https://github.com/dr460nf1r3.keys";
     };
-
-    # Secure boot support
-    lanzaboote.url = "github:nix-community/lanzaboote";
 
     # Prismlauncher
     nix-minecraft = {
@@ -56,8 +50,6 @@
     { archix
     , chaotic-nyx
     , home-manager
-    , impermanence
-    , lanzaboote
     , nixpkgs
     , sops-nix
     , stylix
@@ -132,8 +124,6 @@
           imports = [
             ./hosts/slim-lair/slim-lair.nix
             archix.nixosModules.default
-            impermanence.nixosModules.impermanence
-            lanzaboote.nixosModules.lanzaboote
           ];
         };
         # My old laptop serving as TV
@@ -178,8 +168,6 @@
           ++ [
           ./hosts/slim-lair/slim-lair.nix
           archix.nixosModules.default
-          impermanence.nixosModules.impermanence
-          lanzaboote.nixosModules.lanzaboote
         ];
         inherit specialArgs;
       };

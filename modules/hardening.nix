@@ -31,8 +31,6 @@ in
       "kernel.yama.ptrace_scope" = 2;
       # Hide kptrs even for processes with CAP_SYSLOG
       "kernel.kptr_restrict" = 2;
-      # Disable bpf() JIT (to eliminate spray attacks)
-      "net.core.bpf_jit_enable" = false;
       # Disable ftrace debugging
       "kernel.ftrace_enabled" = false;
     };

@@ -15,11 +15,7 @@ in
       dns = "none";
       enable = true;
       unmanaged = [ "lo" "docker0" ];
-      wifi = {
-        backend = "iwd";
-        macAddress = "random";
-        powersave = true;
-      };
+      wifi.backend = "iwd";
     };
     # Enable nftables instead of iptables
     nftables.enable = true;
@@ -51,11 +47,13 @@ in
     startWhenNeeded = true;
   };
 
+  # Allow passwordless sudo for authenticated SSH users (like me)
+  security.pam.enableSSHAgentAuth = true;
+
   # Use the performant openssh (currently marked insecure)
   # programs.ssh.package = pkgs.openssh_hpn;
 
   # Lightweight bandwidth usage tracking
   services.vnstat.enable = true;
-
 }
 

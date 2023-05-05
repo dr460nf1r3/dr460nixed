@@ -109,7 +109,7 @@ in
             github.codespaces
             github.copilot
             ms-azuretools.vscode-docker
-            ms-python.python
+            #ms-python.python
             ms-python.vscode-pylance
             ms-vscode.hexeditor
             ms-vsliveshare.vsliveshare

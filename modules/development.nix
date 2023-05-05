@@ -81,12 +81,6 @@ in
         Bind = [ "/home/nico:/home/root" ];
       };
     };
-    systemd.services."systemd-nspawn@garuda-dev" = {
-      enable = false;
-      environment = { SYSTEMD_NSPAWN_UNIFIED_HIERARCHY = "1"; };
-      overrideStrategy = "asDropin";
-      wantedBy = [ "machines.target" ];
-    };
 
     # Allow to cross-compile to aarch64
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

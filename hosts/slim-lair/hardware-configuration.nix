@@ -1,44 +1,45 @@
 { config
 , lib
 , modulesPath
+, pkgs
 , ...
 }: {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports =
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
-  # Boot konfiguration
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.extraModulePackages = [ ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usbhid" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
 
-  # Our ZFS pools
-  fileSystems."/" = {
-    device = "zroot/ROOT/empty";
-    fsType = "zfs";
-    neededForBoot = true;
-  };
-  fileSystems."/nix" = {
-    device = "zroot/ROOT/nix";
-    fsType = "zfs";
-  };
-  fileSystems."/home/nico/Games" = {
-    device = "zroot/games/home";
-    fsType = "zfs";
-  };
-  fileSystems."/var/persistent" = {
-    device = "zroot/data/persistent";
-    fsType = "zfs";
-    neededForBoot = true;
-  };
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/0012-B6FF";
-    fsType = "vfat";
-  };
+  fileSystems."/" =
+    {
+      device = "/dev/disk/by-uuid/7e2d88b3-7268-4c25-9a7d-af700c07d96d";
+      fsType = "btrfs";
+      options = [ "subvol=@nixos" "compress=zstd" "noatime" ];
+    };
+  fileSystems."/home" =
+    {
+      device = "/dev/disk/by-uuid/7e2d88b3-7268-4c25-9a7d-af700c07d96d";
+      fsType = "btrfs";
+      options = [ "subvol=@home" "compress=zstd" "noatime" ];
+    };
+  fileSystems."/nix" =
+    {
+      device = "/dev/disk/by-uuid/7e2d88b3-7268-4c25-9a7d-af700c07d96d";
+      fsType = "btrfs";
+      options = [ "subvol=@nix" "compress=zstd" "noatime" ];
+    };
+  fileSystems."/boot" =
+    {
+      device = "/dev/disk/by-uuid/5772-1FF9";
+      fsType = "vfat";
+    };
 
-  # ZFS doesn't support SWAP
   swapDevices = [ ];
 
-  # Generic stuff
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

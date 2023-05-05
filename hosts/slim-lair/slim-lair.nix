@@ -7,42 +7,31 @@
   # Individual settings
   imports = [
     ../../configurations/common.nix
-    ../../configurations/desktops/impermanence.nix
     ../../configurations/services/chaotic.nix
     ./hardware-configuration.nix
   ];
 
   # Use Lanzaboote for secure boot
   boot = {
-    supportedFilesystems = [ "zfs" ];
-    zfs = {
-      enableUnstable = true;
-      requestEncryptionCredentials = false;
-    };
+    supportedFilesystems = [ "btrfs" ];
     # Needed to get the touchpad to work
     blacklistedKernelModules = [ "elan_i2c" ];
     # The new AMD Pstate driver & needed modules
     extraModulePackages = with config.boot.kernelPackages; [ amdgpu-pro acpi_call zenpower ];
     kernelModules = [ "acpi_call" "amdgpu" "amd-pstate=passive" ];
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
+    kernelPackages = pkgs.linuxPackages_cachyos;
     kernelParams = [ "initcall_blacklist=acpi_cpufreq_init" ];
-    lanzaboote = {
-      configurationLimit = 20;
-      enable = true;
-      pkiBundle = "/etc/secureboot";
+    loader = {
+      efi.canTouchEfiVariables = true;
+      systemd-boot.enable = true;
     };
-    loader.efi.canTouchEfiVariables = true;
   };
 
-  # Network configuration & id for ZFS
-  networking.hostId = "9c8011ee";
+  # Hostname
   networking.hostName = "slim-lair";
 
   # SSD
   services.fstrim.enable = true;
-
-  # ZFS scrubbing
-  services.zfs.autoScrub.enable = true;
 
   # AMD device
   services.hardware.bolt.enable = false;
@@ -58,8 +47,7 @@
     driversi686Linux.amdvlk
   ];
 
-  # Bleeding edge Mesa - current broken on my flake, 
-  # investiations are going on
+  # Bleeding edge Mesa - broken on master
   chaotic.mesa-git.enable = true;
 
   # Enable a few selected custom settings
@@ -72,6 +60,17 @@
     school = true;
     yubikey = true;
   };
+
+  # BTRFS stuff
+  services.beesd.filesystems = {
+    root = {
+      spec = "LABEL=OS";
+      hashTableSizeMB = 2048;
+      verbosity = "crit";
+      extraOptions = [ "--loadavg-target" "1.0" ];
+    };
+  };
+  services.btrfs.autoScrub.enable = true;
 
   # Workaround to enable HIP
   systemd.tmpfiles.rules = [
@@ -87,24 +86,8 @@
     RADV_VIDEO_DECODE = "1";
   };
 
-  # Virtualisation / Containerization
-  virtualisation.containers.storage.settings = {
-    storage = {
-      driver = "zfs";
-      graphroot = "/var/lib/containers/storage";
-      runroot = "/run/containers/storage";
-      options.zfs = {
-        fsname = "zroot/containers";
-        mountopt = "nodev";
-      };
-    };
-  };
-
   # Enable the touchpad & secure boot, as well as add the ipman script
   environment.systemPackages = with pkgs; [ libinput radeontop rocm-smi sbctl zenmonitor ];
-
-  # Neeeded for lzbt
-  boot.bootspec.enable = true;
 
   # Home-manager desktop configuration
   home-manager.users."nico" = import ../../configurations/home/desktops.nix;
