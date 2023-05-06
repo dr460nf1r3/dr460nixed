@@ -8,6 +8,7 @@
     ./docker-compose-runner.nix
     ./development.nix
     ./gaming.nix
+    ./garuda-chroot.nix
     ./hardening.nix
     ./locales.nix
     ./misc.nix

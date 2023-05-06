@@ -39,7 +39,7 @@ in
 
   config = mkIf cfg.common.enable {
     ## A few kernel tweaks
-    boot.kernel.sysctl = { "kernel.unprivileged_userns_clone" = 1;};
+    boot.kernel.sysctl = { "kernel.unprivileged_userns_clone" = 1; };
 
     # Microcode and firmware updates
     hardware = {

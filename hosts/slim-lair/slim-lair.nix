@@ -56,6 +56,7 @@
     desktops.enable = true;
     development.enable = true;
     gaming.enable = true;
+    garuda-chroot.enable = true;
     performance-tweaks.enable = true;
     school = true;
     yubikey = true;
