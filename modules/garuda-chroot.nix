@@ -76,13 +76,43 @@ in
         options = [ "noatime" ];
       };
 
+    # Be able to run the same installation in systemd-nspawn
+    systemd.targets.machines.enable = true;
     systemd.nspawn."garuda" = {
       enable = true;
       execConfig = {
         Boot = "yes";
         Capability = "all";
         PrivateUsers = 0;
+        ResolvConf = "copy-host";
       };
+      filesConfig = {
+        Bind = [
+          "/dev/dri/card0"
+          "/dev/dri/renderD128"
+          "/dev/input"
+          "/dev/shm"
+          "/dev/tty"
+          "/dev/tty0"
+          "/dev/tty1"
+          "/dev/tty2"
+          "/dev/video0"
+          "/home/nico/.Xauthority"
+          "/run/udev:/run/udev"
+          "/run/user/1000/pulse:/run/user/host/pulse"
+          "/sys/class/input"
+          "/tmp/.X11-unix"
+        ];
+      };
+      networkConfig = {
+        Private = false;
+      };
+    };
+    systemd.services."systemd-nspawn@garuda" = {
+      enable = true;
+      environment = { SYSTEMD_NSPAWN_UNIFIED_HIERARCHY = "1"; };
+      overrideStrategy = "asDropin";
+      wantedBy = [ "machines.target" ];
     };
   };
 }
