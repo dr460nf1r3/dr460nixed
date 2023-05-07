@@ -43,6 +43,9 @@
     auto-upgrade = true;
     chromium = true;
     desktops.enable = true;
+    docker-compose-runner."tv-nixos" = {
+      source = ../../configurations/docker-compose/tv-nixos;
+    };
     performance-tweaks.enable = true;
     servers = {
       enable = true;

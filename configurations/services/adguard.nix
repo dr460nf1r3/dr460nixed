@@ -196,10 +196,10 @@
     "100.120.171.12" = [ "tv-nixos" ];
     "100.85.210.126" = [ "rpi-dragon" ];
     "100.86.102.115" = [ "oracle-dragon" ];
-    "100.96.236.126" = [ "slim-lair" ];
+    "100.99.129.81" = [ "slim-lair" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:6255:d27e" = [ "oracle-dragon" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:6256:6673" = [ "rpi-dragon" ];
-    "fd7a:115c:a1e0:ab12:4843:cd96:6260:ec7e" = [ "slim-lair" ];
+    "fd7a:115c:a1e0:ab12:4843:cd96:6263:8151" = [ "slim-lair" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:6274:a70b" = [ "dragon-pixel" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:6278:ab0c" = [ "tv-nixos" ];
   };
