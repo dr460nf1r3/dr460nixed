@@ -9,7 +9,7 @@ in
       address = "nico@dr460nf1r3.org";
       gpg = {
         inherit key;
-        signByDefault = true;
+        signByDefault = false;
       };
       imap = {
         host = mailserver;
@@ -23,7 +23,6 @@ in
         '';
         showSignature = "append";
       };
-      passwordCommand = "secret-tool lookup email nico@dr460nf1r3.org";
       thunderbird.enable = true;
       smtp = {
         host = mailserver;
@@ -34,7 +33,7 @@ in
       address = "dr460nf1r3@garudalinux.org";
       gpg = {
         inherit key;
-        signByDefault = true;
+        signByDefault = false;
       };
       imap = {
         host = mailserver;
@@ -48,7 +47,6 @@ in
         '';
         showSignature = "append";
       };
-      passwordCommand = "secret-tool lookup email dr460nf1r3@garudalinux.org";
       smtp = {
         host = mailserver;
       };
@@ -58,7 +56,7 @@ in
       address = "team@garudalinux.org";
       gpg = {
         inherit key;
-        signByDefault = true;
+        signByDefault = false;
       };
       imap = {
         host = mailserver;
@@ -71,7 +69,6 @@ in
         '';
         showSignature = "append";
       };
-      passwordCommand = "secret-tool lookup email team@garudalinux.org";
       thunderbird.enable = true;
       smtp = {
         host = mailserver;

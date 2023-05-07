@@ -94,7 +94,6 @@ in
       shfmt
       speedcrunch
       statix
-      teamviewer
       termius
       ventoy-full
       virt-manager

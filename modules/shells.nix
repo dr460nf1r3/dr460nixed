@@ -29,6 +29,7 @@ in
       bash.shellAliases = {
         # General useful things & theming
         "bat" = "bat --style header --style snip --style changes";
+        "cat" = "bat --style header --style snip --style changes";
         "cls" = "clear";
         "dd" = "dd progress=status";
         "dir" = "dir --color=auto";
@@ -78,6 +79,7 @@ in
         };
         shellAliases = {
           "bat" = "bat --style header --style snip --style changes";
+          "cat" = "bat --style header --style snip --style changes";
           "dd" = "dd progress=status";
           "dir" = "dir --color=auto";
           "egrep" = "egrep --color=auto";

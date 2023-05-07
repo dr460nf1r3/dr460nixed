@@ -84,7 +84,7 @@
     btop = {
       enable = true;
       settings = {
-        color_theme = "gruvbox-dark";
+        color_theme = "TTY";
         proc_tree = true;
         theme_background = false;
       };

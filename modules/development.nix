@@ -68,20 +68,6 @@ in
       };
     };
 
-    # This is a containerized version of Garuda Linux from nspawn.org
-    systemd.nspawn."garuda-dev" = {
-      enable = true;
-      execConfig = {
-        Boot = "yes";
-        Capability = "all";
-        PrivateUsers = 0;
-        ResolvConf = "on";
-      };
-      filesConfig = {
-        Bind = [ "/home/nico:/home/root" ];
-      };
-    };
-
     # Allow to cross-compile to aarch64
     boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
