@@ -1,5 +1,6 @@
 { config
 , lib
+, pkgs
 , ...
 }:
 with lib;
@@ -110,9 +111,27 @@ in
     };
     systemd.services."systemd-nspawn@garuda" = {
       enable = true;
-      environment = { SYSTEMD_NSPAWN_UNIFIED_HIERARCHY = "1"; };
+      environment = {
+        DISPLAY = ":0.0";
+        PULSE_SERVER = "unix:/run/user/host/pulse/native";
+        SYSTEMD_NSPAWN_UNIFIED_HIERARCHY = "1";
+      };
       overrideStrategy = "asDropin";
       wantedBy = [ "machines.target" ];
+    };
+
+    # This is needed to share Xorg
+    environment.systemPackages = [ pkgs.xorg.xhost ];
+
+    # Easy alias for starting the machine
+    # Programs & global config
+    programs = {
+      bash.shellAliases = {
+        "grun" = "xhost +local:; sudo machinectl login garuda; xhost -;";
+      };
+      fish.shellAbbrs = {
+        "grun" = "xhost +local:; sudo machinectl login garuda; xhost -;";
+      };
     };
   };
 }
