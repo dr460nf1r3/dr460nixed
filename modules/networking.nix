@@ -15,7 +15,6 @@ in
       dns = "none";
       enable = true;
       unmanaged = [ "lo" "docker0" ];
-      wifi.backend = "iwd";
     };
     # Enable nftables instead of iptables
     nftables.enable = true;

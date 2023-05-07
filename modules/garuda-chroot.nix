@@ -16,62 +16,73 @@ in
           Enables mounting of the Garuda Linux root partition.
         '';
       };
+    root = mkOption
+      {
+        default = "/mnt/garuda";
+        type = types.str;
+        description = mdDoc ''
+          Specifies where the Garuda Linux root partition should be mounted
+        '';
+      };
   };
 
   config = mkIf cfg.enable {
-    fileSystems."/mnt/garuda" =
+    fileSystems."${cfg.root}" =
       {
         device = "/dev/disk/by-label/OS";
         fsType = "btrfs";
         options = [ "subvol=@" "compress=zstd" "noatime" ];
       };
-    fileSystems."/mnt/garuda/home" =
+    fileSystems."${cfg.root}/home" =
       {
         device = "/dev/disk/by-label/OS";
         fsType = "btrfs";
         options = [ "subvol=@home" "compress=zstd" "noatime" ];
       };
-    fileSystems."/mnt/garuda/root" =
+    fileSystems."${cfg.root}/root" =
       {
         device = "/dev/disk/by-label/OS";
         fsType = "btrfs";
         options = [ "subvol=@root" "compress=zstd" "noatime" ];
       };
-    fileSystems."/mnt/garuda/srv" =
+    fileSystems."${cfg.root}/srv" =
       {
         device = "/dev/disk/by-label/OS";
         fsType = "btrfs";
         options = [ "subvol=@srv" "compress=zstd" "noatime" ];
       };
-    fileSystems."/mnt/garuda/var/cache" =
+    fileSystems."${cfg.root}/var/cache" =
       {
         device = "/dev/disk/by-label/OS";
         fsType = "btrfs";
         options = [ "subvol=@cache" "compress=zstd" "noatime" ];
       };
-    fileSystems."/mnt/garuda/var/log" =
+    fileSystems."${cfg.root}/var/log" =
       {
         device = "/dev/disk/by-label/OS";
         fsType = "btrfs";
         options = [ "subvol=@log" "compress=zstd" "noatime" ];
       };
-    fileSystems."/mnt/garuda/var/tmp" =
+    fileSystems."${cfg.root}/var/tmp" =
       {
         device = "/dev/disk/by-label/OS";
         fsType = "btrfs";
         options = [ "subvol=@tmp" "compress=zstd" "noatime" ];
       };
-    fileSystems."/mnt/garuda/nix" =
-      {
-        device = "/dev/disk/by-label/OS";
-        fsType = "btrfs";
-        options = [ "subvol=@nix" "compress=zstd" "noatime" ];
-      };
-    fileSystems."/mnt/garuda/boot/efi" =
+    fileSystems."${cfg.root}/boot/efi" =
       {
         device = "/dev/disk/by-uuid/5772-1FF9";
         fsType = "vfat";
         options = [ "noatime" ];
       };
+
+    systemd.nspawn."garuda" = {
+      enable = true;
+      execConfig = {
+        Boot = "yes";
+        Capability = "all";
+        PrivateUsers = 0;
+      };
+    };
   };
 }
