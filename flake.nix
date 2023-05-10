@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Chaotic Nyx!
-    chaotic-nyx.url = "github:chaotic-cx/nyx/thunderbird-appmenu";
+    chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # Home configuration management
     home-manager = {

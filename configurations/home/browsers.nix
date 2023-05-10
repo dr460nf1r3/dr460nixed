@@ -2,7 +2,7 @@
   # Thunderbird configuration
   programs.thunderbird = {
     enable = true;
-    package = pkgs.thunderbird-appmenu;
+    # package = pkgs.thunderbird-appmenu;
     profiles."nico" = {
       isDefault = true;
       settings = {
