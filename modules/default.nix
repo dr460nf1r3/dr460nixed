@@ -17,6 +17,6 @@
     ./servers.nix
     ./shells.nix
     ./theming.nix
-    ./xdg-ninja
+    # ./xdg-ninja
   ];
 }

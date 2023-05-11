@@ -70,24 +70,24 @@ in
     X-KDE-SubstituteUID=false
     X-KDE-Username=
   '';
-  home.file."${appdir}/com.yubico.authenticator.desktop".text = ''
-    [Desktop Entry]
-    Categories=Utility;
-    Comment=Use the Yubikey for OTP's
-    Exec=${pkgs.yubioath-flutter}/bin/yubioath-flutter
-    GenericName=Yubico Authenticator
-    Icon=keysmith
-    Keywords=Yubico;Authenticator;
-    Name=Yubico Authenticator
-    NoDisplay=false
-    Path=
-    StartupNotify=true
-    Terminal=false
-    TerminalOptions=
-    Type=Application
-    X-KDE-SubstituteUID=false
-    X-KDE-Username=
-  '';
+  # home.file."${appdir}/com.yubico.authenticator.desktop".text = ''
+  #   [Desktop Entry]
+  #   Categories=Utility;
+  #   Comment=Use the Yubikey for OTP's
+  #   Exec=${pkgs.yubioath-flutter}/bin/yubioath-flutter
+  #   GenericName=Yubico Authenticator
+  #   Icon=keysmith
+  #   Keywords=Yubico;Authenticator;
+  #   Name=Yubico Authenticator
+  #   NoDisplay=false
+  #   Path=
+  #   StartupNotify=true
+  #   Terminal=false
+  #   TerminalOptions=
+  #   Type=Application
+  #   X-KDE-SubstituteUID=false
+  #   X-KDE-Username=
+  # '';
   home.file."${appdir}/keybase.desktop".text = ''
     [Desktop Entry]
     Categories=Network;

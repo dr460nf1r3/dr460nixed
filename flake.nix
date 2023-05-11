@@ -14,9 +14,6 @@
       url = "github:nix-community/home-manager/master";
     };
 
-    # Archlinux tools
-    archix.url = "github:SamLukeYes/archix";
-
     # My SSH keys
     keys_nico = {
       flake = false;
@@ -47,8 +44,7 @@
   };
 
   outputs =
-    { archix
-    , chaotic-nyx
+    { chaotic-nyx
     , home-manager
     , nixpkgs
     , sops-nix
@@ -121,10 +117,7 @@
             allowLocalDeployment = true;
             tags = [ "laptops" "main" ];
           };
-          imports = [
-            ./hosts/slim-lair/slim-lair.nix
-            archix.nixosModules.default
-          ];
+          imports = [ ./hosts/slim-lair/slim-lair.nix ];
         };
         # My old laptop serving as TV
         tv-nixos = {
@@ -165,10 +158,7 @@
       nixosConfigurations."slim-lair" = nixos.lib.nixosSystem {
         inherit system;
         modules = defaultModules
-          ++ [
-          ./hosts/slim-lair/slim-lair.nix
-          archix.nixosModules.default
-        ];
+          ++ [ ./hosts/slim-lair/slim-lair.nix ];
         inherit specialArgs;
       };
       # Free Tier Oracle aarch64 VM

@@ -69,7 +69,7 @@ in
           "gpr" = "git pull --rebase";
           "gpull" = "git pull";
           "gpush" = "git push";
-          "reb" = " sudo nixos-rebuild switch -L";
+          "reb" = "sudo nixos-rebuild switch -L";
           "roll" = "sudo nixos-rebuild switch --rollback";
           "su" = "sudo su -";
           "tarnow" = "tar acf ";
