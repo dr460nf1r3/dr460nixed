@@ -30,6 +30,7 @@ in
         micro
         nettools
         nmap
+        pinentry-curses
         python3
         sops
         tldr
