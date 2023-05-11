@@ -104,7 +104,7 @@ in
     # KDE Connect to connect my phone & Partition Manager
     programs = {
       kdeconnect.enable = true;
-      partition-manager.enable = true;   
+      partition-manager.enable = true;
     };
 
     # Enable Kvantum for theming

@@ -87,6 +87,12 @@
       };
     };
 
+    # Direnv for per-directory environment variables
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
     # Exa as ls replacement
     exa = {
       enable = true;
