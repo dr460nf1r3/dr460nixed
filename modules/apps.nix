@@ -108,6 +108,7 @@ in
             foxundermoon.shell-format
             github.codespaces
             github.copilot
+            github.vscode-github-actions
             ms-azuretools.vscode-docker
             ms-python.python
             ms-python.vscode-pylance
