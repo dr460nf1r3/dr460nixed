@@ -26,8 +26,8 @@ jobs:
         if: steps.bump.outcome == 'success'
         run: |
           set -e
-          git config --global user.name 'Github Actions'
-          git config --global user.email 'actions@dr460nf1r3.org'
+          git config --global user.name 'Chaotic-Temeraire'
+          git config --global user.email 'actions@chaotic.cx'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git add flake.lock
           git commit -m "❄️ chore(flake.lock): bump inputs to $(date +%Y%m%d)"

@@ -1,4 +1,4 @@
-[![built with nix](https://img.shields.io/static/v1?logo(default nixos&logoColor(default white&label(default &message(default Built%20with%20Nix&color(default 41439a)](https://builtwithnix.org) [![Build x86](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/cachix_x86.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/cachix_x86.yml) [![Sync Tailscale ACLs](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml)
+[![built with nix](https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org) [![Build x86](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/cachix_x86.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/cachix_x86.yml) [![Sync Tailscale ACLs](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml)
 
 # My personal NixOS flake & system configurations
 
@@ -29,13 +29,13 @@ Other, smaller tweaks I particularly like about this setup include:
 ## Structure
 
 - `flake.nix`: Entrypoint for hosts and home configurations. Also exposes a
-  devshell for bootstrapping (`nix develop` or `nix-shell`) as well as Colmena configs.
-- `apps`: Packages built from source.
+  devshell for bootstrapping (`nix develop` or `nix-shell`) as well as Colmena configs
+- `apps`: Packages built from source
 - `configurations`: All the Nix configurations not available via modules, eg. home-manager configurations
-- `hosts`: NixOS Configurations, accessible via `nixos-rebuild --flake`.
+- `hosts`: NixOS Configurations, accessible via `nixos-rebuild --flake`
 - `modules`: The major part of the system configurations, exposes `dr460nixed.*` options
-- `overlays`: Patches and version overrides for some packages.
-- `pkgs`: My custom packages.
+- `overlays`: Patches and version overrides for some packages
+- `pkgs`: My custom packages
 
 ## Module options
 
