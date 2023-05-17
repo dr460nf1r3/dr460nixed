@@ -36,11 +36,11 @@
         "yuzu-ea-git-src": "yuzu-ea-git-src"
       },
       "locked": {
-        "lastModified": 1684258833,
-        "narHash": "sha256-0YItfLf3Ig6lzxYPM6F9TlLBVGb2w7ct81zYbKsD7eo=",
+        "lastModified": 1684323950,
+        "narHash": "sha256-0vqaQDwi01Q+28jOL5qNBQcLTHvMbRUKPXV4j7JygXg=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "0dfd9ade0125a0ebcb361e692ddf8d6cb9979ccb",
+        "rev": "f105cc4806817824033db64722c3727cc52ce484",
         "type": "github"
       },
       "original": {
@@ -120,11 +120,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1684189380,
-        "narHash": "sha256-GUp9OkZynocyppLur1VX8oAjtXGue0oKRHbsksOMUm0=",
+        "lastModified": 1684321175,
+        "narHash": "sha256-V4EbM+jK7pvjKBaj0dgAiW9ultzDE27Nz5fRyu/ceMk=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "b7d814c5744dca7e70b3dc2638f06568dce96ca6",
+        "rev": "59659243cd4ababda605e79b4a9c2e6d83e24c86",
         "type": "github"
       },
       "original": {
@@ -227,11 +227,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1684198684,
-        "narHash": "sha256-jlMijPiA/sVYyGHghcd+7ObhPJowYD7tLwcpVUSDRfc=",
+        "lastModified": 1684285756,
+        "narHash": "sha256-4QMLH03KQFEpoLJ5kJEoJjGVcM9lvsrg9NqSCUQmM4U=",
         "owner": "misterio77",
         "repo": "nix-minecraft",
-        "rev": "809be9d42bec60ecd240920507f641b9262cb408",
+        "rev": "d6bf4bb2c402683f3e00f75e2468720bea18a7cf",
         "type": "github"
       },
       "original": {
