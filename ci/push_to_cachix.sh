@@ -2,7 +2,7 @@
 set -euo pipefail
 
 FLAKE_DIR="$(pwd)"
-TARGETS_X86=("tv-nixos" "slim-lair")
+TARGETS_X86=("tv-nixos" "dragons-ryzen")
 TARGETS_AARCH64=("oracle-dragon" "pi-dragon")
 
 # Build every variation of the flake
@@ -26,7 +26,7 @@ fi
 for system in "${TARGETS[@]}"; do
     echo "Started building variation $system ❄️!"
     echo ""
-    nix build -L ".#nixosConfigurations.$system.config.system.build.toplevel" --impure
+    nix build -L ".#nixosConfigurations.$system.config.system.build.toplevel"
     echo ""
     echo "Done building variation $system ❄️!"
     echo ""

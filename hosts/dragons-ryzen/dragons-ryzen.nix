@@ -28,7 +28,7 @@
   };
 
   # Hostname
-  networking.hostName = "slim-lair";
+  networking.hostName = "dragons-ryzen";
 
   # SSD
   services.fstrim.enable = true;
@@ -37,16 +37,8 @@
   services.hardware.bolt.enable = false;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  # enables AMDVLK & OpenCL support
-  hardware.opengl.extraPackages = with pkgs; [
-    amdvlk
-  ];
-  hardware.opengl.extraPackages32 = with pkgs; [
-    driversi686Linux.amdvlk
-  ];
-
-  # Bleeding edge Mesa - broken on master
-  chaotic.mesa-git.enable = true;
+  # Bleeding edge Mesa - currently giving a slideshow
+  # chaotic.mesa-git.enable = true;
 
   # Enable a few selected custom settings
   dr460nixed = {

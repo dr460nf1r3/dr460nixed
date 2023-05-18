@@ -112,12 +112,12 @@
           imports = defaultModules;
         };
         # My main device (Lenovo Slim 7)
-        slim-lair = {
+        dragons-ryzen = {
           deployment = {
             allowLocalDeployment = true;
             tags = [ "laptops" "main" ];
           };
-          imports = [ ./hosts/slim-lair/slim-lair.nix ];
+          imports = [ ./hosts/dragons-ryzen/dragons-ryzen.nix ];
         };
         # My old laptop serving as TV
         tv-nixos = {
@@ -155,10 +155,10 @@
         inherit specialArgs;
       };
       # My main device (Lenovo Slim 7)
-      nixosConfigurations."slim-lair" = nixos.lib.nixosSystem {
+      nixosConfigurations."dragons-ryzen" = nixos.lib.nixosSystem {
         inherit system;
         modules = defaultModules
-          ++ [ ./hosts/slim-lair/slim-lair.nix ];
+          ++ [ ./hosts/dragons-ryzen/dragons-ryzen.nix ];
         inherit specialArgs;
       };
       # Free Tier Oracle aarch64 VM
