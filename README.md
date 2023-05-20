@@ -39,7 +39,7 @@ Other, smaller tweaks I particularly like about this setup include:
 
 ## Module options
 
-- `dr460nixed.common.enable` (default false) - enables auto-upgrading the system daily by pulling the updated Nix flake from the repo
+- `dr460nixed.auto-upgrade.enable` (default false) - enables auto-upgrading the system daily by pulling the updated Nix flake from the repo
 - `dr460nixed.common.enable` (default true) - common options for every system
 - `dr460nixed.desktops.enable` (default false) - options for desktop systems
 - `dr460nixed.development.enable` (default false) - enables a development environment
@@ -49,10 +49,12 @@ Other, smaller tweaks I particularly like about this setup include:
 - `dr460nixed.hardening.enable` (default true) - system hardening
 - `dr460nixed.live-cd` (default false) - live CD applications
 - `dr460nixed.locales` (default true) - does all the localization setup / console font config
+- `dr460nixed.nodocs` (default true) - removes unneeded documentation to save space
 - `dr460nixed.performance-tweaks` (default false) - performance-enhancing options
 - `dr460nixed.rpi` (default false) - Raspberry Pi related things
 - `dr460nixed.school` (default false) - things I need for school
 - `dr460nixed.servers.enable` (default false) - common server options
+- `dr460nixed.servers.monitoring` (default false) - enables some basic monitoring via Netdata 
 - `dr460nixed.shells` (default true) - enables common shell aliases & theming
 - `dr460nixed.systemd-boot` (default true) - a quiet systemd-boot configuration
 - `dr460nixed.theming` (default true) - supplies fonts and general system theming via Stylix
