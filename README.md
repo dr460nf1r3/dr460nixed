@@ -13,7 +13,7 @@ This repo contains my NixOS dotfiles. All of my devices are going to be added he
 - NixOS / Garuda living in one partition via BTRFS subvolumes using shared Nix store & home subvolumes as well as running both at the same time via **systemd-nspawn** and shared Xorg sessions
 - **Opt-in persistence** through impermanence + BTRFS snapshots (currently unused because of using Garuda/NixOS shared home)
 - **Mesh networked** hosts with **Tailscale**
-- Uses the custom **Linux-cachyos BORE EEVD** kernel
+- Uses the custom **Linux-cachyos BORE EEVDF** kernel
 - Additional packages not existing in Nixpkgs (yet) via **chaotic-nyx**
 - Secrets are managed via **nix-sops**
 - Automated flake building when pushing to main & pushing to **Cachix** via **GitHub Actions**
@@ -55,7 +55,7 @@ Other, smaller tweaks I particularly like about this setup include:
 - `dr460nixed.servers.enable` (default false) - common server options
 - `dr460nixed.shells` (default true) - enables common shell aliases & theming
 - `dr460nixed.systemd-boot` (default true) - a quiet systemd-boot configuration
-- `dr460nixed.yubikey` (default true) - supplies fonts and general system theming via Stylix
+- `dr460nixed.theming` (default true) - supplies fonts and general system theming via Stylix
 - `dr460nixed.yubikey` (default false) - options for using the Yubikey as login
 
 ## How to use the flake?
