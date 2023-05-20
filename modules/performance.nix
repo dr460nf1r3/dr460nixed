@@ -48,9 +48,6 @@ in
       freeMemThreshold = 5;
     };
 
-    # Tune the Zen kernel
-    programs.cfs-zen-tweaks.enable = true;
-
     ## A few other kernel tweaks
     boot.kernel.sysctl = {
       "kernel.nmi_watchdog" = 0;

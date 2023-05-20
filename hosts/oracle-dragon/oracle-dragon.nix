@@ -6,8 +6,8 @@
   imports = [
     ../../configurations/common.nix
     ../../configurations/services/adguard.nix
-    ../../configurations/services/code-server.nix
-    ../../configurations/services/github-runner.nix
+    # ../../configurations/services/code-server.nix - nodejs marked insecure
+    # ../../configurations/services/github-runner.nix - nodejs marked insecure
     ../../configurations/services/searxng.nix
     ./hardware-configuration.nix
   ];
