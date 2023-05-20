@@ -52,7 +52,6 @@
           "snapchat"
           "tiktok"
           "twitch"
-          "twitter"
           "whatsapp"
         ];
         bogus_nxdomain = [ ];
