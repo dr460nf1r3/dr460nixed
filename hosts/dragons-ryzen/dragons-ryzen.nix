@@ -27,8 +27,12 @@
     };
   };
 
-  # Hostname
-  networking.hostName = "dragons-ryzen";
+  # Hostname & fixing https://github.com/tailscale/tailscale/issues/6850 
+  # probably because I'm using wifi tethering via phone mostly
+  networking = {
+    hostName = "dragons-ryzen";
+    nameservers = [ "100.100.100.100" ];
+  };
 
   # SSD
   services.fstrim.enable = true;
@@ -38,7 +42,7 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Bleeding edge Mesa - currently giving a slideshow
-  # chaotic.mesa-git.enable = true;
+  chaotic.mesa-git.enable = true;
 
   # Enable a few selected custom settings
   dr460nixed = {
