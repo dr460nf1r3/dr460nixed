@@ -243,23 +243,4 @@ in
     "${localDir}/wallpapers/Malefor.jpg".source = wallpaper;
     ".gtkrc-2.0".source = ./kde-static/gtkrc-2.0;
   };
-
-  # A systemd user unit for JamesDSP
-  systemd.user.services.jamesdsp = {
-    Unit = {
-      Description = "JamesDSP daemon";
-      Requires = [ "dbus.service" ];
-      After = [ "graphical-session-pre.target" ];
-      PartOf = [ "graphical-session.target" "pipewire.service" ];
-    };
-
-    Install.WantedBy = [ "graphical-session.target" ];
-
-    Service = {
-      ExecStart = "${pkgs.jamesdsp}/bin/jamesdsp --tray";
-      ExecStop = "${pkgs.killall}/bin/killall jamesdsp";
-      Restart = "on-failure";
-      RestartSec = 5;
-    };
-  };
 }

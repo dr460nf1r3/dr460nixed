@@ -8,8 +8,8 @@ let
   cfg = config.dr460nixed.locales;
   cfgDesktops = config.dr460nixed.desktops;
   de = "de_DE.UTF-8";
-  defaultLocale = "en_US.UTF-8";
-  terminus-variant = "124n";
+  defaultLocale = "en_GB.UTF-8";
+  terminus-variant = "116n";
 in
 {
   options.dr460nixed.locales = {
