@@ -36,11 +36,11 @@
         "yuzu-ea-git-src": "yuzu-ea-git-src"
       },
       "locked": {
-        "lastModified": 1684666556,
-        "narHash": "sha256-TsXWTlKs4KkxBD7lrzLd8GrJxdMTsd1BB4RuqhyLn+o=",
+        "lastModified": 1684676990,
+        "narHash": "sha256-VGx1uYf1SUb+xfwmxsZbvGFPluPWrYBX1wRIzE7Kw2g=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "bd192dab311324ba435136ac2f4ccd5ff07d06c5",
+        "rev": "e93a0fa1f21948bbc48eb6009b70827ed444490d",
         "type": "github"
       },
       "original": {
@@ -205,11 +205,11 @@
     "mesa-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1684571628,
-        "narHash": "sha256-6XqjPKfmvUGBVoAipR+XkpPrzHV8eK8ywjMWgyR9cyA=",
+        "lastModified": 1684625843,
+        "narHash": "sha256-5rWUQhqhOTuobfIfTpHX7IJJ5eVjk5RNaHnQgZDBfn4=",
         "owner": "chaotic-cx",
         "repo": "mesa-mirror",
-        "rev": "a0b1aa6f00e6f811e56c4f1c024af937bbebfd09",
+        "rev": "8e53b293f88cd30e2780d73adcf7da314ce811d1",
         "type": "github"
       },
       "original": {
@@ -244,8 +244,11 @@
       "locked": {
         "lastModified": 1684570954,
         "narHash": "sha256-FX5y4Sm87RWwfu9PI71XFvuRpZLowh00FQpIJ1WfXqE=",
+        "lastModified": 1684570954,
+        "narHash": "sha256-FX5y4Sm87RWwfu9PI71XFvuRpZLowh00FQpIJ1WfXqE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
+        "rev": "3005f20ce0aaa58169cdee57c8aa12e5f1b6e1b3",
         "rev": "3005f20ce0aaa58169cdee57c8aa12e5f1b6e1b3",
         "type": "github"
       },
@@ -260,8 +263,11 @@
       "locked": {
         "lastModified": 1684632198,
         "narHash": "sha256-SdxMPd0WmU9MnDBuuy7ouR++GftrThmSGL7PCQj/uVI=",
+        "lastModified": 1684632198,
+        "narHash": "sha256-SdxMPd0WmU9MnDBuuy7ouR++GftrThmSGL7PCQj/uVI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
+        "rev": "d0dade110dc7072d67ce27826cfe9ab2ab0cf247",
         "rev": "d0dade110dc7072d67ce27826cfe9ab2ab0cf247",
         "type": "github"
       },
@@ -292,8 +298,11 @@
       "locked": {
         "lastModified": 1684585791,
         "narHash": "sha256-lYPboblKrchmbkGMoAcAivomiOscZCjtGxxTSCY51SM=",
+        "lastModified": 1684585791,
+        "narHash": "sha256-lYPboblKrchmbkGMoAcAivomiOscZCjtGxxTSCY51SM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
+        "rev": "eea79d584eff53bf7a76aeb63f8845da6d386129",
         "rev": "eea79d584eff53bf7a76aeb63f8845da6d386129",
         "type": "github"
       },
@@ -341,8 +350,11 @@
       "locked": {
         "lastModified": 1684637723,
         "narHash": "sha256-0vAxL7MVMhGbTkAyvzLvleELHjVsaS43p+PR1h9gzNQ=",
+        "lastModified": 1684637723,
+        "narHash": "sha256-0vAxL7MVMhGbTkAyvzLvleELHjVsaS43p+PR1h9gzNQ=",
         "owner": "Mic92",
         "repo": "sops-nix",
+        "rev": "4ccdfb573f323a108a44c13bb7730e42baf962a9",
         "rev": "4ccdfb573f323a108a44c13bb7730e42baf962a9",
         "type": "github"
       },
@@ -408,11 +420,11 @@
     "sway-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1683802076,
-        "narHash": "sha256-M+81OjLWFWiG1HT+KElU81Akpxl4YAPEuTctq6Yzr/g=",
+        "lastModified": 1684594585,
+        "narHash": "sha256-2ZcYiLEeyr325irTgGLBEGMBNj8pLUlfCs8O0OQFoFc=",
         "owner": "swaywm",
         "repo": "sway",
-        "rev": "01b0c11394b88fea2ec8ac691e30504f1e0800f5",
+        "rev": "48d6eda3cb0f79d2190756af44f01d028696bf0e",
         "type": "github"
       },
       "original": {
@@ -491,11 +503,11 @@
     "yuzu-ea-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1684464069,
-        "narHash": "sha256-RQdyeTdqFe+QaeUs5dcVwJHo1WZ73Pn5qR47dZaebjI=",
+        "lastModified": 1684650131,
+        "narHash": "sha256-Yd91sAvBuAvuVBYrzu4o/06loCHbOMoQN6faRMGOADQ=",
         "owner": "pineappleEA",
         "repo": "pineapple-src",
-        "rev": "b7e5c476fcc4ed72bcf8d08b6e1beb110781f1c5",
+        "rev": "024a301e119747f75b5eccf0efca0cd6a16b9af4",
         "type": "github"
       },
       "original": {

@@ -68,12 +68,6 @@ in
         # disable usb autosuspend
         "usbcore.autosuspend=-1"
 
-        # 7 = KERN_DEBUG for debugging
-        "loglevel=7"
-
-        # isables resume and restores original swap space
-        "noresume"
-
         # allows systemd to set and save the backlight state
         "acpi_backlight=native"
 
@@ -88,7 +82,6 @@ in
         "rd.udev.log_level=3"
 
         # disable the cursor in vt to get a black screen during intermissions
-        # TODO turn back on in tty
         "vt.global_cursor_default=0"
       ];
       loader = {
