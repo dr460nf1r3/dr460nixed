@@ -89,6 +89,7 @@ in
       nixpkgs-fmt
       nixpkgs-lint
       nixpkgs-review
+      nodePackages_latest.prettier
       nodejs
       ruff
       shellcheck

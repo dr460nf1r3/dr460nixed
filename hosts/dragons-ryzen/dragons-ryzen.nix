@@ -31,7 +31,7 @@
   # probably because I'm using wifi tethering via phone mostly
   networking = {
     hostName = "dragons-ryzen";
-    nameservers = [ "100.100.100.100" ];
+    nameservers = lib.mkForce [ "100.86.102.115" "1.1.1.1" ];
   };
 
   # SSD
@@ -42,7 +42,7 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Bleeding edge Mesa - currently giving a slideshow
-  chaotic.mesa-git.enable = true;
+  # chaotic.mesa-git.enable = true;
 
   # Enable a few selected custom settings
   dr460nixed = {
