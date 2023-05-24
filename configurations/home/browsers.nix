@@ -37,5 +37,6 @@
         updateUrl = "https://raw.githubusercontent.com/libredirect/libredirect/master/src/updates/updates.xml";
       }
     ];
+    package = pkgs.chromium-flagged;
   };
 }

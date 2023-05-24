@@ -16,6 +16,18 @@ _: {
         prismlauncher-mod = prev.prismlauncher.overrideDerivation (oa: {
           patches = [ ./offline-mode-prism-launcher.diff ] ++ oa.patches;
         });
+        # Enable dark mode, hardware acceleration & add WideVine plugin
+        chromium-flagged = final.chromium.override {
+          commandLineArgs = [
+            "--enable-accelerated-2d-canvas"
+            "--enable-features=WebUIDarkMode,VaapiVideoDecoder,WebContentsForceDark:classifier_policy/transparency_and_num_colors"
+            "--enable-gpu-rasterization"
+            "--enable-smooth-scrolling"
+            "--ignore-gpu-blacklist"
+            "--smooth-scrolling"
+          ];
+          enableWideVine = true;
+        };
       };
     in
     [ thisConfigsOverlay ];
