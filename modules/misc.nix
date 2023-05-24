@@ -136,8 +136,8 @@ in
     # Basic chromium settings (system-wide)
     programs.chromium = mkIf cfg.chromium {
       defaultSearchProviderEnabled = true;
-      defaultSearchProviderSearchURL = "https://search.dr460nf1r3.org/search?q=%s";
-      defaultSearchProviderSuggestURL = "https://search.dr460nf1r3.org/autocomplete?q=%s";
+      defaultSearchProviderSearchURL = "https://searx.dr460nf1r3.org/search?q=%s";
+      defaultSearchProviderSuggestURL = "https://searx.dr460nf1r3.org/autocomplete?q=%s";
       enable = true;
       extensions = [
         "ajhmfdgkijocedmfjonnpjfojldioehi" # Privacy Pass
@@ -150,7 +150,7 @@ in
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
       ];
       extraOpts = {
-        "HomepageLocation" = "https://search.dr460nf1r3.org";
+        "HomepageLocation" = "https://searx.dr460nf1r3.org";
         "QuicAllowed" = true;
         "RestoreOnStartup" = true;
         "ShowHomeButton" = true;
