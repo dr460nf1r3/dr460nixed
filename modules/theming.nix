@@ -75,5 +75,11 @@ in
       inherit sansSerif;
       inherit serif;
     };
+    stylix.targets = {
+      # Allow setting GTK theme, which fits best
+      chromium.enable = false;
+      # Allow settings Plymouth bgrt without mkForce
+      plymouth.enable = false;
+    };
   };
 }

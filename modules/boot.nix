@@ -92,8 +92,7 @@ in
         generationsDir.copyKernels = true;
         timeout = 1;
       };
-      # We need to override Stylix here to keep the splash
-      plymouth = mkForce {
+      plymouth = {
         enable = true;
         theme = "bgrt";
       };
