@@ -42,6 +42,22 @@ services:
       - rustdesk-net
     restart: unless-stopped
 
+  # Forgejo server
+  forgejo:
+    image: codeberg.org/forgejo/forgejo:1.19.3-0-arm64
+    container_name: forgejo
+    environment:
+      USER_UID: 1000
+      USER_GID: 1000
+    volumes:
+      - ./forgejo:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "5000:3000"
+      - "222:22"
+    restart: always
+
   # Automatic container updates
   watchtower:
     image: containrrr/watchtower:latest
