@@ -142,11 +142,12 @@ in
       extensions = [
         "ajhmfdgkijocedmfjonnpjfojldioehi" # Privacy Pass
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock origin
+        "doojmbjmlfjjnbmnoijecmcbfeoakpjm" # NoScript
+        "fhnegjjodccfaliddboelcleikbmapik" # Tab Counter
         "hipekcciheckooncpjeljhnekcoolahp" # Tabliss
         "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly
         "mdjildafknihdffpkfmmpnpoiajfjnjd" # Consent-O-Matic
         "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
-        "njdfdhgcmkocbgbhcioffdbicglldapd" # LocalCDN
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
       ];
       extraOpts = {
