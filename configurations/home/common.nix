@@ -124,6 +124,14 @@
       '';
     };
 
+    # SSH stuff, to better keep connections alive
+    ssh = {
+      compression = true;
+      enable = true;
+      serverAliveCountMax = 2;
+      serverAliveInterval = 600;
+    };
+
     # The starship prompt
     starship = {
       enable = true;

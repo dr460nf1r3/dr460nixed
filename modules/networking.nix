@@ -43,14 +43,16 @@ in
   # OpenSSH for remote accessing, hardened via ssh-audit suggestions
   services.openssh = {
     enable = true;
-    startWhenNeeded = true;
+    extraConfig = ''
+      ClientAliveCountMax 2
+      ClientAliveInterval 600
+      Protocol 2
+      TCPKeepAlive yes
+    '';
   };
 
-  # Allow passwordless sudo for authenticated SSH users (like me)
-  security.pam.enableSSHAgentAuth = true;
-
-  # Use the performant openssh (currently marked insecure)
-  # programs.ssh.package = pkgs.openssh_hpn;
+  # Enable Mosh, a replacement for OpenSSH
+  programs.mosh.enable = true;
 
   # Lightweight bandwidth usage tracking
   services.vnstat.enable = true;

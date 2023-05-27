@@ -83,11 +83,7 @@ in
     services.openssh = {
       extraConfig = ''
         ChallengeResponseAuthentication no
-        ClientAliveInterval 600
         HostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,rsa-sha2-256,rsa-sha2-512,rsa-sha2-256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com
-        LoginGraceTime 15
-        MaxStartups 30:30:60
-        Protocol 2
       '';
       settings = {
         Ciphers = [

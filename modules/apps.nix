@@ -28,6 +28,7 @@ in
         jq
         killall
         micro
+        mosh
         nettools
         nmap
         pinentry-curses
