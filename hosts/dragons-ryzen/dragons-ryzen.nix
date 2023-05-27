@@ -62,7 +62,7 @@
   # Virt-manager requires iptables to let guests have internet
   networking.nftables.enable = lib.mkForce false;
 
-  # BTRFS stuff
+  # BTRFS stuff (filesystem deduplication in the background)
   services.beesd.filesystems = {
     root = {
       spec = "LABEL=OS";
