@@ -48,6 +48,7 @@ in
         "micro" = "micro -colorscheme geany -autosu true -mkparents true";
         "psmem" = "ps auxf | sort -nr -k 4";
         "psmem10" = "ps auxf | sort -nr -k 4 | head -1";
+        "reloc-us" = "sudo tailscale up --exit-node=100.75.73.33";
         "su" = "sudo su -";
         "tarnow" = "tar acf ";
         "untar" = "tar zxvf ";
@@ -72,6 +73,7 @@ in
           "reb" = "sudo nixos-rebuild switch -L";
           "roll" = "sudo nixos-rebuild switch --rollback";
           "run" = "nix run nixpkgs#";
+          "reloc-us" = "sudo tailscale up --exit-node=100.75.73.33";
           "su" = "sudo su -";
           "tarnow" = "tar acf ";
           "test" = "sudo nixos-rebuild switch --test";
