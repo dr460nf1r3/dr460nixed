@@ -127,5 +127,11 @@ in
       allowedTCPPorts = [ 80 443 ];
       allowedUDPPorts = [ 443 ];
     };
+
+    # Enable this so we don't get annoyed by the ACME TOS
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "root@dr460nf1r3.org";
+    };
   };
 }
