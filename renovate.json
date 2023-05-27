@@ -1,6 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
-  ]
+  "assignees": ["dr460nf1r3"],
+  "commitMessageAction": "update",
+  "extends": ["config:base", ":gitSignOff"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "extends": ["schedule:daily"]
+  },
+  "nix": {
+    "enabled": true
+  },
+  "reviewersFromCodeOwners": true
 }
