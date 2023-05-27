@@ -59,6 +59,9 @@
     yubikey = true;
   };
 
+  # Virt-manager requires iptables to let guests have internet
+  networking.nftables.enable = lib.mkForce false;
+
   # BTRFS stuff
   services.beesd.filesystems = {
     root = {
