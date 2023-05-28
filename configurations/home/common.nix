@@ -128,6 +128,9 @@
     ssh = {
       compression = true;
       enable = true;
+      extraConfig = ''
+        TCPKeepAlive yes
+      '';
       serverAliveCountMax = 2;
       serverAliveInterval = 600;
     };

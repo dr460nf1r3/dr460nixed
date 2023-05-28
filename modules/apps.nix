@@ -98,6 +98,7 @@ in
       speedcrunch
       statix
       termius
+      vagrant
       ventoy-full
       virt-manager
       (vscode-with-extensions.override {

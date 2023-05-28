@@ -80,7 +80,7 @@ in
 
     # Disable root login & password authentication on sshd
     # also, apply recommendations of ssh-audit.com
-    services.openssh = {
+    services.openssh = lib.mkDefault {
       extraConfig = ''
         ChallengeResponseAuthentication no
         HostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,rsa-sha2-256,rsa-sha2-512,rsa-sha2-256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com
@@ -143,7 +143,7 @@ in
       enable = true;
       wrappedBinaries = {
         chromium = {
-          executable = "${pkgs.chromium}/bin/chromium";
+          executable = "${pkgs.chromium-flagged}/bin/chromium";
           profile = "${pkgs.firejail}/etc/firejail/chromium.profile";
           extraArgs = [
             "--dbus-user.talk=org.freedesktop.Notifications"
