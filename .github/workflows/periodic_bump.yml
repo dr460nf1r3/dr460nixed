@@ -1,0 +1,34 @@
+name: Periodic flake bump
+
+on:
+  # Trigger this workflow every 12 hours
+  schedule:
+    - cron: "0 0,12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Nix
+        uses: cachix/install-nix-action@v21
+        with:
+          extra_nix_config: "accept-flake-config = true"
+      - uses: actions/checkout@v3
+      - name: Update nixpkgs flake
+        run: nix flake update || exit 1; git diff --exit-code flake.lock && exit 1 || exit 0
+        continue-on-error: true
+        id: bump
+      - name: Commit nixpkgs bump
+        if: steps.bump.outcome == 'success'
+        run: |
+          set -e
+          git config --global user.name 'Chaotic-Temeraire'
+          git config --global user.email 'actions@chaotic.cx'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git add flake.lock
+          git commit -m "❄️ chore(flake.lock): bump inputs to $(date +%Y%m%d)"
+          git push
