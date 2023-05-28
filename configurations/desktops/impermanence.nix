@@ -1,9 +1,4 @@
-# ZFS-based impermanence but instead of rolling back on every start, roll back on safe shutdown/halt/reboot
-{ config
-, lib
-, pkgs
-, ...
-}: {
+_: {
   # This was recently added to Chaotic Nyx
   chaotic.zfs-impermanence-on-shutdown = {
     enable = true;

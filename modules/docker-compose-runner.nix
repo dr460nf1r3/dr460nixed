@@ -1,4 +1,4 @@
-{ lib, pkgs, config, sources, ... }:
+{ lib, pkgs, config, ... }:
 with lib;
 let
   cfg = config.dr460nixed.docker-compose-runner;

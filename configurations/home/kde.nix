@@ -1,6 +1,4 @@
-{ config
-, lib
-, pkgs
+{ lib
 , ...
 }:
 with builtins; let
