@@ -97,16 +97,6 @@ in
       allowReboot = true;
       dates = "04:00";
       enable = true;
-      flags = [
-        "--option"
-        "extra-binary-caches"
-        "https://colmena.cachix.org"
-        "https://dr460nf1r3.cachix.org"
-        "https://garuda-linux.cachix.org"
-        "https://nix-community.cachix.org"
-        "https://nixpkgs-unfree.cachix.org"
-        "https://nyx.chaotic.cx"
-      ];
       flake = "github:dr460nf1r3/dr460nixed";
       randomizedDelaySec = "1h";
       rebootWindow = { lower = "00:00"; upper = "06:00"; };
