@@ -116,6 +116,7 @@
           deployment = {
             allowLocalDeployment = true;
             tags = [ "laptops" "main" ];
+            targetHost = "100.99.129.81";
           };
           imports = [ ./hosts/dragons-ryzen/dragons-ryzen.nix ];
         };
@@ -123,6 +124,7 @@
         tv-nixos = {
           deployment = {
             tags = [ "servers" "tv" ];
+            targetHost = "100.120.171.12";
           };
           imports = [ ./hosts/tv-nixos/tv-nixos.nix ];
         };
@@ -131,6 +133,7 @@
           deployment = {
             buildOnTarget = true;
             tags = [ "oracle" "servers" ];
+            targetHost = "100.86.102.115";
           };
           imports = [ ./hosts/oracle-dragon/oracle-dragon.nix ];
           nixpkgs.system = "aarch64-linux";
@@ -140,6 +143,7 @@
           deployment = {
             buildOnTarget = true;
             tags = [ "rpi" "servers" ];
+            targetHost = "100.85.210.126";
           };
           imports = [ ./hosts/rpi-dragon/rpi-dragon.nix ];
           nixpkgs.system = "aarch64-linux";

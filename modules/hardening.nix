@@ -7,6 +7,7 @@ with lib;
 let
   cfg = config.dr460nixed.hardening;
   cfgDesktops = config.dr460nixed.desktops.enable;
+  cfgServers = config.dr460nixed.servers.enable;
 in
 {
   options.dr460nixed.hardening = {
@@ -80,7 +81,7 @@ in
 
     # Disable root login & password authentication on sshd
     # also, apply recommendations of ssh-audit.com
-    services.openssh = lib.mkDefault {
+    services.openssh = mkDefault {
       extraConfig = ''
         ChallengeResponseAuthentication no
         HostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,rsa-sha2-256,rsa-sha2-512,rsa-sha2-256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com
@@ -109,7 +110,7 @@ in
         PasswordAuthentication = false;
         PermitRootLogin = "no";
         X11Forwarding = false;
-        kbdInteractiveAuthentication = mkDefault false;
+        kbdInteractiveAuthentication = false;
         useDns = false;
       };
     };
@@ -155,7 +156,7 @@ in
     };
 
     # Technically we don't need this as we use pubkey authentication
-    services.fail2ban = mkIf cfgDesktops {
+    services.fail2ban = mkIf cfgServers {
       enable = true;
       ignoreIP = [
         "100.0.0.0/8"
