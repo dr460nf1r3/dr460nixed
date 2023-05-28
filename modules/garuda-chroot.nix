@@ -127,10 +127,10 @@ in
     # Programs & global config
     programs = {
       bash.shellAliases = {
-        "grun" = "xhost +local:; sudo sudo machinectl start garuda; sudo machinectl login garuda; xhost -;";
+        "grun" = "xhost +local:; sudo systemctl start systemd-nspawn@garuda; sudo machinectl login garuda; xhost -";
       };
       fish.shellAbbrs = {
-        "grun" = "xhost +local:; sudo sudo machinectl start garuda; sudo machinectl login garuda; xhost -;";
+        "grun" = "xhost +local:; sudo systemctl start systemd-nspawn@garuda; sudo machinectl login garuda; xhost -";
       };
     };
   };
