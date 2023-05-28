@@ -124,17 +124,6 @@
       '';
     };
 
-    # SSH stuff, to better keep connections alive
-    ssh = {
-      compression = true;
-      enable = true;
-      extraConfig = ''
-        TCPKeepAlive yes
-      '';
-      serverAliveCountMax = 2;
-      serverAliveInterval = 600;
-    };
-
     # The starship prompt
     starship = {
       enable = true;

@@ -40,7 +40,7 @@ in
     permitCertUid = "root";
   };
 
-  # OpenSSH for remote accessing, hardened via ssh-audit suggestions
+  # SSHD shall keep connections alive for longer
   services.openssh = {
     enable = true;
     extraConfig = ''
@@ -50,6 +50,13 @@ in
       TCPKeepAlive yes
     '';
   };
+
+  # Client side SSH configuration
+  programs.ssh.extraConfig = ''
+    TCPKeepAlive yes
+    ServerAliveCountMax 2
+    ServerAliveInterval 600
+  '';
 
   # Enable Mosh, a replacement for OpenSSH
   programs.mosh.enable = true;

@@ -159,7 +159,7 @@ in
         builders-use-substitutes = true;
 
         # A few extra binary caches and their public keys
-        extra-substituters = [
+        substituters = [
           "https://colmena.cachix.org"
           "https://dr460nf1r3.cachix.org"
           "https://garuda-linux.cachix.org"
@@ -167,7 +167,7 @@ in
           "https://nixpkgs-unfree.cachix.org"
           "https://nyx.chaotic.cx"
         ];
-        extra-trusted-public-keys = [
+        trusted-public-keys = [
           "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
           "colmena.cachix.org-1:7BzpDnjjH8ki2CT3f6GdOk7QAzPOl+1t3LvTLXqYcSg="
           "dr460nf1r3.cachix.org-1:ujkI5l3i3m6Jh3J8phRXtnUbKdrn7JIxb/dPAO3ePbI="
