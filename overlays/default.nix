@@ -17,12 +17,13 @@ _: {
           patches = [ ./offline-mode-prism-launcher.diff ] ++ oa.patches;
         });
         # Enable dark mode, hardware acceleration & add WideVine plugin
-        chromium-flagged = final.ungoogled-chromium.override {
+        ungoogled-chromium-flagged = final.ungoogled-chromium.override {
           commandLineArgs = [
             "--enable-accelerated-2d-canvas"
             "--enable-features=WebUIDarkMode,VaapiVideoDecoder,WebContentsForceDark:classifier_policy/transparency_and_num_colors"
             "--enable-gpu-rasterization"
             "--enable-smooth-scrolling"
+            "--enable-zero-copy"
             "--ignore-gpu-blacklist"
             "--smooth-scrolling"
           ];

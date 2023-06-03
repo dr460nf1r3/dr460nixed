@@ -185,22 +185,6 @@ in
     # Run security analysis
     environment.systemPackages = with pkgs; [ lynis ];
 
-    # Enable Firejail for Chromium
-    programs.firejail = mkIf cfgDesktops {
-      enable = true;
-      wrappedBinaries = {
-        chromium = {
-          executable = "${pkgs.chromium-flagged}/bin/chromium";
-          profile = "${pkgs.firejail}/etc/firejail/chromium.profile";
-          extraArgs = [
-            "--dbus-user.talk=org.freedesktop.Notifications"
-            "--env=GTK_THEME=Sweet-dark:dark"
-            "--ignore=private-dev"
-          ];
-        };
-      };
-    };
-
     # Technically we don't need this as we use pubkey authentication
     services.fail2ban = mkIf cfgServers {
       enable = true;

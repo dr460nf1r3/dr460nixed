@@ -185,7 +185,7 @@
           password = "$2b$05$zjtZ461DmcgZTgv7AppSOu66ZieCWEAR63xCeGQt.CyKJYAzhkK82";
         }
       ];
-      schema_version = 14;
+      schema_version = 20;
     };
   };
 
