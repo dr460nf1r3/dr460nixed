@@ -27,7 +27,10 @@ in
           autoNumlock = true;
           enable = true;
           settings = {
-            General = { Font = "Fira Sans"; };
+            General = {
+              CursorTheme = "Sweet-cursors";
+              Font = "Fira Sans";
+            };
             # Autologin = { User = "nico"; Session = "plasma"; };
           };
           theme = "Sweet";
