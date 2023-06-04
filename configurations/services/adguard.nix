@@ -68,7 +68,6 @@
         cache_ttl_min = 0;
         disallowed_clients = [ ];
         dns64_prefixes = [ ];
-        edns_client_subnet = false;
         enable_dnssec = true;
         fastest_addr = false;
         fastest_timeout = "1s";
@@ -117,7 +116,7 @@
       statistics = {
         enabled = true;
         ignored = [ ];
-        interval = 90;
+        interval = "2160h";
       };
       filters = [
         {

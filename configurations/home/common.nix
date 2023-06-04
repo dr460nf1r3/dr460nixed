@@ -57,7 +57,7 @@
       enable = true;
       initExtra = ''
         if [ -z "$TMUX" ] &&  [ "$SSH_CLIENT" != "" ]; then
-          exec ${pkgs.tmux}/bin/tmux || exec /usr/bin/tmux
+          exec ${pkgs.tmux}/bin/tmux a || exec /usr/bin/tmux a
         fi
       '';
     };
@@ -172,7 +172,7 @@
       historyLimit = 10000;
       newSession = true;
       sensibleOnTop = false;
-      shell = "/usr/bin/env fish";
+      shell = "${pkgs.fish}/bin/fish";
     };
   };
 
