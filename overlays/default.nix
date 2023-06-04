@@ -17,7 +17,7 @@ _: {
           patches = [ ./offline-mode-prism-launcher.diff ] ++ oa.patches;
         });
         # Enable dark mode, hardware acceleration & add WideVine plugin
-        ungoogled-chromium-flagged = final.ungoogled-chromium.override {
+        brave-flagged = final.brave.override {
           commandLineArgs = [
             "--enable-accelerated-2d-canvas"
             "--enable-features=WebUIDarkMode,VaapiVideoDecoder,WebContentsForceDark:classifier_policy/transparency_and_num_colors"
@@ -27,7 +27,6 @@ _: {
             "--ignore-gpu-blacklist"
             "--smooth-scrolling"
           ];
-          enableWideVine = true;
         };
       };
     in

@@ -17,26 +17,4 @@
       };
     };
   };
-
-  # Basic Chromium settings using Ungoogled Chromium (user)
-  programs.chromium = {
-    commandLineArgs = [
-      "--enable-accelerated-2d-canvas"
-      "--enable-features=VaapiVideoDecoder"
-      "--enable-features=WebUIDarkMode"
-      "--enable-gpu-rasterization"
-      "--enable-vulkan"
-      "--enable-zero-copy"
-      "--ignore-gpu-blocklist"
-      "--ozone-platform-hint=auto"
-    ];
-    enable = true;
-    extensions = [
-      {
-        id = "oladmjdebphlnjjcnomfhhbfdldiimaf";
-        updateUrl = "https://raw.githubusercontent.com/libredirect/libredirect/master/src/updates/updates.xml";
-      }
-    ];
-    package = pkgs.ungoogled-chromium-flagged;
-  };
 }

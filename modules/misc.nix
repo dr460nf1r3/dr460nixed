@@ -139,6 +139,7 @@ in
         "mdjildafknihdffpkfmmpnpoiajfjnjd" # Consent-O-Matic
         "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
+        "oladmjdebphlnjjcnomfhhbfdldiimaf;https://raw.githubusercontent.com/libredirect/libredirect/master/src/updates/updates.xml" # Libredirect
       ];
       extraOpts = {
         "HomepageLocation" = "https://searx.dr460nf1r3.org";
