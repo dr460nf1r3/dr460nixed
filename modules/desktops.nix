@@ -56,7 +56,6 @@ in
     environment.systemPackages = with pkgs; [
       applet-window-appmenu
       applet-window-title
-      beautyline-icons
       dr460nized-kde-theme
       firedragon
       jamesdsp
@@ -68,7 +67,6 @@ in
       resvg
       sshfs
       sweet
-      sweet-nova
       vlc
       xdg-desktop-portal
     ];
