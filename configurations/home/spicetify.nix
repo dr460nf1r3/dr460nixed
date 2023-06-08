@@ -12,7 +12,7 @@ let
     (import flake-compat {
       src = builtins.fetchTarball {
         url = "https://github.com/the-argus/spicetify-nix/archive/master.zip";
-        sha256 = "1jhx1yqfpyhdabb48yrrk8wjfgzrg6gbbh3pv71rjkfv57d52hyp";
+        sha256 = "0l9rf5a80qq05kpkp1pi56saa0kmlps94amvwx4fzpjvikgyb339";
       };
     }).defaultNix;
   spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
