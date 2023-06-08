@@ -49,7 +49,7 @@ in
       aspell
       aspellDicts.de
       aspellDicts.en
-      brave-flagged
+      chromium-flagged
       ffmpegthumbnailer
       gimp
       helvum
