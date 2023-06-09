@@ -29,6 +29,7 @@
         "mangohud-git-src": "mangohud-git-src",
         "mesa-git-src": "mesa-git-src",
         "nixpkgs": "nixpkgs",
+        "river-git-src": "river-git-src",
         "sway-git-src": "sway-git-src",
         "swaylock-plugin-git-src": "swaylock-plugin-git-src",
         "waynergy-git-src": "waynergy-git-src",
@@ -36,11 +37,11 @@
         "yuzu-ea-git-src": "yuzu-ea-git-src"
       },
       "locked": {
-        "lastModified": 1686253056,
-        "narHash": "sha256-1hoyCRV7u5SCOf0Ku2Tq2JqewjrnberKvojaZ14ZAAs=",
+        "lastModified": 1686272738,
+        "narHash": "sha256-iiXVP02MqikgCpyJu0rSrehtPFQ2zeUWtxmcxoVl6GE=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "ba45a9d06a378f737d313fe7484d0bf0f588bf09",
+        "rev": "f0341c9e08e93c86eed8685b89bec5405468193a",
         "type": "github"
       },
       "original": {
@@ -139,11 +140,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1686265146,
-        "narHash": "sha256-w5RtAG37rqcfqVWEQrJGUvZnUjt/BKdGvf+3XAw09ps=",
+        "lastModified": 1686305101,
+        "narHash": "sha256-xCgeI+uTKay3Ab3tMdP9m9flIJbFkRMKwRAmg5PQhJQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "69bdd6de50df2082901d94dbf70ecb762d8b636c",
+        "rev": "1e5d741ea3f3290d7ac06a02ded24bfdc7aadb37",
         "type": "github"
       },
       "original": {
@@ -294,11 +295,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1686135559,
-        "narHash": "sha256-pY8waAV8K/sbHBdLn5diPFnQKpNg0YS9w03MrD2lUGE=",
+        "lastModified": 1686226982,
+        "narHash": "sha256-nLuiPoeiVfqqzeq9rmXxpybh77VS37dsY/k8N2LoxVg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "381e92a35e2d196fdd6077680dca0cd0197e75cb",
+        "rev": "a64b73e07d4aa65cfcbda29ecf78eaf9e72e44bd",
         "type": "github"
       },
       "original": {
@@ -337,6 +338,23 @@
         "owner": "NixOS",
         "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "river-git-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1685988087,
+        "narHash": "sha256-5bQolX+X5vf43TLvCOfEtVVC31fjJCyG9qMiHZ22HrA=",
+        "owner": "riverwm",
+        "repo": "river",
+        "rev": "93a567ca945bd1f8a04b6453e59e0dbaeed0fcb3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "riverwm",
+        "ref": "master",
+        "repo": "river",
         "type": "github"
       }
     },
