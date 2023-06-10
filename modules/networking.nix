@@ -38,8 +38,9 @@ in
   services.tailscale = {
     enable = true;
     permitCertUid = "root";
+    useRoutingFeatures = lib.mkDefault "client";
   };
-
+  
   # SSHD shall keep connections alive for longer
   services.openssh = {
     enable = true;
