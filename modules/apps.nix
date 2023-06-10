@@ -86,6 +86,7 @@ in
       hugo
       jetbrains.pycharm-professional
       keybase-gui
+      nixd
       nixos-generators
       nixpkgs-fmt
       nixpkgs-lint
@@ -112,6 +113,7 @@ in
             github.codespaces
             github.copilot
             github.vscode-github-actions
+            jnoortheen.nix-ide
             ms-azuretools.vscode-docker
             ms-python.python
             ms-python.vscode-pylance
@@ -143,7 +145,7 @@ in
       yarn
     ]) ++ optionals cfg.yubikey (with pkgs; [
       yubikey-personalization
-      # yubioath-flutter # ERROR: No matching distribution found for yubikey-manager==5.0.1
+      yubioath-flutter
     ]) ++ optionals cfg.school (with pkgs; [
       speedcrunch
       teams-for-linux

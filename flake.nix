@@ -26,6 +26,9 @@
       url = "github:misterio77/nix-minecraft";
     };
 
+    # Nixd language server
+    nixd.url = "github:nix-community/nixd";
+
     # Secrets management
     sops-nix.url = "github:Mic92/sops-nix";
 
@@ -46,6 +49,7 @@
   outputs =
     { chaotic-nyx
     , home-manager
+    , nixd
     , nixpkgs
     , sops-nix
     , stylix
@@ -67,6 +71,9 @@
         home-manager.nixosModules.home-manager
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
+        {
+          nixpkgs.overlays = [ nixd.overlays.default ];
+        }
       ];
       pkgs = import nixpkgs {
         inherit system;
@@ -100,7 +107,7 @@
       colmena = {
         meta = {
           nixpkgs = import nixpkgs {
-            overlays = [ ];
+            overlays = [ nixd.overlays.default ];
             system = "${system}";
           };
           inherit specialArgs;
