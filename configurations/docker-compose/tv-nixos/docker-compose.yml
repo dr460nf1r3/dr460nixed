@@ -52,7 +52,7 @@ services:
       - "./storage:/photoprism/storage"
 
   mariadb:
-    image: mariadb:10.11
+    image: mariadb:11.0
     restart: unless-stopped
     stop_grace_period: 5s
     security_opt:
