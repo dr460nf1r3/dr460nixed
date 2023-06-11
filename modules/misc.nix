@@ -133,10 +133,10 @@ in
         "ajhmfdgkijocedmfjonnpjfojldioehi" # Privacy Pass
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock origin
         "doojmbjmlfjjnbmnoijecmcbfeoakpjm" # NoScript
+        "edibdbjcniadpccecjdfdjjppcpchdlm" # I Still Don't Care About Cookies
         "fhnegjjodccfaliddboelcleikbmapik" # Tab Counter
         "hipekcciheckooncpjeljhnekcoolahp" # Tabliss
         "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly
-        "mdjildafknihdffpkfmmpnpoiajfjnjd" # Consent-O-Matic
         "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
         "oladmjdebphlnjjcnomfhhbfdldiimaf;https://raw.githubusercontent.com/libredirect/libredirect/master/src/updates/updates.xml" # Libredirect
