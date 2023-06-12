@@ -37,11 +37,11 @@
         "yuzu-ea-git-src": "yuzu-ea-git-src"
       },
       "locked": {
-        "lastModified": 1686484006,
-        "narHash": "sha256-uuukVAlI/vwkZcgp45MWoZk2zg/pC3/MqcsxPa+pSn0=",
+        "lastModified": 1686530523,
+        "narHash": "sha256-h6+smfbGn2Fr0FrUReR0YeBIIM0GD0y2rqHMrEZMPiU=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "90576897f30a72b2bf200cb63f10c022b4fb5edd",
+        "rev": "fbb475c653f1fa4a2727554e5d44e0559e043662",
         "type": "github"
       },
       "original": {
@@ -266,11 +266,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1686445922,
-        "narHash": "sha256-jHMDgzMYMVfaDo7gphm1CKYF2HmZ/CoCAA/v549z+qs=",
+        "lastModified": 1686532122,
+        "narHash": "sha256-morr5aOXspxYLyEjnvvO5ak98snnqh1wFCTMQ1KBygo=",
         "owner": "misterio77",
         "repo": "nix-minecraft",
-        "rev": "d16e9f182722c81c42e1a706b7591e757467ca3a",
+        "rev": "dbdd0e8bfa576a38c056776922fee5106ad5af0f",
         "type": "github"
       },
       "original": {
@@ -285,11 +285,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1686471623,
-        "narHash": "sha256-aum9LO/WURACInv+eRx96qvxJGrKeZwkOJkiiENo5TE=",
+        "lastModified": 1686489854,
+        "narHash": "sha256-kn6mgHOMroQOVAD0fmDsvltua4Qzw6035R51Hj3DZKs=",
         "owner": "nix-community",
         "repo": "nixd",
-        "rev": "f7b7a6f1c262bf24c665d5b97415cb561a17e992",
+        "rev": "7e320f960ed66ae6447d41202c88557746e771c7",
         "type": "github"
       },
       "original": {
