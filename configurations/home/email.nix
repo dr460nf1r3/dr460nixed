@@ -26,6 +26,7 @@ in
       thunderbird.enable = true;
       smtp = {
         host = mailserver;
+        port = 465;
       };
       userName = "nico@dr460nf1r3.org";
     };
@@ -49,6 +50,7 @@ in
       };
       smtp = {
         host = mailserver;
+        port = 465;
       };
       userName = "dr460nf1r3@garudalinux.org";
     };
@@ -72,6 +74,7 @@ in
       thunderbird.enable = true;
       smtp = {
         host = mailserver;
+        port = 465;
       };
       userName = "team@garudalinux.org";
     };
