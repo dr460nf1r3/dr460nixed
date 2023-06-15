@@ -86,6 +86,7 @@ in
       hugo
       jetbrains.pycharm-professional
       keybase-gui
+      nix-prefetch-git
       nixd
       nixos-generators
       nixpkgs-fmt
