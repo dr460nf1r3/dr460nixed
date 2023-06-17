@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: cachix/install-nix-action@v21
+      - uses: cachix/install-nix-action@v22
         with:
           extra_nix_config: "system-features = big-parallel kvm\naccept-flake-config = true"
           nix_path: nixpkgs=channel:nixos-unstable
