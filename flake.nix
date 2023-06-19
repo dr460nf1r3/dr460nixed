@@ -10,9 +10,9 @@
 
     # Garuda Linux subsystem - soon to have more options from the system
     garuda = {
-      url = "/home/nico/Documents/misc/garuda-nix-subsystem";
       inputs.chaotic.follows = "chaotic-nyx";
       inputs.garuda-nixpkgs.follows = "chaotic-nyx/nixpkgs";
+      url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
     };
 
     # Home configuration management

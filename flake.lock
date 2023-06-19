@@ -187,15 +187,16 @@
       "locked": {
         "lastModified": 1687198741,
         "narHash": "sha256-C6MHAw0fBMlCFSN3fZ572AyGGS2B3mNnbsqOqIaMhpA=",
-        "ref": "refs/heads/main",
+        "owner": "garuda-linux",
+        "repo": "garuda-nix-subsystem",
         "rev": "9fa9663cd52858af0dc0d3ada958adba08142ddc",
-        "revCount": 11,
-        "type": "git",
-        "url": "file:///home/nico/Documents/misc/garuda-nix-subsystem"
+        "type": "gitlab"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/nico/Documents/misc/garuda-nix-subsystem"
+        "owner": "garuda-linux",
+        "ref": "main",
+        "repo": "garuda-nix-subsystem",
+        "type": "gitlab"
       }
     },
     "home-manager": {
