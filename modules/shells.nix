@@ -55,7 +55,6 @@ in
         "vdir" = "vdir --color=auto";
         "wget" = "wget -c";
       };
-      command-not-found.enable = false;
       fish = {
         enable = true;
         vendor = {
@@ -70,7 +69,7 @@ in
           "gpr" = "git pull --rebase";
           "gpull" = "git pull";
           "gpush" = "git push";
-          "reb" = "sudo nixos-rebuild switch -L";
+          #"reb" = "sudo nixos-rebuild switch -L";
           "roll" = "sudo nixos-rebuild switch --rollback";
           "run" = "nix run nixpkgs#";
           "reloc-us" = "sudo tailscale up --exit-node=100.75.73.33";

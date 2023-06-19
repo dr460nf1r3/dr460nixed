@@ -8,6 +8,13 @@
     # Chaotic Nyx!
     chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
+    # Garuda Linux subsystem - soon to have more options from the system
+    garuda = {
+      url = "/home/nico/Documents/misc/garuda-nix-subsystem";
+      inputs.chaotic.follows = "chaotic-nyx";
+      inputs.garuda-nixpkgs.follows = "chaotic-nyx/nixpkgs";
+    };
+
     # Home configuration management
     home-manager = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -47,16 +54,15 @@
   };
 
   outputs =
-    { chaotic-nyx
-    , home-manager
+    { home-manager
     , nixd
-    , nixpkgs
+    , garuda
     , sops-nix
     , stylix
     , ...
     } @ inputs:
     let
-      nixos = nixpkgs;
+      nixos = garuda;
       system = "x86_64-linux";
       specialArgs = {
         sources = {
@@ -67,7 +73,6 @@
       };
       defaultModules = [
         ./modules/default.nix
-        chaotic-nyx.nixosModules.default
         home-manager.nixosModules.home-manager
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
@@ -75,9 +80,8 @@
           nixpkgs.overlays = [ nixd.overlays.default ];
         }
       ];
-      pkgs = import nixpkgs {
+      pkgs = import garuda.nixpkgs {
         inherit system;
-        config = { tarball-ttl = 0; };
       };
     in
     {
@@ -101,12 +105,12 @@
       };
 
       # Defines a formatter for "nix fmt"
-      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+      formatter.${system} = nixos.legacyPackages.${system}.nixpkgs-fmt;
 
       # Colmena profiles for easy deployment
       colmena = {
         meta = {
-          nixpkgs = import nixpkgs {
+          nixpkgs = import garuda.nixpkgs {
             overlays = [ nixd.overlays.default ];
             system = "${system}";
           };
@@ -159,47 +163,47 @@
 
       # All the system configurations (flake)
       # My old laptop serving as TV
-      nixosConfigurations."tv-nixos" = nixos.lib.nixosSystem {
+      nixosConfigurations."tv-nixos" = garuda.lib.garudaSystem {
         inherit system;
         modules = defaultModules
           ++ [ ./hosts/tv-nixos/tv-nixos.nix ];
         inherit specialArgs;
       };
       # My main device (Lenovo Slim 7)
-      nixosConfigurations."dragons-ryzen" = nixos.lib.nixosSystem {
+      nixosConfigurations."dragons-ryzen" = garuda.lib.garudaSystem {
         inherit system;
         modules = defaultModules
           ++ [ ./hosts/dragons-ryzen/dragons-ryzen.nix ];
         inherit specialArgs;
       };
       # Free Tier Oracle aarch64 VM
-      nixosConfigurations."oracle-dragon" = nixos.lib.nixosSystem {
+      nixosConfigurations."oracle-dragon" = garuda.lib.garudaSystem {
         system = "aarch64-linux";
         modules = defaultModules
           ++ [ ./hosts/oracle-dragon/oracle-dragon.nix ];
         inherit specialArgs;
       };
       # My Raspberry Pi 4B
-      nixosConfigurations."rpi-dragon" = nixos.lib.nixosSystem {
+      nixosConfigurations."rpi-dragon" = garuda.lib.garudaSystem {
         system = "aarch64-linux";
         modules = defaultModules
           ++ [ ./hosts/rpi-dragon/rpi-dragon.nix ];
         inherit specialArgs;
       };
       # For WSL, mostly used at work only
-      nixosConfigurations."nixos-wsl" = nixos.lib.nixosSystem {
+      nixosConfigurations."nixos-wsl" = garuda.lib.garudaSystem {
         inherit system;
         modules = defaultModules
           ++ [ ./hosts/nixos-wsl/nixos-wsl.nix ];
         inherit specialArgs;
       };
       # To-do for installations
-      nixosConfigurations."live-usb" = nixos.lib.nixosSystem {
+      nixosConfigurations."live-usb" = garuda.lib.garudaSystem {
         inherit system;
         modules = defaultModules
           ++ [
           ./hosts/live-usb/live-usb.nix
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          "${garuda}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
         ];
         inherit specialArgs;
       };

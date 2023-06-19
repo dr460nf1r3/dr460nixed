@@ -27,11 +27,7 @@ in
 
   # Enable BBR & cake
   boot.kernelModules = [ "tcp_bbr" ];
-  boot.kernel.sysctl = {
-    "net.core.default_qdisc" = "cake";
-    "net.ipv4.tcp_congestion_control" = "bbr";
-    "net.ipv4.tcp_fin_timeout" = 5;
-  };
+
 
   # Tailscale network to connect the devices
   networking.firewall.trustedInterfaces = [ "tailscale0" ];

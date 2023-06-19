@@ -88,10 +88,6 @@
     desktops.enable = true;
     development.enable = true;
     gaming.enable = true;
-    garuda-chroot = {
-      enable = true;
-      root = "/var/lib/machines/garuda";
-    };
     performance-tweaks.enable = true;
     school = true;
     yubikey = true;

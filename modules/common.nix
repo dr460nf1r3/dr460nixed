@@ -111,7 +111,6 @@ in
       enable = true;
       interval = "hourly";
       localuser = null;
-      locate = pkgs.plocate;
     };
 
     # Who needs documentation when there is the internet? #bl04t3d
@@ -143,7 +142,7 @@ in
       gc = {
         automatic = true;
         dates = "daily";
-        options = "--delete-older-than 5d";
+        # options = "--delete-older-than 5d";
       };
 
       settings = {
@@ -215,7 +214,7 @@ in
     };
 
     # Print a diff when running system updates
-    system.activationScripts.diff = ''
+    system.activationScripts.diff = lib.mkForce ''
       if [[ -e /run/current-system ]]; then
         (
           for i in {1..3}; do
