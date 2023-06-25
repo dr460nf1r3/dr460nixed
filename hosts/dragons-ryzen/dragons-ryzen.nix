@@ -95,12 +95,7 @@
   garuda.garuda-chroot.enable = true;
   garuda.gaming.enable = true;
   garuda.performance-tweaks.cachyos-kernel = true;
-  garuda.locales = {
-    defaultLocale = "de_DE.UTF-8";
-    defaultUnits = "en_GB.UTF-8";
-    keymap = "de";
-    timezone = "Europe/Berlin";
-  };
+
 
   # Virt-manager requires iptables to let guests have internet
   networking.nftables.enable = lib.mkForce false;
