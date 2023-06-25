@@ -36,12 +36,6 @@ in
     users."nico" = import ../../configurations/home/nico.nix;
   };
 
-  # Enable a few selected custom settings
-  dr460nixed = {
-    common.enable = true;
-    shells.enable = true;
-  };
-
   # Override this to always run fish & workaround fastfetch error
   programs.bash.shellInit = lib.mkForce ''
     exec "${pkgs.fish}/bin/fish"

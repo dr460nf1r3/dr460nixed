@@ -120,13 +120,13 @@
 
   # Enable a few selected custom settings
   dr460nixed = {
-    common.enable = true;
-    performance-tweaks.enable = true;
     rpi = true;
     servers.enable = true;
     servers.monitoring = true;
-    shells.enable = true;
   };
+
+  # Garuda Nix subsystem options
+  garuda.performance-tweaks.enable = true;
 
   # Add remote build machine
   nix.buildMachines = [

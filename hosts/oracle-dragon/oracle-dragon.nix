@@ -127,15 +127,15 @@
 
   # Enable a few selected custom settings
   dr460nixed = {
-    common.enable = true;
     docker-compose-runner."oracle-dragon" = {
       source = ../../configurations/docker-compose/oracle-dragon;
     };
-    performance-tweaks.enable = true;
     servers.enable = true;
     servers.monitoring = true;
-    shells.enable = true;
   };
+
+  # Garuda Nix subsystem options
+  garuda.performance-tweaks.enable = true;
 
   # Mattermost instance
   services.mattermost = {

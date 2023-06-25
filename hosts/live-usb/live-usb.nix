@@ -11,11 +11,12 @@
 
   # Enable a few selected custom settings
   dr460nixed = {
-    common.enable = true;
+    chromium = true;
     desktops.enable = true;
-    shells.enable = true;
-    boot.enable = true;
   };
+
+  # Garuda Nix subsystem options
+  garuda.dr460nized.enable = true;
 
   # This seems to be needed for not getting "root account locked"
   users.mutableUsers = lib.mkForce true;

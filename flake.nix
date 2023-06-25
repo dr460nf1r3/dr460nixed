@@ -105,63 +105,9 @@
       };
 
       # Defines a formatter for "nix fmt"
-      formatter.${system} = nixos.legacyPackages.${system}.nixpkgs-fmt;
+      formatter.${system} = garuda.nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
 
-      # Colmena profiles for easy deployment
-      colmena = {
-        meta = {
-          nixpkgs = import garuda.nixpkgs {
-            overlays = [ nixd.overlays.default ];
-            system = "${system}";
-          };
-          inherit specialArgs;
-        };
-        defaults = {
-          deployment = {
-            targetUser = "deploy";
-          };
-          imports = defaultModules;
-        };
-        # My main device (Lenovo Slim 7)
-        dragons-ryzen = {
-          deployment = {
-            allowLocalDeployment = true;
-            tags = [ "laptops" "main" ];
-            targetHost = "100.99.129.81";
-          };
-          imports = [ ./hosts/dragons-ryzen/dragons-ryzen.nix ];
-        };
-        # My old laptop serving as TV
-        tv-nixos = {
-          deployment = {
-            tags = [ "servers" "tv" ];
-            targetHost = "100.120.171.12";
-          };
-          imports = [ ./hosts/tv-nixos/tv-nixos.nix ];
-        };
-        # Free Tier Oracle aarch64 VM
-        oracle-dragon = {
-          deployment = {
-            buildOnTarget = true;
-            tags = [ "oracle" "servers" ];
-            targetHost = "100.86.102.115";
-          };
-          imports = [ ./hosts/oracle-dragon/oracle-dragon.nix ];
-          nixpkgs.system = "aarch64-linux";
-        };
-        # My Raspberry Pi 4B
-        rpi-dragon = {
-          deployment = {
-            buildOnTarget = true;
-            tags = [ "rpi" "servers" ];
-            targetHost = "100.85.210.126";
-          };
-          imports = [ ./hosts/rpi-dragon/rpi-dragon.nix ];
-          nixpkgs.system = "aarch64-linux";
-        };
-      };
-
-      # All the system configurations (flake)
+      # All the system configurations
       # My old laptop serving as TV
       nixosConfigurations."tv-nixos" = garuda.lib.garudaSystem {
         inherit system;
