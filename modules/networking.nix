@@ -14,20 +14,10 @@ in
     networkmanager = mkIf cfg.desktops.enable or cfg.rpi {
       dns = "none";
       enable = true;
-      unmanaged = [ "lo" "docker0" ];
     };
     # Enable nftables instead of iptables
     nftables.enable = true;
-    # Disable non-NetworkManager
-    useDHCP = mkDefault false;
   };
-
-  # Enable wireless database
-  hardware.wirelessRegulatoryDatabase = true;
-
-  # Enable BBR & cake
-  boot.kernelModules = [ "tcp_bbr" ];
-
 
   # Tailscale network to connect the devices
   networking.firewall.trustedInterfaces = [ "tailscale0" ];

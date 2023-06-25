@@ -125,11 +125,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1687542138,
-        "narHash": "sha256-fDplTvWbXF8shz+f5flooXEk8zDL8VMKZ89zo4RGkJo=",
+        "lastModified": 1687664367,
+        "narHash": "sha256-tTL745eL+YNXIc6urhPRU7VZ7tzi6P+Yoc8TO5m9Kac=",
         "owner": "wamserma",
         "repo": "flake-programs-sqlite",
-        "rev": "b7848671ab3315aaf0ecad6edd8c28bdaffa7dc7",
+        "rev": "6c82211a5a82d0c0ab283d2f9fa84ab692ef195a",
         "type": "github"
       },
       "original": {
@@ -185,18 +185,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1687595866,
-        "narHash": "sha256-JfXt/wuADwLk54H2Yqaau0gqmorSTAhQz1KYy9WJxwY=",
-        "owner": "garuda-linux",
-        "repo": "garuda-nix-subsystem",
-        "rev": "2d8c31ad98723d99fed6bc8b8af5ba13190a1d74",
-        "type": "gitlab"
+        "lastModified": 1687668555,
+        "narHash": "sha256-YqRtcnj1ADvdUavDG7qQTDILGK4cDXKTgjFVAERyWLQ=",
+        "type": "git",
+        "url": "file:///home/nico/Documents/misc/garuda-nix-subsystem"
       },
       "original": {
-        "owner": "garuda-linux",
-        "ref": "main",
-        "repo": "garuda-nix-subsystem",
-        "type": "gitlab"
+        "type": "git",
+        "url": "file:///home/nico/Documents/misc/garuda-nix-subsystem"
       }
     },
     "home-manager": {

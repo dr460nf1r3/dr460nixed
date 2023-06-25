@@ -19,7 +19,6 @@
     # The new AMD Pstate driver & needed modules
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
     kernelModules = [ "acpi_call" "amdgpu" "amd-pstate=passive" ];
-    kernelPackages = pkgs.linuxPackages_cachyos;
     kernelParams = [ "initcall_blacklist=acpi_cpufreq_init" ];
     loader = {
       efi.canTouchEfiVariables = true;
@@ -87,10 +86,20 @@
     chromium = true;
     desktops.enable = true;
     development.enable = true;
-    gaming.enable = true;
-    performance-tweaks.enable = true;
     school = true;
     yubikey = true;
+  };
+
+  garuda.dr460nized.enable = true;
+  garuda.performance-tweaks.enable = true;
+  garuda.garuda-chroot.enable = true;
+  garuda.gaming.enable = true;
+  garuda.performance-tweaks.cachyos-kernel = true;
+  garuda.locales = {
+    defaultLocale = "de_DE.UTF-8";
+    defaultUnits = "en_GB.UTF-8";
+    keymap = "de";
+    timezone = "Europe/Berlin";
   };
 
   # Virt-manager requires iptables to let guests have internet

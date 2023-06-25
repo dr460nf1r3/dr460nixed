@@ -20,20 +20,7 @@ in
 
   config = mkIf cfg.enable {
     boot = {
-      consoleLogLevel = 0;
-      initrd = {
-        # extremely experimental, just the way I like it on a production machine
-        systemd.enable = true;
-
-        # strip copied binaries and libraries from inframs
-        # saves 30~ mb space according to the nix derivation
-        systemd.strip = true;
-        verbose = false;
-      };
       kernelParams = [
-        # enables calls to ACPI methods through /proc/acpi/call
-        "acpi_call"
-
         # https://en.wikipedia.org/wiki/Kernel_page-table_isolation
         "pti=on"
 
@@ -71,9 +58,6 @@ in
         # allows systemd to set and save the backlight state
         "acpi_backlight=native"
 
-        # tell the kernel to not be verbose
-        "quiet"
-
         # disable systemd status messages
         # rd prefix means systemd-udev will be used instead of initrd
         "rd.systemd.show_status=auto"
@@ -91,15 +75,6 @@ in
 
         generationsDir.copyKernels = true;
         timeout = 1;
-      };
-      plymouth = {
-        enable = true;
-        theme = "bgrt";
-      };
-      tmp = {
-        # If not using tmpfs, which is naturally purged on reboot, we must clean
-        # /tmp ourselves. /tmp should be volatile storage!
-        cleanOnBoot = mkDefault (!config.boot.tmp.useTmpfs);
       };
     };
   };
