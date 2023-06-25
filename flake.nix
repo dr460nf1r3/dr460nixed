@@ -2,17 +2,27 @@
   description = "Dr460nixed NixOS flake ❄️";
 
   inputs = {
-    # We roll unstable, as usual
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # We roll unstable, as usual - unfree packages enabled
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    # This enables unfree packages on top of nixpkgs-unstable  
+    nixpkgs = {
+      url = "github:numtide/nixpkgs-unfree";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     # Chaotic Nyx!
     chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
+    # For accessing deploy-rs' utility Nix functions
+    deploy-rs.url = "github:serokell/deploy-rs";
 
     # Garuda Linux subsystem - soon to have more options from the system
     garuda = {
       inputs.chaotic.follows = "chaotic-nyx";
       inputs.garuda-nixpkgs.follows = "chaotic-nyx/nixpkgs";
       url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
+      # url = "/home/nico/Documents/misc/garuda-nix-subsystem/";
     };
 
     # Home configuration management
@@ -25,12 +35,6 @@
     keys_nico = {
       flake = false;
       url = "https://github.com/dr460nf1r3.keys";
-    };
-
-    # Prismlauncher
-    nix-minecraft = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:misterio77/nix-minecraft";
     };
 
     # Nixd language server
@@ -54,22 +58,25 @@
   };
 
   outputs =
-    { home-manager
-    , nixd
+    { deploy-rs
     , garuda
+    , home-manager
+    , nixd
+    , nixpkgs
+    , self
     , sops-nix
     , stylix
     , ...
     } @ inputs:
     let
-      nixos = garuda;
+      nixos = garuda.nixpkgs;
       system = "x86_64-linux";
       specialArgs = {
         sources = {
           chaotic-toolbox = inputs.src-chaotic-toolbox;
           repoctl = inputs.src-repoctl;
         };
-        keys = { nico = inputs.keys_nico; };
+        keys.nico = inputs.keys_nico;
       };
       defaultModules = [
         ./modules/default.nix
@@ -80,9 +87,9 @@
           nixpkgs.overlays = [ nixd.overlays.default ];
         }
       ];
-      pkgs = import garuda.nixpkgs {
-        inherit system;
-      };
+      pkgs = import garuda.nixpkgs { inherit system; };
+      sshUser = "deploy";
+      user = "root";
     in
     {
       # The default checks to run on Nix files
@@ -93,8 +100,8 @@
         name = "dr460nixed";
         packages = with pkgs; [
           age
-          colmena
           deadnix
+          deploy-rs
           git
           gnupg
           nix
@@ -152,6 +159,36 @@
           "${garuda}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
         ];
         inherit specialArgs;
+      };
+
+      # Deployment configurations for deploy-rs
+      deploy.nodes = {
+        "tv-nixos" = {
+          hostname = "100.120.171.12";
+          inherit sshUser;
+          inherit user;
+          profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."tv-nixos";
+        };
+        "dragons-ryzen" = {
+          hostname = "127.0.0.1";
+          inherit sshUser;
+          inherit user;
+          profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."dragons-ryzen";
+        };
+        "oracle-dragon" = {
+          hostname = "100.86.102.115";
+          inherit sshUser;
+          inherit user;
+          profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations."oracle-dragon";
+          remoteBuild = true;
+        };
+        "rpi-dragon" = {
+          hostname = "100.85.210.126";
+          inherit sshUser;
+          inherit user;
+          profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations."rpi-dragon";
+          remoteBuild = true;
+        };
       };
     };
 }

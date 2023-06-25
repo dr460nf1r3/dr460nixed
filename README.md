@@ -17,7 +17,7 @@ This repo contains my NixOS dotfiles. All of my devices are going to be added he
 - Additional packages not existing in Nixpkgs (yet) via **chaotic-nyx**
 - Secrets are managed via **nix-sops**
 - Automated flake building when pushing to main & pushing to **Cachix** via **GitHub Actions**
-- Easy building of configurations & deployment via **Colmena**
+- Easy building of configurations & deployment via **deploy-rs**
 
 Other, smaller tweaks I particularly like about this setup include:
 
@@ -29,28 +29,27 @@ Other, smaller tweaks I particularly like about this setup include:
 ## Structure
 
 - `flake.nix`: Entrypoint for hosts and home configurations. Also exposes a
-  devshell for bootstrapping (`nix develop` or `nix-shell`) as well as Colmena configs
+  devshell for bootstrapping (`nix develop` or `nix-shell`) as well as deploy-rs configs
 - `apps`: Packages built from source
 - `configurations`: All the Nix configurations not available via modules, eg. home-manager configurations
 - `hosts`: NixOS Configurations, accessible via `nixos-rebuild --flake`
 - `modules`: The major part of the system configurations, exposes `dr460nixed.*` options
 - `overlays`: Patches and version overrides for some packages
-- `pkgs`: My custom packages
+- `pkgs`: My custom packages not available in Chaotic Nyx
 
 ## Module options
+
+A lot of those have been moved to the [Garuda Nix Subsystem](https://gitlab.com/garuda-linux/garuda-nix-subsystem).
 
 - `dr460nixed.auto-upgrade.enable` (default false) - enables auto-upgrading the system daily by pulling the updated Nix flake from the repo
 - `dr460nixed.common.enable` (default true) - common options for every system
 - `dr460nixed.desktops.enable` (default false) - options for desktop systems
 - `dr460nixed.development.enable` (default false) - enables a development environment
 - `dr460nixed.docker-compose-runner` (default false) - runs a docker-compose.yml and supplies an additional .env file for secrets if desired
-- `dr460nixed.gaming.enable` (default false) - gaming-related apps & options
-- `dr460nixed.garuda-chroot` (default false) - mounts my Garuda BTRFS subvolumes and creates a systemd-nspawn machine from it
 - `dr460nixed.hardening.enable` (default true) - system hardening
 - `dr460nixed.live-cd` (default false) - live CD applications
 - `dr460nixed.locales` (default true) - does all the localization setup / console font config
 - `dr460nixed.nodocs` (default true) - removes unneeded documentation to save space
-- `dr460nixed.performance-tweaks` (default false) - performance-enhancing options
 - `dr460nixed.rpi` (default false) - Raspberry Pi related things
 - `dr460nixed.school` (default false) - things I need for school
 - `dr460nixed.servers.enable` (default false) - common server options

@@ -115,18 +115,16 @@ in
 
         # A few extra binary caches and their public keys
         substituters = [
-          "https://colmena.cachix.org"
           "https://dr460nf1r3.cachix.org"
           "https://garuda-linux.cachix.org"
           "https://nix-community.cachix.org"
-          "https://nixpkgs-unfree.cachix.org"
+          "https://numtide.cachix.org"
         ];
         trusted-public-keys = [
-          "colmena.cachix.org-1:7BzpDnjjH8ki2CT3f6GdOk7QAzPOl+1t3LvTLXqYcSg="
           "dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU="
           "garuda-linux.cachix.org-1:tWw7YBE6qZae0L6BbyNrHo8G8L4sHu5QoDp0OXv70bg="
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
+          "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
         ];
 
         # Enable certain system features

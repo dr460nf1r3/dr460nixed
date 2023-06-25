@@ -19,8 +19,8 @@ in
         cached-nix-shell
         cachix
         cloudflared
-        colmena
         curl
+        deploy-rs
         direnv
         duf
         exa
@@ -81,6 +81,7 @@ in
     ]) ++ optionals cfg.development.enable (with pkgs; [
       ansible
       bind.dnsutils
+      deadnix
       gitkraken
       heroku
       hugo

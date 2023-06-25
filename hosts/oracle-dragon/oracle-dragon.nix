@@ -135,7 +135,13 @@
   };
 
   # Garuda Nix subsystem options
-  garuda.performance-tweaks.enable = true;
+  garuda = {
+    hardware.enable = false;
+    performance-tweaks.enable = true;
+  };
+
+  # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # Mattermost instance
   services.mattermost = {

@@ -126,7 +126,10 @@
   };
 
   # Garuda Nix subsystem options
-  garuda.performance-tweaks.enable = true;
+  garuda = {
+    hardware.enable = false;
+    performance-tweaks.enable = true;
+  };
 
   # Add remote build machine
   nix.buildMachines = [
