@@ -17,7 +17,6 @@
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-    kernelPackages = pkgs.linuxPackages_cachyos;
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -45,12 +44,15 @@
     docker-compose-runner."tv-nixos" = {
       source = ../../configurations/docker-compose/tv-nixos;
     };
-    performance-tweaks.enable = true;
     servers = {
       enable = true;
       monitoring = true;
     };
   };
+
+  garuda.dr460nized.enable = true;
+  garuda.performance-tweaks.enable = true;
+  garuda.performance-tweaks.cachyos-kernel = true;
 
   # Yes, autologin on this one
   services.xserver.displayManager.sddm.settings = {

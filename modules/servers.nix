@@ -71,6 +71,14 @@ in
     services.netdata.python.extraPackages = ps: [ ps.psycopg2 ];
     systemd.services.netdata = { path = with pkgs; [ jq ]; };
 
+    # Connect to Netdata Cloud easily
+    services.netdata.claimTokenFile = config.sops.secrets."api_keys/netdata".path;
+    sops.secrets."api_keys/netdata" = {
+      mode = "0600";
+      owner = "netdata";
+      path = "/run/secrets/api_keys/netadata";
+    };
+
     # The Nginx QUIC package with Brotli modules
     services.nginx.package = pkgs.nginxQuic.override { doCheck = false; };
     services.nginx.additionalModules = with pkgs; [ nginxModules.brotli ];
