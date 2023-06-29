@@ -37,11 +37,11 @@
         "yuzu-ea-git-src": "yuzu-ea-git-src"
       },
       "locked": {
-        "lastModified": 1687964877,
-        "narHash": "sha256-LIKe3h80fXU995Pif0F2jTB4dzQKKSf82VXYwc1YP9U=",
+        "lastModified": 1688066595,
+        "narHash": "sha256-xJtmWW8wGK6EZWd13GvJD6NavW0z9uwj6h5tDOqBnaQ=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "fe358e3175baa65b18574876c8a7400e5ea61193",
+        "rev": "7b5c3ed23c2b7b94976fa82cf32afe4fd31d149a",
         "type": "github"
       },
       "original": {
@@ -313,11 +313,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1688022118,
-        "narHash": "sha256-/Ac7I4VbYSNV0hla7OvX1MmOhPPMXitFsUkN+jenbrM=",
+        "lastModified": 1688064669,
+        "narHash": "sha256-/0kg/mvMdXm9dlF1ITJOY4kHBvILiSEgvf+FAsa8Jmc=",
         "owner": "nix-community",
         "repo": "nixd",
-        "rev": "ffd08a8f1d2b354644d6ff7a97f70d3917b55a3e",
+        "rev": "c4557ca1c7955a08ed1cfc80f1edb844c582fc2b",
         "type": "github"
       },
       "original": {
