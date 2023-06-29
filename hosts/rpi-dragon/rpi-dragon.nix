@@ -125,7 +125,7 @@
     servers.monitoring = true;
   };
 
-  # Garuda Nix subsystem options
+  # Garuda Nix subsystem option
   garuda = {
     hardware.enable = false;
     performance-tweaks.enable = true;

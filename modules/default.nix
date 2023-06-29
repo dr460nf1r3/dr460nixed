@@ -8,6 +8,7 @@
     ./docker-compose-runner.nix
     ./development.nix
     ./hardening.nix
+    ./locales.nix
     ./misc.nix
     ./networking.nix
     ./servers.nix

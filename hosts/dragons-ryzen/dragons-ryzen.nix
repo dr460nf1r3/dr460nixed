@@ -90,12 +90,14 @@
     yubikey = true;
   };
 
-  garuda.dr460nized.enable = true;
-  garuda.performance-tweaks.enable = true;
-  garuda.garuda-chroot.enable = true;
-  garuda.gaming.enable = true;
-  garuda.performance-tweaks.cachyos-kernel = true;
-
+  # Garuda Nix subsystem option
+  garuda = {
+    dr460nized.enable = true;
+    performance-tweaks.enable = true;
+    garuda-chroot.enable = true;
+    gaming.enable = true;
+    performance-tweaks.cachyos-kernel = true;
+  };
 
   # Virt-manager requires iptables to let guests have internet
   networking.nftables.enable = lib.mkForce false;

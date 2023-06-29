@@ -50,9 +50,14 @@
     };
   };
 
-  garuda.dr460nized.enable = true;
-  garuda.performance-tweaks.enable = true;
-  garuda.performance-tweaks.cachyos-kernel = true;
+  # Garuda Nix subsystem options
+  garuda = {
+    dr460nized.enable = true;
+    performance-tweaks = {
+      enable = true;
+      cachyos-kernel = true;
+    };
+  };
 
   # Yes, autologin on this one
   services.xserver.displayManager.sddm.settings = {

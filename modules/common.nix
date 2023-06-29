@@ -50,14 +50,6 @@ in
       '';
     };
 
-    # Set our default locales
-    garuda.locales = {
-      defaultLocale = "de_DE.UTF-8";
-      defaultUnits = "en_GB.UTF-8";
-      keymap = "de";
-      timezone = "Europe/Berlin";
-    };
-
     # Increase open file limit for sudoers
     security.pam.loginLimits = [
       {
