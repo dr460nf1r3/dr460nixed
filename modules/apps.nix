@@ -68,7 +68,6 @@ in
       lm_sensors
       movit
       nextcloud-client
-      nheko
       obs-studio-wrapped
       qbittorrent
       spotify

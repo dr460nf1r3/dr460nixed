@@ -89,6 +89,9 @@ in
       nixos.enable = false;
     };
 
+    # Workaround this not compiling right now
+    services.ananicy.enable = mkForce false;
+
     # General nix settings
     nix = {
       # Do garbage collections whenever there is less than 1GB free space left
