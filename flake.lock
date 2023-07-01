@@ -37,11 +37,11 @@
         "yuzu-ea-git-src": "yuzu-ea-git-src"
       },
       "locked": {
-        "lastModified": 1688116357,
-        "narHash": "sha256-nRUdoZrANVvE7WdWDqeoIRI0OAVmmJsubKAXBSX8nGA=",
+        "lastModified": 1688129123,
+        "narHash": "sha256-JzPY3D8dtRdXgPaW2FF4RVnGTzWtszLxmEZ6XjaUX2Y=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "cdf4071aca4795108080ffc156cbbc97f4d72262",
+        "rev": "d5c67ca35b92f7f3540257f375403a3c4a8b1663",
         "type": "github"
       },
       "original": {
@@ -145,11 +145,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1688048704,
-        "narHash": "sha256-266cl+oLvmt9XENVVzaTDHVGrivdJfq65heoLW5/uTQ=",
+        "lastModified": 1688145304,
+        "narHash": "sha256-P2TYNq/UM4U4t64fivJZKjtluaYdTVVEF7QTYa3atXE=",
         "owner": "wamserma",
         "repo": "flake-programs-sqlite",
-        "rev": "1d04d40a3bd7f9d54de2a4f202839ba4b221de1f",
+        "rev": "f74f8fc691195bb813ac5af5d0f2a7f9f6c24668",
         "type": "github"
       },
       "original": {
@@ -161,11 +161,11 @@
     "gamescope-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1687491122,
-        "narHash": "sha256-QrZ+VMHw/KT69PVv6nYTmyqkxid7nZZcrEjBcMP1AP8=",
+        "lastModified": 1688046330,
+        "narHash": "sha256-+JeGFwqIJ7r5ltLFw1YgLzCpzD5Wmh00Cg1Em2efHWY=",
         "owner": "ValveSoftware",
         "repo": "gamescope",
-        "rev": "9b70b3b9e38057d51e0a0bdbccf68b36a7e751a4",
+        "rev": "1b9b73625741dcb03ca9da67cd567d5411269240",
         "type": "github"
       },
       "original": {
@@ -187,11 +187,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1688076094,
-        "narHash": "sha256-ilytz9vqm+Sf0RobXH7OGJsYp6O99yz1m01DzMr1bYI=",
+        "lastModified": 1688162503,
+        "narHash": "sha256-oA6cDMyhN0ywJyVt70Q+Nisiv976AVJSqArNqy7gMuk=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "557d069b9b055259e8670c9ddb6f48c20d68b991",
+        "rev": "8f7650c050c0056b29a2991f852bd84aaf9a876f",
         "type": "gitlab"
       },
       "original": {
@@ -208,11 +208,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1687969886,
-        "narHash": "sha256-tC2qFLmuM0PFaw0tMHVcFmzsG/351q09qa1EpuL2n1U=",
+        "lastModified": 1688168945,
+        "narHash": "sha256-AfBdMc2JU54YKaOAvCR0t3dWQIA1bLKb9vGnaZJUh0E=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a7002d6bfca54742d5fc9b485a1879953b4585b9",
+        "rev": "44d1a8542ac92f0ce75d970090216245043a2709",
         "type": "github"
       },
       "original": {
@@ -276,11 +276,11 @@
     "mangohud-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1687780239,
-        "narHash": "sha256-SdVkvnt19JJ+gWEkpmt28XhRYFKGCMO80P91oal4YQ0=",
+        "lastModified": 1687900886,
+        "narHash": "sha256-8UMisF6fL2ng/3sMfONuKcn9eq8IYo4kOS7OXxoLr6k=",
         "owner": "flightlessmango",
         "repo": "MangoHud",
-        "rev": "e345195f564a6227f9a1974ede9d2a7d60f44b60",
+        "rev": "51162cb842df91bb44ee04101905f17cfae38dce",
         "type": "github"
       },
       "original": {
@@ -293,11 +293,11 @@
     "mesa-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1687865939,
-        "narHash": "sha256-ftHcTwpRkErgpieIFzfy6TdDlNDqGBXVtP2Q/fulQTo=",
+        "lastModified": 1688123532,
+        "narHash": "sha256-Fw+/WWAUyq9ivcMXao7sAIhWLQBZcsVp0k/cI34iHBo=",
         "owner": "chaotic-cx",
         "repo": "mesa-mirror",
-        "rev": "035e55f5aca9ef2da59bc834c2c0b8c18527e2e2",
+        "rev": "ac61162e2a903f973d0f98979c2b974346820d8b",
         "type": "github"
       },
       "original": {
@@ -479,11 +479,11 @@
     "river-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1687267589,
-        "narHash": "sha256-v12+HGX3aVCW1QrmHYaYYaX/ZhFpinFGOVRc2pZxKE0=",
+        "lastModified": 1687959512,
+        "narHash": "sha256-5wHyh3CXN4dJN+QZXFqtCBOTeqrO/B8cB4LtqDKv0Rg=",
         "ref": "refs/heads/master",
-        "rev": "470eb222803a6382fd444e133b675fcc168fbf60",
-        "revCount": 1035,
+        "rev": "0b142bd16baab2dba9e01444892032d05c179c2a",
+        "revCount": 1038,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/riverwm/river"
@@ -585,11 +585,11 @@
     "sway-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1687813066,
-        "narHash": "sha256-6q3Pp7LVC6kUb/9cED4MBR/7WYTFTCrl3ONi0mwg5pQ=",
+        "lastModified": 1687902057,
+        "narHash": "sha256-2plFvH3747PWHRF8il2FipRG79eXxgzTRpy4A24YHGY=",
         "owner": "swaywm",
         "repo": "sway",
-        "rev": "20c91335f6ba515e43b444fafd52b822bd460eda",
+        "rev": "20ffe545bab3fe518d8d1be00949943f7d39cfe0",
         "type": "github"
       },
       "original": {
@@ -681,11 +681,11 @@
     "wlroots-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1687820952,
-        "narHash": "sha256-MtoPI7rjkRuTiUqPHKSVoFYlJS4XY1dOCgGQtr+cepA=",
+        "lastModified": 1688099510,
+        "narHash": "sha256-qXx5tBOt9Me8InuRsXKGG1I226A6vz1o2lo4JHrBBhM=",
         "ref": "master",
-        "rev": "9b9ee51b093bbb2f4a42dce9e4f0d34dcbef69ab",
-        "revCount": 6438,
+        "rev": "aa1055134da5f5f4f25a5781b43305b7de79fd99",
+        "revCount": 6458,
         "type": "git",
         "url": "https://gitlab.freedesktop.org/wlroots/wlroots.git"
       },
@@ -698,11 +698,11 @@
     "yuzu-ea-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1687561624,
-        "narHash": "sha256-+QKVwtImzCVEsui6NuGLkjbrVy03f8jmJ/4Bzb3M+Ug=",
+        "lastModified": 1688117056,
+        "narHash": "sha256-KckXkDBaoQ+V0AiGC+W2//Tp5myAECiW4KulV7JPYFM=",
         "owner": "pineappleEA",
         "repo": "pineapple-src",
-        "rev": "47d3d8f0dd9985cc6b0dc70404e19964e21cc491",
+        "rev": "0e8b3f02cf90490cf2205d6fb6137e6ffa6cc556",
         "type": "github"
       },
       "original": {
