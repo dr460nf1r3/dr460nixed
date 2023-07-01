@@ -57,7 +57,11 @@
   garuda = {
     dr460nized.enable = true;
     performance-tweaks.enable = true;
-    garuda-chroot.enable = true;
+    garuda-chroot = {
+      boot-uuid = "5772-1FF9";
+      enable = true;
+      root-uuid = "7e2d88b3-7268-4c25-9a7d-af700c07d96d";
+    };
     gaming.enable = true;
     performance-tweaks.cachyos-kernel = true;
   };
