@@ -20,10 +20,6 @@
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
     kernelModules = [ "acpi_call" "amdgpu" "amd-pstate=passive" ];
     kernelParams = [ "initcall_blacklist=acpi_cpufreq_init" ];
-    loader = {
-      efi.canTouchEfiVariables = true;
-      systemd-boot.enable = true;
-    };
   };
 
   # Hostname
@@ -38,7 +34,7 @@
 
   # Fix the fucking Wifi - https://github.com/NixOS/nixpkgs/issues/18410
   boot.extraModprobeConfig = ''
-      options iwlwifi power_save=0
+    options iwlwifi power_save=0
   '';
 
   # Bleeding edge Mesa - currently giving a slideshow
@@ -46,6 +42,7 @@
 
   # Enable a few selected custom settings
   dr460nixed = {
+    boot.enable = false;
     chromium = true;
     desktops.enable = true;
     development.enable = true;
@@ -56,14 +53,17 @@
   # Garuda Nix subsystem option
   garuda = {
     dr460nized.enable = true;
-    performance-tweaks.enable = true;
-    garuda-chroot = {
-      boot-uuid = "5772-1FF9";
-      enable = true;
-      root-uuid = "7e2d88b3-7268-4c25-9a7d-af700c07d96d";
-    };
     gaming.enable = true;
-    performance-tweaks.cachyos-kernel = true;
+    garuda-chroot = {
+      boot-uuid = "B101-5FCE";
+      enable = true;
+      root-uuid = "bec8156c-10e5-4f23-9e51-21b453d9fddd";
+    };
+    performance-tweaks = {
+      cachyos-kernel = true;
+      enable = true;
+    };
+    subsystem.imported-users.shared-home = true;
   };
 
   # Virt-manager requires iptables to let guests have internet
@@ -105,7 +105,6 @@
     owner = config.users.users.nico.name;
     path = "/home/nico/.ssh/id_rsa";
   };
-
 
   # NixOS stuff
   system.stateVersion = "22.11";

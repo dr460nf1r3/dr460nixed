@@ -22,13 +22,7 @@
       inputs.chaotic.follows = "chaotic-nyx";
       inputs.garuda-nixpkgs.follows = "chaotic-nyx/nixpkgs";
       url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
-      # url = "/home/nico/Documents/misc/garuda-nix-subsystem/";
-    };
-
-    # Home configuration management
-    home-manager = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/home-manager/master";
+      #url = "/home/nico/Documents/misc/garuda-nix-subsystem/";
     };
 
     # My SSH keys
@@ -126,7 +120,13 @@
       nixosConfigurations."dragons-ryzen" = garuda.lib.garudaSystem {
         inherit system;
         modules = defaultModules
-          ++ [ ./hosts/dragons-ryzen/dragons-ryzen.nix ];
+          ++ [
+          ./hosts/dragons-ryzen/dragons-ryzen.nix
+          {
+            garuda.subsystem.config = ./garuda-managed.json;
+            garuda.subsystem.enable = true;
+          }
+        ];
         inherit specialArgs;
       };
       # Free Tier Oracle aarch64 VM

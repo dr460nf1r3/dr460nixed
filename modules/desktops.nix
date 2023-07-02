@@ -24,16 +24,12 @@ in
     services.flatpak.enable = true;
 
     # Additional KDE packages not included by default
-    environment.systemPackages = with pkgs; [
-      jamesdsp
-    ];
+    environment.systemPackages = with pkgs; [ jamesdsp ];
 
     # Define the default fonts Fira Sans & Jetbrains Mono Nerd Fonts
     fonts.enableDefaultFonts = false;
 
     # # Kernel paramters & settings
-    boot.kernelParams = [
-      "mitigations=off"
-    ];
+    boot.kernelParams = [ "mitigations=off" ];
   };
 }

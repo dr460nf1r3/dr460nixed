@@ -50,8 +50,10 @@ in
         enable = true;
         parallelShutdown = 2;
         qemu = {
-          ovmf.enable = true;
-          ovmf.packages = [ pkgs.OVMFFull.fd ];
+          ovmf = {
+            enable = true;
+            packages = [ pkgs.OVMFFull.fd ];
+          };
           package = pkgs.qemu_kvm;
           swtpm.enable = true;
         };
