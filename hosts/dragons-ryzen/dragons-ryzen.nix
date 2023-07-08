@@ -52,33 +52,26 @@
 
   # Garuda Nix subsystem option
   garuda = {
+    btrfs-maintenance. = {
+      deduplication = true;
+      enable = true;
+    };
     dr460nized.enable = true;
     gaming.enable = true;
     garuda-chroot = {
       boot-uuid = "B101-5FCE";
       enable = true;
+      user = "nico";
       root-uuid = "bec8156c-10e5-4f23-9e51-21b453d9fddd";
     };
     performance-tweaks = {
       cachyos-kernel = true;
       enable = true;
     };
-    subsystem.imported-users.shared-home = true;
   };
 
   # Virt-manager requires iptables to let guests have internet
   networking.nftables.enable = lib.mkForce false;
-
-  # BTRFS stuff (filesystem deduplication in the background)
-  services.beesd.filesystems = {
-    root = {
-      spec = "LABEL=OS";
-      hashTableSizeMB = 2048;
-      verbosity = "crit";
-      extraOptions = [ "--loadavg-target" "1.0" ];
-    };
-  };
-  services.btrfs.autoScrub.enable = true;
 
   # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
