@@ -39,6 +39,7 @@ in
         ugrep
         wget
         whois
+        zellij
       ];
     in
     required-packages

@@ -33,8 +33,9 @@ in
   # Compatibility for GNOME apps
   dconf.enable = true;
 
-  # This was getting generated for whatever reason? Also we ship our own KDE theme!
+  # This was getting generated for whatever reason? Also we ship our own themes!
   stylix.targets = {
+    gtk.enable = false;
     kde.enable = false;
     swaylock.enable = false;
   };
