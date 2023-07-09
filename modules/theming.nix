@@ -78,6 +78,10 @@ in
     stylix.targets = {
       # Allow setting GTK theme, which fits best
       chromium.enable = false;
+      # Also looks quite out of place
+      grub.enable = false;
+      # Disable GTK/KDE target for Stylix as we supply KDE built files
+      gtk.enable = false;
       # Allow settings Plymouth bgrt without mkForce
       plymouth.enable = false;
     };

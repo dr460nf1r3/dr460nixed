@@ -33,8 +33,11 @@ in
   # Compatibility for GNOME apps
   dconf.enable = true;
 
-  # Disable GTK target for Stylix as we supply KDE built files
-  stylix.targets.gtk.enable = false;
+  # This was getting generated for whatever reason? Also we ship our own KDE theme!
+  stylix.targets = {
+    kde.enable = false;
+    swaylock.enable = false;
+  };
 
   # Enable Kvantum theme and GTK & place a few bigger files
   home.file = lib.mkIf immutable {

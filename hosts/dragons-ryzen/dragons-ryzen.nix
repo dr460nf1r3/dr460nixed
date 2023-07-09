@@ -52,7 +52,7 @@
 
   # Garuda Nix subsystem option
   garuda = {
-    btrfs-maintenance. = {
+    btrfs-maintenance = {
       deduplication = true;
       enable = true;
     };
