@@ -145,11 +145,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1688876158,
-        "narHash": "sha256-YbSfL2oMNNNBvPBxCuP3c9HRYSfTW0SiXdzWYmqLRFM=",
+        "lastModified": 1688937765,
+        "narHash": "sha256-xNx5onPLUvuzkWz2nYdAqMuYOELtOjyhg0lzIS0JSLo=",
         "owner": "wamserma",
         "repo": "flake-programs-sqlite",
-        "rev": "362e6dc5d3f50fae2f7d0dd4f1ca3d41313c7a2e",
+        "rev": "391a739b45a5333c4cd1607eca7343d8d991ce87",
         "type": "github"
       },
       "original": {
@@ -188,11 +188,11 @@
         "home-manager": "home-manager"
       },
       "locked": {
-        "lastModified": 1688902000,
-        "narHash": "sha256-Ovbm+ptg5sWVwDb3+2H51LIumLRVIKTmDhlMy4YV9HE=",
+        "lastModified": 1688940087,
+        "narHash": "sha256-bwoi+shvmP//3s2nYE75/9JtGIews3Qsrbj6tSFqN8I=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "24bdbe265b5fc67feb77270c62738e5562abad89",
+        "rev": "192cbacf2a20dc25beee8e2234b735d9b61e39fc",
         "type": "gitlab"
       },
       "original": {
@@ -604,11 +604,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1688842479,
-        "narHash": "sha256-IZnlGEqtYKk3EqAGPqpp5wsm6F9eOrOFhaCpg5uKv/k=",
+        "lastModified": 1688925359,
+        "narHash": "sha256-GJkkG16z7/VI1s4ZMSys6DMnAp18BOhcpdt/Xb9T6NM=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "f5c5e02d70ad3f0bca719e121b0bccab499209e7",
+        "rev": "5e7b312b5fcc5beb5b9a36e73f96c438fa74fcc9",
         "type": "github"
       },
       "original": {
