@@ -19,6 +19,7 @@
     # The new AMD Pstate driver & needed modules
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
     kernelModules = [ "acpi_call" "amdgpu" "amd-pstate=passive" ];
+    kernelPackages = lib.mkForce pkgs.linuxPackages_xanmod;
     kernelParams = [ "initcall_blacklist=acpi_cpufreq_init" ];
   };
 
@@ -39,6 +40,9 @@
 
   # Bleeding edge Mesa - currently giving a slideshow
   # chaotic.mesa-git.enable = true;
+
+  # Fix an issue
+  programs.command-not-found.enable = false;
 
   # Enable a few selected custom settings
   dr460nixed = {
