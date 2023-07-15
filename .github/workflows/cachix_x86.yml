@@ -33,6 +33,6 @@ jobs:
           name: dr460nf1r3
           signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
 
-      - run: echo $GARUDA_JSON > ./garuda-managed.json && git add ./garuda-managed.json
+      - run: sed -i 's/garuda.subsystem.enable = true/garuda.subsystem.enable = false/g' ./flake.nix
 
       - run: bash ./ci/push_to_cachix.sh
