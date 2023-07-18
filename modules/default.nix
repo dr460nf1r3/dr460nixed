@@ -13,6 +13,6 @@
     ./networking.nix
     ./servers.nix
     ./shells.nix
-    ./theming.nix
+    # ./theming.nix
   ];
 }

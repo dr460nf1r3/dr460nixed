@@ -34,11 +34,11 @@ in
   dconf.enable = true;
 
   # This was getting generated for whatever reason? Also we ship our own themes!
-  stylix.targets = {
-    gtk.enable = false;
-    kde.enable = false;
-    swaylock.enable = false;
-  };
+  # stylix.targets = {
+  #   gtk.enable = false;
+  #   kde.enable = false;
+  #   swaylock.enable = false;
+  # };
 
   # Enable Kvantum theme and GTK & place a few bigger files
   home.file = lib.mkIf immutable {

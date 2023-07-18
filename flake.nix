@@ -59,7 +59,6 @@
     , nixpkgs
     , self
     , sops-nix
-    , stylix
     , ...
     } @ inputs:
     let
@@ -76,7 +75,6 @@
         ./modules/default.nix
         home-manager.nixosModules.home-manager
         sops-nix.nixosModules.sops
-        stylix.nixosModules.stylix
         {
           nixpkgs.overlays = [ nixd.overlays.default ];
         }
