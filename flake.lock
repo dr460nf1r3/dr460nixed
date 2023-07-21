@@ -31,14 +31,15 @@
         "swaylock-plugin-git-src": "swaylock-plugin-git-src",
         "waynergy-git-src": "waynergy-git-src",
         "wlroots-git-src": "wlroots-git-src",
+        "yt-dlp-git-src": "yt-dlp-git-src",
         "yuzu-ea-git-src": "yuzu-ea-git-src"
       },
       "locked": {
-        "lastModified": 1689856005,
-        "narHash": "sha256-6cLIqVWgMTLFqx1e09wom6WKAkCiso77giT7BZulfus=",
+        "lastModified": 1689890248,
+        "narHash": "sha256-PFPRML09wUfWZDAYOMgbl90VuDyGALdGC5z5jO13MIU=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "47daf4699831ff72a1078abab043d094e64be5fe",
+        "rev": "23bcc3d489e4f3a5698e29fd8b4ab80219b19394",
         "type": "github"
       },
       "original": {
@@ -142,11 +143,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1689797005,
-        "narHash": "sha256-DGG5ajQ+pzufrI/xTbWXdsrPnOOWzkrO/gKnOY+kjHc=",
+        "lastModified": 1689852163,
+        "narHash": "sha256-VThV1VY3EN8VX7ng1miEY/hd22TshirT7c+Ex6euR9M=",
         "owner": "wamserma",
         "repo": "flake-programs-sqlite",
-        "rev": "e15b140bb5495438da4368724248aff55fac5226",
+        "rev": "ad115c13010331d20511925d8a956b8be9ddfc66",
         "type": "github"
       },
       "original": {
@@ -201,11 +202,11 @@
         "home-manager": "home-manager"
       },
       "locked": {
-        "lastModified": 1689804084,
-        "narHash": "sha256-m1bLdg/pTFMGjED4IkBov087j5NTYKqYDyTXJ2OCTEg=",
+        "lastModified": 1689890490,
+        "narHash": "sha256-qnnooCdduq2SaqJ/k1LcOID4YYaczsHIcH1hBLewres=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "6229e5bc15caae00703dcccd1b4310d5059ccd14",
+        "rev": "5bc4a5e842eac86b5ae82305c40dd50826495549",
         "type": "gitlab"
       },
       "original": {
@@ -223,11 +224,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1689802112,
-        "narHash": "sha256-Se7oHV/L0dHTQ4xp8MvYafaVdkSzF04Hx5NeloUYHtM=",
+        "lastModified": 1689875525,
+        "narHash": "sha256-fgUrFH3bMZ6R7qgBTfuTRGlkZXIkdyjndl6ZbExbjE8=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0cb3ac57fca6b52c42e4c0f560185540ae1dfb6c",
+        "rev": "1443abd2696ec6bd6fb9701e6c26b277a27b4a3e",
         "type": "github"
       },
       "original": {
@@ -242,11 +243,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1689802112,
-        "narHash": "sha256-Se7oHV/L0dHTQ4xp8MvYafaVdkSzF04Hx5NeloUYHtM=",
+        "lastModified": 1689891262,
+        "narHash": "sha256-Pc4wDczbdgd6QXKJIXprgxe7L9AVDsoAkMnvm5vmpUU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0cb3ac57fca6b52c42e4c0f560185540ae1dfb6c",
+        "rev": "ee5673246de0254186e469935909e821b8f4ec15",
         "type": "github"
       },
       "original": {
@@ -307,11 +308,11 @@
     "mangohud-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1689719228,
-        "narHash": "sha256-q6w7tOYEf8C7V0rgHxsBOwyD+gg+AgKbm5jIuicZVc0=",
+        "lastModified": 1689791145,
+        "narHash": "sha256-1Lne2Lq5hQyoCK9ywrC0aRRg7HPLnrbUK93eUl6rSOs=",
         "owner": "flightlessmango",
         "repo": "MangoHud",
-        "rev": "a05d576b4b92281d8a48bfe383a909e7006beffc",
+        "rev": "1182bcfbec58234979e107de88453c93f9b09523",
         "type": "github"
       },
       "original": {
@@ -324,11 +325,11 @@
     "mesa-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1689785639,
-        "narHash": "sha256-ailAcZjGylcLHuSHQkSoeeAo+Z2uVk8dDrnCzdV4JnQ=",
+        "lastModified": 1689851290,
+        "narHash": "sha256-f1jy8dDzYhVz0UMgVnjM0hzEZd4BqsSObXIoJTc90Oo=",
         "owner": "chaotic-cx",
         "repo": "mesa-mirror",
-        "rev": "2661e975dcac47c26bd13a158b7860bf384ffaab",
+        "rev": "95c9d3db32bd581adb52c7736801fd5f27d0332d",
         "type": "github"
       },
       "original": {
@@ -632,11 +633,11 @@
     "sway-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1689751713,
-        "narHash": "sha256-SR85FXdhXTwcAePPmmgu7KwNnsprmzHpylNpusROeJg=",
+        "lastModified": 1689834989,
+        "narHash": "sha256-QQOVim0U8uiAstPy9HMRBAl4McyvAdXoO44jCRlzVIQ=",
         "owner": "swaywm",
         "repo": "sway",
-        "rev": "ee4637b086aed256c7698b9f68786e6de5d8da00",
+        "rev": "c3e6390073167bae8245d7fac9b455f9f06a5333",
         "type": "github"
       },
       "original": {
@@ -725,6 +726,23 @@
         "ref": "master",
         "type": "git",
         "url": "https://gitlab.freedesktop.org/wlroots/wlroots.git"
+      }
+    },
+    "yt-dlp-git-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1689883792,
+        "narHash": "sha256-6w2nKRMh107BAIEErZSAa6CzZUNbL7Jj5RXKzZEoM+I=",
+        "owner": "yt-dlp",
+        "repo": "yt-dlp",
+        "rev": "9b16762f48914de9ac914601769c76668e433325",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yt-dlp",
+        "ref": "master",
+        "repo": "yt-dlp",
+        "type": "github"
       }
     },
     "yuzu-ea-git-src": {
