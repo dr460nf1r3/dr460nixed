@@ -44,7 +44,7 @@ services:
 
   # Forgejo server
   forgejo:
-    image: codeberg.org/forgejo/forgejo:1.19.4-0-arm64
+    image: codeberg.org/forgejo/forgejo:1.20.1-0-arm64
     container_name: forgejo
     environment:
       USER_UID: 1000
