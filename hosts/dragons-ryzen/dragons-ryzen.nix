@@ -18,7 +18,7 @@
     blacklistedKernelModules = [ "elan_i2c" ];
     # The new AMD Pstate driver & needed modules
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
-    kernelModules = [ "acpi_call" "amdgpu" "amd_pstate=guided" "amd_iommu=off" ];
+    kernelModules = [ "acpi_call" "amdgpu" "amd_pstate=passive" ];
   };
 
   # Hostname
@@ -32,7 +32,7 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Bleeding edge Mesa - currently giving a slideshow
-  chaotic.mesa-git.enable = true;
+ # chaotic.mesa-git.enable = true;
 
   # Fix an issue
   programs.command-not-found.enable = false;

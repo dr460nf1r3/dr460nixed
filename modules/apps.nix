@@ -59,7 +59,7 @@ in
       hunspellDicts.en_US
       inkscape
       krita
-      libreoffice-qt
+      # libreoffice-qt why it wants to compile suddenly?
       libsForQt5.kdenlive
       libsForQt5.kleopatra
       libsForQt5.krdc
