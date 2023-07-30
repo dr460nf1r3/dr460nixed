@@ -2,7 +2,7 @@
 set -euo pipefail
 
 FLAKE_DIR="$(pwd)"
-TARGETS_X86=("tv-nixos" "dragons-ryzen")
+TARGETS_X86=("tv-nixos") # "dragons-ryzen" currently not because of issues with garuda-managed.json
 TARGETS_AARCH64=("oracle-dragon" "pi-dragon")
 
 # Build every variation of the flake
