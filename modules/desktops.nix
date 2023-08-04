@@ -27,7 +27,7 @@ in
     environment.systemPackages = with pkgs; [ jamesdsp ];
 
     # Define the default fonts Fira Sans & Jetbrains Mono Nerd Fonts
-    fonts.enableDefaultFonts = false;
+    fonts.enableDefaultPackages = false;
 
     # Fix "the name ca.desrt.dconf was not provided by any .service files"
     # https://nix-community.github.io/home-manager/index.html

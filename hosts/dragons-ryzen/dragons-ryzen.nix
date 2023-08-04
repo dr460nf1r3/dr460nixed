@@ -24,7 +24,6 @@
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
     # The new AMD Pstate driver & needed modules
     kernelModules = [ "acpi_call" "amdgpu" "amd_pstate=passive" ];
-    kernelPackages = lib.mkForce pkgs.linuxPackages_xanmod;
     # Prevent the device waking up after going to sleep
     kernelParams = [
       "mem_sleep_default=deep"

@@ -87,6 +87,7 @@ in
       hugo
       jetbrains.pycharm-professional
       keybase-gui
+      mongodb-compass
       nix-prefetch-git
       nixd
       nixos-generators
