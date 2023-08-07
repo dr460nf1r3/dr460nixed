@@ -36,11 +36,11 @@
         "yuzu-ea-git-src": "yuzu-ea-git-src"
       },
       "locked": {
-        "lastModified": 1691322160,
-        "narHash": "sha256-RMZBmhVDwFQ/a5bqmEUhxQetYZQn/dCVffIKHc8MEEY=",
+        "lastModified": 1691345561,
+        "narHash": "sha256-O3kgHap5V1F34bVTb0OfB/aj5Di6F1JrMwbhy1A59Ak=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "c2e58c34b5a1869d492f9efcb926f81f81b7aaaf",
+        "rev": "804f6a9e4d401182de9c263fd8ed0cd4d6067e15",
         "type": "github"
       },
       "original": {
@@ -144,11 +144,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1691256753,
-        "narHash": "sha256-CCd/u3RWZ7559MgjM3zkpe/KDPSKsN+OBLjrpcNDF9U=",
+        "lastModified": 1691358738,
+        "narHash": "sha256-te/F0H/XGdipp3QzvwuPP5awJ43TJFF2txLbWHuYit4=",
         "owner": "wamserma",
         "repo": "flake-programs-sqlite",
-        "rev": "2ca353607c4071eed63f2ae582e4ebf73c0f031b",
+        "rev": "d56b826619225a51200dba8445e638069c8fab18",
         "type": "github"
       },
       "original": {
@@ -203,11 +203,11 @@
         "home-manager": "home-manager_2"
       },
       "locked": {
-        "lastModified": 1691272902,
-        "narHash": "sha256-8cjqSusSyIwCSt9evsAAE5+RymAHXH2PeV1xjyybzKA=",
+        "lastModified": 1691359292,
+        "narHash": "sha256-xGFp8J5G/iE4tx90AU71hwx8HmOskn8ScOMvbhXrBsc=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "11e79cd43090ac6bb53cbf83795ec131e24415c8",
+        "rev": "70b37925a60cc577dcb27d5049812b8ecebebac9",
         "type": "gitlab"
       },
       "original": {
@@ -246,11 +246,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1691225770,
-        "narHash": "sha256-O5slH8nW8msTAqVAS5rkvdHSkjmrO+JauuSDzZCmv2M=",
+        "lastModified": 1691312444,
+        "narHash": "sha256-J9e9dGwAPTX+UlAn8jehoyaEq6fwK+L+gunfx0cYT4E=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "0a014a729cdd54d9919ff36b714d047909d7a4c8",
+        "rev": "903e06d734bcae48efb79b9afd51b406d2744179",
         "type": "github"
       },
       "original": {
@@ -318,7 +318,7 @@
     "keys_nico": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-bjGTTIvcY63ND86cV15JJIhbH0rPmqkTZaWQFTTQME8=",
+        "narHash": "sha256-vpxhTHZTCwioN8JHjb0RYjNWZvKA4VbzBxTs+8clLqc=",
         "type": "file",
         "url": "https://github.com/dr460nf1r3.keys"
       },
@@ -382,11 +382,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1691186842,
-        "narHash": "sha256-wxBVCvZUwq+XS4N4t9NqsHV4E64cPVqQ2fdDISpjcw0=",
+        "lastModified": 1691276849,
+        "narHash": "sha256-RNnrzxhW38SOFIF6TY/WaX7VB3PCkYFEeRE5YZU+wHw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "18036c0be90f4e308ae3ebcab0e14aae0336fe42",
+        "rev": "5faab29808a2d72f4ee0c44c8e850e4e6ada972f",
         "type": "github"
       },
       "original": {
@@ -432,11 +432,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1691186842,
-        "narHash": "sha256-wxBVCvZUwq+XS4N4t9NqsHV4E64cPVqQ2fdDISpjcw0=",
+        "lastModified": 1691276849,
+        "narHash": "sha256-RNnrzxhW38SOFIF6TY/WaX7VB3PCkYFEeRE5YZU+wHw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "18036c0be90f4e308ae3ebcab0e14aae0336fe42",
+        "rev": "5faab29808a2d72f4ee0c44c8e850e4e6ada972f",
         "type": "github"
       },
       "original": {
