@@ -45,6 +45,15 @@ in
 
     # Libvirt & Podman with docker alias
     virtualisation = {
+      docker = {
+        autoPrune = {
+          enable = true;
+          flags = [ "--all" ];
+        };
+        enable = true;
+        enableOnBoot = false;
+        storageDriver = "overlay2";
+      };
       kvmgt.enable = true;
       libvirtd = {
         enable = true;
@@ -59,15 +68,6 @@ in
         };
       };
       lxd.enable = false;
-      podman = {
-        autoPrune = {
-          enable = true;
-          flags = [ "--all" ];
-        };
-        dockerCompat = true;
-        dockerSocket.enable = true;
-        enable = true;
-      };
     };
 
     # Allow to cross-compile to aarch64
