@@ -80,6 +80,7 @@ in
       xdg-ninja
     ]) ++ optionals cfg.development.enable (with pkgs; [
       ansible
+      beekeeper-studio
       bind.dnsutils
       deadnix
       gitkraken
