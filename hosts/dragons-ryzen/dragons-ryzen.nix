@@ -16,11 +16,6 @@
     supportedFilesystems = [ "btrfs" ];
     # Needed to get the touchpad to work
     blacklistedKernelModules = [ "elan_i2c" ];
-    # Used to prevent a lot of wifi disconnects
-    extraModprobeConfig = ''
-      options iwlwifi power_save=0
-      options iwlmvm power_scheme=1
-    '';
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
     # The new AMD Pstate driver & needed modules
     kernelModules = [ "acpi_call" "amdgpu" "amd_pstate=passive" ];
