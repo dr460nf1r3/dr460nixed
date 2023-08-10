@@ -76,7 +76,7 @@ in
     sops.secrets."api_keys/netdata" = {
       mode = "0600";
       owner = "netdata";
-      path = "/run/secrets/api_keys/netadata";
+      path = "/run/secrets/api_keys/netdata";
     };
 
     # The Nginx QUIC package with Brotli modules

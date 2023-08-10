@@ -63,7 +63,7 @@ in
             enable = true;
             packages = [ pkgs.OVMFFull.fd ];
           };
-          package = pkgs.qemu_kvm;
+          package = pkgs.qemu_full;
           swtpm.enable = true;
         };
       };
