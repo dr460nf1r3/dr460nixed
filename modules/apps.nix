@@ -149,7 +149,7 @@ in
       yarn
     ]) ++ optionals cfg.yubikey (with pkgs; [
       yubikey-personalization
-      yubioath-flutter
+      #yubioath-flutter
     ]) ++ optionals cfg.school (with pkgs; [
       speedcrunch
       teams-for-linux

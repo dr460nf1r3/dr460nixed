@@ -56,7 +56,7 @@ in
       };
       kvmgt.enable = true;
       libvirtd = {
-        enable = true;
+        enable = false;
         parallelShutdown = 2;
         qemu = {
           ovmf = {

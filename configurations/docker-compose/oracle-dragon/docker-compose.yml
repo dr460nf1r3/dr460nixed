@@ -42,10 +42,11 @@ services:
       - rustdesk-net
     restart: unless-stopped
 
-  # GitHub runner for my projects
+  # GitHub runner for my projects - privileged to allow mounting img files
   github_runner:
     image: myoung34/github-runner:latest
     container_name: github_runner
+    privileged: true
     environment:
       REPO_URL: https://github.com/dr460nf1r3/school-rpi
       RUNNER_TOKEN: ${RUNNER_TOKEN}
@@ -54,9 +55,6 @@ services:
       RUNNER_NAME: oracle-dragon
       RUNNER_SCOPE: 'repo'
       RUNNER_WORKDIR: /tmp/runner/work
-    security_opt:
-      # needed on SELinux systems to allow docker container to manage other docker containers
-      - label:disable
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
       - '/tmp/runner:/tmp/runner'

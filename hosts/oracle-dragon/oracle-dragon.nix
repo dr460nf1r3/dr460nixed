@@ -63,8 +63,6 @@
     servers.enable = true;
     servers.monitoring = true;
   };
-
-  # Supply secrets to Docker
   sops.secrets."api_keys/github_runner" = {
     mode = "0600";
     owner = config.users.users.nico.name;

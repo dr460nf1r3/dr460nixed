@@ -48,7 +48,7 @@
     desktops.enable = true;
     development.enable = true;
     school = true;
-    yubikey = true;
+    #yubikey = true;
   };
 
   # Garuda Nix subsystem option
@@ -61,7 +61,7 @@
     gaming.enable = true;
     garuda-chroot = {
       boot-uuid = "B101-5FCE";
-      enable = true;
+      enable = false;
       user = "nico";
       root-uuid = "bec8156c-10e5-4f23-9e51-21b453d9fddd";
     };
