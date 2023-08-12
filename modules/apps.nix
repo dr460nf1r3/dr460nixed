@@ -25,6 +25,8 @@ in
         duf
         exa
         fastfetch
+        fishPlugins.autopair
+        fishPlugins.puffer
         jq
         killall
         micro

@@ -91,38 +91,7 @@
     };
 
     # Fish shell
-    fish = {
-      enable = true;
-      shellInit = ''
-        # Functions to allow repeating previous command with !!
-        function __history_previous_command
-          switch (commandline -t)
-          case "!"
-            commandline -t $history[1]; commandline -f repaint
-          case "*"
-            commandline -i !
-          end
-        end
-        function _history_previous_command_arguments
-          switch (commandline -t)
-          case "!"
-            commandline -t ""
-            commandline -f history-token-search-backward
-          case "*"
-            commandline -i '$'
-          end
-        end
-
-        # Actually bind the keys
-        bind ! __history_previous_command
-        bind '$' __history_previous_command_arguments
-
-        # Fish command history
-        function history
-          builtin history --show-time='%F %T '
-        end
-      '';
-    };
+    fish.enable = true;
 
     # The starship prompt
     starship = {
