@@ -40,6 +40,9 @@ in
     # Conflicts with virtualisation.containers if enabled
     boot.enableContainers = false;
 
+    # Allow building sdcard images for Raspi
+    nixpkgs.config.allowUnsupportedSystem = true;
+
     # Wireshark
     programs.wireshark.enable = true;
 
@@ -63,7 +66,6 @@ in
             enable = true;
             packages = [ pkgs.OVMFFull.fd ];
           };
-          package = pkgs.qemu_full;
           swtpm.enable = true;
         };
       };

@@ -89,6 +89,8 @@ How to proceed from here?
 - Adapt the configurations like enabled modules and home-manager configs to your needs
 - Easily deploy to hosts via `colmena apply`
 - Add your hosts to Tailscale, if you want to be using it. I can warmly recommend it for connecting with any kind of host!
+- Build an sdcard image for Raspberry Pi 4
+  - `nixos-generate --system aarch64-linux --format sd-aarch64 --flake .#rpi-dragon`
 - ... 😋
 
 ## Credits
