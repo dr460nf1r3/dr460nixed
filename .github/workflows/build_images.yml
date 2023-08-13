@@ -43,7 +43,7 @@ jobs:
       - run: bash ./ci/build_images.sh
 
       - name: Upload created images
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Dr460nized-live.iso
           path: ./result
