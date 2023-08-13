@@ -26,7 +26,7 @@
     };
 
     # My SSH keys
-    keys_nico = { 
+    keys_nico = {
       flake = false;
       url = "https://github.com/dr460nf1r3.keys";
     };
@@ -38,7 +38,7 @@
     sops-nix.url = "github:Mic92/sops-nix";
 
     # Spicetify
-    spicetify-nix ={
+    spicetify-nix = {
       inputs.nixpkgs.follows = "nixpkgs-unstable";
       url = "github:the-argus/spicetify-nix";
     };
@@ -162,10 +162,7 @@
       nixosConfigurations."live-usb" = garuda.lib.garudaSystem {
         inherit system;
         modules = defaultModules
-          ++ [
-          ./hosts/live-usb/live-usb.nix
-          "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-        ];
+          ++ [ ./hosts/live-usb/live-usb.nix ];
         inherit specialArgs;
       };
       # To-do for installations

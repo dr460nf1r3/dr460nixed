@@ -2,8 +2,8 @@
 , lib
 , ...
 }: {
-  isoImage.volumeID = lib.mkForce "id-live";
-  isoImage.isoName = lib.mkForce "id-live.iso";
+  isoImage.volumeID = lib.mkForce "dr460inxed-live";
+  isoImage.isoName = lib.mkForce "dr460nixed-live.iso";
 
   imports = [
     ../../configurations/common.nix
@@ -22,10 +22,7 @@
   users.mutableUsers = lib.mkForce true;
 
   # Use the latest Linux kernel
-  boot = {
-    kernelPackages = pkgs.linuxPackages_xanmod_latest;
-    zfs.enableUnstable = true;
-  };
+  boot.zfs.enableUnstable = true;
 
   # Increase timeout
   boot.loader.timeout = lib.mkForce 10;
