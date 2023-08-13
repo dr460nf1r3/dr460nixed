@@ -13,5 +13,5 @@ build_system() {
 }
 
 # Build the corresponding system configurations
-build_system live-usb install-iso
+#build_system live-usb install-iso
 build_system rpiImage sd-aarch64

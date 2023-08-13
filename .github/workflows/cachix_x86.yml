@@ -21,6 +21,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Run GH actions cleanup
+        run: sudo rm -rf /usr/share /usr/local /opt || true # https://github.com/easimon/maximize-build-space
+
       - uses: cachix/install-nix-action@v22
         with:
           extra_nix_config: "system-features = big-parallel kvm\naccept-flake-config = true"
