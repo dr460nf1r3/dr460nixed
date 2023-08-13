@@ -1,11 +1,13 @@
 { config
 , lib
 , pkgs
+, spicetify-nix
 , ...
 }:
 with lib;
 let
   cfg = config.dr460nixed.desktops;
+  spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
 in
 {
   options.dr460nixed.desktops = {
@@ -35,5 +37,33 @@ in
 
     # # Kernel paramters & settings
     boot.kernelParams = [ "mitigations=off" ];
+
+    # Fancy themed, enhanced Spotify
+    programs.spicetify = {
+      enable = true;
+      theme = spicePkgs.themes.Comfy;
+      enabledExtensions = with spicePkgs.extensions; [
+        autoSkipVideo
+        bookmark
+        fullAlbumDate
+        fullAppDisplayMod
+        genre
+        groupSession
+        hidePodcasts
+        history
+        playlistIcons
+        popupLyrics
+        seekSong
+        songStats
+      ];
+      injectCss = true;
+      replaceColors = true;
+      overwriteAssets = true;
+      sidebarConfig = true;
+      enabledCustomApps = with spicePkgs.apps; [
+        lyrics-plus
+        new-releases
+      ];
+    };
   };
 }

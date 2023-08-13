@@ -22,11 +22,11 @@
       inputs.chaotic.follows = "chaotic-nyx";
       inputs.garuda-nixpkgs.follows = "chaotic-nyx/nixpkgs";
       url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
-      #url = "/home/nico/Documents/misc/garuda-nix-subsystem/";
+      # url = "/home/nico/Documents/misc/garuda-nix-subsystem/";
     };
 
     # My SSH keys
-    keys_nico = {
+    keys_nico = { 
       flake = false;
       url = "https://github.com/dr460nf1r3.keys";
     };
@@ -36,6 +36,12 @@
 
     # Secrets management
     sops-nix.url = "github:Mic92/sops-nix";
+
+    # Spicetify
+    spicetify-nix ={
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:the-argus/spicetify-nix";
+    };
 
     # The Chaotic toolbox
     src-chaotic-toolbox = {
@@ -59,22 +65,25 @@
     , nixpkgs
     , self
     , sops-nix
+    , spicetify-nix
     , ...
     } @ inputs:
     let
       nixos = garuda.nixpkgs;
       system = "x86_64-linux";
       specialArgs = {
+        inherit spicetify-nix;
+        keys.nico = inputs.keys_nico;
         sources = {
           chaotic-toolbox = inputs.src-chaotic-toolbox;
           repoctl = inputs.src-repoctl;
         };
-        keys.nico = inputs.keys_nico;
       };
       defaultModules = [
         ./modules/default.nix
         home-manager.nixosModules.home-manager
         sops-nix.nixosModules.sops
+        spicetify-nix.nixosModule
         {
           nixpkgs.overlays = [ nixd.overlays.default ];
         }
@@ -97,6 +106,7 @@
           git
           gnupg
           nix
+          nixos-generators
           nixpkgs-fmt
           sops
           statix
@@ -154,7 +164,17 @@
         modules = defaultModules
           ++ [
           ./hosts/live-usb/live-usb.nix
-          "${garuda}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+        ];
+        inherit specialArgs;
+      };
+      # To-do for installations
+      nixosConfigurations."rpiImage" = garuda.lib.garudaSystem {
+        inherit system;
+        modules = defaultModules
+          ++ [
+          ./hosts/rpi-dragon/rpi-dragon.nix
+          "${nixos}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
         ];
         inherit specialArgs;
       };

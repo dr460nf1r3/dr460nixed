@@ -8,7 +8,6 @@
     ./kde.nix
     ./misc.nix
     ./shells.nix
-    ./spicetify.nix
     ./syncthing.nix
   ];
 }
