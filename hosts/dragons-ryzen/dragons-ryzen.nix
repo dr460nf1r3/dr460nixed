@@ -48,7 +48,7 @@
     desktops.enable = true;
     development.enable = true;
     school = true;
-    # yubikey = true;
+    yubikey = true;
   };
 
   # Garuda Nix subsystem option

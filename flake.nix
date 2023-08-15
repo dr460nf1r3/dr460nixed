@@ -2,14 +2,8 @@
   description = "Dr460nixed NixOS flake ❄️";
 
   inputs = {
-    # We roll unstable, as usual - unfree packages enabled
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-    # This enables unfree packages on top of nixpkgs-unstable  
-    nixpkgs = {
-      url = "github:numtide/nixpkgs-unfree";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    # We roll unstable, as usual
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Chaotic Nyx!
     chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
@@ -20,9 +14,8 @@
     # Garuda Linux subsystem - soon to have more options from the system
     garuda = {
       inputs.chaotic.follows = "chaotic-nyx";
-      inputs.garuda-nixpkgs.follows = "chaotic-nyx/nixpkgs";
+      inputs.garuda-nixpkgs.follows = "nixpkgs";
       url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
-      # url = "/home/nico/Documents/misc/garuda-nix-subsystem/";
     };
 
     # My SSH keys
@@ -39,7 +32,7 @@
 
     # Spicetify
     spicetify-nix = {
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:the-argus/spicetify-nix";
     };
 
