@@ -22,11 +22,6 @@
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot/efi";
       };
-      systemd-boot = {
-        consoleMode = "max";
-        editor = false;
-        enable = true;
-      };
     };
   };
 
@@ -48,6 +43,7 @@
       enable = true;
       monitoring = true;
     };
+    systemd-boot.enable = true;
   };
 
   # Garuda Nix subsystem options

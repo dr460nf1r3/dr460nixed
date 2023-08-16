@@ -2,7 +2,7 @@
 , ...
 }:
 with builtins; let
-  immutable = false;
+  immutable = true;
 
   configDir = ".config";
   kvantumDir = ".config/Kvantum";
@@ -50,21 +50,6 @@ in
       StartupNotify=false
       Terminal=false
       Type=Application
-    '';
-    "${configDir}/autostart/com.rustdesk.RustDesk.desktop".text = ''    
-      [Desktop Entry]
-      Name=RustDesk
-      Exec=flatpak run --branch=master --arch=x86_64 --command=rustdesk --file-forwarding com.rustdesk.RustDesk @@u %u @@
-      Icon=com.rustdesk.RustDesk
-      Terminal=false
-      Type=Application
-      StartupNotify=true
-      Actions=new-window;
-      X-Flatpak=com.rustdesk.RustDesk
-
-      [Desktop Action new-window]
-      Name=Open a New Window
-      Exec=flatpak run --branch=master --arch=x86_64 --command=rustdesk --file-forwarding com.rustdesk.RustDesk @@u %u @@
     '';
     "${configDir}/baloofilerc".text = ''
       [General]
@@ -134,17 +119,6 @@ in
       [Notification Messages]
       ShowPasteHugeTextWarning=false
     '';
-    "${configDir}/kscreenlockerrc".text = ''
-      [Daemon]
-      LockGrace=60
-      Timeout=20
-
-      [Greeter]
-      WallpaperPlugin=org.kde.image
-
-      [Greeter][Wallpaper][org][kde][image][General]
-      Image=${wallpaper}
-    '';
     "${configDir}/kwalletrc".text = ''
       [Wallet]
       First Use=false
@@ -197,7 +171,6 @@ in
       [Formats]
       LANG=en_US.UTF-8
     '';
-    "${configDir}/plasma-org.kde.plasma.desktop-appletsrc".source = ./kde-static/plasma-org.kde.plasma.desktop-appletsrc;
     "${configDir}/plasmarc".text = ''
       [Theme]
       name=Dr460nized
@@ -242,7 +215,6 @@ in
     '';
     "${localDir}/konsole/Dr460nized.profile".source = ./kde-static/Dr460nized.profile;
     "${localDir}/user-places.xbel".source = ./kde-static/user-places.xbel;
-    "${localDir}/wallpapers/Malefor.jpg".source = wallpaper;
     ".gtkrc-2.0".source = ./kde-static/gtkrc-2.0;
   };
 }

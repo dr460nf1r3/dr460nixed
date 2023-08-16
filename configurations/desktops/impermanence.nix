@@ -2,7 +2,7 @@ _: {
   # This was recently added to Chaotic Nyx
   chaotic.zfs-impermanence-on-shutdown = {
     enable = true;
-    snapshot = "keys";
+    snapshot = "start";
     volume = "zroot/ROOT/empty";
   };
 
@@ -13,7 +13,6 @@ _: {
       "/etc/NetworkManager/system-connections"
       "/etc/nixos"
       "/etc/secureboot"
-      "/etc/ssh"
       "/var/cache/chaotic"
       "/var/cache/tailscale"
       "/var/lib/AccountsService/icons"
@@ -23,6 +22,7 @@ _: {
       "/var/lib/flatpak"
       "/var/lib/libvirt"
       "/var/lib/machines"
+      "/var/lib/sddm"
       "/var/lib/systemd"
       "/var/lib/tailscale"
       "/var/lib/upower"
@@ -52,26 +52,7 @@ _: {
       directories = [
         ".android"
         ".ansible"
-        ".config/Code"
-        ".config/GitKraken"
-        ".config/Google"
-        ".config/JetBrains"
-        ".config/Nextcloud"
-        ".config/Termius"
-        ".config/asciinema"
-        ".config/chromium"
-        ".config/jamesdsp"
-        ".config/kdeconnect"
-        ".config/libreoffice"
-        ".config/lutris"
-        ".config/nheko"
-        ".config/obs-studio"
-        ".config/session"
-        ".config/sops/age"
-        ".config/spotify"
-        ".config/teams-for-linux"
-        ".config/thefuck"
-        ".config/vlc"
+        ".config"
         ".firedragon"
         ".gitkraken"
         ".java"
@@ -95,7 +76,6 @@ _: {
         ".local/share/kscreen"
         ".local/share/kwalletd"
         ".local/share/lutris"
-        ".local/share/nheko"
         ".local/share/plasma"
         ".local/share/tor-browser"
         ".mozilla"
@@ -110,14 +90,6 @@ _: {
         "Pictures"
         "Sync"
         "Videos"
-        {
-          directory = ".config/Bitwarden CLI";
-          mode = "0700";
-        }
-        {
-          directory = ".config/Keybase";
-          mode = "0700";
-        }
         {
           directory = ".gnupg";
           mode = "0700";
@@ -134,26 +106,6 @@ _: {
           directory = ".ssh";
           mode = "0700";
         }
-      ];
-      # These files are used by Plasma for saving state
-      files = [
-        ".config/gwenviewrc"
-        ".config/kactivitymanagerd-statsrc"
-        ".config/kateschemarc"
-        ".config/kconf_updaterc"
-        ".config/kglobalshortcutsrc"
-        ".config/khotkeysrc"
-        ".config/konsolesshconfig"
-        ".config/ksmserverrc"
-        ".config/ktimedrc"
-        ".config/kwinrulesrc"
-        ".config/kxkbrc"
-        ".config/okularpartrc"
-        ".config/plasmanotifyrc"
-        ".config/plasmashellrc"
-        ".local/share/krunnerstaterc"
-        ".local/share/recently-used.xbel"
-        ".opencommit"
       ];
     };
   };

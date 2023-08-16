@@ -3,7 +3,7 @@
 
   inputs = {
     # We roll unstable, as usual
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Chaotic Nyx!
     chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
@@ -11,17 +11,26 @@
     # For accessing deploy-rs' utility Nix functions
     deploy-rs.url = "github:serokell/deploy-rs";
 
-    # Garuda Linux subsystem - soon to have more options from the system
+    # Garuda Linux flake - most of my system settings are here
     garuda = {
       inputs.chaotic.follows = "chaotic-nyx";
       inputs.garuda-nixpkgs.follows = "nixpkgs";
       url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
     };
 
+    # Reset rootfs every reboot
+    impermanence.url = "github:nix-community/impermanence";
+
     # My SSH keys
     keys_nico = {
       flake = false;
       url = "https://github.com/dr460nf1r3.keys";
+    };
+
+    # Lanzaboote for secure boot support
+    lanzaboote = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/lanzaboote/v0.3.0";
     };
 
     # Nixd language server
@@ -54,6 +63,8 @@
     { deploy-rs
     , garuda
     , home-manager
+    , impermanence
+    , lanzaboote
     , nixd
     , nixpkgs
     , self
@@ -123,10 +134,8 @@
         modules = defaultModules
           ++ [
           ./hosts/dragons-ryzen/dragons-ryzen.nix
-          {
-            garuda.subsystem.config = ./garuda-managed.json;
-            garuda.subsystem.enable = true;
-          }
+          impermanence.nixosModules.impermanence
+          lanzaboote.nixosModules.lanzaboote
         ];
         inherit specialArgs;
       };

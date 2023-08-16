@@ -7,29 +7,30 @@
   # Individual settings
   imports = [
     ../../configurations/common.nix
+    ../../configurations/desktops/impermanence.nix
     ../../configurations/services/chaotic.nix
     ./hardware-configuration.nix
   ];
 
   # Boot options
   boot = {
-    supportedFilesystems = [ "btrfs" ];
+    supportedFilesystems = [ "zfs" ];
     # Needed to get the touchpad to work
     blacklistedKernelModules = [ "elan_i2c" ];
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
     # The new AMD Pstate driver & needed modules
-    kernelModules = [ "acpi_call" "amdgpu" "amd_pstate=passive" ];
+    kernelModules = [ "acpi_call" "amdgpu" "amd_pstate=guided" ];
     # Prevent the device waking up after going to sleep
     kernelParams = [
       "mem_sleep_default=deep"
     ];
   };
 
-  # Hostname
-  networking.hostName = "dragons-ryzen";
-
-  # SSD
-  services.fstrim.enable = true;
+  # Hostname & hostId for ZFS
+  networking = {
+    hostId = "13377331";
+    hostName = "dragons-ryzen";
+  };
 
   # AMD device
   services.hardware.bolt.enable = false;
@@ -43,28 +44,18 @@
 
   # Enable a few selected custom settings
   dr460nixed = {
-    boot.enable = false;
     chromium = true;
     desktops.enable = true;
     development.enable = true;
+    lanzaboote.enable = true;
     school = true;
     yubikey = true;
   };
 
   # Garuda Nix subsystem option
   garuda = {
-    btrfs-maintenance = {
-      deduplication = true;
-      enable = true;
-    };
     dr460nized.enable = true;
     gaming.enable = true;
-    garuda-chroot = {
-      boot-uuid = "B101-5FCE";
-      enable = false;
-      user = "nico";
-      root-uuid = "bec8156c-10e5-4f23-9e51-21b453d9fddd";
-    };
     performance-tweaks = {
       cachyos-kernel = true;
       enable = true;
