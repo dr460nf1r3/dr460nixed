@@ -109,18 +109,8 @@ in
         builders-use-substitutes = true;
 
         # A few extra binary caches and their public keys
-        substituters = [
-          "https://dr460nf1r3.cachix.org"
-          "https://garuda-linux.cachix.org"
-          "https://nix-community.cachix.org"
-          "https://numtide.cachix.org"
-        ];
-        trusted-public-keys = [
-          "dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU="
-          "garuda-linux.cachix.org-1:tWw7YBE6qZae0L6BbyNrHo8G8L4sHu5QoDp0OXv70bg="
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
-        ];
+        substituters = [ "https://dr460nf1r3.cachix.org" ];
+        trusted-public-keys = [ "dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU=" ];
 
         # Enable certain system features
         system-features = [ "big-parallel" "kvm" "recursive-nix" ];

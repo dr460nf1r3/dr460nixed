@@ -28,7 +28,7 @@ in
     # Additional KDE packages not included by default
     environment.systemPackages = with pkgs; [ jamesdsp ];
 
-    # Define the default fonts Fira Sans & Jetbrains Mono Nerd Fonts
+    # Only install fonts I personally use
     fonts.enableDefaultPackages = false;
 
     # Fix "the name ca.desrt.dconf was not provided by any .service files"
@@ -65,5 +65,8 @@ in
         new-releases
       ];
     };
+
+    # Fix (read: workaround) an issue with Sqlite
+    programs.command-not-found.enable = false;
   };
 }

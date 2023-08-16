@@ -73,7 +73,6 @@ in
       nextcloud-client
       obs-studio-wrapped
       qbittorrent
-      spotify
       tdesktop
       tor-browser-bundle-bin
       usbutils
