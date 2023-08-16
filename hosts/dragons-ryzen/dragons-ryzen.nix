@@ -21,23 +21,63 @@
     # The new AMD Pstate driver & needed modules
     kernelModules = [ "acpi_call" "amdgpu" "amd_pstate=guided" ];
     # Prevent the device waking up after going to sleep
-    kernelParams = [
-      "mem_sleep_default=deep"
-    ];
+    kernelParams = [ "mem_sleep_default=deep" ];
   };
 
   # Hostname & hostId for ZFS
   networking = {
-    hostId = "13377331";
+    hostId = "9c8011ee";
     hostName = "dragons-ryzen";
   };
+
+  # Useful ZFS maintenance
+  services.zfs = {
+    autoScrub.enable = true;
+    trim.enable = true;
+  };
+  programs.msmtp = {
+    enable = true;
+    setSendmail = true;
+    defaults = {
+      aliases = "/etc/aliases";
+      auth = "login";
+      port = 465;
+      tls = "on";
+      tls_starttls = "off";
+      tls_trust_file = "/etc/ssl/certs/ca-certificates.crt";
+    };
+    accounts = {
+      default = {
+        from = "nico@dr460nf1r3.org";
+        host = "mail.garudalinux.net";
+        passwordeval = "cat /run/secrets/passwords/nico@dr460nf1r3.org";
+        user = "nico@dr460nf1r3.org";
+      };
+    };
+  };
+  environment.etc = {
+    "aliases".text = ''
+      root: nico@dr460nf1r3.org
+    '';
+  };
+  services.zfs.zed.settings = {
+    ZED_DEBUG_LOG = "/tmp/zed.debug.log";
+    ZED_EMAIL_ADDR = [ "root" ];
+    ZED_EMAIL_PROG = "${pkgs.msmtp}/bin/msmtp";
+    ZED_EMAIL_OPTS = "@ADDRESS@";
+
+    ZED_NOTIFY_INTERVAL_SECS = 3600;
+    ZED_NOTIFY_VERBOSE = true;
+
+    ZED_USE_ENCLOSURE_LEDS = true;
+    ZED_SCRUB_AFTER_RESILVER = true;
+  };
+  # this option does not work; will return error
+  services.zfs.zed.enableMail = false;
 
   # AMD device
   services.hardware.bolt.enable = false;
   services.xserver.videoDrivers = [ "amdgpu" ];
-
-  # Bleeding edge Mesa - currently giving a slideshow
-  chaotic.mesa-git.enable = true;
 
   # Enable a few selected custom settings
   dr460nixed = {
@@ -84,6 +124,10 @@
   sops.secrets."machine-id/slim-lair" = {
     path = "/etc/machine-id";
     mode = "0600";
+  };
+  sops.secrets."passwords/nico@dr460nf1r3.org" = {
+    mode = "0600";
+    path = "/run/secrets/passwords/nico@dr460nf1r3.org";
   };
   sops.secrets."ssh_keys/id_rsa" = {
     mode = "0600";
