@@ -99,6 +99,13 @@ in
       [Confirmations]
       ConfirmEmptyTrash=false
     '';
+    "${configDir}/kleopatrarc".text = ''
+      [MainWindow]
+      MenuBar=Disabled
+      RestorePositionForNextInstance=false
+      State=AAAA/wAAAAD9AAAAAAAABAAAAAGwAAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAA
+      ToolBarsMovable=Disabled
+    '';
     "${configDir}/konsolerc".text = ''
       [Desktop Entry]
       DefaultProfile=Dr460nized.profile
@@ -118,6 +125,12 @@ in
 
       [Notification Messages]
       ShowPasteHugeTextWarning=false
+    '';
+    "${configDir}/ktimezonedrc".text = ''
+      [TimeZones]
+      LocalZone=Europe/Berlin
+      ZoneinfoDir=/etc/zoneinfo
+      Zonetab=/etc/zoneinfo/zone.tab
     '';
     "${configDir}/kwalletrc".text = ''
       [Wallet]

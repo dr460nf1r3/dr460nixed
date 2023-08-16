@@ -37,7 +37,7 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Bleeding edge Mesa - currently giving a slideshow
-  # chaotic.mesa-git.enable = true;
+  chaotic.mesa-git.enable = true;
 
   # Enable a few selected custom settings
   dr460nixed = {
@@ -73,6 +73,9 @@
 
   # Enable the touchpad & secure boot, as well as add the ipman script
   environment.systemPackages = with pkgs; [ libinput radeontop zenmonitor ];
+
+  # Lets use Waydroid here
+  virtualisation.waydroid.enable = true;
 
   # Home-manager desktop configuration
   home-manager.users."nico" = import ../../configurations/home/desktops.nix;
