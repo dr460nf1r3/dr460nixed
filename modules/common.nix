@@ -129,5 +129,8 @@ in
         max-jobs = "auto";
       };
     };
+
+    # Fix (read: workaround) an issue with Sqlite
+    programs.command-not-found.enable = false;
   };
 } 

@@ -65,8 +65,5 @@ in
         new-releases
       ];
     };
-
-    # Fix (read: workaround) an issue with Sqlite
-    programs.command-not-found.enable = false;
   };
 }
