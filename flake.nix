@@ -86,6 +86,7 @@
       defaultModules = [
         ./modules/default.nix
         home-manager.nixosModules.home-manager
+        lanzaboote.nixosModules.lanzaboote
         sops-nix.nixosModules.sops
         spicetify-nix.nixosModule
         {
@@ -135,7 +136,6 @@
           ++ [
           ./hosts/dragons-ryzen/dragons-ryzen.nix
           impermanence.nixosModules.impermanence
-          lanzaboote.nixosModules.lanzaboote
         ];
         inherit specialArgs;
       };

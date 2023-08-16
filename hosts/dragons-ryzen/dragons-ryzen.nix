@@ -39,9 +39,6 @@
   # Bleeding edge Mesa - currently giving a slideshow
   # chaotic.mesa-git.enable = true;
 
-  # Fix an issue
-  programs.command-not-found.enable = false;
-
   # Enable a few selected custom settings
   dr460nixed = {
     chromium = true;

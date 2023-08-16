@@ -2,7 +2,7 @@
 set -euo pipefail
 
 FLAKE_DIR="$(pwd)"
-TARGETS_X86=("dragons-ryzen tv-nixos")
+TARGETS_X86=("dragons-ryzen" "tv-nixos")
 TARGETS_AARCH64=("oracle-dragon" "rpi-dragon")
 
 # Build every variation of the flake
