@@ -57,6 +57,10 @@ A lot of those have been moved to the [Garuda Nix Subsystem](https://gitlab.com/
 - `dr460nixed.servers.monitoring` (default false) - enables some basic monitoring via Netdata
 - `dr460nixed.shells` (default true) - enables common shell aliases & theming
 - `dr460nixed.systemd-boot.enable` (default true) - a quiet systemd-boot configuration
+- `dr460nixed.tailscale-autoconnect.enable` (default true) - automatically connects to the Tailnet
+- `dr460nixed.tailscale-autoconnect.authFile` - points to the location where the authkey file is stored
+- `dr460nixed.tailscale-autoconnect.extraUpArgs` (default none) - Extra arguments to pass to the Tailscale daemon
+- `dr460nixed.tailscale-tls.enable` (default false) - enables automatic management of Tailscale certificates
 - `dr460nixed.theming` (default true) - supplies fonts and general system theming via Stylix
 - `dr460nixed.yubikey` (default false) - options for using the Yubikey as login
 
