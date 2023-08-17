@@ -10,9 +10,10 @@
     ./hardening.nix
     ./locales.nix
     ./misc.nix
+    ./msmtp.nix
     ./networking.nix
     ./servers.nix
     ./shells.nix
-    # ./theming.nix
+    ./zfs.nix
   ];
 }

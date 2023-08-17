@@ -14,7 +14,6 @@
 
   # Boot options
   boot = {
-    supportedFilesystems = [ "zfs" ];
     # Needed to get the touchpad to work
     blacklistedKernelModules = [ "elan_i2c" ];
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
@@ -30,51 +29,6 @@
     hostName = "dragons-ryzen";
   };
 
-  # Useful ZFS maintenance
-  services.zfs = {
-    autoScrub.enable = true;
-    trim.enable = true;
-  };
-  programs.msmtp = {
-    enable = true;
-    setSendmail = true;
-    defaults = {
-      aliases = "/etc/aliases";
-      auth = "login";
-      port = 465;
-      tls = "on";
-      tls_starttls = "off";
-      tls_trust_file = "/etc/ssl/certs/ca-certificates.crt";
-    };
-    accounts = {
-      default = {
-        from = "nico@dr460nf1r3.org";
-        host = "mail.garudalinux.net";
-        passwordeval = "cat /run/secrets/passwords/nico@dr460nf1r3.org";
-        user = "nico@dr460nf1r3.org";
-      };
-    };
-  };
-  environment.etc = {
-    "aliases".text = ''
-      root: nico@dr460nf1r3.org
-    '';
-  };
-  services.zfs.zed.settings = {
-    ZED_DEBUG_LOG = "/tmp/zed.debug.log";
-    ZED_EMAIL_ADDR = [ "root" ];
-    ZED_EMAIL_PROG = "${pkgs.msmtp}/bin/msmtp";
-    ZED_EMAIL_OPTS = "@ADDRESS@";
-
-    ZED_NOTIFY_INTERVAL_SECS = 3600;
-    ZED_NOTIFY_VERBOSE = true;
-
-    ZED_USE_ENCLOSURE_LEDS = true;
-    ZED_SCRUB_AFTER_RESILVER = true;
-  };
-  # this option does not work; will return error
-  services.zfs.zed.enableMail = false;
-
   # AMD device
   services.hardware.bolt.enable = false;
   services.xserver.videoDrivers = [ "amdgpu" ];
@@ -86,7 +40,12 @@
     development.enable = true;
     lanzaboote.enable = true;
     school = true;
+    smtp.enable = true;
     yubikey = true;
+    zfs = {
+      enable = true;
+      sendMails = true;
+    };
   };
 
   # Garuda Nix subsystem option
