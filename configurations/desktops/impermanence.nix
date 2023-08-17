@@ -27,7 +27,6 @@ _: {
       "/var/lib/tailscale"
       "/var/lib/upower"
       "/var/lib/vnstat"
-      "/var/lib/waydroid"
       {
         directory = "/var/lib/iwd";
         mode = "u=rwx,g=,o=";

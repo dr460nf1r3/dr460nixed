@@ -20,6 +20,7 @@
       device = "zroot/ROOT/empty";
       fsType = "zfs";
       neededForBoot = true;
+      options = [ "noatime" ];
     };
 
   fileSystems."/nix" =
@@ -27,13 +28,14 @@
       device = "zroot/ROOT/nix";
       fsType = "zfs";
       neededForBoot = true;
+      options = [ "noatime" ];
     };
 
   fileSystems."/home/nico/Games" =
     {
       device = "zroot/games/home";
       fsType = "zfs";
-      options = [ "x-gvfs-hide" ];
+      options = [ "x-gvfs-hide" "noatime" ];
     };
 
   fileSystems."/var/persistent" =
@@ -41,6 +43,7 @@
       device = "zroot/data/persistent";
       fsType = "zfs";
       neededForBoot = true;
+      options = [ "noatime" ];
     };
 
   fileSystems."/var/residues" =
@@ -48,6 +51,7 @@
       device = "zroot/ROOT/residues";
       fsType = "zfs";
       neededForBoot = true;
+      options = [ "noatime" ];
     };
 
   fileSystems."/boot" =

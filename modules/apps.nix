@@ -54,6 +54,7 @@ in
       aspellDicts.en
       chromium-flagged
       ffmpegthumbnailer
+      freerdp
       gimp
       helvum
       hunspell

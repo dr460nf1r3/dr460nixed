@@ -14,6 +14,8 @@
     ./networking.nix
     ./servers.nix
     ./shells.nix
+    ./tailscale.nix
+    ./tailscale-tls.nix
     ./zfs.nix
   ];
 }

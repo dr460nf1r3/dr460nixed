@@ -57,9 +57,8 @@ in
         enableOnBoot = false;
         storageDriver = "overlay2";
       };
-      kvmgt.enable = true;
       libvirtd = {
-        enable = false;
+        enable = true;
         parallelShutdown = 2;
         qemu = {
           ovmf = {
