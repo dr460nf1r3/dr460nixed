@@ -114,9 +114,6 @@
   # Enable the touchpad & secure boot, as well as add the ipman script
   environment.systemPackages = with pkgs; [ libinput radeontop zenmonitor ];
 
-  # Lets use Waydroid here
-  virtualisation.waydroid.enable = true;
-
   # Home-manager desktop configuration
   home-manager.users."nico" = import ../../configurations/home/desktops.nix;
 

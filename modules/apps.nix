@@ -141,16 +141,16 @@ in
             {
               name = "ruff";
               publisher = "charliermarsh";
-              sha256 = "sha256-2FAq5jEbnQbfXa7O9O231aun/pJ8mkoBf1u4ekkBQu8=";
-              version = "2023.13.10931546";
+              sha256 = "sha256-Qu7olXmRw+uSFbvGoLkUlR/6nHgMMfg5g+ePINjPcYQ=";
+              version = "2023.32.0";
             }
           ];
       })
       xdg-utils
       yarn
     ]) ++ optionals cfg.yubikey (with pkgs; [
-      yubikey-personalization
-      #yubioath-flutter
+      yubikey-manager-qt
+      yubioath-flutter
     ]) ++ optionals cfg.school (with pkgs; [
       speedcrunch
       teams-for-linux
