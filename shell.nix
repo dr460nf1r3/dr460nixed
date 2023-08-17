@@ -14,11 +14,12 @@
     NIX_CONFIG = "extra-experimental-features = nix-command flakes repl-flake";
     nativeBuildInputs = with pkgs; [
       age
-      colmena
       deadnix
+      deploy-rs
       git
       gnupg
       nix
+      nixos-generators
       nixpkgs-fmt
       sops
       statix
