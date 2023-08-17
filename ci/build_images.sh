@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Explicitly allow aarch64 builds
+export NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1
+
 # Build functions
 build_system() {
     echo Started building variation "$1" ❄️!
@@ -13,5 +16,5 @@ build_system() {
 }
 
 # Build the corresponding system configurations
-#build_system live-usb install-iso
-build_system rpiImage sd-aarch64
+PATH=$(build_system live-usb install-iso | grep dr460nixed-live.iso/iso/dr460nixed-live.iso)
+cp "$PATH" .

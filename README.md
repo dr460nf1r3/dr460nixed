@@ -1,17 +1,17 @@
-[![built with nix](https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org) [![Build x86](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/cachix_x86.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/cachix_x86.yml) [![Sync Tailscale ACLs](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml)
+[![built with nix](https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org) [![Build x86](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/cachix_x86.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/cachix_x86.yml) [![Sync Tailscale ACLs](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml) [![Build images](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml)
 
 # My personal NixOS flake & system configurations
 
-This repo contains my NixOS dotfiles. All of my devices are going to be added here over time.
+This repo contains my NixOS dotfiles. Every device supported by NixOS will be added here! 😎
 
 ![desktop-kde](https://i.imgur.com/h3WGSJ4.jpg)
 
 **What is inside?**:
 
-- Multiple **NixOS configurations**, including **desktop**, **server**, **nixos-wsl** & **live-usb**
+- Multiple **NixOS configurations**, including **desktop**, **server**, **nixos-wsl** , **raspberry pi** & **live-usb**
 - A fully ported & configured **Garuda dr460nized KDE** setup: **Dr460nixed** !
-- NixOS / Garuda living in one partition via BTRFS subvolumes using shared Nix store & home subvolumes as well as running both at the same time via **systemd-nspawn** and shared Xorg sessions
-- **Opt-in persistence** through impermanence + BTRFS snapshots (currently unused because of using Garuda/NixOS shared home)
+- Root-on-ZFS and secure-boot enabled systems via **Lanzaboote**
+- **Opt-in persistence** through impermanence + ZFS snapshots
 - **Mesh networked** hosts with **Tailscale**
 - Uses the custom **Linux-cachyos BORE EEVDF** kernel
 - Additional packages not existing in Nixpkgs (yet) via **chaotic-nyx**
@@ -47,15 +47,16 @@ A lot of those have been moved to the [Garuda Nix Subsystem](https://gitlab.com/
 - `dr460nixed.development.enable` (default false) - enables a development environment
 - `dr460nixed.docker-compose-runner` (default false) - runs a docker-compose.yml and supplies an additional .env file for secrets if desired
 - `dr460nixed.hardening.enable` (default true) - system hardening
+- `dr460nixed.lanzaboote.enable` (default false) - enables Lanzaboote instead of systemd-boot for secure-boot support
 - `dr460nixed.live-cd` (default false) - live CD applications
 - `dr460nixed.locales` (default true) - does all the localization setup / console font config
 - `dr460nixed.nodocs` (default true) - removes unneeded documentation to save space
 - `dr460nixed.rpi` (default false) - Raspberry Pi related things
 - `dr460nixed.school` (default false) - things I need for school
 - `dr460nixed.servers.enable` (default false) - common server options
-- `dr460nixed.servers.monitoring` (default false) - enables some basic monitoring via Netdata 
+- `dr460nixed.servers.monitoring` (default false) - enables some basic monitoring via Netdata
 - `dr460nixed.shells` (default true) - enables common shell aliases & theming
-- `dr460nixed.systemd-boot` (default true) - a quiet systemd-boot configuration
+- `dr460nixed.systemd-boot.enable` (default true) - a quiet systemd-boot configuration
 - `dr460nixed.theming` (default true) - supplies fonts and general system theming via Stylix
 - `dr460nixed.yubikey` (default false) - options for using the Yubikey as login
 
@@ -89,8 +90,10 @@ How to proceed from here?
 - Adapt the configurations like enabled modules and home-manager configs to your needs
 - Easily deploy to hosts via `colmena apply`
 - Add your hosts to Tailscale, if you want to be using it. I can warmly recommend it for connecting with any kind of host!
-- Build an sdcard image for Raspberry Pi 4
-  - `nixos-generate --system aarch64-linux --format sd-aarch64 --flake .#rpi-dragon`
+- Build an images of the flake's configurations:
+  ~~~
+  nixos-generate --format iso --flake .#live-usb
+  nixos-generate --system aarch64-linux --format sd-aarch64 --flake .#rpi-dragon
 - ... 😋
 
 ## Credits

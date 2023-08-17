@@ -33,6 +33,9 @@
   # This is a live USB
   networking.hostName = "live-usb";
 
+  # For ZFS to be happy
+  networking.hostId = "00000000";
+
   # Otherwise set to "no" by my config
   services.openssh.settings.PermitRootLogin = lib.mkForce "yes";
 
