@@ -6,6 +6,31 @@
 with lib;
 let
   cfg = config.dr460nixed;
+  chromium-gate = pkgs.writeShellScriptBin "chromium-gate" ''
+    set -o errexit
+
+    CHROMIUM="${pkgs.chromium-flagged}/bin/chromium"
+    KDIALOG="${pkgs.libsForQt5.kdialog}/bin/kdialog"
+    ZFS="${pkgs.zfs}/bin/zfs"
+
+    echo 'Handling encrypted Chromium profile'
+    if [ "$USER" != 'nico' ] || [ -f "$HOME/.config/chromium" ]; then
+      exec "$CHROMIUM" "$@"
+    else
+      "$KDIALOG" --title "Chromium gatekeeper" --password "Please provide the password for the Chromium vault 🔑" |\
+        (sudo "$ZFS" load-key zroot/data/chromium \
+        || ("$KDIALOG" --title "Chromium gatekeeper" --error "Unable to load ZFS key, loading fresh profile instead!" \
+        && "$CHROMIUM" "$@" && false))
+      sudo "$ZFS" mount zroot/data/chromium \
+        || ("$KDIALOG" --title "Chromium gatekeeper" --error "Unable to mount ZFS partition, loading fresh profile instead!" \
+        && "$CHROMIUM" "$@" && false)
+
+      "$CHROMIUM" "$@"
+
+      sudo "$ZFS" umount -f zroot/data/chromium
+      sudo "$ZFS" unload-key zroot/data/chromium
+    fi
+  '';
 in
 {
   options.dr460nixed = {
@@ -119,5 +144,8 @@ in
 
     # SUID Sandbox
     security.chromiumSuidSandbox.enable = mkIf cfg.chromium true;
+
+    # Chromium gate (thanks Pedro!)
+    environment.systemPackages = mkIf cfg.chromium [ chromium-gate ];
   };
 }

@@ -53,6 +53,28 @@ in
     X-KDE-SubstituteUID=false
     X-KDE-Username=
   '';
+  home.file."${appdir}/chromium.desktop".text = ''
+    [Desktop Entry]
+    Actions=new-window;new-private-window;
+    Categories=Network;WebBrowser;
+    Comment=Access the Internet
+    Exec=chromium-gate %U
+    GenericName[en_GB]=Web Browser
+    GenericName=Web Browser
+    Icon=chromium-gate
+    MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;application/xhtml_xml;application/xml;image/gif;image/jpeg;image/png;image/webp;text/html;text/xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/webcal;x-scheme-handler/mailto;x-scheme-handler/about;x-scheme-handler/unknown
+    Name=Chromium
+    NoDisplay=false
+    Path=
+    StartupNotify=true
+    StartupWMClass=chromium-browser
+    Terminal=false
+    TerminalOptions=
+    Type=Application
+    Version=1.0
+    X-KDE-SubstituteUID=false
+    X-KDE-Username=
+  '';
   home.file."${appdir}/fish.desktop".text = ''
     [Desktop Entry]
     Categories=ConsoleOnly;System;
@@ -162,26 +184,6 @@ in
     X-KDE-SubstituteUID=false
     X-KDE-Username=
   '';
-  # home.file."${appdir}/org.prismlauncher.PrismLauncher.desktop".text = ''
-  #   [Desktop Entry]
-  #   Categories=Game;ActionGame;AdventureGame;Simulation;
-  #   Comment=A custom launcher for Minecraft that allows you to easily manage multiple installations of Minecraft at once.
-  #   Exec=${pkgs.prismlauncher-mod}/bin/prismlauncher
-  #   Icon=minecraft
-  #   Keywords=game;minecraft;launcher;mc;multimc;polymc;
-  #   MimeType=application/zip;application/x-modrinth-modpack+zip
-  #   Name=Prism Launcher
-  #   NoDisplay=false
-  #   Path=
-  #   StartupNotify=true
-  #   StartupWMClass=PrismLauncher
-  #   Terminal=false
-  #   TerminalOptions=
-  #   Type=Application
-  #   Version=1.0
-  #   X-KDE-SubstituteUID=false
-  #   X-KDE-Username=
-  # '';
   home.file."${appdir}/org.pipewire.Helvum.desktop".text = ''
     [Desktop Entry]
     Categories=AudioVideo;Audio;Video;Midi;Settings;GNOME;GTK;
