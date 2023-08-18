@@ -41,6 +41,10 @@
     lanzaboote.enable = true;
     school = true;
     smtp.enable = true;
+    tailscale = {
+      enable = true;
+      extraUpArgs = ["--accept-routes" "--accept-dns=true" ];
+    };
     yubikey = true;
     zfs = {
       enable = true;

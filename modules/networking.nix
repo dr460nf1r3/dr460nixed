@@ -23,31 +23,8 @@ in
     nftables.enable = true;
   };
 
-  # Tailscale network to connect the devices
-  networking.firewall.trustedInterfaces = [ "tailscale0" ];
-  services.tailscale = {
-    enable = true;
-    permitCertUid = "root";
-    useRoutingFeatures = lib.mkDefault "client";
-  };
-
-  # SSHD shall keep connections alive for longer
-  services.openssh = {
-    enable = true;
-    extraConfig = ''
-      ClientAliveCountMax 2
-      ClientAliveInterval 600
-      Protocol 2
-      TCPKeepAlive yes
-    '';
-  };
-
-  # Client side SSH configuration
-  programs.ssh.extraConfig = ''
-    TCPKeepAlive yes
-    ServerAliveCountMax 2
-    ServerAliveInterval 600
-  '';
+  # Enable SSHD
+  services.openssh.enable = true;
 
   # Enable Mosh, a replacement for OpenSSH
   programs.mosh.enable = true;

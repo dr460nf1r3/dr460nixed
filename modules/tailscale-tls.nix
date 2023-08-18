@@ -35,8 +35,8 @@ in
 
   config = mkIf cfg.enable {
     users.users.tailscale-tls = {
-      home = "/var/lib/tailscale-tls";
       group = "tailscale-tls";
+      home = "/var/lib/tailscale-tls";
       isSystemUser = true;
     };
 

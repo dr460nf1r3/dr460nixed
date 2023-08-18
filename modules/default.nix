@@ -12,6 +12,7 @@
     ./misc.nix
     ./msmtp.nix
     ./networking.nix
+    ./nix.nix
     ./servers.nix
     ./shells.nix
     ./tailscale.nix

@@ -4,7 +4,7 @@
 , ...
 }:
 with lib; let
-  cfg = config.dr460nixed.tailscale-autoconnect;
+  cfg = config.dr460nixed.tailscale;
 
   tailscaleJoinArgsList =
     [
@@ -16,26 +16,28 @@ with lib; let
   tailscaleJoinArgsString = builtins.concatStringsSep " " tailscaleJoinArgsList;
 
   tailscaleUpScript = ''
-    # wait for tailscaled to settle
     sleep 2
-
-    # check if we are already authenticated to tailscale
     status="$(${pkgs.tailscale}/bin/tailscale status -json | ${pkgs.jq}/bin/jq -r .BackendState)"
     if [ $status = "Running" ]; then # if so, then do nothing
       exit 0
     fi
-
     ${pkgs.tailscale}/bin/tailscale up ${tailscaleJoinArgsString}
   '';
 in
 {
-  options.dr460nixed.tailscale-autoconnect = {
+  options.dr460nixed.tailscale = {
     enable = mkEnableOption "Tailscale client daemon";
+
+    autoConnect = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Whether to automatically connect to Tailscale using an auth key";
+    };
 
     authFile = mkOption {
       type = types.path;
       example = "/run/secrets/tailscale-key";
-      description = "File location store tailscale auth-key";
+      description = "File location storing tailscale auth-key";
     };
 
     extraUpArgs = mkOption {
@@ -46,10 +48,17 @@ in
   };
 
   config = mkIf cfg.enable {
-    systemd.services.tailscale-autoconnect = {
+    # Enable Tailscale service
+    services.tailscale.enable = true;
+
+    # Allow Tailscale devices to connect
+    networking.firewall.trustedInterfaces = [ "tailscale0" ];
+
+    # Connect to Tailnet automatically
+    systemd.services.tailscale-autoconnect = mkIf cfg.autoConnect {
       description = "Automatic connection to Tailscale";
 
-      # make sure tailscale is running before trying to connect to tailscale
+      # Make sure tailscale is running before trying to connect to tailscale
       after = [ "network-pre.target" "tailscale.service" ];
       wants = [ "network-pre.target" "tailscale.service" ];
       wantedBy = [ "multi-user.target" ];

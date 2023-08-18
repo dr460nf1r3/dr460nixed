@@ -34,7 +34,7 @@ in
     boot = {
       kernelParams = [
         "acpi_backlight=native"
-        "iommu=pt"
+        "iommu=full"
         "page_alloc.shuffle=1"
         "processor.max_cstate=5"
         "rd.systemd.show_status=auto"
