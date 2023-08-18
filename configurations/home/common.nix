@@ -52,7 +52,7 @@
 
   # Invididual terminal app configs
   programs = {
-    # Common Bash aliases & tmux autostart
+    # Common Bash aliases & tmux autostart for SSH sessions
     bash = {
       enable = true;
       initExtra = ''

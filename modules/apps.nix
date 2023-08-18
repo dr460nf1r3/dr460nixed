@@ -451,11 +451,11 @@ in
         "text/x-tcl"
         "text/x-tex"
       ];
-    in
+    in lib.mkForce ( # Overriding garuda-nix flakes defaults here
     (lib.genAttrs code (_: [ "code.desktop" ]))
     // (lib.genAttrs archives (_: [ "ark.desktop" ]))
     // (lib.genAttrs audioVideo (_: [ "vlc.desktop" ]))
     // (lib.genAttrs documents (_: [ "okular.desktop" ]))
     // (lib.genAttrs images (_: [ "gwenview.desktop" ]))
-    // (lib.genAttrs urls (_: [ "firedragon.desktop" ]));
+    // (lib.genAttrs urls (_: [ "firedragon.desktop" ])));
 }
