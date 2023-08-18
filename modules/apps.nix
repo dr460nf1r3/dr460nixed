@@ -14,34 +14,26 @@ in
       required-packages = [
         age
         bind
-        bitwarden-cli
         btop
         cached-nix-shell
         cachix
         cloudflared
-        curl
         deploy-rs
-        direnv
         duf
-        exa
-        fastfetch
-        fishPlugins.autopair
-        fishPlugins.puffer
         jq
         killall
         micro
         mosh
         nettools
         nmap
-        pinentry-curses
         python3
         sops
         tldr
+        tmux
         traceroute
         ugrep
         wget
         whois
-        zellij
       ];
     in
     required-packages

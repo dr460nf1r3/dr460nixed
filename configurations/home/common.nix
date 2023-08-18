@@ -65,7 +65,7 @@
     # The better cat replacement
     bat = {
       enable = true;
-      config.theme = "GitHub";
+      config.theme = "Dracula";
     };
 
     # Btop to view resource usage
