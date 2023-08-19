@@ -38,6 +38,7 @@
     chromium = true;
     desktops.enable = true;
     development.enable = true;
+    gaming.enable = true;
     lanzaboote.enable = true;
     school = true;
     smtp.enable = true;

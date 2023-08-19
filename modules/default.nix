@@ -7,6 +7,7 @@
     ./desktops.nix
     ./docker-compose-runner.nix
     ./development.nix
+    ./gaming.nix
     ./hardening.nix
     ./locales.nix
     ./misc.nix
