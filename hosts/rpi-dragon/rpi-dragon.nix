@@ -70,18 +70,6 @@
     path = "/run/secrets/cloudflared/rpi/cred";
   };
 
-  # Make the SSL secret key & cert available (aquired via Tailscale)
-  sops.secrets."ssl/rpi-dragon-key" = {
-    mode = "0600";
-    owner = "nginx";
-    path = "/run/secrets/ssl/rpi-dragon-key";
-  };
-  sops.secrets."ssl/rpi-dragon-cert" = {
-    mode = "0600";
-    owner = "nginx";
-    path = "/run/secrets/ssl/rpi-dragon-cert";
-  };
-
   # Provide a reverse proxy for our services
   services.nginx = {
     enable = true;
@@ -113,16 +101,27 @@
         proxyPass = "http://127.0.0.1:3000";
         proxyWebsockets = true;
       };
-      sslCertificate = config.sops.secrets."ssl/rpi-dragon-cert".path;
-      sslCertificateKey = config.sops.secrets."ssl/rpi-dragon-key".path;
+      sslCertificate = "/var/lib/tailscale-tls/cert.crt";
+      sslCertificateKey = "/var/lib/tailscale-tls/key.key";
     };
   };
 
   # Enable a few selected custom settings
   dr460nixed = {
     rpi = true;
-    servers.enable = true;
-    servers.monitoring = true;
+    servers = {
+      enable = true;
+      monitoring = true;
+    };
+    tailscale = {
+      enable = true;
+      extraUpArgs = [
+        "--accept-dns"
+        "--accept-routes"
+        "--ssh"
+      ];
+    };
+    tailscale-tls.enable = true;
   };
 
   # Garuda Nix subsystem option

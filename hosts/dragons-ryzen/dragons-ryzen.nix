@@ -43,7 +43,11 @@
     smtp.enable = true;
     tailscale = {
       enable = true;
-      extraUpArgs = ["--accept-routes" "--accept-dns=true" ];
+      extraUpArgs = [
+        "--accept-dns"
+        "--accept-routes"
+        "--ssh"
+      ];
     };
     yubikey = true;
     zfs = {

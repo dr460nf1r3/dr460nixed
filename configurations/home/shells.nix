@@ -1,4 +1,4 @@
-let 
+let
   immortalis = "116.202.208.112";
 in
 {

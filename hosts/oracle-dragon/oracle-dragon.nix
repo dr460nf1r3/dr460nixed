@@ -68,9 +68,10 @@
     tailscale = {
       enable = true;
       extraUpArgs = [
-        "--accept-dns=true"
+        "--accept-dns"
         "--accept-routes"
         "--advertise-exit-node"
+        "--ssh"
       ];
     };
     tailscale-tls.enable = true;

@@ -43,6 +43,16 @@
       enable = true;
       monitoring = true;
     };
+    tailscale = {
+      enable = true;
+      extraUpArgs = [
+        "--accept-dns"
+        "--accept-routes"
+        "--advertise-exit-node"
+        "--ssh"
+      ];
+    };
+    tailscale-tls.enable = true;
     systemd-boot.enable = true;
   };
 
@@ -90,21 +100,9 @@
       '';
       forceSSL = true;
       http3 = true;
-      sslCertificate = config.sops.secrets."ssl/tv-nixos-cert".path;
-      sslCertificateKey = config.sops.secrets."ssl/tv-nixos-key".path;
+      sslCertificate = "/var/lib/tailscale-tls/cert.crt";
+      sslCertificateKey = "/var/lib/tailscale-tls/key.key";
     };
-  };
-
-  # Make the SSL secret key & cert available (aquired via Tailscale)
-  sops.secrets."ssl/tv-nixos-key" = {
-    mode = "0600";
-    owner = "nginx";
-    path = "/run/secrets/ssl/tv-nixos-key";
-  };
-  sops.secrets."ssl/tv-nixos-cert" = {
-    mode = "0600";
-    owner = "nginx";
-    path = "/run/secrets/ssl/tv-nixos-cert";
   };
 
   # Enable the touchpad
