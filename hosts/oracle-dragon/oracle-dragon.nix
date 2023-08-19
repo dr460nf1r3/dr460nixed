@@ -49,8 +49,8 @@
           proxyPass = "http://127.0.0.1:3000";
           proxyWebsockets = true;
         };
-        sslCertificate = config.sops.secrets."ssl/oracle-dragon-cert".path;
-        sslCertificateKey = config.sops.secrets."ssl/oracle-dragon-key".path;
+        sslCertificate = "/var/lib/tailscale-tls/cert.crt";
+        sslCertificateKey = "/var/lib/tailscale-tls/key.key";
       };
     };
   };
@@ -60,9 +60,23 @@
     docker-compose-runner."oracle-dragon" = {
       source = ../../configurations/docker-compose/oracle-dragon;
     };
-    servers.enable = true;
-    servers.monitoring = true;
+    oci.enable = true;
+    servers = {
+      enable = true;
+      monitoring = true;
+    };
+    tailscale = {
+      enable = true;
+      extraUpArgs = [
+        "--accept-dns=true"
+        "--accept-routes"
+        "--advertise-exit-node"
+      ];
+    };
+    tailscale-tls.enable = true;
   };
+
+  # Secrets for the docker-compose runner
   sops.secrets."api_keys/github_runner" = {
     mode = "0600";
     owner = config.users.users.nico.name;
@@ -83,59 +97,6 @@
     "net.ipv4.ip_forward" = 1;
     "net.ipv6.conf.all.forwarding" = 1;
   };
-  services.tailscale.useRoutingFeatures = "both";
-
-  # Make the SSL secret key & cert available (aquired via Tailscale)
-  sops.secrets."ssl/oracle-dragon-key" = {
-    mode = "0600";
-    owner = "nginx";
-    path = "/run/secrets/ssl/oracle-dragon-key";
-  };
-  sops.secrets."ssl/oracle-dragon-cert" = {
-    mode = "0600";
-    owner = "nginx";
-    path = "/run/secrets/ssl/oracle-dragon-cert";
-  };
-
-  # This is my remote development machine
-  # Import secrets needed for development
-  sops.secrets."api_keys/sops" = {
-    mode = "0600";
-    owner = config.users.users.nico.name;
-    path = "/home/nico/.config/sops/age/keys.txt";
-  };
-  sops.secrets."api_keys/heroku" = {
-    mode = "0600";
-    owner = config.users.users.nico.name;
-    path = "/home/nico/.netrc";
-  };
-  sops.secrets."api_keys/cloudflared" = {
-    mode = "0600";
-    owner = config.users.users.nico.name;
-    path = "/home/nico/.cloudflared/cert.pem";
-  };
-
-  # For pushing to GitHub etc.
-  sops.secrets."ssh_keys/id_rsa" = {
-    mode = "0600";
-    owner = config.users.users.nico.name;
-    path = "/home/nico/.ssh/id_rsa";
-  };
-
-  # Needed for KASM workspaces
-  virtualisation = {
-    docker = {
-      autoPrune = {
-        dates = "2d";
-        enable = true;
-      };
-      enable = true;
-    };
-    oci-containers.backend = "docker";
-  };
-
-  # Slows down write operations considerably
-  nix.settings.auto-optimise-store = lib.mkForce false;
 
   # Cloudflared tunnel configurations
   # services.cloudflared = {
@@ -160,10 +121,4 @@
   #   owner = config.users.users.cloudflared.name;
   #   path = "/run/secrets/cloudflared/oracle-dragon/cred";
   # };
-
-  # This is needed as the packages are marked unsupported
-  hardware.cpu = {
-    amd.updateMicrocode = lib.mkForce false;
-    intel.updateMicrocode = lib.mkForce false;
-  };
 }

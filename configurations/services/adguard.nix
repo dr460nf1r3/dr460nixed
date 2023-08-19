@@ -169,13 +169,13 @@
       ];
       tls = {
         allow_unencrypted_doh = true;
-        certificate_path = config.sops.secrets."ssl/oracle-dragon-cert".path;
+        certificate_path = "/var/lib/tailscale-tls/cert.crt";
         enabled = true;
         force_https = false;
         port_dns_over_quic = 853;
         port_dns_over_tls = 853;
         port_https = 3001;
-        private_key_path = config.sops.secrets."ssl/oracle-dragon-key".path;
+        private_key_path = "/var/lib/tailscale-tls/key.key";
         server_name = "100.86.102.115";
       };
       users = [

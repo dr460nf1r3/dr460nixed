@@ -13,6 +13,7 @@
     ./msmtp.nix
     ./networking.nix
     ./nix.nix
+    ./oci.nix
     ./servers.nix
     ./shells.nix
     ./tailscale.nix

@@ -2,13 +2,6 @@
   # This is a QEMU machine
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
-  # Bootloader
-  boot.loader.grub = {
-    device = "nodev";
-    efiInstallAsRemovable = true;
-    efiSupport = true;
-  };
-
   # Our filesystems
   fileSystems."/" = {
     device = "/dev/sda1";
