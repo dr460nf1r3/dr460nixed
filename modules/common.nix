@@ -89,6 +89,9 @@ in
       nixos.enable = false;
     };
 
+    # Ship systemd logs to Loki & Grafana
+    dr460nixed.promtail.lokiAddress = "100.86.102.115";
+
     # Fix (read: workaround) an issue with Sqlite
     programs.command-not-found.enable = false;
   };

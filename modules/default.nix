@@ -11,6 +11,7 @@
     ./hardening.nix
     ./locales.nix
     ./misc.nix
+    ./monitoring.nix
     ./msmtp.nix
     ./networking.nix
     ./nix.nix

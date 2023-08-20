@@ -60,7 +60,14 @@
     docker-compose-runner."oracle-dragon" = {
       source = ../../configurations/docker-compose/oracle-dragon;
     };
+    grafanaStack = {
+      address = "100.86.102.115";
+      enable = true;
+    };
     oci.enable = true;
+    prometheus = {
+      nginxExporter = true;
+    };
     servers = {
       enable = true;
       monitoring = true;
@@ -77,11 +84,16 @@
     tailscale-tls.enable = true;
   };
 
-  # Secrets for the docker-compose runner
-  sops.secrets."api_keys/github_runner" = {
+  # Secrets for the docker-compose runner & adguardExporter
+  sops.secrets."api_keys/oracle-dragon" = {
     mode = "0600";
     owner = config.users.users.nico.name;
     path = "/var/docker-compose-runner/oracle-dragon/.env";
+  };
+  sops.secrets."api_keys/adguard" = {
+    mode = "0600";
+    owner = config.users.users.adguard.name;
+    path = "/run/secrets/api_keys/adguard";
   };
 
   # Garuda Nix subsystem options

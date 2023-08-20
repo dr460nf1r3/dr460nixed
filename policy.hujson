@@ -29,6 +29,8 @@
 		},
 		// All Tailscale admins can access everything
 		{"action": "accept", "src": ["autogroup:admin"], "dst": ["*:*"]},
+		// Allow scraping metrics via node_exporter
+		{"action": "accept", "src": ["100.86.102.115"], "dst": ["100.97.58.140:3021"]},
 	],
 
 	// Define tagOwners via autogroups

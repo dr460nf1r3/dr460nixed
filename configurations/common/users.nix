@@ -57,6 +57,7 @@ in
         "network"
         "networkmanager"
         "podman"
+        "systemd-journal"
         "wireshark"
       ];
     home = "/home/nico";
