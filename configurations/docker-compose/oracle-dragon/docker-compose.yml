@@ -53,16 +53,18 @@ services:
       EPHEMERAL: true
       LABELS: linux,x64,gpu
       RUNNER_NAME: oracle-dragon
-      RUNNER_SCOPE: 'repo'
+      RUNNER_SCOPE: repo
       RUNNER_WORKDIR: /tmp/runner/work
     volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock'
-      - '/tmp/runner:/tmp/runner'
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/tmp/runner:/tmp/runner"
+    restart: unless-stopped
 
   # Automatic container updates
   watchtower:
     image: containrrr/watchtower:latest
     container_name: watchtower
+    command: hhbr hhbs github_runner watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: hhbr hhbs kasm watchtower
+    restart: unless-stopped
