@@ -2,10 +2,11 @@
   # Thunderbird configuration
   programs.thunderbird = {
     enable = true;
-    # package = pkgs.thunderbird-appmenu;
     profiles."nico" = {
       isDefault = true;
       settings = {
+        "calendar.timezone.local" = "Europe/Berlin";
+        "calendar.timezone.useSystemTimezone" = true;
         "datareporting.healthreport.uploadEnabled" = false;
         "font.name.sans-serif.x-western" = "Fira Sans";
         "mail.incorporate.return_receipt" = 1;

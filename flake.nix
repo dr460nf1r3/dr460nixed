@@ -12,10 +12,10 @@
     deploy-rs.url = "github:serokell/deploy-rs";
 
     # Garuda Linux flake - most of my system settings are here
-    garuda = {
+    garuda-nix = {
       inputs.chaotic.follows = "chaotic-nyx";
       inputs.garuda-nixpkgs.follows = "nixpkgs";
-      url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
+      url = "gitlab:garuda-linux/garuda-nix/main";
     };
 
     # Reset rootfs every reboot
@@ -61,7 +61,7 @@
 
   outputs =
     { deploy-rs
-    , garuda
+    , garuda-nix
     , impermanence
     , lanzaboote
     , nixd
@@ -72,7 +72,7 @@
     , ...
     } @ inputs:
     let
-      nixos = garuda.nixpkgs;
+      nixos = garuda-nix.nixpkgs;
       system = "x86_64-linux";
       specialArgs = {
         inherit spicetify-nix;
@@ -91,7 +91,7 @@
           nixpkgs.overlays = [ nixd.overlays.default ];
         }
       ];
-      pkgs = import garuda.nixpkgs { inherit system; };
+      pkgs = import garuda-nix.nixpkgs { inherit system; };
       sshUser = "deploy";
       user = "root";
     in
@@ -117,18 +117,18 @@
       };
 
       # Defines a formatter for "nix fmt"
-      formatter.${system} = garuda.nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+      formatter.${system} = garuda-nix.nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
 
       # All the system configurations
       # My old laptop serving as TV
-      nixosConfigurations."tv-nixos" = garuda.lib.garudaSystem {
+      nixosConfigurations."tv-nixos" = garuda-nix.lib.garudaSystem {
         inherit system;
         modules = defaultModules
           ++ [ ./hosts/tv-nixos/tv-nixos.nix ];
         inherit specialArgs;
       };
       # My main device (Lenovo Slim 7)
-      nixosConfigurations."dragons-ryzen" = garuda.lib.garudaSystem {
+      nixosConfigurations."dragons-ryzen" = garuda-nix.lib.garudaSystem {
         inherit system;
         modules = defaultModules
           ++ [
@@ -138,35 +138,35 @@
         inherit specialArgs;
       };
       # Free Tier Oracle aarch64 VM
-      nixosConfigurations."oracle-dragon" = garuda.lib.garudaSystem {
+      nixosConfigurations."oracle-dragon" = garuda-nix.lib.garudaSystem {
         system = "aarch64-linux";
         modules = defaultModules
           ++ [ ./hosts/oracle-dragon/oracle-dragon.nix ];
         inherit specialArgs;
       };
       # My Raspberry Pi 4B
-      nixosConfigurations."rpi-dragon" = garuda.lib.garudaSystem {
+      nixosConfigurations."rpi-dragon" = garuda-nix.lib.garudaSystem {
         system = "aarch64-linux";
         modules = defaultModules
           ++ [ ./hosts/rpi-dragon/rpi-dragon.nix ];
         inherit specialArgs;
       };
       # For WSL, mostly used at work only
-      nixosConfigurations."nixos-wsl" = garuda.lib.garudaSystem {
+      nixosConfigurations."nixos-wsl" = garuda-nix.lib.garudaSystem {
         inherit system;
         modules = defaultModules
           ++ [ ./hosts/nixos-wsl/nixos-wsl.nix ];
         inherit specialArgs;
       };
       # To-do for installations
-      nixosConfigurations."live-usb" = garuda.lib.garudaSystem {
+      nixosConfigurations."live-usb" = garuda-nix.lib.garudaSystem {
         inherit system;
         modules = defaultModules
           ++ [ ./hosts/live-usb/live-usb.nix ];
         inherit specialArgs;
       };
       # To-do for installations
-      nixosConfigurations."rpiImage" = garuda.lib.garudaSystem {
+      nixosConfigurations."rpiImage" = garuda-nix.lib.garudaSystem {
         inherit system;
         modules = defaultModules
           ++ [
