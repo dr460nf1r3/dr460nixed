@@ -23,6 +23,7 @@ in
       bash.shellAliases = {
         "deploy" = "deploy -s";
         "reloc-us" = "sudo tailscale up --exit-node=100.75.73.33";
+        "diffnix" = "nvd diff $(sh -c 'ls -d1v /nix/var/nix/profiles/system-*-link|tail -n 2')";
       };
       fish = {
         shellAliases = {
@@ -30,6 +31,7 @@ in
         };
         shellAbbrs = {
           "reloc-us" = "sudo tailscale up --exit-node=100.75.73.33";
+          "diffnix" = "nvd diff $(sh -c 'ls -d1v /nix/var/nix/profiles/system-*-link|tail -n 2')";
         };
       };
     };

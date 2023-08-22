@@ -70,7 +70,6 @@ in
   # Load my home-manager configurations
   home-manager = {
     useGlobalPkgs = true;
-    useUserPackages = true;
     users."nico" = import ../home/common.nix;
   };
 

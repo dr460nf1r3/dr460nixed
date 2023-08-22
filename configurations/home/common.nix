@@ -68,16 +68,6 @@
       config.theme = "Dracula";
     };
 
-    # Btop to view resource usage
-    btop = {
-      enable = true;
-      settings = {
-        color_theme = "TTY";
-        proc_tree = false;
-        theme_background = false;
-      };
-    };
-
     # Direnv for per-directory environment variables
     direnv = {
       enable = true;

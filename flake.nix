@@ -62,7 +62,6 @@
   outputs =
     { deploy-rs
     , garuda
-    , home-manager
     , impermanence
     , lanzaboote
     , nixd
@@ -85,7 +84,6 @@
       };
       defaultModules = [
         ./modules/default.nix
-        home-manager.nixosModules.home-manager
         lanzaboote.nixosModules.lanzaboote
         sops-nix.nixosModules.sops
         spicetify-nix.nixosModule
