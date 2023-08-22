@@ -68,10 +68,7 @@ in
   };
 
   # Load my home-manager configurations
-  home-manager = {
-    useGlobalPkgs = true;
-    users."nico" = import ../home/common.nix;
-  };
+  home-manager.users."nico" = import ../home/common.nix;
 
   # Allow pushing to Cachix
   sops.secrets."api_keys/cachix" = {

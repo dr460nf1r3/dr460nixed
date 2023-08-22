@@ -48,14 +48,8 @@
   };
 
   # Always use my cache
-  home.file = {
-    ".config/nix/nix.conf".text = ''
-      substituters = https://dr460nf1r3.cachix.org
-      trusted-public-keys = dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU= 
-    '';
-    ".local/share/nix/trusted-settings.json".text = ''
-      substituters = https://dr460nf1r3.cachix.org
-      trusted-public-keys = dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU= 
-    '';
-  };
+  nix.extraOptions = ''
+    extra-substituters = https://dr460nf1r3.cachix.org
+    extra-trusted-public-keys = dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU=
+  '';
 }

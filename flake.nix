@@ -15,7 +15,7 @@
     garuda-nix = {
       inputs.chaotic.follows = "chaotic-nyx";
       inputs.garuda-nixpkgs.follows = "nixpkgs";
-      url = "gitlab:garuda-linux/garuda-nix/main";
+      url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
     };
 
     # Reset rootfs every reboot
