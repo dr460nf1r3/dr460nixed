@@ -41,8 +41,6 @@
       clock24 = true;
       enable = true;
       extraConfig = ''
-        set status-utf8 on
-        set utf8 on
         set -g default-terminal "screen-256color"
         set -g status-bg black
       '';

@@ -30,7 +30,34 @@
 		// All Tailscale admins can access everything
 		{"action": "accept", "src": ["autogroup:admin"], "dst": ["*:*"]},
 		// Allow scraping metrics via node_exporter
-		{"action": "accept", "src": ["100.86.102.115"], "dst": ["100.97.58.140:3021"]},
+		{
+			"action": "accept",
+			"src":    ["100.86.102.115"],
+			"dst":    ["100.97.58.140:3021"],
+		},
+	],
+
+	// Allow the usage of Tailscale SSH - enabling VSCode extension
+	"ssh": [
+		{
+			// All users can SSH to their own devices, as non-root
+			"action": "accept",
+			"src":    ["autogroup:members"],
+			"dst":    ["autogroup:self"],
+			"users":  ["autogroup:nonroot"],
+		},
+		{
+			"action": "accept",
+			"src":    ["dr460nf1r3@github"],
+			"dst":    ["tag:dragons"],
+			"users":  ["autogroup:nonroot"],
+		},
+		{
+			"action": "accept",
+			"src":    ["dr460nf1r3@github"],
+			"dst":    ["tag:others"],
+			"users":  ["autogroup:nonroot"],
+		},
 	],
 
 	// Define tagOwners via autogroups

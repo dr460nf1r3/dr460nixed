@@ -47,6 +47,7 @@
       enable = true;
       extraUpArgs = [
         "--accept-dns"
+        "--accept-risk=lose-ssh"
         "--accept-routes"
         "--advertise-exit-node"
         "--ssh"
