@@ -40,6 +40,9 @@ in
     # https://nix-community.github.io/home-manager/index.html
     programs.dconf.enable = true;
 
+    # Allow better Syncthing speeds
+    services.syncthing.openDefaultPorts = true;
+
     # # Kernel paramters & settings
     boot.kernelParams = [ "mitigations=off" ];
 
