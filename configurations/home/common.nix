@@ -40,6 +40,12 @@
       baseIndex = 1;
       clock24 = true;
       enable = true;
+      extraConfig = ''
+        set status-utf8 on
+        set utf8 on
+        set -g default-terminal "screen-256color"
+        set -g status-bg black
+      '';
       historyLimit = 10000;
       newSession = true;
       sensibleOnTop = false;

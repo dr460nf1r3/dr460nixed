@@ -379,11 +379,11 @@
         "home-manager": "home-manager_2"
       },
       "locked": {
-        "lastModified": 1692741673,
-        "narHash": "sha256-vocrlC0Hajd4RCgyTKtxOuduC5X0PjbavwmOaMMY00c=",
+        "lastModified": 1692783174,
+        "narHash": "sha256-R8EZwQ0bK0pWmpjMe9pLDEXlIGAFYBJicjl6UqSm3VQ=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "21507adaa561f73c0c46d413da0adc6e6b20fc71",
+        "rev": "2328199356e3035aed0e6b3077f0aec17580706b",
         "type": "gitlab"
       },
       "original": {
