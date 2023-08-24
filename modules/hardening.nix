@@ -83,11 +83,12 @@ in
     # leaving EnvFactor enabled for other apps
     security.duosec = {
       acceptEnvFactor = true;
-      autopush = false;
+      autopush = true;
       failmode = "safe";
       host = "api-a7b9f5f3.duosecurity.com";
       integrationKey = "DID3CH2NCQ2H24L1GUUN";
       pam.enable = true;
+      prompts = 1;
       pushinfo = true;
       secretKeyFile = config.sops.secrets."api_keys/duo".path;
       ssh.enable = true;
