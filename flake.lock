@@ -90,11 +90,11 @@
         "yuzu-ea-git-src": "yuzu-ea-git-src"
       },
       "locked": {
-        "lastModified": 1692838243,
-        "narHash": "sha256-VVd9F3RBeTukYotnr9sEDbRCGHawtfy2pYxlimurcEE=",
+        "lastModified": 1692878962,
+        "narHash": "sha256-lp8EwsrYZ8IDitIqiGuaGKUCwLKA7P9G0sLWYMVoIww=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "bba1f385ddf65f8aa854e35319d7db13aa010102",
+        "rev": "e4002b6866536c0096b00e2c0eca3f371ad919a7",
         "type": "github"
       },
       "original": {
@@ -570,11 +570,11 @@
     "mesa-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1692814435,
-        "narHash": "sha256-2b8ruIy5ysaPt2Um+ZIZlbcc2LxvBXDZmfZNZCIToMg=",
+        "lastModified": 1692869934,
+        "narHash": "sha256-muLFeEnQkfst2JONd36a/TSRQPyCT8iDOgH/Ny/2MFQ=",
         "owner": "chaotic-cx",
         "repo": "mesa-mirror",
-        "rev": "56587b24e5d47924cf4f029ab4bfbb66980413aa",
+        "rev": "5ceba97c2e18c848beb23016a7b4c190f0f5178b",
         "type": "github"
       },
       "original": {
@@ -590,11 +590,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1692066861,
-        "narHash": "sha256-UTA2HZsFDaIR3NkIobH6dpQlGgGsEw1kL1uQhM6bO2g=",
+        "lastModified": 1692870717,
+        "narHash": "sha256-Ur8+u5Luegsxd3ydH/sfg0WokqC2TLJsGOIpmH7a+6k=",
         "owner": "nix-community",
         "repo": "nixd",
-        "rev": "d1704af3bc2fffa1cbe70e29d96a1522040aaee5",
+        "rev": "e06753cc8959c6680bc9a9bd87dccd4067f3e9f6",
         "type": "github"
       },
       "original": {
@@ -1047,11 +1047,11 @@
     "wlroots-git-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1692815338,
-        "narHash": "sha256-EWmg3+5QdPZdyVxbXrouNaSBffvRgrwP8Be0RUZUNpI=",
+        "lastModified": 1692849276,
+        "narHash": "sha256-5aSH5zY7NBXNNftexHWgk4K8ksevKxh3ugITrZEImak=",
         "ref": "master",
-        "rev": "a94168b5fe640a10a001b5afe3ef4dc9bbfd3416",
-        "revCount": 6568,
+        "rev": "7bf6c1fc6c824bb2e031d464000ae41c86c459e5",
+        "revCount": 6570,
         "type": "git",
         "url": "https://gitlab.freedesktop.org/wlroots/wlroots.git"
       },
