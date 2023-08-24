@@ -112,10 +112,12 @@ in
             github.codespaces
             github.copilot
             github.vscode-github-actions
+            github.vscode-pull-request-github
             jnoortheen.nix-ide
             ms-azuretools.vscode-docker
-            # ms-python.python
+            # ms-python.python - https://github.com/NixOS/nixpkgs/issues/251045
             ms-python.vscode-pylance
+            ms-vscode-remote.remote-ssh
             ms-vscode.hexeditor
             ms-vsliveshare.vsliveshare
             njpwerner.autodocstring
