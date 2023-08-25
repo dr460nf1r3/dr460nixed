@@ -285,11 +285,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1692737539,
-        "narHash": "sha256-lPYJXbLhc/gerQugL9QbvQG6prGTQQhh7SHDSZ6VYm4=",
+        "lastModified": 1692912150,
+        "narHash": "sha256-gRAFFDrTodXAyw8/AxsQK+o0C2tGNB9CfGBkespTKjA=",
         "owner": "wamserma",
         "repo": "flake-programs-sqlite",
-        "rev": "63772e66c0d4699a9a48cc85874dd7e5287cdc5f",
+        "rev": "620508678be747f1d50bc3e67d615c3536ce899f",
         "type": "github"
       },
       "original": {
@@ -379,11 +379,11 @@
         "home-manager": "home-manager_2"
       },
       "locked": {
-        "lastModified": 1692828104,
-        "narHash": "sha256-pJbtWUly5PHE4MjSxwAIb4nYmtjMuJ2zLXlVbq+CKS0=",
+        "lastModified": 1692914495,
+        "narHash": "sha256-Vi+euC1evfwXSvum3zrm165aRIO4xD81GTbLl4xRuCE=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "77083d6dae0ee43cefcef69af70024155d4be8de",
+        "rev": "75fe3176e5ea8796fa2893120d87b0d6e0dc8f02",
         "type": "gitlab"
       },
       "original": {
@@ -867,11 +867,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1692816312,
-        "narHash": "sha256-r2T7EJevH4+5gML5cB6G/qTyUySUHO9t63+KlwAyN0k=",
+        "lastModified": 1692902572,
+        "narHash": "sha256-PBZf8g0OgQ3I7EEipr6glhAWWGNBENPZFJc98USd/sA=",
         "owner": "the-argus",
         "repo": "spicetify-nix",
-        "rev": "96a7cb1b6b13d44b4c23fb4228cc28206c22d09f",
+        "rev": "3a17678308b74bedb43d9865937fee3871ae4046",
         "type": "github"
       },
       "original": {
