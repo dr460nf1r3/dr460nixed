@@ -15,6 +15,7 @@ This repo contains my NixOS dotfiles. Every device supported by NixOS will be ad
 - **Mesh networked** hosts with **Tailscale**
 - Uses the custom **Linux-cachyos BORE EEVDF** kernel
 - Additional packages not existing in Nixpkgs (yet) via **chaotic-nyx**
+- **Opt-in 2FA protection** of ssh and password prompts **with Duo Security**
 - Secrets are managed via **nix-sops**
 - Automated flake building when pushing to main & pushing to **Cachix** via **GitHub Actions**
 - Easy building of configurations & deployment via **deploy-rs**
@@ -40,6 +41,35 @@ Other, smaller tweaks I particularly like about this setup include:
 ## Module options
 
 A lot of those have been moved to the [Garuda Nix Subsystem](https://gitlab.com/garuda-linux/garuda-nix-subsystem).
+
+```
+├── modules
+│  ├── apps.nix
+│  ├── boot.nix
+│  ├── chaotic
+│  │  ├── chaotic-mirror.nix
+│  │  ├── chaotic.nix
+│  │  └── patch.diff
+│  ├── common.nix
+│  ├── default.nix
+│  ├── desktops.nix
+│  ├── development.nix
+│  ├── docker-compose-runner.nix
+│  ├── gaming.nix
+│  ├── hardening.nix
+│  ├── locales.nix
+│  ├── misc.nix
+│  ├── monitoring.nix
+│  ├── msmtp.nix
+│  ├── networking.nix
+│  ├── nix.nix
+│  ├── oci.nix
+│  ├── servers.nix
+│  ├── shells.nix
+│  ├── tailscale-tls.nix
+│  ├── tailscale.nix
+│  └── zfs.nix
+```
 
 - `dr460nixed.auto-upgrade.enable` (default false) - enables auto-upgrading the system daily by pulling the updated Nix flake from the repo
 - `dr460nixed.common.enable` (default true) - common options for every system
@@ -95,9 +125,10 @@ How to proceed from here?
 - Easily deploy to hosts via `colmena apply`
 - Add your hosts to Tailscale, if you want to be using it. I can warmly recommend it for connecting with any kind of host!
 - Build an images of the flake's configurations:
-  ~~~
+  ```
   nixos-generate --format iso --flake .#live-usb
   nixos-generate --system aarch64-linux --format sd-aarch64 --flake .#rpi-dragon
+  ```
 - ... 😋
 
 ## Credits
