@@ -2,11 +2,6 @@
   # Import individual configuration snippets
   imports = [ ./shells.nix ];
 
-  # Always needed home-manager settings - don't touch!
-  home.homeDirectory = "/home/nico";
-  home.stateVersion = "22.11";
-  home.username = "nico";
-
   # I'm working with git a lot
   programs.git = {
     signing = {
@@ -24,7 +19,7 @@
       enable = true;
       initExtra = ''
         if [ -z "$TMUX" ] &&  [ "$SSH_CLIENT" != "" ]; then
-          exec ${pkgs.tmux}/bin/tmux a || exec /usr/bin/tmux a
+          exec ${pkgs.tmux}/bin/tmux a
         fi
       '';
     };

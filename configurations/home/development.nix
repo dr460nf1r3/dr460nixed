@@ -4,8 +4,12 @@
     "org/virt-manager/virt-manager" = {
       manager-window-height = 550;
       manager-window-width = 550;
+      system-tray = true;
+      xmleditor-enabled = true;
     };
     "org/virt-manager/virt-manager/confirm" = {
+      forcepoweroff = false;
+      removedev = false;
       unapplied-dev = true;
     };
     "org/virt-manager/virt-manager/connections" = {
@@ -19,36 +23,44 @@
       disk-usage = true;
       network-traffic = true;
     };
+    "org/virt-manager/virt-manager/stats" = {
+      enable-disk-poll = true;
+      enable-memory-poll = true;
+      enable-net-poll = true;
+    };
   };
 
   # VSCode settings
   programs.vscode.userSettings = {
-    "workbench.colorTheme" = "Sweet vscode";
     "editor.fontFamily" = "'Jetbrains Mono Nerd Font'; 'monospace'; monospace";
     "editor.formatOnSave" = true;
+    "editor.inlineSuggest.enabled" = true;
+    "explorer.confirmDelete" = false;
+    "gitlens.telemetry.enabled" = false;
+    "merge-conflict.autoNavigateNextConflict.enabled" = true;
+    "nix.enableLanguageServer" = true;
+    "nix.serverPath" = "nixd";
+    "telemetry.telemetryLevel" = "off";
     "terminal.integrated.confirmOnExit" = "hasChildProcesses";
-    "terminal.integrated.cursorStyle" = "line";
     "terminal.integrated.copyOnSelection" = true;
     "terminal.integrated.cursorBlinking" = true;
+    "terminal.integrated.cursorStyle" = "line";
+    "terminal.integrated.defaultProfile.linux" = "tmux";
     "terminal.integrated.enableBell" = true;
     "terminal.integrated.gpuAcceleration" = "on";
     "terminal.integrated.ignoreProcessNames" = [
-      "starship"
-      "oh-my-posh"
       "bash"
-      "zsh"
       "fish"
+      "oh-my-posh"
+      "starship"
       "tmux"
+      "zsh"
     ];
     "terminal.integrated.persistentSessionScrollback" = 10000;
-    "terminal.integrated.sendKeybindingsToShell" = true;
-    "terminal.integrated.shellIntegration.suggestEnabled" = true;
-    "terminal.integrated.smoothScrolling" = true;
-    "terminal.integrated.shellIntegration.history" = 10000;
     "terminal.integrated.profiles.linux" = {
       "bash" = {
-        "path" = "bash";
         "icon" = "terminal-bash";
+        "path" = "bash";
       };
       "zsh" = {
         "path" = "zsh";
@@ -57,26 +69,23 @@
         "path" = "fish";
       };
       "tmux" = {
-        "path" = "tmux";
         "icon" = "terminal-tmux";
+        "path" = "tmux";
       };
       "pwsh" = {
-        "path" = "pwsh";
         "icon" = "terminal-powershell";
+        "path" = "pwsh";
       };
     };
-    "terminal.integrated.defaultProfile.linux" = "tmux";
-    "telemetry.telemetryLevel" = "off";
-    "gitlens.telemetry.enabled" = false;
-    "nix.serverPath" = "nixd";
-    "nix.enableLanguageServer" = true;
-    "merge-conflict.autoNavigateNextConflict.enabled" = true;
-    "yaml.keyOrdering" = true;
+    "terminal.integrated.sendKeybindingsToShell" = true;
+    "terminal.integrated.shellIntegration.history" = 10000;
+    "terminal.integrated.shellIntegration.suggestEnabled" = true;
+    "terminal.integrated.smoothScrolling" = true;
     "workbench.iconTheme" = "material-icon-theme";
-    "editor.inlineSuggest.enabled" = true;
+    "workbench.colorTheme" = "Sweet vscode";
+    "yaml.keyOrdering" = true;
     "[nix]" = {
       "editor.defaultFormatter" = "jnoortheen.nix-ide";
     };
-    "explorer.confirmDelete" = false;
   };
 }
