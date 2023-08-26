@@ -62,7 +62,6 @@
     , lanzaboote
     , nixd
     , nixpkgs
-    , self
     , sops-nix
     , spicetify-nix
     , ...
@@ -88,8 +87,6 @@
         }
       ];
       pkgs = import garuda-nix.nixpkgs { inherit system; };
-      sshUser = "deploy";
-      user = "root";
     in
     {
       # The default checks to run on Nix files

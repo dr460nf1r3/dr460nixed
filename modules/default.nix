@@ -18,6 +18,7 @@
     ./oci.nix
     ./servers.nix
     ./shells.nix
+    ./syncthing.nix
     ./tailscale.nix
     ./tailscale-tls.nix
     ./zfs.nix

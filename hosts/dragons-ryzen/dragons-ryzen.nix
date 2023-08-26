@@ -51,6 +51,24 @@
         "--ssh"
       ];
     };
+    # syncthing = {
+    #   cert = config.sops.secrets."syncthing/dragons-ryzen_cert".path;
+    #   devices = {
+    #     pixel-6 = {
+    #       id = "EBJDXV-7KUQ2N3-EMDYCJR-XEFBULZ-WGBNLIA-O27UFJM-PZAULDR-J2L3XQX";
+    #     };
+    #     tv-nixos = {
+    #       id = "7BCXVUAC-LWRHPS5-YHQU3JW-Z5EUI7D-U3TUXMB-F65I2BI-KWDYDAB-BLHNGA5";
+    #     };
+    #   };
+    #   devicesNames = [
+    #     "pixel-6"
+    #     "tv-nixos"
+    #   ];
+    #   enable = true;
+    #   key = config.sops.secrets."syncthing/dragons-ryzen_cert".path;
+    #   user = "nico";
+    # };
     yubikey = true;
     zfs = {
       enable = true;
@@ -87,18 +105,32 @@
   home-manager.users."nico" = import ../../configurations/home/desktops.nix;
 
   # A few secrets
-  sops.secrets."machine-id/slim-lair" = {
-    path = "/etc/machine-id";
-    mode = "0600";
-  };
-  sops.secrets."passwords/nico@dr460nf1r3.org" = {
-    mode = "0600";
-    path = "/run/secrets/passwords/nico@dr460nf1r3.org";
-  };
-  sops.secrets."ssh_keys/id_rsa" = {
-    mode = "0600";
-    owner = config.users.users.nico.name;
-    path = "/home/nico/.ssh/id_rsa";
+  sops.secrets = {
+    "machine-id/slim-lair" = {
+      path = "/etc/machine-id";
+      mode = "0600";
+    };
+    "passwords/nico@dr460nf1r3.org" = {
+      mode = "0600";
+      path = "/run/secrets/passwords/nico@dr460nf1r3.org";
+    };
+    "ssh_keys/id_rsa" = {
+      mode = "0640";
+      owner = config.users.users.nico.name;
+      path = "/home/nico/.ssh/id_rsa";
+    };
+    "syncthing/dragons-ryzen_key" = {
+      mode = "0600";
+      owner = config.users.users.nico.name;
+      group = config.users.groups.syncthing.name;
+      path = "/home/nico/.config/syncthing/key.pem";
+    };
+    "syncthing/dragons-ryzen_cert" = {
+      mode = "0640";
+      owner = config.users.users.nico.name;
+      group = config.users.groups.syncthing.name;
+      path = "/home/nico/.config/syncthing/cert.pem";
+    };
   };
 
   # NixOS stuff
