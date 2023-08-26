@@ -1,5 +1,6 @@
 { config
 , lib
+, pkgs
 , ...
 }:
 with lib;
@@ -44,10 +45,11 @@ in
     # & allow deployment of configurations via Colmena
     security.sudo = {
       execWheelOnly = true;
-      extraConfig = ''
-        deploy ALL=(ALL) NOPASSWD:ALL
-      '';
+      package = pkgs.sudo.override { withInsults = true; };
     };
+
+    # BPF-based auto-tuning of Linux system parameters
+    services.bpftune.enable = true;
 
     # Increase open file limit for sudoers
     security.pam.loginLimits = [
