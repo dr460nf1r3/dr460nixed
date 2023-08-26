@@ -1,7 +1,4 @@
-{ pkgs
-, lib
-, ...
-}: {
+{ lib, ... }: {
   isoImage.volumeID = lib.mkForce "dr460inxed-live";
   isoImage.isoName = lib.mkForce "dr460nixed-live.iso";
 

@@ -1,8 +1,4 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
+_:
 {
   # General nix settings
   nix = {

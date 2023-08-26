@@ -6,7 +6,6 @@
 with lib;
 let
   cfg = config.dr460nixed.hardening;
-  cfgDesktops = config.dr460nixed.desktops.enable;
   cfgServers = config.dr460nixed.servers.enable;
 in
 {

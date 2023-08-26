@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+_: {
   # Thunderbird configuration
   programs.thunderbird = {
     enable = true;

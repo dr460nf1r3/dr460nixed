@@ -1,7 +1,4 @@
-{ config
-, lib
-, ...
-}: {
+{ lib, ... }: {
   # Own systemd config using a custom user
   systemd.services.adguardhome = {
     serviceConfig.DynamicUser = lib.mkForce false;
