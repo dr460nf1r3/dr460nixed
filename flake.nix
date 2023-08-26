@@ -9,9 +9,9 @@
     chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # Disko for Nix-managed partition management
-    inputs = {
-      disko.url = "github:nix-community/disko";
-      disko.inputs.nixpkgs.follows = "nixpkgs";
+    disko = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/disko";
     };
 
     # Garuda Linux flake - most of my system settings are here
