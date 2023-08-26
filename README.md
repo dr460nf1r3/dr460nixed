@@ -29,14 +29,26 @@ Other, smaller tweaks I particularly like about this setup include:
 
 ## Structure
 
+```
+├── configurations
+├── flake.nix
+├── hosts
+├── lib
+├── modules
+├── overlays
+├── pkgs
+├── secrets
+```
+
+- `configurations`: All the Nix configurations not available via modules, eg. home-manager configurations
 - `flake.nix`: Entrypoint for hosts and home configurations. Also exposes a
   devshell for bootstrapping (`nix develop` or `nix-shell`) as well as deploy-rs configs
-- `apps`: Packages built from source
-- `configurations`: All the Nix configurations not available via modules, eg. home-manager configurations
 - `hosts`: NixOS Configurations, accessible via `nixos-rebuild --flake`
+- `lib`: Things helping with the maintenance of the flake, eg. linters
 - `modules`: The major part of the system configurations, exposes `dr460nixed.*` options
 - `overlays`: Patches and version overrides for some packages
 - `pkgs`: My custom packages not available in Chaotic Nyx
+- `secrets`: The secrets used by `sops-nix`
 
 ## Module options
 
