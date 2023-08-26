@@ -18,7 +18,7 @@
     blacklistedKernelModules = [ "elan_i2c" ];
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
     # The new AMD Pstate driver & needed modules
-    kernelModules = [ "acpi_call" "amdgpu" "amd_pstate=guided" ];
+    kernelModules = [ "acpi_call" "amdgpu" "amd_pstate=active" ];
     # Prevent the device waking up after going to sleep
     kernelParams = [ "mem_sleep_default=deep" ];
   };
@@ -122,13 +122,11 @@
     "syncthing/dragons-ryzen_key" = {
       mode = "0600";
       owner = config.users.users.nico.name;
-      group = config.users.groups.syncthing.name;
       path = "/home/nico/.config/syncthing/key.pem";
     };
     "syncthing/dragons-ryzen_cert" = {
       mode = "0640";
       owner = config.users.users.nico.name;
-      group = config.users.groups.syncthing.name;
       path = "/home/nico/.config/syncthing/cert.pem";
     };
   };

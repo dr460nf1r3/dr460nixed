@@ -3,10 +3,16 @@
 
   inputs = {
     # We roll unstable, as usual
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Chaotic Nyx!
     chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
+    # Disko for Nix-managed partition management
+    inputs = {
+      disko.url = "github:nix-community/disko";
+      disko.inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Garuda Linux flake - most of my system settings are here
     garuda-nix = {
@@ -27,14 +33,21 @@
     # Lanzaboote for secure boot support
     lanzaboote = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/lanzaboote/v0.3.0";
+      url = "github:nix-community/lanzaboote";
     };
 
     # Nixd language server
-    nixd.url = "github:nix-community/nixd";
+    nixd = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixd";
+    };
 
     # Secrets management
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
+      url = "github:Mic92/sops-nix";
+    };
 
     # Spicetify
     spicetify-nix = {
@@ -51,13 +64,11 @@
       flake = false;
       url = "github:cassava/repoctl";
     };
-
-    # Automated system themes
-    stylix.url = "github:danth/stylix";
   };
 
   outputs =
-    { garuda-nix
+    { disko
+    , garuda-nix
     , impermanence
     , lanzaboote
     , nixd
@@ -79,6 +90,7 @@
       };
       defaultModules = [
         ./modules/default.nix
+        disko.nixosModules.disko
         lanzaboote.nixosModules.lanzaboote
         sops-nix.nixosModules.sops
         spicetify-nix.nixosModule
