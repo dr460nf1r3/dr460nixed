@@ -18,7 +18,6 @@ This repo contains my NixOS dotfiles. Every device supported by NixOS will be ad
 - **Opt-in 2FA protection** of ssh and password prompts **with Duo Security**
 - Secrets are managed via **nix-sops**
 - Automated flake building when pushing to main & pushing to **Cachix** via **GitHub Actions**
-- Easy building of configurations & deployment via **deploy-rs**
 
 Other, smaller tweaks I particularly like about this setup include:
 

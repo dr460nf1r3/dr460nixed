@@ -15,7 +15,6 @@
     nativeBuildInputs = with pkgs; [
       age
       deadnix
-      deploy-rs
       git
       gnupg
       nix

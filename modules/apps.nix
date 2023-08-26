@@ -18,7 +18,6 @@ in
         cached-nix-shell
         cachix
         cloudflared
-        deploy-rs
         duf
         jq
         killall

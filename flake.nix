@@ -8,9 +8,6 @@
     # Chaotic Nyx!
     chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
-    # For accessing deploy-rs' utility Nix functions
-    deploy-rs.url = "github:serokell/deploy-rs";
-
     # Garuda Linux flake - most of my system settings are here
     garuda-nix = {
       inputs.chaotic.follows = "chaotic-nyx";
@@ -60,8 +57,7 @@
   };
 
   outputs =
-    { deploy-rs
-    , garuda-nix
+    { garuda-nix
     , impermanence
     , lanzaboote
     , nixd
@@ -105,12 +101,12 @@
         packages = with pkgs; [
           age
           deadnix
-          deploy-rs
           git
           gnupg
           nix
           nixos-generators
           nixpkgs-fmt
+          rsync
           sops
           statix
         ];
@@ -174,36 +170,6 @@
           "${nixos}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
         ];
         inherit specialArgs;
-      };
-
-      # Deployment configurations for deploy-rs
-      deploy.nodes = {
-        "tv-nixos" = {
-          hostname = "100.120.171.12";
-          inherit sshUser;
-          inherit user;
-          profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."tv-nixos";
-        };
-        "dragons-ryzen" = {
-          hostname = "127.0.0.1";
-          inherit sshUser;
-          inherit user;
-          profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."dragons-ryzen";
-        };
-        "oracle-dragon" = {
-          hostname = "100.86.102.115";
-          inherit sshUser;
-          inherit user;
-          profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations."oracle-dragon";
-          remoteBuild = true;
-        };
-        "rpi-dragon" = {
-          hostname = "100.85.210.126";
-          inherit sshUser;
-          inherit user;
-          profiles.system.path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations."rpi-dragon";
-          remoteBuild = true;
-        };
       };
     };
 }

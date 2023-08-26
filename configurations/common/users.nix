@@ -18,18 +18,6 @@ in
     neededForUsers = true;
   };
 
-  # This is for easy configuration roll-out
-  users.users.deploy = {
-    extraGroups = [ "wheel" ];
-    home = "/home/deploy";
-    isNormalUser = true;
-    openssh.authorizedKeys = {
-      keyFiles = [ keys.nico ];
-      keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBa5YB2FSxQZLFn2OraC0U+UGVaurOgQThC+yYz+3OE+" ];
-    };
-    password = "*";
-    uid = 2000;
-  };
   # Lock root password
   users.users.root = {
     passwordFile = config.sops.secrets."passwords/root".path;
