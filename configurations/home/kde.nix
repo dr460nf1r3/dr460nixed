@@ -1,4 +1,5 @@
 { lib
+, pkgs
 , ...
 }:
 with builtins; let
@@ -37,22 +38,49 @@ in
   home.file = lib.mkIf immutable {
     "${configDir}/autostart/nextcloud-client.desktop".text = ''
       [Desktop Entry]
-      Exec=nextcloud --background
+      Exec=${pkgs.nextcloud-client}/bin/nextcloud --background
       Icon=Nextcloud
       Name=Nextcloud
       StartupNotify=false
       Terminal=false
       Type=Application
+      X-KDE-autostart-after=panel
+      X-KDE-autostart-phase=2
+      X-KDE-autostart-after=panel
+      X-KDE-autostart-phase=2
     '';
     "${configDir}/autostart/syncthingtray.desktop".text = ''
       [Desktop Entry]
-      Exec=syncthingtray
+      Exec=${pkgs.syncthingtray}/bin/syncthingtray
+      Exec=${pkgs.syncthingtray}/bin/syncthingtray
       Icon=syncthingtray
       Name=Syncthing Tray
       Terminal=false
       Type=Application
+      X-KDE-autostart-after=panel
+      X-KDE-autostart-phase=2
     '';
-
+    "${configDir}/autostart/jamesdsp.desktop".text = ''
+      [Desktop Entry]
+      Exec=${pkgs.jamesdsp}/bin/jamesdsp --tray
+      Icon=jamesdsp
+      Name=JamesDSP for Linux
+      StartupNotify=false
+      Terminal=false
+      Type=Application
+      X-KDE-autostart-after=panel
+      X-KDE-autostart-phase=2
+    '';
+    "${configDir}/autostart/org.telegram.desktop".text = ''
+      [Desktop Entry]
+      Exec=${pkgs.tdesktop}/bin/telegram-desktop -autostart
+      Icon=telegram
+      Name=Telegram Desktop
+      SingleMainWindow=true
+      StartupWMClass=TelegramDesktop
+      Terminal=false
+      Type=Application
+    '';
     "${configDir}/baloofilerc".text = ''
       [General]
       exclude filters=*~,*.part,*.o,*.la,*.lo,*.loT,*.moc,moc_*.cpp,qrc_*.cpp,ui_*.h,cmake_install.cmake,CMakeCache.txt,CTestTestfile.cmake,libtool,config.status,confdefs.h,autom4te,conftest,confstat,Makefile.am,*.gcode,.ninja_deps,.ninja_log,build.ninja,*.csproj,*.m4,*.rej,*.gmo,*.pc,*.omf,*.aux,*.tmp,*.po,*.vm*,*.nvram,*.rcore,*.swp,*.swap,lzo,litmain.sh,*.orig,.histfile.*,.xsession-errors*,*.map,*.so,*.a,*.db,*.qrc,*.ini,*.init,*.img,*.vdi,*.vbox*,vbox.log,*.qcow2,*.vmdk,*.vhd,*.vhdx,*.sql,*.sql.gz,*.ytdl,*.class,*.pyc,*.pyo,*.elc,*.qmlc,*.jsc,*.fastq,*.fq,*.gb,*.fasta,*.fna,*.gbff,*.faa,po,CVS,.svn,.git,_darcs,.bzr,.hg,CMakeFiles,CMakeTmp,CMakeTmpQmake,.moc,.obj,.pch,.uic,.npm,.yarn,.yarn-cache,__pycache__,node_modules,node_packages,nbproject,core-dumps,lost+found
