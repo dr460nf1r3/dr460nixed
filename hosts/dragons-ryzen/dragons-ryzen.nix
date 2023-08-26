@@ -114,21 +114,21 @@
       mode = "0600";
       path = "/run/secrets/passwords/nico@dr460nf1r3.org";
     };
-    "ssh_keys/id_rsa" = {
-      mode = "0640";
-      owner = config.users.users.nico.name;
-      path = "/home/nico/.ssh/id_rsa";
-    };
-    "syncthing/dragons-ryzen_key" = {
-      mode = "0600";
-      owner = config.users.users.nico.name;
-      path = "/home/nico/.config/syncthing/key.pem";
-    };
-    "syncthing/dragons-ryzen_cert" = {
-      mode = "0640";
-      owner = config.users.users.nico.name;
-      path = "/home/nico/.config/syncthing/cert.pem";
-    };
+    # "ssh_keys/id_rsa" = {
+    #   mode = "0640";
+    #   owner = config.users.users.nico.name;
+    #   path = "/home/nico/.ssh/id_rsa";
+    # };
+    # "syncthing/dragons-ryzen_key" = {
+    #   mode = "0600";
+    #   owner = config.users.users.nico.name;
+    #   path = "/home/nico/.config/syncthing/key.pem";
+    # };
+    # "syncthing/dragons-ryzen_cert" = {
+    #   mode = "0640";
+    #   owner = config.users.users.nico.name;
+    #   path = "/home/nico/.config/syncthing/cert.pem";
+    # };
   };
 
   # NixOS stuff
