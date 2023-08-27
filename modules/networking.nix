@@ -21,6 +21,13 @@ in
     };
     # Enable nftables instead of iptables
     nftables.enable = true;
+    wireless.iwd = {
+      enable = true;
+      settings = {
+        General.AddressRandomization = "once";
+        General.AddressRandomizationRange = "full";
+      };
+    };
   };
 
   # Enable SSHD

@@ -95,5 +95,6 @@ in
 
     # Fix (read: workaround) an issue with Sqlite
     programs.command-not-found.enable = false;
+    programs.nix-index-database.comma.enable = true;
   };
 } 

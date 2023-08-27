@@ -6,10 +6,6 @@
   # Individual settings
   imports = [
     ../../configurations/common.nix
-    "${builtins.fetchGit {
-      url = "https://github.com/NixOS/nixos-hardware.git";
-      rev = "f38f9a4c9b2b6f89a5778465e0afd166a8300680";
-    }}/raspberry-pi/4"
     ./hardware-configuration.nix
   ];
 
