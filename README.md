@@ -1,5 +1,5 @@
 [![built with nix](https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org)
-[![Run nix flake check](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/flake_check.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/flake_check.yml) [![Build and push to Cachix](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_cache.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_cache.yml) [![Periodic flake bump](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/periodic_bump.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/periodic_bump.yml) [![Sync Tailscale ACLs](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml)
+[![Run nix flake check](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/flake_check.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/flake_check.yml) [![Build and push to Cachix](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_cache.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_cache.yml) [![Build images](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml) [![Periodic flake bump](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/periodic_bump.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/periodic_bump.yml) [![Sync Tailscale ACLs](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml)
 
 # My personal NixOS flake & system configurations
 
@@ -19,6 +19,7 @@ This repo contains my NixOS dotfiles. Every device supported by NixOS will be ad
 - **Opt-in 2FA protection** of ssh and password prompts **with Duo Security**
 - Secrets are managed via **nix-sops**
 - Automated flake building when pushing to main & pushing to **Cachix** via **GitHub Actions**
+- Installer images are automatically built via **Github actions**
 
 Other, smaller tweaks I particularly like about this setup include:
 

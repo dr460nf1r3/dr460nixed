@@ -233,13 +233,6 @@
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           system = "x86_64-linux";
         };
-        rpi-image = nixos-generators.nixosGenerate {
-          format = "sd-aarch64-installer";
-          inherit modules;
-          inherit specialArgs;
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          system = "aarch64-linux";
-        };
         vbox = nixos-generators.nixosGenerate {
           format = "virtualbox";
           inherit modules;

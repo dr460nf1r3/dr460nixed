@@ -51,4 +51,9 @@
     extra-substituters = https://dr460nf1r3.cachix.org
     extra-trusted-public-keys = dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU=
   '';
+
+  # Shut up direnv
+  home.sessionVariables = {
+    DIRENV_LOG_FORMAT = "";
+  };
 }
