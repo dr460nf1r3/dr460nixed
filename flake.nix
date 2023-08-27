@@ -117,13 +117,6 @@
     in
     {
       # All the system configurations
-      # My old laptop serving as TV
-      nixosConfigurations."tv-nixos" = garuda-nix.lib.garudaSystem {
-        inherit system;
-        modules = defaultModules
-        ++ [ ./hosts/tv-nixos/tv-nixos.nix ];
-        inherit specialArgs;
-      };
       # My main device (Lenovo Slim 7)
       nixosConfigurations."dragons-ryzen" = garuda-nix.lib.garudaSystem {
         inherit system;
@@ -131,23 +124,9 @@
         ++ [
           ./hosts/dragons-ryzen/dragons-ryzen.nix
           impermanence.nixosModules.impermanence
-        ];
-        inherit specialArgs;
-      };
-      # Free Tier Oracle aarch64 VM
-      nixosConfigurations."oracle-dragon" = garuda-nix.lib.garudaSystem {
-        system = "aarch64-linux";
-        modules = defaultModules
-        ++ [ ./hosts/oracle-dragon/oracle-dragon.nix ];
-        inherit specialArgs;
-      };
-      # My Raspberry Pi 4B
-      nixosConfigurations."rpi-dragon" = garuda-nix.lib.garudaSystem {
-        system = "aarch64-linux";
-        modules = defaultModules
-        ++ [
-          ./hosts/rpi-dragon/rpi-dragon.nix
-          nixos-hardware.nixosModules.raspberry-pi-4
+          nixos-hardware.nixosModules.common-cpu-amd
+          nixos-hardware.nixosModules.common-cpu-amd-pstate
+          nixos-hardware.nixosModules.common-gpu-amd
         ];
         inherit specialArgs;
       };
@@ -161,6 +140,13 @@
         ];
         inherit specialArgs;
       };
+      # Free Tier Oracle aarch64 VM
+      nixosConfigurations."oracle-dragon" = garuda-nix.lib.garudaSystem {
+        system = "aarch64-linux";
+        modules = defaultModules
+        ++ [ ./hosts/oracle-dragon/oracle-dragon.nix ];
+        inherit specialArgs;
+      };
       # To-do for installations
       nixosConfigurations."portable-dragon" = garuda-nix.lib.garudaSystem {
         inherit system;
@@ -171,18 +157,40 @@
         ];
         inherit specialArgs;
       };
+      # My Raspberry Pi 4B
+      nixosConfigurations."rpi-dragon" = garuda-nix.lib.garudaSystem {
+        system = "aarch64-linux";
+        modules = defaultModules
+        ++ [
+          ./hosts/rpi-dragon/rpi-dragon.nix
+          nixos-hardware.nixosModules.raspberry-pi-4
+        ];
+        inherit specialArgs;
+      };
+
       # To-do for installations
-      nixosConfigurations."rpiImage" = garuda-nix.lib.garudaSystem {
+      nixosConfigurations."rpi-image" = garuda-nix.lib.garudaSystem {
         inherit system;
         modules = defaultModules
         ++ [
           ./hosts/rpi-dragon/rpi-dragon.nix
           "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+          nixos-hardware.nixosModules.raspberry-pi-4
         ];
         inherit specialArgs;
       };
-    } //
-    flake-utils.lib.eachDefaultSystem (system:
+      # My old laptop serving as TV
+      nixosConfigurations."tv-nixos" = garuda-nix.lib.garudaSystem {
+        inherit system;
+        modules = defaultModules
+        ++ [
+          ./hosts/tv-nixos/tv-nixos.nix
+          nixos-hardware.nixosModules.common-gpu-intel
+          nixos-hardware.nixosModules.lenovo-thinkpad-t470s
+        ];
+        inherit specialArgs;
+      };
+    } // flake-utils.lib.eachDefaultSystem (system:
     {
       checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
         src = ./.;
@@ -200,7 +208,7 @@
       };
 
       # The shell to enter with "nix develop"
-      devShell = nixpkgs.legacyPackages.${system}.mkShellNoCC {
+      devShell = nixpkgs.legacyPackages.${system}.mkShell {
         name = "dr460nixed";
         packages = with pkgs; [
           age
@@ -221,6 +229,6 @@
       };
 
       # Defines a formatter for "nix fmt"
-      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+      formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
     });
 }

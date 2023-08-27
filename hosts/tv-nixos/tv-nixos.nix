@@ -6,11 +6,6 @@
   imports = [
     ../../configurations/common.nix
     ./hardware-configuration.nix
-    "${builtins.fetchGit {
-      url = "https://github.com/NixOS/nixos-hardware.git";
-      rev = "f38f9a4c9b2b6f89a5778465e0afd166a8300680";
-    }}/lenovo/thinkpad/t470s"
-    ./hardware-configuration.nix
   ];
 
   # Bootloader
@@ -110,7 +105,7 @@
   environment.systemPackages = with pkgs; [ libinput ];
 
   # Home-manager desktop configuration
-  home-manager.users."nico" = import ../../configurations/home/desktops.nix;
+  home-manager.users."nico" = import ../../home-manager/desktops.nix;
 
   # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
   systemd.services.NetworkManager-wait-online.enable = false;

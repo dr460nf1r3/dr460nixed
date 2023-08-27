@@ -1,4 +1,7 @@
-{ inputs, ... }:
+{ inputs
+, lib
+, ...
+}:
 {
   # General nix settings
   nix = {
@@ -19,11 +22,11 @@
       };
       nixpkgs.to = {
         type = "path";
-        path = inputs.nixpkgs;
+        path = lib.mkForce inputs.nixpkgs;
       };
     };
     settings = {
-      trusted-users = [ "@wheel" "deploy" ];
+      trusted-users = [ "@wheel" ];
 
       # Use available binary caches, this is not Gentoo
       # this also allows us to use remote builders to reduce build times and batter usage

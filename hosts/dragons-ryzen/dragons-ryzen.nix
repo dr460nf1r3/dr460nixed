@@ -16,11 +16,7 @@
   boot = {
     # Needed to get the touchpad to work
     blacklistedKernelModules = [ "elan_i2c" ];
-    extraModulePackages = with config.boot.kernelPackages; [ acpi_call zenpower ];
-    # The new AMD Pstate driver & needed modules
-    kernelModules = [ "acpi_call" "amdgpu" "amd_pstate=active" ];
-    # Prevent the device waking up after going to sleep
-    kernelParams = [ "mem_sleep_default=deep" ];
+    extraModulePackages = with config.boot.kernelPackages; [ zenpower ];
   };
 
   # Hostname & hostId for ZFS
@@ -102,7 +98,7 @@
   environment.systemPackages = with pkgs; [ libinput radeontop zenmonitor ];
 
   # Home-manager desktop configuration
-  home-manager.users."nico" = import ../../configurations/home/desktops.nix;
+  home-manager.users."nico" = import ../../home-manager/desktops.nix;
 
   # A few secrets
   sops.secrets = {
@@ -132,5 +128,5 @@
   };
 
   # NixOS stuff
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.11";
 }

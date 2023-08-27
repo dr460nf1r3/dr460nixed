@@ -56,7 +56,7 @@ in
   };
 
   # Load my home-manager configurations
-  home-manager.users."nico" = import ../home/common.nix;
+  home-manager.users."nico" = import ../../home-manager/common.nix;
 
   # Allow pushing to Cachix
   sops.secrets."api_keys/cachix" = {

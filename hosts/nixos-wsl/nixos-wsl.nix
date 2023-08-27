@@ -35,7 +35,7 @@
   # Slimmed down user config
   home-manager = {
     useGlobalPkgs = true;
-    users."nico" = import ../../configurations/home/common.nix;
+    users."nico" = import ../../home-manager/common.nix;
   };
 
   # Override this to always run fish & workaround fastfetch error
