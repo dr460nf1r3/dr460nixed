@@ -197,6 +197,7 @@
             deadnix = {
               edit = true;
               hidden = true;
+              noLambdaArg = true;
             };
           };
         };
