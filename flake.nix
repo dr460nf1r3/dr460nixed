@@ -14,6 +14,9 @@
       url = "github:nix-community/disko";
     };
 
+    # Required by pre-commit-hooks
+    flake-utils.url = "github:numtide/flake-utils";
+
     # Garuda Linux flake - most of my system settings are here
     garuda-nix = {
       inputs.chaotic.follows = "chaotic-nyx";
@@ -42,6 +45,9 @@
       url = "github:nix-community/nixd";
     };
 
+    # Easy linting of the flake
+    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+
     # Secrets management
     sops-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -68,17 +74,19 @@
 
   outputs =
     { disko
+    , flake-utils
     , garuda-nix
     , impermanence
     , lanzaboote
     , nixd
     , nixpkgs
+    , pre-commit-hooks
     , sops-nix
+    , self
     , spicetify-nix
     , ...
     } @ inputs:
     let
-      nixos = garuda-nix.nixpkgs;
       system = "x86_64-linux";
       specialArgs = {
         inherit spicetify-nix;
@@ -98,15 +106,93 @@
           nixpkgs.overlays = [ nixd.overlays.default ];
         }
       ];
-      pkgs = import garuda-nix.nixpkgs { inherit system; };
+      pkgs = import nixpkgs { inherit system; };
     in
     {
-      # The default checks to run on Nix files
-      checks.${system} = import ./lib/checks { inherit pkgs; };
+      # Defines a formatter for "nix fmt"
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
 
-      # The devshell exposed by .envrc
-      devShells.${system}.default = pkgs.mkShell {
+      # All the system configurations
+      # My old laptop serving as TV
+      nixosConfigurations."tv-nixos" = garuda-nix.lib.garudaSystem {
+        inherit system;
+        modules = defaultModules
+        ++ [ ./hosts/tv-nixos/tv-nixos.nix ];
+        inherit specialArgs;
+      };
+      # My main device (Lenovo Slim 7)
+      nixosConfigurations."dragons-ryzen" = garuda-nix.lib.garudaSystem {
+        inherit system;
+        modules = defaultModules
+        ++ [
+          ./hosts/dragons-ryzen/dragons-ryzen.nix
+          impermanence.nixosModules.impermanence
+        ];
+        inherit specialArgs;
+      };
+      # Free Tier Oracle aarch64 VM
+      nixosConfigurations."oracle-dragon" = garuda-nix.lib.garudaSystem {
+        system = "aarch64-linux";
+        modules = defaultModules
+        ++ [ ./hosts/oracle-dragon/oracle-dragon.nix ];
+        inherit specialArgs;
+      };
+      # My Raspberry Pi 4B
+      nixosConfigurations."rpi-dragon" = garuda-nix.lib.garudaSystem {
+        system = "aarch64-linux";
+        modules = defaultModules
+        ++ [ ./hosts/rpi-dragon/rpi-dragon.nix ];
+        inherit specialArgs;
+      };
+      # For WSL, mostly used at work only
+      nixosConfigurations."nixos-wsl" = garuda-nix.lib.garudaSystem {
+        inherit system;
+        modules = defaultModules
+        ++ [ ./hosts/nixos-wsl/nixos-wsl.nix ];
+        inherit specialArgs;
+      };
+      # To-do for installations
+      nixosConfigurations."live-usb" = garuda-nix.lib.garudaSystem {
+        inherit system;
+        modules = defaultModules
+        ++ [ ./hosts/live-usb/live-usb.nix ];
+        inherit specialArgs;
+      };
+      # To-do for installations
+      nixosConfigurations."rpiImage" = garuda-nix.lib.garudaSystem {
+        inherit system;
+        modules = defaultModules
+        ++ [
+          ./hosts/rpi-dragon/rpi-dragon.nix
+          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+        ];
+        inherit specialArgs;
+      };
+    } //
+    flake-utils.lib.eachDefaultSystem (system:
+    {
+      checks = {
+        pre-commit-check = pre-commit-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            deadnix.enable = true;
+            nil.enable = true;
+            nixpkgs-fmt.enable = true;
+            prettier.enable = true;
+            shellcheck.enable = true;
+          };
+          settings = {
+            deadnix = {
+              edit = true;
+              hidden = true;
+            };
+          };
+        };
+      };
+
+      devShell = nixpkgs.legacyPackages.${system}.mkShell {
         name = "dr460nixed";
+        inherit (self.checks.${system}.pre-commit-check) shellHook;
         packages = with pkgs; [
           age
           deadnix
@@ -120,65 +206,5 @@
           statix
         ];
       };
-
-      # Defines a formatter for "nix fmt"
-      formatter.${system} = garuda-nix.nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
-
-      # All the system configurations
-      # My old laptop serving as TV
-      nixosConfigurations."tv-nixos" = garuda-nix.lib.garudaSystem {
-        inherit system;
-        modules = defaultModules
-          ++ [ ./hosts/tv-nixos/tv-nixos.nix ];
-        inherit specialArgs;
-      };
-      # My main device (Lenovo Slim 7)
-      nixosConfigurations."dragons-ryzen" = garuda-nix.lib.garudaSystem {
-        inherit system;
-        modules = defaultModules
-          ++ [
-          ./hosts/dragons-ryzen/dragons-ryzen.nix
-          impermanence.nixosModules.impermanence
-        ];
-        inherit specialArgs;
-      };
-      # Free Tier Oracle aarch64 VM
-      nixosConfigurations."oracle-dragon" = garuda-nix.lib.garudaSystem {
-        system = "aarch64-linux";
-        modules = defaultModules
-          ++ [ ./hosts/oracle-dragon/oracle-dragon.nix ];
-        inherit specialArgs;
-      };
-      # My Raspberry Pi 4B
-      nixosConfigurations."rpi-dragon" = garuda-nix.lib.garudaSystem {
-        system = "aarch64-linux";
-        modules = defaultModules
-          ++ [ ./hosts/rpi-dragon/rpi-dragon.nix ];
-        inherit specialArgs;
-      };
-      # For WSL, mostly used at work only
-      nixosConfigurations."nixos-wsl" = garuda-nix.lib.garudaSystem {
-        inherit system;
-        modules = defaultModules
-          ++ [ ./hosts/nixos-wsl/nixos-wsl.nix ];
-        inherit specialArgs;
-      };
-      # To-do for installations
-      nixosConfigurations."live-usb" = garuda-nix.lib.garudaSystem {
-        inherit system;
-        modules = defaultModules
-          ++ [ ./hosts/live-usb/live-usb.nix ];
-        inherit specialArgs;
-      };
-      # To-do for installations
-      nixosConfigurations."rpiImage" = garuda-nix.lib.garudaSystem {
-        inherit system;
-        modules = defaultModules
-          ++ [
-          ./hosts/rpi-dragon/rpi-dragon.nix
-          "${nixos}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
-        ];
-        inherit specialArgs;
-      };
-    };
+    });
 }

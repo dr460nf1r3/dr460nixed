@@ -88,6 +88,7 @@ _: {
         "Music"
         "Nextcloud"
         "Pictures"
+        "School"
         "Sync"
         "Videos"
         {
