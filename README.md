@@ -1,4 +1,5 @@
-[![built with nix](https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org) [![Run nix flake check](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/flake_check.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/flake_check.yml) [![Build and push to Cachix](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_cache.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_cache.yml) [![Periodic flake bump](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/periodic_bump.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/periodic_bump.yml) [![Sync Tailscale ACLs](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml)
+[![built with nix](https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org)
+[![Run nix flake check](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/flake_check.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/flake_check.yml) [![Build and push to Cachix](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_cache.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_cache.yml) [![Periodic flake bump](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/periodic_bump.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/periodic_bump.yml) [![Sync Tailscale ACLs](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml)
 
 # My personal NixOS flake & system configurations
 
@@ -30,23 +31,23 @@ Other, smaller tweaks I particularly like about this setup include:
 
 ```
 ├── configurations
+├── disko
 ├── flake.nix
+├── home-manager
 ├── hosts
-├── lib
 ├── modules
 ├── overlays
-├── pkgs
 ├── secrets
+└── shell.nix
 ```
 
 - `configurations`: All the Nix configurations not available via modules, eg. home-manager configurations
-- `flake.nix`: Entrypoint for hosts and home configurations. Also exposes a
-  devshell for bootstrapping (`nix develop` or `nix-shell`) as well as deploy-rs configs
+- `disco`: Configurations for managing partitions & filesystems
+- `flake.nix`: Entrypoint for hosts and home configurations. Also exposes a devshell for bootstrapping via `nix develop`
+- `home-manager`: Contains all home-manager configurations
 - `hosts`: NixOS Configurations, accessible via `nixos-rebuild --flake`
-- `lib`: Things helping with the maintenance of the flake, eg. linters
-- `modules`: The major part of the system configurations, exposes `dr460nixed.*` options
+- `modules`: The major part of the system configurations that are not in `garuda-nix-subsystem`, exposes `dr460nixed.*` options
 - `overlays`: Patches and version overrides for some packages
-- `pkgs`: My custom packages not available in Chaotic Nyx
 - `secrets`: The secrets used by `sops-nix`
 
 ## Module options
@@ -54,32 +55,29 @@ Other, smaller tweaks I particularly like about this setup include:
 A lot of those have been moved to the [Garuda Nix Subsystem](https://gitlab.com/garuda-linux/garuda-nix-subsystem).
 
 ```
-├── modules
-│  ├── apps.nix
-│  ├── boot.nix
-│  ├── chaotic
-│  │  ├── chaotic-mirror.nix
-│  │  ├── chaotic.nix
-│  │  └── patch.diff
-│  ├── common.nix
-│  ├── default.nix
-│  ├── desktops.nix
-│  ├── development.nix
-│  ├── docker-compose-runner.nix
-│  ├── gaming.nix
-│  ├── hardening.nix
-│  ├── locales.nix
-│  ├── misc.nix
-│  ├── monitoring.nix
-│  ├── msmtp.nix
-│  ├── networking.nix
-│  ├── nix.nix
-│  ├── oci.nix
-│  ├── servers.nix
-│  ├── shells.nix
-│  ├── tailscale-tls.nix
-│  ├── tailscale.nix
-│  └── zfs.nix
+├── apps.nix
+├── boot.nix
+├── chaotic
+├── common.nix
+├── default.nix
+├── desktops.nix
+├── development.nix
+├── docker-compose-runner.nix
+├── gaming.nix
+├── hardening.nix
+├── locales.nix
+├── misc.nix
+├── monitoring.nix
+├── msmtp.nix
+├── networking.nix
+├── nix.nix
+├── oci.nix
+├── servers.nix
+├── shells.nix
+├── syncthing.nix
+├── tailscale-tls.nix
+├── tailscale.nix
+└── zfs.nix
 ```
 
 - `dr460nixed.auto-upgrade.enable` (default false) - enables auto-upgrading the system daily by pulling the updated Nix flake from the repo
@@ -121,8 +119,7 @@ Then, the bootstrapping process can be started. All you need is `nix`. Run:
 nix-shell
 ```
 
-If you already have `nix` 2.4+, `git`, and have already enabled `flakes` and
-`nix-command`, you can also use the non-legacy command:
+If you already have `nix` 2.4+, `git`, and have already enabled `flakes` and `nix-command`, you can also use the non-legacy command:
 
 ```
 nix develop

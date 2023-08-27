@@ -19,9 +19,7 @@ in
   };
 
   # Lock root password
-  users.users.root = {
-    passwordFile = config.sops.secrets."passwords/root".path;
-  };
+  users.users.root.passwordFile = config.sops.secrets."passwords/root".path;
   # My user
   users.users.nico = {
     extraGroups =

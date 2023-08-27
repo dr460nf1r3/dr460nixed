@@ -1,6 +1,9 @@
 {
   description = "Dr460nixed NixOS flake ❄️";
 
+  nixConfig.extra-substituters = [ "https://dr460nf1r3.cachix.org" ];
+  nixConfig.extra-trusted-public-keys = [ "dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU=" ];
+
   inputs = {
     # Chaotic Nyx!
     chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
@@ -80,6 +83,7 @@
     , lanzaboote
     , nix-index-database
     , nixd
+    , nixos-generators
     , nixos-hardware
     , nixpkgs
     , nixos-wsl
@@ -104,7 +108,6 @@
         sops-nix.nixosModules.sops
         spicetify-nix.nixosModule
       ];
-      pkgs = nixpkgs.legacyPackages.${system}.pkgs;
       specialArgs = {
         inherit spicetify-nix;
         keys.nico = inputs.keys_nico;
@@ -147,34 +150,12 @@
         ++ [ ./hosts/oracle-dragon/oracle-dragon.nix ];
         inherit specialArgs;
       };
-      # To-do for installations
-      nixosConfigurations."portable-dragon" = garuda-nix.lib.garudaSystem {
-        inherit system;
-        modules = defaultModules
-        ++ [
-          ./hosts/portable-dragon/portable-dragon.nix
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
-        ];
-        inherit specialArgs;
-      };
       # My Raspberry Pi 4B
       nixosConfigurations."rpi-dragon" = garuda-nix.lib.garudaSystem {
         system = "aarch64-linux";
         modules = defaultModules
         ++ [
           ./hosts/rpi-dragon/rpi-dragon.nix
-          nixos-hardware.nixosModules.raspberry-pi-4
-        ];
-        inherit specialArgs;
-      };
-
-      # To-do for installations
-      nixosConfigurations."rpi-image" = garuda-nix.lib.garudaSystem {
-        inherit system;
-        modules = defaultModules
-        ++ [
-          ./hosts/rpi-dragon/rpi-dragon.nix
-          "${nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
           nixos-hardware.nixosModules.raspberry-pi-4
         ];
         inherit specialArgs;
@@ -191,6 +172,20 @@
         inherit specialArgs;
       };
     } // flake-utils.lib.eachDefaultSystem (system:
+    let
+      modules = [
+        ./modules/images/base.nix
+        ./modules/images/iso.nix
+        ./modules/locales.nix
+        ./modules/nix.nix
+        nix-index-database.nixosModules.nix-index
+      ];
+      pkgs = nixpkgs.legacyPackages.${system}.pkgs;
+      specialArgs = {
+        inherit inputs;
+        keys.nico = inputs.keys_nico;
+      };
+    in
     {
       checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
         src = ./.;
@@ -216,7 +211,6 @@
           git
           gnupg
           nix
-          nixos-generators
           nixpkgs-fmt
           rsync
           sops
@@ -230,5 +224,30 @@
 
       # Defines a formatter for "nix fmt"
       formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+
+      packages = {
+        iso = nixos-generators.nixosGenerate {
+          format = "install-iso";
+          inherit modules;
+          inherit specialArgs;
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          system = "x86_64-linux";
+        };
+        rpi-image = nixos-generators.nixosGenerate {
+          format = "sd-aarch64-installer";
+          inherit modules;
+          inherit specialArgs;
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          system = "aarch64-linux";
+        };
+        vbox = nixos-generators.nixosGenerate {
+          format = "virtualbox";
+          inherit modules;
+          inherit specialArgs;
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          system = "x86_64-linux";
+        };
+      };
     });
 }
+   
