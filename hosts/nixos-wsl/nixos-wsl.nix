@@ -1,25 +1,22 @@
 { lib
-, pkgs
 , modulesPath
+, pkgs
 , ...
 }:
-with lib; let
-  nixos-wsl = import ./nixos-wsl;
-in
 {
   # Slimmed down configurations
   imports = [
     ../../configurations/common/common.nix
-    ../../overlays/default.nix
     "${modulesPath}/profiles/minimal.nix"
-    nixos-wsl.nixosModules.wsl
   ];
 
   # WSL flake settings
   wsl = {
-    enable = true;
-    automountPath = "/mnt";
+    # NixOS specific settings
     defaultUser = "nico";
+    enable = true;
+    interop.register = true;
+    nativeSystemd = true;
     startMenuLaunchers = true;
 
     # Enable native Docker support
@@ -27,13 +24,18 @@ in
 
     # Enable integration with Docker Desktop (needs to be installed)
     docker-desktop.enable = true;
+
+    # Generic WSL settings
+    wslConf = {
+      automount.root = "/mnt";
+      network.generateResolvConf = false;
+    };
   };
 
   # Slimmed down user config
   home-manager = {
     useGlobalPkgs = true;
-    useUserPackages = true;
-    users."nico" = import ../../configurations/home/nico.nix;
+    users."nico" = import ../../configurations/home/common.nix;
   };
 
   # Override this to always run fish & workaround fastfetch error
@@ -46,5 +48,5 @@ in
   '';
 
   # NixOS stuff
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.11";
 }

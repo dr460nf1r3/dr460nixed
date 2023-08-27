@@ -1,10 +1,14 @@
 { lib, ... }: {
-  isoImage.volumeID = lib.mkForce "dr460inxed-live";
-  isoImage.isoName = lib.mkForce "dr460nixed-live.iso";
-
   imports = [
     ../../configurations/common.nix
   ];
+
+  # Speed up spashfs process & set names
+  isoImage = {
+    isoName = lib.mkForce "dr460nixed-live.iso";
+    squashfsCompression = "zstd -Xcompression-level 6";
+    volumeID = lib.mkForce "dr460inxed-live";
+  };
 
   # Enable a few selected custom settings
   dr460nixed = {
@@ -18,9 +22,6 @@
   # This seems to be needed for not getting "root account locked"
   users.mutableUsers = lib.mkForce true;
 
-  # Use the latest Linux kernel
-  boot.zfs.enableUnstable = true;
-
   # Increase timeout
   boot.loader.timeout = lib.mkForce 10;
 
@@ -28,7 +29,7 @@
   boot.supportedFilesystems = lib.mkForce [ "btrfs" "reiserfs" "vfat" "f2fs" "xfs" "ntfs" "cifs" "zfs" ];
 
   # This is a live USB
-  networking.hostName = "live-usb";
+  networking.hostName = "portable-dragon";
 
   # For ZFS to be happy
   networking.hostId = "00000000";
@@ -62,4 +63,7 @@
   # Enable virtualization support
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
+
+  # NixOS stuff
+  system.stateVersion = "23.11";
 }

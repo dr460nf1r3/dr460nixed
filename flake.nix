@@ -45,6 +45,12 @@
       url = "github:nix-community/nixd";
     };
 
+    # NixOS WSL
+    nixos-wsl = {
+      url = "github:nix-community/nixos-wsl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Easy linting of the flake
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
@@ -80,6 +86,7 @@
     , lanzaboote
     , nixd
     , nixpkgs
+    , nixos-wsl
     , pre-commit-hooks
     , sops-nix
     , self
@@ -148,14 +155,20 @@
       nixosConfigurations."nixos-wsl" = garuda-nix.lib.garudaSystem {
         inherit system;
         modules = defaultModules
-        ++ [ ./hosts/nixos-wsl/nixos-wsl.nix ];
+        ++ [
+          ./hosts/nixos-wsl/nixos-wsl.nix
+          nixos-wsl.nixosModules.wsl
+        ];
         inherit specialArgs;
       };
       # To-do for installations
       nixosConfigurations."live-usb" = garuda-nix.lib.garudaSystem {
         inherit system;
         modules = defaultModules
-        ++ [ ./hosts/live-usb/live-usb.nix ];
+        ++ [
+          ./hosts/live-usb/live-usb.nix
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+        ];
         inherit specialArgs;
       };
       # To-do for installations
@@ -176,7 +189,6 @@
           src = ./.;
           hooks = {
             deadnix.enable = true;
-            nil.enable = true;
             nixpkgs-fmt.enable = true;
             prettier.enable = true;
             shellcheck.enable = true;

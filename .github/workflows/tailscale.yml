@@ -2,9 +2,9 @@ name: Sync Tailscale ACLs
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   acls:
