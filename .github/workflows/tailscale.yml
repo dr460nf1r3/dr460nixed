@@ -3,8 +3,8 @@ name: Sync Tailscale ACLs
 on:
   push:
     branches: ["main"]
-  pull_request:
-    branches: ["main"]
+    paths:
+      - "policy.hujson"
 
 jobs:
   acls:
