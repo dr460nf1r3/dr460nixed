@@ -8,14 +8,10 @@ TARGETS_AARCH64=("oracle-dragon" "rpi-dragon")
 # Build every variation of the flake
 cd "$FLAKE_DIR"
 
-# Stolen from https://github.com/easimon/maximize-build-space
-# Save about 50GB of space by removing things we don't need anyways
-sudo rm -rf /usr/share /usr/local /opt || true
-
 # Determine system architecture
-if [[ "$(uname -m)" == "x86_64" ]]; then
+if [[ "$1" == "x86_64" ]]; then
     TARGETS=("${TARGETS_X86[@]}")
-elif [[ "$(uname -m)" == "aarch64" ]]; then
+elif [[ "$1" == "aarch64" ]]; then
     TARGETS=("${TARGETS_AARCH64[@]}")
 else
     echo "Unsupported architecture: $(uname -m)"

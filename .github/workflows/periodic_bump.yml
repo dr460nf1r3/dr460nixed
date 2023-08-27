@@ -17,11 +17,14 @@ jobs:
         uses: cachix/install-nix-action@v22
         with:
           extra_nix_config: "accept-flake-config = true"
+
       - uses: actions/checkout@v3
+
       - name: Update nixpkgs flake
         run: nix flake update || exit 1; git diff --exit-code flake.lock && exit 1 || exit 0
         continue-on-error: true
         id: bump
+
       - name: Commit nixpkgs bump
         if: steps.bump.outcome == 'success'
         run: |
@@ -30,5 +33,5 @@ jobs:
           git config --global user.email 'actions@chaotic.cx'
           git remote set-url origin https://x-access-token:${{ secrets.PAT_CHAOTIC }}@github.com/${{ github.repository }}
           git add flake.lock
-          git commit -m "❄️ chore(flake.lock): bump inputs to $(date +%Y%m%d)"
+          git commit -m "flake.nix: bump inputs to $(date +%Y%m%d)"
           git push

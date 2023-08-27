@@ -115,7 +115,7 @@
       path = "/run/secrets/passwords/nico@dr460nf1r3.org";
     };
     # "ssh_keys/id_rsa" = {
-    #   mode = "0640";
+    #   mode = "0600";
     #   owner = config.users.users.nico.name;
     #   path = "/home/nico/.ssh/id_rsa";
     # };

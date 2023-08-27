@@ -1,0 +1,34 @@
+name: Run nix flake check
+
+on:
+  pull_request_target:
+    types: [labeled]
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Periodic flake bump"]
+    types:
+      - completed
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  flake_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: cachix/install-nix-action@v22
+        with:
+          extra_nix_config: |
+            accept-flake-config = true
+            system-features = big-parallel kvm
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      - name: Run nix flake check (includes linting)
+        run: nix flake check

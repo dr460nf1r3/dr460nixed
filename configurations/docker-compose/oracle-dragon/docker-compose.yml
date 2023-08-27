@@ -42,18 +42,18 @@ services:
       - rustdesk-net
     restart: unless-stopped
 
-  # GitHub runner for my projects - privileged to allow mounting img files
+  # GitHub runner for my projects
   github_runner:
     image: myoung34/github-runner:latest
     container_name: github_runner
     privileged: true
     environment:
-      REPO_URL: https://github.com/dr460nf1r3/school-rpi
-      RUNNER_TOKEN: ${RUNNER_TOKEN}
       EPHEMERAL: true
       LABELS: linux,x64,gpu
+      REPO_URL: https://github.com/dr460nf1r3/dr460nixed
       RUNNER_NAME: oracle-dragon
       RUNNER_SCOPE: repo
+      RUNNER_TOKEN: ${RUNNER_TOKEN}
       RUNNER_WORKDIR: /tmp/runner/work
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"

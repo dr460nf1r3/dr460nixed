@@ -162,11 +162,11 @@
         inherit specialArgs;
       };
       # To-do for installations
-      nixosConfigurations."live-usb" = garuda-nix.lib.garudaSystem {
+      nixosConfigurations."portable-dragon" = garuda-nix.lib.garudaSystem {
         inherit system;
         modules = defaultModules
         ++ [
-          ./hosts/live-usb/live-usb.nix
+          ./hosts/portable-dragon/portable-dragon.nix
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
         ];
         inherit specialArgs;

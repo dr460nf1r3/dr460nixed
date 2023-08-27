@@ -83,7 +83,6 @@
     "terminal.integrated.smoothScrolling" = true;
     "workbench.iconTheme" = "material-icon-theme";
     "workbench.colorTheme" = "Sweet vscode";
-    "yaml.keyOrdering" = true;
     "[nix]" = {
       "editor.defaultFormatter" = "jnoortheen.nix-ide";
     };

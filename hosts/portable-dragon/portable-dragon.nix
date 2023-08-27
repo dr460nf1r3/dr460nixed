@@ -5,9 +5,9 @@
 
   # Speed up spashfs process & set names
   isoImage = {
-    isoName = lib.mkForce "dr460nixed-live.iso";
+    isoName = lib.mkForce "portable-dragon.iso";
     squashfsCompression = "zstd -Xcompression-level 6";
-    volumeID = lib.mkForce "dr460inxed-live";
+    volumeID = lib.mkForce "portable-dragon";
   };
 
   # Enable a few selected custom settings
