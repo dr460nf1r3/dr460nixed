@@ -5,10 +5,10 @@
 with lib;
 let
   cfg = config.dr460nixed;
-  adguardExporter = builtins.fetchurl {
-    url = "https://github.com/ebrianne/adguard-exporter/releases/latest/download/adguard_exporter-linux-arm64";
-    sha256 = "sha256:0y2gyw1xc366a70sblpjybl7alx70ppjzi5s4zzbm7swsa5vqqds";
-  };
+  # adguardExporter = builtins.fetchurl {
+  #   url = "https://github.com/ebrianne/adguard-exporter/releases/latest/download/adguard_exporter-linux-arm64";
+  #   sha256 = "sha256:0y2gyw1xc366a70sblpjybl7alx70ppjzi5s4zzbm7swsa5vqqds";
+  # };
 in
 {
   options.dr460nixed = {

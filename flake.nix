@@ -190,7 +190,10 @@
       checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
         src = ./.;
         hooks = {
+          commitizen.enable = true;
           deadnix.enable = true;
+          hadolint.enable = true;
+          nil.enable = true;
           nixpkgs-fmt.enable = true;
           prettier.enable = true;
           shellcheck.enable = true;

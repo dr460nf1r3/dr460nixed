@@ -1,6 +1,5 @@
 { keys
 , config
-, home-manager
 , ...
 }:
 let
