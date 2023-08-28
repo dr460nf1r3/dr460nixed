@@ -24,7 +24,6 @@ in
     extraGroups =
       [
         "audio"
-        "systemd-journal"
         "video"
         "wheel"
       ]

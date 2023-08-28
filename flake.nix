@@ -176,7 +176,6 @@
       modules = [
         ./modules/images/base.nix
         ./modules/images/iso.nix
-        ./modules/locales.nix
         ./modules/nix.nix
         nix-index-database.nixosModules.nix-index
       ];
@@ -187,6 +186,7 @@
       };
     in
     {
+      # Set those up via "nix develop", then automatically used at "git commit"
       checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
         src = ./.;
         hooks = {
@@ -228,6 +228,13 @@
       # Defines a formatter for "nix fmt"
       formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
 
+      # Defines what to build via Hydra (if I get to use it)
+      hydraJobs = {
+        inherit (self)
+          packages;
+      };
+
+      # Images to be built via "nix build"
       packages = {
         iso = nixos-generators.nixosGenerate {
           format = "install-iso";
