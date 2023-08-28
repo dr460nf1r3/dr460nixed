@@ -20,30 +20,33 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     # Garuda Linux flake - most of my system settings are here
+    garuda-nix.url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
     garuda-nix.inputs.chaotic.follows = "chaotic-nyx";
     garuda-nix.inputs.garuda-nixpkgs.follows = "nixpkgs";
-    garuda-nix.url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
 
     # Reset rootfs every reboot
     impermanence.url = "github:nix-community/impermanence";
 
     # My SSH keys
-    keys_nico.flake = false;
     keys_nico.url = "https://github.com/dr460nf1r3.keys";
+    keys_nico.flake = false;
 
     # Lanzaboote for secure boot support
     lanzaboote.url = "github:nix-community/lanzaboote/master";
     lanzaboote.inputs.flake-parts.follows = "flake-parts";
-    lanzaboote.inputs.flake-compat.follows = "";
 
     # Nixd language server
+    nixd.url = "github:nix-community/nixd";
     nixd.inputs.flake-parts.follows = "flake-parts";
     nixd.inputs.nixpkgs.follows = "nixpkgs";
-    nixd.url = "github:nix-community/nixd";
 
     # Have a local index of nixpkgs for fast launching of apps
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Nix-on-Droid
+    nix-on-droid.url = "github:t184256/nix-on-droid";
+    nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
 
     # NixOS generators to build system images
     nixos-generators.url = "github:nix-community/nixos-generators";
@@ -62,17 +65,16 @@
     # Secrets management
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    sops-nix.inputs.nixpkgs-stable.follows = "";
 
     # Spicetify
-    spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
     spicetify-nix.url = "github:the-argus/spicetify-nix";
+    spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     # The Chaotic toolbox
-    src-chaotic-toolbox.flake = false;
     src-chaotic-toolbox.url = "github:chaotic-aur/toolbox";
-    src-repoctl.flake = false;
+    src-chaotic-toolbox.flake = false;
     src-repoctl.url = "github:cassava/repoctl";
+    src-repoctl.flake = false;
   };
 
   outputs =
@@ -82,14 +84,15 @@
     , impermanence
     , lanzaboote
     , nix-index-database
+    , nix-on-droid
     , nixd
     , nixos-generators
     , nixos-hardware
-    , nixpkgs
     , nixos-wsl
+    , nixpkgs
     , pre-commit-hooks
-    , sops-nix
     , self
+    , sops-nix
     , spicetify-nix
     , ...
     } @ inputs:
@@ -170,6 +173,19 @@
           nixos-hardware.nixosModules.lenovo-thinkpad-t470s
         ];
         inherit specialArgs;
+      };
+      # My Pixel 6 via Nix-on-Droid
+      nixOnDroidConfigurations."mobile-dragon" = nix-on-droid.lib.nixOnDroidConfiguration {
+        # home-manager-path = inputs.garuda-nix.inputs.home-manager.outPath;
+        modules = [
+          ./modules/default.nix
+          nix-index-database.nixosModules.nix-index
+          sops-nix.nixosModules.sops
+        ];
+        pkgs = import nixpkgs {
+          system = "aarch64-linux";
+          overlays = [ nix-on-droid.overlays.default ];
+        };
       };
     } // flake-utils.lib.eachDefaultSystem (system:
     let
