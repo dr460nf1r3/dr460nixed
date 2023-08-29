@@ -206,6 +206,7 @@
       checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
         src = ./.;
         hooks = {
+          actionlint.enable = true;
           commitizen.enable = true;
           deadnix.enable = true;
           hadolint.enable = true;
@@ -226,6 +227,7 @@
         name = "dr460nixed";
         packages = with pkgs; [
           age
+          commitizen
           deadnix
           git
           gnupg

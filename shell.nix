@@ -4,7 +4,11 @@ let
   pre-commit-check = nix-pre-commit-hooks.run {
     src = ./.;
     hooks = {
+      actionlint.enable = true;
+      commitizen.enable = true;
       deadnix.enable = true;
+      hadolint.enable = true;
+      nil.enable = true;
       nixpkgs-fmt.enable = true;
       prettier.enable = true;
       shellcheck.enable = true;
@@ -24,6 +28,7 @@ pkgs.mkShell {
   '';
   packages = with pkgs; [
     age
+    commitizen
     deadnix
     git
     gnupg
