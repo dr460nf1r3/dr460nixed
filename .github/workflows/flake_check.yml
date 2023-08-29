@@ -30,5 +30,8 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           nix_path: nixpkgs=channel:nixos-unstable
 
+      - name: Set up Magic Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
       - name: Run nix flake check (includes linting)
         run: nix flake check --all-systems
