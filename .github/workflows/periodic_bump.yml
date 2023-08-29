@@ -1,7 +1,6 @@
 name: Periodic flake bump
 
 on:
-  # Trigger this workflow every 12 hours
   schedule:
     - cron: "0 0,12 * * *"
   workflow_dispatch:
