@@ -1,7 +1,4 @@
-{ config
-, pkgs
-, ...
-}:
+{ pkgs, ... }:
 let
   de = "de_DE.UTF-8";
   defaultLocale = "en_GB.UTF-8";

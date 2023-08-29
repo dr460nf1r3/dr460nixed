@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   flake_check:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v3
 
@@ -31,4 +31,4 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
 
       - name: Run nix flake check (includes linting)
-        run: nix flake check
+        run: nix flake check --all-systems
