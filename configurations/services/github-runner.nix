@@ -7,12 +7,11 @@
     enable = true;
     extraLabels = [ "aarch64" "oracle" ];
     extraPackages = with pkgs; [
-      colmena
       nix
     ];
     name = "oracle-dragon";
-    tokenFile = config.sops.secrets."api_keys/github-runner".path;
-    url = "https://github.com/dr460nf1r3/device-configurations";
+    tokenFile = config.sops.secrets."api_keys/github_runner".path;
+    url = "https://github.com/dr460nf1r3/dr460nixed";
     user = "github-runner";
   };
 
@@ -25,9 +24,12 @@
   };
   users.groups.github-runner = { };
 
-  sops.secrets."api_keys/github-runner" = {
+  sops.secrets."api_keys/github_runner" = {
     mode = "0600";
     owner = "github-runner";
-    path = "/run/secrets/api_keys/github-runner";
+    path = "/run/secrets/api_keys/github_runner";
   };
+
+  # Needed to allow GitHub runner
+  nixpkgs.config.permittedInsecurePackages = [ "nodejs-16.20.2" ];
 }
