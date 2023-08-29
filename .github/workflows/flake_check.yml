@@ -18,9 +18,12 @@ concurrency:
 
 jobs:
   flake_check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
+
+      - name: Run GitHub actions cleanup
+        run: sudo rm -rf /usr/share /usr/local /opt || true # https://github.com/easimon/maximize-build-space
 
       - uses: cachix/install-nix-action@v22
         with:
