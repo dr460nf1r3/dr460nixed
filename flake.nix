@@ -231,6 +231,7 @@
           deadnix
           git
           gnupg
+          manix
           nix
           nixpkgs-fmt
           rsync

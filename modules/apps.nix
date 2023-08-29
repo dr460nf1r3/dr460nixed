@@ -83,6 +83,7 @@ in
       hugo
       jetbrains.pycharm-professional
       keybase-gui
+      manix
       mongodb-compass
       nix-prefetch-git
       nixd

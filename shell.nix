@@ -32,6 +32,7 @@ pkgs.mkShell {
     deadnix
     git
     gnupg
+    manix
     nix
     nixos-generators
     nixpkgs-fmt
