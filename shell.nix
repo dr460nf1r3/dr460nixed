@@ -35,6 +35,7 @@ pkgs.mkShell {
     nix
     nixos-generators
     nixpkgs-fmt
+    nodePackages_latest.prettier
     rsync
     sops
     statix

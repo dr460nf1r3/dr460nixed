@@ -137,15 +137,15 @@ in
             {
               name = "ruff";
               publisher = "charliermarsh";
-              sha256 = "sha256-Qu7olXmRw+uSFbvGoLkUlR/6nHgMMfg5g+ePINjPcYQ=";
-              version = "2023.32.0";
+              sha256 = "sha256-KOntjiE+n1yf9047XDldGg2pT+zknI/aEg6h71LwEB8=";
+              version = "2023.34.0";
             }
             {
               # Available in nixpkgs, but outdated (0.4.0) at the time of adding
               name = "vscode-tailscale";
               publisher = "tailscale";
-              sha256 = "sha256-bdCQvD3tKYQGDCo4N06VwKwKhJQARWfnnsnbM6FynnE=";
-              version = "0.6.1";
+              sha256 = "sha256-lwKsAYy04l1LkZPGgu9ezRQNTX7ZPzLJJ8j86ZuqNlQ=";
+              version = "0.6.2";
             }
           ];
       })
