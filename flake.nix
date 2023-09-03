@@ -128,6 +128,10 @@
         inherit system;
         modules = defaultModules
         ++ [
+          {
+            _module.args.disks = [ "/dev/nvme0n1" ];
+          }
+          ./modules/disko/zfs-encrypted.nix
           ./hosts/dragons-ryzen/dragons-ryzen.nix
           impermanence.nixosModules.impermanence
           nixos-hardware.nixosModules.common-cpu-amd
