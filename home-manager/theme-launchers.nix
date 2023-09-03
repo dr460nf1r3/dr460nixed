@@ -53,27 +53,6 @@ in
     X-KDE-SubstituteUID=false
     X-KDE-Username=
   '';
-  home.file."${appdir}/chromium-gate.desktop".text = ''
-    [Desktop Entry]
-    Categories=Network;WebBrowser;
-    Comment=Access the Internet
-    Exec=chromium-gate %U
-    GenericName[en_GB]=Web Browser
-    GenericName=Web Browser
-    Icon=chromium-gate
-    MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;application/xhtml_xml;application/xml;image/gif;image/jpeg;image/png;image/webp;text/html;text/xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/webcal;x-scheme-handler/mailto;x-scheme-handler/about;x-scheme-handler/unknown
-    Name=Chromium Gate
-    NoDisplay=false
-    Path=
-    StartupNotify=true
-    StartupWMClass=chromium-browser
-    Terminal=false
-    TerminalOptions=
-    Type=Application
-    Version=1.0
-    X-KDE-SubstituteUID=false
-    X-KDE-Username=
-  '';
   home.file."${appdir}/fish.desktop".text = ''
     [Desktop Entry]
     Categories=ConsoleOnly;System;

@@ -67,6 +67,7 @@ in
       nextcloud-client
       obs-studio-wrapped
       qbittorrent
+      spotdl
       syncthingtray
       tdesktop
       tor-browser-bundle-bin

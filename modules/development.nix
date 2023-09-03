@@ -55,7 +55,8 @@ in
         };
         enable = true;
         enableOnBoot = false;
-        storageDriver = "overlay2";
+        package = pkgs.docker_24;
+        storageDriver = "zfs";
       };
       libvirtd = {
         enable = true;

@@ -49,17 +49,6 @@ in
       X-KDE-autostart-after=panel
       X-KDE-autostart-phase=2
     '';
-    "${configDir}/autostart/syncthingtray.desktop".text = ''
-      [Desktop Entry]
-      Exec=${pkgs.syncthingtray}/bin/syncthingtray
-      Exec=${pkgs.syncthingtray}/bin/syncthingtray
-      Icon=syncthingtray
-      Name=Syncthing Tray
-      Terminal=false
-      Type=Application
-      X-KDE-autostart-after=panel
-      X-KDE-autostart-phase=2
-    '';
     "${configDir}/autostart/jamesdsp.desktop".text = ''
       [Desktop Entry]
       Exec=${pkgs.jamesdsp}/bin/jamesdsp --tray
