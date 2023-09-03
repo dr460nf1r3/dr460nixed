@@ -33,8 +33,8 @@ in
     # Support booting off ZFS
     boot.supportedFilesystems = [ "zfs" ];
 
-    # If volumes are encrypted, I don't want to be annoyed
-    boot.zfs.requestEncryptionCredentials = false;
+    # Always request encryption credentials to open rootfs
+    boot.zfs.requestEncryptionCredentials = true;
 
     # Useful ZFS maintenance
     services.zfs = {

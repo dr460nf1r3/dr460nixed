@@ -82,6 +82,14 @@
     };
   };
 
+  # FDE enables the usage of autologin
+  services.xserver.displayManager.sddm.settings = {
+    Autologin = {
+      User = "nico";
+      Session = "plasma";
+    };
+  };
+
   # Virt-manager requires iptables to let guests have internet
   networking.nftables.enable = lib.mkForce false;
 
