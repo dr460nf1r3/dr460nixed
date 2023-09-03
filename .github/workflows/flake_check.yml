@@ -1,4 +1,4 @@
-name: Run nix flake check
+name: Run nix-eval-jobs
 
 on:
   pull_request_target:
@@ -17,8 +17,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  flake_check:
-    runs-on: self-hosted
+  nix_eval_jobs:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -26,9 +26,20 @@ jobs:
         with:
           extra_nix_config: |
             accept-flake-config = true
+            experimental-features = nix-command flakes
             system-features = big-parallel kvm
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           nix_path: nixpkgs=channel:nixos-unstable
 
-      - name: Run nix flake check (includes linting)
-        run: nix flake check --all-systems
+      - name: Run nix-eval-jobs on flake outputs
+        run: |
+          outputs=(nixosConfigurations checks packages nixOnDroidConfigurations devShell hydraJobs)
+
+          for output in "${outputs[@]}"; do
+            nix run nixpkgs#nix-eval-jobs -- --workers "$(nproc)" --max-memory-size "$(free -m | grep ^Mem | tr -s ' ' | cut -d ' ' -f 3)" --gc-roots-dir /tmp/gcroot --flake .#"$output" | tee eval.json
+          done
+
+          jq -c 'select(.error)' eval.json | tee errors.json
+          if [ "$(wc -l <errors.json)" -gt 0 ]; then 
+            exit 1; 
+          fi
