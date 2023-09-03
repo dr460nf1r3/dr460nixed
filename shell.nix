@@ -1,4 +1,15 @@
-{ pkgs ? import <nixpkgs> { } }:
+# Shell for bootstrapping flake-enabled nix and other tooling
+{ pkgs ? # If pkgs is not defined, instanciate nixpkgs from locked commit
+  let
+    lock = (builtins.fromJSON (builtins.readFile ./flake.lock)).nodes.nixpkgs.locked;
+    nixpkgs = fetchTarball {
+      url = "https://github.com/nixos/nixpkgs/archive/${lock.rev}.tar.gz";
+      sha256 = lock.narHash;
+    };
+  in
+  import nixpkgs { overlays = [ ]; }
+, ...
+}:
 let
   nix-pre-commit-hooks = import (builtins.fetchTarball "https://github.com/cachix/pre-commit-hooks.nix/tarball/master");
   pre-commit-check = nix-pre-commit-hooks.run {
@@ -22,10 +33,6 @@ let
 in
 pkgs.mkShell {
   name = "dr460nixed";
-  shellHook = ''
-    ${pre-commit-check.shellHook}
-    echo "Welcome to the dr460nixed shell! ❄️"
-  '';
   packages = with pkgs; [
     age
     commitizen
@@ -41,4 +48,9 @@ pkgs.mkShell {
     sops
     statix
   ];
+  shellHook = ''
+    ${pre-commit-check.shellHook}
+    echo "Welcome to the dr460nixed shell! ❄️"
+  '';
+  NIX_CONFIG = "extra-experimental-features = nix-command flakes repl-flake";
 }

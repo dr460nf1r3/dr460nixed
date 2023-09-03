@@ -32,6 +32,7 @@ in
         tmux
         traceroute
         ugrep
+        vulnix
         wget
         whois
       ];

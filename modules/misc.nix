@@ -50,6 +50,14 @@ in
           Whether this device uses should use Chromium.
         '';
       };
+    chromium-gate = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether to protect Chromium with a password with a ZFS encrypted partition.
+        '';
+      };
     live-cd = mkOption
       {
         default = false;
@@ -146,6 +154,6 @@ in
     security.chromiumSuidSandbox.enable = mkIf cfg.chromium true;
 
     # Chromium gate (thanks Pedro!)
-    environment.systemPackages = mkIf cfg.chromium [ chromium-gate ];
+    environment.systemPackages = mkIf cfg.chromium-gate [ chromium-gate ];
   };
 }
