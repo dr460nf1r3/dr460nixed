@@ -32,11 +32,13 @@ in
 
   config = {
     boot = {
+      consoleLogLevel = 0;
       kernelParams = [
         "acpi_backlight=native"
         "iommu=full"
         "page_alloc.shuffle=1"
         "processor.max_cstate=5"
+        "quiet"
         "rd.systemd.show_status=auto"
         "rd.udev.log_level=3"
         "rootflags=noatime"

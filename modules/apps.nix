@@ -152,6 +152,7 @@ in
             }
           ];
       })
+      wireshark
       xdg-utils
       yarn
     ]) ++ optionals cfg.yubikey (with pkgs; [
@@ -159,6 +160,7 @@ in
       yubioath-flutter
     ]) ++ optionals cfg.school (with pkgs; [
       speedcrunch
+      sqlite
       teams-for-linux
       virt-manager
     ]) ++ optionals cfg.live-cd (with pkgs; [
