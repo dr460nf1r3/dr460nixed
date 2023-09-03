@@ -1,9 +1,9 @@
-{
+{ disks ? [ "/dev/nvme0n1" ], ... }: {
   disko.devices = {
     disk = {
       vdb = {
         type = "disk";
-        device = "/dev/disk/by-diskseq/1";
+        device = builtins.elemAt disks 0;
         content = {
           type = "gpt";
           partitions = {
