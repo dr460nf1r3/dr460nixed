@@ -59,7 +59,13 @@
     nixos-wsl.url = "github:nix-community/nixos-wsl";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Easy linting of the flake
+    # The source of all truth!
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
+    # Nix user repository (the AUR of NixOS)
+    nur.url = "github:nix-community/NUR";
+
+    # Easy linting of the flake and all kind of other stuff
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
     # Secrets management
@@ -90,6 +96,7 @@
     , nixos-hardware
     , nixos-wsl
     , nixpkgs
+    , nur
     , pre-commit-hooks
     , self
     , sops-nix
@@ -102,12 +109,13 @@
         {
           _module.args.self = self;
           _module.args.inputs = self.inputs;
-          nixpkgs.overlays = [ nixd.overlays.default ];
+          nixpkgs.overlays = [ nixd.overlays.default nur.overlay ];
         }
         ./modules/default.nix
         disko.nixosModules.disko
         lanzaboote.nixosModules.lanzaboote
         nix-index-database.nixosModules.nix-index
+        nur.nixosModules.nur
         sops-nix.nixosModules.sops
         spicetify-nix.nixosModule
       ];
