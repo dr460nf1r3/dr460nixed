@@ -21,7 +21,7 @@ jobs:
       - name: Run GitHub actions cleanup
         run: sudo rm -rf /usr/share /usr/local /opt || true # https://github.com/easimon/maximize-build-space
 
-      - uses: cachix/install-nix-action@v22
+      - uses: cachix/install-nix-action@6a9a9e84a173d90b3ffb42c5ddaf9ea033fad011 # v23
         with:
           extra_nix_config: |
             accept-flake-config = true
@@ -51,7 +51,7 @@ jobs:
       - name: Install QEMU to allow building aarch64
         run: sudo apt-get update && sudo apt-get install -y qemu-user-static
 
-      - uses: cachix/install-nix-action@v22
+      - uses: cachix/install-nix-action@6a9a9e84a173d90b3ffb42c5ddaf9ea033fad011 # v23
         with:
           extra_nix_config: |
             accept-flake-config = true
