@@ -12,6 +12,8 @@
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
     initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
+    # Without this, bluetooth does not work
+    kernelModules = [ "btintel" ];
     loader = {
       efi = {
         canTouchEfiVariables = true;

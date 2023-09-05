@@ -14,9 +14,11 @@
 
   # Boot options
   boot = {
-    # Needed to get the touchpad to work
+    # Needed to get the touchpad working
     blacklistedKernelModules = [ "elan_i2c" ];
     extraModulePackages = with config.boot.kernelPackages; [ zenpower ];
+    # Without this, bluetooth does not work
+    kernelModules = [ "btintel" ];
   };
 
   # Hostname & hostId for ZFS
