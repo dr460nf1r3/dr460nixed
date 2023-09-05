@@ -8,6 +8,9 @@
     # Chaotic Nyx!
     chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
+    # Devshell to set up a development environment
+    devshell.url = "github:numtide/devshell";
+
     # Disko for Nix-managed partition management
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -44,10 +47,6 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Nix-on-Droid
-    nix-on-droid.url = "github:t184256/nix-on-droid";
-    nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
-
     # NixOS generators to build system images
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
@@ -61,9 +60,6 @@
 
     # The source of all truth!
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-
-    # Nix user repository (the AUR of NixOS)
-    nur.url = "github:nix-community/NUR";
 
     # Easy linting of the flake and all kind of other stuff
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
@@ -81,207 +77,38 @@
     src-chaotic-toolbox.flake = false;
     src-repoctl.url = "github:cassava/repoctl";
     src-repoctl.flake = false;
+
+    # Treefmt for advanced linting / formatting
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
-    { disko
-    , flake-utils
-    , garuda-nix
-    , impermanence
-    , lanzaboote
-    , nix-index-database
-    , nix-on-droid
-    , nixd
-    , nixos-generators
-    , nixos-hardware
-    , nixos-wsl
+    { devshell
+    , flake-parts
     , nixpkgs
-    , nur
-    , pre-commit-hooks
-    , self
-    , sops-nix
-    , spicetify-nix
     , ...
     } @ inputs:
-    let
-      defaultModules = [
-        # make flake inputs accessiable in NixOS
-        {
-          _module.args.self = self;
-          _module.args.inputs = self.inputs;
-          nixpkgs.overlays = [ nixd.overlays.default nur.overlay ];
-        }
-        ./modules/default.nix
-        disko.nixosModules.disko
-        lanzaboote.nixosModules.lanzaboote
-        nix-index-database.nixosModules.nix-index
-        nur.nixosModules.nur
-        sops-nix.nixosModules.sops
-        spicetify-nix.nixosModule
-      ];
-      specialArgs = {
-        inherit spicetify-nix;
-        keys.nico = inputs.keys_nico;
-        sources = {
-          chaotic-toolbox = inputs.src-chaotic-toolbox;
-          repoctl = inputs.src-repoctl;
-        };
-      };
-      system = "x86_64-linux";
-    in
-    {
-      # All the system configurations
-      # My main device (Lenovo Slim 7)
-      nixosConfigurations."dragons-ryzen" = garuda-nix.lib.garudaSystem {
-        inherit system;
-        modules = defaultModules
-        ++ [
-          {
-            _module.args.disks = [ "/dev/nvme0n1" ];
-          }
-          ./modules/disko/zfs-encrypted.nix
-          ./hosts/dragons-ryzen/dragons-ryzen.nix
-          impermanence.nixosModules.impermanence
-          nixos-hardware.nixosModules.common-cpu-amd
-          nixos-hardware.nixosModules.common-cpu-amd-pstate
-          nixos-hardware.nixosModules.common-gpu-amd
+    flake-parts.lib.mkFlake { inherit inputs; }
+      {
+        imports = [
+          ./devshell/flake-module.nix
+          ./nixos/flake-module.nix
+          inputs.devshell.flakeModule
+          inputs.pre-commit-hooks.flakeModule
         ];
-        inherit specialArgs;
-      };
-      # For WSL, mostly used at work only
-      nixosConfigurations."nixos-wsl" = garuda-nix.lib.garudaSystem {
-        inherit system;
-        modules = defaultModules
-        ++ [
-          ./hosts/nixos-wsl/nixos-wsl.nix
-          nixos-wsl.nixosModules.wsl
-        ];
-        inherit specialArgs;
-      };
-      # Free Tier Oracle aarch64 VM
-      nixosConfigurations."oracle-dragon" = garuda-nix.lib.garudaSystem {
-        system = "aarch64-linux";
-        modules = defaultModules
-        ++ [ ./hosts/oracle-dragon/oracle-dragon.nix ];
-        inherit specialArgs;
-      };
-      # My Raspberry Pi 4B
-      nixosConfigurations."rpi-dragon" = garuda-nix.lib.garudaSystem {
-        system = "aarch64-linux";
-        modules = defaultModules
-        ++ [
-          ./hosts/rpi-dragon/rpi-dragon.nix
-          nixos-hardware.nixosModules.raspberry-pi-4
-        ];
-        inherit specialArgs;
-      };
-      # My old laptop serving as TV
-      nixosConfigurations."tv-nixos" = garuda-nix.lib.garudaSystem {
-        inherit system;
-        modules = defaultModules
-        ++ [
-          ./hosts/tv-nixos/tv-nixos.nix
-          nixos-hardware.nixosModules.common-gpu-intel
-          nixos-hardware.nixosModules.lenovo-thinkpad-t470s
-        ];
-        inherit specialArgs;
-      };
-      # My Pixel 6 via Nix-on-Droid
-      nixOnDroidConfigurations."mobile-dragon" = nix-on-droid.lib.nixOnDroidConfiguration {
-        # home-manager-path = inputs.garuda-nix.inputs.home-manager.outPath;
-        modules = [
-          ./modules/default.nix
-          nix-index-database.nixosModules.nix-index
-          sops-nix.nixosModules.sops
-        ];
-        pkgs = import nixpkgs {
-          system = "aarch64-linux";
-          overlays = [ nix-on-droid.overlays.default ];
-        };
-      };
-    } // flake-utils.lib.eachDefaultSystem (system:
-    let
-      modules = [
-        ./modules/images/base.nix
-        ./modules/images/iso.nix
-        ./modules/nix.nix
-        nix-index-database.nixosModules.nix-index
-      ];
-      pkgs = nixpkgs.legacyPackages.${system}.pkgs;
-      specialArgs = {
-        inherit inputs;
-        keys.nico = inputs.keys_nico;
-      };
-    in
-    {
-      # Set those up via "nix develop", then automatically used at "git commit"
-      checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
-        src = ./.;
-        hooks = {
-          actionlint.enable = true;
-          commitizen.enable = true;
-          deadnix.enable = true;
-          hadolint.enable = true;
-          nil.enable = true;
-          nixpkgs-fmt.enable = true;
-          prettier.enable = true;
-          shellcheck.enable = true;
-        };
-        settings.deadnix = {
-          edit = true;
-          hidden = true;
-          noLambdaArg = true;
-        };
-      };
 
-      # The shell to enter with "nix develop"
-      devShell = nixpkgs.legacyPackages.${system}.mkShell {
-        name = "dr460nixed";
-        packages = with pkgs; [
-          age
-          commitizen
-          deadnix
-          git
-          gnupg
-          manix
-          nix
-          nixpkgs-fmt
-          rsync
-          sops
-          statix
-        ];
-        shellHook = ''
-          ${self.checks.${system}.pre-commit-check}
-          echo "Welcome to the dr460nixed shell! ❄️"
-        '';
-      };
+        systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
 
-      # Defines a formatter for "nix fmt"
-      formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
+        perSystem = { pkgs, system, ... }: {
+          # Defines a formatter for "nix fmt"
+          formatter = pkgs.nixpkgs-fmt;
 
-      # Defines what to build via Hydra (if I get to use it)
-      hydraJobs = {
-        inherit (self)
-          packages;
-      };
-
-      # Images to be built via "nix build"
-      packages = {
-        iso = nixos-generators.nixosGenerate {
-          format = "install-iso";
-          inherit modules;
-          inherit specialArgs;
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          system = "x86_64-linux";
-        };
-        vbox = nixos-generators.nixosGenerate {
-          format = "virtualbox";
-          inherit modules;
-          inherit specialArgs;
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          system = "x86_64-linux";
+          _module.args.pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
         };
       };
-    });
 }
    

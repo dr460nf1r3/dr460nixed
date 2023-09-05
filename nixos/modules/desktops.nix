@@ -1,13 +1,13 @@
 { config
+, inputs
 , lib
 , pkgs
-, spicetify-nix
 , ...
 }:
 with lib;
 let
   cfg = config.dr460nixed.desktops;
-  spicePkgs = spicetify-nix.packages.${pkgs.system}.default;
+  spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
 in
 {
   options.dr460nixed.desktops = {

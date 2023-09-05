@@ -13,22 +13,26 @@
 let
   nix-pre-commit-hooks = import (builtins.fetchTarball "https://github.com/cachix/pre-commit-hooks.nix/tarball/master");
   pre-commit-check = nix-pre-commit-hooks.run {
-    src = ./.;
     hooks = {
       actionlint.enable = true;
       commitizen.enable = true;
       deadnix.enable = true;
-      hadolint.enable = true;
+      markdownlint.enable = true;
       nil.enable = true;
       nixpkgs-fmt.enable = true;
+      pre-commit-hook-ensure-sops.enable = true;
       prettier.enable = true;
       shellcheck.enable = true;
+      shfmt.enable = true;
+      statix.enable = true;
+      yamllint.enable = true;
     };
     settings.deadnix = {
       edit = true;
       hidden = true;
       noLambdaArg = true;
     };
+    src = ../.;
   };
 in
 pkgs.mkShell {
