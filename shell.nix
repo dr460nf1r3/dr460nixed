@@ -45,6 +45,7 @@ pkgs.mkShell {
     nixos-generators
     rsync
     sops
+    yamlfix
   ];
   shellHook = ''
     ${pre-commit-check.shellHook}

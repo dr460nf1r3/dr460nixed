@@ -10,36 +10,36 @@ _:
       devshells.default = {
         commands = [
           {
-            package = "treefmt";
-            category = "formatter";
-          }
-          {
             package = "pre-commit";
             category = "formatter";
           }
           {
             package = "manix";
-            category = "tools";
+            category = "handbook";
           }
           {
             package = "age";
-            category = "tools";
+            category = "secrets management";
           }
           {
             package = "commitizen";
-            category = "tools";
+            category = "formatter";
           }
           {
             package = "gnupg";
-            category = "tools";
+            category = "secrets management";
           }
           {
             package = "rsync";
-            category = "tools";
+            category = "deployment";
           }
           {
             package = "sops";
-            category = "tools";
+            category = "secrets management";
+          }
+          {
+            package = "yamlfix";
+            category = "formatter";
           }
         ];
         motd = ''

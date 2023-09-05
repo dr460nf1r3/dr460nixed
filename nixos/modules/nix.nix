@@ -33,8 +33,14 @@
       builders-use-substitutes = true;
 
       # A few extra binary caches and their public keys
-      substituters = [ "https://dr460nf1r3.cachix.org" ];
-      trusted-public-keys = [ "dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU=" ];
+      substituters = [
+        "https://cache.garnix.io"
+        "https://dr460nf1r3.cachix.org"
+      ];
+      trusted-public-keys = [
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+        "dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU="
+      ];
 
       # Enable certain system features
       system-features = [ "big-parallel" "kvm" "recursive-nix" ];

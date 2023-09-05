@@ -1,47 +1,33 @@
-version: "3"
-
+---
+version: '3'
 networks:
   rustdesk-net:
     external: false
-
 services:
   # RustDesk server related containers - Tailscale net only
   hbbs:
     image: rustdesk/rustdesk-server:latest-arm64v8
     container_name: rustdesk_hbbs
-    ports:
-      - 21115:21115
-      - 21116:21116
-      - 21116:21116/udp
-      - 21118:21118
+    ports: [21115:21115, 21116:21116, 21116:21116/udp, 21118:21118]
     command: hbbs
     environment:
       ENCRYPTED_ONLY: 1
-      RELAY_SERVERS: "100.86.102.115:21117"
-    volumes:
-      - ./rustdesk:/root
-    networks:
-      - rustdesk-net
-    depends_on:
-      - hbbr
+      RELAY_SERVERS: 100.86.102.115:21117
+    volumes: [./rustdesk:/root]
+    networks: [rustdesk-net]
+    depends_on: [hbbr]
     restart: unless-stopped
-
   hbbr:
     image: rustdesk/rustdesk-server:latest-arm64v8
     container_name: rustdesk_hbbr
-    ports:
-      - 21117:21117
-      - 21119:21119
+    ports: [21117:21117, 21119:21119]
     environment:
       ENCRYPTED_ONLY: 1
-      RELAY_SERVERS: "100.86.102.115:21117"
+      RELAY_SERVERS: 100.86.102.115:21117
     command: hbbr
-    volumes:
-      - ./rustdesk:/root
-    networks:
-      - rustdesk-net
+    volumes: [./rustdesk:/root]
+    networks: [rustdesk-net]
     restart: unless-stopped
-
   # GitHub runner for my projects
   github_runner:
     image: myoung34/github-runner:latest
@@ -54,15 +40,13 @@ services:
       RUNNER_TOKEN: ${RUNNER_TOKEN}
       RUNNER_WORKDIR: /tmp/runner/work
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/tmp/runner:/tmp/runner"
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp/runner:/tmp/runner
     restart: unless-stopped
-
   # Automatic container updates
   watchtower:
     image: containrrr/watchtower:latest
     container_name: watchtower
     command: hhbr hhbs github_runner watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+    volumes: [/var/run/docker.sock:/var/run/docker.sock]
     restart: unless-stopped

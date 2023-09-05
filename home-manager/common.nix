@@ -42,7 +42,7 @@
 
   # Always use my cache
   nix.extraOptions = ''
-    extra-substituters = https://dr460nf1r3.cachix.org
-    extra-trusted-public-keys = dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU=
+    extra-substituters = https://cache.garnix.io https://dr460nf1r3.cachix.org
+    extra-trusted-public-keys = cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g= dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU=
   '';
 }

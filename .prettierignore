@@ -1,0 +1,2 @@
+configurations/docker-compose/**
+.github/workflows/*
