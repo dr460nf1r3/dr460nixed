@@ -39,18 +39,12 @@ pkgs.mkShell {
   name = "dr460nixed";
   packages = with pkgs; [
     age
-    commitizen
-    deadnix
     git
     gnupg
     manix
-    nix
     nixos-generators
-    nixpkgs-fmt
-    nodePackages_latest.prettier
     rsync
     sops
-    statix
   ];
   shellHook = ''
     ${pre-commit-check.shellHook}

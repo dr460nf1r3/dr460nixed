@@ -61,7 +61,6 @@ _:
             markdownlint.enable = true;
             nil.enable = true;
             nixpkgs-fmt.enable = true;
-            pre-commit-hook-ensure-sops.enable = true;
             prettier.enable = true;
             shellcheck.enable = true;
             shfmt.enable = true;
