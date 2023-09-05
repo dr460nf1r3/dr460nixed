@@ -58,7 +58,6 @@ _:
             actionlint.enable = true;
             commitizen.enable = true;
             deadnix.enable = true;
-            markdownlint.enable = true;
             nil.enable = true;
             nixpkgs-fmt.enable = true;
             prettier.enable = true;

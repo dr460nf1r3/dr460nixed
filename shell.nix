@@ -17,7 +17,6 @@ let
       actionlint.enable = true;
       commitizen.enable = true;
       deadnix.enable = true;
-      markdownlint.enable = true;
       nil.enable = true;
       nixpkgs-fmt.enable = true;
       pre-commit-hook-ensure-sops.enable = true;
