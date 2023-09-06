@@ -10,12 +10,12 @@
         inputs.spicetify-nix.nixosModule
       ];
 
-      # imageModules = [
-      #   ./images/base.nix
-      #   ./images/iso.nix
-      #   ./modules/nix.nix
-      #   inputs.nix-index-database.nixosModules.nix-index
-      # ];
+      imageModules = [
+        ./images/base.nix
+        ./images/iso.nix
+        ./modules/nix.nix
+        inputs.nix-index-database.nixosModules.nix-index
+      ];
 
       specialArgs = {
         inherit inputs;
@@ -97,19 +97,19 @@
       };
 
       # Images to build via "nix build .#packages.{iso,vbox}"
-      # packages = {
-      #   iso = inputs.nixos-generators.nixosGenerate {
-      #     format = "install-iso";
-      #     inherit specialArgs;
-      #     modules = imageModules;
-      #     system = "x86_64-linux";
-      #   };
-      #   vbox = inputs.nixos-generators.nixosGenerate {
-      #     format = "virtualbox";
-      #     inherit specialArgs;
-      #     modules = imageModules;
-      #     system = "x86_64-linux";
-      #   };
-      # };
+      packages.x86_64-linux = {
+        iso = inputs.nixos-generators.nixosGenerate {
+          format = "install-iso";
+          inherit specialArgs;
+          modules = imageModules;
+          system = "x86_64-linux";
+        };
+        vbox = inputs.nixos-generators.nixosGenerate {
+          format = "virtualbox";
+          inherit specialArgs;
+          modules = imageModules;
+          system = "x86_64-linux";
+        };
+      };
     };
 }

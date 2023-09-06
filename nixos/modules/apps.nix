@@ -118,7 +118,7 @@ in
             github.vscode-pull-request-github
             jnoortheen.nix-ide
             ms-azuretools.vscode-docker
-            # ms-python.python - https://github.com/NixOS/nixpkgs/issues/251045
+            ms-python.python
             ms-python.vscode-pylance
             ms-vscode-remote.remote-ssh
             ms-vscode.hexeditor
@@ -161,6 +161,7 @@ in
     ]) ++ optionals cfg.school (with pkgs; [
       speedcrunch
       sqlite
+      sqlitebrowser
       teams-for-linux
       virt-manager
     ]) ++ optionals cfg.live-cd (with pkgs; [

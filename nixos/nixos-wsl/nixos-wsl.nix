@@ -1,14 +1,10 @@
 { lib
-, modulesPath
 , pkgs
 , ...
 }:
 {
-  # Slimmed down configurations
-  imports = [
-    ../../configurations/common/common.nix
-    "${modulesPath}/profiles/minimal.nix"
-  ];
+  # Import common configurations
+  imports = [ ../../configurations/common.nix ];
 
   # WSL flake settings
   wsl = {
@@ -32,20 +28,118 @@
     };
   };
 
-  # Slimmed down user config
-  home-manager = {
-    useGlobalPkgs = true;
-    users."nico" = import ../../home-manager/common.nix;
+  # Use the newer Docker 24
+  virtualisation = {
+    docker = {
+      autoPrune = {
+        enable = true;
+        flags = [ "--all" ];
+      };
+      enable = true;
+      enableOnBoot = false;
+      package = lib.mkForce pkgs.docker_24;
+    };
   };
 
-  # Override this to always run fish & workaround fastfetch error
-  programs.bash.shellInit = lib.mkForce ''
-    exec "${pkgs.fish}/bin/fish"
-  '';
-  programs.fish.shellInit = lib.mkForce ''
-    set fish_greeting
-    fastfetch -l nixos
-  '';
+  # Use micro as editor
+  environment.sessionVariables = {
+    EDITOR = "${pkgs.micro}/bin/micro";
+    VISUAL = "${pkgs.micro}/bin/micro";
+  };
+
+  # Often needed apps
+  environment.systemPackages = with pkgs; [
+    age
+    ansible
+    asciinema
+    bat
+    bind
+    btop
+    cachix
+    cloudflared
+    curl
+    deadnix
+    duf
+    exa
+    fastfetch
+    git
+    htop
+    jq
+    killall
+    manix
+    micro
+    mosh
+    nettools
+    nixos-generators
+    nixpkgs-fmt
+    nmap
+    nvd
+    python3
+    rsync
+    screen
+    shellcheck
+    shfmt
+    sops
+    tldr
+    tmux
+    traceroute
+    ugrep
+    vulnix
+    wget
+    whois
+  ];
+
+  # Programs & global config
+  programs = {
+    bash.shellAliases = {
+      # General useful things & theming
+      "bat" = "bat --style header --style snip --style changes";
+      "cat" = "bat --style header --style snip --style changes";
+      "dd" = "dd progress=status";
+      "dir" = "dir --color=auto";
+      "fastfetch" = "fastfetch -l nixos";
+      "ip" = "ip --color=auto";
+      "jctl" = "journalctl -p 3 -xb";
+      "ls" = "exa -al --color=always --group-directories-first --icons";
+      "micro" = "micro -colorscheme geany -autosu true -mkparents true";
+      "su" = "sudo su -";
+      "tarnow" = "tar acf ";
+      "untar" = "tar zxvf ";
+      "wget" = "wget -c";
+    };
+    fish = {
+      enable = true;
+      vendor = {
+        completions.enable = true;
+        config.enable = true;
+      };
+      shellAbbrs = {
+        "reb" = " sudo nixos-rebuild switch -L";
+        "roll" = "sudo nixos-rebuild switch --rollback";
+        "su" = "sudo su -";
+        "tarnow" = "tar acf ";
+        "test" = "sudo nixos-rebuild switch --test";
+        "untar" = "tar zxvf ";
+      };
+      shellAliases = {
+        "bat" = "bat --style header --style snip --style changes";
+        "cat" = "bat --style header --style snip --style changes";
+        "dd" = "dd progress=status";
+        "dir" = "dir --color=auto";
+        "fastfetch" = "fastfetch -l nixos";
+        "gitlog" = "git log --oneline --graph --decorate --all";
+        "ip" = "ip --color=auto";
+        "jctl" = "journalctl -p 3 -xb";
+        "ls" = "exa -al --color=always --group-directories-first --icons";
+        "micro" = "micro -colorscheme geany -autosu true -mkparents true";
+        "wget" = "wget -c";
+      };
+      shellInit = ''
+        set fish_greeting
+        fastfetch -l nixos --load-config neofetch
+      '';
+    };
+  };
 
   # NixOS stuff
   system.stateVersion = "23.11";

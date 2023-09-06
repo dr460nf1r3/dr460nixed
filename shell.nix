@@ -38,6 +38,7 @@ pkgs.mkShell {
   name = "dr460nixed";
   packages = with pkgs; [
     age
+    commitizen
     git
     gnupg
     manix

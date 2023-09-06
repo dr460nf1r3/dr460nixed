@@ -125,7 +125,6 @@ _: {
         ".cache/chromium"
         ".cache/firedragon"
         ".cache/konsole"
-        ".cache/lorri"
         ".cache/lutris"
         ".cache/mesa_shader_cache"
         ".cache/mozilla"

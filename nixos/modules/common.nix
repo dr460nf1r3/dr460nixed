@@ -69,6 +69,7 @@ in
 
     # Always needed applications
     programs = {
+      command-not-found.enable = false;
       git = {
         enable = true;
         lfs.enable = true;
@@ -78,6 +79,7 @@ in
         enable = true;
         pinentryFlavor = "curses";
       };
+      nix-index-database.comma.enable = true;
     };
 
     # Who needs documentation when there is the internet? #bl04t3d
@@ -92,9 +94,5 @@ in
 
     # Ship systemd logs to Loki & Grafana
     dr460nixed.promtail.lokiAddress = "100.86.102.115";
-
-    # Fix (read: workaround) an issue with Sqlite
-    programs.command-not-found.enable = false;
-    programs.nix-index-database.comma.enable = true;
   };
-} 
+}

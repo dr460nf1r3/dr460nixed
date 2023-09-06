@@ -97,7 +97,5 @@ in
       enable = true;
       silent = true;
     };
-    # Enhance direnv with lorri
-    services.lorri.enable = true;
   };
 }
