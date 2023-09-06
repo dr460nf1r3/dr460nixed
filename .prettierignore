@@ -1,2 +1,3 @@
-configurations/docker-compose/**
 .github/workflows/*
+configurations/docker-compose/**
+flake.lock
