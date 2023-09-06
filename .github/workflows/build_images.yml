@@ -18,12 +18,12 @@ jobs:
             system-features = big-parallel kvm
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           nix_path: nixpkgs=channel:nixos-unstable
-      - uses: cachix/cachix-action@v12
+      - name: Set up Nix cache
+        uses: zombiezen/setup-nix-cache-action@v0.2.0
         with:
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-          extraPullNames: chaotic-nyx
-          name: dr460nf1r3
-          signingKey: ${{ secrets.CACHIX_SIGNING_KEY }}
+          substituters: https://cache.garnix.io https://chaotic-nyx.cachix.org
+          trusted_public_keys: cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=
+            chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8=
       - name: Build ISO
         run: nix build -L .#packages.x86_64-linux.iso
         env:
