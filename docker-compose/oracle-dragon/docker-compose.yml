@@ -6,7 +6,7 @@ networks:
 services:
   # RustDesk server related containers - Tailscale net only
   hbbs:
-    image: rustdesk/rustdesk-server:latest-arm64v8
+    image: rustdesk/rustdesk-server:1.1.8-2-arm64v8
     container_name: rustdesk_hbbs
     ports: [21115:21115, 21116:21116, 21116:21116/udp, 21118:21118]
     command: hbbs
@@ -18,7 +18,7 @@ services:
     depends_on: [hbbr]
     restart: unless-stopped
   hbbr:
-    image: rustdesk/rustdesk-server:latest-arm64v8
+    image: rustdesk/rustdesk-server:1.1.8-2-arm64v8
     container_name: rustdesk_hbbr
     ports: [21117:21117, 21119:21119]
     environment:
@@ -30,7 +30,7 @@ services:
     restart: unless-stopped
   # GitHub runner for my projects
   github_runner:
-    image: myoung34/github-runner:latest
+    image: myoung34/github-runner:2.309.0
     container_name: github_runner
     privileged: true
     environment:
@@ -42,11 +42,4 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp/runner:/tmp/runner
-    restart: unless-stopped
-  # Automatic container updates
-  watchtower:
-    image: containrrr/watchtower:latest
-    container_name: watchtower
-    command: hhbr hhbs github_runner watchtower
-    volumes: [/var/run/docker.sock:/var/run/docker.sock]
     restart: unless-stopped
