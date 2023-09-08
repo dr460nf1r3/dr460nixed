@@ -4,7 +4,10 @@
 }:
 {
   # Import common configurations
-  imports = [ ../../configurations/common.nix ];
+  imports = [
+    ../modules/nix.nix
+    ../modules/shells.nix
+  ];
 
   # WSL flake settings
   wsl = {

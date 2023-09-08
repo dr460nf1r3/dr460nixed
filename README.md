@@ -13,16 +13,18 @@ This repo contains my NixOS dotfiles. Every device supported by NixOS will be ad
 - A fully ported & configured **Garuda dr460nized KDE** setup: **Dr460nixed** !
 - Root-on-ZFS and secure-boot enabled systems via **Lanzaboote**
 - **Opt-in persistence** through impermanence + ZFS snapshots
-- **Mesh networked** hosts with **Tailscale**
+- **Mesh networked** hosts with **Tailscale** and optional use of Mullvad VPN exit nodes
 - Uses the custom **Linux-cachyos BORE EEVDF** kernel
 - Additional packages not existing in Nixpkgs (yet) via **chaotic-nyx**
 - **Opt-in 2FA protection** of ssh and password prompts **with Duo Security**
 - Secrets are managed via **nix-sops**
-- Automated flake building when pushing to main & pushing to **Cachix** via **GitHub Actions**
+- Uses **Garnix CI** for automated flake checks followed by building outputs when pushing to main & uploading to **Garnix CI cache**
 - Always up-to-date installer images are automatically built via **Github actions**
 
 Other, smaller tweaks I particularly like about this setup include:
 
+- Keeping it well organized via **flake-parts**
+- Custom devshells with fully declarative **pre-commit-hooks**
 - A much enhanced, fancy-themed Spotify **via spicetify-cli**
 - No password prompts when having my **Yubikey** connected to my laptop
 - Being able to easily remote-control my machines via **KDEConnect** and a self-hosted **Rustdesk server**
@@ -31,25 +33,24 @@ Other, smaller tweaks I particularly like about this setup include:
 ## Structure
 
 ```
-├── configurations
-├── disko
-├── flake.nix
+├── devshell
+├── docker-compose
+│   ├── oracle-dragon
+│   └── tv-nixos
 ├── home-manager
-├── hosts
-├── modules
+├── nixos
+│   ├── dragons-ryzen
+│   ├── images
+│   ├── modules
+│   │   ├── chaotic
+│   │   └── disko
+│   ├── nixos-wsl
+│   ├── oracle-dragon
+│   ├── rpi-dragon
+│   └── tv-nixos
 ├── overlays
-├── secrets
-└── shell.nix
+└── secrets
 ```
-
-- `configurations`: All the Nix configurations not available via modules, eg. home-manager configurations
-- `disco`: Configurations for managing partitions & filesystems
-- `flake.nix`: Entrypoint for hosts and home configurations. Also exposes a devshell for bootstrapping via `nix develop`
-- `home-manager`: Contains all home-manager configurations
-- `hosts`: NixOS Configurations, accessible via `nixos-rebuild --flake`
-- `modules`: The major part of the system configurations that are not in `garuda-nix-subsystem`, exposes `dr460nixed.*` options
-- `overlays`: Patches and version overrides for some packages
-- `secrets`: The secrets used by `sops-nix`
 
 ## Module options
 
@@ -59,13 +60,22 @@ A lot of those have been moved to the [Garuda Nix Subsystem](https://gitlab.com/
 ├── apps.nix
 ├── boot.nix
 ├── chaotic
+│   ├── chaotic-mirror.nix
+│   ├── chaotic.nix
 ├── common.nix
 ├── default.nix
 ├── desktops.nix
 ├── development.nix
+├── disko
+│   ├── btrfs-subvolumes.nix
+│   ├── luks-btrfs-subvolumes.nix
+│   ├── simple-efi.nix
+│   ├── zfs-encrypted.nix
+│   └── zfs.nix
 ├── docker-compose-runner.nix
 ├── gaming.nix
 ├── hardening.nix
+├── impermanence.nix
 ├── locales.nix
 ├── misc.nix
 ├── monitoring.nix
@@ -76,8 +86,9 @@ A lot of those have been moved to the [Garuda Nix Subsystem](https://gitlab.com/
 ├── servers.nix
 ├── shells.nix
 ├── syncthing.nix
-├── tailscale-tls.nix
 ├── tailscale.nix
+├── tailscale-tls.nix
+├── users.nix
 └── zfs.nix
 ```
 

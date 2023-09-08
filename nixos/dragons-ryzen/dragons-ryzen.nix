@@ -6,9 +6,8 @@
 {
   # Individual settings
   imports = [
-    ../../configurations/common.nix
-    ../../configurations/desktops/impermanence.nix
-    ../../configurations/services/chaotic.nix
+    ../modules/impermanence.nix
+    ./chaotic.nix
     ./hardware-configuration.nix
   ];
 

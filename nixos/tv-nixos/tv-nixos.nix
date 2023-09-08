@@ -34,7 +34,7 @@
     chromium = true;
     desktops.enable = true;
     docker-compose-runner."tv-nixos" = {
-      source = ../../configurations/docker-compose/tv-nixos;
+      source = ../../docker-compose/tv-nixos;
     };
     servers = {
       enable = true;

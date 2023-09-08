@@ -4,10 +4,9 @@
 }: {
   # These are the services I use on this machine
   imports = [
-    ../../configurations/common.nix
-    ../../configurations/services/adguard.nix
-    ../../configurations/services/searxng.nix
+    ./adguard.nix
     ./hardware-configuration.nix
+    ./searxng.nix
   ];
 
   # Oracle provides DHCP
@@ -58,7 +57,7 @@
   # Enable a few selected custom settings
   dr460nixed = {
     docker-compose-runner."oracle-dragon" = {
-      source = ../../configurations/docker-compose/oracle-dragon;
+      source = ../../docker-compose/oracle-dragon;
     };
     grafanaStack = {
       address = "100.86.102.115";

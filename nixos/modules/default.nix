@@ -1,5 +1,6 @@
 {
   imports = [
+    ../../overlays
     ./apps.nix
     ./boot.nix
     ./chaotic/chaotic.nix
@@ -16,6 +17,7 @@
     ./networking.nix
     ./nix.nix
     ./oci.nix
+    ./users.nix
     ./servers.nix
     ./shells.nix
     ./syncthing.nix
