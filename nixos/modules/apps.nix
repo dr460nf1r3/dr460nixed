@@ -19,6 +19,7 @@ in
         cachix
         cloudflared
         duf
+        eza
         jq
         killall
         micro
