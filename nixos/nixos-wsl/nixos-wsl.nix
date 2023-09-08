@@ -28,6 +28,9 @@
     };
   };
 
+  # Required by nixos-wsl
+  networking.nftables.enable = lib.mkForce false;
+
   # Use the newer Docker 24
   virtualisation = {
     docker = {
