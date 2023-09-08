@@ -60,6 +60,16 @@
 		},
 	],
 
+	// Allow my personal devices to use Mullvad exit nodes
+	"nodeAttrs": [
+		{
+			"target": ["dr460nf1r3@github"],
+			"attr": [
+				"mullvad",
+			],
+		},
+	],
+
 	// Define tagOwners via autogroups
 	"tagOwners": {
 		// admins own devices with tag:dragons
