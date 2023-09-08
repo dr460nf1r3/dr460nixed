@@ -4,7 +4,6 @@
 }: {
   # Individual settings
   imports = [
-    ../../configurations/common.nix
     ./hardware-configuration.nix
   ];
 
