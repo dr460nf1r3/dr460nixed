@@ -63,7 +63,7 @@
     curl
     deadnix
     duf
-    exa
+    eza
     fastfetch
     git
     htop
@@ -103,7 +103,7 @@
       "fastfetch" = "fastfetch -l nixos";
       "ip" = "ip --color=auto";
       "jctl" = "journalctl -p 3 -xb";
-      "ls" = "exa -al --color=always --group-directories-first --icons";
+      "ls" = "eza -al --color=always --group-directories-first --icons";
       "micro" = "micro -colorscheme geany -autosu true -mkparents true";
       "su" = "sudo su -";
       "tarnow" = "tar acf ";
@@ -133,7 +133,7 @@
         "gitlog" = "git log --oneline --graph --decorate --all";
         "ip" = "ip --color=auto";
         "jctl" = "journalctl -p 3 -xb";
-        "ls" = "exa -al --color=always --group-directories-first --icons";
+        "ls" = "eza -al --color=always --group-directories-first --icons";
         "micro" = "micro -colorscheme geany -autosu true -mkparents true";
         "wget" = "wget -c";
       };

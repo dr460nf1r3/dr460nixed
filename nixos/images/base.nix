@@ -160,7 +160,7 @@ in
       "gpush" = "git push";
       "ip" = "ip --color=auto";
       "jctl" = "journalctl -p 3 -xb";
-      "ls" = "exa -al --color=always --group-directories-first --icons";
+      "ls" = "eza -al --color=always --group-directories-first --icons";
       "micro" = "micro -colorscheme geany -autosu true -mkparents true";
       "psmem" = "ps auxf | sort -nr -k 4";
       "psmem10" = "ps auxf | sort -nr -k 4 | head -1";
@@ -204,7 +204,7 @@ in
         "gitlog" = "git log --oneline --graph --decorate --all";
         "ip" = "ip --color=auto";
         "jctl" = "journalctl -p 3 -xb";
-        "ls" = "exa -al --color=always --group-directories-first --icons";
+        "ls" = "eza -al --color=always --group-directories-first --icons";
         "micro" = "micro -colorscheme geany -autosu true -mkparents true";
         "psmem" = "ps auxf | sort -nr -k 4";
         "psmem10" = "ps auxf | sort -nr -k 4 | head -1";
