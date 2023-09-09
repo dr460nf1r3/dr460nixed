@@ -1,9 +1,5 @@
 _:
 {
-  # imports = [
-  #   inputs.treefmt-nix.flakeModule
-  # ];
-
   perSystem = { pkgs, ... }:
     {
       # The default development shell spawned by "nix develop"
@@ -43,7 +39,7 @@ _:
           }
         ];
         motd = ''
-          {202}🔨 Welcome to the dr460nixed shell ❄️{reset}
+          {202}🔨 Welcome to the dr460nixed shell{reset} ❄️
           $(type -p menu &>/dev/null && menu)
         '';
         name = "dr460nixed";

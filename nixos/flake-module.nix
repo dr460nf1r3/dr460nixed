@@ -96,6 +96,9 @@
         };
       };
 
+      # Expose dr460nixed and other modules for use in other flakes
+      nixosModules.dr460nixed = import ./modules;
+
       # Images to build via "nix build .#packages.{iso,vbox}"
       packages.x86_64-linux = {
         iso = inputs.nixos-generators.nixosGenerate {
