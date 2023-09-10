@@ -5,7 +5,7 @@
   "extends": ["config:base", ":gitSignOff"],
   "lockFileMaintenance": {
     "enabled": true,
-    "extends": ["schedule:weekly"]
+    "extends": ["schedule:daily"]
   },
   "nix": {
     "enabled": true
