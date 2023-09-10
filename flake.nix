@@ -10,10 +10,16 @@
 
     # Devshell to set up a development environment
     devshell.url = "github:numtide/devshell";
+    devshell.inputs.nixpkgs.follows = "nixpkgs";
+    devshell.inputs.systems.follows = "systems";
 
     # Disko for Nix-managed partition management
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Required by some other flakes
+    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat.flake = false;
 
     # Required by some other flakes
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -21,11 +27,21 @@
 
     # Required by pre-commit-hooks
     flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.inputs.systems.follows = "systems";
 
     # Garuda Linux flake - most of my system settings are here
     garuda-nix.url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
     garuda-nix.inputs.chaotic.follows = "chaotic-nyx";
     garuda-nix.inputs.garuda-nixpkgs.follows = "nixpkgs";
+    garuda-nix.inputs.home-manager.follows = "home-manager";
+
+    # Home-manager for managing my home directory
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Gitignore common input
+    gitignore.url = "github:hercules-ci/gitignore.nix";
+    gitignore.inputs.nixpkgs.follows = "nixpkgs";
 
     # Reset rootfs every reboot
     impermanence.url = "github:nix-community/impermanence";
@@ -36,7 +52,11 @@
 
     # Lanzaboote for secure boot support
     lanzaboote.url = "github:nix-community/lanzaboote/master";
+    lanzaboote.inputs.flake-compat.follows = "flake-compat";
     lanzaboote.inputs.flake-parts.follows = "flake-parts";
+    lanzaboote.inputs.flake-utils.follows = "flake-utils";
+    lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
+    lanzaboote.inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
 
     # Nixd language server
     nixd.url = "github:nix-community/nixd";
@@ -56,20 +76,30 @@
 
     # NixOS WSL
     nixos-wsl.url = "github:nix-community/nixos-wsl";
+    nixos-wsl.inputs.flake-compat.follows = "flake-compat";
+    nixos-wsl.inputs.flake-utils.follows = "flake-utils";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
 
     # The source of all truth!
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
 
     # Easy linting of the flake and all kind of other stuff
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+    pre-commit-hooks.inputs.flake-compat.follows = "flake-compat";
+    pre-commit-hooks.inputs.flake-utils.follows = "flake-utils";
+    pre-commit-hooks.inputs.gitignore.follows = "gitignore";
+    pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
+    pre-commit-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
     # Secrets management
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
     # Spicetify
     spicetify-nix.url = "github:the-argus/spicetify-nix";
+    spicetify-nix.inputs.flake-utils.follows = "flake-utils";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     # The Chaotic toolbox
@@ -77,6 +107,9 @@
     src-chaotic-toolbox.flake = false;
     src-repoctl.url = "github:cassava/repoctl";
     src-repoctl.flake = false;
+
+    # Common input
+    systems.url = "github:nix-systems/default";
 
     # Treefmt for advanced linting / formatting
     treefmt-nix.url = "github:numtide/treefmt-nix";
@@ -87,6 +120,7 @@
     { devshell
     , flake-parts
     , nixpkgs
+    , self
     , ...
     } @ inputs:
     flake-parts.lib.mkFlake { inherit inputs; }
@@ -101,6 +135,10 @@
         systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
 
         perSystem = { pkgs, system, ... }: {
+          # Enter devshell via "nix run .#apps.x86_64-linux.devshell"
+          apps.devshell = self.outputs.devShells.${system}.default.flakeApp;
+
+
           # Defines a formatter for "nix fmt"
           formatter = pkgs.nixpkgs-fmt;
 

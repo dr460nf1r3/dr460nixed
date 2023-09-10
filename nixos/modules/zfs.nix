@@ -40,7 +40,7 @@ in
     services.zfs = {
       autoScrub = {
         enable = true;
-        interval = "daily";
+        interval = "weekly";
       };
       trim.enable = true;
     };

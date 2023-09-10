@@ -37,6 +37,10 @@ _:
             package = "yamlfix";
             category = "formatter";
           }
+          {
+            package = "nix-melt";
+            category = "tools";
+          }
         ];
         motd = ''
           {202}🔨 Welcome to the dr460nixed shell{reset} ❄️
