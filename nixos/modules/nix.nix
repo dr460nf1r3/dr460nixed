@@ -11,8 +11,6 @@
       warn-dirty = false
     '';
     settings = {
-      trusted-users = [ "@wheel" ];
-
       # Use available binary caches, this is not Gentoo
       # this also allows us to use remote builders to reduce build times and batter usage
       builders-use-substitutes = true;

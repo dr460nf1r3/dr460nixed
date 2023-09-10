@@ -1,6 +1,5 @@
 { config
 , lib
-, pkgs
 , ...
 }:
 with lib;
@@ -45,7 +44,6 @@ in
     # & allow deployment of configurations via Colmena
     security.sudo = {
       execWheelOnly = true;
-      package = pkgs.sudo.override { withInsults = true; };
     };
 
     # This is the default sops file that will be used for all secrets
@@ -53,9 +51,6 @@ in
       age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
       defaultSopsFile = ../../secrets/global.yaml;
     };
-
-    # BPF-based auto-tuning of Linux system parameters
-    services.bpftune.enable = true;
 
     # Increase open file limit for sudoers
     security.pam.loginLimits = [
@@ -75,7 +70,6 @@ in
 
     # Always needed applications
     programs = {
-      command-not-found.enable = false;
       git = {
         enable = true;
         lfs.enable = true;
@@ -85,7 +79,6 @@ in
         enable = true;
         pinentryFlavor = "curses";
       };
-      nix-index-database.comma.enable = true;
     };
 
     # Who needs documentation when there is the internet? #bl04t3d

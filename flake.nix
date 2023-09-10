@@ -31,18 +31,25 @@
     flake-utils.inputs.systems.follows = "systems";
 
     # Garuda Linux flake - most of my system settings are here
+    # garuda-nix.url = "/home/nico/Documents/misc/garuda-nix-subsystem";
     garuda-nix.url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
-    garuda-nix.inputs.chaotic.follows = "chaotic-nyx";
-    garuda-nix.inputs.garuda-nixpkgs.follows = "nixpkgs";
+    garuda-nix.inputs.chaotic-nyx.follows = "chaotic-nyx";
+    garuda-nix.inputs.devshell.follows = "devshell";
+    garuda-nix.inputs.flake-utils.follows = "flake-utils";
     garuda-nix.inputs.home-manager.follows = "home-manager";
-
-    # Home-manager for managing my home directory
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    garuda-nix.inputs.nix-index-database.follows = "nix-index-database";
+    garuda-nix.inputs.nixos-hardware.follows = "nixos-hardware";
+    garuda-nix.inputs.nixpkgs.follows = "nixpkgs";
+    garuda-nix.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
+    garuda-nix.inputs.spicetify-nix.follows = "spicetify-nix";
 
     # Gitignore common input
     gitignore.url = "github:hercules-ci/gitignore.nix";
     gitignore.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Home-manager for managing my home directory
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Reset rootfs every reboot
     impermanence.url = "github:nix-community/impermanence";
@@ -66,6 +73,7 @@
 
     # MicroVMs based on Nix
     microvm.url = "github:astro/microvm.nix";
+    microvm.inputs.flake-utils.follows = "flake-utils";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
 
     # Nix gaming-related packages and modules
@@ -79,8 +87,8 @@
 
     # feature-rich and convenient fork of the Nix package manager
     nix-super.url = "github:privatevoid-net/nix-super";
-    nix-super.inputs.nixpkgs.follows = "nixpkgs";
     nix-super.inputs.flake-compat.follows = "flake-compat";
+    nix-super.inputs.nixpkgs.follows = "nixpkgs";
 
     # NixOS generators to build system images
     nixos-generators.url = "github:nix-community/nixos-generators";

@@ -10,40 +10,35 @@ in
   users.mutableUsers = false;
 
   # This is needed for early set up of user accounts
-  sops.secrets."passwords/nico" = {
-    neededForUsers = true;
-  };
-  sops.secrets."passwords/root" = {
-    neededForUsers = true;
-  };
+  sops.secrets."passwords/nico" = { neededForUsers = true; };
+  sops.secrets."passwords/root" = { neededForUsers = true; };
 
   # Lock root password
   users.users.root.passwordFile = config.sops.secrets."passwords/root".path;
   # My user
   users.users.nico = {
-    extraGroups =
-      [
-        "audio"
-        "video"
-        "wheel"
-      ]
-      ++ ifTheyExist [
-        "adbusers"
-        "chaotic_op"
-        "deluge"
-        "disk"
-        "docker"
-        "flatpak"
-        "git"
-        "kvm"
-        "libvirtd"
-        "mysql"
-        "network"
-        "networkmanager"
-        "podman"
-        "systemd-journal"
-        "wireshark"
-      ];
+    extraGroups = [
+      "audio"
+      "video"
+      "wheel"
+    ]
+    ++ ifTheyExist [
+      "adbusers"
+      "chaotic_op"
+      "deluge"
+      "disk"
+      "docker"
+      "flatpak"
+      "git"
+      "kvm"
+      "libvirtd"
+      "mysql"
+      "network"
+      "networkmanager"
+      "podman"
+      "systemd-journal"
+      "wireshark"
+    ];
     home = "/home/nico";
     isNormalUser = true;
     openssh.authorizedKeys.keyFiles = [ keys.nico ];

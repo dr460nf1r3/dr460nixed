@@ -91,11 +91,5 @@ in
 
     # In case I need to fix my phone
     programs.adb.enable = true;
-
-    # Direnv for per-directory environment variables
-    programs.direnv = {
-      enable = true;
-      silent = true;
-    };
   };
 }
