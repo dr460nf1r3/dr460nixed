@@ -1,5 +1,5 @@
 [![built with nix](https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org) [![built with garnix](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fdr460nf1r3%2Fdr460nixed%3Fbranch%3Dmain)](https://garnix.io)
-[![Build images](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml) [![Periodic flake bump](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/periodic_bump.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/periodic_bump.yml) [![Sync Tailscale ACLs](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml)
+[![Build images](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml) [![Sync Tailscale ACLs](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml)
 
 # My personal NixOS flake & system configurations
 
@@ -136,6 +136,6 @@ How to proceed from here?
 - Build an ISO to play around with `nix build .#iso` - this has no theming, but has all the important configs for live usb purposes
 - ... so much more. It never ends ❄️
 
-## Credits
+a## Credits
 
 A special thanks to [PedroHLC](https://github.com/pedrohlc), who always gives great advice and who is also the reason I'm using NixOS today. Also, I studied [Mysterio77](https://github.com/Misterio77)'s and [NotAShelf](https://github.com/NotAShelf)'s Nix configurations while building this one.
