@@ -1,14 +1,16 @@
 { config
+, inputs
 , lib
 , pkgs
 , ...
 }:
 {
-  # Individual settings
+  # Individual settings + low-latency Pipewire
   imports = [
     ../modules/impermanence.nix
     ./chaotic.nix
     ./hardware-configuration.nix
+    inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
 
   # Boot options
@@ -89,6 +91,13 @@
       User = "nico";
       Session = "plasma";
     };
+  };
+
+  # Low-latency definitions
+  services.pipewire.lowLatency = {
+    enable = true;
+    quantum = 64;
+    rate = 48000;
   };
 
   # Virt-manager requires iptables to let guests have internet

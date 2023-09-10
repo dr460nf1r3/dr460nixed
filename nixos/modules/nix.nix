@@ -1,5 +1,4 @@
 { inputs
-, lib
 , ...
 }:
 {
@@ -11,20 +10,6 @@
       http-connections = 0
       warn-dirty = false
     '';
-    nixPath = [
-      "chaotic=${inputs.chaotic-nyx}"
-      "nixpkgs=${inputs.nixpkgs}"
-    ];
-    registry = {
-      chaotic.to = {
-        type = "path";
-        path = inputs.chaotic-nyx;
-      };
-      nixpkgs.to = {
-        type = "path";
-        path = lib.mkForce inputs.nixpkgs;
-      };
-    };
     settings = {
       trusted-users = [ "@wheel" ];
 
@@ -59,4 +44,12 @@
       max-jobs = "auto";
     };
   };
+  nixpkgs.overlays = [
+    inputs.nixd.overlays.default
+    (
+      _: prev: {
+        nix = inputs.nix-super.packages.x86_64-linux.default;
+      }
+    )
+  ];
 }

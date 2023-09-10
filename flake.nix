@@ -7,6 +7,7 @@
   inputs = {
     # Chaotic Nyx!
     chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    chaotic-nyx.inputs.home-manager.follows = "home-manager";
 
     # Devshell to set up a development environment
     devshell.url = "github:numtide/devshell";
@@ -63,9 +64,23 @@
     nixd.inputs.flake-parts.follows = "flake-parts";
     nixd.inputs.nixpkgs.follows = "nixpkgs";
 
+    # MicroVMs based on Nix
+    microvm.url = "github:astro/microvm.nix";
+    microvm.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Nix gaming-related packages and modules
+    nix-gaming.url = "github:fufexan/nix-gaming";
+    nix-gaming.inputs.flake-parts.follows = "flake-parts";
+    nix-gaming.inputs.nixpkgs.follows = "nixpkgs";
+
     # Have a local index of nixpkgs for fast launching of apps
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    # feature-rich and convenient fork of the Nix package manager
+    nix-super.url = "github:privatevoid-net/nix-super";
+    nix-super.inputs.nixpkgs.follows = "nixpkgs";
+    nix-super.inputs.flake-compat.follows = "flake-compat";
 
     # NixOS generators to build system images
     nixos-generators.url = "github:nix-community/nixos-generators";
@@ -137,7 +152,6 @@
         perSystem = { pkgs, system, ... }: {
           # Enter devshell via "nix run .#apps.x86_64-linux.devshell"
           apps.devshell = self.outputs.devShells.${system}.default.flakeApp;
-
 
           # Defines a formatter for "nix fmt"
           formatter = pkgs.nixpkgs-fmt;
