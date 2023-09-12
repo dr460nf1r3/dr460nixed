@@ -33,7 +33,6 @@ Other, smaller tweaks I particularly like about this setup include:
 ## Structure
 
 ```
-├── devshell
 ├── docker-compose
 │   ├── oracle-dragon
 │   └── tv-nixos

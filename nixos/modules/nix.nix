@@ -42,10 +42,13 @@
       max-jobs = "auto";
     };
   };
+
+  # Overlays for nixpkgs
   nixpkgs.overlays = [
     inputs.nixd.overlays.default
     (
-      _: prev: {
+      # Overlays nix with nix-super, which tracks future features
+      _: _prev: {
         nix = inputs.nix-super.packages.x86_64-linux.default;
       }
     )

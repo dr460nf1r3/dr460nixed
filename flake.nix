@@ -11,8 +11,7 @@
 
     # Devshell to set up a development environment
     devshell.url = "github:numtide/devshell";
-    devshell.inputs.nixpkgs.follows = "nixpkgs";
-    devshell.inputs.systems.follows = "systems";
+    devshell.flake = false;
 
     # Disko for Nix-managed partition management
     disko.url = "github:nix-community/disko";
@@ -143,32 +142,97 @@
     { devshell
     , flake-parts
     , nixpkgs
+    , pre-commit-hooks
     , self
     , ...
-    } @ inputs:
-    flake-parts.lib.mkFlake { inherit inputs; }
-      {
-        imports = [
-          ./devshell/flake-module.nix
-          ./nixos/flake-module.nix
-          inputs.devshell.flakeModule
-          inputs.pre-commit-hooks.flakeModule
-        ];
+    } @ inp:
+    let
+      inputs = inp;
+      perSystem =
+        { pkgs
+        , system
+        , ...
+        }: {
+          apps.default = self.outputs.devShells.${system}.default.flakeApp;
 
-        systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
+          checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
+            hooks = {
+              actionlint.enable = true;
+              commitizen.enable = true;
+              deadnix.enable = true;
+              nil.enable = true;
+              nixpkgs-fmt.enable = true;
+              prettier.enable = true;
+              yamllint.enable = true;
+              statix.enable = true;
+            };
+            src = ./.;
+          };
 
-        perSystem = { pkgs, system, ... }: {
-          # Enter devshell via "nix run .#apps.x86_64-linux.devshell"
-          apps.devshell = self.outputs.devShells.${system}.default.flakeApp;
+          devShells =
+            let
+              makeDevshell = import "${inp.devshell}/modules" pkgs;
+              mkShell = config: (makeDevshell {
+                configuration = {
+                  inherit config;
+                  imports = [ ];
+                };
+              }).shell;
+            in
+            rec {
+              default = dr460nixed-shell;
+              dr460nixed-shell = mkShell {
+                devshell.name = "dr460nixed-devshell";
+                commands = [
+                  { package = "age"; }
+                  { package = "commitizen"; }
+                  { package = "gnupg"; }
+                  { package = "manix"; }
+                  { package = "mdbook"; }
+                  { package = "nix-melt"; }
+                  { package = "pre-commit"; }
+                  { package = "rsync"; }
+                  { package = "sops"; }
+                  { package = "yamlfix"; }
+                ];
+                devshell.startup = {
+                  preCommitHooks.text = self.checks.${system}.pre-commit-check.shellHook;
+                  dr460nixedEnv.text = ''
+                    export NIX_PATH=nixpkgs=${nixpkgs}
+                  '';
+                };
+              };
+            };
 
-          # Defines a formatter for "nix fmt"
           formatter = pkgs.nixpkgs-fmt;
 
-          _module.args.pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
+          packages.docs = pkgs.runCommand "dr460nixed-docs"
+            { nativeBuildInputs = with pkgs; [ bash mdbook ]; }
+            ''
+              bash -c "errors=$(mdbook build -d $out ${./.}/docs |& grep ERROR)
+              if [ \"$errors\" ]; then
+                exit 1
+              fi"
+            '';
+
         };
-      };
+    in
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        ./nixos/flake-module.nix
+        inputs.devshell.flakeModule
+        inputs.pre-commit-hooks.flakeModule
+      ];
+      systems = [ "x86_64-linux" "aarch64-linux" ];
+      inherit perSystem;
+    };
 }
-   
+
+
+
+
+
+
+
+
+
