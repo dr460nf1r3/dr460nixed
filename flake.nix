@@ -132,10 +132,6 @@
 
     # Common input
     systems.url = "github:nix-systems/default";
-
-    # Treefmt for advanced linting / formatting
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
