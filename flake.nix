@@ -27,7 +27,6 @@
 
     # Required by pre-commit-hooks
     flake-utils.url = "github:numtide/flake-utils";
-    flake-utils.inputs.systems.follows = "systems";
 
     # Garuda Linux flake - most of my system settings are here
     # garuda-nix.url = "/home/nico/Documents/misc/garuda-nix-subsystem";
@@ -129,9 +128,6 @@
     src-chaotic-toolbox.flake = false;
     src-repoctl.url = "github:cassava/repoctl";
     src-repoctl.flake = false;
-
-    # Common input
-    systems.url = "github:nix-systems/default";
   };
 
   outputs =
@@ -216,7 +212,6 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         ./nixos/flake-module.nix
-        inputs.devshell.flakeModule
         inputs.pre-commit-hooks.flakeModule
       ];
       systems = [ "x86_64-linux" "aarch64-linux" ];
