@@ -13,7 +13,7 @@ jobs:
         uses: cachix/install-nix-action@v17
         with:
           extra_nix_config: |
-            experimental-features = nix-command flaskes
+            experimental-features = nix-command flakes
           nix_path: nixpkgs=channel:nixos-unstable
       - name: Build documentation book
         run: nix build -L --show-trace .#docs
