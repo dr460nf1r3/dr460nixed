@@ -1,6 +1,12 @@
 [book]
 authors = ["Nico Jensch"]
+description = "Contains the documentation for the dr460nixed flake."
 language = "en"
 multilingual = false
 src = "src"
-title = "dr460nixed documentation"
+title = "Dr460nixed flake documentation"
+
+[output.html]
+default-theme = "dark"
+git-repository-icon = "fa-github"
+git-repository-url = "https://gitlab.com/dr460nf1r3/dr460nixed"
