@@ -1,5 +1,5 @@
 ---
-name: Github pages
+name: Cloudflare pages
 on:
   push:
     branches: [main]
@@ -21,8 +21,8 @@ jobs:
         run: |
           cd docs && mdbook build
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          folder: docs/book
-          single-commit: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: cf-pages
+          publish_dir: docs/book
