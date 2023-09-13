@@ -40,11 +40,8 @@ in
     ## A few kernel tweaks
     boot.kernel.sysctl = { "kernel.unprivileged_userns_clone" = 1; };
 
-    # We want to be insulted on wrong passwords
-    # & allow deployment of configurations via Colmena
-    security.sudo = {
-      execWheelOnly = true;
-    };
+    # Allow wheel group users to use sudo
+    security.sudo.execWheelOnly = true;
 
     # This is the default sops file that will be used for all secrets
     sops = {
@@ -88,7 +85,7 @@ in
       enable = true;
       info.enable = false;
       man.enable = false;
-      nixos.enable = false;
+      nixos.enable = true;
     };
 
     # Ship systemd logs to Loki & Grafana

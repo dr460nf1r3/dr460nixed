@@ -14,7 +14,7 @@ in
   sops.secrets."passwords/root" = { neededForUsers = true; };
 
   # Lock root password
-  users.users.root.passwordFile = config.sops.secrets."passwords/root".path;
+  users.users.root.hashedPasswordFile = config.sops.secrets."passwords/root".path;
   # My user
   users.users.nico = {
     extraGroups = [
@@ -42,7 +42,7 @@ in
     home = "/home/nico";
     isNormalUser = true;
     openssh.authorizedKeys.keyFiles = [ keys.nico ];
-    passwordFile = config.sops.secrets."passwords/nico".path;
+    hashedPasswordFile = config.sops.secrets."passwords/nico".path;
     uid = 1000;
   };
 
