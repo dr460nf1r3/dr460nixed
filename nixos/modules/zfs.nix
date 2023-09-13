@@ -42,7 +42,10 @@ in
         enable = true;
         interval = "weekly";
       };
-      trim.enable = true;
+      trim = {
+        enable = true;
+        interval = "weekly";
+      };
     };
 
     # Enable configuration of msmtp
@@ -64,6 +67,11 @@ in
 
     # This option does not work; will return error
     services.zfs.zed.enableMail = mkIf cfg.sendMails false;
+
+    # Metrics
+    services.telegraf.extraConfig.inputs = lib.mkIf config.services.telegraf.enable {
+      zfs.poolMetrics = true;
+    };
   };
 }
 

@@ -246,33 +246,52 @@ in
           };
           relabel_configs = [
             {
+              source_labels = [ "__journal__hostname" ];
+              target_label = "host";
+            }
+            {
+              source_labels = [ "__journal_priority" ];
+              target_label = "priority";
+            }
+            {
+              source_labels = [ "__journal_priority_keyword" ];
+              target_label = "level";
+            }
+            {
               source_labels = [ "__journal__systemd_unit" ];
               target_label = "unit";
             }
             {
-              source_labels = [ "__journal_syslog_identifier" ];
-              target_label = "syslog_identifier";
+              source_labels = [ "__journal__systemd_user_unit" ];
+              target_label = "user_unit";
             }
             {
-              source_labels = [ "__journal_container_tag" ];
-              target_label = "container_tag";
+              source_labels = [ "__journal__boot_id" ];
+              target_label = "boot_id";
             }
             {
-              source_labels = [ "__journal_namespace" ];
-              target_label = "namespace";
-            }
-            {
-              source_labels = [ "__journal_container_name" ];
-              target_label = "container_name";
-            }
-            {
-              source_labels = [ "__journal_image_name" ];
-              target_label = "image_name";
+              source_labels = [ "__journal__comm" ];
+              target_label = "command";
             }
           ];
         }];
+        pipeline_stages = [
+          {
+            json.expressions = {
+              transport = "_TRANSPORT";
+              unit = "_SYSTEMD_UNIT";
+              msg = "MESSAGE";
+              coredump_cgroup = "COREDUMP_CGROUP";
+              coredump_exe = "COREDUMP_EXE";
+              coredump_cmdline = "COREDUMP_CMDLINE";
+              coredump_uid = "COREDUMP_UID";
+              coredump_gid = "COREDUMP_GID";
+            };
+          }
+        ];
       };
     };
+    systemd.services.promtail.serviceConfig.RestartSec = "600"; # Retry every 10 minutes
 
     # Grafana on port 3010 (8010)
     services.grafana = mkIf cfg.grafanaStack.enable {

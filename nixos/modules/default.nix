@@ -7,6 +7,7 @@
     ./common.nix
     ./desktops.nix
     ./docker-compose-runner.nix
+    ./deterministic-ids.nix
     ./development.nix
     ./gaming.nix
     ./hardening.nix
