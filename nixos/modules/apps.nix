@@ -88,6 +88,7 @@ in
       keybase-gui
       manix
       mongodb-compass
+      nerdctl
       nix-prefetch-git
       nixd
       nixos-generators

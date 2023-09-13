@@ -393,6 +393,32 @@
         "type": "github"
       }
     },
+    "nix-snapshotter": {
+      "inputs": {
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1694527390,
+        "narHash": "sha256-YQOUBhwFlx2UX7RzhM2F19wrZUTQn8vURNcQ4ObwToc=",
+        "owner": "pdtpartners",
+        "repo": "nix-snapshotter",
+        "rev": "6eb21bd3429535646da4aa396bb0c1f81a9b72c6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pdtpartners",
+        "repo": "nix-snapshotter",
+        "type": "github"
+      }
+    },
     "nix-super": {
       "inputs": {
         "flake-compat": [
@@ -631,6 +657,7 @@
         "microvm": "microvm",
         "nix-gaming": "nix-gaming",
         "nix-index-database": "nix-index-database",
+        "nix-snapshotter": "nix-snapshotter",
         "nix-super": "nix-super",
         "nixd": "nixd",
         "nixos-generators": "nixos-generators",

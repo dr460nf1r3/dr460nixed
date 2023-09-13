@@ -65,15 +65,15 @@
     lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
     lanzaboote.inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
 
-    # Nixd language server
-    nixd.url = "github:nix-community/nixd";
-    nixd.inputs.flake-parts.follows = "flake-parts";
-    nixd.inputs.nixpkgs.follows = "nixpkgs";
-
     # MicroVMs based on Nix
     microvm.url = "github:astro/microvm.nix";
     microvm.inputs.flake-utils.follows = "flake-utils";
     microvm.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Nixd language server
+    nixd.url = "github:nix-community/nixd";
+    nixd.inputs.flake-parts.follows = "flake-parts";
+    nixd.inputs.nixpkgs.follows = "nixpkgs";
 
     # Nix gaming-related packages and modules
     nix-gaming.url = "github:fufexan/nix-gaming";
@@ -83,6 +83,12 @@
     # Have a local index of nixpkgs for fast launching of apps
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Bring native understanding of Nix packages to containerd
+    nix-snapshotter.url = "github:pdtpartners/nix-snapshotter";
+    nix-snapshotter.inputs.flake-compat.follows = "flake-compat";
+    nix-snapshotter.inputs.flake-parts.follows = "flake-parts";
+    nix-snapshotter.inputs.nixpkgs.follows = "nixpkgs";
 
     # feature-rich and convenient fork of the Nix package manager
     nix-super.url = "github:privatevoid-net/nix-super";
