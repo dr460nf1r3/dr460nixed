@@ -195,11 +195,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1694591189,
-        "narHash": "sha256-Fa1ePl52OxhTntvU6sNcgU2QYwD6UHyXBBl2RUnx6zc=",
+        "lastModified": 1694605686,
+        "narHash": "sha256-TJTVWxPbsUSYT7R9+TZcUD9pm/rClBswIPbB4gW9X2o=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "ca6cbf4e70d990c54defc67e2a8a3dec506087f8",
+        "rev": "cca3b9b251bffee985cd7168a331a093a7f5a687",
         "type": "gitlab"
       },
       "original": {
@@ -568,11 +568,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1694562957,
-        "narHash": "sha256-ZvDt5bxX6Ga+TQ6kvK5WEn7OQN87KAsMaRrFSdReIm8=",
+        "lastModified": 1694593561,
+        "narHash": "sha256-WSaIQZ5s9N9bDFkEMTw6P9eaZ9bv39ZhsiW12GtTNM0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f4a33546bdb5f81bd6cceb1b3cb19667145fed83",
+        "rev": "1697b7d480449b01111e352021f46e5879e47643",
         "type": "github"
       },
       "original": {
