@@ -10,25 +10,23 @@ jobs:
   build_iso:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac  # v4
-      - uses: cachix/install-nix-action@6a9a9e84a173d90b3ffb42c5ddaf9ea033fad011  # v23
+      - name: Checkout 🛎️
+        uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac  # v4
+      - name: Install Nix 📦
+        uses: cachix/install-nix-action@6a9a9e84a173d90b3ffb42c5ddaf9ea033fad011  # v23
         with:
           extra_nix_config: |
             accept-flake-config = true
             system-features = big-parallel kvm
+            extra-substituters = https://cache.garnix.io
+            extra-trusted-public-keys = cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           nix_path: nixpkgs=channel:nixos-unstable
-      - name: Set up Nix cache
-        uses: zombiezen/setup-nix-cache-action@v0.2.0
-        with:
-          substituters: https://cache.garnix.io https://chaotic-nyx.cachix.org
-          trusted_public_keys: cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=
-            chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8=
-      - name: Build ISO
-        run: nix build -L .#packages.x86_64-linux.iso
+      - name: Build ISO 📀
+        run: nix build --accept-flake-config -L .#packages.x86_64-linux.iso
         env:
           NIXPKGS_ALLOW_UNFREE: 1
-      - name: Upload ISO
+      - name: Upload ISO 🚀
         uses: actions/upload-artifact@v3
         with:
           name: Dr460nixed ISO

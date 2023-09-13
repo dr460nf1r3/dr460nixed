@@ -1,8 +1,8 @@
 {
   description = "Dr460nixed NixOS flake ❄️";
 
-  nixConfig.extra-substituters = [ "https://dr460nf1r3.cachix.org" ];
-  nixConfig.extra-trusted-public-keys = [ "dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU=" ];
+  nixConfig.extra-substituters = [ "https://cache.garnix.io" ];
+  nixConfig.extra-trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
 
   inputs = {
     # Chaotic Nyx!
