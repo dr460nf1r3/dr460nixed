@@ -1,13 +1,14 @@
 ---
 name: Build images
-on:
-  check_suite:
-    types: [completed]
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
+on:
+  push:
+    branches: [main]
+    paths: [home-manager, nixos, overlays, flake.lock, flake.nix]
 jobs:
-  build_iso:
+  flake-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -22,6 +23,11 @@ jobs:
             extra-trusted-public-keys = cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           nix_path: nixpkgs=channel:nixos-unstable
+      - name: Check flake 📝
+        run: nix flake check
+  build-iso:
+    runs-on: ubuntu-latest
+    steps:
       - name: Build ISO 📀
         run: nix build --accept-flake-config -L .#packages.x86_64-linux.iso
         env:

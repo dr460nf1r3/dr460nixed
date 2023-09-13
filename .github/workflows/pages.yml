@@ -3,9 +3,7 @@ name: Cloudflare pages
 on:
   push:
     branches: [main]
-    paths: [docs/**]
-  pull_request:
-    paths: [docs/**]
+    paths: [docs/**, README.md]
 permissions:
   contents: write
 jobs:
