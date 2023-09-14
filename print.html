@@ -84,7 +84,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Welcome</li><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="quick-start.html"><strong aria-hidden="true">2.</strong> Quick start</a></li><li class="chapter-item expanded affix "><li class="part-title">Modules</li><li class="chapter-item expanded "><a href="modules/apps.html"><strong aria-hidden="true">3.</strong> apps</a></li><li class="chapter-item expanded "><a href="modules/boot.html"><strong aria-hidden="true">4.</strong> boot</a></li><li class="chapter-item expanded "><a href="modules/common.html"><strong aria-hidden="true">5.</strong> common</a></li><li class="chapter-item expanded "><a href="modules/desktops.html"><strong aria-hidden="true">6.</strong> desktops</a></li><li class="chapter-item expanded "><a href="modules/deterministic-ids.html"><strong aria-hidden="true">7.</strong> deterministic-ids</a></li><li class="chapter-item expanded "><a href="modules/development.html"><strong aria-hidden="true">8.</strong> development</a></li><li class="chapter-item expanded "><a href="modules/docker-compose-runner.html"><strong aria-hidden="true">9.</strong> docker-compose-runner</a></li><li class="chapter-item expanded "><a href="modules/gaming.html"><strong aria-hidden="true">10.</strong> gaming</a></li><li class="chapter-item expanded "><a href="modules/hardening.html"><strong aria-hidden="true">11.</strong> hardening</a></li><li class="chapter-item expanded "><a href="modules/impermanence.html"><strong aria-hidden="true">12.</strong> impermanence</a></li><li class="chapter-item expanded "><a href="modules/locales.html"><strong aria-hidden="true">13.</strong> locales</a></li><li class="chapter-item expanded "><a href="modules/msmtp.html"><strong aria-hidden="true">14.</strong> msmtp</a></li><li class="chapter-item expanded "><a href="modules/networking.html"><strong aria-hidden="true">15.</strong> networking</a></li><li class="chapter-item expanded "><a href="modules/nix.html"><strong aria-hidden="true">16.</strong> nix</a></li><li class="chapter-item expanded "><a href="modules/oci.html"><strong aria-hidden="true">17.</strong> oci</a></li><li class="chapter-item expanded "><a href="modules/servers.html"><strong aria-hidden="true">18.</strong> servers</a></li><li class="chapter-item expanded "><a href="modules/shells.html"><strong aria-hidden="true">19.</strong> shells</a></li><li class="chapter-item expanded "><a href="modules/syncthing.html"><strong aria-hidden="true">20.</strong> syncthing</a></li><li class="chapter-item expanded "><a href="modules/tailscale-tls.html"><strong aria-hidden="true">21.</strong> tailscale-tls</a></li><li class="chapter-item expanded "><a href="modules/tailscale.html"><strong aria-hidden="true">22.</strong> tailscale</a></li><li class="chapter-item expanded "><a href="modules/users.html"><strong aria-hidden="true">23.</strong> users</a></li><li class="chapter-item expanded "><a href="modules/zfs.html"><strong aria-hidden="true">24.</strong> zfs</a></li><li class="chapter-item expanded affix "><li class="part-title">Misc</li><li class="chapter-item expanded "><a href="credits.html"><strong aria-hidden="true">25.</strong> Credits</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -197,7 +197,10 @@
 <li>No password prompts when having my <strong>Yubikey</strong> connected to my laptop</li>
 <li>Being able to easily remote-control my machines via <strong>KDEConnect</strong> and a self-hosted <strong>Rustdesk server</strong></li>
 <li>Having custom <strong>bleeding-edge Mesa</strong> builds</li>
+<li>Easy deployment of mdBook-generated documentation to Cloudflare pages</li>
 </ul>
+<h2 id="documentation"><a class="header" href="#documentation">Documentation</a></h2>
+<p>A fully searchable, mdBook-based documentation is available <a href="https://nixed.dr460nf1r3.org">here</a>.</p>
 <h2 id="structure"><a class="header" href="#structure">Structure</a></h2>
 <pre><code>├── docker-compose
 │   ├── oracle-dragon
@@ -216,67 +219,7 @@
 ├── overlays
 └── secrets
 </code></pre>
-<h2 id="module-options"><a class="header" href="#module-options">Module options</a></h2>
-<p>A lot of those have been moved to the <a href="https://gitlab.com/garuda-linux/garuda-nix-subsystem">Garuda Nix Subsystem</a>.</p>
-<pre><code>├── apps.nix
-├── boot.nix
-├── chaotic
-│   ├── chaotic-mirror.nix
-│   ├── chaotic.nix
-├── common.nix
-├── default.nix
-├── desktops.nix
-├── development.nix
-├── disko
-│   ├── btrfs-subvolumes.nix
-│   ├── luks-btrfs-subvolumes.nix
-│   ├── simple-efi.nix
-│   ├── zfs-encrypted.nix
-│   └── zfs.nix
-├── docker-compose-runner.nix
-├── gaming.nix
-├── hardening.nix
-├── impermanence.nix
-├── locales.nix
-├── misc.nix
-├── monitoring.nix
-├── msmtp.nix
-├── networking.nix
-├── nix.nix
-├── oci.nix
-├── servers.nix
-├── shells.nix
-├── syncthing.nix
-├── tailscale.nix
-├── tailscale-tls.nix
-├── users.nix
-└── zfs.nix
-</code></pre>
-<ul>
-<li><code>dr460nixed.auto-upgrade.enable</code> (default false) - enables auto-upgrading the system daily by pulling the updated Nix flake from the repo</li>
-<li><code>dr460nixed.common.enable</code> (default true) - common options for every system</li>
-<li><code>dr460nixed.desktops.enable</code> (default false) - options for desktop systems</li>
-<li><code>dr460nixed.development.enable</code> (default false) - enables a development environment</li>
-<li><code>dr460nixed.docker-compose-runner</code> (default false) - runs a docker-compose.yml and supplies an additional .env file for secrets if desired</li>
-<li><code>dr460nixed.hardening.enable</code> (default true) - system hardening</li>
-<li><code>dr460nixed.lanzaboote.enable</code> (default false) - enables Lanzaboote instead of systemd-boot for secure-boot support</li>
-<li><code>dr460nixed.live-cd</code> (default false) - live CD applications</li>
-<li><code>dr460nixed.locales</code> (default true) - does all the localization setup / console font config</li>
-<li><code>dr460nixed.nodocs</code> (default true) - removes unneeded documentation to save space</li>
-<li><code>dr460nixed.rpi</code> (default false) - Raspberry Pi related things</li>
-<li><code>dr460nixed.school</code> (default false) - things I need for school</li>
-<li><code>dr460nixed.servers.enable</code> (default false) - common server options</li>
-<li><code>dr460nixed.servers.monitoring</code> (default false) - enables some basic monitoring via Netdata</li>
-<li><code>dr460nixed.shells</code> (default true) - enables common shell aliases &amp; theming</li>
-<li><code>dr460nixed.systemd-boot.enable</code> (default true) - a quiet systemd-boot configuration</li>
-<li><code>dr460nixed.tailscale-autoconnect.enable</code> (default true) - automatically connects to the Tailnet</li>
-<li><code>dr460nixed.tailscale-autoconnect.authFile</code> - points to the location where the authkey file is stored</li>
-<li><code>dr460nixed.tailscale-autoconnect.extraUpArgs</code> (default none) - Extra arguments to pass to the Tailscale daemon</li>
-<li><code>dr460nixed.tailscale-tls.enable</code> (default false) - enables automatic management of Tailscale certificates</li>
-<li><code>dr460nixed.theming</code> (default true) - supplies fonts and general system theming via Stylix</li>
-<li><code>dr460nixed.yubikey</code> (default false) - options for using the Yubikey as login</li>
-</ul>
-<h2 id="how-to-use-the-flake"><a class="header" href="#how-to-use-the-flake">How to use the flake?</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h1>
 <p>Several preparations have to be made in order to bootstrap a working installation:</p>
 <ul>
 <li>A working <code>hardware-configuration.nix</code> needs to be generated for the current machine to replace mine</li>
@@ -294,7 +237,2397 @@
 <li>Build an ISO to play around with <code>nix build .#iso</code> - this has no theming, but has all the important configs for live usb purposes</li>
 <li>... so much more. It never ends ❄️</li>
 </ul>
-<p>a## Credits</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="apps"><a class="header" href="#apps">Apps</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, pkgs
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed;
+in
+{
+  # These are the packages I always need
+  environment.systemPackages = with pkgs;
+    let
+      required-packages = [
+        age
+        bind
+        btop
+        cached-nix-shell
+        cachix
+        cloudflared
+        duf
+        eza
+        jq
+        killall
+        micro
+        mosh
+        nettools
+        nmap
+        nvd
+        python3
+        sops
+        tldr
+        tmux
+        traceroute
+        ugrep
+        vulnix
+        wget
+        whois
+      ];
+    in
+    required-packages
+    ++ optionals cfg.desktops.enable (with pkgs; [
+      acpi
+      appimage-run
+      asciinema
+      aspell
+      aspellDicts.de
+      aspellDicts.en
+      chromium-flagged
+      ffmpegthumbnailer
+      freerdp
+      gimp
+      helvum
+      hunspell
+      hunspellDicts.de_DE
+      hunspellDicts.en_US
+      inkscape
+      krita
+      libreoffice-qt
+      libsForQt5.kdenlive
+      libsForQt5.kleopatra
+      libsForQt5.krdc
+      libsForQt5.krfb
+      libsecret
+      libva-utils
+      lm_sensors
+      movit
+      nextcloud-client
+      obs-studio-wrapped
+      qbittorrent
+      spotdl
+      syncthingtray
+      tdesktop
+      tor-browser-bundle-bin
+      usbutils
+      vorta
+      vulkan-tools
+      xdg-ninja
+    ]) ++ optionals cfg.development.enable (with pkgs; [
+      ansible
+      beekeeper-studio
+      bind.dnsutils
+      deadnix
+      gitkraken
+      heroku
+      hugo
+      jetbrains.pycharm-professional
+      keybase-gui
+      manix
+      mongodb-compass
+      nerdctl
+      nix-prefetch-git
+      nixd
+      nixos-generators
+      nixpkgs-fmt
+      nixpkgs-lint
+      nixpkgs-review
+      nodePackages_latest.prettier
+      nodejs
+      ruff
+      shellcheck
+      shfmt
+      speedcrunch
+      statix
+      termius
+      vagrant
+      ventoy-full
+      virt-manager
+      (vscode-with-extensions.override {
+        vscodeExtensions = with vscode-extensions;
+          [
+            b4dm4n.vscode-nixpkgs-fmt
+            bbenoist.nix
+            eamodio.gitlens
+            esbenp.prettier-vscode
+            foxundermoon.shell-format
+            github.codespaces
+            github.copilot
+            github.vscode-github-actions
+            github.vscode-pull-request-github
+            jnoortheen.nix-ide
+            ms-azuretools.vscode-docker
+            ms-python.python
+            ms-python.vscode-pylance
+            ms-vscode-remote.remote-ssh
+            ms-vscode.hexeditor
+            ms-vsliveshare.vsliveshare
+            njpwerner.autodocstring
+            pkief.material-icon-theme
+            redhat.vscode-xml
+            redhat.vscode-yaml
+            timonwong.shellcheck
+            tyriar.sort-lines
+          ]
+          ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+            {
+              name = &quot;sweet-vscode&quot;;
+              publisher = &quot;eliverlara&quot;;
+              sha256 = &quot;sha256-kJgqMEJHyYF3GDxe1rnpTEmbfJE01tyyOFjRUp4SOds=&quot;;
+              version = &quot;1.1.1&quot;;
+            }
+            {
+              name = &quot;ruff&quot;;
+              publisher = &quot;charliermarsh&quot;;
+              sha256 = &quot;sha256-KOntjiE+n1yf9047XDldGg2pT+zknI/aEg6h71LwEB8=&quot;;
+              version = &quot;2023.34.0&quot;;
+            }
+            {
+              # Available in nixpkgs, but outdated (0.4.0) at the time of adding
+              name = &quot;vscode-tailscale&quot;;
+              publisher = &quot;tailscale&quot;;
+              sha256 = &quot;sha256-lwKsAYy04l1LkZPGgu9ezRQNTX7ZPzLJJ8j86ZuqNlQ=&quot;;
+              version = &quot;0.6.2&quot;;
+            }
+          ];
+      })
+      wireshark
+      xdg-utils
+      yarn
+    ]) ++ optionals cfg.yubikey (with pkgs; [
+      yubikey-manager-qt
+      yubioath-flutter
+    ]) ++ optionals cfg.school (with pkgs; [
+      speedcrunch
+      sqlite
+      sqlitebrowser
+      teams-for-linux
+      virt-manager
+    ]) ++ optionals cfg.live-cd (with pkgs; [
+      btrfs-progs
+      chntpw
+      cryptsetup
+      dosfstools
+      e2fsprogs
+      efibootmgr
+      flashrom
+      gnutar
+      gparted
+      hexedit
+      home-manager
+      hwinfo
+      inxi
+      memtest86-efi
+      ntfs3g
+      nvme-cli
+      p7zip
+      pciutils
+      perl
+      qemu-utils
+      rsync
+      tcpdump
+      testdisk
+      util-linux
+      wipe
+      xfsprogs
+    ]);
+
+  xdg.mime.defaultApplications =
+    let
+      # Take from the respective mimetype files
+      images = [
+        &quot;image/bmp&quot;
+        &quot;image/gif&quot;
+        &quot;image/jpeg&quot;
+        &quot;image/jpg&quot;
+        &quot;image/pjpeg&quot;
+        &quot;image/png&quot;
+        &quot;image/svg+xml&quot;
+        &quot;image/svg+xml-compressed&quot;
+        &quot;image/tiff&quot;
+        &quot;image/vnd.wap.wbmp;image/x-icns&quot;
+        &quot;image/x-bmp&quot;
+        &quot;image/x-gray&quot;
+        &quot;image/x-icb&quot;
+        &quot;image/x-ico&quot;
+        &quot;image/x-pcx&quot;
+        &quot;image/x-png&quot;
+        &quot;image/x-portable-anymap&quot;
+        &quot;image/x-portable-bitmap&quot;
+        &quot;image/x-portable-graymap&quot;
+        &quot;image/x-portable-pixmap&quot;
+        &quot;image/x-xbitmap&quot;
+        &quot;image/x-xpixmap&quot;
+      ];
+      urls = [
+        &quot;text/html&quot;
+        &quot;x-scheme-handler/about&quot;
+        &quot;x-scheme-handler/http&quot;
+        &quot;x-scheme-handler/https&quot;
+        &quot;x-scheme-handler/unknown&quot;
+      ];
+      documents = [
+        &quot;application/illustrator&quot;
+        &quot;application/oxps&quot;
+        &quot;application/pdf&quot;
+        &quot;application/postscript&quot;
+        &quot;application/vnd.comicbook+zip&quot;
+        &quot;application/vnd.comicbook-rar&quot;
+        &quot;application/vnd.ms-xpsdocument&quot;
+        &quot;application/x-bzdvi&quot;
+        &quot;application/x-bzpdf&quot;
+        &quot;application/x-bzpostscript&quot;
+        &quot;application/x-cb7&quot;
+        &quot;application/x-cbr&quot;
+        &quot;application/x-cbt&quot;
+        &quot;application/x-cbz&quot;
+        &quot;application/x-dvi&quot;
+        &quot;application/x-ext-cb7&quot;
+        &quot;application/x-ext-cbr&quot;
+        &quot;application/x-ext-cbt&quot;
+        &quot;application/x-ext-cbz&quot;
+        &quot;application/x-ext-djv&quot;
+        &quot;application/x-ext-djvu&quot;
+        &quot;application/x-ext-dvi&quot;
+        &quot;application/x-ext-eps&quot;
+        &quot;application/x-ext-pdf&quot;
+        &quot;application/x-ext-ps&quot;
+        &quot;application/x-gzdvi&quot;
+        &quot;application/x-gzpdf&quot;
+        &quot;application/x-gzpostscript&quot;
+        &quot;application/x-xzpdf&quot;
+        &quot;image/tiff&quot;
+        &quot;image/vnd.djvu+multipage&quot;
+        &quot;image/x-bzeps&quot;
+        &quot;image/x-eps&quot;
+        &quot;image/x-gzeps&quot;
+      ];
+      audioVideo = [
+        &quot;application/mxf&quot;
+        &quot;application/ogg&quot;
+        &quot;application/sdp&quot;
+        &quot;application/smil&quot;
+        &quot;application/streamingmedia&quot;
+        &quot;application/vnd.apple.mpegurl&quot;
+        &quot;application/vnd.ms-asf&quot;
+        &quot;application/vnd.rn-realmedia&quot;
+        &quot;application/vnd.rn-realmedia-vbr&quot;
+        &quot;application/x-cue&quot;
+        &quot;application/x-extension-m4a&quot;
+        &quot;application/x-extension-mp4&quot;
+        &quot;application/x-matroska&quot;
+        &quot;application/x-mpegurl&quot;
+        &quot;application/x-ogg&quot;
+        &quot;application/x-ogm&quot;
+        &quot;application/x-ogm-audio&quot;
+        &quot;application/x-ogm-video&quot;
+        &quot;application/x-shorten&quot;
+        &quot;application/x-smil&quot;
+        &quot;application/x-streamingmedia&quot;
+        &quot;audio/3gpp&quot;
+        &quot;audio/3gpp2&quot;
+        &quot;audio/AMR&quot;
+        &quot;audio/aac&quot;
+        &quot;audio/ac3&quot;
+        &quot;audio/aiff&quot;
+        &quot;audio/amr-wb&quot;
+        &quot;audio/dv&quot;
+        &quot;audio/eac3&quot;
+        &quot;audio/flac&quot;
+        &quot;audio/m3u&quot;
+        &quot;audio/m4a&quot;
+        &quot;audio/mp1&quot;
+        &quot;audio/mp2&quot;
+        &quot;audio/mp3&quot;
+        &quot;audio/mp4&quot;
+        &quot;audio/mpeg&quot;
+        &quot;audio/mpeg2&quot;
+        &quot;audio/mpeg3&quot;
+        &quot;audio/mpegurl&quot;
+        &quot;audio/mpg&quot;
+        &quot;audio/musepack&quot;
+        &quot;audio/ogg&quot;
+        &quot;audio/opus&quot;
+        &quot;audio/rn-mpeg&quot;
+        &quot;audio/scpls&quot;
+        &quot;audio/vnd.dolby.heaac.1&quot;
+        &quot;audio/vnd.dolby.heaac.2&quot;
+        &quot;audio/vnd.dts&quot;
+        &quot;audio/vnd.dts.hd&quot;
+        &quot;audio/vnd.rn-realaudio&quot;
+        &quot;audio/vorbis&quot;
+        &quot;audio/wav&quot;
+        &quot;audio/webm&quot;
+        &quot;audio/x-aac&quot;
+        &quot;audio/x-adpcm&quot;
+        &quot;audio/x-aiff&quot;
+        &quot;audio/x-ape&quot;
+        &quot;audio/x-m4a&quot;
+        &quot;audio/x-matroska&quot;
+        &quot;audio/x-mp1&quot;
+        &quot;audio/x-mp2&quot;
+        &quot;audio/x-mp3&quot;
+        &quot;audio/x-mpegurl&quot;
+        &quot;audio/x-mpg&quot;
+        &quot;audio/x-ms-asf&quot;
+        &quot;audio/x-ms-wma&quot;
+        &quot;audio/x-musepack&quot;
+        &quot;audio/x-pls&quot;
+        &quot;audio/x-pn-au&quot;
+        &quot;audio/x-pn-realaudio&quot;
+        &quot;audio/x-pn-wav&quot;
+        &quot;audio/x-pn-windows-pcm&quot;
+        &quot;audio/x-realaudio&quot;
+        &quot;audio/x-scpls&quot;
+        &quot;audio/x-shorten&quot;
+        &quot;audio/x-tta&quot;
+        &quot;audio/x-vorbis&quot;
+        &quot;audio/x-vorbis+ogg&quot;
+        &quot;audio/x-wav&quot;
+        &quot;audio/x-wavpack&quot;
+        &quot;video/3gp&quot;
+        &quot;video/3gpp&quot;
+        &quot;video/3gpp2&quot;
+        &quot;video/avi&quot;
+        &quot;video/divx&quot;
+        &quot;video/dv&quot;
+        &quot;video/fli&quot;
+        &quot;video/flv&quot;
+        &quot;video/mkv&quot;
+        &quot;video/mp2t&quot;
+        &quot;video/mp4&quot;
+        &quot;video/mp4v-es&quot;
+        &quot;video/mpeg&quot;
+        &quot;video/msvideo&quot;
+        &quot;video/ogg&quot;
+        &quot;video/quicktime&quot;
+        &quot;video/vnd.divx&quot;
+        &quot;video/vnd.mpegurl&quot;
+        &quot;video/vnd.rn-realvideo&quot;
+        &quot;video/webm&quot;
+        &quot;video/x-avi&quot;
+        &quot;video/x-flc&quot;
+        &quot;video/x-flic&quot;
+        &quot;video/x-flv&quot;
+        &quot;video/x-m4v&quot;
+        &quot;video/x-matroska&quot;
+        &quot;video/x-mpeg2&quot;
+        &quot;video/x-mpeg3&quot;
+        &quot;video/x-ms-afs&quot;
+        &quot;video/x-ms-asf&quot;
+        &quot;video/x-ms-wmv&quot;
+        &quot;video/x-ms-wmx&quot;
+        &quot;video/x-ms-wvxvideo&quot;
+        &quot;video/x-msvideo&quot;
+        &quot;video/x-ogm&quot;
+        &quot;video/x-ogm+ogg&quot;
+        &quot;video/x-theora&quot;
+        &quot;video/x-theora+ogg&quot;
+      ];
+      archives = [
+        &quot;application/bzip2&quot;
+        &quot;application/gzip&quot;
+        &quot;application/vnd.android.package-archive&quot;
+        &quot;application/vnd.debian.binary-package&quot;
+        &quot;application/vnd.ms-cab-compressed&quot;
+        &quot;application/x-7z-compressed&quot;
+        &quot;application/x-7z-compressed-tar&quot;
+        &quot;application/x-ace&quot;
+        &quot;application/x-alz&quot;
+        &quot;application/x-ar&quot;
+        &quot;application/x-archive&quot;
+        &quot;application/x-arj&quot;
+        &quot;application/x-brotli&quot;
+        &quot;application/x-bzip&quot;
+        &quot;application/x-bzip-brotli-tar&quot;
+        &quot;application/x-bzip-compressed-tar&quot;
+        &quot;application/x-bzip1&quot;
+        &quot;application/x-bzip1-compressed-tar&quot;
+        &quot;application/x-cabinet&quot;
+        &quot;application/x-cd-image&quot;
+        &quot;application/x-chrome-extension&quot;
+        &quot;application/x-compress&quot;
+        &quot;application/x-compressed-tar&quot;
+        &quot;application/x-cpio&quot;
+        &quot;application/x-deb&quot;
+        &quot;application/x-ear&quot;
+        &quot;application/x-gtar&quot;
+        &quot;application/x-gzip&quot;
+        &quot;application/x-gzpostscript&quot;
+        &quot;application/x-java-archive&quot;
+        &quot;application/x-lha&quot;
+        &quot;application/x-lhz&quot;
+        &quot;application/x-lrzip&quot;
+        &quot;application/x-lrzip-compressed-tar&quot;
+        &quot;application/x-lz4&quot;
+        &quot;application/x-lz4-compressed-tar&quot;
+        &quot;application/x-lzip&quot;
+        &quot;application/x-lzip-compressed-tar&quot;
+        &quot;application/x-lzma&quot;
+        &quot;application/x-lzma-compressed-tar&quot;
+        &quot;application/x-lzop&quot;
+        &quot;application/x-ms-dos-executable&quot;
+        &quot;application/x-ms-wim&quot;
+        &quot;application/x-rar&quot;
+        &quot;application/x-rar-compressed&quot;
+        &quot;application/x-rpm&quot;
+        &quot;application/x-rzip&quot;
+        &quot;application/x-rzip-compressed-tar&quot;
+        &quot;application/x-source-rpm&quot;
+        &quot;application/x-stuffit&quot;
+        &quot;application/x-tar&quot;
+        &quot;application/x-tarz&quot;
+        &quot;application/x-tzo&quot;
+        &quot;application/x-war&quot;
+        &quot;application/x-xar&quot;
+        &quot;application/x-xz&quot;
+        &quot;application/x-xz-compressed-tar&quot;
+        &quot;application/x-zip&quot;
+        &quot;application/x-zip-compressed&quot;
+        &quot;application/x-zoo&quot;
+        &quot;application/x-zstd-compressed-tar&quot;
+        &quot;application/zip&quot;
+        &quot;application/zstd&quot;
+      ];
+      code = [
+        &quot;application/x-shellscript&quot;
+        &quot;text/english&quot;
+        &quot;text/plain&quot;
+        &quot;text/x-c&quot;
+        &quot;text/x-c++&quot;
+        &quot;text/x-c++hdr&quot;
+        &quot;text/x-c++src&quot;
+        &quot;text/x-chdr&quot;
+        &quot;text/x-csrc&quot;
+        &quot;text/x-java&quot;
+        &quot;text/x-makefile&quot;
+        &quot;text/x-moc&quot;
+        &quot;text/x-pascal&quot;
+        &quot;text/x-tcl&quot;
+        &quot;text/x-tex&quot;
+      ];
+    in
+    lib.mkForce (
+      # Overriding garuda-nix flakes defaults here
+      (lib.genAttrs code (_: [ &quot;code.desktop&quot; ]))
+      // (lib.genAttrs archives (_: [ &quot;ark.desktop&quot; ]))
+      // (lib.genAttrs audioVideo (_: [ &quot;vlc.desktop&quot; ]))
+      // (lib.genAttrs documents (_: [ &quot;okular.desktop&quot; ]))
+      // (lib.genAttrs images (_: [ &quot;gwenview.desktop&quot; ]))
+      // (lib.genAttrs urls (_: [ &quot;firedragon.desktop&quot; ]))
+    );
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="boot"><a class="header" href="#boot">Boot</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, pkgs
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed.systemd-boot;
+  cfgLanza = config.dr460nixed.lanzaboote;
+in
+{
+  options.dr460nixed.systemd-boot = {
+    enable = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Configures common options for a quiet systemd-boot.
+        '';
+      };
+  };
+  options.dr460nixed.lanzaboote = {
+    enable = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Configures common options using Lanzaboote as secure boot manager.
+        '';
+      };
+  };
+
+  config = {
+    boot = {
+      consoleLogLevel = 0;
+      kernelParams = [
+        &quot;acpi_backlight=native&quot;
+        &quot;iommu=full&quot;
+        &quot;page_alloc.shuffle=1&quot;
+        &quot;processor.max_cstate=5&quot;
+        &quot;quiet&quot;
+        &quot;rd.systemd.show_status=auto&quot;
+        &quot;rd.udev.log_level=3&quot;
+        &quot;rootflags=noatime&quot;
+        &quot;usbcore.autosuspend=-1&quot;
+        &quot;vt.global_cursor_default=0&quot;
+      ];
+      loader = mkIf cfg.enable {
+        generationsDir.copyKernels = true;
+        timeout = 1;
+        systemd-boot = {
+          consoleMode = &quot;max&quot;;
+          editor = false;
+          enable = true;
+        };
+      };
+    };
+
+    # Needed if using Lanzaboote
+    boot.lanzaboote = mkIf cfgLanza.enable {
+      enable = true;
+      pkiBundle = &quot;/etc/secureboot&quot;;
+    };
+    environment.systemPackages = mkIf cfgLanza.enable [ pkgs.sbctl ];
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="common"><a class="header" href="#common">COmmon</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed;
+in
+{
+  options.dr460nixed = {
+    common = {
+      enable = mkOption
+        {
+          default = true;
+          type = types.bool;
+          description = mdDoc ''
+            Whether to enable common system configurations.
+          '';
+        };
+    };
+    rpi = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether this is a Raspberry Pi.
+        '';
+      };
+    nodocs = mkOption
+      {
+        default = true;
+        type = types.bool;
+        description = mdDoc ''
+          Whether to disable the documentation.
+        '';
+      };
+  };
+
+  config = mkIf cfg.common.enable {
+    ## A few kernel tweaks
+    boot.kernel.sysctl = { &quot;kernel.unprivileged_userns_clone&quot; = 1; };
+
+    # Allow wheel group users to use sudo
+    security.sudo.execWheelOnly = true;
+
+    # This is the default sops file that will be used for all secrets
+    sops = {
+      age.sshKeyPaths = [ &quot;/etc/ssh/ssh_host_ed25519_key&quot; ];
+      defaultSopsFile = ../../secrets/global.yaml;
+    };
+
+    # Increase open file limit for sudoers
+    security.pam.loginLimits = [
+      {
+        domain = &quot;@wheel&quot;;
+        item = &quot;nofile&quot;;
+        type = &quot;soft&quot;;
+        value = &quot;524288&quot;;
+      }
+      {
+        domain = &quot;@wheel&quot;;
+        item = &quot;nofile&quot;;
+        type = &quot;hard&quot;;
+        value = &quot;1048576&quot;;
+      }
+    ];
+
+    # Always needed applications
+    programs = {
+      git = {
+        enable = true;
+        lfs.enable = true;
+      };
+      # The GnuPG agent
+      gnupg.agent = {
+        enable = true;
+        pinentryFlavor = &quot;curses&quot;;
+      };
+    };
+
+    # Who needs documentation when there is the internet? #bl04t3d
+    documentation = mkIf cfg.nodocs {
+      dev.enable = false;
+      doc.enable = false;
+      enable = true;
+      info.enable = false;
+      man.enable = false;
+      nixos.enable = true;
+    };
+
+    # Ship systemd logs to Loki &amp; Grafana
+    dr460nixed.promtail.lokiAddress = &quot;100.86.102.115&quot;;
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="desktops"><a class="header" href="#desktops">Desktops</a></h1>
+<pre><code class="language-nix">{ config
+, inputs
+, lib
+, pkgs
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed.desktops;
+  spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
+in
+{
+  options.dr460nixed.desktops = {
+    enable = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether to enable basic dr460nized desktop theming.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    # Only install fonts I personally use
+    fonts.enableDefaultPackages = false;
+
+    # Allow better Syncthing speeds
+    services.syncthing.openDefaultPorts = true;
+
+    # # Kernel paramters &amp; settings
+    boot.kernelParams = [ &quot;mitigations=off&quot; ];
+
+    # Fancy themed, enhanced Spotify
+    programs.spicetify = {
+      enable = true;
+      theme = spicePkgs.themes.Comfy;
+      enabledExtensions = with spicePkgs.extensions; [
+        autoSkipVideo
+        bookmark
+        fullAlbumDate
+        fullAppDisplayMod
+        genre
+        groupSession
+        hidePodcasts
+        history
+        playlistIcons
+        popupLyrics
+        seekSong
+        songStats
+      ];
+      injectCss = true;
+      replaceColors = true;
+      overwriteAssets = true;
+      sidebarConfig = true;
+      enabledCustomApps = with spicePkgs.apps; [
+        lyrics-plus
+        new-releases
+      ];
+    };
+
+    # Pipewire configuration
+    environment.etc = {
+      # Allow pipewire to dynamically adjust the rate sent to the devices based on the playback stream
+      &quot;pipewire/pipewire.conf.d/99-allowed-rates.conf&quot;.text = builtins.toJSON {
+        &quot;context.properties&quot;.&quot;default.clock.allowed-rates&quot; = [
+          44100
+          48000
+          88200
+          96000
+          176400
+          192000
+        ];
+      };
+      # If resampling is required, use a higher quality. 15 is overkill and too cpu expensive without any obvious audible advantage
+      &quot;pipewire/pipewire-pulse.conf.d/99-resample.conf&quot;.text = builtins.toJSON {
+        &quot;stream.properties&quot;.&quot;resample.quality&quot; = 10;
+      };
+      &quot;pipewire/client.conf.d/99-resample.conf&quot;.text = builtins.toJSON {
+        &quot;stream.properties&quot;.&quot;resample.quality&quot; = 10;
+      };
+      &quot;pipewire/client-rt.conf.d/99-resample.conf&quot;.text = builtins.toJSON {
+        &quot;stream.properties&quot;.&quot;resample.quality&quot; = 10;
+      };
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="deterministic-ids"><a class="header" href="#deterministic-ids">Deterministic ids</a></h1>
+<pre><code class="language-nix"># https://github.com/oddlama/nix-config/blob/main/modules/system/deteministic-ids.nix
+{ lib
+, config
+, ...
+}:
+let
+  inherit
+    (lib)
+    concatLists
+    flip
+    mapAttrsToList
+    mdDoc
+    mkDefault
+    mkIf
+    mkOption
+    types
+    ;
+
+  cfg = config.users.deterministicIds;
+in
+{
+  options = {
+    users.deterministicIds = mkOption {
+      default = { };
+      description = mdDoc ''
+        Maps a user or group name to its expected uid/gid values. If a user/group is
+        used on the system without specifying a uid/gid, this module will assign the
+        corresponding ids defined here, or show an error if the definition is missing.
+      '';
+      type = types.attrsOf (types.submodule {
+        options = {
+          uid = mkOption {
+            type = types.nullOr types.int;
+            default = null;
+            description = mdDoc &quot;The uid to assign if it is missing in `users.users.&lt;name&gt;`.&quot;;
+          };
+          gid = mkOption {
+            type = types.nullOr types.int;
+            default = null;
+            description = mdDoc &quot;The gid to assign if it is missing in `users.groups.&lt;name&gt;`.&quot;;
+          };
+        };
+      });
+    };
+
+    users.users = mkOption {
+      type = types.attrsOf (types.submodule ({ name, ... }: {
+        config.uid =
+          let
+            deterministicUid = cfg.${name}.uid or null;
+          in
+          mkIf (deterministicUid != null) (mkDefault deterministicUid);
+      }));
+    };
+
+    users.groups = mkOption {
+      type = types.attrsOf (types.submodule ({ name, ... }: {
+        config.gid =
+          let
+            deterministicGid = cfg.${name}.gid or null;
+          in
+          mkIf (deterministicGid != null) (mkDefault deterministicGid);
+      }));
+    };
+  };
+
+  config = {
+    assertions =
+      concatLists
+        (flip mapAttrsToList config.users.users (name: user: [
+          {
+            assertion = user.uid != null;
+            message = &quot;non-deterministic uid detected for '${name}', please assign one via `users.deterministicIds`&quot;;
+          }
+          {
+            assertion = !user.autoSubUidGidRange;
+            message = &quot;non-deterministic subUids/subGids detected for: ${name}&quot;;
+          }
+        ]))
+      ++ flip mapAttrsToList config.users.groups (name: group: {
+        assertion = group.gid != null;
+        message = &quot;non-deterministic gid detected for '${name}', please assign one via `users.deterministicIds`&quot;;
+      });
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="development"><a class="header" href="#development">Development</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, pkgs
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed.development;
+in
+{
+  options.dr460nixed.development = {
+    enable = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enables commonly used development tools.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    # Import secrets needed for development
+    sops.secrets.&quot;api_keys/sops&quot; = {
+      mode = &quot;0600&quot;;
+      owner = config.users.users.nico.name;
+      path = &quot;/home/nico/.config/sops/age/keys.txt&quot;;
+    };
+    sops.secrets.&quot;api_keys/heroku&quot; = {
+      mode = &quot;0600&quot;;
+      owner = config.users.users.nico.name;
+      path = &quot;/home/nico/.netrc&quot;;
+    };
+    sops.secrets.&quot;api_keys/cloudflared&quot; = {
+      mode = &quot;0600&quot;;
+      owner = config.users.users.nico.name;
+      path = &quot;/home/nico/.cloudflared/cert.pem&quot;;
+    };
+
+    # Conflicts with virtualisation.containers if enabled
+    boot.enableContainers = false;
+
+    # Allow building sdcard images for Raspi
+    nixpkgs.config.allowUnsupportedSystem = true;
+
+    # Wireshark
+    programs.wireshark.enable = true;
+
+    # Libvirt &amp; Podman with docker alias
+    virtualisation = {
+      containerd.enable = true;
+      docker = {
+        autoPrune = {
+          enable = true;
+          flags = [ &quot;--all&quot; ];
+        };
+        enable = true;
+        enableOnBoot = false;
+        package = pkgs.docker_24;
+        storageDriver = &quot;zfs&quot;;
+      };
+      libvirtd = {
+        enable = true;
+        parallelShutdown = 2;
+        qemu = {
+          ovmf = {
+            enable = true;
+            packages = [ pkgs.OVMFFull.fd ];
+          };
+          swtpm.enable = true;
+        };
+      };
+      lxd.enable = false;
+    };
+
+    # Allow cross-compiling to aarch64
+    boot.binfmt.emulatedSystems = [ &quot;aarch64-linux&quot; ];
+
+    # Configure nspawn containers
+    systemd.nspawn.&quot;garuda&quot; = {
+      execConfig = {
+        Boot = true;
+      };
+      enable = true;
+      filesConfig = {
+        Bind = [ &quot;/home/nico&quot; ];
+      };
+      networkConfig = {
+        VirtualEthernet = false;
+      };
+    };
+
+    # Leverage the Nix store for enhancing containerd
+    services.nix-snapshotter = {
+      enable = true;
+      setContainerdSnapshotter = true;
+    };
+
+    # In case I need to fix my phone
+    programs.adb.enable = true;
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="docker-compose-runner"><a class="header" href="#docker-compose-runner">Docker compose runner</a></h1>
+<pre><code class="language-nix">{ lib, pkgs, config, ... }:
+with lib;
+let
+  cfg = config.dr460nixed.docker-compose-runner;
+in
+{
+  options.dr460nixed.docker-compose-runner = mkOption {
+    type = types.attrsOf (types.submodule {
+      options = {
+        source = mkOption {
+          default = null;
+          description = &quot;Folder containing a docker-compose file.&quot;;
+          type = types.path;
+        };
+        envfile = mkOption {
+          default = null;
+          description = &quot;Direct path to a valid .env file&quot;;
+          type = types.nullOr types.path;
+        };
+      };
+    });
+    default = { };
+  };
+
+  config = {
+    systemd.services = mapAttrs'
+      (name: value: nameValuePair (&quot;docker-compose-runner-&quot; + name) (
+        let
+          output = derivation {
+            builder = pkgs.writeShellScript &quot;build&quot; ''
+              PATH=&quot;${pkgs.rsync}/bin:${pkgs.coreutils}/bin:${pkgs.gnused}/bin&quot;
+              set -e
+              mkdir &quot;$out&quot;
+              sed -r 's/(^\s+restart:\s*)(unless-stopped|always)(\s*($|#))/\1on-failure\3/g' &quot;$src/docker-compose.yml&quot; &gt; &quot;$out/docker-compose.yml&quot;
+              rsync -a &quot;$src/&quot; &quot;$out&quot;
+            '';
+            name = &quot;docker-compose-runner-&quot; + name;
+            src = value.source;
+            inherit (pkgs.hostPlatform) system;
+          };
+          statepath = &quot;/var/docker-compose-runner/${name}&quot;;
+        in
+        {
+          description = &quot;docker-compose runner for ${name}&quot;;
+          path = with pkgs; [ rsync docker-compose docker bash ];
+          serviceConfig = {
+            ExecStart = pkgs.writeShellScript (&quot;execstart-docker-compose-runner-&quot; + name) ''
+              set -e
+              mkdir -p &quot;${statepath}&quot;
+              rsync -a --no-owner --size-only &quot;${output}/&quot; &quot;${statepath}&quot;
+              ${optionalString (value.envfile != null) ''
+                  cp &quot;${value.envfile}&quot; &quot;${statepath}/.env&quot;
+                  chmod 600 &quot;${statepath}/.env&quot;
+              ''}
+              cd &quot;${statepath}&quot;
+              docker-compose up
+            '';
+            ExecStopPost = pkgs.writeShellScript (&quot;execstop-docker-compose-runner-&quot; + name) ''
+              set -e
+              cd &quot;${statepath}&quot;
+              docker-compose down
+            '';
+          };
+          unitConfig = {
+            After = &quot;docker.service&quot;;
+            Requisite = &quot;docker.service&quot;;
+            StopPropagatedFrom = &quot;docker.service&quot;;
+          };
+          wantedBy = [ &quot;multi-user.target&quot; ];
+        }
+      ))
+      cfg;
+    environment.systemPackages = mkIf (cfg != { }) [ pkgs.docker-compose ];
+    virtualisation.docker.enable = mkIf (cfg != { }) true;
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="gaming"><a class="header" href="#gaming">Gaming</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, pkgs
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed.gaming;
+in
+{
+  options.dr460nixed.gaming = {
+    enable = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether this device is used for gaming.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    chaotic.steam.extraCompatPackages = with pkgs; [ proton-ge-custom ];
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hardening"><a class="header" href="#hardening">Hardening</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, pkgs
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed.hardening;
+  cfgServers = config.dr460nixed.servers.enable;
+in
+{
+  options.dr460nixed.hardening = {
+    enable = mkOption
+      {
+        default = true;
+        type = types.bool;
+        description = mdDoc ''
+          Whether the operating system should be hardened.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    boot.kernel.sysctl = {
+      # The Magic SysRq key is a key combo that allows users connected to the
+      # system console of a Linux kernel to perform some low-level commands.
+      # Disable it, since we don't need it, and is a potential security concern.
+      &quot;kernel.sysrq&quot; = 0;
+      # Restrict ptrace() usage to processes with a pre-defined relationship
+      # (e.g., parent/child)
+      &quot;kernel.yama.ptrace_scope&quot; = 2;
+      # Hide kptrs even for processes with CAP_SYSLOG
+      &quot;kernel.kptr_restrict&quot; = 2;
+      # Disable ftrace debugging
+      &quot;kernel.ftrace_enabled&quot; = false;
+    };
+
+    boot.blacklistedKernelModules = [
+      # Obscure network protocols
+      &quot;ax25&quot;
+      &quot;netrom&quot;
+      &quot;rose&quot;
+      # Old or rare or insufficiently audited filesystems
+      &quot;adfs&quot;
+      &quot;affs&quot;
+      &quot;befs&quot;
+      &quot;bfs&quot;
+      &quot;btusb&quot;
+      &quot;cifs&quot;
+      &quot;cramfs&quot;
+      &quot;cramfs&quot;
+      &quot;efs&quot;
+      &quot;erofs&quot;
+      &quot;exofs&quot;
+      &quot;f2fs&quot;
+      &quot;freevxfs&quot;
+      &quot;freevxfs&quot;
+      &quot;gfs2&quot;
+      &quot;hfs&quot;
+      &quot;hfsplus&quot;
+      &quot;hpfs&quot;
+      &quot;jffs2&quot;
+      &quot;jfs&quot;
+      &quot;ksmbd&quot;
+      &quot;minix&quot;
+      &quot;nfs&quot;
+      &quot;nfsv3&quot;
+      &quot;nfsv4&quot;
+      &quot;nilfs2&quot;
+      &quot;omfs&quot;
+      &quot;qnx4&quot;
+      &quot;qnx6&quot;
+      &quot;sysv&quot;
+      &quot;udf&quot;
+      &quot;vivid&quot;
+    ];
+
+    # Disable coredumps
+    systemd.coredump.enable = false;
+
+    # Protect logins and sudo on servers via DUO
+    # leaving EnvFactor enabled for other apps
+    security.duosec = {
+      acceptEnvFactor = true;
+      autopush = true;
+      failmode = &quot;safe&quot;;
+      host = &quot;api-a7b9f5f3.duosecurity.com&quot;;
+      integrationKey = &quot;DID3CH2NCQ2H24L1GUUN&quot;;
+      pam.enable = true;
+      prompts = 1;
+      pushinfo = true;
+      secretKeyFile = config.sops.secrets.&quot;api_keys/duo&quot;.path;
+      ssh.enable = true;
+    };
+    sops.secrets.&quot;api_keys/duo&quot; = {
+      mode = &quot;0600&quot;;
+      path = &quot;/run/secrets/api_keys/duo&quot;;
+    };
+    security.pam.services = {
+      &quot;login&quot;.duoSecurity.enable = true;
+      &quot;sddm&quot;.duoSecurity.enable = lib.mkIf config.dr460nixed.desktops.enable true;
+      &quot;sudo&quot;.duoSecurity.enable = lib.mkIf config.dr460nixed.servers.enable true;
+    };
+
+    # Disable root login &amp; password authentication on sshd
+    # also, apply recommendations of ssh-audit.com and enable Duo 2FA 
+    # (for whatever reason the default config did not work a at all? 
+    # maybe related to https://github.com/NixOS/nixpkgs/issues/115044)
+    services.openssh = {
+      extraConfig = ''
+        AllowTcpForwarding no
+        ForceCommand /usr/bin/env login_duo
+        HostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,rsa-sha2-256,rsa-sha2-512,rsa-sha2-256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com
+        PermitTunnel no
+      '';
+      settings = {
+        Ciphers = [
+          &quot;aes256-gcm@openssh.com&quot;
+          &quot;aes256-ctr,aes192-ctr&quot;
+          &quot;aes128-ctr&quot;
+          &quot;aes128-gcm@openssh.com&quot;
+          &quot;chacha20-poly1305@openssh.com&quot;
+        ];
+        KbdInteractiveAuthentication = false;
+        KexAlgorithms = [
+          &quot;curve25519-sha256&quot;
+          &quot;curve25519-sha256@libssh.org&quot;
+          &quot;diffie-hellman-group16-sha512&quot;
+          &quot;diffie-hellman-group18-sha512&quot;
+          &quot;sntrup761x25519-sha512@openssh.com&quot;
+        ];
+        Macs = [
+          &quot;hmac-sha2-512-etm@openssh.com&quot;
+          &quot;hmac-sha2-256-etm@openssh.com&quot;
+          &quot;umac-128-etm@openssh.com&quot;
+        ];
+        PasswordAuthentication = false;
+        PermitRootLogin = &quot;no&quot;;
+        X11Forwarding = false;
+      };
+    };
+
+    # Client side SSH configuration
+    programs.ssh = {
+      ciphers = [
+        &quot;aes256-gcm@openssh.com&quot;
+        &quot;aes256-ctr,aes192-ctr&quot;
+        &quot;aes128-ctr&quot;
+        &quot;aes128-gcm@openssh.com&quot;
+        &quot;chacha20-poly1305@openssh.com&quot;
+      ];
+      hostKeyAlgorithms = [
+        &quot;ssh-ed25519&quot;
+        &quot;ssh-ed25519-cert-v01@openssh.com&quot;
+        &quot;sk-ssh-ed25519@openssh.com&quot;
+        &quot;sk-ssh-ed25519-cert-v01@openssh.com&quot;
+        &quot;rsa-sha2-512&quot;
+        &quot;rsa-sha2-512-cert-v01@openssh.com&quot;
+        &quot;rsa-sha2-256&quot;
+        &quot;rsa-sha2-256-cert-v01@openssh.com&quot;
+      ];
+      kexAlgorithms = [
+        &quot;curve25519-sha256&quot;
+        &quot;curve25519-sha256@libssh.org&quot;
+        &quot;diffie-hellman-group16-sha512&quot;
+        &quot;diffie-hellman-group18-sha512&quot;
+        &quot;sntrup761x25519-sha512@openssh.com&quot;
+      ];
+      knownHosts = {
+        aur-rsa = {
+          hostNames = [ &quot;aur.archlinux.org&quot; ];
+          publicKey = &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDKF9vAFWdgm9Bi8uc+tYRBmXASBb5cB5iZsB7LOWWFeBrLp3r14w0/9S2vozjgqY5sJLDPONWoTTaVTbhe3vwO8CBKZTEt1AcWxuXNlRnk9FliR1/eNB9uz/7y1R0+c1Md+P98AJJSJWKN12nqIDIhjl2S1vOUvm7FNY43fU2knIhEbHybhwWeg+0wxpKwcAd/JeL5i92Uv03MYftOToUijd1pqyVFdJvQFhqD4v3M157jxS5FTOBrccAEjT+zYmFyD8WvKUa9vUclRddNllmBJdy4NyLB8SvVZULUPrP3QOlmzemeKracTlVOUG1wsDbxknF1BwSCU7CmU6UFP90kpWIyz66bP0bl67QAvlIc52Yix7pKJPbw85+zykvnfl2mdROsaT8p8R9nwCdFsBc9IiD0NhPEHcyHRwB8fokXTajk2QnGhL+zP5KnkmXnyQYOCUYo3EKMXIlVOVbPDgRYYT/XqvBuzq5S9rrU70KoI/S5lDnFfx/+lPLdtcnnEPk=&quot;;
+        };
+        aur-ed25519 = {
+          hostNames = [ &quot;aur.archlinux.org&quot; ];
+          publicKey = &quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuBKrPzbawxA/k2g6NcyV5jmqwJ2s+zpgZGZ7tpLIcN&quot;;
+        };
+        github-rsa = {
+          hostNames = [ &quot;github.com&quot; ];
+          publicKey = &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk=&quot;;
+        };
+        github-ed25519 = {
+          hostNames = [ &quot;github.com&quot; ];
+          publicKey = &quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl&quot;;
+        };
+        gitlab-rsa = {
+          hostNames = [ &quot;gitlab.com&quot; ];
+          publicKey = &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9&quot;;
+        };
+        gitlab-ed25519 = {
+          hostNames = [ &quot;gitlab.com&quot; ];
+          publicKey = &quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf&quot;;
+        };
+      };
+      macs = [
+        &quot;hmac-sha2-512-etm@openssh.com&quot;
+        &quot;hmac-sha2-256-etm@openssh.com&quot;
+        &quot;umac-128-etm@openssh.com&quot;
+      ];
+    };
+
+    # The hardening profile enables Apparmor by default, we don't want this to happen
+    security.apparmor.enable = false;
+
+    # Timeout TTY after 1 hour
+    programs.bash.interactiveShellInit = &quot;if [[ $(tty) =~ /dev\\/tty[1-6] ]]; then TMOUT=3600; fi&quot;;
+
+    # Don't lock kernel modules, this is also enabled by the hardening profile by default
+    security.lockKernelModules = false;
+
+    # Run security analysis
+    environment.systemPackages = with pkgs; [ lynis ];
+
+    # Technically we don't need this as we use pubkey authentication
+    services.fail2ban = mkIf cfgServers {
+      enable = true;
+      ignoreIP = [
+        &quot;100.0.0.0/8&quot;
+        &quot;127.0.0.1/8&quot;
+      ];
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="impermanence"><a class="header" href="#impermanence">Impermanence</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, ...
+}: {
+  # This was recently added to Chaotic Nyx
+  chaotic.zfs-impermanence-on-shutdown = {
+    enable = true;
+    snapshot = &quot;start&quot;;
+    volume = &quot;zroot/ROOT/empty&quot;;
+  };
+
+  # Persistent files
+  environment.persistence.&quot;/var/persistent&quot; = {
+    hideMounts = true;
+    directories = [
+      &quot;/etc/NetworkManager/system-connections&quot;
+      &quot;/etc/nixos&quot;
+      &quot;/etc/secureboot&quot;
+      &quot;/var/cache/chaotic&quot;
+      &quot;/var/cache/tailscale&quot;
+      &quot;/var/lib/AccountsService/icons&quot;
+      &quot;/var/lib/bluetooth&quot;
+      &quot;/var/lib/chaotic&quot;
+      &quot;/var/lib/containers&quot;
+      &quot;/var/lib/flatpak&quot;
+      &quot;/var/lib/libvirt&quot;
+      &quot;/var/lib/machines&quot;
+      &quot;/var/lib/sddm&quot;
+      &quot;/var/lib/systemd&quot;
+      &quot;/var/lib/tailscale&quot;
+      &quot;/var/lib/upower&quot;
+      &quot;/var/lib/vnstat&quot;
+      { directory = &quot;/var/lib/iwd&quot;; mode = &quot;u=rwx,g=,o=&quot;; }
+    ] ++ lib.optionals config.security.acme.acceptTerms [
+      {
+        directory = &quot;/var/lib/acme&quot;;
+        user = &quot;acme&quot;;
+        group = &quot;acme&quot;;
+        mode = &quot;0755&quot;;
+      }
+    ] ++ lib.optionals config.services.printing.enable [
+      {
+        directory = &quot;/var/lib/cups&quot;;
+        user = &quot;root&quot;;
+        group = &quot;root&quot;;
+        mode = &quot;0700&quot;;
+      }
+    ] ++ lib.optionals config.services.fail2ban.enable [
+      {
+        directory = &quot;/var/lib/fail2ban&quot;;
+        user = &quot;fail2ban&quot;;
+        group = &quot;fail2ban&quot;;
+        mode = &quot;0750&quot;;
+      }
+    ] ++ lib.optionals config.services.postgresql.enable [
+      {
+        directory = &quot;/var/lib/postgresql&quot;;
+        user = &quot;postgres&quot;;
+        group = &quot;postgres&quot;;
+        mode = &quot;0700&quot;;
+      }
+    ] ++ lib.optionals config.services.loki.enable [
+      {
+        directory = &quot;/var/lib/loki&quot;;
+        user = &quot;loki&quot;;
+        group = &quot;loki&quot;;
+        mode = &quot;0700&quot;;
+      }
+    ] ++ lib.optionals config.services.grafana.enable [
+      {
+        directory = config.services.grafana.dataDir;
+        user = &quot;grafana&quot;;
+        group = &quot;grafana&quot;;
+        mode = &quot;0700&quot;;
+      }
+    ] ++ lib.optionals config.services.vaultwarden.enable [
+      {
+        directory = &quot;/var/lib/vaultwarden&quot;;
+        user = &quot;vaultwarden&quot;;
+        group = &quot;vaultwarden&quot;;
+        mode = &quot;0700&quot;;
+      }
+    ] ++ lib.optionals config.services.influxdb2.enable [
+      {
+        directory = &quot;/var/lib/influxdb2&quot;;
+        user = &quot;influxdb2&quot;;
+        group = &quot;influxdb2&quot;;
+        mode = &quot;0700&quot;;
+      }
+    ] ++ lib.optionals config.services.telegraf.enable [
+      {
+        directory = &quot;/var/lib/telegraf&quot;;
+        user = &quot;telegraf&quot;;
+        group = &quot;telegraf&quot;;
+        mode = &quot;0700&quot;;
+      }
+    ] ++ lib.optionals config.services.adguardhome.enable [
+      {
+        directory = &quot;/var/lib/private/AdGuardHome&quot;;
+        user = &quot;root&quot;;
+        group = &quot;root&quot;;
+        mode = &quot;0700&quot;;
+      }
+    ];
+    files = [ &quot;/var/lib/dbus/machine-id&quot; ];
+    users.&quot;root&quot; = {
+      home = &quot;/root&quot;;
+      directories = [
+        { directory = &quot;.gnupg&quot;; mode = &quot;0700&quot;; }
+        { directory = &quot;.ssh&quot;; mode = &quot;0700&quot;; }
+      ];
+    };
+    users.&quot;nico&quot; = {
+      directories = [
+        &quot;.android&quot;
+        &quot;.ansible&quot;
+        &quot;.config&quot;
+        &quot;.firedragon&quot;
+        &quot;.gitkraken&quot;
+        &quot;.java&quot;
+        &quot;.local/share/JetBrains&quot;
+        &quot;.local/share/Nextcloud&quot;
+        &quot;.local/share/PrismLauncher&quot;
+        &quot;.local/share/Steam&quot;
+        &quot;.local/share/TelegramDesktop&quot;
+        &quot;.local/share/Vorta&quot;
+        &quot;.local/share/applications&quot;
+        &quot;.local/share/baloo&quot;
+        &quot;.local/share/containers&quot;
+        &quot;.local/share/direnv&quot;
+        &quot;.local/share/dolphin&quot;
+        &quot;.local/share/fish&quot;
+        &quot;.local/share/heroku&quot;
+        &quot;.local/share/kactivitymanagerd&quot;
+        &quot;.local/share/klipper&quot;
+        &quot;.local/share/knewstuff3&quot;
+        &quot;.local/share/konsole&quot;
+        &quot;.local/share/krita&quot;
+        &quot;.local/share/kscreen&quot;
+        &quot;.local/share/kwalletd&quot;
+        &quot;.local/share/lutris&quot;
+        &quot;.local/share/plasma&quot;
+        &quot;.local/share/tor-browser&quot;
+        &quot;.mozilla&quot;
+        &quot;.thunderbird&quot;
+        &quot;.tldrc&quot;
+        &quot;.var&quot;
+        &quot;.yubico&quot;
+        &quot;Documents&quot;
+        &quot;Downloads&quot;
+        &quot;Music&quot;
+        &quot;Nextcloud&quot;
+        &quot;Pictures&quot;
+        &quot;School&quot;
+        &quot;Sync&quot;
+        &quot;Videos&quot;
+        { directory = &quot;.gnupg&quot;; mode = &quot;0700&quot;; }
+        { directory = &quot;.local/share/keybase&quot;; mode = &quot;0700&quot;; }
+        { directory = &quot;.local/share/keyrings&quot;; mode = &quot;0700&quot;; }
+        { directory = &quot;.ssh&quot;; mode = &quot;0700&quot;; }
+      ];
+    };
+  };
+
+  # Not important but persistent files
+  environment.persistence.&quot;/var/residues&quot; = {
+    hideMounts = true;
+    directories = [
+      &quot;/var/cache&quot;
+      &quot;/var/log&quot;
+    ];
+    users.nico = {
+      directories = [
+        &quot;.cache/bookmarksrunner&quot;
+        &quot;.cache/chromium&quot;
+        &quot;.cache/firedragon&quot;
+        &quot;.cache/konsole&quot;
+        &quot;.cache/lutris&quot;
+        &quot;.cache/mesa_shader_cache&quot;
+        &quot;.cache/mozilla&quot;
+        &quot;.cache/nix&quot;
+        &quot;.cache/nix-index&quot;
+        &quot;.cache/plasmashell&quot;
+        &quot;.cache/spotify&quot;
+        &quot;.cache/starship&quot;
+        &quot;.cache/thunderbird&quot;
+        &quot;.cache/virt-manager&quot;
+        &quot;.local/share/Trash&quot;
+        &quot;.local/state/wireplumber&quot;
+        &quot;.steam&quot;
+      ];
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="locales"><a class="header" href="#locales">Locales</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, pkgs
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed.locales;
+  cfgDesktops = config.dr460nixed.desktops;
+  de = &quot;de_DE.UTF-8&quot;;
+  defaultLocale = &quot;en_GB.UTF-8&quot;;
+  terminus-variant = &quot;120n&quot;;
+in
+{
+  options.dr460nixed.locales = {
+    enable = mkOption
+      {
+        default = true;
+        type = types.bool;
+        description = mdDoc ''
+          Whether the operating system be having a default set of locales set.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    # Timezone
+    time = {
+      hardwareClockInLocalTime = true;
+      timeZone = &quot;Europe/Berlin&quot;;
+    };
+
+    # Common locale settings
+    i18n = {
+      inherit defaultLocale;
+
+      extraLocaleSettings = {
+        LANG = defaultLocale;
+        LC_COLLATE = defaultLocale;
+        LC_CTYPE = defaultLocale;
+        LC_MESSAGES = defaultLocale;
+
+        LC_ADDRESS = de;
+        LC_IDENTIFICATION = de;
+        LC_MEASUREMENT = de;
+        LC_MONETARY = de;
+        LC_NAME = de;
+        LC_NUMERIC = de;
+        LC_PAPER = de;
+        LC_TELEPHONE = de;
+        LC_TIME = de;
+      };
+
+      supportedLocales = [
+        &quot;de_DE.UTF-8/UTF-8&quot;
+        &quot;en_GB.UTF-8/UTF-8&quot;
+        &quot;en_US.UTF-8/UTF-8&quot;
+      ];
+    };
+
+    # Console font
+    console = {
+      font = &quot;${pkgs.terminus_font}/share/consolefonts/ter-${terminus-variant}.psf.gz&quot;;
+      keyMap = &quot;de&quot;;
+    };
+
+    # X11 keyboard layout
+    services.xserver = mkIf cfgDesktops.enable {
+      layout = &quot;de&quot;;
+      xkbVariant = &quot;&quot;;
+    };
+  };
+}
+
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="msmtp"><a class="header" href="#msmtp">MSMTP</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed.smtp;
+in
+{
+  options.dr460nixed.smtp = {
+    enable = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enable sending mails via CMD using msmtp.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    programs.msmtp = {
+      enable = true;
+      setSendmail = true;
+      defaults = {
+        aliases = &quot;/etc/aliases&quot;;
+        auth = &quot;login&quot;;
+        port = 465;
+        tls = &quot;on&quot;;
+        tls_starttls = &quot;off&quot;;
+        tls_trust_file = &quot;/etc/ssl/certs/ca-certificates.crt&quot;;
+      };
+      accounts = {
+        default = {
+          from = &quot;nico@dr460nf1r3.org&quot;;
+          host = &quot;mail.garudalinux.net&quot;;
+          passwordeval = &quot;cat /run/secrets/passwords/nico@dr460nf1r3.org&quot;;
+          user = &quot;nico@dr460nf1r3.org&quot;;
+        };
+      };
+    };
+    environment.etc = {
+      &quot;aliases&quot;.text = ''
+        root: nico@dr460nf1r3.org
+      '';
+    };
+  };
+}
+
+
+
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="networking"><a class="header" href="#networking">Networking</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed;
+in
+{
+  # We want to use NetworkManager on desktops
+  networking = {
+    # Pointing to our Adguard instance via Tailscale
+    nameservers = [ &quot;1.1.1.1&quot; &quot;1.0.0.1&quot; ];
+    networkmanager = mkIf cfg.desktops.enable or cfg.rpi {
+      dns = &quot;none&quot;;
+      enable = true;
+    };
+    # Enable nftables instead of iptables
+    nftables.enable = true;
+  };
+
+  # Enable SSHD
+  services.openssh.enable = true;
+
+  # Enable Mosh, a replacement for OpenSSH
+  programs.mosh.enable = true;
+
+  # Lightweight bandwidth usage tracking
+  services.vnstat.enable = true;
+}
+
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="nix"><a class="header" href="#nix">Nix</a></h1>
+<pre><code class="language-nix">{ inputs
+, ...
+}:
+{
+  # General nix settings
+  nix = {
+    # Do garbage collections whenever there is less than 1GB free space left
+    extraOptions = ''
+      accept-flake-config = true
+      http-connections = 0
+      warn-dirty = false
+    '';
+    settings = {
+      # Use available binary caches, this is not Gentoo
+      # this also allows us to use remote builders to reduce build times and batter usage
+      builders-use-substitutes = true;
+
+      # A few extra binary caches and their public keys
+      substituters = [
+        &quot;https://cache.garnix.io&quot;
+        &quot;https://dr460nf1r3.cachix.org&quot;
+      ];
+      trusted-public-keys = [
+        &quot;cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=&quot;
+        &quot;dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU=&quot;
+      ];
+
+      # Enable certain system features
+      system-features = [ &quot;big-parallel&quot; &quot;kvm&quot; &quot;recursive-nix&quot; ];
+
+      # Continue building derivations if one fails
+      keep-going = true;
+
+      # Show more log lines for failed builds
+      log-lines = 20;
+
+      # For direnv GC roots
+      keep-derivations = true;
+      keep-outputs = true;
+
+      # Max number of parallel jobs
+      max-jobs = &quot;auto&quot;;
+    };
+  };
+
+  # Overlays for nixpkgs
+  nixpkgs.overlays = [
+    inputs.nixd.overlays.default
+    (
+      # Overlays nix with nix-super, which tracks future features
+      _: _prev: {
+        nix = inputs.nix-super.packages.x86_64-linux.default;
+      }
+    )
+  ];
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="oci"><a class="header" href="#oci">OCI</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed.oci;
+in
+{
+  options.dr460nixed.oci = {
+    enable = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enable common options for Oracle cloud instances.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    # Taken from /proc/cmdline of Ubuntu 20.04.2 LTS on OCI
+    boot = {
+      kernelParams = [
+        &quot;nvme.shutdown_timeout=10&quot;
+        &quot;nvme_core.shutdown_timeout=10&quot;
+        &quot;libiscsi.debug_libiscsi_eh=1&quot;
+        &quot;crash_kexec_post_notifiers&quot;
+        &quot;console=tty1&quot;
+        &quot;console=ttyS0&quot;
+        &quot;console=ttyAMA0,115200&quot;
+      ];
+      loader.grub = {
+        device = &quot;nodev&quot;;
+        efiInstallAsRemovable = true;
+        efiSupport = true;
+        extraConfig = ''
+          serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
+          terminal_input --append serial
+          terminal_output --append serial
+        '';
+        splashImage = null;
+      };
+    };
+
+    # https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/configuringntpservice.htm#Configuring_the_Oracle_Cloud_Infrastructure_NTP_Service_for_an_Instance
+    networking.timeServers = [ &quot;169.254.169.254&quot; ];
+
+    # Slows down write operations considerably
+    nix.settings.auto-optimise-store = lib.mkForce false;
+
+    # This is needed as the packages are marked unsupported
+    hardware.cpu = {
+      amd.updateMicrocode = lib.mkForce false;
+      intel.updateMicrocode = lib.mkForce false;
+    };
+  };
+}
+
+
+
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="servers"><a class="header" href="#servers">Servers</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, pkgs
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed.servers;
+in
+{
+  options.dr460nixed.servers = {
+    enable = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether this device is a server.
+        '';
+      };
+    monitoring = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether to enable monitoring via Netdata.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    # The common used config is not available
+    programs.fish.shellInit = mkForce ''
+      set fish_greeting
+      fastfetch -l nixos
+    '';
+
+    # Automatic server upgrades
+    dr460nixed.auto-upgrade = true;
+
+    # Enable the Netdata daemon
+    services.netdata.enable = mkIf cfg.monitoring true;
+    services.netdata.config = {
+      global = {
+        &quot;dbengine disk space&quot; = &quot;512&quot;;
+        &quot;memory mode&quot; = &quot;dbengine&quot;;
+        &quot;update every&quot; = &quot;2&quot;;
+      };
+      ml = { &quot;enabled&quot; = &quot;yes&quot;; };
+    };
+    services.netdata.configDir = {
+      &quot;go.d.conf&quot; = pkgs.writeText &quot;go.d.conf&quot; ''
+        enabled: yes
+        modules:
+          nginx: yes
+          web_log: yes
+      '';
+      &quot;python.d.conf&quot; = pkgs.writeText &quot;python.d.conf&quot; ''
+        postgres: no
+        web_log: no
+      '';
+      &quot;go.d/nginx.conf&quot; =
+        mkIf config.services.nginx.enable
+          (pkgs.writeText &quot;nginx.conf&quot; ''
+            jobs:
+              - name: local
+                url: http://127.0.0.1/nginx_status
+          '');
+    };
+
+    # Extra Python &amp; system packages required for Netdata to function
+    services.netdata.python.extraPackages = ps: [ ps.psycopg2 ];
+    systemd.services.netdata = { path = with pkgs; [ jq ]; };
+
+    # Connect to Netdata Cloud easily
+    services.netdata.claimTokenFile = config.sops.secrets.&quot;api_keys/netdata&quot;.path;
+    sops.secrets.&quot;api_keys/netdata&quot; = {
+      mode = &quot;0600&quot;;
+      owner = &quot;netdata&quot;;
+      path = &quot;/run/secrets/api_keys/netdata&quot;;
+    };
+
+    # The Nginx QUIC package with Brotli modules
+    services.nginx.package = pkgs.nginxQuic.override { doCheck = false; };
+    services.nginx.additionalModules = with pkgs; [ nginxModules.brotli ];
+
+    # Recommended settings replacing custom configuration
+    services.nginx = {
+      recommendedGzipSettings = true;
+      recommendedOptimisation = true;
+      recommendedTlsSettings = true;
+    };
+
+    # Statuspage for Netdata to consume
+    services.nginx.statusPage = true;
+
+    # Upstream resolvers
+    services.nginx.resolver = {
+      addresses = [ &quot;100.100.100.100&quot; ];
+      valid = &quot;60s&quot;;
+    };
+
+    # Global Nginx configuration
+    services.nginx.appendConfig = ''
+      worker_processes auto;
+    '';
+
+    # Logformat to use for Netdata &amp; extra config that doesn't exist as separate key in NixOS
+    services.nginx.commonHttpConfig = ''
+      # Custom log format for Netdata to analyze
+      log_format              custom '&quot;$http_referer&quot; &quot;$http_user_agent&quot; '
+                              '$remote_addr - $remote_user [$time_local] '
+                              '&quot;$request&quot; $status $body_bytes_sent';
+
+      # Brotli compression
+      brotli                  on;
+      brotli_comp_level       6;
+      brotli_static           on;
+      brotli_types            application/atom+xml application/javascript application/json application/rss+xml
+                              application/vnd.ms-fontobject application/x-font-opentype application/x-font-truetype
+                              application/x-font-ttf application/x-javascript application/xhtml+xml application/xml
+                              font/eot font/opentype font/otf font/truetype image/svg+xml image/vnd.microsoft.icon
+                              image/x-icon image/x-win-bitmap text/css text/javascript text/plain text/xml;
+    '';
+
+    # Diffie-Hellman parameter for DHE ciphersuites
+    security.dhparams = mkIf config.services.nginx.enable {
+      defaultBitSize = 3072;
+      enable = true;
+      params.nginx = { };
+    };
+    services.nginx.sslDhparam = config.security.dhparams.params.nginx.path;
+
+    # Need to explicitly open our web server ports
+    networking.firewall = mkIf config.services.nginx.enable {
+      allowedTCPPorts = [ 80 443 ];
+      allowedUDPPorts = [ 443 ];
+    };
+
+    # Enable this so we don't get annoyed by the ACME TOS
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = &quot;root@dr460nf1r3.org&quot;;
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="shells"><a class="header" href="#shells">Shells</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed.shells;
+in
+{
+  options.dr460nixed.shells.enable = mkOption
+    {
+      default = true;
+      type = types.bool;
+      description = mdDoc ''
+        Whether the shell should receive our aliases and themes.
+      '';
+    };
+
+  config = mkIf cfg.enable {
+    # Programs &amp; global config
+    programs = {
+      bash.shellAliases = {
+        &quot;gpl&quot; = &quot;curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE&quot;;
+        &quot;reloc-us&quot; = &quot;sudo tailscale up --exit-node=100.75.73.33&quot;;
+        &quot;tree&quot; = &quot;eza --git --color always -T&quot;;
+      };
+      fish.shellAbbrs = {
+        &quot;gpl&quot; = &quot;curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE&quot;;
+        &quot;reloc-us&quot; = &quot;sudo tailscale up --exit-node=100.75.73.33&quot;;
+      };
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="syncthing"><a class="header" href="#syncthing">Syncthing</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, pkgs
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed.syncthing;
+  settingsFormat = pkgs.formats.json { };
+in
+{
+  options.dr460nixed.syncthing = {
+    enable = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enable common file synchronisation between devices.
+        '';
+      };
+    key = mkOption
+      {
+        default = &quot;&quot;;
+        type = types.str;
+        description = mdDoc ''
+          The key to use for Syncthing.
+        '';
+      };
+    cert = mkOption
+      {
+        default = &quot;&quot;;
+        type = types.str;
+        description = mdDoc ''
+          The cert to use for Syncthing.
+        '';
+      };
+    devices = mkOption
+      {
+        default = [ ];
+        type = types.attrsOf (types.submodule ({ name, ... }: {
+          freeformType = settingsFormat.type;
+          options = {
+            name = mkOption {
+              type = types.str;
+              default = name;
+              description = lib.mdDoc ''
+                The name of the device.
+              '';
+            };
+            id = mkOption {
+              type = types.str;
+              description = mdDoc ''
+                The device ID. See &lt;https://docs.syncthing.net/dev/device-ids.html&gt;.
+              '';
+            };
+            autoAcceptFolders = mkOption {
+              type = types.bool;
+              default = false;
+              description = mdDoc ''
+                Automatically create or share folders that this device advertises at the default path.
+                See &lt;https://docs.syncthing.net/users/config.html?highlight=autoaccept#config-file-format&gt;.
+              '';
+            };
+          };
+        }));
+        description = mdDoc ''
+          The devices to sync with.
+        '';
+      };
+    devicesNames = mkOption
+      {
+        default = [ ];
+        type = types.listOf types.str;
+        description = mdDoc ''
+          The names of the devices to sync with.
+        '';
+      };
+    user = mkOption
+      {
+        default = &quot;&quot;;
+        type = types.str;
+        description = mdDoc ''
+          The user to run syncthing as.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    services.syncthing = {
+      inherit (cfg) cert;
+      dataDir = &quot;/home/${cfg.user}&quot;;
+      enable = true;
+      inherit (cfg) key;
+      settings = {
+        inherit (cfg) devices;
+        folders = {
+          &quot;/home/nico/Music&quot; = {
+            id = &quot;ybqqh-as53c&quot;;
+            devices = cfg.devicesNames;
+          };
+          &quot;/home/nico/Pictures&quot; = {
+            id = &quot;9gj2u-j3m9s&quot;;
+            devices = cfg.devicesNames;
+          };
+          &quot;/home/nico/School&quot; = {
+            id = &quot;g5jha-cnrr4&quot;;
+            devices = cfg.devicesNames;
+          };
+          &quot;/home/nico/Sync&quot; = {
+            id = &quot;u62ge-wzsau&quot;;
+            devices = cfg.devicesNames;
+          };
+          &quot;/home/nico/Videos&quot; = {
+            id = &quot;nxhpo-c2j5b&quot;;
+            devices = cfg.devicesNames;
+          };
+        };
+        options = {
+          localAnnounceEnabled = true;
+          urAccepted = -1;
+        };
+      };
+      inherit (cfg) user;
+    };
+  };
+}
+
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tailscale-tls"><a class="header" href="#tailscale-tls">Tailscale TLS</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, pkgs
+, ...
+}:
+with lib; let
+  cfg = config.dr460nixed.tailscale-tls;
+  domainExpression =
+    if cfg.domain-override != null
+    then cfg.domain-override
+    else &quot;$(${pkgs.tailscale}/bin/tailscale cert 2&gt;&amp;1 | grep use | cut -d '\&quot;' -f2)&quot;;
+in
+{
+  options.dr460nixed.tailscale-tls = {
+    enable = mkEnableOption &quot;Automatic Tailscale certificates renewal&quot;;
+
+    target = mkOption {
+      type = types.str;
+      description = &quot;Where to put certificates&quot;;
+      default = &quot;/var/lib/tailscale-tls&quot;;
+    };
+
+    mode = mkOption {
+      type = types.str;
+      description = &quot;File mode for certificates&quot;;
+      default = &quot;0640&quot;;
+    };
+
+    domain-override = mkOption {
+      type = types.nullOr types.str;
+      description = &quot;Override domain. Defaults to suggested one by tailscale&quot;;
+      default = null;
+    };
+  };
+
+  config = mkIf cfg.enable {
+    users.users.tailscale-tls = {
+      group = &quot;tailscale-tls&quot;;
+      home = &quot;/var/lib/tailscale-tls&quot;;
+      isSystemUser = true;
+    };
+
+    users.groups.tailscale-tls = { };
+
+    systemd.services.tailscale-tls = {
+      description = &quot;Automatic Tailscale certificates&quot;;
+
+      after = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
+      wants = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
+      wantedBy = [ &quot;multi-user.target&quot; ];
+
+      serviceConfig.Type = &quot;oneshot&quot;;
+      script = ''
+        status=&quot;Starting&quot;
+
+        until [ $status = &quot;Running&quot; ]; do
+          sleep 2
+          status=$(${pkgs.tailscale}/bin/tailscale status -json | ${pkgs.jq}/bin/jq -r .BackendState)
+        done
+
+        mkdir -p &quot;${cfg.target}&quot;
+
+        DOMAIN=${domainExpression}
+
+        ${pkgs.tailscale}/bin/tailscale cert \
+          --cert-file &quot;${cfg.target}/cert.crt&quot; \
+          --key-file &quot;${cfg.target}/key.key&quot; \
+          &quot;$DOMAIN&quot;
+
+        chown -R tailscale-tls:tailscale-tls &quot;${cfg.target}&quot;
+
+        chmod ${cfg.mode} &quot;${cfg.target}/cert.crt&quot; &quot;${cfg.target}/key.key&quot;
+      '';
+    };
+
+    systemd.timers.tailscale-tls = {
+      description = &quot;Automatic Tailscale certificates renewal&quot;;
+
+      after = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
+      wants = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
+      wantedBy = [ &quot;multi-user.target&quot; ];
+
+      timerConfig = {
+        OnCalendar = &quot;weekly&quot;;
+        Persistent = &quot;true&quot;;
+        Unit = &quot;schedule-test.service&quot;;
+      };
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tailscale"><a class="header" href="#tailscale">Tailscale</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, pkgs
+, ...
+}:
+with lib; let
+  cfg = config.dr460nixed.tailscale;
+
+  tailscaleJoinArgsList =
+    [
+      &quot;-authkey&quot;
+      &quot;$(cat ${cfg.authFile})&quot;
+    ]
+    ++ cfg.extraUpArgs;
+
+  tailscaleJoinArgsString = builtins.concatStringsSep &quot; &quot; tailscaleJoinArgsList;
+
+  tailscaleUpScript = ''
+    sleep 2
+    status=&quot;$(${pkgs.tailscale}/bin/tailscale status -json | ${pkgs.jq}/bin/jq -r .BackendState)&quot;
+    if [ $status = &quot;Running&quot; ]; then # if so, then do nothing
+      exit 0
+    fi
+    ${pkgs.tailscale}/bin/tailscale up ${tailscaleJoinArgsString}
+  '';
+in
+{
+  options.dr460nixed.tailscale = {
+    enable = mkEnableOption &quot;Tailscale client daemon&quot;;
+
+    autoConnect = mkOption {
+      type = types.bool;
+      default = false;
+      description = &quot;Whether to automatically connect to Tailscale using an auth key&quot;;
+    };
+
+    authFile = mkOption {
+      type = types.path;
+      example = &quot;/run/secrets/tailscale-key&quot;;
+      description = &quot;File location storing tailscale auth-key&quot;;
+    };
+
+    extraUpArgs = mkOption {
+      type = with types; listOf str;
+      default = [ ];
+      description = &quot;Extra args for tailscale up&quot;;
+    };
+  };
+
+  config = mkIf cfg.enable {
+    # Enable Tailscale service
+    services.tailscale.enable = true;
+
+    # Allow Tailscale devices to connect
+    networking.firewall.trustedInterfaces = [ &quot;tailscale0&quot; ];
+
+    # Connect to Tailnet automatically
+    systemd.services.tailscale-autoconnect = mkIf cfg.autoConnect {
+      description = &quot;Automatic connection to Tailscale&quot;;
+
+      # Make sure tailscale is running before trying to connect to tailscale
+      after = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
+      wants = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
+      wantedBy = [ &quot;multi-user.target&quot; ];
+
+      serviceConfig.Type = &quot;oneshot&quot;;
+      script = tailscaleUpScript;
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="users"><a class="header" href="#users">Users</a></h1>
+<pre><code class="language-nix">{ keys
+, config
+, ...
+}:
+let
+  # Use fixed UIDs/GIDs
+  deterministicIds =
+    let
+      uidGid = id: {
+        gid = id;
+        uid = id;
+      };
+    in
+    {
+      acme = uidGid 999;
+      adbusers = uidGid 998;
+      avahi = uidGid 997;
+      chaotic_op = uidGid 996;
+      grafana = uidGid 995;
+      influxdb2 = uidGid 994;
+      loki = uidGid 993;
+      nico = uidGid 1000;
+      nm-iodine = uidGid 992;
+      node-exporter = uidGid 991;
+      nscd = uidGid 990;
+      plocate = uidGid 989;
+      polkituser = uidGid 988;
+      promtail = uidGid 987;
+      rtkit = uidGid 986;
+      sshd = uidGid 985;
+      systemd-coredump = uidGid 984;
+      systemd-oom = uidGid 983;
+      telegraf = uidGid 982;
+      vnstatd = uidGid 981;
+      wireshark = uidGid 980;
+    };
+
+  # Add groups only if they exist
+  ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
+in
+{
+  # This is needed for early set up of user accounts
+  sops.secrets = {
+    &quot;passwords/nico&quot;.neededForUsers = true;
+    &quot;passwords/root&quot;.neededForUsers = true;
+  };
+
+  users = {
+    inherit deterministicIds;
+    # All users are immuntable; if a password is required it needs to be set via passwordFile
+    mutableUsers = false;
+    users = {
+      nico = {
+        autoSubUidGidRange = false; # Use fixed UIDs/GIDs
+        extraGroups = [
+          &quot;audio&quot;
+          &quot;video&quot;
+          &quot;wheel&quot;
+        ] ++ ifTheyExist [
+          &quot;adbusers&quot;
+          &quot;chaotic_op&quot;
+          &quot;deluge&quot;
+          &quot;disk&quot;
+          &quot;docker&quot;
+          &quot;flatpak&quot;
+          &quot;git&quot;
+          &quot;kvm&quot;
+          &quot;libvirtd&quot;
+          &quot;mysql&quot;
+          &quot;network&quot;
+          &quot;networkmanager&quot;
+          &quot;podman&quot;
+          &quot;systemd-journal&quot;
+          &quot;wireshark&quot;
+        ];
+        hashedPasswordFile = config.sops.secrets.&quot;passwords/nico&quot;.path;
+        home = &quot;/home/nico&quot;;
+        isNormalUser = true;
+        openssh.authorizedKeys.keyFiles = [ keys.nico ];
+      };
+      # Lock root password
+      root.hashedPasswordFile = config.sops.secrets.&quot;passwords/root&quot;.path;
+    };
+  };
+
+  # Load my home-manager configurations
+  home-manager.users.&quot;nico&quot; = import ../../home-manager/common.nix;
+
+  # Allow pushing to Cachix
+  sops.secrets.&quot;api_keys/cachix&quot; = {
+    mode = &quot;0600&quot;;
+    owner = config.users.users.nico.name;
+    path = &quot;/home/nico/.config/cachix/cachix.dhall&quot;;
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="zfs"><a class="header" href="#zfs">ZFS</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, pkgs
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed.zfs;
+in
+{
+  options.dr460nixed.zfs = {
+    enable = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Configures common options for using ZFS on NixOS.
+        '';
+      };
+  };
+  options.dr460nixed.zfs = {
+    sendMails = mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enables sending status reports about ZFS maintainance via email.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    # Support booting off ZFS
+    boot.supportedFilesystems = [ &quot;zfs&quot; ];
+
+    # Always request encryption credentials to open rootfs
+    boot.zfs.requestEncryptionCredentials = true;
+
+    # Useful ZFS maintenance
+    services.zfs = {
+      autoScrub = {
+        enable = true;
+        interval = &quot;weekly&quot;;
+      };
+      trim = {
+        enable = true;
+        interval = &quot;weekly&quot;;
+      };
+    };
+
+    # Enable configuration of msmtp
+    dr460nixed.smtp.enable = mkIf cfg.sendMails true;
+
+    # Configure ZFS Event Daemon to use msmtp
+    services.zfs.zed.settings = mkIf cfg.sendMails {
+      ZED_DEBUG_LOG = &quot;/tmp/zed.debug.log&quot;;
+      ZED_EMAIL_ADDR = [ &quot;root&quot; ];
+      ZED_EMAIL_OPTS = &quot;@ADDRESS@&quot;;
+      ZED_EMAIL_PROG = &quot;${pkgs.msmtp}/bin/msmtp&quot;;
+
+      ZED_NOTIFY_INTERVAL_SECS = 3600;
+      ZED_NOTIFY_VERBOSE = true;
+
+      ZED_SCRUB_AFTER_RESILVER = true;
+      ZED_USE_ENCLOSURE_LEDS = true;
+    };
+
+    # This option does not work; will return error
+    services.zfs.zed.enableMail = mkIf cfg.sendMails false;
+
+    # Metrics
+    services.telegraf.extraConfig.inputs = lib.mkIf config.services.telegraf.enable {
+      zfs.poolMetrics = true;
+    };
+  };
+}
+
+
+
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="credits"><a class="header" href="#credits">Credits</a></h1>
 <p>A special thanks to <a href="https://github.com/pedrohlc">PedroHLC</a>, who always gives great advice and who is also the reason I'm using NixOS today. Also, I studied <a href="https://github.com/Misterio77">Mysterio77</a>'s and <a href="https://github.com/NotAShelf">NotAShelf</a>'s Nix configurations while building this one.</p>
 
                     </main>

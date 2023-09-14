@@ -1,0 +1,707 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js dark">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>apps - Dr460nixed flake documentation</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="Contains the documentation for the dr460nixed flake.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "dark";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('dark')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Welcome</li><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../quick-start.html"><strong aria-hidden="true">2.</strong> Quick start</a></li><li class="chapter-item expanded affix "><li class="part-title">Modules</li><li class="chapter-item expanded "><a href="../modules/apps.html" class="active"><strong aria-hidden="true">3.</strong> apps</a></li><li class="chapter-item expanded "><a href="../modules/boot.html"><strong aria-hidden="true">4.</strong> boot</a></li><li class="chapter-item expanded "><a href="../modules/common.html"><strong aria-hidden="true">5.</strong> common</a></li><li class="chapter-item expanded "><a href="../modules/desktops.html"><strong aria-hidden="true">6.</strong> desktops</a></li><li class="chapter-item expanded "><a href="../modules/deterministic-ids.html"><strong aria-hidden="true">7.</strong> deterministic-ids</a></li><li class="chapter-item expanded "><a href="../modules/development.html"><strong aria-hidden="true">8.</strong> development</a></li><li class="chapter-item expanded "><a href="../modules/docker-compose-runner.html"><strong aria-hidden="true">9.</strong> docker-compose-runner</a></li><li class="chapter-item expanded "><a href="../modules/gaming.html"><strong aria-hidden="true">10.</strong> gaming</a></li><li class="chapter-item expanded "><a href="../modules/hardening.html"><strong aria-hidden="true">11.</strong> hardening</a></li><li class="chapter-item expanded "><a href="../modules/impermanence.html"><strong aria-hidden="true">12.</strong> impermanence</a></li><li class="chapter-item expanded "><a href="../modules/locales.html"><strong aria-hidden="true">13.</strong> locales</a></li><li class="chapter-item expanded "><a href="../modules/msmtp.html"><strong aria-hidden="true">14.</strong> msmtp</a></li><li class="chapter-item expanded "><a href="../modules/networking.html"><strong aria-hidden="true">15.</strong> networking</a></li><li class="chapter-item expanded "><a href="../modules/nix.html"><strong aria-hidden="true">16.</strong> nix</a></li><li class="chapter-item expanded "><a href="../modules/oci.html"><strong aria-hidden="true">17.</strong> oci</a></li><li class="chapter-item expanded "><a href="../modules/servers.html"><strong aria-hidden="true">18.</strong> servers</a></li><li class="chapter-item expanded "><a href="../modules/shells.html"><strong aria-hidden="true">19.</strong> shells</a></li><li class="chapter-item expanded "><a href="../modules/syncthing.html"><strong aria-hidden="true">20.</strong> syncthing</a></li><li class="chapter-item expanded "><a href="../modules/tailscale-tls.html"><strong aria-hidden="true">21.</strong> tailscale-tls</a></li><li class="chapter-item expanded "><a href="../modules/tailscale.html"><strong aria-hidden="true">22.</strong> tailscale</a></li><li class="chapter-item expanded "><a href="../modules/users.html"><strong aria-hidden="true">23.</strong> users</a></li><li class="chapter-item expanded "><a href="../modules/zfs.html"><strong aria-hidden="true">24.</strong> zfs</a></li><li class="chapter-item expanded affix "><li class="part-title">Misc</li><li class="chapter-item expanded "><a href="../credits.html"><strong aria-hidden="true">25.</strong> Credits</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Dr460nixed flake documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://gitlab.com/dr460nf1r3/dr460nixed" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="apps"><a class="header" href="#apps">Apps</a></h1>
+<pre><code class="language-nix">{ config
+, lib
+, pkgs
+, ...
+}:
+with lib;
+let
+  cfg = config.dr460nixed;
+in
+{
+  # These are the packages I always need
+  environment.systemPackages = with pkgs;
+    let
+      required-packages = [
+        age
+        bind
+        btop
+        cached-nix-shell
+        cachix
+        cloudflared
+        duf
+        eza
+        jq
+        killall
+        micro
+        mosh
+        nettools
+        nmap
+        nvd
+        python3
+        sops
+        tldr
+        tmux
+        traceroute
+        ugrep
+        vulnix
+        wget
+        whois
+      ];
+    in
+    required-packages
+    ++ optionals cfg.desktops.enable (with pkgs; [
+      acpi
+      appimage-run
+      asciinema
+      aspell
+      aspellDicts.de
+      aspellDicts.en
+      chromium-flagged
+      ffmpegthumbnailer
+      freerdp
+      gimp
+      helvum
+      hunspell
+      hunspellDicts.de_DE
+      hunspellDicts.en_US
+      inkscape
+      krita
+      libreoffice-qt
+      libsForQt5.kdenlive
+      libsForQt5.kleopatra
+      libsForQt5.krdc
+      libsForQt5.krfb
+      libsecret
+      libva-utils
+      lm_sensors
+      movit
+      nextcloud-client
+      obs-studio-wrapped
+      qbittorrent
+      spotdl
+      syncthingtray
+      tdesktop
+      tor-browser-bundle-bin
+      usbutils
+      vorta
+      vulkan-tools
+      xdg-ninja
+    ]) ++ optionals cfg.development.enable (with pkgs; [
+      ansible
+      beekeeper-studio
+      bind.dnsutils
+      deadnix
+      gitkraken
+      heroku
+      hugo
+      jetbrains.pycharm-professional
+      keybase-gui
+      manix
+      mongodb-compass
+      nerdctl
+      nix-prefetch-git
+      nixd
+      nixos-generators
+      nixpkgs-fmt
+      nixpkgs-lint
+      nixpkgs-review
+      nodePackages_latest.prettier
+      nodejs
+      ruff
+      shellcheck
+      shfmt
+      speedcrunch
+      statix
+      termius
+      vagrant
+      ventoy-full
+      virt-manager
+      (vscode-with-extensions.override {
+        vscodeExtensions = with vscode-extensions;
+          [
+            b4dm4n.vscode-nixpkgs-fmt
+            bbenoist.nix
+            eamodio.gitlens
+            esbenp.prettier-vscode
+            foxundermoon.shell-format
+            github.codespaces
+            github.copilot
+            github.vscode-github-actions
+            github.vscode-pull-request-github
+            jnoortheen.nix-ide
+            ms-azuretools.vscode-docker
+            ms-python.python
+            ms-python.vscode-pylance
+            ms-vscode-remote.remote-ssh
+            ms-vscode.hexeditor
+            ms-vsliveshare.vsliveshare
+            njpwerner.autodocstring
+            pkief.material-icon-theme
+            redhat.vscode-xml
+            redhat.vscode-yaml
+            timonwong.shellcheck
+            tyriar.sort-lines
+          ]
+          ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+            {
+              name = &quot;sweet-vscode&quot;;
+              publisher = &quot;eliverlara&quot;;
+              sha256 = &quot;sha256-kJgqMEJHyYF3GDxe1rnpTEmbfJE01tyyOFjRUp4SOds=&quot;;
+              version = &quot;1.1.1&quot;;
+            }
+            {
+              name = &quot;ruff&quot;;
+              publisher = &quot;charliermarsh&quot;;
+              sha256 = &quot;sha256-KOntjiE+n1yf9047XDldGg2pT+zknI/aEg6h71LwEB8=&quot;;
+              version = &quot;2023.34.0&quot;;
+            }
+            {
+              # Available in nixpkgs, but outdated (0.4.0) at the time of adding
+              name = &quot;vscode-tailscale&quot;;
+              publisher = &quot;tailscale&quot;;
+              sha256 = &quot;sha256-lwKsAYy04l1LkZPGgu9ezRQNTX7ZPzLJJ8j86ZuqNlQ=&quot;;
+              version = &quot;0.6.2&quot;;
+            }
+          ];
+      })
+      wireshark
+      xdg-utils
+      yarn
+    ]) ++ optionals cfg.yubikey (with pkgs; [
+      yubikey-manager-qt
+      yubioath-flutter
+    ]) ++ optionals cfg.school (with pkgs; [
+      speedcrunch
+      sqlite
+      sqlitebrowser
+      teams-for-linux
+      virt-manager
+    ]) ++ optionals cfg.live-cd (with pkgs; [
+      btrfs-progs
+      chntpw
+      cryptsetup
+      dosfstools
+      e2fsprogs
+      efibootmgr
+      flashrom
+      gnutar
+      gparted
+      hexedit
+      home-manager
+      hwinfo
+      inxi
+      memtest86-efi
+      ntfs3g
+      nvme-cli
+      p7zip
+      pciutils
+      perl
+      qemu-utils
+      rsync
+      tcpdump
+      testdisk
+      util-linux
+      wipe
+      xfsprogs
+    ]);
+
+  xdg.mime.defaultApplications =
+    let
+      # Take from the respective mimetype files
+      images = [
+        &quot;image/bmp&quot;
+        &quot;image/gif&quot;
+        &quot;image/jpeg&quot;
+        &quot;image/jpg&quot;
+        &quot;image/pjpeg&quot;
+        &quot;image/png&quot;
+        &quot;image/svg+xml&quot;
+        &quot;image/svg+xml-compressed&quot;
+        &quot;image/tiff&quot;
+        &quot;image/vnd.wap.wbmp;image/x-icns&quot;
+        &quot;image/x-bmp&quot;
+        &quot;image/x-gray&quot;
+        &quot;image/x-icb&quot;
+        &quot;image/x-ico&quot;
+        &quot;image/x-pcx&quot;
+        &quot;image/x-png&quot;
+        &quot;image/x-portable-anymap&quot;
+        &quot;image/x-portable-bitmap&quot;
+        &quot;image/x-portable-graymap&quot;
+        &quot;image/x-portable-pixmap&quot;
+        &quot;image/x-xbitmap&quot;
+        &quot;image/x-xpixmap&quot;
+      ];
+      urls = [
+        &quot;text/html&quot;
+        &quot;x-scheme-handler/about&quot;
+        &quot;x-scheme-handler/http&quot;
+        &quot;x-scheme-handler/https&quot;
+        &quot;x-scheme-handler/unknown&quot;
+      ];
+      documents = [
+        &quot;application/illustrator&quot;
+        &quot;application/oxps&quot;
+        &quot;application/pdf&quot;
+        &quot;application/postscript&quot;
+        &quot;application/vnd.comicbook+zip&quot;
+        &quot;application/vnd.comicbook-rar&quot;
+        &quot;application/vnd.ms-xpsdocument&quot;
+        &quot;application/x-bzdvi&quot;
+        &quot;application/x-bzpdf&quot;
+        &quot;application/x-bzpostscript&quot;
+        &quot;application/x-cb7&quot;
+        &quot;application/x-cbr&quot;
+        &quot;application/x-cbt&quot;
+        &quot;application/x-cbz&quot;
+        &quot;application/x-dvi&quot;
+        &quot;application/x-ext-cb7&quot;
+        &quot;application/x-ext-cbr&quot;
+        &quot;application/x-ext-cbt&quot;
+        &quot;application/x-ext-cbz&quot;
+        &quot;application/x-ext-djv&quot;
+        &quot;application/x-ext-djvu&quot;
+        &quot;application/x-ext-dvi&quot;
+        &quot;application/x-ext-eps&quot;
+        &quot;application/x-ext-pdf&quot;
+        &quot;application/x-ext-ps&quot;
+        &quot;application/x-gzdvi&quot;
+        &quot;application/x-gzpdf&quot;
+        &quot;application/x-gzpostscript&quot;
+        &quot;application/x-xzpdf&quot;
+        &quot;image/tiff&quot;
+        &quot;image/vnd.djvu+multipage&quot;
+        &quot;image/x-bzeps&quot;
+        &quot;image/x-eps&quot;
+        &quot;image/x-gzeps&quot;
+      ];
+      audioVideo = [
+        &quot;application/mxf&quot;
+        &quot;application/ogg&quot;
+        &quot;application/sdp&quot;
+        &quot;application/smil&quot;
+        &quot;application/streamingmedia&quot;
+        &quot;application/vnd.apple.mpegurl&quot;
+        &quot;application/vnd.ms-asf&quot;
+        &quot;application/vnd.rn-realmedia&quot;
+        &quot;application/vnd.rn-realmedia-vbr&quot;
+        &quot;application/x-cue&quot;
+        &quot;application/x-extension-m4a&quot;
+        &quot;application/x-extension-mp4&quot;
+        &quot;application/x-matroska&quot;
+        &quot;application/x-mpegurl&quot;
+        &quot;application/x-ogg&quot;
+        &quot;application/x-ogm&quot;
+        &quot;application/x-ogm-audio&quot;
+        &quot;application/x-ogm-video&quot;
+        &quot;application/x-shorten&quot;
+        &quot;application/x-smil&quot;
+        &quot;application/x-streamingmedia&quot;
+        &quot;audio/3gpp&quot;
+        &quot;audio/3gpp2&quot;
+        &quot;audio/AMR&quot;
+        &quot;audio/aac&quot;
+        &quot;audio/ac3&quot;
+        &quot;audio/aiff&quot;
+        &quot;audio/amr-wb&quot;
+        &quot;audio/dv&quot;
+        &quot;audio/eac3&quot;
+        &quot;audio/flac&quot;
+        &quot;audio/m3u&quot;
+        &quot;audio/m4a&quot;
+        &quot;audio/mp1&quot;
+        &quot;audio/mp2&quot;
+        &quot;audio/mp3&quot;
+        &quot;audio/mp4&quot;
+        &quot;audio/mpeg&quot;
+        &quot;audio/mpeg2&quot;
+        &quot;audio/mpeg3&quot;
+        &quot;audio/mpegurl&quot;
+        &quot;audio/mpg&quot;
+        &quot;audio/musepack&quot;
+        &quot;audio/ogg&quot;
+        &quot;audio/opus&quot;
+        &quot;audio/rn-mpeg&quot;
+        &quot;audio/scpls&quot;
+        &quot;audio/vnd.dolby.heaac.1&quot;
+        &quot;audio/vnd.dolby.heaac.2&quot;
+        &quot;audio/vnd.dts&quot;
+        &quot;audio/vnd.dts.hd&quot;
+        &quot;audio/vnd.rn-realaudio&quot;
+        &quot;audio/vorbis&quot;
+        &quot;audio/wav&quot;
+        &quot;audio/webm&quot;
+        &quot;audio/x-aac&quot;
+        &quot;audio/x-adpcm&quot;
+        &quot;audio/x-aiff&quot;
+        &quot;audio/x-ape&quot;
+        &quot;audio/x-m4a&quot;
+        &quot;audio/x-matroska&quot;
+        &quot;audio/x-mp1&quot;
+        &quot;audio/x-mp2&quot;
+        &quot;audio/x-mp3&quot;
+        &quot;audio/x-mpegurl&quot;
+        &quot;audio/x-mpg&quot;
+        &quot;audio/x-ms-asf&quot;
+        &quot;audio/x-ms-wma&quot;
+        &quot;audio/x-musepack&quot;
+        &quot;audio/x-pls&quot;
+        &quot;audio/x-pn-au&quot;
+        &quot;audio/x-pn-realaudio&quot;
+        &quot;audio/x-pn-wav&quot;
+        &quot;audio/x-pn-windows-pcm&quot;
+        &quot;audio/x-realaudio&quot;
+        &quot;audio/x-scpls&quot;
+        &quot;audio/x-shorten&quot;
+        &quot;audio/x-tta&quot;
+        &quot;audio/x-vorbis&quot;
+        &quot;audio/x-vorbis+ogg&quot;
+        &quot;audio/x-wav&quot;
+        &quot;audio/x-wavpack&quot;
+        &quot;video/3gp&quot;
+        &quot;video/3gpp&quot;
+        &quot;video/3gpp2&quot;
+        &quot;video/avi&quot;
+        &quot;video/divx&quot;
+        &quot;video/dv&quot;
+        &quot;video/fli&quot;
+        &quot;video/flv&quot;
+        &quot;video/mkv&quot;
+        &quot;video/mp2t&quot;
+        &quot;video/mp4&quot;
+        &quot;video/mp4v-es&quot;
+        &quot;video/mpeg&quot;
+        &quot;video/msvideo&quot;
+        &quot;video/ogg&quot;
+        &quot;video/quicktime&quot;
+        &quot;video/vnd.divx&quot;
+        &quot;video/vnd.mpegurl&quot;
+        &quot;video/vnd.rn-realvideo&quot;
+        &quot;video/webm&quot;
+        &quot;video/x-avi&quot;
+        &quot;video/x-flc&quot;
+        &quot;video/x-flic&quot;
+        &quot;video/x-flv&quot;
+        &quot;video/x-m4v&quot;
+        &quot;video/x-matroska&quot;
+        &quot;video/x-mpeg2&quot;
+        &quot;video/x-mpeg3&quot;
+        &quot;video/x-ms-afs&quot;
+        &quot;video/x-ms-asf&quot;
+        &quot;video/x-ms-wmv&quot;
+        &quot;video/x-ms-wmx&quot;
+        &quot;video/x-ms-wvxvideo&quot;
+        &quot;video/x-msvideo&quot;
+        &quot;video/x-ogm&quot;
+        &quot;video/x-ogm+ogg&quot;
+        &quot;video/x-theora&quot;
+        &quot;video/x-theora+ogg&quot;
+      ];
+      archives = [
+        &quot;application/bzip2&quot;
+        &quot;application/gzip&quot;
+        &quot;application/vnd.android.package-archive&quot;
+        &quot;application/vnd.debian.binary-package&quot;
+        &quot;application/vnd.ms-cab-compressed&quot;
+        &quot;application/x-7z-compressed&quot;
+        &quot;application/x-7z-compressed-tar&quot;
+        &quot;application/x-ace&quot;
+        &quot;application/x-alz&quot;
+        &quot;application/x-ar&quot;
+        &quot;application/x-archive&quot;
+        &quot;application/x-arj&quot;
+        &quot;application/x-brotli&quot;
+        &quot;application/x-bzip&quot;
+        &quot;application/x-bzip-brotli-tar&quot;
+        &quot;application/x-bzip-compressed-tar&quot;
+        &quot;application/x-bzip1&quot;
+        &quot;application/x-bzip1-compressed-tar&quot;
+        &quot;application/x-cabinet&quot;
+        &quot;application/x-cd-image&quot;
+        &quot;application/x-chrome-extension&quot;
+        &quot;application/x-compress&quot;
+        &quot;application/x-compressed-tar&quot;
+        &quot;application/x-cpio&quot;
+        &quot;application/x-deb&quot;
+        &quot;application/x-ear&quot;
+        &quot;application/x-gtar&quot;
+        &quot;application/x-gzip&quot;
+        &quot;application/x-gzpostscript&quot;
+        &quot;application/x-java-archive&quot;
+        &quot;application/x-lha&quot;
+        &quot;application/x-lhz&quot;
+        &quot;application/x-lrzip&quot;
+        &quot;application/x-lrzip-compressed-tar&quot;
+        &quot;application/x-lz4&quot;
+        &quot;application/x-lz4-compressed-tar&quot;
+        &quot;application/x-lzip&quot;
+        &quot;application/x-lzip-compressed-tar&quot;
+        &quot;application/x-lzma&quot;
+        &quot;application/x-lzma-compressed-tar&quot;
+        &quot;application/x-lzop&quot;
+        &quot;application/x-ms-dos-executable&quot;
+        &quot;application/x-ms-wim&quot;
+        &quot;application/x-rar&quot;
+        &quot;application/x-rar-compressed&quot;
+        &quot;application/x-rpm&quot;
+        &quot;application/x-rzip&quot;
+        &quot;application/x-rzip-compressed-tar&quot;
+        &quot;application/x-source-rpm&quot;
+        &quot;application/x-stuffit&quot;
+        &quot;application/x-tar&quot;
+        &quot;application/x-tarz&quot;
+        &quot;application/x-tzo&quot;
+        &quot;application/x-war&quot;
+        &quot;application/x-xar&quot;
+        &quot;application/x-xz&quot;
+        &quot;application/x-xz-compressed-tar&quot;
+        &quot;application/x-zip&quot;
+        &quot;application/x-zip-compressed&quot;
+        &quot;application/x-zoo&quot;
+        &quot;application/x-zstd-compressed-tar&quot;
+        &quot;application/zip&quot;
+        &quot;application/zstd&quot;
+      ];
+      code = [
+        &quot;application/x-shellscript&quot;
+        &quot;text/english&quot;
+        &quot;text/plain&quot;
+        &quot;text/x-c&quot;
+        &quot;text/x-c++&quot;
+        &quot;text/x-c++hdr&quot;
+        &quot;text/x-c++src&quot;
+        &quot;text/x-chdr&quot;
+        &quot;text/x-csrc&quot;
+        &quot;text/x-java&quot;
+        &quot;text/x-makefile&quot;
+        &quot;text/x-moc&quot;
+        &quot;text/x-pascal&quot;
+        &quot;text/x-tcl&quot;
+        &quot;text/x-tex&quot;
+      ];
+    in
+    lib.mkForce (
+      # Overriding garuda-nix flakes defaults here
+      (lib.genAttrs code (_: [ &quot;code.desktop&quot; ]))
+      // (lib.genAttrs archives (_: [ &quot;ark.desktop&quot; ]))
+      // (lib.genAttrs audioVideo (_: [ &quot;vlc.desktop&quot; ]))
+      // (lib.genAttrs documents (_: [ &quot;okular.desktop&quot; ]))
+      // (lib.genAttrs images (_: [ &quot;gwenview.desktop&quot; ]))
+      // (lib.genAttrs urls (_: [ &quot;firedragon.desktop&quot; ]))
+    );
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../quick-start.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../modules/boot.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../quick-start.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../modules/boot.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

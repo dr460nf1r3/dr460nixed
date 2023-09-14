@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html" class="active"><strong aria-hidden="true">1.</strong> Introduction</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Welcome</li><li class="chapter-item expanded "><a href="intro.html" class="active"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="quick-start.html"><strong aria-hidden="true">2.</strong> Quick start</a></li><li class="chapter-item expanded affix "><li class="part-title">Modules</li><li class="chapter-item expanded "><a href="modules/apps.html"><strong aria-hidden="true">3.</strong> apps</a></li><li class="chapter-item expanded "><a href="modules/boot.html"><strong aria-hidden="true">4.</strong> boot</a></li><li class="chapter-item expanded "><a href="modules/common.html"><strong aria-hidden="true">5.</strong> common</a></li><li class="chapter-item expanded "><a href="modules/desktops.html"><strong aria-hidden="true">6.</strong> desktops</a></li><li class="chapter-item expanded "><a href="modules/deterministic-ids.html"><strong aria-hidden="true">7.</strong> deterministic-ids</a></li><li class="chapter-item expanded "><a href="modules/development.html"><strong aria-hidden="true">8.</strong> development</a></li><li class="chapter-item expanded "><a href="modules/docker-compose-runner.html"><strong aria-hidden="true">9.</strong> docker-compose-runner</a></li><li class="chapter-item expanded "><a href="modules/gaming.html"><strong aria-hidden="true">10.</strong> gaming</a></li><li class="chapter-item expanded "><a href="modules/hardening.html"><strong aria-hidden="true">11.</strong> hardening</a></li><li class="chapter-item expanded "><a href="modules/impermanence.html"><strong aria-hidden="true">12.</strong> impermanence</a></li><li class="chapter-item expanded "><a href="modules/locales.html"><strong aria-hidden="true">13.</strong> locales</a></li><li class="chapter-item expanded "><a href="modules/msmtp.html"><strong aria-hidden="true">14.</strong> msmtp</a></li><li class="chapter-item expanded "><a href="modules/networking.html"><strong aria-hidden="true">15.</strong> networking</a></li><li class="chapter-item expanded "><a href="modules/nix.html"><strong aria-hidden="true">16.</strong> nix</a></li><li class="chapter-item expanded "><a href="modules/oci.html"><strong aria-hidden="true">17.</strong> oci</a></li><li class="chapter-item expanded "><a href="modules/servers.html"><strong aria-hidden="true">18.</strong> servers</a></li><li class="chapter-item expanded "><a href="modules/shells.html"><strong aria-hidden="true">19.</strong> shells</a></li><li class="chapter-item expanded "><a href="modules/syncthing.html"><strong aria-hidden="true">20.</strong> syncthing</a></li><li class="chapter-item expanded "><a href="modules/tailscale-tls.html"><strong aria-hidden="true">21.</strong> tailscale-tls</a></li><li class="chapter-item expanded "><a href="modules/tailscale.html"><strong aria-hidden="true">22.</strong> tailscale</a></li><li class="chapter-item expanded "><a href="modules/users.html"><strong aria-hidden="true">23.</strong> users</a></li><li class="chapter-item expanded "><a href="modules/zfs.html"><strong aria-hidden="true">24.</strong> zfs</a></li><li class="chapter-item expanded affix "><li class="part-title">Misc</li><li class="chapter-item expanded "><a href="credits.html"><strong aria-hidden="true">25.</strong> Credits</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -196,7 +196,10 @@
 <li>No password prompts when having my <strong>Yubikey</strong> connected to my laptop</li>
 <li>Being able to easily remote-control my machines via <strong>KDEConnect</strong> and a self-hosted <strong>Rustdesk server</strong></li>
 <li>Having custom <strong>bleeding-edge Mesa</strong> builds</li>
+<li>Easy deployment of mdBook-generated documentation to Cloudflare pages</li>
 </ul>
+<h2 id="documentation"><a class="header" href="#documentation">Documentation</a></h2>
+<p>A fully searchable, mdBook-based documentation is available <a href="https://nixed.dr460nf1r3.org">here</a>.</p>
 <h2 id="structure"><a class="header" href="#structure">Structure</a></h2>
 <pre><code>├── docker-compose
 │   ├── oracle-dragon
@@ -215,92 +218,15 @@
 ├── overlays
 └── secrets
 </code></pre>
-<h2 id="module-options"><a class="header" href="#module-options">Module options</a></h2>
-<p>A lot of those have been moved to the <a href="https://gitlab.com/garuda-linux/garuda-nix-subsystem">Garuda Nix Subsystem</a>.</p>
-<pre><code>├── apps.nix
-├── boot.nix
-├── chaotic
-│   ├── chaotic-mirror.nix
-│   ├── chaotic.nix
-├── common.nix
-├── default.nix
-├── desktops.nix
-├── development.nix
-├── disko
-│   ├── btrfs-subvolumes.nix
-│   ├── luks-btrfs-subvolumes.nix
-│   ├── simple-efi.nix
-│   ├── zfs-encrypted.nix
-│   └── zfs.nix
-├── docker-compose-runner.nix
-├── gaming.nix
-├── hardening.nix
-├── impermanence.nix
-├── locales.nix
-├── misc.nix
-├── monitoring.nix
-├── msmtp.nix
-├── networking.nix
-├── nix.nix
-├── oci.nix
-├── servers.nix
-├── shells.nix
-├── syncthing.nix
-├── tailscale.nix
-├── tailscale-tls.nix
-├── users.nix
-└── zfs.nix
-</code></pre>
-<ul>
-<li><code>dr460nixed.auto-upgrade.enable</code> (default false) - enables auto-upgrading the system daily by pulling the updated Nix flake from the repo</li>
-<li><code>dr460nixed.common.enable</code> (default true) - common options for every system</li>
-<li><code>dr460nixed.desktops.enable</code> (default false) - options for desktop systems</li>
-<li><code>dr460nixed.development.enable</code> (default false) - enables a development environment</li>
-<li><code>dr460nixed.docker-compose-runner</code> (default false) - runs a docker-compose.yml and supplies an additional .env file for secrets if desired</li>
-<li><code>dr460nixed.hardening.enable</code> (default true) - system hardening</li>
-<li><code>dr460nixed.lanzaboote.enable</code> (default false) - enables Lanzaboote instead of systemd-boot for secure-boot support</li>
-<li><code>dr460nixed.live-cd</code> (default false) - live CD applications</li>
-<li><code>dr460nixed.locales</code> (default true) - does all the localization setup / console font config</li>
-<li><code>dr460nixed.nodocs</code> (default true) - removes unneeded documentation to save space</li>
-<li><code>dr460nixed.rpi</code> (default false) - Raspberry Pi related things</li>
-<li><code>dr460nixed.school</code> (default false) - things I need for school</li>
-<li><code>dr460nixed.servers.enable</code> (default false) - common server options</li>
-<li><code>dr460nixed.servers.monitoring</code> (default false) - enables some basic monitoring via Netdata</li>
-<li><code>dr460nixed.shells</code> (default true) - enables common shell aliases &amp; theming</li>
-<li><code>dr460nixed.systemd-boot.enable</code> (default true) - a quiet systemd-boot configuration</li>
-<li><code>dr460nixed.tailscale-autoconnect.enable</code> (default true) - automatically connects to the Tailnet</li>
-<li><code>dr460nixed.tailscale-autoconnect.authFile</code> - points to the location where the authkey file is stored</li>
-<li><code>dr460nixed.tailscale-autoconnect.extraUpArgs</code> (default none) - Extra arguments to pass to the Tailscale daemon</li>
-<li><code>dr460nixed.tailscale-tls.enable</code> (default false) - enables automatic management of Tailscale certificates</li>
-<li><code>dr460nixed.theming</code> (default true) - supplies fonts and general system theming via Stylix</li>
-<li><code>dr460nixed.yubikey</code> (default false) - options for using the Yubikey as login</li>
-</ul>
-<h2 id="how-to-use-the-flake"><a class="header" href="#how-to-use-the-flake">How to use the flake?</a></h2>
-<p>Several preparations have to be made in order to bootstrap a working installation:</p>
-<ul>
-<li>A working <code>hardware-configuration.nix</code> needs to be generated for the current machine to replace mine</li>
-<li>The hosts <code>*.nix</code> configuration should be adapted to suit the hardware's needs, eg. needed kernel modules or <code>services.xserver.videoDrivers</code> should be fitting</li>
-<li>Since <code>sops-nix</code> is used to handle secrets, my files need to be replaced with own ones. Usage instructions can be found <a href="https://github.com/Mic92/sops-nix#usage-example">here</a>, basically one needs to create an age public key from the host's ed21559 SSH private key, which is then added to <code>.sops.yaml</code> to allow the host to decrypt secrets while booting up. A fitting age key should also be generated and placed in <code>~/.config/sops/age/keys.txt</code> as described in the usage instructions - this allows decrypting the secrets file to edit it. It lives in <code>secrets/global.yaml</code> and contains the secrets and can be edited with sops <code>secrets/global.yaml</code> (opens a terminal text editor).</li>
-<li>It might be easier to supply a static password in <code>users.nix</code> for bootstrapping, since no login will be possible if the secrets management isn't properly set up yet. I had a few issues with this in the past while setting things up, so I felt giving this advice might help. Usernames are of course also to be changed, as well as SSH public keys.</li>
-</ul>
-<p>Then, the bootstrapping process can be started. All you need is <code>nix</code>. Run:</p>
-<p><code>nix develop</code> or <code>nix-shell</code> to create a shell containing the basic dependencies, then you can proceed by <code>nixos-rebuild --flake .#hostname</code> to build system configurations.</p>
-<p>How to proceed from here?</p>
-<ul>
-<li>Adapt the configurations like enabled modules and home-manager configs to your needs</li>
-<li>Set up CI to build your custom system configurations</li>
-<li>Add your hosts to Tailscale, if you want to be using it. I can warmly recommend it for connecting with any kind of host!</li>
-<li>Build an ISO to play around with <code>nix build .#iso</code> - this has no theming, but has all the important configs for live usb purposes</li>
-<li>... so much more. It never ends ❄️</li>
-</ul>
-<p>a## Credits</p>
-<p>A special thanks to <a href="https://github.com/pedrohlc">PedroHLC</a>, who always gives great advice and who is also the reason I'm using NixOS today. Also, I studied <a href="https://github.com/Misterio77">Mysterio77</a>'s and <a href="https://github.com/NotAShelf">NotAShelf</a>'s Nix configurations while building this one.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
 
+                            <a rel="next" href="quick-start.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -309,6 +235,9 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
 
+                    <a rel="next" href="quick-start.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
