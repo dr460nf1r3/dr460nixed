@@ -56,8 +56,7 @@ in
           "audio"
           "video"
           "wheel"
-        ]
-        ++ ifTheyExist [
+        ] ++ ifTheyExist [
           "adbusers"
           "chaotic_op"
           "deluge"
