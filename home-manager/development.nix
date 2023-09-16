@@ -33,7 +33,7 @@
   # VSCode settings
   programs.vscode.userSettings = {
     "editor.fontFamily" = "'Jetbrains Mono Nerd Font'; 'monospace'; monospace";
-    "editor.formatOnSave" = true;
+    "editor.formatOnSave" = false;
     "editor.inlineSuggest.enabled" = true;
     "explorer.confirmDelete" = false;
     "gitlens.telemetry.enabled" = false;

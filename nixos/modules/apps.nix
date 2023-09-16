@@ -68,6 +68,7 @@ in
       nextcloud-client
       obs-studio-wrapped
       qbittorrent
+      rustdesk
       spotdl
       syncthingtray
       tdesktop
@@ -111,6 +112,7 @@ in
           [
             b4dm4n.vscode-nixpkgs-fmt
             bbenoist.nix
+            davidanson.vscode-markdownlint
             eamodio.gitlens
             esbenp.prettier-vscode
             foxundermoon.shell-format

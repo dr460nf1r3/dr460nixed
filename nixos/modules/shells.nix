@@ -21,12 +21,15 @@ in
     programs = {
       bash.shellAliases = {
         "gpl" = "curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
-        "reloc-us" = "sudo tailscale up --exit-node=100.75.73.33";
         "tree" = "eza --git --color always -T";
       };
-      fish.shellAbbrs = {
-        "gpl" = "curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
-        "reloc-us" = "sudo tailscale up --exit-node=100.75.73.33";
+      fish = {
+        shellAbbrs = {
+          "gpl" = "curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
+        };
+        shellAliases = {
+          "tree" = "eza --git --color always -T";
+        };
       };
     };
   };

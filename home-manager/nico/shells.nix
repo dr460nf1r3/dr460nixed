@@ -7,6 +7,7 @@ in
 {
   # SSH shortcuts
   programs = {
+    # Bash receives aliaseses
     bash.shellAliases = {
       "b1" = "ssh -p23 u342919@u342919.${hetznerStoragebox}";
       "b2" = "ssh -p23 u358867@u358867.${hetznerStoragebox}";
@@ -23,6 +24,7 @@ in
       "m" = "mosh ${user}@garuda-mail.kanyu-bushi.ts.net";
       "o" = "mosh ${user}@oracle-dragon.emperor-mercat.ts.net";
     };
+    # Fish receives auto-expanding abbreviations (much cooler!)
     fish.shellAbbrs = {
       "b1" = "ssh -p23 u342919@u342919.${hetznerStoragebox}";
       "b2" = "ssh -p23 u358867@u358867.${hetznerStoragebox}";

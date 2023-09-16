@@ -51,6 +51,9 @@ in
     # Enable Tailscale service
     services.tailscale.enable = true;
 
+    # Install Tailscale systray
+    environment.systemPackages = lib.mkIf config.dr460nixed.desktops.enable [ pkgs.tailscale-systray ];
+
     # Allow Tailscale devices to connect
     networking.firewall.trustedInterfaces = [ "tailscale0" ];
 

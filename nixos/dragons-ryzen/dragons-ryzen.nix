@@ -115,8 +115,8 @@
   # Enable the touchpad & secure boot, as well as add the ipman script
   environment.systemPackages = with pkgs; [ libinput radeontop zenmonitor ];
 
-  # Home-manager desktop configuration
-  home-manager.users."nico" = import ../../home-manager/desktops.nix;
+  # Home-manager individual settings
+  home-manager.users."nico" = import ../../home-manager/nico/nico.nix;
 
   # A few secrets
   sops.secrets = {

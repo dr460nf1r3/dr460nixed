@@ -11,6 +11,7 @@
     ./development.nix
     ./gaming.nix
     ./hardening.nix
+    ./home-manager.nix
     ./locales.nix
     ./misc.nix
     ./monitoring.nix
