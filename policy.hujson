@@ -3,17 +3,11 @@
 	// Define access control lists for users, groups, autogroups, tags,
 	// Tailscale IP addresses, and subnet ranges
 	"acls": [
-		// All devices tag:dragons can access devices with the same tag
+		// All tagged devices can access each other
 		{
 			"action": "accept",
-			"src":    ["tag:dragons"],
-			"dst":    ["tag:dragons:*"],
-		},
-		// All devices tag:other can access devices with the same tag
-		{
-			"action": "accept",
-			"src":    ["tag:others"],
-			"dst":    ["tag:others:*"],
+			"src":    ["tag:dragons", "tag:others"],
+			"dst":    ["tag:dragons:*", "tag:others:*"],
 		},
 		// All invited members can access devices tagged tag:others
 		{
@@ -24,11 +18,15 @@
 		// All users can use exit nodes
 		{
 			"action": "accept",
-			"src":    ["autogroup:members"],
+			"src":    ["dr460nf1r3@github", "tag:dragons", "tag:others"],
 			"dst":    ["autogroup:internet:*"],
 		},
-		// All Tailscale admins can access everything
-		{"action": "accept", "src": ["autogroup:admin"], "dst": ["*:*"]},
+		// The Tailscale admin can access everything
+		{
+			"action": "accept",
+			"src":    ["dr460nf1r3@github"],
+			"dst":    ["*:*"],
+		},
 		// Allow scraping metrics via node_exporter
 		{
 			"action": "accept",
@@ -40,41 +38,24 @@
 	// Allow the usage of Tailscale SSH - enabling VSCode extension
 	"ssh": [
 		{
-			// All users can SSH to their own devices, as non-root
-			"action": "accept",
-			"src":    ["autogroup:members"],
-			"dst":    ["autogroup:self"],
-			"users":  ["autogroup:nonroot"],
-		},
-		{
 			"action": "accept",
 			"src":    ["dr460nf1r3@github"],
-			"dst":    ["tag:dragons"],
-			"users":  ["autogroup:nonroot"],
-		},
-		{
-			"action": "accept",
-			"src":    ["dr460nf1r3@github"],
-			"dst":    ["tag:others"],
-			"users":  ["autogroup:nonroot"],
+			"dst":    ["tag:dragons", "tag:others", "dr460nf1r3@github"],
+			"users":  ["nico"],
 		},
 	],
 
 	// Allow my personal devices to use Mullvad exit nodes
-	"nodeAttrs": [
-		{
-			"target": ["dr460nf1r3@github"],
-			"attr": [
-				"mullvad",
-			],
-		},
-	],
+	"nodeAttrs": [{
+		"target": ["dr460nf1r3@github"],
+		"attr":   ["mullvad"],
+	}],
 
 	// Define tagOwners via autogroups
 	"tagOwners": {
 		// admins own devices with tag:dragons
-		"tag:dragons": ["autogroup:admin"],
+		"tag:dragons": ["dr460nf1r3@github"],
 		// admins own devices with tag:others
-		"tag:others": ["autogroup:admin"],
+		"tag:others": ["dr460nf1r3@github"],
 	},
 }
