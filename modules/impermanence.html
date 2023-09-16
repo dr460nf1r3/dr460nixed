@@ -171,9 +171,10 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="impermanence"><a class="header" href="#impermanence">Impermanence</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
 }: {
   # This was recently added to Chaotic Nyx
   chaotic.zfs-impermanence-on-shutdown = {
@@ -185,102 +186,122 @@
   # Persistent files
   environment.persistence.&quot;/var/persistent&quot; = {
     hideMounts = true;
-    directories = [
-      &quot;/etc/NetworkManager/system-connections&quot;
-      &quot;/etc/nixos&quot;
-      &quot;/etc/secureboot&quot;
-      &quot;/var/cache/chaotic&quot;
-      &quot;/var/cache/tailscale&quot;
-      &quot;/var/lib/AccountsService/icons&quot;
-      &quot;/var/lib/bluetooth&quot;
-      &quot;/var/lib/chaotic&quot;
-      &quot;/var/lib/containers&quot;
-      &quot;/var/lib/flatpak&quot;
-      &quot;/var/lib/libvirt&quot;
-      &quot;/var/lib/machines&quot;
-      &quot;/var/lib/sddm&quot;
-      &quot;/var/lib/systemd&quot;
-      &quot;/var/lib/tailscale&quot;
-      &quot;/var/lib/upower&quot;
-      &quot;/var/lib/vnstat&quot;
-      { directory = &quot;/var/lib/iwd&quot;; mode = &quot;u=rwx,g=,o=&quot;; }
-    ] ++ lib.optionals config.security.acme.acceptTerms [
-      {
-        directory = &quot;/var/lib/acme&quot;;
-        user = &quot;acme&quot;;
-        group = &quot;acme&quot;;
-        mode = &quot;0755&quot;;
-      }
-    ] ++ lib.optionals config.services.printing.enable [
-      {
-        directory = &quot;/var/lib/cups&quot;;
-        user = &quot;root&quot;;
-        group = &quot;root&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ] ++ lib.optionals config.services.fail2ban.enable [
-      {
-        directory = &quot;/var/lib/fail2ban&quot;;
-        user = &quot;fail2ban&quot;;
-        group = &quot;fail2ban&quot;;
-        mode = &quot;0750&quot;;
-      }
-    ] ++ lib.optionals config.services.postgresql.enable [
-      {
-        directory = &quot;/var/lib/postgresql&quot;;
-        user = &quot;postgres&quot;;
-        group = &quot;postgres&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ] ++ lib.optionals config.services.loki.enable [
-      {
-        directory = &quot;/var/lib/loki&quot;;
-        user = &quot;loki&quot;;
-        group = &quot;loki&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ] ++ lib.optionals config.services.grafana.enable [
-      {
-        directory = config.services.grafana.dataDir;
-        user = &quot;grafana&quot;;
-        group = &quot;grafana&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ] ++ lib.optionals config.services.vaultwarden.enable [
-      {
-        directory = &quot;/var/lib/vaultwarden&quot;;
-        user = &quot;vaultwarden&quot;;
-        group = &quot;vaultwarden&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ] ++ lib.optionals config.services.influxdb2.enable [
-      {
-        directory = &quot;/var/lib/influxdb2&quot;;
-        user = &quot;influxdb2&quot;;
-        group = &quot;influxdb2&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ] ++ lib.optionals config.services.telegraf.enable [
-      {
-        directory = &quot;/var/lib/telegraf&quot;;
-        user = &quot;telegraf&quot;;
-        group = &quot;telegraf&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ] ++ lib.optionals config.services.adguardhome.enable [
-      {
-        directory = &quot;/var/lib/private/AdGuardHome&quot;;
-        user = &quot;root&quot;;
-        group = &quot;root&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ];
-    files = [ &quot;/var/lib/dbus/machine-id&quot; ];
+    directories =
+      [
+        &quot;/etc/NetworkManager/system-connections&quot;
+        &quot;/etc/nixos&quot;
+        &quot;/etc/secureboot&quot;
+        &quot;/var/cache/chaotic&quot;
+        &quot;/var/cache/tailscale&quot;
+        &quot;/var/lib/AccountsService/icons&quot;
+        &quot;/var/lib/bluetooth&quot;
+        &quot;/var/lib/chaotic&quot;
+        &quot;/var/lib/containers&quot;
+        &quot;/var/lib/flatpak&quot;
+        &quot;/var/lib/libvirt&quot;
+        &quot;/var/lib/machines&quot;
+        &quot;/var/lib/sddm&quot;
+        &quot;/var/lib/systemd&quot;
+        &quot;/var/lib/tailscale&quot;
+        &quot;/var/lib/upower&quot;
+        &quot;/var/lib/vnstat&quot;
+        {
+          directory = &quot;/var/lib/iwd&quot;;
+          mode = &quot;u=rwx,g=,o=&quot;;
+        }
+      ]
+      ++ lib.optionals config.security.acme.acceptTerms [
+        {
+          directory = &quot;/var/lib/acme&quot;;
+          user = &quot;acme&quot;;
+          group = &quot;acme&quot;;
+          mode = &quot;0755&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.printing.enable [
+        {
+          directory = &quot;/var/lib/cups&quot;;
+          user = &quot;root&quot;;
+          group = &quot;root&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.fail2ban.enable [
+        {
+          directory = &quot;/var/lib/fail2ban&quot;;
+          user = &quot;fail2ban&quot;;
+          group = &quot;fail2ban&quot;;
+          mode = &quot;0750&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.postgresql.enable [
+        {
+          directory = &quot;/var/lib/postgresql&quot;;
+          user = &quot;postgres&quot;;
+          group = &quot;postgres&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.loki.enable [
+        {
+          directory = &quot;/var/lib/loki&quot;;
+          user = &quot;loki&quot;;
+          group = &quot;loki&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.grafana.enable [
+        {
+          directory = config.services.grafana.dataDir;
+          user = &quot;grafana&quot;;
+          group = &quot;grafana&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.vaultwarden.enable [
+        {
+          directory = &quot;/var/lib/vaultwarden&quot;;
+          user = &quot;vaultwarden&quot;;
+          group = &quot;vaultwarden&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.influxdb2.enable [
+        {
+          directory = &quot;/var/lib/influxdb2&quot;;
+          user = &quot;influxdb2&quot;;
+          group = &quot;influxdb2&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.telegraf.enable [
+        {
+          directory = &quot;/var/lib/telegraf&quot;;
+          user = &quot;telegraf&quot;;
+          group = &quot;telegraf&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.adguardhome.enable [
+        {
+          directory = &quot;/var/lib/private/AdGuardHome&quot;;
+          user = &quot;root&quot;;
+          group = &quot;root&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ];
+    files = [&quot;/var/lib/dbus/machine-id&quot;];
     users.&quot;root&quot; = {
       home = &quot;/root&quot;;
       directories = [
-        { directory = &quot;.gnupg&quot;; mode = &quot;0700&quot;; }
-        { directory = &quot;.ssh&quot;; mode = &quot;0700&quot;; }
+        {
+          directory = &quot;.gnupg&quot;;
+          mode = &quot;0700&quot;;
+        }
+        {
+          directory = &quot;.ssh&quot;;
+          mode = &quot;0700&quot;;
+        }
       ];
     };
     users.&quot;nico&quot; = {
@@ -327,10 +348,22 @@
         &quot;School&quot;
         &quot;Sync&quot;
         &quot;Videos&quot;
-        { directory = &quot;.gnupg&quot;; mode = &quot;0700&quot;; }
-        { directory = &quot;.local/share/keybase&quot;; mode = &quot;0700&quot;; }
-        { directory = &quot;.local/share/keyrings&quot;; mode = &quot;0700&quot;; }
-        { directory = &quot;.ssh&quot;; mode = &quot;0700&quot;; }
+        {
+          directory = &quot;.gnupg&quot;;
+          mode = &quot;0700&quot;;
+        }
+        {
+          directory = &quot;.local/share/keybase&quot;;
+          mode = &quot;0700&quot;;
+        }
+        {
+          directory = &quot;.local/share/keyrings&quot;;
+          mode = &quot;0700&quot;;
+        }
+        {
+          directory = &quot;.ssh&quot;;
+          mode = &quot;0700&quot;;
+        }
       ];
     };
   };

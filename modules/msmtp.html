@@ -171,17 +171,17 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="msmtp"><a class="header" href="#msmtp">MSMTP</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.smtp;
-in
-{
+in {
   options.dr460nixed.smtp = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -219,9 +219,6 @@ in
     };
   };
 }
-
-
-
 </code></pre>
 
                     </main>

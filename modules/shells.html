@@ -171,16 +171,16 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="shells"><a class="header" href="#shells">Shells</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, ...
-}:
-with lib;
-let
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.dr460nixed.shells;
-in
-{
-  options.dr460nixed.shells.enable = mkOption
+in {
+  options.dr460nixed.shells.enable = with lib;
+    mkOption
     {
       default = true;
       type = types.bool;
@@ -189,17 +189,20 @@ in
       '';
     };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Programs &amp; global config
     programs = {
       bash.shellAliases = {
-        &quot;gpl&quot; = &quot;curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE&quot;;
-        &quot;reloc-us&quot; = &quot;sudo tailscale up --exit-node=100.75.73.33&quot;;
-        &quot;tree&quot; = &quot;eza --git --color always -T&quot;;
+        &quot;gpl&quot; = &quot;${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE&quot;;
+        &quot;nix&quot; = &quot;${pkgs.nix}/bin/nix --verbose --print-build-logs&quot;; # https://github.com/NixOS/nix/pull/8323
       };
-      fish.shellAbbrs = {
-        &quot;gpl&quot; = &quot;curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE&quot;;
-        &quot;reloc-us&quot; = &quot;sudo tailscale up --exit-node=100.75.73.33&quot;;
+      fish = {
+        shellAbbrs = {
+          &quot;gpl&quot; = &quot;${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE&quot;;
+        };
+        shellAliases = {
+          &quot;nix&quot; = &quot;${pkgs.nix}/bin/nix --verbose --print-build-logs&quot;; # https://github.com/NixOS/nix/pull/8323
+        };
       };
     };
   };

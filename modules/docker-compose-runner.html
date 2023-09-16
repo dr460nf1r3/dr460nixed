@@ -171,12 +171,15 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="docker-compose-runner"><a class="header" href="#docker-compose-runner">Docker compose runner</a></h1>
-<pre><code class="language-nix">{ lib, pkgs, config, ... }:
-with lib;
-let
+<pre><code class="language-nix">{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+with lib; let
   cfg = config.dr460nixed.docker-compose-runner;
-in
-{
+in {
   options.dr460nixed.docker-compose-runner = mkOption {
     type = types.attrsOf (types.submodule {
       options = {
@@ -192,59 +195,60 @@ in
         };
       };
     });
-    default = { };
+    default = {};
   };
 
   config = {
-    systemd.services = mapAttrs'
-      (name: value: nameValuePair (&quot;docker-compose-runner-&quot; + name) (
-        let
-          output = derivation {
-            builder = pkgs.writeShellScript &quot;build&quot; ''
-              PATH=&quot;${pkgs.rsync}/bin:${pkgs.coreutils}/bin:${pkgs.gnused}/bin&quot;
-              set -e
-              mkdir &quot;$out&quot;
-              sed -r 's/(^\s+restart:\s*)(unless-stopped|always)(\s*($|#))/\1on-failure\3/g' &quot;$src/docker-compose.yml&quot; &gt; &quot;$out/docker-compose.yml&quot;
-              rsync -a &quot;$src/&quot; &quot;$out&quot;
-            '';
-            name = &quot;docker-compose-runner-&quot; + name;
-            src = value.source;
-            inherit (pkgs.hostPlatform) system;
-          };
-          statepath = &quot;/var/docker-compose-runner/${name}&quot;;
-        in
-        {
-          description = &quot;docker-compose runner for ${name}&quot;;
-          path = with pkgs; [ rsync docker-compose docker bash ];
-          serviceConfig = {
-            ExecStart = pkgs.writeShellScript (&quot;execstart-docker-compose-runner-&quot; + name) ''
-              set -e
-              mkdir -p &quot;${statepath}&quot;
-              rsync -a --no-owner --size-only &quot;${output}/&quot; &quot;${statepath}&quot;
-              ${optionalString (value.envfile != null) ''
+    systemd.services =
+      mapAttrs'
+      (name: value:
+        nameValuePair (&quot;docker-compose-runner-&quot; + name) (
+          let
+            output = derivation {
+              builder = pkgs.writeShellScript &quot;build&quot; ''
+                PATH=&quot;${pkgs.rsync}/bin:${pkgs.coreutils}/bin:${pkgs.gnused}/bin&quot;
+                set -e
+                mkdir &quot;$out&quot;
+                sed -r 's/(^\s+restart:\s*)(unless-stopped|always)(\s*($|#))/\1on-failure\3/g' &quot;$src/docker-compose.yml&quot; &gt; &quot;$out/docker-compose.yml&quot;
+                rsync -a &quot;$src/&quot; &quot;$out&quot;
+              '';
+              name = &quot;docker-compose-runner-&quot; + name;
+              src = value.source;
+              inherit (pkgs.hostPlatform) system;
+            };
+            statepath = &quot;/var/docker-compose-runner/${name}&quot;;
+          in {
+            description = &quot;docker-compose runner for ${name}&quot;;
+            path = with pkgs; [rsync docker-compose docker bash];
+            serviceConfig = {
+              ExecStart = pkgs.writeShellScript (&quot;execstart-docker-compose-runner-&quot; + name) ''
+                set -e
+                mkdir -p &quot;${statepath}&quot;
+                rsync -a --no-owner --size-only &quot;${output}/&quot; &quot;${statepath}&quot;
+                ${optionalString (value.envfile != null) ''
                   cp &quot;${value.envfile}&quot; &quot;${statepath}/.env&quot;
                   chmod 600 &quot;${statepath}/.env&quot;
-              ''}
-              cd &quot;${statepath}&quot;
-              docker-compose up
-            '';
-            ExecStopPost = pkgs.writeShellScript (&quot;execstop-docker-compose-runner-&quot; + name) ''
-              set -e
-              cd &quot;${statepath}&quot;
-              docker-compose down
-            '';
-          };
-          unitConfig = {
-            After = &quot;docker.service&quot;;
-            Requisite = &quot;docker.service&quot;;
-            StopPropagatedFrom = &quot;docker.service&quot;;
-          };
-          wantedBy = [ &quot;multi-user.target&quot; ];
-        }
-      ))
+                ''}
+                cd &quot;${statepath}&quot;
+                docker-compose up
+              '';
+              ExecStopPost = pkgs.writeShellScript (&quot;execstop-docker-compose-runner-&quot; + name) ''
+                set -e
+                cd &quot;${statepath}&quot;
+                docker-compose down
+              '';
+            };
+            unitConfig = {
+              After = &quot;docker.service&quot;;
+              Requisite = &quot;docker.service&quot;;
+              StopPropagatedFrom = &quot;docker.service&quot;;
+            };
+            wantedBy = [&quot;multi-user.target&quot;];
+          }
+        ))
       cfg;
-    environment.systemPackages = mkIf (cfg != { }) [ pkgs.docker-compose ];
-    virtualisation.docker.enable = mkIf (cfg != { }) true;
+    environment.systemPackages = mkIf (cfg != {}) [pkgs.docker-compose];
+    virtualisation.docker.enable = mkIf (cfg != {}) true;
   };
 }
 </code></pre>

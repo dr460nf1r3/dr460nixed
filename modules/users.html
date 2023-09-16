@@ -171,47 +171,49 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="users"><a class="header" href="#users">Users</a></h1>
-<pre><code class="language-nix">{ keys
-, config
-, ...
-}:
-let
+<pre><code class="language-nix">{
+  keys,
+  config,
+  ...
+}: let
   # Use fixed UIDs/GIDs
-  deterministicIds =
-    let
-      uidGid = id: {
-        gid = id;
-        uid = id;
-      };
-    in
-    {
-      acme = uidGid 999;
-      adbusers = uidGid 998;
-      avahi = uidGid 997;
-      chaotic_op = uidGid 996;
-      grafana = uidGid 995;
-      influxdb2 = uidGid 994;
-      loki = uidGid 993;
-      nico = uidGid 1000;
-      nm-iodine = uidGid 992;
-      node-exporter = uidGid 991;
-      nscd = uidGid 990;
-      plocate = uidGid 989;
-      polkituser = uidGid 988;
-      promtail = uidGid 987;
-      rtkit = uidGid 986;
-      sshd = uidGid 985;
-      systemd-coredump = uidGid 984;
-      systemd-oom = uidGid 983;
-      telegraf = uidGid 982;
-      vnstatd = uidGid 981;
-      wireshark = uidGid 980;
+  deterministicIds = let
+    uidGid = id: {
+      gid = id;
+      uid = id;
     };
+  in {
+    acme = uidGid 999;
+    adbusers = uidGid 998;
+    adguard = uidGid 977;
+    avahi = uidGid 997;
+    chaotic_op = uidGid 996;
+    cloudflared = uidGid 976;
+    dhcpcd = uidGid 976;
+    grafana = uidGid 995;
+    influxdb2 = uidGid 994;
+    loki = uidGid 993;
+    netdata = uidGid 979;
+    nico = uidGid 1000;
+    nm-iodine = uidGid 992;
+    node-exporter = uidGid 991;
+    nscd = uidGid 990;
+    plocate = uidGid 989;
+    polkituser = uidGid 988;
+    promtail = uidGid 987;
+    rtkit = uidGid 986;
+    sshd = uidGid 985;
+    systemd-coredump = uidGid 984;
+    systemd-oom = uidGid 983;
+    tailscale-tls = uidGid 978;
+    telegraf = uidGid 982;
+    vnstatd = uidGid 981;
+    wireshark = uidGid 980;
+  };
 
-  # Add groups only if they exist
+  # Add groups to user only if they exist
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in
-{
+in {
   # This is needed for early set up of user accounts
   sops.secrets = {
     &quot;passwords/nico&quot;.neededForUsers = true;
@@ -225,39 +227,38 @@ in
     users = {
       nico = {
         autoSubUidGidRange = false; # Use fixed UIDs/GIDs
-        extraGroups = [
-          &quot;audio&quot;
-          &quot;video&quot;
-          &quot;wheel&quot;
-        ] ++ ifTheyExist [
-          &quot;adbusers&quot;
-          &quot;chaotic_op&quot;
-          &quot;deluge&quot;
-          &quot;disk&quot;
-          &quot;docker&quot;
-          &quot;flatpak&quot;
-          &quot;git&quot;
-          &quot;kvm&quot;
-          &quot;libvirtd&quot;
-          &quot;mysql&quot;
-          &quot;network&quot;
-          &quot;networkmanager&quot;
-          &quot;podman&quot;
-          &quot;systemd-journal&quot;
-          &quot;wireshark&quot;
-        ];
+        extraGroups =
+          [
+            &quot;audio&quot;
+            &quot;video&quot;
+            &quot;wheel&quot;
+          ]
+          ++ ifTheyExist [
+            &quot;adbusers&quot;
+            &quot;chaotic_op&quot;
+            &quot;deluge&quot;
+            &quot;disk&quot;
+            &quot;docker&quot;
+            &quot;flatpak&quot;
+            &quot;git&quot;
+            &quot;kvm&quot;
+            &quot;libvirtd&quot;
+            &quot;mysql&quot;
+            &quot;network&quot;
+            &quot;networkmanager&quot;
+            &quot;podman&quot;
+            &quot;systemd-journal&quot;
+            &quot;wireshark&quot;
+          ];
         hashedPasswordFile = config.sops.secrets.&quot;passwords/nico&quot;.path;
         home = &quot;/home/nico&quot;;
         isNormalUser = true;
-        openssh.authorizedKeys.keyFiles = [ keys.nico ];
+        openssh.authorizedKeys.keyFiles = [keys.nico];
       };
       # Lock root password
       root.hashedPasswordFile = config.sops.secrets.&quot;passwords/root&quot;.path;
     };
   };
-
-  # Load my home-manager configurations
-  home-manager.users.&quot;nico&quot; = import ../../home-manager/common.nix;
 
   # Allow pushing to Cachix
   sops.secrets.&quot;api_keys/cachix&quot; = {

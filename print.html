@@ -171,9 +171,9 @@
 
                 <div id="content" class="content">
                     <main>
-                        <p><a href="https://builtwithnix.org"><img src="https://img.shields.io/static/v1?logo=nixos&amp;logoColor=white&amp;label=&amp;message=Built%20with%20Nix&amp;color=41439a" alt="built with nix" /></a> <a href="https://garnix.io"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fdr460nf1r3%2Fdr460nixed%3Fbranch%3Dmain" alt="built with garnix" /></a>
+                        <h1 id="my-personal-nixos-flake--system-configurations"><a class="header" href="#my-personal-nixos-flake--system-configurations">My personal NixOS flake &amp; system configurations</a></h1>
+<p><a href="https://builtwithnix.org"><img src="https://img.shields.io/static/v1?logo=nixos&amp;logoColor=white&amp;label=&amp;message=Built%20with%20Nix&amp;color=41439a" alt="built with nix" /></a> <a href="https://garnix.io"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fdr460nf1r3%2Fdr460nixed%3Fbranch%3Dmain" alt="built with garnix" /></a>
 <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml"><img src="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml/badge.svg" alt="Build images" /></a> <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml"><img src="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg" alt="Sync Tailscale ACLs" /></a></p>
-<h1 id="my-personal-nixos-flake--system-configurations"><a class="header" href="#my-personal-nixos-flake--system-configurations">My personal NixOS flake &amp; system configurations</a></h1>
 <p>This repo contains my NixOS dotfiles. Every device supported by NixOS will be added here! 😎</p>
 <p><img src="https://i.imgur.com/h3WGSJ4.jpg" alt="desktop-kde" /></p>
 <p><strong>What is inside?</strong>:</p>
@@ -203,7 +203,7 @@
 <h2 id="documentation"><a class="header" href="#documentation">Documentation</a></h2>
 <p>A fully searchable, mdBook-based documentation is available <a href="https://nixed.dr460nf1r3.org">here</a>.</p>
 <h2 id="structure"><a class="header" href="#structure">Structure</a></h2>
-<pre><code>├── docker-compose
+<pre><code class="language-shell">├── docker-compose
 │   ├── oracle-dragon
 │   └── tv-nixos
 ├── home-manager
@@ -239,46 +239,43 @@
 <li>... so much more. It never ends ❄️</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="apps"><a class="header" href="#apps">Apps</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, pkgs
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed;
-in
-{
+in {
   # These are the packages I always need
-  environment.systemPackages = with pkgs;
-    let
-      required-packages = [
-        age
-        bind
-        btop
-        cached-nix-shell
-        cachix
-        cloudflared
-        duf
-        eza
-        jq
-        killall
-        micro
-        mosh
-        nettools
-        nmap
-        nvd
-        python3
-        sops
-        tldr
-        tmux
-        traceroute
-        ugrep
-        vulnix
-        wget
-        whois
-      ];
-    in
+  environment.systemPackages = with pkgs; let
+    required-packages = [
+      age
+      bind
+      btop
+      cached-nix-shell
+      cachix
+      cloudflared
+      duf
+      eza
+      jq
+      killall
+      micro
+      mosh
+      nettools
+      nmap
+      nvd
+      python3
+      sops
+      tldr
+      tmux
+      traceroute
+      ugrep
+      wget
+      whois
+    ];
+  in
     required-packages
     ++ optionals cfg.desktops.enable (with pkgs; [
       acpi
@@ -309,6 +306,7 @@ in
       nextcloud-client
       obs-studio-wrapped
       qbittorrent
+      rustdesk
       spotdl
       syncthingtray
       tdesktop
@@ -317,7 +315,8 @@ in
       vorta
       vulkan-tools
       xdg-ninja
-    ]) ++ optionals cfg.development.enable (with pkgs; [
+    ])
+    ++ optionals cfg.development.enable (with pkgs; [
       ansible
       beekeeper-studio
       bind.dnsutils
@@ -333,7 +332,6 @@ in
       nix-prefetch-git
       nixd
       nixos-generators
-      nixpkgs-fmt
       nixpkgs-lint
       nixpkgs-review
       nodePackages_latest.prettier
@@ -350,8 +348,9 @@ in
       (vscode-with-extensions.override {
         vscodeExtensions = with vscode-extensions;
           [
-            b4dm4n.vscode-nixpkgs-fmt
             bbenoist.nix
+            charliermarsh.ruff
+            davidanson.vscode-markdownlint
             eamodio.gitlens
             esbenp.prettier-vscode
             foxundermoon.shell-format
@@ -360,6 +359,7 @@ in
             github.vscode-github-actions
             github.vscode-pull-request-github
             jnoortheen.nix-ide
+            kamadorueda.alejandra
             ms-azuretools.vscode-docker
             ms-python.python
             ms-python.vscode-pylance
@@ -381,12 +381,6 @@ in
               version = &quot;1.1.1&quot;;
             }
             {
-              name = &quot;ruff&quot;;
-              publisher = &quot;charliermarsh&quot;;
-              sha256 = &quot;sha256-KOntjiE+n1yf9047XDldGg2pT+zknI/aEg6h71LwEB8=&quot;;
-              version = &quot;2023.34.0&quot;;
-            }
-            {
               # Available in nixpkgs, but outdated (0.4.0) at the time of adding
               name = &quot;vscode-tailscale&quot;;
               publisher = &quot;tailscale&quot;;
@@ -395,19 +389,23 @@ in
             }
           ];
       })
+      vulnix
       wireshark
       xdg-utils
       yarn
-    ]) ++ optionals cfg.yubikey (with pkgs; [
+    ])
+    ++ optionals cfg.yubikey (with pkgs; [
       yubikey-manager-qt
       yubioath-flutter
-    ]) ++ optionals cfg.school (with pkgs; [
+    ])
+    ++ optionals cfg.school (with pkgs; [
       speedcrunch
       sqlite
       sqlitebrowser
       teams-for-linux
       virt-manager
-    ]) ++ optionals cfg.live-cd (with pkgs; [
+    ])
+    ++ optionals cfg.live-cd (with pkgs; [
       btrfs-progs
       chntpw
       cryptsetup
@@ -436,306 +434,305 @@ in
       xfsprogs
     ]);
 
-  xdg.mime.defaultApplications =
-    let
-      # Take from the respective mimetype files
-      images = [
-        &quot;image/bmp&quot;
-        &quot;image/gif&quot;
-        &quot;image/jpeg&quot;
-        &quot;image/jpg&quot;
-        &quot;image/pjpeg&quot;
-        &quot;image/png&quot;
-        &quot;image/svg+xml&quot;
-        &quot;image/svg+xml-compressed&quot;
-        &quot;image/tiff&quot;
-        &quot;image/vnd.wap.wbmp;image/x-icns&quot;
-        &quot;image/x-bmp&quot;
-        &quot;image/x-gray&quot;
-        &quot;image/x-icb&quot;
-        &quot;image/x-ico&quot;
-        &quot;image/x-pcx&quot;
-        &quot;image/x-png&quot;
-        &quot;image/x-portable-anymap&quot;
-        &quot;image/x-portable-bitmap&quot;
-        &quot;image/x-portable-graymap&quot;
-        &quot;image/x-portable-pixmap&quot;
-        &quot;image/x-xbitmap&quot;
-        &quot;image/x-xpixmap&quot;
-      ];
-      urls = [
-        &quot;text/html&quot;
-        &quot;x-scheme-handler/about&quot;
-        &quot;x-scheme-handler/http&quot;
-        &quot;x-scheme-handler/https&quot;
-        &quot;x-scheme-handler/unknown&quot;
-      ];
-      documents = [
-        &quot;application/illustrator&quot;
-        &quot;application/oxps&quot;
-        &quot;application/pdf&quot;
-        &quot;application/postscript&quot;
-        &quot;application/vnd.comicbook+zip&quot;
-        &quot;application/vnd.comicbook-rar&quot;
-        &quot;application/vnd.ms-xpsdocument&quot;
-        &quot;application/x-bzdvi&quot;
-        &quot;application/x-bzpdf&quot;
-        &quot;application/x-bzpostscript&quot;
-        &quot;application/x-cb7&quot;
-        &quot;application/x-cbr&quot;
-        &quot;application/x-cbt&quot;
-        &quot;application/x-cbz&quot;
-        &quot;application/x-dvi&quot;
-        &quot;application/x-ext-cb7&quot;
-        &quot;application/x-ext-cbr&quot;
-        &quot;application/x-ext-cbt&quot;
-        &quot;application/x-ext-cbz&quot;
-        &quot;application/x-ext-djv&quot;
-        &quot;application/x-ext-djvu&quot;
-        &quot;application/x-ext-dvi&quot;
-        &quot;application/x-ext-eps&quot;
-        &quot;application/x-ext-pdf&quot;
-        &quot;application/x-ext-ps&quot;
-        &quot;application/x-gzdvi&quot;
-        &quot;application/x-gzpdf&quot;
-        &quot;application/x-gzpostscript&quot;
-        &quot;application/x-xzpdf&quot;
-        &quot;image/tiff&quot;
-        &quot;image/vnd.djvu+multipage&quot;
-        &quot;image/x-bzeps&quot;
-        &quot;image/x-eps&quot;
-        &quot;image/x-gzeps&quot;
-      ];
-      audioVideo = [
-        &quot;application/mxf&quot;
-        &quot;application/ogg&quot;
-        &quot;application/sdp&quot;
-        &quot;application/smil&quot;
-        &quot;application/streamingmedia&quot;
-        &quot;application/vnd.apple.mpegurl&quot;
-        &quot;application/vnd.ms-asf&quot;
-        &quot;application/vnd.rn-realmedia&quot;
-        &quot;application/vnd.rn-realmedia-vbr&quot;
-        &quot;application/x-cue&quot;
-        &quot;application/x-extension-m4a&quot;
-        &quot;application/x-extension-mp4&quot;
-        &quot;application/x-matroska&quot;
-        &quot;application/x-mpegurl&quot;
-        &quot;application/x-ogg&quot;
-        &quot;application/x-ogm&quot;
-        &quot;application/x-ogm-audio&quot;
-        &quot;application/x-ogm-video&quot;
-        &quot;application/x-shorten&quot;
-        &quot;application/x-smil&quot;
-        &quot;application/x-streamingmedia&quot;
-        &quot;audio/3gpp&quot;
-        &quot;audio/3gpp2&quot;
-        &quot;audio/AMR&quot;
-        &quot;audio/aac&quot;
-        &quot;audio/ac3&quot;
-        &quot;audio/aiff&quot;
-        &quot;audio/amr-wb&quot;
-        &quot;audio/dv&quot;
-        &quot;audio/eac3&quot;
-        &quot;audio/flac&quot;
-        &quot;audio/m3u&quot;
-        &quot;audio/m4a&quot;
-        &quot;audio/mp1&quot;
-        &quot;audio/mp2&quot;
-        &quot;audio/mp3&quot;
-        &quot;audio/mp4&quot;
-        &quot;audio/mpeg&quot;
-        &quot;audio/mpeg2&quot;
-        &quot;audio/mpeg3&quot;
-        &quot;audio/mpegurl&quot;
-        &quot;audio/mpg&quot;
-        &quot;audio/musepack&quot;
-        &quot;audio/ogg&quot;
-        &quot;audio/opus&quot;
-        &quot;audio/rn-mpeg&quot;
-        &quot;audio/scpls&quot;
-        &quot;audio/vnd.dolby.heaac.1&quot;
-        &quot;audio/vnd.dolby.heaac.2&quot;
-        &quot;audio/vnd.dts&quot;
-        &quot;audio/vnd.dts.hd&quot;
-        &quot;audio/vnd.rn-realaudio&quot;
-        &quot;audio/vorbis&quot;
-        &quot;audio/wav&quot;
-        &quot;audio/webm&quot;
-        &quot;audio/x-aac&quot;
-        &quot;audio/x-adpcm&quot;
-        &quot;audio/x-aiff&quot;
-        &quot;audio/x-ape&quot;
-        &quot;audio/x-m4a&quot;
-        &quot;audio/x-matroska&quot;
-        &quot;audio/x-mp1&quot;
-        &quot;audio/x-mp2&quot;
-        &quot;audio/x-mp3&quot;
-        &quot;audio/x-mpegurl&quot;
-        &quot;audio/x-mpg&quot;
-        &quot;audio/x-ms-asf&quot;
-        &quot;audio/x-ms-wma&quot;
-        &quot;audio/x-musepack&quot;
-        &quot;audio/x-pls&quot;
-        &quot;audio/x-pn-au&quot;
-        &quot;audio/x-pn-realaudio&quot;
-        &quot;audio/x-pn-wav&quot;
-        &quot;audio/x-pn-windows-pcm&quot;
-        &quot;audio/x-realaudio&quot;
-        &quot;audio/x-scpls&quot;
-        &quot;audio/x-shorten&quot;
-        &quot;audio/x-tta&quot;
-        &quot;audio/x-vorbis&quot;
-        &quot;audio/x-vorbis+ogg&quot;
-        &quot;audio/x-wav&quot;
-        &quot;audio/x-wavpack&quot;
-        &quot;video/3gp&quot;
-        &quot;video/3gpp&quot;
-        &quot;video/3gpp2&quot;
-        &quot;video/avi&quot;
-        &quot;video/divx&quot;
-        &quot;video/dv&quot;
-        &quot;video/fli&quot;
-        &quot;video/flv&quot;
-        &quot;video/mkv&quot;
-        &quot;video/mp2t&quot;
-        &quot;video/mp4&quot;
-        &quot;video/mp4v-es&quot;
-        &quot;video/mpeg&quot;
-        &quot;video/msvideo&quot;
-        &quot;video/ogg&quot;
-        &quot;video/quicktime&quot;
-        &quot;video/vnd.divx&quot;
-        &quot;video/vnd.mpegurl&quot;
-        &quot;video/vnd.rn-realvideo&quot;
-        &quot;video/webm&quot;
-        &quot;video/x-avi&quot;
-        &quot;video/x-flc&quot;
-        &quot;video/x-flic&quot;
-        &quot;video/x-flv&quot;
-        &quot;video/x-m4v&quot;
-        &quot;video/x-matroska&quot;
-        &quot;video/x-mpeg2&quot;
-        &quot;video/x-mpeg3&quot;
-        &quot;video/x-ms-afs&quot;
-        &quot;video/x-ms-asf&quot;
-        &quot;video/x-ms-wmv&quot;
-        &quot;video/x-ms-wmx&quot;
-        &quot;video/x-ms-wvxvideo&quot;
-        &quot;video/x-msvideo&quot;
-        &quot;video/x-ogm&quot;
-        &quot;video/x-ogm+ogg&quot;
-        &quot;video/x-theora&quot;
-        &quot;video/x-theora+ogg&quot;
-      ];
-      archives = [
-        &quot;application/bzip2&quot;
-        &quot;application/gzip&quot;
-        &quot;application/vnd.android.package-archive&quot;
-        &quot;application/vnd.debian.binary-package&quot;
-        &quot;application/vnd.ms-cab-compressed&quot;
-        &quot;application/x-7z-compressed&quot;
-        &quot;application/x-7z-compressed-tar&quot;
-        &quot;application/x-ace&quot;
-        &quot;application/x-alz&quot;
-        &quot;application/x-ar&quot;
-        &quot;application/x-archive&quot;
-        &quot;application/x-arj&quot;
-        &quot;application/x-brotli&quot;
-        &quot;application/x-bzip&quot;
-        &quot;application/x-bzip-brotli-tar&quot;
-        &quot;application/x-bzip-compressed-tar&quot;
-        &quot;application/x-bzip1&quot;
-        &quot;application/x-bzip1-compressed-tar&quot;
-        &quot;application/x-cabinet&quot;
-        &quot;application/x-cd-image&quot;
-        &quot;application/x-chrome-extension&quot;
-        &quot;application/x-compress&quot;
-        &quot;application/x-compressed-tar&quot;
-        &quot;application/x-cpio&quot;
-        &quot;application/x-deb&quot;
-        &quot;application/x-ear&quot;
-        &quot;application/x-gtar&quot;
-        &quot;application/x-gzip&quot;
-        &quot;application/x-gzpostscript&quot;
-        &quot;application/x-java-archive&quot;
-        &quot;application/x-lha&quot;
-        &quot;application/x-lhz&quot;
-        &quot;application/x-lrzip&quot;
-        &quot;application/x-lrzip-compressed-tar&quot;
-        &quot;application/x-lz4&quot;
-        &quot;application/x-lz4-compressed-tar&quot;
-        &quot;application/x-lzip&quot;
-        &quot;application/x-lzip-compressed-tar&quot;
-        &quot;application/x-lzma&quot;
-        &quot;application/x-lzma-compressed-tar&quot;
-        &quot;application/x-lzop&quot;
-        &quot;application/x-ms-dos-executable&quot;
-        &quot;application/x-ms-wim&quot;
-        &quot;application/x-rar&quot;
-        &quot;application/x-rar-compressed&quot;
-        &quot;application/x-rpm&quot;
-        &quot;application/x-rzip&quot;
-        &quot;application/x-rzip-compressed-tar&quot;
-        &quot;application/x-source-rpm&quot;
-        &quot;application/x-stuffit&quot;
-        &quot;application/x-tar&quot;
-        &quot;application/x-tarz&quot;
-        &quot;application/x-tzo&quot;
-        &quot;application/x-war&quot;
-        &quot;application/x-xar&quot;
-        &quot;application/x-xz&quot;
-        &quot;application/x-xz-compressed-tar&quot;
-        &quot;application/x-zip&quot;
-        &quot;application/x-zip-compressed&quot;
-        &quot;application/x-zoo&quot;
-        &quot;application/x-zstd-compressed-tar&quot;
-        &quot;application/zip&quot;
-        &quot;application/zstd&quot;
-      ];
-      code = [
-        &quot;application/x-shellscript&quot;
-        &quot;text/english&quot;
-        &quot;text/plain&quot;
-        &quot;text/x-c&quot;
-        &quot;text/x-c++&quot;
-        &quot;text/x-c++hdr&quot;
-        &quot;text/x-c++src&quot;
-        &quot;text/x-chdr&quot;
-        &quot;text/x-csrc&quot;
-        &quot;text/x-java&quot;
-        &quot;text/x-makefile&quot;
-        &quot;text/x-moc&quot;
-        &quot;text/x-pascal&quot;
-        &quot;text/x-tcl&quot;
-        &quot;text/x-tex&quot;
-      ];
-    in
+  xdg.mime.defaultApplications = let
+    # Take from the respective mimetype files
+    images = [
+      &quot;image/bmp&quot;
+      &quot;image/gif&quot;
+      &quot;image/jpeg&quot;
+      &quot;image/jpg&quot;
+      &quot;image/pjpeg&quot;
+      &quot;image/png&quot;
+      &quot;image/svg+xml&quot;
+      &quot;image/svg+xml-compressed&quot;
+      &quot;image/tiff&quot;
+      &quot;image/vnd.wap.wbmp;image/x-icns&quot;
+      &quot;image/x-bmp&quot;
+      &quot;image/x-gray&quot;
+      &quot;image/x-icb&quot;
+      &quot;image/x-ico&quot;
+      &quot;image/x-pcx&quot;
+      &quot;image/x-png&quot;
+      &quot;image/x-portable-anymap&quot;
+      &quot;image/x-portable-bitmap&quot;
+      &quot;image/x-portable-graymap&quot;
+      &quot;image/x-portable-pixmap&quot;
+      &quot;image/x-xbitmap&quot;
+      &quot;image/x-xpixmap&quot;
+    ];
+    urls = [
+      &quot;text/html&quot;
+      &quot;x-scheme-handler/about&quot;
+      &quot;x-scheme-handler/http&quot;
+      &quot;x-scheme-handler/https&quot;
+      &quot;x-scheme-handler/unknown&quot;
+    ];
+    documents = [
+      &quot;application/illustrator&quot;
+      &quot;application/oxps&quot;
+      &quot;application/pdf&quot;
+      &quot;application/postscript&quot;
+      &quot;application/vnd.comicbook+zip&quot;
+      &quot;application/vnd.comicbook-rar&quot;
+      &quot;application/vnd.ms-xpsdocument&quot;
+      &quot;application/x-bzdvi&quot;
+      &quot;application/x-bzpdf&quot;
+      &quot;application/x-bzpostscript&quot;
+      &quot;application/x-cb7&quot;
+      &quot;application/x-cbr&quot;
+      &quot;application/x-cbt&quot;
+      &quot;application/x-cbz&quot;
+      &quot;application/x-dvi&quot;
+      &quot;application/x-ext-cb7&quot;
+      &quot;application/x-ext-cbr&quot;
+      &quot;application/x-ext-cbt&quot;
+      &quot;application/x-ext-cbz&quot;
+      &quot;application/x-ext-djv&quot;
+      &quot;application/x-ext-djvu&quot;
+      &quot;application/x-ext-dvi&quot;
+      &quot;application/x-ext-eps&quot;
+      &quot;application/x-ext-pdf&quot;
+      &quot;application/x-ext-ps&quot;
+      &quot;application/x-gzdvi&quot;
+      &quot;application/x-gzpdf&quot;
+      &quot;application/x-gzpostscript&quot;
+      &quot;application/x-xzpdf&quot;
+      &quot;image/tiff&quot;
+      &quot;image/vnd.djvu+multipage&quot;
+      &quot;image/x-bzeps&quot;
+      &quot;image/x-eps&quot;
+      &quot;image/x-gzeps&quot;
+    ];
+    audioVideo = [
+      &quot;application/mxf&quot;
+      &quot;application/ogg&quot;
+      &quot;application/sdp&quot;
+      &quot;application/smil&quot;
+      &quot;application/streamingmedia&quot;
+      &quot;application/vnd.apple.mpegurl&quot;
+      &quot;application/vnd.ms-asf&quot;
+      &quot;application/vnd.rn-realmedia&quot;
+      &quot;application/vnd.rn-realmedia-vbr&quot;
+      &quot;application/x-cue&quot;
+      &quot;application/x-extension-m4a&quot;
+      &quot;application/x-extension-mp4&quot;
+      &quot;application/x-matroska&quot;
+      &quot;application/x-mpegurl&quot;
+      &quot;application/x-ogg&quot;
+      &quot;application/x-ogm&quot;
+      &quot;application/x-ogm-audio&quot;
+      &quot;application/x-ogm-video&quot;
+      &quot;application/x-shorten&quot;
+      &quot;application/x-smil&quot;
+      &quot;application/x-streamingmedia&quot;
+      &quot;audio/3gpp&quot;
+      &quot;audio/3gpp2&quot;
+      &quot;audio/AMR&quot;
+      &quot;audio/aac&quot;
+      &quot;audio/ac3&quot;
+      &quot;audio/aiff&quot;
+      &quot;audio/amr-wb&quot;
+      &quot;audio/dv&quot;
+      &quot;audio/eac3&quot;
+      &quot;audio/flac&quot;
+      &quot;audio/m3u&quot;
+      &quot;audio/m4a&quot;
+      &quot;audio/mp1&quot;
+      &quot;audio/mp2&quot;
+      &quot;audio/mp3&quot;
+      &quot;audio/mp4&quot;
+      &quot;audio/mpeg&quot;
+      &quot;audio/mpeg2&quot;
+      &quot;audio/mpeg3&quot;
+      &quot;audio/mpegurl&quot;
+      &quot;audio/mpg&quot;
+      &quot;audio/musepack&quot;
+      &quot;audio/ogg&quot;
+      &quot;audio/opus&quot;
+      &quot;audio/rn-mpeg&quot;
+      &quot;audio/scpls&quot;
+      &quot;audio/vnd.dolby.heaac.1&quot;
+      &quot;audio/vnd.dolby.heaac.2&quot;
+      &quot;audio/vnd.dts&quot;
+      &quot;audio/vnd.dts.hd&quot;
+      &quot;audio/vnd.rn-realaudio&quot;
+      &quot;audio/vorbis&quot;
+      &quot;audio/wav&quot;
+      &quot;audio/webm&quot;
+      &quot;audio/x-aac&quot;
+      &quot;audio/x-adpcm&quot;
+      &quot;audio/x-aiff&quot;
+      &quot;audio/x-ape&quot;
+      &quot;audio/x-m4a&quot;
+      &quot;audio/x-matroska&quot;
+      &quot;audio/x-mp1&quot;
+      &quot;audio/x-mp2&quot;
+      &quot;audio/x-mp3&quot;
+      &quot;audio/x-mpegurl&quot;
+      &quot;audio/x-mpg&quot;
+      &quot;audio/x-ms-asf&quot;
+      &quot;audio/x-ms-wma&quot;
+      &quot;audio/x-musepack&quot;
+      &quot;audio/x-pls&quot;
+      &quot;audio/x-pn-au&quot;
+      &quot;audio/x-pn-realaudio&quot;
+      &quot;audio/x-pn-wav&quot;
+      &quot;audio/x-pn-windows-pcm&quot;
+      &quot;audio/x-realaudio&quot;
+      &quot;audio/x-scpls&quot;
+      &quot;audio/x-shorten&quot;
+      &quot;audio/x-tta&quot;
+      &quot;audio/x-vorbis&quot;
+      &quot;audio/x-vorbis+ogg&quot;
+      &quot;audio/x-wav&quot;
+      &quot;audio/x-wavpack&quot;
+      &quot;video/3gp&quot;
+      &quot;video/3gpp&quot;
+      &quot;video/3gpp2&quot;
+      &quot;video/avi&quot;
+      &quot;video/divx&quot;
+      &quot;video/dv&quot;
+      &quot;video/fli&quot;
+      &quot;video/flv&quot;
+      &quot;video/mkv&quot;
+      &quot;video/mp2t&quot;
+      &quot;video/mp4&quot;
+      &quot;video/mp4v-es&quot;
+      &quot;video/mpeg&quot;
+      &quot;video/msvideo&quot;
+      &quot;video/ogg&quot;
+      &quot;video/quicktime&quot;
+      &quot;video/vnd.divx&quot;
+      &quot;video/vnd.mpegurl&quot;
+      &quot;video/vnd.rn-realvideo&quot;
+      &quot;video/webm&quot;
+      &quot;video/x-avi&quot;
+      &quot;video/x-flc&quot;
+      &quot;video/x-flic&quot;
+      &quot;video/x-flv&quot;
+      &quot;video/x-m4v&quot;
+      &quot;video/x-matroska&quot;
+      &quot;video/x-mpeg2&quot;
+      &quot;video/x-mpeg3&quot;
+      &quot;video/x-ms-afs&quot;
+      &quot;video/x-ms-asf&quot;
+      &quot;video/x-ms-wmv&quot;
+      &quot;video/x-ms-wmx&quot;
+      &quot;video/x-ms-wvxvideo&quot;
+      &quot;video/x-msvideo&quot;
+      &quot;video/x-ogm&quot;
+      &quot;video/x-ogm+ogg&quot;
+      &quot;video/x-theora&quot;
+      &quot;video/x-theora+ogg&quot;
+    ];
+    archives = [
+      &quot;application/bzip2&quot;
+      &quot;application/gzip&quot;
+      &quot;application/vnd.android.package-archive&quot;
+      &quot;application/vnd.debian.binary-package&quot;
+      &quot;application/vnd.ms-cab-compressed&quot;
+      &quot;application/x-7z-compressed&quot;
+      &quot;application/x-7z-compressed-tar&quot;
+      &quot;application/x-ace&quot;
+      &quot;application/x-alz&quot;
+      &quot;application/x-ar&quot;
+      &quot;application/x-archive&quot;
+      &quot;application/x-arj&quot;
+      &quot;application/x-brotli&quot;
+      &quot;application/x-bzip&quot;
+      &quot;application/x-bzip-brotli-tar&quot;
+      &quot;application/x-bzip-compressed-tar&quot;
+      &quot;application/x-bzip1&quot;
+      &quot;application/x-bzip1-compressed-tar&quot;
+      &quot;application/x-cabinet&quot;
+      &quot;application/x-cd-image&quot;
+      &quot;application/x-chrome-extension&quot;
+      &quot;application/x-compress&quot;
+      &quot;application/x-compressed-tar&quot;
+      &quot;application/x-cpio&quot;
+      &quot;application/x-deb&quot;
+      &quot;application/x-ear&quot;
+      &quot;application/x-gtar&quot;
+      &quot;application/x-gzip&quot;
+      &quot;application/x-gzpostscript&quot;
+      &quot;application/x-java-archive&quot;
+      &quot;application/x-lha&quot;
+      &quot;application/x-lhz&quot;
+      &quot;application/x-lrzip&quot;
+      &quot;application/x-lrzip-compressed-tar&quot;
+      &quot;application/x-lz4&quot;
+      &quot;application/x-lz4-compressed-tar&quot;
+      &quot;application/x-lzip&quot;
+      &quot;application/x-lzip-compressed-tar&quot;
+      &quot;application/x-lzma&quot;
+      &quot;application/x-lzma-compressed-tar&quot;
+      &quot;application/x-lzop&quot;
+      &quot;application/x-ms-dos-executable&quot;
+      &quot;application/x-ms-wim&quot;
+      &quot;application/x-rar&quot;
+      &quot;application/x-rar-compressed&quot;
+      &quot;application/x-rpm&quot;
+      &quot;application/x-rzip&quot;
+      &quot;application/x-rzip-compressed-tar&quot;
+      &quot;application/x-source-rpm&quot;
+      &quot;application/x-stuffit&quot;
+      &quot;application/x-tar&quot;
+      &quot;application/x-tarz&quot;
+      &quot;application/x-tzo&quot;
+      &quot;application/x-war&quot;
+      &quot;application/x-xar&quot;
+      &quot;application/x-xz&quot;
+      &quot;application/x-xz-compressed-tar&quot;
+      &quot;application/x-zip&quot;
+      &quot;application/x-zip-compressed&quot;
+      &quot;application/x-zoo&quot;
+      &quot;application/x-zstd-compressed-tar&quot;
+      &quot;application/zip&quot;
+      &quot;application/zstd&quot;
+    ];
+    code = [
+      &quot;application/x-shellscript&quot;
+      &quot;text/english&quot;
+      &quot;text/plain&quot;
+      &quot;text/x-c&quot;
+      &quot;text/x-c++&quot;
+      &quot;text/x-c++hdr&quot;
+      &quot;text/x-c++src&quot;
+      &quot;text/x-chdr&quot;
+      &quot;text/x-csrc&quot;
+      &quot;text/x-java&quot;
+      &quot;text/x-makefile&quot;
+      &quot;text/x-moc&quot;
+      &quot;text/x-pascal&quot;
+      &quot;text/x-tcl&quot;
+      &quot;text/x-tex&quot;
+    ];
+  in
     lib.mkForce (
       # Overriding garuda-nix flakes defaults here
-      (lib.genAttrs code (_: [ &quot;code.desktop&quot; ]))
-      // (lib.genAttrs archives (_: [ &quot;ark.desktop&quot; ]))
-      // (lib.genAttrs audioVideo (_: [ &quot;vlc.desktop&quot; ]))
-      // (lib.genAttrs documents (_: [ &quot;okular.desktop&quot; ]))
-      // (lib.genAttrs images (_: [ &quot;gwenview.desktop&quot; ]))
-      // (lib.genAttrs urls (_: [ &quot;firedragon.desktop&quot; ]))
+      (lib.genAttrs code (_: [&quot;code.desktop&quot;]))
+      // (lib.genAttrs archives (_: [&quot;ark.desktop&quot;]))
+      // (lib.genAttrs audioVideo (_: [&quot;vlc.desktop&quot;]))
+      // (lib.genAttrs documents (_: [&quot;okular.desktop&quot;]))
+      // (lib.genAttrs images (_: [&quot;gwenview.desktop&quot;]))
+      // (lib.genAttrs urls (_: [&quot;firedragon.desktop&quot;]))
     );
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="boot"><a class="header" href="#boot">Boot</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, pkgs
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.systemd-boot;
   cfgLanza = config.dr460nixed.lanzaboote;
-in
-{
+in {
   options.dr460nixed.systemd-boot = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -745,7 +742,8 @@ in
       };
   };
   options.dr460nixed.lanzaboote = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -786,23 +784,23 @@ in
       enable = true;
       pkiBundle = &quot;/etc/secureboot&quot;;
     };
-    environment.systemPackages = mkIf cfgLanza.enable [ pkgs.sbctl ];
+    environment.systemPackages = mkIf cfgLanza.enable [pkgs.sbctl];
   };
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="common"><a class="header" href="#common">COmmon</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed;
-in
-{
+in {
   options.dr460nixed = {
     common = {
-      enable = mkOption
+      enable =
+        mkOption
         {
           default = true;
           type = types.bool;
@@ -811,7 +809,8 @@ in
           '';
         };
     };
-    rpi = mkOption
+    rpi =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -819,7 +818,8 @@ in
           Whether this is a Raspberry Pi.
         '';
       };
-    nodocs = mkOption
+    nodocs =
+      mkOption
       {
         default = true;
         type = types.bool;
@@ -831,14 +831,14 @@ in
 
   config = mkIf cfg.common.enable {
     ## A few kernel tweaks
-    boot.kernel.sysctl = { &quot;kernel.unprivileged_userns_clone&quot; = 1; };
+    boot.kernel.sysctl = {&quot;kernel.unprivileged_userns_clone&quot; = 1;};
 
     # Allow wheel group users to use sudo
     security.sudo.execWheelOnly = true;
 
     # This is the default sops file that will be used for all secrets
     sops = {
-      age.sshKeyPaths = [ &quot;/etc/ssh/ssh_host_ed25519_key&quot; ];
+      age.sshKeyPaths = [&quot;/etc/ssh/ssh_host_ed25519_key&quot;];
       defaultSopsFile = ../../secrets/global.yaml;
     };
 
@@ -881,26 +881,29 @@ in
       nixos.enable = true;
     };
 
+    # Enable all hardware drivers
+    hardware.enableRedistributableFirmware = true;
+
     # Ship systemd logs to Loki &amp; Grafana
     dr460nixed.promtail.lokiAddress = &quot;100.86.102.115&quot;;
   };
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="desktops"><a class="header" href="#desktops">Desktops</a></h1>
-<pre><code class="language-nix">{ config
-, inputs
-, lib
-, pkgs
-, ...
+<pre><code class="language-nix">{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.desktops;
   spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
-in
-{
+in {
   options.dr460nixed.desktops = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -914,11 +917,14 @@ in
     # Only install fonts I personally use
     fonts.enableDefaultPackages = false;
 
+    # Enable the dr460nized desktop's settings
+    garuda.dr460nized.enable = true;
+
     # Allow better Syncthing speeds
     services.syncthing.openDefaultPorts = true;
 
     # # Kernel paramters &amp; settings
-    boot.kernelParams = [ &quot;mitigations=off&quot; ];
+    boot.kernelParams = [&quot;mitigations=off&quot;];
 
     # Fancy themed, enhanced Spotify
     programs.spicetify = {
@@ -977,11 +983,11 @@ in
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="deterministic-ids"><a class="header" href="#deterministic-ids">Deterministic ids</a></h1>
 <pre><code class="language-nix"># https://github.com/oddlama/nix-config/blob/main/modules/system/deteministic-ids.nix
-{ lib
-, config
-, ...
-}:
-let
+{
+  lib,
+  config,
+  ...
+}: let
   inherit
     (lib)
     concatLists
@@ -995,11 +1001,10 @@ let
     ;
 
   cfg = config.users.deterministicIds;
-in
-{
+in {
   options = {
     users.deterministicIds = mkOption {
-      default = { };
+      default = {};
       description = mdDoc ''
         Maps a user or group name to its expected uid/gid values. If a user/group is
         used on the system without specifying a uid/gid, this module will assign the
@@ -1022,21 +1027,19 @@ in
     };
 
     users.users = mkOption {
-      type = types.attrsOf (types.submodule ({ name, ... }: {
-        config.uid =
-          let
-            deterministicUid = cfg.${name}.uid or null;
-          in
+      type = types.attrsOf (types.submodule ({name, ...}: {
+        config.uid = let
+          deterministicUid = cfg.${name}.uid or null;
+        in
           mkIf (deterministicUid != null) (mkDefault deterministicUid);
       }));
     };
 
     users.groups = mkOption {
-      type = types.attrsOf (types.submodule ({ name, ... }: {
-        config.gid =
-          let
-            deterministicGid = cfg.${name}.gid or null;
-          in
+      type = types.attrsOf (types.submodule ({name, ...}: {
+        config.gid = let
+          deterministicGid = cfg.${name}.gid or null;
+        in
           mkIf (deterministicGid != null) (mkDefault deterministicGid);
       }));
     };
@@ -1045,16 +1048,16 @@ in
   config = {
     assertions =
       concatLists
-        (flip mapAttrsToList config.users.users (name: user: [
-          {
-            assertion = user.uid != null;
-            message = &quot;non-deterministic uid detected for '${name}', please assign one via `users.deterministicIds`&quot;;
-          }
-          {
-            assertion = !user.autoSubUidGidRange;
-            message = &quot;non-deterministic subUids/subGids detected for: ${name}&quot;;
-          }
-        ]))
+      (flip mapAttrsToList config.users.users (name: user: [
+        {
+          assertion = user.uid != null;
+          message = &quot;non-deterministic uid detected for '${name}', please assign one via `users.deterministicIds`&quot;;
+        }
+        {
+          assertion = !user.autoSubUidGidRange;
+          message = &quot;non-deterministic subUids/subGids detected for: ${name}&quot;;
+        }
+      ]))
       ++ flip mapAttrsToList config.users.groups (name: group: {
         assertion = group.gid != null;
         message = &quot;non-deterministic gid detected for '${name}', please assign one via `users.deterministicIds`&quot;;
@@ -1063,18 +1066,18 @@ in
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="development"><a class="header" href="#development">Development</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, pkgs
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.development;
-in
-{
+in {
   options.dr460nixed.development = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -1117,7 +1120,7 @@ in
       docker = {
         autoPrune = {
           enable = true;
-          flags = [ &quot;--all&quot; ];
+          flags = [&quot;--all&quot;];
         };
         enable = true;
         enableOnBoot = false;
@@ -1130,7 +1133,7 @@ in
         qemu = {
           ovmf = {
             enable = true;
-            packages = [ pkgs.OVMFFull.fd ];
+            packages = [pkgs.OVMFFull.fd];
           };
           swtpm.enable = true;
         };
@@ -1139,7 +1142,7 @@ in
     };
 
     # Allow cross-compiling to aarch64
-    boot.binfmt.emulatedSystems = [ &quot;aarch64-linux&quot; ];
+    boot.binfmt.emulatedSystems = [&quot;aarch64-linux&quot;];
 
     # Configure nspawn containers
     systemd.nspawn.&quot;garuda&quot; = {
@@ -1148,7 +1151,7 @@ in
       };
       enable = true;
       filesConfig = {
-        Bind = [ &quot;/home/nico&quot; ];
+        Bind = [&quot;/home/nico&quot;];
       };
       networkConfig = {
         VirtualEthernet = false;
@@ -1167,12 +1170,15 @@ in
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="docker-compose-runner"><a class="header" href="#docker-compose-runner">Docker compose runner</a></h1>
-<pre><code class="language-nix">{ lib, pkgs, config, ... }:
-with lib;
-let
+<pre><code class="language-nix">{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+with lib; let
   cfg = config.dr460nixed.docker-compose-runner;
-in
-{
+in {
   options.dr460nixed.docker-compose-runner = mkOption {
     type = types.attrsOf (types.submodule {
       options = {
@@ -1188,75 +1194,76 @@ in
         };
       };
     });
-    default = { };
+    default = {};
   };
 
   config = {
-    systemd.services = mapAttrs'
-      (name: value: nameValuePair (&quot;docker-compose-runner-&quot; + name) (
-        let
-          output = derivation {
-            builder = pkgs.writeShellScript &quot;build&quot; ''
-              PATH=&quot;${pkgs.rsync}/bin:${pkgs.coreutils}/bin:${pkgs.gnused}/bin&quot;
-              set -e
-              mkdir &quot;$out&quot;
-              sed -r 's/(^\s+restart:\s*)(unless-stopped|always)(\s*($|#))/\1on-failure\3/g' &quot;$src/docker-compose.yml&quot; &gt; &quot;$out/docker-compose.yml&quot;
-              rsync -a &quot;$src/&quot; &quot;$out&quot;
-            '';
-            name = &quot;docker-compose-runner-&quot; + name;
-            src = value.source;
-            inherit (pkgs.hostPlatform) system;
-          };
-          statepath = &quot;/var/docker-compose-runner/${name}&quot;;
-        in
-        {
-          description = &quot;docker-compose runner for ${name}&quot;;
-          path = with pkgs; [ rsync docker-compose docker bash ];
-          serviceConfig = {
-            ExecStart = pkgs.writeShellScript (&quot;execstart-docker-compose-runner-&quot; + name) ''
-              set -e
-              mkdir -p &quot;${statepath}&quot;
-              rsync -a --no-owner --size-only &quot;${output}/&quot; &quot;${statepath}&quot;
-              ${optionalString (value.envfile != null) ''
+    systemd.services =
+      mapAttrs'
+      (name: value:
+        nameValuePair (&quot;docker-compose-runner-&quot; + name) (
+          let
+            output = derivation {
+              builder = pkgs.writeShellScript &quot;build&quot; ''
+                PATH=&quot;${pkgs.rsync}/bin:${pkgs.coreutils}/bin:${pkgs.gnused}/bin&quot;
+                set -e
+                mkdir &quot;$out&quot;
+                sed -r 's/(^\s+restart:\s*)(unless-stopped|always)(\s*($|#))/\1on-failure\3/g' &quot;$src/docker-compose.yml&quot; &gt; &quot;$out/docker-compose.yml&quot;
+                rsync -a &quot;$src/&quot; &quot;$out&quot;
+              '';
+              name = &quot;docker-compose-runner-&quot; + name;
+              src = value.source;
+              inherit (pkgs.hostPlatform) system;
+            };
+            statepath = &quot;/var/docker-compose-runner/${name}&quot;;
+          in {
+            description = &quot;docker-compose runner for ${name}&quot;;
+            path = with pkgs; [rsync docker-compose docker bash];
+            serviceConfig = {
+              ExecStart = pkgs.writeShellScript (&quot;execstart-docker-compose-runner-&quot; + name) ''
+                set -e
+                mkdir -p &quot;${statepath}&quot;
+                rsync -a --no-owner --size-only &quot;${output}/&quot; &quot;${statepath}&quot;
+                ${optionalString (value.envfile != null) ''
                   cp &quot;${value.envfile}&quot; &quot;${statepath}/.env&quot;
                   chmod 600 &quot;${statepath}/.env&quot;
-              ''}
-              cd &quot;${statepath}&quot;
-              docker-compose up
-            '';
-            ExecStopPost = pkgs.writeShellScript (&quot;execstop-docker-compose-runner-&quot; + name) ''
-              set -e
-              cd &quot;${statepath}&quot;
-              docker-compose down
-            '';
-          };
-          unitConfig = {
-            After = &quot;docker.service&quot;;
-            Requisite = &quot;docker.service&quot;;
-            StopPropagatedFrom = &quot;docker.service&quot;;
-          };
-          wantedBy = [ &quot;multi-user.target&quot; ];
-        }
-      ))
+                ''}
+                cd &quot;${statepath}&quot;
+                docker-compose up
+              '';
+              ExecStopPost = pkgs.writeShellScript (&quot;execstop-docker-compose-runner-&quot; + name) ''
+                set -e
+                cd &quot;${statepath}&quot;
+                docker-compose down
+              '';
+            };
+            unitConfig = {
+              After = &quot;docker.service&quot;;
+              Requisite = &quot;docker.service&quot;;
+              StopPropagatedFrom = &quot;docker.service&quot;;
+            };
+            wantedBy = [&quot;multi-user.target&quot;];
+          }
+        ))
       cfg;
-    environment.systemPackages = mkIf (cfg != { }) [ pkgs.docker-compose ];
-    virtualisation.docker.enable = mkIf (cfg != { }) true;
+    environment.systemPackages = mkIf (cfg != {}) [pkgs.docker-compose];
+    virtualisation.docker.enable = mkIf (cfg != {}) true;
   };
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="gaming"><a class="header" href="#gaming">Gaming</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, pkgs
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.gaming;
-in
-{
+in {
   options.dr460nixed.gaming = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -1267,24 +1274,28 @@ in
   };
 
   config = mkIf cfg.enable {
-    chaotic.steam.extraCompatPackages = with pkgs; [ proton-ge-custom ];
+    # ProtonGE-Custom
+    chaotic.steam.extraCompatPackages = with pkgs; [proton-ge-custom];
+
+    # Enable Garuda's gaming module
+    garuda.gaming.enable = true;
   };
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hardening"><a class="header" href="#hardening">Hardening</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, pkgs
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.hardening;
   cfgServers = config.dr460nixed.servers.enable;
-in
-{
+in {
   options.dr460nixed.hardening = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = true;
         type = types.bool;
@@ -1377,8 +1388,8 @@ in
     };
 
     # Disable root login &amp; password authentication on sshd
-    # also, apply recommendations of ssh-audit.com and enable Duo 2FA 
-    # (for whatever reason the default config did not work a at all? 
+    # also, apply recommendations of ssh-audit.com and enable Duo 2FA
+    # (for whatever reason the default config did not work a at all?
     # maybe related to https://github.com/NixOS/nixpkgs/issues/115044)
     services.openssh = {
       extraConfig = ''
@@ -1442,27 +1453,27 @@ in
       ];
       knownHosts = {
         aur-rsa = {
-          hostNames = [ &quot;aur.archlinux.org&quot; ];
+          hostNames = [&quot;aur.archlinux.org&quot;];
           publicKey = &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDKF9vAFWdgm9Bi8uc+tYRBmXASBb5cB5iZsB7LOWWFeBrLp3r14w0/9S2vozjgqY5sJLDPONWoTTaVTbhe3vwO8CBKZTEt1AcWxuXNlRnk9FliR1/eNB9uz/7y1R0+c1Md+P98AJJSJWKN12nqIDIhjl2S1vOUvm7FNY43fU2knIhEbHybhwWeg+0wxpKwcAd/JeL5i92Uv03MYftOToUijd1pqyVFdJvQFhqD4v3M157jxS5FTOBrccAEjT+zYmFyD8WvKUa9vUclRddNllmBJdy4NyLB8SvVZULUPrP3QOlmzemeKracTlVOUG1wsDbxknF1BwSCU7CmU6UFP90kpWIyz66bP0bl67QAvlIc52Yix7pKJPbw85+zykvnfl2mdROsaT8p8R9nwCdFsBc9IiD0NhPEHcyHRwB8fokXTajk2QnGhL+zP5KnkmXnyQYOCUYo3EKMXIlVOVbPDgRYYT/XqvBuzq5S9rrU70KoI/S5lDnFfx/+lPLdtcnnEPk=&quot;;
         };
         aur-ed25519 = {
-          hostNames = [ &quot;aur.archlinux.org&quot; ];
+          hostNames = [&quot;aur.archlinux.org&quot;];
           publicKey = &quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuBKrPzbawxA/k2g6NcyV5jmqwJ2s+zpgZGZ7tpLIcN&quot;;
         };
         github-rsa = {
-          hostNames = [ &quot;github.com&quot; ];
+          hostNames = [&quot;github.com&quot;];
           publicKey = &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk=&quot;;
         };
         github-ed25519 = {
-          hostNames = [ &quot;github.com&quot; ];
+          hostNames = [&quot;github.com&quot;];
           publicKey = &quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl&quot;;
         };
         gitlab-rsa = {
-          hostNames = [ &quot;gitlab.com&quot; ];
+          hostNames = [&quot;gitlab.com&quot;];
           publicKey = &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9&quot;;
         };
         gitlab-ed25519 = {
-          hostNames = [ &quot;gitlab.com&quot; ];
+          hostNames = [&quot;gitlab.com&quot;];
           publicKey = &quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf&quot;;
         };
       };
@@ -1483,7 +1494,7 @@ in
     security.lockKernelModules = false;
 
     # Run security analysis
-    environment.systemPackages = with pkgs; [ lynis ];
+    environment.systemPackages = with pkgs; [lynis];
 
     # Technically we don't need this as we use pubkey authentication
     services.fail2ban = mkIf cfgServers {
@@ -1497,9 +1508,10 @@ in
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="impermanence"><a class="header" href="#impermanence">Impermanence</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
 }: {
   # This was recently added to Chaotic Nyx
   chaotic.zfs-impermanence-on-shutdown = {
@@ -1511,102 +1523,122 @@ in
   # Persistent files
   environment.persistence.&quot;/var/persistent&quot; = {
     hideMounts = true;
-    directories = [
-      &quot;/etc/NetworkManager/system-connections&quot;
-      &quot;/etc/nixos&quot;
-      &quot;/etc/secureboot&quot;
-      &quot;/var/cache/chaotic&quot;
-      &quot;/var/cache/tailscale&quot;
-      &quot;/var/lib/AccountsService/icons&quot;
-      &quot;/var/lib/bluetooth&quot;
-      &quot;/var/lib/chaotic&quot;
-      &quot;/var/lib/containers&quot;
-      &quot;/var/lib/flatpak&quot;
-      &quot;/var/lib/libvirt&quot;
-      &quot;/var/lib/machines&quot;
-      &quot;/var/lib/sddm&quot;
-      &quot;/var/lib/systemd&quot;
-      &quot;/var/lib/tailscale&quot;
-      &quot;/var/lib/upower&quot;
-      &quot;/var/lib/vnstat&quot;
-      { directory = &quot;/var/lib/iwd&quot;; mode = &quot;u=rwx,g=,o=&quot;; }
-    ] ++ lib.optionals config.security.acme.acceptTerms [
-      {
-        directory = &quot;/var/lib/acme&quot;;
-        user = &quot;acme&quot;;
-        group = &quot;acme&quot;;
-        mode = &quot;0755&quot;;
-      }
-    ] ++ lib.optionals config.services.printing.enable [
-      {
-        directory = &quot;/var/lib/cups&quot;;
-        user = &quot;root&quot;;
-        group = &quot;root&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ] ++ lib.optionals config.services.fail2ban.enable [
-      {
-        directory = &quot;/var/lib/fail2ban&quot;;
-        user = &quot;fail2ban&quot;;
-        group = &quot;fail2ban&quot;;
-        mode = &quot;0750&quot;;
-      }
-    ] ++ lib.optionals config.services.postgresql.enable [
-      {
-        directory = &quot;/var/lib/postgresql&quot;;
-        user = &quot;postgres&quot;;
-        group = &quot;postgres&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ] ++ lib.optionals config.services.loki.enable [
-      {
-        directory = &quot;/var/lib/loki&quot;;
-        user = &quot;loki&quot;;
-        group = &quot;loki&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ] ++ lib.optionals config.services.grafana.enable [
-      {
-        directory = config.services.grafana.dataDir;
-        user = &quot;grafana&quot;;
-        group = &quot;grafana&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ] ++ lib.optionals config.services.vaultwarden.enable [
-      {
-        directory = &quot;/var/lib/vaultwarden&quot;;
-        user = &quot;vaultwarden&quot;;
-        group = &quot;vaultwarden&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ] ++ lib.optionals config.services.influxdb2.enable [
-      {
-        directory = &quot;/var/lib/influxdb2&quot;;
-        user = &quot;influxdb2&quot;;
-        group = &quot;influxdb2&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ] ++ lib.optionals config.services.telegraf.enable [
-      {
-        directory = &quot;/var/lib/telegraf&quot;;
-        user = &quot;telegraf&quot;;
-        group = &quot;telegraf&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ] ++ lib.optionals config.services.adguardhome.enable [
-      {
-        directory = &quot;/var/lib/private/AdGuardHome&quot;;
-        user = &quot;root&quot;;
-        group = &quot;root&quot;;
-        mode = &quot;0700&quot;;
-      }
-    ];
-    files = [ &quot;/var/lib/dbus/machine-id&quot; ];
+    directories =
+      [
+        &quot;/etc/NetworkManager/system-connections&quot;
+        &quot;/etc/nixos&quot;
+        &quot;/etc/secureboot&quot;
+        &quot;/var/cache/chaotic&quot;
+        &quot;/var/cache/tailscale&quot;
+        &quot;/var/lib/AccountsService/icons&quot;
+        &quot;/var/lib/bluetooth&quot;
+        &quot;/var/lib/chaotic&quot;
+        &quot;/var/lib/containers&quot;
+        &quot;/var/lib/flatpak&quot;
+        &quot;/var/lib/libvirt&quot;
+        &quot;/var/lib/machines&quot;
+        &quot;/var/lib/sddm&quot;
+        &quot;/var/lib/systemd&quot;
+        &quot;/var/lib/tailscale&quot;
+        &quot;/var/lib/upower&quot;
+        &quot;/var/lib/vnstat&quot;
+        {
+          directory = &quot;/var/lib/iwd&quot;;
+          mode = &quot;u=rwx,g=,o=&quot;;
+        }
+      ]
+      ++ lib.optionals config.security.acme.acceptTerms [
+        {
+          directory = &quot;/var/lib/acme&quot;;
+          user = &quot;acme&quot;;
+          group = &quot;acme&quot;;
+          mode = &quot;0755&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.printing.enable [
+        {
+          directory = &quot;/var/lib/cups&quot;;
+          user = &quot;root&quot;;
+          group = &quot;root&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.fail2ban.enable [
+        {
+          directory = &quot;/var/lib/fail2ban&quot;;
+          user = &quot;fail2ban&quot;;
+          group = &quot;fail2ban&quot;;
+          mode = &quot;0750&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.postgresql.enable [
+        {
+          directory = &quot;/var/lib/postgresql&quot;;
+          user = &quot;postgres&quot;;
+          group = &quot;postgres&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.loki.enable [
+        {
+          directory = &quot;/var/lib/loki&quot;;
+          user = &quot;loki&quot;;
+          group = &quot;loki&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.grafana.enable [
+        {
+          directory = config.services.grafana.dataDir;
+          user = &quot;grafana&quot;;
+          group = &quot;grafana&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.vaultwarden.enable [
+        {
+          directory = &quot;/var/lib/vaultwarden&quot;;
+          user = &quot;vaultwarden&quot;;
+          group = &quot;vaultwarden&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.influxdb2.enable [
+        {
+          directory = &quot;/var/lib/influxdb2&quot;;
+          user = &quot;influxdb2&quot;;
+          group = &quot;influxdb2&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.telegraf.enable [
+        {
+          directory = &quot;/var/lib/telegraf&quot;;
+          user = &quot;telegraf&quot;;
+          group = &quot;telegraf&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ]
+      ++ lib.optionals config.services.adguardhome.enable [
+        {
+          directory = &quot;/var/lib/private/AdGuardHome&quot;;
+          user = &quot;root&quot;;
+          group = &quot;root&quot;;
+          mode = &quot;0700&quot;;
+        }
+      ];
+    files = [&quot;/var/lib/dbus/machine-id&quot;];
     users.&quot;root&quot; = {
       home = &quot;/root&quot;;
       directories = [
-        { directory = &quot;.gnupg&quot;; mode = &quot;0700&quot;; }
-        { directory = &quot;.ssh&quot;; mode = &quot;0700&quot;; }
+        {
+          directory = &quot;.gnupg&quot;;
+          mode = &quot;0700&quot;;
+        }
+        {
+          directory = &quot;.ssh&quot;;
+          mode = &quot;0700&quot;;
+        }
       ];
     };
     users.&quot;nico&quot; = {
@@ -1653,10 +1685,22 @@ in
         &quot;School&quot;
         &quot;Sync&quot;
         &quot;Videos&quot;
-        { directory = &quot;.gnupg&quot;; mode = &quot;0700&quot;; }
-        { directory = &quot;.local/share/keybase&quot;; mode = &quot;0700&quot;; }
-        { directory = &quot;.local/share/keyrings&quot;; mode = &quot;0700&quot;; }
-        { directory = &quot;.ssh&quot;; mode = &quot;0700&quot;; }
+        {
+          directory = &quot;.gnupg&quot;;
+          mode = &quot;0700&quot;;
+        }
+        {
+          directory = &quot;.local/share/keybase&quot;;
+          mode = &quot;0700&quot;;
+        }
+        {
+          directory = &quot;.local/share/keyrings&quot;;
+          mode = &quot;0700&quot;;
+        }
+        {
+          directory = &quot;.ssh&quot;;
+          mode = &quot;0700&quot;;
+        }
       ];
     };
   };
@@ -1693,22 +1737,22 @@ in
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="locales"><a class="header" href="#locales">Locales</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, pkgs
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.locales;
   cfgDesktops = config.dr460nixed.desktops;
   de = &quot;de_DE.UTF-8&quot;;
   defaultLocale = &quot;en_GB.UTF-8&quot;;
   terminus-variant = &quot;120n&quot;;
-in
-{
+in {
   options.dr460nixed.locales = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = true;
         type = types.bool;
@@ -1766,20 +1810,19 @@ in
     };
   };
 }
-
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="msmtp"><a class="header" href="#msmtp">MSMTP</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.smtp;
-in
-{
+in {
   options.dr460nixed.smtp = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -1817,24 +1860,20 @@ in
     };
   };
 }
-
-
-
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="networking"><a class="header" href="#networking">Networking</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed;
-in
-{
+in {
   # We want to use NetworkManager on desktops
   networking = {
     # Pointing to our Adguard instance via Tailscale
-    nameservers = [ &quot;1.1.1.1&quot; &quot;1.0.0.1&quot; ];
+    nameservers = [&quot;1.1.1.1&quot; &quot;1.0.0.1&quot;];
     networkmanager = mkIf cfg.desktops.enable or cfg.rpi {
       dns = &quot;none&quot;;
       enable = true;
@@ -1852,78 +1891,162 @@ in
   # Lightweight bandwidth usage tracking
   services.vnstat.enable = true;
 }
-
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="nix"><a class="header" href="#nix">Nix</a></h1>
-<pre><code class="language-nix">{ inputs
-, ...
-}:
-{
-  # General nix settings
-  nix = {
-    # Do garbage collections whenever there is less than 1GB free space left
-    extraOptions = ''
-      accept-flake-config = true
-      http-connections = 0
-      warn-dirty = false
-    '';
-    settings = {
-      # Use available binary caches, this is not Gentoo
-      # this also allows us to use remote builders to reduce build times and batter usage
-      builders-use-substitutes = true;
-
-      # A few extra binary caches and their public keys
-      substituters = [
-        &quot;https://cache.garnix.io&quot;
-        &quot;https://dr460nf1r3.cachix.org&quot;
-      ];
-      trusted-public-keys = [
-        &quot;cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=&quot;
-        &quot;dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU=&quot;
-      ];
-
-      # Enable certain system features
-      system-features = [ &quot;big-parallel&quot; &quot;kvm&quot; &quot;recursive-nix&quot; ];
-
-      # Continue building derivations if one fails
-      keep-going = true;
-
-      # Show more log lines for failed builds
-      log-lines = 20;
-
-      # For direnv GC roots
-      keep-derivations = true;
-      keep-outputs = true;
-
-      # Max number of parallel jobs
-      max-jobs = &quot;auto&quot;;
+<pre><code class="language-nix">{
+  config,
+  inputs,
+  lib,
+  ...
+}: let
+  cfgSuper = config.dr460nixed.nix-super;
+  cfgRemote = config.dr460nixed.remote-build;
+in {
+  options.dr460nixed = with lib; {
+    nix-super = {
+      enable = mkOption {
+        default = true;
+        type = types.bool;
+        description = mdDoc ''
+          Replaces nix with nix-super, which tracks future features of nix.
+        '';
+      };
+    };
+    remote-build = {
+      enable = mkOption {
+        default = false;
+        example = true;
+        type = types.bool;
+        description = mdDoc ''
+          Enable the capability of building via nix on a remote machine when specified via command line flag.
+        '';
+      };
+      enableGlobally = mkOption {
+        default = false;
+        example = true;
+        type = types.bool;
+        description = mdDoc ''
+          Enables remote builds via enableDistributedBuild rather than making it opt-in via command line.
+        '';
+      };
+      host = mkOption {
+        default = false;
+        type = types.str;
+        example = &quot;dragons-ryzen&quot;;
+        description = mdDoc ''
+          Specifies the target host for remote builds.
+        '';
+      };
+      port = mkOption {
+        default = 22;
+        type = types.int;
+        example = &quot;build&quot;;
+        description = mdDoc ''
+          Specifies the target port for remote builds.
+        '';
+      };
+      trustedPublicKey = mkOption {
+        default = null;
+        type = types.str;
+        example = &quot;remote-build:8vrLBvFoMiKVKRYD//30bhUBTEEiuupfdQzl2UoMms4=&quot;;
+        description = mdDoc ''
+          Specifies the substitutors cache signing key for remote builds.
+        '';
+      };
+      user = mkOption {
+        default = null;
+        type = types.str;
+        example = &quot;build&quot;;
+        description = mdDoc ''
+          Specifies the target user for remote builds.
+        '';
+      };
     };
   };
 
-  # Overlays for nixpkgs
-  nixpkgs.overlays = [
-    inputs.nixd.overlays.default
-    (
-      # Overlays nix with nix-super, which tracks future features
-      _: _prev: {
+  config = {
+    # General nix settings
+    nix = {
+      # The remote builder to use for distributed builds
+      buildMachines = lib.mkIf cfgRemote.enable [
+        {
+          hostName = cfgRemote.host;
+          maxJobs = 16;
+          protocol = &quot;ssh-ng&quot;;
+          supportedFeatures = [&quot;nixos-test&quot; &quot;benchmark&quot; &quot;big-parallel&quot; &quot;kvm&quot;];
+          systems = [&quot;x86_64-linux&quot; &quot;aarch64-linux&quot;];
+        }
+      ];
+
+      # Allow distributed builds
+      distributedBuilds = lib.mkIf cfgRemote.enableGlobally true;
+
+      # Don't warn about dirty flakes and accept flake configs by default
+      extraOptions = ''
+        http-connections = 0
+        warn-dirty = false
+      '';
+      settings = {
+        # Accept flake configs by default
+        accept-flake-config = true;
+
+        # Test out ca-derivations (https://nixos.wiki/wiki/Ca-derivations)
+        experimental-features = [&quot;ca-derivations&quot;];
+
+        # For direnv GC roots
+        keep-derivations = true;
+        keep-outputs = true;
+
+        # Continue building derivations if one fails
+        keep-going = true;
+
+        # Show more log lines for failed builds
+        log-lines = 20;
+
+        # Max number of parallel jobs
+        max-jobs = &quot;auto&quot;;
+
+        # Enable certain system features
+        system-features = [&quot;big-parallel&quot; &quot;kvm&quot;];
+
+        # Trust the remote machines' cache signatures
+        trusted-public-keys = lib.mkIf cfgRemote.enable [&quot;${cfgRemote.trustedPublicKey}&quot;];
+        trusted-substituters = lib.mkIf cfgRemote.enable [&quot;ssh-ng://${cfgRemote.host}&quot;];
+      };
+    };
+
+    # Nix-super - https://github.com/privatevoid-net/nix-super
+    nixpkgs.overlays = lib.mkIf cfgSuper.enable [
+      (_: _prev: {
         nix = inputs.nix-super.packages.x86_64-linux.default;
-      }
-    )
-  ];
+      })
+    ];
+
+    # Let root ssh into the remote builder seamlessly
+    home-manager.users.&quot;root&quot; = lib.mkIf cfgRemote.enable {
+      home.stateVersion = &quot;23.11&quot;; # Specify this since its otherwise unset
+      programs.ssh.extraConfig = ''
+        Host ${cfgRemote.host}
+          HostName ${cfgRemote.host}
+          Port ${toString cfgRemote.port}
+          User ${cfgRemote.user}
+      '';
+    };
+  };
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="oci"><a class="header" href="#oci">OCI</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.oci;
-in
-{
+in {
   options.dr460nixed.oci = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -1959,7 +2082,7 @@ in
     };
 
     # https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/configuringntpservice.htm#Configuring_the_Oracle_Cloud_Infrastructure_NTP_Service_for_an_Instance
-    networking.timeServers = [ &quot;169.254.169.254&quot; ];
+    networking.timeServers = [&quot;169.254.169.254&quot;];
 
     # Slows down write operations considerably
     nix.settings.auto-optimise-store = lib.mkForce false;
@@ -1971,23 +2094,20 @@ in
     };
   };
 }
-
-
-
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="servers"><a class="header" href="#servers">Servers</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, pkgs
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.servers;
-in
-{
+in {
   options.dr460nixed.servers = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -1995,7 +2115,8 @@ in
           Whether this device is a server.
         '';
       };
-    monitoring = mkOption
+    monitoring =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -2023,7 +2144,7 @@ in
         &quot;memory mode&quot; = &quot;dbengine&quot;;
         &quot;update every&quot; = &quot;2&quot;;
       };
-      ml = { &quot;enabled&quot; = &quot;yes&quot;; };
+      ml = {&quot;enabled&quot; = &quot;yes&quot;;};
     };
     services.netdata.configDir = {
       &quot;go.d.conf&quot; = pkgs.writeText &quot;go.d.conf&quot; ''
@@ -2038,16 +2159,16 @@ in
       '';
       &quot;go.d/nginx.conf&quot; =
         mkIf config.services.nginx.enable
-          (pkgs.writeText &quot;nginx.conf&quot; ''
-            jobs:
-              - name: local
-                url: http://127.0.0.1/nginx_status
-          '');
+        (pkgs.writeText &quot;nginx.conf&quot; ''
+          jobs:
+            - name: local
+              url: http://127.0.0.1/nginx_status
+        '');
     };
 
     # Extra Python &amp; system packages required for Netdata to function
-    services.netdata.python.extraPackages = ps: [ ps.psycopg2 ];
-    systemd.services.netdata = { path = with pkgs; [ jq ]; };
+    services.netdata.python.extraPackages = ps: [ps.psycopg2];
+    systemd.services.netdata = {path = with pkgs; [jq];};
 
     # Connect to Netdata Cloud easily
     services.netdata.claimTokenFile = config.sops.secrets.&quot;api_keys/netdata&quot;.path;
@@ -2058,8 +2179,8 @@ in
     };
 
     # The Nginx QUIC package with Brotli modules
-    services.nginx.package = pkgs.nginxQuic.override { doCheck = false; };
-    services.nginx.additionalModules = with pkgs; [ nginxModules.brotli ];
+    services.nginx.package = pkgs.nginxQuic.override {doCheck = false;};
+    services.nginx.additionalModules = with pkgs; [nginxModules.brotli];
 
     # Recommended settings replacing custom configuration
     services.nginx = {
@@ -2073,7 +2194,7 @@ in
 
     # Upstream resolvers
     services.nginx.resolver = {
-      addresses = [ &quot;100.100.100.100&quot; ];
+      addresses = [&quot;100.100.100.100&quot;];
       valid = &quot;60s&quot;;
     };
 
@@ -2104,14 +2225,14 @@ in
     security.dhparams = mkIf config.services.nginx.enable {
       defaultBitSize = 3072;
       enable = true;
-      params.nginx = { };
+      params.nginx = {};
     };
     services.nginx.sslDhparam = config.security.dhparams.params.nginx.path;
 
     # Need to explicitly open our web server ports
     networking.firewall = mkIf config.services.nginx.enable {
-      allowedTCPPorts = [ 80 443 ];
-      allowedUDPPorts = [ 443 ];
+      allowedTCPPorts = [80 443];
+      allowedUDPPorts = [443];
     };
 
     # Enable this so we don't get annoyed by the ACME TOS
@@ -2123,16 +2244,16 @@ in
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="shells"><a class="header" href="#shells">Shells</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, ...
-}:
-with lib;
-let
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.dr460nixed.shells;
-in
-{
-  options.dr460nixed.shells.enable = mkOption
+in {
+  options.dr460nixed.shells.enable = with lib;
+    mkOption
     {
       default = true;
       type = types.bool;
@@ -2141,36 +2262,39 @@ in
       '';
     };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Programs &amp; global config
     programs = {
       bash.shellAliases = {
-        &quot;gpl&quot; = &quot;curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE&quot;;
-        &quot;reloc-us&quot; = &quot;sudo tailscale up --exit-node=100.75.73.33&quot;;
-        &quot;tree&quot; = &quot;eza --git --color always -T&quot;;
+        &quot;gpl&quot; = &quot;${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE&quot;;
+        &quot;nix&quot; = &quot;${pkgs.nix}/bin/nix --verbose --print-build-logs&quot;; # https://github.com/NixOS/nix/pull/8323
       };
-      fish.shellAbbrs = {
-        &quot;gpl&quot; = &quot;curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE&quot;;
-        &quot;reloc-us&quot; = &quot;sudo tailscale up --exit-node=100.75.73.33&quot;;
+      fish = {
+        shellAbbrs = {
+          &quot;gpl&quot; = &quot;${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE&quot;;
+        };
+        shellAliases = {
+          &quot;nix&quot; = &quot;${pkgs.nix}/bin/nix --verbose --print-build-logs&quot;; # https://github.com/NixOS/nix/pull/8323
+        };
       };
     };
   };
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="syncthing"><a class="header" href="#syncthing">Syncthing</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, pkgs
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.syncthing;
-  settingsFormat = pkgs.formats.json { };
-in
-{
+  settingsFormat = pkgs.formats.json {};
+in {
   options.dr460nixed.syncthing = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -2178,7 +2302,8 @@ in
           Enable common file synchronisation between devices.
         '';
       };
-    key = mkOption
+    key =
+      mkOption
       {
         default = &quot;&quot;;
         type = types.str;
@@ -2186,7 +2311,8 @@ in
           The key to use for Syncthing.
         '';
       };
-    cert = mkOption
+    cert =
+      mkOption
       {
         default = &quot;&quot;;
         type = types.str;
@@ -2194,10 +2320,11 @@ in
           The cert to use for Syncthing.
         '';
       };
-    devices = mkOption
+    devices =
+      mkOption
       {
-        default = [ ];
-        type = types.attrsOf (types.submodule ({ name, ... }: {
+        default = [];
+        type = types.attrsOf (types.submodule ({name, ...}: {
           freeformType = settingsFormat.type;
           options = {
             name = mkOption {
@@ -2227,15 +2354,17 @@ in
           The devices to sync with.
         '';
       };
-    devicesNames = mkOption
+    devicesNames =
+      mkOption
       {
-        default = [ ];
+        default = [];
         type = types.listOf types.str;
         description = mdDoc ''
           The names of the devices to sync with.
         '';
       };
-    user = mkOption
+    user =
+      mkOption
       {
         default = &quot;&quot;;
         type = types.str;
@@ -2284,13 +2413,13 @@ in
     };
   };
 }
-
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tailscale-tls"><a class="header" href="#tailscale-tls">Tailscale TLS</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, pkgs
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib; let
   cfg = config.dr460nixed.tailscale-tls;
@@ -2298,8 +2427,7 @@ with lib; let
     if cfg.domain-override != null
     then cfg.domain-override
     else &quot;$(${pkgs.tailscale}/bin/tailscale cert 2&gt;&amp;1 | grep use | cut -d '\&quot;' -f2)&quot;;
-in
-{
+in {
   options.dr460nixed.tailscale-tls = {
     enable = mkEnableOption &quot;Automatic Tailscale certificates renewal&quot;;
 
@@ -2329,14 +2457,14 @@ in
       isSystemUser = true;
     };
 
-    users.groups.tailscale-tls = { };
+    users.groups.tailscale-tls = {};
 
     systemd.services.tailscale-tls = {
       description = &quot;Automatic Tailscale certificates&quot;;
 
-      after = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
-      wants = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
-      wantedBy = [ &quot;multi-user.target&quot; ];
+      after = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
+      wants = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
+      wantedBy = [&quot;multi-user.target&quot;];
 
       serviceConfig.Type = &quot;oneshot&quot;;
       script = ''
@@ -2365,9 +2493,9 @@ in
     systemd.timers.tailscale-tls = {
       description = &quot;Automatic Tailscale certificates renewal&quot;;
 
-      after = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
-      wants = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
-      wantedBy = [ &quot;multi-user.target&quot; ];
+      after = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
+      wants = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
+      wantedBy = [&quot;multi-user.target&quot;];
 
       timerConfig = {
         OnCalendar = &quot;weekly&quot;;
@@ -2379,10 +2507,11 @@ in
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tailscale"><a class="header" href="#tailscale">Tailscale</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, pkgs
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib; let
   cfg = config.dr460nixed.tailscale;
@@ -2404,8 +2533,7 @@ with lib; let
     fi
     ${pkgs.tailscale}/bin/tailscale up ${tailscaleJoinArgsString}
   '';
-in
-{
+in {
   options.dr460nixed.tailscale = {
     enable = mkEnableOption &quot;Tailscale client daemon&quot;;
 
@@ -2423,7 +2551,7 @@ in
 
     extraUpArgs = mkOption {
       type = with types; listOf str;
-      default = [ ];
+      default = [];
       description = &quot;Extra args for tailscale up&quot;;
     };
   };
@@ -2432,17 +2560,20 @@ in
     # Enable Tailscale service
     services.tailscale.enable = true;
 
+    # Install Tailscale systray
+    environment.systemPackages = lib.mkIf config.dr460nixed.desktops.enable [pkgs.tailscale-systray];
+
     # Allow Tailscale devices to connect
-    networking.firewall.trustedInterfaces = [ &quot;tailscale0&quot; ];
+    networking.firewall.trustedInterfaces = [&quot;tailscale0&quot;];
 
     # Connect to Tailnet automatically
     systemd.services.tailscale-autoconnect = mkIf cfg.autoConnect {
       description = &quot;Automatic connection to Tailscale&quot;;
 
       # Make sure tailscale is running before trying to connect to tailscale
-      after = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
-      wants = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
-      wantedBy = [ &quot;multi-user.target&quot; ];
+      after = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
+      wants = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
+      wantedBy = [&quot;multi-user.target&quot;];
 
       serviceConfig.Type = &quot;oneshot&quot;;
       script = tailscaleUpScript;
@@ -2451,47 +2582,49 @@ in
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="users"><a class="header" href="#users">Users</a></h1>
-<pre><code class="language-nix">{ keys
-, config
-, ...
-}:
-let
+<pre><code class="language-nix">{
+  keys,
+  config,
+  ...
+}: let
   # Use fixed UIDs/GIDs
-  deterministicIds =
-    let
-      uidGid = id: {
-        gid = id;
-        uid = id;
-      };
-    in
-    {
-      acme = uidGid 999;
-      adbusers = uidGid 998;
-      avahi = uidGid 997;
-      chaotic_op = uidGid 996;
-      grafana = uidGid 995;
-      influxdb2 = uidGid 994;
-      loki = uidGid 993;
-      nico = uidGid 1000;
-      nm-iodine = uidGid 992;
-      node-exporter = uidGid 991;
-      nscd = uidGid 990;
-      plocate = uidGid 989;
-      polkituser = uidGid 988;
-      promtail = uidGid 987;
-      rtkit = uidGid 986;
-      sshd = uidGid 985;
-      systemd-coredump = uidGid 984;
-      systemd-oom = uidGid 983;
-      telegraf = uidGid 982;
-      vnstatd = uidGid 981;
-      wireshark = uidGid 980;
+  deterministicIds = let
+    uidGid = id: {
+      gid = id;
+      uid = id;
     };
+  in {
+    acme = uidGid 999;
+    adbusers = uidGid 998;
+    adguard = uidGid 977;
+    avahi = uidGid 997;
+    chaotic_op = uidGid 996;
+    cloudflared = uidGid 976;
+    dhcpcd = uidGid 976;
+    grafana = uidGid 995;
+    influxdb2 = uidGid 994;
+    loki = uidGid 993;
+    netdata = uidGid 979;
+    nico = uidGid 1000;
+    nm-iodine = uidGid 992;
+    node-exporter = uidGid 991;
+    nscd = uidGid 990;
+    plocate = uidGid 989;
+    polkituser = uidGid 988;
+    promtail = uidGid 987;
+    rtkit = uidGid 986;
+    sshd = uidGid 985;
+    systemd-coredump = uidGid 984;
+    systemd-oom = uidGid 983;
+    tailscale-tls = uidGid 978;
+    telegraf = uidGid 982;
+    vnstatd = uidGid 981;
+    wireshark = uidGid 980;
+  };
 
-  # Add groups only if they exist
+  # Add groups to user only if they exist
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
-in
-{
+in {
   # This is needed for early set up of user accounts
   sops.secrets = {
     &quot;passwords/nico&quot;.neededForUsers = true;
@@ -2505,39 +2638,38 @@ in
     users = {
       nico = {
         autoSubUidGidRange = false; # Use fixed UIDs/GIDs
-        extraGroups = [
-          &quot;audio&quot;
-          &quot;video&quot;
-          &quot;wheel&quot;
-        ] ++ ifTheyExist [
-          &quot;adbusers&quot;
-          &quot;chaotic_op&quot;
-          &quot;deluge&quot;
-          &quot;disk&quot;
-          &quot;docker&quot;
-          &quot;flatpak&quot;
-          &quot;git&quot;
-          &quot;kvm&quot;
-          &quot;libvirtd&quot;
-          &quot;mysql&quot;
-          &quot;network&quot;
-          &quot;networkmanager&quot;
-          &quot;podman&quot;
-          &quot;systemd-journal&quot;
-          &quot;wireshark&quot;
-        ];
+        extraGroups =
+          [
+            &quot;audio&quot;
+            &quot;video&quot;
+            &quot;wheel&quot;
+          ]
+          ++ ifTheyExist [
+            &quot;adbusers&quot;
+            &quot;chaotic_op&quot;
+            &quot;deluge&quot;
+            &quot;disk&quot;
+            &quot;docker&quot;
+            &quot;flatpak&quot;
+            &quot;git&quot;
+            &quot;kvm&quot;
+            &quot;libvirtd&quot;
+            &quot;mysql&quot;
+            &quot;network&quot;
+            &quot;networkmanager&quot;
+            &quot;podman&quot;
+            &quot;systemd-journal&quot;
+            &quot;wireshark&quot;
+          ];
         hashedPasswordFile = config.sops.secrets.&quot;passwords/nico&quot;.path;
         home = &quot;/home/nico&quot;;
         isNormalUser = true;
-        openssh.authorizedKeys.keyFiles = [ keys.nico ];
+        openssh.authorizedKeys.keyFiles = [keys.nico];
       };
       # Lock root password
       root.hashedPasswordFile = config.sops.secrets.&quot;passwords/root&quot;.path;
     };
   };
-
-  # Load my home-manager configurations
-  home-manager.users.&quot;nico&quot; = import ../../home-manager/common.nix;
 
   # Allow pushing to Cachix
   sops.secrets.&quot;api_keys/cachix&quot; = {
@@ -2548,18 +2680,18 @@ in
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="zfs"><a class="header" href="#zfs">ZFS</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, pkgs
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.zfs;
-in
-{
+in {
   options.dr460nixed.zfs = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -2569,7 +2701,8 @@ in
       };
   };
   options.dr460nixed.zfs = {
-    sendMails = mkOption
+    sendMails =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -2581,7 +2714,7 @@ in
 
   config = mkIf cfg.enable {
     # Support booting off ZFS
-    boot.supportedFilesystems = [ &quot;zfs&quot; ];
+    boot.supportedFilesystems = [&quot;zfs&quot;];
 
     # Always request encryption credentials to open rootfs
     boot.zfs.requestEncryptionCredentials = true;
@@ -2604,7 +2737,7 @@ in
     # Configure ZFS Event Daemon to use msmtp
     services.zfs.zed.settings = mkIf cfg.sendMails {
       ZED_DEBUG_LOG = &quot;/tmp/zed.debug.log&quot;;
-      ZED_EMAIL_ADDR = [ &quot;root&quot; ];
+      ZED_EMAIL_ADDR = [&quot;root&quot;];
       ZED_EMAIL_OPTS = &quot;@ADDRESS@&quot;;
       ZED_EMAIL_PROG = &quot;${pkgs.msmtp}/bin/msmtp&quot;;
 
@@ -2624,9 +2757,6 @@ in
     };
   };
 }
-
-
-
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="credits"><a class="header" href="#credits">Credits</a></h1>
 <p>A special thanks to <a href="https://github.com/pedrohlc">PedroHLC</a>, who always gives great advice and who is also the reason I'm using NixOS today. Also, I studied <a href="https://github.com/Misterio77">Mysterio77</a>'s and <a href="https://github.com/NotAShelf">NotAShelf</a>'s Nix configurations while building this one.</p>

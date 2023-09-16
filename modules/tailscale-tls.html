@@ -171,10 +171,11 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="tailscale-tls"><a class="header" href="#tailscale-tls">Tailscale TLS</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, pkgs
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib; let
   cfg = config.dr460nixed.tailscale-tls;
@@ -182,8 +183,7 @@ with lib; let
     if cfg.domain-override != null
     then cfg.domain-override
     else &quot;$(${pkgs.tailscale}/bin/tailscale cert 2&gt;&amp;1 | grep use | cut -d '\&quot;' -f2)&quot;;
-in
-{
+in {
   options.dr460nixed.tailscale-tls = {
     enable = mkEnableOption &quot;Automatic Tailscale certificates renewal&quot;;
 
@@ -213,14 +213,14 @@ in
       isSystemUser = true;
     };
 
-    users.groups.tailscale-tls = { };
+    users.groups.tailscale-tls = {};
 
     systemd.services.tailscale-tls = {
       description = &quot;Automatic Tailscale certificates&quot;;
 
-      after = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
-      wants = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
-      wantedBy = [ &quot;multi-user.target&quot; ];
+      after = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
+      wants = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
+      wantedBy = [&quot;multi-user.target&quot;];
 
       serviceConfig.Type = &quot;oneshot&quot;;
       script = ''
@@ -249,9 +249,9 @@ in
     systemd.timers.tailscale-tls = {
       description = &quot;Automatic Tailscale certificates renewal&quot;;
 
-      after = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
-      wants = [ &quot;network-pre.target&quot; &quot;tailscale.service&quot; ];
-      wantedBy = [ &quot;multi-user.target&quot; ];
+      after = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
+      wants = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
+      wantedBy = [&quot;multi-user.target&quot;];
 
       timerConfig = {
         OnCalendar = &quot;weekly&quot;;

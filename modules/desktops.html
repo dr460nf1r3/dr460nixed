@@ -171,20 +171,20 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="desktops"><a class="header" href="#desktops">Desktops</a></h1>
-<pre><code class="language-nix">{ config
-, inputs
-, lib
-, pkgs
-, ...
+<pre><code class="language-nix">{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.desktops;
   spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
-in
-{
+in {
   options.dr460nixed.desktops = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -198,11 +198,14 @@ in
     # Only install fonts I personally use
     fonts.enableDefaultPackages = false;
 
+    # Enable the dr460nized desktop's settings
+    garuda.dr460nized.enable = true;
+
     # Allow better Syncthing speeds
     services.syncthing.openDefaultPorts = true;
 
     # # Kernel paramters &amp; settings
-    boot.kernelParams = [ &quot;mitigations=off&quot; ];
+    boot.kernelParams = [&quot;mitigations=off&quot;];
 
     # Fancy themed, enhanced Spotify
     programs.spicetify = {

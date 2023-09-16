@@ -171,19 +171,18 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="networking"><a class="header" href="#networking">Networking</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed;
-in
-{
+in {
   # We want to use NetworkManager on desktops
   networking = {
     # Pointing to our Adguard instance via Tailscale
-    nameservers = [ &quot;1.1.1.1&quot; &quot;1.0.0.1&quot; ];
+    nameservers = [&quot;1.1.1.1&quot; &quot;1.0.0.1&quot;];
     networkmanager = mkIf cfg.desktops.enable or cfg.rpi {
       dns = &quot;none&quot;;
       enable = true;
@@ -201,7 +200,6 @@ in
   # Lightweight bandwidth usage tracking
   services.vnstat.enable = true;
 }
-
 </code></pre>
 
                     </main>

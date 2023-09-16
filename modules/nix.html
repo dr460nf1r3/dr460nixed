@@ -171,61 +171,146 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="nix"><a class="header" href="#nix">Nix</a></h1>
-<pre><code class="language-nix">{ inputs
-, ...
-}:
-{
-  # General nix settings
-  nix = {
-    # Do garbage collections whenever there is less than 1GB free space left
-    extraOptions = ''
-      accept-flake-config = true
-      http-connections = 0
-      warn-dirty = false
-    '';
-    settings = {
-      # Use available binary caches, this is not Gentoo
-      # this also allows us to use remote builders to reduce build times and batter usage
-      builders-use-substitutes = true;
-
-      # A few extra binary caches and their public keys
-      substituters = [
-        &quot;https://cache.garnix.io&quot;
-        &quot;https://dr460nf1r3.cachix.org&quot;
-      ];
-      trusted-public-keys = [
-        &quot;cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=&quot;
-        &quot;dr460nf1r3.cachix.org-1:eLI/ymdDmYKBwwSNuA0l6zvfDZuZfh0OECGKzuv8xvU=&quot;
-      ];
-
-      # Enable certain system features
-      system-features = [ &quot;big-parallel&quot; &quot;kvm&quot; &quot;recursive-nix&quot; ];
-
-      # Continue building derivations if one fails
-      keep-going = true;
-
-      # Show more log lines for failed builds
-      log-lines = 20;
-
-      # For direnv GC roots
-      keep-derivations = true;
-      keep-outputs = true;
-
-      # Max number of parallel jobs
-      max-jobs = &quot;auto&quot;;
+<pre><code class="language-nix">{
+  config,
+  inputs,
+  lib,
+  ...
+}: let
+  cfgSuper = config.dr460nixed.nix-super;
+  cfgRemote = config.dr460nixed.remote-build;
+in {
+  options.dr460nixed = with lib; {
+    nix-super = {
+      enable = mkOption {
+        default = true;
+        type = types.bool;
+        description = mdDoc ''
+          Replaces nix with nix-super, which tracks future features of nix.
+        '';
+      };
+    };
+    remote-build = {
+      enable = mkOption {
+        default = false;
+        example = true;
+        type = types.bool;
+        description = mdDoc ''
+          Enable the capability of building via nix on a remote machine when specified via command line flag.
+        '';
+      };
+      enableGlobally = mkOption {
+        default = false;
+        example = true;
+        type = types.bool;
+        description = mdDoc ''
+          Enables remote builds via enableDistributedBuild rather than making it opt-in via command line.
+        '';
+      };
+      host = mkOption {
+        default = false;
+        type = types.str;
+        example = &quot;dragons-ryzen&quot;;
+        description = mdDoc ''
+          Specifies the target host for remote builds.
+        '';
+      };
+      port = mkOption {
+        default = 22;
+        type = types.int;
+        example = &quot;build&quot;;
+        description = mdDoc ''
+          Specifies the target port for remote builds.
+        '';
+      };
+      trustedPublicKey = mkOption {
+        default = null;
+        type = types.str;
+        example = &quot;remote-build:8vrLBvFoMiKVKRYD//30bhUBTEEiuupfdQzl2UoMms4=&quot;;
+        description = mdDoc ''
+          Specifies the substitutors cache signing key for remote builds.
+        '';
+      };
+      user = mkOption {
+        default = null;
+        type = types.str;
+        example = &quot;build&quot;;
+        description = mdDoc ''
+          Specifies the target user for remote builds.
+        '';
+      };
     };
   };
 
-  # Overlays for nixpkgs
-  nixpkgs.overlays = [
-    inputs.nixd.overlays.default
-    (
-      # Overlays nix with nix-super, which tracks future features
-      _: _prev: {
+  config = {
+    # General nix settings
+    nix = {
+      # The remote builder to use for distributed builds
+      buildMachines = lib.mkIf cfgRemote.enable [
+        {
+          hostName = cfgRemote.host;
+          maxJobs = 16;
+          protocol = &quot;ssh-ng&quot;;
+          supportedFeatures = [&quot;nixos-test&quot; &quot;benchmark&quot; &quot;big-parallel&quot; &quot;kvm&quot;];
+          systems = [&quot;x86_64-linux&quot; &quot;aarch64-linux&quot;];
+        }
+      ];
+
+      # Allow distributed builds
+      distributedBuilds = lib.mkIf cfgRemote.enableGlobally true;
+
+      # Don't warn about dirty flakes and accept flake configs by default
+      extraOptions = ''
+        http-connections = 0
+        warn-dirty = false
+      '';
+      settings = {
+        # Accept flake configs by default
+        accept-flake-config = true;
+
+        # Test out ca-derivations (https://nixos.wiki/wiki/Ca-derivations)
+        experimental-features = [&quot;ca-derivations&quot;];
+
+        # For direnv GC roots
+        keep-derivations = true;
+        keep-outputs = true;
+
+        # Continue building derivations if one fails
+        keep-going = true;
+
+        # Show more log lines for failed builds
+        log-lines = 20;
+
+        # Max number of parallel jobs
+        max-jobs = &quot;auto&quot;;
+
+        # Enable certain system features
+        system-features = [&quot;big-parallel&quot; &quot;kvm&quot;];
+
+        # Trust the remote machines' cache signatures
+        trusted-public-keys = lib.mkIf cfgRemote.enable [&quot;${cfgRemote.trustedPublicKey}&quot;];
+        trusted-substituters = lib.mkIf cfgRemote.enable [&quot;ssh-ng://${cfgRemote.host}&quot;];
+      };
+    };
+
+    # Nix-super - https://github.com/privatevoid-net/nix-super
+    nixpkgs.overlays = lib.mkIf cfgSuper.enable [
+      (_: _prev: {
         nix = inputs.nix-super.packages.x86_64-linux.default;
-      }
-    )
-  ];
+      })
+    ];
+
+    # Let root ssh into the remote builder seamlessly
+    home-manager.users.&quot;root&quot; = lib.mkIf cfgRemote.enable {
+      home.stateVersion = &quot;23.11&quot;; # Specify this since its otherwise unset
+      programs.ssh.extraConfig = ''
+        Host ${cfgRemote.host}
+          HostName ${cfgRemote.host}
+          Port ${toString cfgRemote.port}
+          User ${cfgRemote.user}
+      '';
+    };
+  };
 }
 </code></pre>
 

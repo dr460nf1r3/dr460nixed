@@ -171,17 +171,17 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="oci"><a class="header" href="#oci">OCI</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.oci;
-in
-{
+in {
   options.dr460nixed.oci = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -217,7 +217,7 @@ in
     };
 
     # https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/configuringntpservice.htm#Configuring_the_Oracle_Cloud_Infrastructure_NTP_Service_for_an_Instance
-    networking.timeServers = [ &quot;169.254.169.254&quot; ];
+    networking.timeServers = [&quot;169.254.169.254&quot;];
 
     # Slows down write operations considerably
     nix.settings.auto-optimise-store = lib.mkForce false;
@@ -229,9 +229,6 @@ in
     };
   };
 }
-
-
-
 </code></pre>
 
                     </main>

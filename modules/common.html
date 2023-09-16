@@ -171,18 +171,18 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="common"><a class="header" href="#common">COmmon</a></h1>
-<pre><code class="language-nix">{ config
-, lib
-, ...
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed;
-in
-{
+in {
   options.dr460nixed = {
     common = {
-      enable = mkOption
+      enable =
+        mkOption
         {
           default = true;
           type = types.bool;
@@ -191,7 +191,8 @@ in
           '';
         };
     };
-    rpi = mkOption
+    rpi =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -199,7 +200,8 @@ in
           Whether this is a Raspberry Pi.
         '';
       };
-    nodocs = mkOption
+    nodocs =
+      mkOption
       {
         default = true;
         type = types.bool;
@@ -211,14 +213,14 @@ in
 
   config = mkIf cfg.common.enable {
     ## A few kernel tweaks
-    boot.kernel.sysctl = { &quot;kernel.unprivileged_userns_clone&quot; = 1; };
+    boot.kernel.sysctl = {&quot;kernel.unprivileged_userns_clone&quot; = 1;};
 
     # Allow wheel group users to use sudo
     security.sudo.execWheelOnly = true;
 
     # This is the default sops file that will be used for all secrets
     sops = {
-      age.sshKeyPaths = [ &quot;/etc/ssh/ssh_host_ed25519_key&quot; ];
+      age.sshKeyPaths = [&quot;/etc/ssh/ssh_host_ed25519_key&quot;];
       defaultSopsFile = ../../secrets/global.yaml;
     };
 
@@ -260,6 +262,9 @@ in
       man.enable = false;
       nixos.enable = true;
     };
+
+    # Enable all hardware drivers
+    hardware.enableRedistributableFirmware = true;
 
     # Ship systemd logs to Loki &amp; Grafana
     dr460nixed.promtail.lokiAddress = &quot;100.86.102.115&quot;;
