@@ -4,9 +4,7 @@
 , ...
 }: {
   # Individual settings
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
   # Our hostname
   networking.hostName = "rpi-dragon";

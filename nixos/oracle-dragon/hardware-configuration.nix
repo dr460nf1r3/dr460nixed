@@ -3,13 +3,15 @@
   imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
   # Our filesystems
-  fileSystems."/" = {
-    device = "/dev/sda1";
-    fsType = "ext4";
-  };
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/200C-2E9B";
-    fsType = "vfat";
+  fileSystems = {
+    "/" = {
+      device = "/dev/sda1";
+      fsType = "ext4";
+    };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/200C-2E9B";
+      fsType = "vfat";
+    };
   };
 
   # Early needed kernel modules

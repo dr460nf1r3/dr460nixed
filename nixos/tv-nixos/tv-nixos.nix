@@ -106,7 +106,7 @@
   environment.systemPackages = with pkgs; [ libinput ];
 
   # Home-manager desktop configuration
-  home-manager.users."nico" = import ../../home-manager/desktops.nix;
+  home-manager.users."nico" = import ../../home-manager/nico/nico.nix;
 
   # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
   systemd.services.NetworkManager-wait-online.enable = false;

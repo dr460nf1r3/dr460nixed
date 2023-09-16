@@ -88,6 +88,9 @@ in
       nixos.enable = true;
     };
 
+    # Enable all hardware drivers
+    hardware.enableRedistributableFirmware = true;
+
     # Ship systemd logs to Loki & Grafana
     dr460nixed.promtail.lokiAddress = "100.86.102.115";
   };

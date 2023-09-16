@@ -29,8 +29,10 @@
   };
 
   # AMD device
-  services.hardware.bolt.enable = false;
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services = {
+    hardware.bolt.enable = false;
+    xserver.videoDrivers = [ "amdgpu" ];
+  };
 
   # Enable a few selected custom settings
   dr460nixed = {

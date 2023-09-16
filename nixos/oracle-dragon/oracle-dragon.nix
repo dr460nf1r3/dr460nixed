@@ -6,13 +6,14 @@
   imports = [
     ./adguard.nix
     ./hardware-configuration.nix
-    ./searxng.nix
   ];
 
   # Oracle provides DHCP
-  networking.useDHCP = false;
-  networking.interfaces.enp0s3.useDHCP = true;
-  networking.hostName = "oracle-dragon";
+  networking = {
+    useDHCP = false;
+    interfaces.enp0s3.useDHCP = true;
+    hostName = "oracle-dragon";
+  };
 
   system.stateVersion = "22.11";
 
@@ -85,15 +86,17 @@
   };
 
   # Secrets for the docker-compose runner & adguardExporter
-  sops.secrets."api_keys/oracle-dragon" = {
-    mode = "0600";
-    owner = config.users.users.nico.name;
-    path = "/var/docker-compose-runner/oracle-dragon/.env";
-  };
-  sops.secrets."api_keys/adguard" = {
-    mode = "0600";
-    owner = config.users.users.adguard.name;
-    path = "/run/secrets/api_keys/adguard";
+  sops = {
+    secrets."api_keys/oracle-dragon" = {
+      mode = "0600";
+      owner = config.users.users.nico.name;
+      path = "/var/docker-compose-runner/oracle-dragon/.env";
+    };
+    secrets."api_keys/adguard" = {
+      mode = "0600";
+      owner = config.users.users.adguard.name;
+      path = "/run/secrets/api_keys/adguard";
+    };
   };
 
   # Garuda Nix subsystem options

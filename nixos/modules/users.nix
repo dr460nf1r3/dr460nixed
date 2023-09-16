@@ -14,11 +14,15 @@ let
     {
       acme = uidGid 999;
       adbusers = uidGid 998;
+      adguard = uidGid 977;
       avahi = uidGid 997;
       chaotic_op = uidGid 996;
+      cloudflared = uidGid 976;
+      dhcpcd = uidGid 976;
       grafana = uidGid 995;
       influxdb2 = uidGid 994;
       loki = uidGid 993;
+      netdata = uidGid 979;
       nico = uidGid 1000;
       nm-iodine = uidGid 992;
       node-exporter = uidGid 991;
@@ -30,12 +34,13 @@ let
       sshd = uidGid 985;
       systemd-coredump = uidGid 984;
       systemd-oom = uidGid 983;
+      tailscale-tls = uidGid 978;
       telegraf = uidGid 982;
       vnstatd = uidGid 981;
       wireshark = uidGid 980;
     };
 
-  # Add groups only if they exist
+  # Add groups to user only if they exist
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in
 {

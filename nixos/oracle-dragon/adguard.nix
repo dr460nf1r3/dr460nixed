@@ -1,21 +1,25 @@
 { lib, ... }: {
   # Own systemd config using a custom user
   systemd.services.adguardhome = {
-    serviceConfig.DynamicUser = lib.mkForce false;
-    serviceConfig.Group = "adguard";
-    serviceConfig.User = "adguard";
+    serviceConfig = {
+      DynamicUser = lib.mkForce false;
+      Group = "adguard";
+      User = "adguard";
+    };
   };
 
   # The custom adguard user & group
-  users.users."adguard" = {
-    createHome = false;
-    description = "Adguard DNS";
-    extraGroups = [ "nginx" ];
-    group = "adguard";
-    home = "/var/lib/AdGuardHome";
-    isSystemUser = true;
+  users = {
+    groups.adguard = { };
+    users."adguard" = {
+      createHome = false;
+      description = "Adguard DNS";
+      extraGroups = [ "nginx" ];
+      group = "adguard";
+      home = "/var/lib/AdGuardHome";
+      isSystemUser = true;
+    };
   };
-  users.groups.adguard = { };
 
   # Complete Adguard configuration
   services.adguardhome = {
@@ -35,9 +39,7 @@
           "100.86.102.115"
           "fd7a:115c:a1e0:ab12:4843:cd96:6256:6673"
         ];
-        blocked_hosts = [
-          "hostname.bind"
-        ];
+        blocked_hosts = [ "hostname.bind" ];
         blocked_response_ttl = 10;
         blocking_ipv4 = "";
         blocking_ipv6 = "";
@@ -94,9 +96,7 @@
         safesearch_enabled = false;
         serve_http3 = true;
         statistics_interval = 90;
-        trusted_proxies = [
-          "127.0.0.1"
-        ];
+        trusted_proxies = [ "127.0.0.1" ];
         upstream_dns = [ "https://cloudflare-dns.com/dns-query" ];
         upstream_dns_file = "";
         upstream_timeout = "10s";
@@ -175,12 +175,10 @@
         private_key_path = "/var/lib/tailscale-tls/key.key";
         server_name = "100.86.102.115";
       };
-      users = [
-        {
-          name = "nico";
-          password = "$2b$05$zjtZ461DmcgZTgv7AppSOu66ZieCWEAR63xCeGQt.CyKJYAzhkK82";
-        }
-      ];
+      users = [{
+        name = "nico";
+        password = "$2b$05$zjtZ461DmcgZTgv7AppSOu66ZieCWEAR63xCeGQt.CyKJYAzhkK82";
+      }];
       schema_version = 20;
     };
   };
@@ -188,42 +186,21 @@
   # Supply non-RDNS found hostnames via /etc/hosts
   networking.hosts = {
     "100.106.219.37" = [ "kde-dragon" ];
-    "100.108.204.61" = [ "chaotic-dragon" ];
     "100.109.201.47" = [ "garuda-mail" ];
-    "100.110.85.114" = [ "esxi-repo" ];
-    "100.115.146.77" = [ "esxi-forum" ];
     "100.116.167.11" = [ "dragon-pixel" ];
     "100.120.171.12" = [ "tv-nixos" ];
-    "100.120.178.79" = [ "garuda-build" ];
-    "100.64.127.121" = [ "web-dragon" ];
-    "100.66.229.30" = [ "esxi-web" ];
-    "100.68.56.130" = [ "monitor-dragon" ];
     "100.75.73.33" = [ "google-dragon" ];
-    "100.78.91.66" = [ "esxi-web-two" ];
-    "100.82.172.37" = [ "esxi-build" ];
-    "100.83.10.105" = [ "backup-dragon" ];
     "100.85.210.126" = [ "rpi-dragon" ];
     "100.86.102.115" = [ "oracle-dragon" ];
-    "100.93.185.32" = [ "esxi-cloud" ];
+    "100.86.22.67" = [ "immortalis" ];
     "100.99.129.81" = [ "dragons-ryzen" ];
-    "fd7a:115c:a1e0:ab12:4843:cd96:6242:e51e" = [ "esxi-web" ];
-    "fd7a:115c:a1e0:ab12:4843:cd96:6244:3882" = [ "monitor-dragon" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:624b:4921" = [ "google-dragon" ];
-    "fd7a:115c:a1e0:ab12:4843:cd96:624e:5b42" = [ "esxi-web-two" ];
-    "fd7a:115c:a1e0:ab12:4843:cd96:6252:ac25" = [ "esxi-build" ];
-    "fd7a:115c:a1e0:ab12:4843:cd96:6253:a69" = [ "backup-dragon" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:6255:d27e" = [ "oracle-dragon" ];
+    "fd7a:115c:a1e0:ab12:4843:cd96:6256:1643" = [ "immortalis" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:6256:6673" = [ "rpi-dragon" ];
-    "fd7a:115c:a1e0:ab12:4843:cd96:625d:b920" = [ "esxi-cloud" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:6263:8151" = [ "dragons-ryzen" ];
-    "fd7a:115c:a1e0:ab12:4843:cd96:626a:db25" = [ "kde-dragon" ];
-    "fd7a:115c:a1e0:ab12:4843:cd96:6240:7f79" = [ "web-dragon" ];
-    "fd7a:115c:a1e0:ab12:4843:cd96:626c:cc3d" = [ "chaotic-dragon" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:626d:c92f" = [ "garuda-mail" ];
-    "fd7a:115c:a1e0:ab12:4843:cd96:626e:5572" = [ "esxi-repo" ];
-    "fd7a:115c:a1e0:ab12:4843:cd96:6273:924d" = [ "esxi-forum" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:6274:a70b" = [ "dragon-pixel" ];
     "fd7a:115c:a1e0:ab12:4843:cd96:6278:ab0c" = [ "tv-nixos" ];
-    "fd7a:115c:a1e0:ab12:4843:cd96:6278:b24f" = [ "garuda-build" ];
   };
 }

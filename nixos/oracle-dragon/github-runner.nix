@@ -16,13 +16,15 @@
   };
 
   # The custom GitHub runner group & user
-  users.users."github-runner" = {
-    group = "github-runner";
-    description = "GitHub runner";
-    createHome = false;
-    isSystemUser = true;
+  users = {
+    groups.github-runner = { };
+    users."github-runner" = {
+      group = "github-runner";
+      description = "GitHub runner";
+      createHome = false;
+      isSystemUser = true;
+    };
   };
-  users.groups.github-runner = { };
 
   sops.secrets."api_keys/github_runner" = {
     mode = "0600";

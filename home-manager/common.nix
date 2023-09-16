@@ -1,7 +1,4 @@
 { pkgs, ... }: {
-  # Lets sign by default
-  programs.git.signing.signByDefault = true;
-
   # Invididual terminal app configs
   programs = {
     # Common Bash aliases & tmux autostart for SSH sessions
