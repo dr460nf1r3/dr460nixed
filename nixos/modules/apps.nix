@@ -92,7 +92,6 @@ in {
       nix-prefetch-git
       nixd
       nixos-generators
-      nixpkgs-fmt
       nixpkgs-lint
       nixpkgs-review
       nodePackages_latest.prettier
@@ -109,8 +108,8 @@ in {
       (vscode-with-extensions.override {
         vscodeExtensions = with vscode-extensions;
           [
-            b4dm4n.vscode-nixpkgs-fmt
             bbenoist.nix
+            charliermarsh.ruff
             davidanson.vscode-markdownlint
             eamodio.gitlens
             esbenp.prettier-vscode
@@ -120,6 +119,7 @@ in {
             github.vscode-github-actions
             github.vscode-pull-request-github
             jnoortheen.nix-ide
+            kamadorueda.alejandra
             ms-azuretools.vscode-docker
             ms-python.python
             ms-python.vscode-pylance
@@ -139,12 +139,6 @@ in {
               publisher = "eliverlara";
               sha256 = "sha256-kJgqMEJHyYF3GDxe1rnpTEmbfJE01tyyOFjRUp4SOds=";
               version = "1.1.1";
-            }
-            {
-              name = "ruff";
-              publisher = "charliermarsh";
-              sha256 = "sha256-KOntjiE+n1yf9047XDldGg2pT+zknI/aEg6h71LwEB8=";
-              version = "2023.34.0";
             }
             {
               # Available in nixpkgs, but outdated (0.4.0) at the time of adding

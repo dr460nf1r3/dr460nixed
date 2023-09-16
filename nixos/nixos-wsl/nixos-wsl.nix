@@ -56,6 +56,7 @@
   # Often needed apps
   environment.systemPackages = with pkgs; [
     age
+    alejandra
     ansible
     asciinema
     bat
@@ -77,7 +78,6 @@
     mosh
     nettools
     nixos-generators
-    nixpkgs-fmt
     nmap
     nvd
     python3

@@ -1,4 +1,4 @@
-_: {
+{inputs, ...}: {
   # Override applications with useful things I want to have
   nixpkgs.overlays = let
     thisConfigsOverlay = final: _prev: {
@@ -24,5 +24,14 @@ _: {
         ];
       };
     };
-  in [thisConfigsOverlay];
+  in [
+    thisConfigsOverlay
+    (
+      # Overlays nix with nix-super, which tracks future features
+      _: _prev: {
+        # https://github.com/privatevoid-net/nix-super
+        nix = inputs.nix-super.packages.x86_64-linux.default;
+      }
+    )
+  ];
 }

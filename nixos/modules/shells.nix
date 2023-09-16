@@ -1,12 +1,12 @@
 {
   config,
   lib,
+  pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.shells;
 in {
-  options.dr460nixed.shells.enable =
+  options.dr460nixed.shells.enable = with lib;
     mkOption
     {
       default = true;
@@ -16,19 +16,19 @@ in {
       '';
     };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Programs & global config
     programs = {
       bash.shellAliases = {
-        "gpl" = "curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
-        "tree" = "eza --git --color always -T";
+        "gpl" = "${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
+        "nix" = "${pkgs.nix}/bin/nix --verbose --print-build-logs"; # https://github.com/NixOS/nix/pull/8323
       };
       fish = {
         shellAbbrs = {
-          "gpl" = "curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
+          "gpl" = "${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
         };
         shellAliases = {
-          "tree" = "eza --git --color always -T";
+          "nix" = "${pkgs.nix}/bin/nix --verbose --print-build-logs"; # https://github.com/NixOS/nix/pull/8323
         };
       };
     };

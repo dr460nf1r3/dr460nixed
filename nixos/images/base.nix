@@ -71,6 +71,7 @@ in {
   # These are the cli packages I always need
   environment.systemPackages = with pkgs; [
     age
+    alejandra
     ansible
     bat
     bind
@@ -104,7 +105,6 @@ in {
     mosh
     nettools
     nixos-generators
-    nixpkgs-fmt
     nmap
     ntfs3g
     nvme-cli

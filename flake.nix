@@ -156,7 +156,15 @@
       checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
         hooks = {
           actionlint.enable = true;
-          alejandra.enable = true;
+          alejandra-quiet = {
+            description = "Run Alejandra in quiet mode";
+            enable = true;
+            entry = ''
+              ${pkgs.alejandra}/bin/alejandra --quiet
+            '';
+            files = "\\.nix$";
+            name = "alejandra";
+          };
           commitizen.enable = true;
           deadnix.enable = true;
           nil.enable = true;
@@ -214,27 +222,28 @@
         };
       };
 
-      formatter = pkgs.nixpkgs-fmt;
+      # By default, alejandra is WAY to verbose
+      formatter = pkgs.writeShellScriptBin "alejandra" ''
+        exec ${pkgs.alejandra}/bin/alejandra --quiet "$@"
+      '';
 
       packages = let
         replPath = toString ./.;
-      in {
-        # Builds the documentation
-        docs =
-          pkgs.runCommand "dr460nixed-docs"
-          {nativeBuildInputs = with pkgs; [bash mdbook];}
-          ''
+      in
+        with pkgs; {
+          # Builds the documentation
+          docs = runCommand "dr460nixed-docs" {nativeBuildInputs = [bash mdbook];} ''
             bash -c "errors=$(mdbook build -d $out ${./.}/docs |& grep ERROR)
             if [ \"$errors\" ]; then
               exit 1
             fi"
           '';
-        # Sets up repl environment with access to the flake
-        repl = pkgs.writeShellScriptBin "dr460nixed-repl" ''
-          source /etc/set-environment
-          nix repl --file "${replPath}/repl.nix" "$@"
-        '';
-      };
+          # Sets up repl environment with access to the flake
+          repl = pkgs.writeShellScriptBin "dr460nixed-repl" ''
+            source /etc/set-environment
+            nix repl --file "${replPath}/repl.nix" "$@"
+          '';
+        };
     };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
