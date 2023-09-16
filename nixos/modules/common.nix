@@ -1,15 +1,15 @@
-{ config
-, lib
-, ...
-}:
-with lib;
-let
-  cfg = config.dr460nixed;
-in
 {
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed;
+in {
   options.dr460nixed = {
     common = {
-      enable = mkOption
+      enable =
+        mkOption
         {
           default = true;
           type = types.bool;
@@ -18,7 +18,8 @@ in
           '';
         };
     };
-    rpi = mkOption
+    rpi =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -26,7 +27,8 @@ in
           Whether this is a Raspberry Pi.
         '';
       };
-    nodocs = mkOption
+    nodocs =
+      mkOption
       {
         default = true;
         type = types.bool;
@@ -38,14 +40,14 @@ in
 
   config = mkIf cfg.common.enable {
     ## A few kernel tweaks
-    boot.kernel.sysctl = { "kernel.unprivileged_userns_clone" = 1; };
+    boot.kernel.sysctl = {"kernel.unprivileged_userns_clone" = 1;};
 
     # Allow wheel group users to use sudo
     security.sudo.execWheelOnly = true;
 
     # This is the default sops file that will be used for all secrets
     sops = {
-      age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
       defaultSopsFile = ../../secrets/global.yaml;
     };
 

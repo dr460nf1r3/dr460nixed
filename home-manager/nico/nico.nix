@@ -1,8 +1,6 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   appdir = ".local/share/applications";
-in
-{
+in {
   # Import individual configuration snippets
   imports = [
     ./email.nix

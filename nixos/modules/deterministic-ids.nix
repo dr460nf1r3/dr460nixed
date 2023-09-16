@@ -1,9 +1,9 @@
 # https://github.com/oddlama/nix-config/blob/main/modules/system/deteministic-ids.nix
-{ lib
-, config
-, ...
-}:
-let
+{
+  lib,
+  config,
+  ...
+}: let
   inherit
     (lib)
     concatLists
@@ -17,11 +17,10 @@ let
     ;
 
   cfg = config.users.deterministicIds;
-in
-{
+in {
   options = {
     users.deterministicIds = mkOption {
-      default = { };
+      default = {};
       description = mdDoc ''
         Maps a user or group name to its expected uid/gid values. If a user/group is
         used on the system without specifying a uid/gid, this module will assign the
@@ -44,21 +43,19 @@ in
     };
 
     users.users = mkOption {
-      type = types.attrsOf (types.submodule ({ name, ... }: {
-        config.uid =
-          let
-            deterministicUid = cfg.${name}.uid or null;
-          in
+      type = types.attrsOf (types.submodule ({name, ...}: {
+        config.uid = let
+          deterministicUid = cfg.${name}.uid or null;
+        in
           mkIf (deterministicUid != null) (mkDefault deterministicUid);
       }));
     };
 
     users.groups = mkOption {
-      type = types.attrsOf (types.submodule ({ name, ... }: {
-        config.gid =
-          let
-            deterministicGid = cfg.${name}.gid or null;
-          in
+      type = types.attrsOf (types.submodule ({name, ...}: {
+        config.gid = let
+          deterministicGid = cfg.${name}.gid or null;
+        in
           mkIf (deterministicGid != null) (mkDefault deterministicGid);
       }));
     };
@@ -67,16 +64,16 @@ in
   config = {
     assertions =
       concatLists
-        (flip mapAttrsToList config.users.users (name: user: [
-          {
-            assertion = user.uid != null;
-            message = "non-deterministic uid detected for '${name}', please assign one via `users.deterministicIds`";
-          }
-          {
-            assertion = !user.autoSubUidGidRange;
-            message = "non-deterministic subUids/subGids detected for: ${name}";
-          }
-        ]))
+      (flip mapAttrsToList config.users.users (name: user: [
+        {
+          assertion = user.uid != null;
+          message = "non-deterministic uid detected for '${name}', please assign one via `users.deterministicIds`";
+        }
+        {
+          assertion = !user.autoSubUidGidRange;
+          message = "non-deterministic subUids/subGids detected for: ${name}";
+        }
+      ]))
       ++ flip mapAttrsToList config.users.groups (name: group: {
         assertion = group.gid != null;
         message = "non-deterministic gid detected for '${name}', please assign one via `users.deterministicIds`";

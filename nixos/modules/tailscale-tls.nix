@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 with lib; let
   cfg = config.dr460nixed.tailscale-tls;
@@ -9,8 +10,7 @@ with lib; let
     if cfg.domain-override != null
     then cfg.domain-override
     else "$(${pkgs.tailscale}/bin/tailscale cert 2>&1 | grep use | cut -d '\"' -f2)";
-in
-{
+in {
   options.dr460nixed.tailscale-tls = {
     enable = mkEnableOption "Automatic Tailscale certificates renewal";
 
@@ -40,14 +40,14 @@ in
       isSystemUser = true;
     };
 
-    users.groups.tailscale-tls = { };
+    users.groups.tailscale-tls = {};
 
     systemd.services.tailscale-tls = {
       description = "Automatic Tailscale certificates";
 
-      after = [ "network-pre.target" "tailscale.service" ];
-      wants = [ "network-pre.target" "tailscale.service" ];
-      wantedBy = [ "multi-user.target" ];
+      after = ["network-pre.target" "tailscale.service"];
+      wants = ["network-pre.target" "tailscale.service"];
+      wantedBy = ["multi-user.target"];
 
       serviceConfig.Type = "oneshot";
       script = ''
@@ -76,9 +76,9 @@ in
     systemd.timers.tailscale-tls = {
       description = "Automatic Tailscale certificates renewal";
 
-      after = [ "network-pre.target" "tailscale.service" ];
-      wants = [ "network-pre.target" "tailscale.service" ];
-      wantedBy = [ "multi-user.target" ];
+      after = ["network-pre.target" "tailscale.service"];
+      wants = ["network-pre.target" "tailscale.service"];
+      wantedBy = ["multi-user.target"];
 
       timerConfig = {
         OnCalendar = "weekly";

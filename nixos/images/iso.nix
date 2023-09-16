@@ -1,8 +1,5 @@
-{ pkgs
-, ...
-}:
-with pkgs;
-{
+{pkgs, ...}:
+with pkgs; {
   # All of the needed services
   services = {
     acpid.enable = true;
@@ -32,7 +29,7 @@ with pkgs;
         };
       };
       enable = true;
-      excludePackages = [ xterm ];
+      excludePackages = [xterm];
       layout = "de";
       xkbVariant = "";
     };
@@ -84,18 +81,17 @@ with pkgs;
     enableDefaultPackages = false;
     packages = [
       fira
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      (nerdfonts.override {fonts = ["JetBrainsMono"];})
       noto-fonts
       noto-fonts-emoji
     ];
     fontconfig = {
       cache32Bit = true;
       defaultFonts = {
-        monospace =
-          [ "JetBrains Mono Nerd Font" "Noto Fonts Emoji" ];
-        sansSerif = [ "Fira" "Noto Fonts Emoji" ];
-        serif = [ "Fira" "Noto Fonts Emoji" ];
-        emoji = [ "Noto Fonts Emoji" ];
+        monospace = ["JetBrains Mono Nerd Font" "Noto Fonts Emoji"];
+        sansSerif = ["Fira" "Noto Fonts Emoji"];
+        serif = ["Fira" "Noto Fonts Emoji"];
+        emoji = ["Noto Fonts Emoji"];
       };
       enable = true;
     };

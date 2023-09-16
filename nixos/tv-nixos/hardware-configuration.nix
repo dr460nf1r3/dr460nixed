@@ -1,14 +1,15 @@
-{ lib
-, modulesPath
-, ...
+{
+  lib,
+  modulesPath,
+  ...
 }: {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
   boot = {
-    extraModulePackages = [ ];
-    initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
-    initrd.kernelModules = [ ];
-    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [];
+    initrd.availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "sd_mod"];
+    initrd.kernelModules = [];
+    kernelModules = ["kvm-intel"];
   };
 
   fileSystems = {
@@ -21,7 +22,7 @@
       fsType = "vfat";
     };
   };
-  swapDevices = [ ];
+  swapDevices = [];
 
   hardware.cpu.intel.updateMicrocode = true;
   nixpkgs.hostPlatform = "x86_64-linux";

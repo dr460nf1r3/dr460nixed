@@ -1,16 +1,16 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.systemd-boot;
   cfgLanza = config.dr460nixed.lanzaboote;
-in
-{
+in {
   options.dr460nixed.systemd-boot = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -20,7 +20,8 @@ in
       };
   };
   options.dr460nixed.lanzaboote = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -61,6 +62,6 @@ in
       enable = true;
       pkiBundle = "/etc/secureboot";
     };
-    environment.systemPackages = mkIf cfgLanza.enable [ pkgs.sbctl ];
+    environment.systemPackages = mkIf cfgLanza.enable [pkgs.sbctl];
   };
 }

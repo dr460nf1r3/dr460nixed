@@ -1,14 +1,14 @@
-{ config
-, lib
-, ...
-}:
-with lib;
-let
-  cfg = config.dr460nixed.smtp;
-in
 {
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.smtp;
+in {
   options.dr460nixed.smtp = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -46,6 +46,3 @@ in
     };
   };
 }
-
-
-

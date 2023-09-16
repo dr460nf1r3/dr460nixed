@@ -1,19 +1,19 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed.locales;
   cfgDesktops = config.dr460nixed.desktops;
   de = "de_DE.UTF-8";
   defaultLocale = "en_GB.UTF-8";
   terminus-variant = "120n";
-in
-{
+in {
   options.dr460nixed.locales = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = true;
         type = types.bool;
@@ -71,4 +71,3 @@ in
     };
   };
 }
-

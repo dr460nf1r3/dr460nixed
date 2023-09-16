@@ -1,15 +1,15 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-with lib;
-let
-  cfg = config.dr460nixed.servers;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.servers;
+in {
   options.dr460nixed.servers = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -17,7 +17,8 @@ in
           Whether this device is a server.
         '';
       };
-    monitoring = mkOption
+    monitoring =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -45,7 +46,7 @@ in
         "memory mode" = "dbengine";
         "update every" = "2";
       };
-      ml = { "enabled" = "yes"; };
+      ml = {"enabled" = "yes";};
     };
     services.netdata.configDir = {
       "go.d.conf" = pkgs.writeText "go.d.conf" ''
@@ -60,16 +61,16 @@ in
       '';
       "go.d/nginx.conf" =
         mkIf config.services.nginx.enable
-          (pkgs.writeText "nginx.conf" ''
-            jobs:
-              - name: local
-                url: http://127.0.0.1/nginx_status
-          '');
+        (pkgs.writeText "nginx.conf" ''
+          jobs:
+            - name: local
+              url: http://127.0.0.1/nginx_status
+        '');
     };
 
     # Extra Python & system packages required for Netdata to function
-    services.netdata.python.extraPackages = ps: [ ps.psycopg2 ];
-    systemd.services.netdata = { path = with pkgs; [ jq ]; };
+    services.netdata.python.extraPackages = ps: [ps.psycopg2];
+    systemd.services.netdata = {path = with pkgs; [jq];};
 
     # Connect to Netdata Cloud easily
     services.netdata.claimTokenFile = config.sops.secrets."api_keys/netdata".path;
@@ -80,8 +81,8 @@ in
     };
 
     # The Nginx QUIC package with Brotli modules
-    services.nginx.package = pkgs.nginxQuic.override { doCheck = false; };
-    services.nginx.additionalModules = with pkgs; [ nginxModules.brotli ];
+    services.nginx.package = pkgs.nginxQuic.override {doCheck = false;};
+    services.nginx.additionalModules = with pkgs; [nginxModules.brotli];
 
     # Recommended settings replacing custom configuration
     services.nginx = {
@@ -95,7 +96,7 @@ in
 
     # Upstream resolvers
     services.nginx.resolver = {
-      addresses = [ "100.100.100.100" ];
+      addresses = ["100.100.100.100"];
       valid = "60s";
     };
 
@@ -126,14 +127,14 @@ in
     security.dhparams = mkIf config.services.nginx.enable {
       defaultBitSize = 3072;
       enable = true;
-      params.nginx = { };
+      params.nginx = {};
     };
     services.nginx.sslDhparam = config.security.dhparams.params.nginx.path;
 
     # Need to explicitly open our web server ports
     networking.firewall = mkIf config.services.nginx.enable {
-      allowedTCPPorts = [ 80 443 ];
-      allowedUDPPorts = [ 443 ];
+      allowedTCPPorts = [80 443];
+      allowedUDPPorts = [443];
     };
 
     # Enable this so we don't get annoyed by the ACME TOS

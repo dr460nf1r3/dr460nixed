@@ -1,16 +1,16 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-with lib;
-let
-  cfg = config.dr460nixed.syncthing;
-  settingsFormat = pkgs.formats.json { };
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.syncthing;
+  settingsFormat = pkgs.formats.json {};
+in {
   options.dr460nixed.syncthing = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -18,7 +18,8 @@ in
           Enable common file synchronisation between devices.
         '';
       };
-    key = mkOption
+    key =
+      mkOption
       {
         default = "";
         type = types.str;
@@ -26,7 +27,8 @@ in
           The key to use for Syncthing.
         '';
       };
-    cert = mkOption
+    cert =
+      mkOption
       {
         default = "";
         type = types.str;
@@ -34,10 +36,11 @@ in
           The cert to use for Syncthing.
         '';
       };
-    devices = mkOption
+    devices =
+      mkOption
       {
-        default = [ ];
-        type = types.attrsOf (types.submodule ({ name, ... }: {
+        default = [];
+        type = types.attrsOf (types.submodule ({name, ...}: {
           freeformType = settingsFormat.type;
           options = {
             name = mkOption {
@@ -67,15 +70,17 @@ in
           The devices to sync with.
         '';
       };
-    devicesNames = mkOption
+    devicesNames =
+      mkOption
       {
-        default = [ ];
+        default = [];
         type = types.listOf types.str;
         description = mdDoc ''
           The names of the devices to sync with.
         '';
       };
-    user = mkOption
+    user =
+      mkOption
       {
         default = "";
         type = types.str;
@@ -124,4 +129,3 @@ in
     };
   };
 }
-

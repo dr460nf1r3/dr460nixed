@@ -1,15 +1,15 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-with lib;
-let
-  cfg = config.dr460nixed.zfs;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.zfs;
+in {
   options.dr460nixed.zfs = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -19,7 +19,8 @@ in
       };
   };
   options.dr460nixed.zfs = {
-    sendMails = mkOption
+    sendMails =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -31,7 +32,7 @@ in
 
   config = mkIf cfg.enable {
     # Support booting off ZFS
-    boot.supportedFilesystems = [ "zfs" ];
+    boot.supportedFilesystems = ["zfs"];
 
     # Always request encryption credentials to open rootfs
     boot.zfs.requestEncryptionCredentials = true;
@@ -54,7 +55,7 @@ in
     # Configure ZFS Event Daemon to use msmtp
     services.zfs.zed.settings = mkIf cfg.sendMails {
       ZED_DEBUG_LOG = "/tmp/zed.debug.log";
-      ZED_EMAIL_ADDR = [ "root" ];
+      ZED_EMAIL_ADDR = ["root"];
       ZED_EMAIL_OPTS = "@ADDRESS@";
       ZED_EMAIL_PROG = "${pkgs.msmtp}/bin/msmtp";
 
@@ -74,6 +75,3 @@ in
     };
   };
 }
-
-
-

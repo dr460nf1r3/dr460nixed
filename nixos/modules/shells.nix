@@ -1,13 +1,13 @@
-{ config
-, lib
-, ...
-}:
-with lib;
-let
-  cfg = config.dr460nixed.shells;
-in
 {
-  options.dr460nixed.shells.enable = mkOption
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.shells;
+in {
+  options.dr460nixed.shells.enable =
+    mkOption
     {
       default = true;
       type = types.bool;

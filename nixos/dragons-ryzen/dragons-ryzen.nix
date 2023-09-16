@@ -1,10 +1,10 @@
-{ config
-, inputs
-, lib
-, pkgs
-, ...
-}:
 {
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}: {
   # Individual settings + low-latency Pipewire
   imports = [
     ../modules/impermanence.nix
@@ -16,10 +16,10 @@
   # Boot options
   boot = {
     # Needed to get the touchpad working
-    blacklistedKernelModules = [ "elan_i2c" ];
-    extraModulePackages = with config.boot.kernelPackages; [ zenpower ];
+    blacklistedKernelModules = ["elan_i2c"];
+    extraModulePackages = with config.boot.kernelPackages; [zenpower];
     # Without this, bluetooth does not work
-    kernelModules = [ "btintel" ];
+    kernelModules = ["btintel"];
   };
 
   # Hostname & hostId for ZFS
@@ -31,7 +31,7 @@
   # AMD device
   services = {
     hardware.bolt.enable = false;
-    xserver.videoDrivers = [ "amdgpu" ];
+    xserver.videoDrivers = ["amdgpu"];
   };
 
   # Enable a few selected custom settings
@@ -115,7 +115,7 @@
   };
 
   # Enable the touchpad & secure boot, as well as add the ipman script
-  environment.systemPackages = with pkgs; [ libinput radeontop zenmonitor ];
+  environment.systemPackages = with pkgs; [libinput radeontop zenmonitor];
 
   # Home-manager individual settings
   home-manager.users."nico" = import ../../home-manager/nico/nico.nix;

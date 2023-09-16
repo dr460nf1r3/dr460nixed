@@ -1,17 +1,18 @@
-{ config
-, pkgs
-, lib
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  ...
 }: {
   # Individual settings
-  imports = [ ./hardware-configuration.nix ];
+  imports = [./hardware-configuration.nix];
 
   # Our hostname
   networking.hostName = "rpi-dragon";
 
   # Kernel defaults
   boot = {
-    initrd.availableKernelModules = [ "usbhid" "usb_storage" ];
+    initrd.availableKernelModules = ["usbhid" "usb_storage"];
     # Fix https://github.com/NixOS/nixpkgs/pull/207969
     initrd.systemd.enable = lib.mkForce false;
     kernelPackages = pkgs.linuxPackages_rpi4;
@@ -127,10 +128,10 @@
   nix.buildMachines = [
     {
       hostName = "oracle-dragon";
-      mandatoryFeatures = [ ];
+      mandatoryFeatures = [];
       maxJobs = 4;
       speedFactor = 2;
-      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
       system = "aarch64-linux";
     }
   ];

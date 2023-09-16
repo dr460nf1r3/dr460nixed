@@ -23,5 +23,5 @@
   };
 
   # Let my user build packages
-  users.users."nico".extraGroups = [ "chaotic-op" ];
+  users.users."nico".extraGroups = ["chaotic-op"];
 }

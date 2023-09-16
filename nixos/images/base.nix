@@ -1,12 +1,10 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   de = "de_DE.UTF-8";
   defaultLocale = "en_GB.UTF-8";
   terminus-variant = "120n";
-in
-{
+in {
   # Cloudflare DNS
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  networking.nameservers = ["1.1.1.1" "1.0.0.1"];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -16,7 +14,7 @@ in
 
   # Flakes only NixOS!
   nix = {
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = ["nix-command" "flakes"];
     package = pkgs.nixFlakes;
   };
 
@@ -230,4 +228,3 @@ in
   # NixOS stuff
   system.stateVersion = "23.11";
 }
-      

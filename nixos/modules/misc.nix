@@ -1,10 +1,10 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed;
   chromium-gate = pkgs.writeShellScriptBin "chromium-gate" ''
     set -o errexit
@@ -31,10 +31,10 @@ let
       sudo "$ZFS" unload-key zroot/data/chromium
     fi
   '';
-in
-{
+in {
   options.dr460nixed = {
-    auto-upgrade = mkOption
+    auto-upgrade =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -42,7 +42,8 @@ in
           Whether this device automatically upgrades.
         '';
       };
-    chromium = mkOption
+    chromium =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -50,7 +51,8 @@ in
           Whether this device uses should use Chromium.
         '';
       };
-    chromium-gate = mkOption
+    chromium-gate =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -58,7 +60,8 @@ in
           Whether to protect Chromium with a password with a ZFS encrypted partition.
         '';
       };
-    live-cd = mkOption
+    live-cd =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -66,7 +69,8 @@ in
           Whether this is live CD.
         '';
       };
-    school = mkOption
+    school =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -74,7 +78,8 @@ in
           Whether this device uses should be used for school.
         '';
       };
-    tor = mkOption
+    tor =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -82,7 +87,8 @@ in
           Whether this device should be using the tor network.
         '';
       };
-    yubikey = mkOption
+    yubikey =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -100,7 +106,10 @@ in
       enable = true;
       flake = "github:dr460nf1r3/dr460nixed";
       randomizedDelaySec = "1h";
-      rebootWindow = { lower = "00:00"; upper = "06:00"; };
+      rebootWindow = {
+        lower = "00:00";
+        upper = "06:00";
+      };
     };
 
     # Enable the tor network
@@ -114,7 +123,7 @@ in
     # Enable the smartcard daemon
     hardware.gpgSmartcards.enable = mkIf cfg.yubikey true;
     services.pcscd.enable = mkIf cfg.yubikey true;
-    services.udev.packages = mkIf cfg.yubikey [ pkgs.yubikey-personalization ];
+    services.udev.packages = mkIf cfg.yubikey [pkgs.yubikey-personalization];
 
     # Configure as challenge-response for instant login,
     # can't provide the secrets as the challenge gets updated
@@ -154,6 +163,6 @@ in
     security.chromiumSuidSandbox.enable = mkIf cfg.chromium true;
 
     # Chromium gate (thanks Pedro!)
-    environment.systemPackages = mkIf cfg.chromium-gate [ chromium-gate ];
+    environment.systemPackages = mkIf cfg.chromium-gate [chromium-gate];
   };
 }

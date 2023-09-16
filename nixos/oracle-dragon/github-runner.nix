@@ -1,11 +1,12 @@
-{ config
-, pkgs
-, ...
+{
+  config,
+  pkgs,
+  ...
 }: {
   # Enable our own GitHub runner
   services.github-runners.oracle-dragon = {
     enable = true;
-    extraLabels = [ "aarch64" "oracle" ];
+    extraLabels = ["aarch64" "oracle"];
     extraPackages = with pkgs; [
       nix
     ];
@@ -17,7 +18,7 @@
 
   # The custom GitHub runner group & user
   users = {
-    groups.github-runner = { };
+    groups.github-runner = {};
     users."github-runner" = {
       group = "github-runner";
       description = "GitHub runner";
@@ -33,5 +34,5 @@
   };
 
   # Needed to allow GitHub runner
-  nixpkgs.config.permittedInsecurePackages = [ "nodejs-16.20.2" ];
+  nixpkgs.config.permittedInsecurePackages = ["nodejs-16.20.2"];
 }

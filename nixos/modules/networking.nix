@@ -1,16 +1,15 @@
-{ config
-, lib
-, ...
-}:
-with lib;
-let
-  cfg = config.dr460nixed;
-in
 {
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed;
+in {
   # We want to use NetworkManager on desktops
   networking = {
     # Pointing to our Adguard instance via Tailscale
-    nameservers = [ "1.1.1.1" "1.0.0.1" ];
+    nameservers = ["1.1.1.1" "1.0.0.1"];
     networkmanager = mkIf cfg.desktops.enable or cfg.rpi {
       dns = "none";
       enable = true;
@@ -28,4 +27,3 @@ in
   # Lightweight bandwidth usage tracking
   services.vnstat.enable = true;
 }
-

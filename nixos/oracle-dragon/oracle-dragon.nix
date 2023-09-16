@@ -1,6 +1,7 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }: {
   # These are the services I use on this machine
   imports = [
@@ -14,8 +15,6 @@
     interfaces.enp0s3.useDHCP = true;
     hostName = "oracle-dragon";
   };
-
-  system.stateVersion = "22.11";
 
   # Provide a reverse proxy for our services
   services.nginx = {
@@ -137,4 +136,6 @@
   #   owner = config.users.users.cloudflared.name;
   #   path = "/run/secrets/cloudflared/oracle-dragon/cred";
   # };
+
+  system.stateVersion = "22.11";
 }

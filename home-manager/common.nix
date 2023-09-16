@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   # Invididual terminal app configs
   programs = {
     # Common Bash aliases & tmux autostart for SSH sessions
@@ -10,35 +10,19 @@
         fi
       '';
     };
-
-    # Easy terminal tabbing
-    tmux = {
-      baseIndex = 1;
-      clock24 = true;
-      enable = true;
-      extraConfig = ''
-        set -g default-terminal "screen-256color"
-        set -g status-bg black
-      '';
-      historyLimit = 10000;
-      newSession = true;
-      sensibleOnTop = false;
-      shell = "${pkgs.fish}/bin/fish";
-    };
   };
 
   # General nix settings
   nix = {
-    # Do garbage collections whenever there is less than 1GB free space left
+    # Don't warn about dirty flakes and accept flake configs by default
     extraOptions = ''
       accept-flake-config = true
       http-connections = 0
       warn-dirty = false
     '';
     settings = {
-      # Use available binary caches, this is not Gentoo
-      # this also allows us to use remote builders to reduce build times and batter usage
-      builders-use-substitutes = true;
+      # Test out ca-derivations (https://nixos.wiki/wiki/Ca-derivations)
+      experimental-features = ["ca-derivations"];
 
       # A few extra binary caches and their public keys
       substituters = [
@@ -51,7 +35,7 @@
       ];
 
       # Enable certain system features
-      system-features = [ "big-parallel" "kvm" "recursive-nix" ];
+      system-features = ["big-parallel" "kvm"];
 
       # Continue building derivations if one fails
       keep-going = true;
@@ -67,5 +51,4 @@
       max-jobs = "auto";
     };
   };
-
 }

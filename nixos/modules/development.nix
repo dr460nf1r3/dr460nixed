@@ -1,15 +1,15 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-with lib;
-let
-  cfg = config.dr460nixed.development;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.development;
+in {
   options.dr460nixed.development = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -52,7 +52,7 @@ in
       docker = {
         autoPrune = {
           enable = true;
-          flags = [ "--all" ];
+          flags = ["--all"];
         };
         enable = true;
         enableOnBoot = false;
@@ -65,7 +65,7 @@ in
         qemu = {
           ovmf = {
             enable = true;
-            packages = [ pkgs.OVMFFull.fd ];
+            packages = [pkgs.OVMFFull.fd];
           };
           swtpm.enable = true;
         };
@@ -74,7 +74,7 @@ in
     };
 
     # Allow cross-compiling to aarch64
-    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+    boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
     # Configure nspawn containers
     systemd.nspawn."garuda" = {
@@ -83,7 +83,7 @@ in
       };
       enable = true;
       filesConfig = {
-        Bind = [ "/home/nico" ];
+        Bind = ["/home/nico"];
       };
       networkConfig = {
         VirtualEthernet = false;

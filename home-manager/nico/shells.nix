@@ -3,8 +3,7 @@ let
   hetznerStoragebox = "your-storagebox.de";
   forwardPostgres = "-L 5432:127.0.0.1:5432";
   user = "nico";
-in
-{
+in {
   # SSH shortcuts
   programs = {
     # Bash receives aliaseses

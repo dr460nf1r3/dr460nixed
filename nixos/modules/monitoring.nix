@@ -1,19 +1,19 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.dr460nixed;
   # adguardExporter = builtins.fetchurl {
   #   url = "https://github.com/ebrianne/adguard-exporter/releases/latest/download/adguard_exporter-linux-arm64";
   #   sha256 = "sha256:0y2gyw1xc366a70sblpjybl7alx70ppjzi5s4zzbm7swsa5vqqds";
   # };
-in
-{
+in {
   options.dr460nixed = {
     grafanaStack = {
-      enable = mkOption
+      enable =
+        mkOption
         {
           default = false;
           type = types.bool;
@@ -21,7 +21,8 @@ in
             Enables the Grafana stack (Grafana, Prometheus and Loki).
           '';
         };
-      address = mkOption
+      address =
+        mkOption
         {
           default = "";
           type = types.str;
@@ -32,7 +33,8 @@ in
     };
     prometheus = {
       adguardExporter = {
-        enable = mkOption
+        enable =
+          mkOption
           {
             default = false;
             type = types.bool;
@@ -40,7 +42,8 @@ in
               Enables Prometheus' AdGuard home exporter.
             '';
           };
-        configfile = mkOption
+        configfile =
+          mkOption
           {
             default = "";
             type = types.str;
@@ -49,7 +52,8 @@ in
             '';
           };
       };
-      blackboxExporter = mkOption
+      blackboxExporter =
+        mkOption
         {
           default = false;
           type = types.bool;
@@ -57,7 +61,8 @@ in
             Enables Prometheus' blackbox exporter.
           '';
         };
-      enable = mkOption
+      enable =
+        mkOption
         {
           default = true;
           type = types.bool;
@@ -65,7 +70,8 @@ in
             Enables Prometheus' node_exporter.
           '';
         };
-      nginxExporter = mkOption
+      nginxExporter =
+        mkOption
         {
           default = false;
           type = types.bool;
@@ -75,7 +81,8 @@ in
         };
     };
     promtail = {
-      enable = mkOption
+      enable =
+        mkOption
         {
           default = true;
           type = types.bool;
@@ -83,7 +90,8 @@ in
             Enables shipping systemd journal logs to Loki.
           '';
         };
-      lokiAddress = mkOption
+      lokiAddress =
+        mkOption
         {
           default = "";
           type = types.str;
@@ -107,7 +115,7 @@ in
         };
         node = {
           port = 3021;
-          enabledCollectors = [ "systemd" ];
+          enabledCollectors = ["systemd"];
           enable = true;
         };
         nginx = mkIf cfg.prometheus.nginxExporter {
@@ -119,36 +127,44 @@ in
       scrapeConfigs = [
         {
           job_name = "nodes";
-          static_configs = [{
-            targets = [
-              "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
-              "100.97.58.140:${toString config.services.prometheus.exporters.node.port}"
-            ];
-          }];
+          static_configs = [
+            {
+              targets = [
+                "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
+                "100.97.58.140:${toString config.services.prometheus.exporters.node.port}"
+              ];
+            }
+          ];
         }
         {
           job_name = "adguard";
-          static_configs = [{
-            targets = [
-              "127.0.0.1:9617"
-            ];
-          }];
+          static_configs = [
+            {
+              targets = [
+                "127.0.0.1:9617"
+              ];
+            }
+          ];
         }
         {
           job_name = "loki";
-          static_configs = [{
-            targets = [
-              "${cfg.grafanaStack.address}:8030"
-            ];
-          }];
+          static_configs = [
+            {
+              targets = [
+                "${cfg.grafanaStack.address}:8030"
+              ];
+            }
+          ];
         }
         {
           job_name = "prometheus";
-          static_configs = [{
-            targets = [
-              "127.0.0.1:9113"
-            ];
-          }];
+          static_configs = [
+            {
+              targets = [
+                "127.0.0.1:9113"
+              ];
+            }
+          ];
         }
       ];
     };
@@ -174,16 +190,18 @@ in
           max_chunk_age = "24h";
         };
         schema_config = {
-          configs = [{
-            from = "2022-06-06";
-            store = "boltdb-shipper";
-            object_store = "filesystem";
-            schema = "v11";
-            index = {
-              prefix = "index_";
-              period = "24h";
-            };
-          }];
+          configs = [
+            {
+              from = "2022-06-06";
+              store = "boltdb-shipper";
+              object_store = "filesystem";
+              schema = "v11";
+              index = {
+                prefix = "index_";
+                period = "24h";
+              };
+            }
+          ];
         };
         server.http_listen_port = 3030;
         storage_config = {
@@ -231,50 +249,54 @@ in
           http_listen_port = 3031;
           grpc_listen_port = 0;
         };
-        clients = [{
-          url = "http://${config.dr460nixed.promtail.lokiAddress}:3030/loki/api/v1/push";
-        }];
-        scrape_configs = [{
-          job_name = "journal";
-          journal = {
-            path = "/var/log/journal";
-            max_age = "24h";
-            labels = {
-              job = "systemd-journal";
-              host = "${config.networking.hostName}";
+        clients = [
+          {
+            url = "http://${config.dr460nixed.promtail.lokiAddress}:3030/loki/api/v1/push";
+          }
+        ];
+        scrape_configs = [
+          {
+            job_name = "journal";
+            journal = {
+              path = "/var/log/journal";
+              max_age = "24h";
+              labels = {
+                job = "systemd-journal";
+                host = "${config.networking.hostName}";
+              };
             };
-          };
-          relabel_configs = [
-            {
-              source_labels = [ "__journal__hostname" ];
-              target_label = "host";
-            }
-            {
-              source_labels = [ "__journal_priority" ];
-              target_label = "priority";
-            }
-            {
-              source_labels = [ "__journal_priority_keyword" ];
-              target_label = "level";
-            }
-            {
-              source_labels = [ "__journal__systemd_unit" ];
-              target_label = "unit";
-            }
-            {
-              source_labels = [ "__journal__systemd_user_unit" ];
-              target_label = "user_unit";
-            }
-            {
-              source_labels = [ "__journal__boot_id" ];
-              target_label = "boot_id";
-            }
-            {
-              source_labels = [ "__journal__comm" ];
-              target_label = "command";
-            }
-          ];
-        }];
+            relabel_configs = [
+              {
+                source_labels = ["__journal__hostname"];
+                target_label = "host";
+              }
+              {
+                source_labels = ["__journal_priority"];
+                target_label = "priority";
+              }
+              {
+                source_labels = ["__journal_priority_keyword"];
+                target_label = "level";
+              }
+              {
+                source_labels = ["__journal__systemd_unit"];
+                target_label = "unit";
+              }
+              {
+                source_labels = ["__journal__systemd_user_unit"];
+                target_label = "user_unit";
+              }
+              {
+                source_labels = ["__journal__boot_id"];
+                target_label = "boot_id";
+              }
+              {
+                source_labels = ["__journal__comm"];
+                target_label = "command";
+              }
+            ];
+          }
+        ];
         pipeline_stages = [
           {
             json.expressions = {
@@ -319,7 +341,7 @@ in
       settings = {
         analytics.reporting_enabled = false;
         live = {
-          allowed_origins = [ "http://${config.dr460nixed.grafanaStack.address}:8010" ]; # Needed to get WS to work
+          allowed_origins = ["http://${config.dr460nixed.grafanaStack.address}:8010"]; # Needed to get WS to work
         };
         security.admin_email = "root@dr460nf1r3.org";
         server = {
@@ -340,22 +362,22 @@ in
       upstreams = {
         "grafana" = {
           servers = {
-            "127.0.0.1:${toString config.services.grafana.settings.server.http_port}" = { };
+            "127.0.0.1:${toString config.services.grafana.settings.server.http_port}" = {};
           };
         };
         "prometheus" = {
           servers = {
-            "${config.dr460nixed.grafanaStack.address}:${toString config.services.prometheus.port}" = { };
+            "${config.dr460nixed.grafanaStack.address}:${toString config.services.prometheus.port}" = {};
           };
         };
         "loki" = {
           servers = {
-            "127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}" = { };
+            "127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}" = {};
           };
         };
         "promtail" = {
           servers = {
-            "127.0.0.1:${toString config.services.promtail.configuration.server.http_listen_port}" = { };
+            "127.0.0.1:${toString config.services.promtail.configuration.server.http_listen_port}" = {};
           };
         };
       };
@@ -373,31 +395,39 @@ in
             proxy_set_header Host $host;
           '';
         };
-        listen = [{
-          addr = "${config.dr460nixed.grafanaStack.address}";
-          port = 8010;
-        }];
+        listen = [
+          {
+            addr = "${config.dr460nixed.grafanaStack.address}";
+            port = 8010;
+          }
+        ];
       };
       virtualHosts.prometheus = {
         locations."/".proxyPass = "http://prometheus";
-        listen = [{
-          addr = "${config.dr460nixed.grafanaStack.address}";
-          port = 8020;
-        }];
+        listen = [
+          {
+            addr = "${config.dr460nixed.grafanaStack.address}";
+            port = 8020;
+          }
+        ];
       };
       virtualHosts.loki = {
         locations."/".proxyPass = "http://loki";
-        listen = [{
-          addr = "${config.dr460nixed.grafanaStack.address}";
-          port = 8030;
-        }];
+        listen = [
+          {
+            addr = "${config.dr460nixed.grafanaStack.address}";
+            port = 8030;
+          }
+        ];
       };
       virtualHosts.promtail = {
         locations."/".proxyPass = "http://promtail";
-        listen = [{
-          addr = "${config.dr460nixed.grafanaStack.address}";
-          port = 8031;
-        }];
+        listen = [
+          {
+            addr = "${config.dr460nixed.grafanaStack.address}";
+            port = 8031;
+          }
+        ];
       };
     };
   };

@@ -1,8 +1,8 @@
 {
   description = "Dr460nixed NixOS flake ❄️";
 
-  nixConfig.extra-substituters = [ "https://cache.garnix.io" ];
-  nixConfig.extra-trusted-public-keys = [ "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=" ];
+  nixConfig.extra-substituters = ["https://cache.garnix.io"];
+  nixConfig.extra-trusted-public-keys = ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="];
 
   inputs = {
     # Chaotic Nyx!
@@ -137,100 +137,117 @@
     src-repoctl.flake = false;
   };
 
-  outputs =
-    { devshell
-    , flake-parts
-    , nixpkgs
-    , pre-commit-hooks
-    , self
-    , ...
-    } @ inp:
-    let
-      inputs = inp;
-      perSystem =
-        { pkgs
-        , system
-        , ...
-        }: {
-          apps.default = self.outputs.devShells.${system}.default.flakeApp;
+  outputs = {
+    devshell,
+    flake-parts,
+    nixpkgs,
+    pre-commit-hooks,
+    self,
+    ...
+  } @ inp: let
+    inputs = inp;
+    perSystem = {
+      pkgs,
+      system,
+      ...
+    }: {
+      apps.default = self.outputs.devShells.${system}.default.flakeApp;
 
-          checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
-            hooks = {
-              actionlint.enable = true;
-              commitizen.enable = true;
-              deadnix.enable = true;
-              nil.enable = true;
-              nixpkgs-fmt.enable = true;
-              prettier.enable = true;
-              yamllint.enable = true;
-              statix.enable = true;
-            };
-            src = ./.;
-          };
-
-          devShells =
-            let
-              makeDevshell = import "${inp.devshell}/modules" pkgs;
-              mkShell = config: (makeDevshell {
-                configuration = {
-                  inherit config;
-                  imports = [ ];
-                };
-              }).shell;
-            in
-            rec {
-              default = dr460nixed-shell;
-              dr460nixed-shell = mkShell {
-                devshell.name = "dr460nixed-devshell";
-                commands = [
-                  { package = "age"; }
-                  { package = "commitizen"; }
-                  { package = "gnupg"; }
-                  { package = "manix"; }
-                  { package = "mdbook"; }
-                  { package = "nix-melt"; }
-                  { package = "pre-commit"; }
-                  { package = "rsync"; }
-                  { package = "sops"; }
-                  { package = "yamlfix"; }
-                ];
-                devshell.startup = {
-                  preCommitHooks.text = self.checks.${system}.pre-commit-check.shellHook;
-                  dr460nixedEnv.text = ''
-                    export NIX_PATH=nixpkgs=${nixpkgs}
-                  '';
-                };
-              };
-            };
-
-          formatter = pkgs.nixpkgs-fmt;
-
-          packages.docs = pkgs.runCommand "dr460nixed-docs"
-            { nativeBuildInputs = with pkgs; [ bash mdbook ]; }
-            ''
-              bash -c "errors=$(mdbook build -d $out ${./.}/docs |& grep ERROR)
-              if [ \"$errors\" ]; then
-                exit 1
-              fi"
-            '';
-
+      checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        hooks = {
+          actionlint.enable = true;
+          alejandra.enable = true;
+          commitizen.enable = true;
+          deadnix.enable = true;
+          nil.enable = true;
+          prettier.enable = true;
+          yamllint.enable = true;
+          statix.enable = true;
         };
-    in
-    flake-parts.lib.mkFlake { inherit inputs; } {
+        src = ./.;
+      };
+
+      devShells = let
+        # Import the devshell module as module rather than a flake input
+        makeDevshell = import "${inp.devshell}/modules" pkgs;
+        mkShell = config:
+          (makeDevshell {
+            configuration = {
+              inherit config;
+              imports = [];
+            };
+          })
+          .shell;
+        # NixOS anywhere for easy installation of NixOS on any host
+        nixos-anywhere = builtins.fetchurl {
+          url = "https://raw.githubusercontent.com/numtide/nixos-anywhere/main/src/nixos-anywhere.sh";
+          sha256 = "0y6yh9qbz8sq4z7x7m30pjsjd1w30gcgfj8zfpdvz9v4avd6py4f";
+        };
+      in rec {
+        default = dr460nixed-shell;
+        dr460nixed-shell = mkShell {
+          devshell.name = "dr460nixed-devshell";
+          commands = [
+            {
+              command = "bash ${nixos-anywhere}";
+              help = "Helps installing NixOS on any host";
+              name = "nixos-anywhere";
+            }
+            {package = "age";}
+            {package = "commitizen";}
+            {package = "gnupg";}
+            {package = "manix";}
+            {package = "mdbook";}
+            {package = "nix-melt";}
+            {package = "pre-commit";}
+            {package = "rsync";}
+            {package = "sops";}
+            {package = "yamlfix";}
+          ];
+          devshell.startup.preCommitHooks.text = self.checks.${system}.pre-commit-check.shellHook;
+          env = [
+            {
+              name = "NIX_PATH";
+              value = "${nixpkgs}";
+            }
+          ];
+        };
+      };
+
+      formatter = pkgs.nixpkgs-fmt;
+
+      packages = let
+        replPath = toString ./.;
+      in {
+        # Builds the documentation
+        docs =
+          pkgs.runCommand "dr460nixed-docs"
+          {nativeBuildInputs = with pkgs; [bash mdbook];}
+          ''
+            bash -c "errors=$(mdbook build -d $out ${./.}/docs |& grep ERROR)
+            if [ \"$errors\" ]; then
+              exit 1
+            fi"
+          '';
+        # Sets up repl environment with access to the flake
+        repl = pkgs.writeShellScriptBin "dr460nixed-repl" ''
+          source /etc/set-environment
+          nix repl --file "${replPath}/repl.nix" "$@"
+        '';
+      };
+    };
+  in
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      # Imports flake-modules
       imports = [
         ./nixos/flake-module.nix
         inputs.pre-commit-hooks.flakeModule
       ];
-      systems = [ "x86_64-linux" "aarch64-linux" ];
+
+      # The systems currently available
+      systems = ["x86_64-linux" "aarch64-linux"];
+
+      # This applies to all systems
       inherit perSystem;
     };
 }
-
-
-
-
-
-
-
-
-

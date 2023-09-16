@@ -1,8 +1,8 @@
-{ lib
-, pkgs
-, ...
-}:
 {
+  lib,
+  pkgs,
+  ...
+}: {
   # Import common configurations
   imports = [
     ../modules/nix.nix
@@ -39,7 +39,7 @@
     docker = {
       autoPrune = {
         enable = true;
-        flags = [ "--all" ];
+        flags = ["--all"];
       };
       enable = true;
       enableOnBoot = false;

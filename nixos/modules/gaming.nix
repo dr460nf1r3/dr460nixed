@@ -1,15 +1,15 @@
-{ config
-, lib
-, pkgs
-, ...
-}:
-with lib;
-let
-  cfg = config.dr460nixed.gaming;
-in
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.gaming;
+in {
   options.dr460nixed.gaming = {
-    enable = mkOption
+    enable =
+      mkOption
       {
         default = false;
         type = types.bool;
@@ -20,6 +20,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    chaotic.steam.extraCompatPackages = with pkgs; [ proton-ge-custom ];
+    chaotic.steam.extraCompatPackages = with pkgs; [proton-ge-custom];
   };
 }

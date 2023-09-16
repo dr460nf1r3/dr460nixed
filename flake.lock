@@ -195,18 +195,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1694733653,
-        "narHash": "sha256-uFajGX3uaoLapUFWyddNIU9tiyEkYyvUtxcW0h1nFm8=",
-        "owner": "garuda-linux",
-        "repo": "garuda-nix-subsystem",
-        "rev": "d6c188c8f52831080b0197bcf83f53d77d427b44",
-        "type": "gitlab"
+        "dirtyRev": "afeef1249710aeeb33ff951442011a1f84ae27d7-dirty",
+        "dirtyShortRev": "afeef12-dirty",
+        "lastModified": 1694718842,
+        "narHash": "sha256-J4l8LAMMz4qrL6jKzV4xfWiu83xjX6H4GS+5Sr/y2+M=",
+        "type": "git",
+        "url": "file:///home/nico/Documents/misc/garuda-nix-subsystem"
       },
       "original": {
-        "owner": "garuda-linux",
-        "ref": "main",
-        "repo": "garuda-nix-subsystem",
-        "type": "gitlab"
+        "type": "git",
+        "url": "file:///home/nico/Documents/misc/garuda-nix-subsystem"
       }
     },
     "gitignore": {

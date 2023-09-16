@@ -1,6 +1,7 @@
-{ pkgs
-, config
-, ...
+{
+  pkgs,
+  config,
+  ...
 }: {
   # Individual settings
   imports = [
@@ -9,10 +10,10 @@
 
   # Bootloader
   boot = {
-    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
-    initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
+    extraModulePackages = with config.boot.kernelPackages; [acpi_call];
+    initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "usbhid" "sd_mod"];
     # Without this, bluetooth does not work
-    kernelModules = [ "btintel" ];
+    kernelModules = ["btintel"];
     loader = {
       efi = {
         canTouchEfiVariables = true;
@@ -103,7 +104,7 @@
   };
 
   # Enable the touchpad
-  environment.systemPackages = with pkgs; [ libinput ];
+  environment.systemPackages = with pkgs; [libinput];
 
   # Home-manager desktop configuration
   home-manager.users."nico" = import ../../home-manager/nico/nico.nix;
