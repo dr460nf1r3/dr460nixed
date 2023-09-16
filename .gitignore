@@ -1,2 +1,3 @@
+*.iso
 .direnv
 .pre-commit-config.yaml

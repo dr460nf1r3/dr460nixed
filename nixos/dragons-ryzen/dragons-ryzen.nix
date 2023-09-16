@@ -41,6 +41,15 @@
     development.enable = true;
     gaming.enable = true;
     lanzaboote.enable = true;
+    nix-super.enable = true;
+    performance = true;
+    remote-build = {
+      enable = true;
+      host = "remote-build";
+      port = 666;
+      trustedPublicKey = "immortalis:8vrLBvFoMiKVKRYD//30bhUBTEEiuupfdQzl2UoMms4=";
+      user = "nico";
+    };
     school = true;
     smtp.enable = true;
     tailscale = {
@@ -74,16 +83,6 @@
     zfs = {
       enable = true;
       sendMails = true;
-    };
-  };
-
-  # Garuda Nix subsystem option
-  garuda = {
-    dr460nized.enable = true;
-    gaming.enable = true;
-    performance-tweaks = {
-      cachyos-kernel = true;
-      enable = true;
     };
   };
 

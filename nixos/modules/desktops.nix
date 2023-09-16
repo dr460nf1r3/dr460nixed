@@ -25,6 +25,9 @@ in {
     # Only install fonts I personally use
     fonts.enableDefaultPackages = false;
 
+    # Enable the dr460nized desktop's settings
+    garuda.dr460nized.enable = true;
+
     # Allow better Syncthing speeds
     services.syncthing.openDefaultPorts = true;
 

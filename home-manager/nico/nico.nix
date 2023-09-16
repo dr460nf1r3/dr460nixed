@@ -8,13 +8,15 @@ in {
   ];
 
   # I'm working with git a lot
-  programs.git = {
-    signing = {
-      key = "D245D484F3578CB17FD6DA6B67DB29BFF3C96757";
-      signByDefault = true;
+  programs = {
+    git = {
+      signing = {
+        key = "D245D484F3578CB17FD6DA6B67DB29BFF3C96757";
+        signByDefault = true;
+      };
+      userEmail = "root@dr460nf1r3.org";
+      userName = "Nico Jensch";
     };
-    userEmail = "root@dr460nf1r3.org";
-    userName = "Nico Jensch";
   };
 
   # The apps themes not everyone might want

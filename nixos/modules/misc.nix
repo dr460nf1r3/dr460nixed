@@ -69,6 +69,15 @@ in {
           Whether this is live CD.
         '';
       };
+    performance =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether this device should be optimized for performance.
+        '';
+      };
     school =
       mkOption
       {
@@ -164,5 +173,11 @@ in {
 
     # Chromium gate (thanks Pedro!)
     environment.systemPackages = mkIf cfg.chromium-gate [chromium-gate];
+
+    # Enhabce performance tweaks
+    garuda.performance-tweaks = lib.mkIf cfg.performance {
+      cachyos-kernel = true;
+      enable = true;
+    };
   };
 }

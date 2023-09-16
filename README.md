@@ -1,7 +1,7 @@
+# My personal NixOS flake & system configurations
+
 [![built with nix](https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org) [![built with garnix](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fdr460nf1r3%2Fdr460nixed%3Fbranch%3Dmain)](https://garnix.io)
 [![Build images](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml) [![Sync Tailscale ACLs](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml)
-
-# My personal NixOS flake & system configurations
 
 This repo contains my NixOS dotfiles. Every device supported by NixOS will be added here! 😎
 
@@ -37,7 +37,7 @@ A fully searchable, mdBook-based documentation is available [here](https://nixed
 
 ## Structure
 
-```
+```shell
 ├── docker-compose
 │   ├── oracle-dragon
 │   └── tv-nixos

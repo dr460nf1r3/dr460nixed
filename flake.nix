@@ -151,8 +151,10 @@
       system,
       ...
     }: {
+      # This basically allows using the devshell as flake app
       apps.default = self.outputs.devShells.${system}.default.flakeApp;
 
+      # Pre-commit hooks are set up automatically via nix-shell / nix develop
       checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
         hooks = {
           actionlint.enable = true;
@@ -175,6 +177,7 @@
         src = ./.;
       };
 
+      # Handy devshell for working with this flake
       devShells = let
         # Import the devshell module as module rather than a flake input
         makeDevshell = import "${inp.devshell}/modules" pkgs;
@@ -200,6 +203,18 @@
               command = "bash ${nixos-anywhere}";
               help = "Helps installing NixOS on any host";
               name = "nixos-anywhere";
+            }
+            {
+              category = "dr460nixed";
+              command = "${self.packages.${system}.repl}/bin/dr460nixed-repl";
+              help = "Start a repl shell with all flake outputs available";
+              name = "repl";
+            }
+            {
+              category = "dr460nixed";
+              command = "nix build .#iso";
+              help = "Builds a NixOS ISO with all most important configurations";
+              name = "buildiso";
             }
             {package = "age";}
             {package = "commitizen";}
@@ -227,23 +242,25 @@
         exec ${pkgs.alejandra}/bin/alejandra --quiet "$@"
       '';
 
+      # The packages this flake outputs
       packages = let
+        # Source repl.nix for pre-setup "nix repl"
         replPath = toString ./.;
-      in
-        with pkgs; {
-          # Builds the documentation
-          docs = runCommand "dr460nixed-docs" {nativeBuildInputs = [bash mdbook];} ''
+      in {
+        # Builds the documentation
+        docs = with pkgs;
+          runCommand "dr460nixed-docs" {nativeBuildInputs = [bash mdbook];} ''
             bash -c "errors=$(mdbook build -d $out ${./.}/docs |& grep ERROR)
             if [ \"$errors\" ]; then
               exit 1
             fi"
           '';
-          # Sets up repl environment with access to the flake
-          repl = pkgs.writeShellScriptBin "dr460nixed-repl" ''
-            source /etc/set-environment
-            nix repl --file "${replPath}/repl.nix" "$@"
-          '';
-        };
+        # Sets up repl environment with access to the flake
+        repl = pkgs.writeShellScriptBin "dr460nixed-repl" ''
+          source /etc/set-environment
+          nix repl --file "${replPath}/repl.nix" "$@"
+        '';
+      };
     };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {

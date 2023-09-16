@@ -20,6 +20,10 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # ProtonGE-Custom
     chaotic.steam.extraCompatPackages = with pkgs; [proton-ge-custom];
+
+    # Enable Garuda's gaming module
+    garuda.gaming.enable = true;
   };
 }

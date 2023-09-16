@@ -36,6 +36,7 @@
     docker-compose-runner."tv-nixos" = {
       source = ../../docker-compose/tv-nixos;
     };
+    performance = true;
     servers = {
       enable = true;
       monitoring = true;
@@ -52,15 +53,6 @@
     };
     tailscale-tls.enable = true;
     systemd-boot.enable = true;
-  };
-
-  # Garuda Nix subsystem options
-  garuda = {
-    dr460nized.enable = true;
-    performance-tweaks = {
-      enable = true;
-      cachyos-kernel = true;
-    };
   };
 
   # Yes, autologin on this one

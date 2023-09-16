@@ -1,16 +1,7 @@
-{inputs, ...}: {
+_: {
   # Override applications with useful things I want to have
   nixpkgs.overlays = let
     thisConfigsOverlay = final: _prev: {
-      # OBS with plugins
-      obs-studio-wrapped = final.wrapOBS.override {inherit (final) obs-studio;} {
-        plugins = with final.obs-studio-plugins; [
-          obs-gstreamer
-          obs-pipewire-audio-capture
-          obs-vaapi
-          obs-vkcapture
-        ];
-      };
       # Enable dark mode, hardware acceleration & add WideVine plugin
       chromium-flagged = final.chromium.override {
         commandLineArgs = [
@@ -23,15 +14,15 @@
           "--smooth-scrolling"
         ];
       };
+      # OBS with plugins
+      obs-studio-wrapped = final.wrapOBS.override {inherit (final) obs-studio;} {
+        plugins = with final.obs-studio-plugins; [
+          obs-gstreamer
+          obs-pipewire-audio-capture
+          obs-vaapi
+          obs-vkcapture
+        ];
+      };
     };
-  in [
-    thisConfigsOverlay
-    (
-      # Overlays nix with nix-super, which tracks future features
-      _: _prev: {
-        # https://github.com/privatevoid-net/nix-super
-        nix = inputs.nix-super.packages.x86_64-linux.default;
-      }
-    )
-  ];
+  in [thisConfigsOverlay];
 }

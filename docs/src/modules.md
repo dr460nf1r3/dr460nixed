@@ -4,7 +4,7 @@
 
 A lot of those have been moved to the [Garuda Nix Subsystem](https://gitlab.com/garuda-linux/garuda-nix-subsystem). To read its documentation please follow [this link](https://nix.garudalinux.org).
 
-```
+```shell
 ├── apps.nix
 ├── boot.nix
 ├── chaotic
@@ -43,12 +43,14 @@ A lot of those have been moved to the [Garuda Nix Subsystem](https://gitlab.com/
 - `dr460nixed.auto-upgrade.enable` (default false) - enables auto-upgrading the system daily by pulling the updated Nix flake from the repo
 - `dr460nixed.common.enable` (default true) - common options for every system
 - `dr460nixed.desktops.enable` (default false) - options for desktop systems
+- `dr460nixed.desktops.gaming` (default false) - enables gaming-related options
 - `dr460nixed.development.enable` (default false) - enables a development environment
 - `dr460nixed.docker-compose-runner` (default false) - runs a docker-compose.yml and supplies an additional .env file for secrets if desired
 - `dr460nixed.hardening.enable` (default true) - system hardening
 - `dr460nixed.lanzaboote.enable` (default false) - enables Lanzaboote instead of systemd-boot for secure-boot support
 - `dr460nixed.live-cd` (default false) - live CD applications
 - `dr460nixed.locales` (default true) - does all the localization setup / console font config
+- `dr460nixed.nix-super.enable` (default false) - Overlays `nix` with [nix-super](https://github.com/privatevoid-net/nix-super)
 - `dr460nixed.nodocs` (default true) - removes unneeded documentation to save space
 - `dr460nixed.rpi` (default false) - Raspberry Pi related things
 - `dr460nixed.school` (default false) - things I need for school

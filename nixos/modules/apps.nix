@@ -31,7 +31,6 @@ in {
       tmux
       traceroute
       ugrep
-      vulnix
       wget
       whois
     ];
@@ -149,6 +148,7 @@ in {
             }
           ];
       })
+      vulnix
       wireshark
       xdg-utils
       yarn

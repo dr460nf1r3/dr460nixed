@@ -195,11 +195,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1694880597,
-        "narHash": "sha256-fdjIfYuKCXbxOTEpzQ9GYYwhjOSORomisJ1VXeUJCEU=",
+        "lastModified": 1694889448,
+        "narHash": "sha256-y2uqcvIWUn1I1qV+q8kFeG7bro+pUJM7qEl6020kK+E=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "b4f644074dc5ae861feee61a664be2af7f8882d8",
+        "rev": "c4359fad335b62d893375da7a5439fe41c7f2b83",
         "type": "gitlab"
       },
       "original": {
