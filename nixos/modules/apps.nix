@@ -17,6 +17,7 @@ in {
       cachix
       cloudflared
       duf
+      dysk
       eza
       jq
       killall

@@ -33,7 +33,6 @@ in {
 
   config = {
     boot = {
-      consoleLogLevel = 0;
       kernelParams = [
         "acpi_backlight=native"
         "iommu=full"

@@ -1,9 +1,11 @@
 {
   inputs,
+  pkgs,
   self,
   ...
 }: {
   flake = let
+    # Default modules to use in all systems
     defaultModules = [
       ./modules
       inputs.disko.nixosModules.disko
@@ -12,11 +14,12 @@
       inputs.sops-nix.nixosModules.sops
     ];
 
+    # Our images should be cleaner, so we use a different set of modules
     imageModules = [
-      ./images/base.nix
-      ./images/iso.nix
-      ./modules/nix.nix
-      inputs.nix-index-database.nixosModules.nix-index
+      ./modules/desktops.nix
+      ./modules/misc.nix
+      ../overlays
+      inputs.nixos-generators.nixosModules.all-formats
     ];
 
     specialArgs = {
@@ -58,6 +61,22 @@
         inherit specialArgs;
       };
 
+      # Dr460nixed base image for nixos-generators
+      dr460nixed-base = inputs.garuda-nix.lib.garudaSystem {
+        system = "x86_64-linux";
+        modules =
+          imageModules ++ [./images/base.nix];
+        inherit specialArgs;
+      };
+
+      # Dr460nized desktop image for nixos-generators
+      dr460nixed-desktop = inputs.garuda-nix.lib.garudaSystem {
+        system = "x86_64-linux";
+        modules =
+          imageModules ++ [./images/iso.nix];
+        inherit specialArgs;
+      };
+
       # For WSL, mostly used at work only
       nixos-wsl = inputs.garuda-nix.lib.garudaSystem {
         system = "x86_64-linux";
@@ -74,8 +93,7 @@
       oracle-dragon = inputs.garuda-nix.lib.garudaSystem {
         system = "aarch64-linux";
         modules =
-          defaultModules
-          ++ [./oracle-dragon/oracle-dragon.nix];
+          defaultModules ++ [./oracle-dragon/oracle-dragon.nix];
         inherit specialArgs;
       };
 
@@ -110,18 +128,12 @@
 
     # Images to build via "nix build .#packages.{iso,vbox}"
     packages.x86_64-linux = {
-      iso = inputs.nixos-generators.nixosGenerate {
-        format = "install-iso";
-        inherit specialArgs;
-        modules = imageModules;
-        system = "x86_64-linux";
-      };
-      vbox = inputs.nixos-generators.nixosGenerate {
-        format = "virtualbox";
-        inherit specialArgs;
-        modules = imageModules;
-        system = "x86_64-linux";
-      };
+      iso = pkgs.writeScriptBin "dr460nixed-iso" ''
+        ${pkgs.nix}/bin/nix build .#nixosConfigurations.dr460nixed-iso.config.formats.install-iso
+      '';
+      vbox = pkgs.writeScriptBin "dr460nixed-vbox" ''
+        ${pkgs.nix}/bin/nix build .#nixosConfigurations.dr460nixed-iso.config.formats.vbox
+      '';
     };
   };
 }

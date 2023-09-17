@@ -2,10 +2,11 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }: let
-  cfgSuper = config.dr460nixed.nix-super;
   cfgRemote = config.dr460nixed.remote-build;
+  cfgSuper = config.dr460nixed.nix-super;
 in {
   options.dr460nixed = with lib; {
     nix-super = {
@@ -91,6 +92,11 @@ in {
         http-connections = 0
         warn-dirty = false
       '';
+
+      # Make use of nix-super if it is enabled
+      package = lib.mkIf cfgSuper.enable pkgs.nixSuper;
+
+      # Nix.conf settings
       settings = {
         # Accept flake configs by default
         accept-flake-config = true;
@@ -123,7 +129,7 @@ in {
     # Nix-super - https://github.com/privatevoid-net/nix-super
     nixpkgs.overlays = lib.mkIf cfgSuper.enable [
       (_: _prev: {
-        nix = inputs.nix-super.packages.x86_64-linux.default;
+        nixSuper = inputs.nix-super.packages.x86_64-linux.default;
       })
     ];
 

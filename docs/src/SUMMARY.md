@@ -4,6 +4,7 @@
 
 - [Introduction](./intro.md)
 - [Quick start](./quick-start.md)
+- [Generating images](generating-images.md)
 
 # Modules
 
