@@ -1,6 +1,14 @@
-{pkgs, ...}: {
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}: {
   # Import base configuration
-  imports = [./base.nix];
+  imports = [
+    ./base.nix
+    "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares.nix"
+  ];
 
   # Enable a few selected custom settings
   dr460nixed = {
@@ -9,23 +17,25 @@
   };
 
   # Home-manager desktop settings
-  home-manager.users."dragon" = import ../../home-manager/desktops.nix;
+  home-manager.users."nixos" = import ../../home-manager/desktops.nix;
 
   # CD's may use autologin for convenience
   services.xserver.displayManager.sddm.settings = {
     Autologin = {
-      User = "dragon";
+      User = "nixos";
       Session = "plasma";
     };
   };
 
+  # Fix conflict with the cd-graphical-base module (we use Pipewire)
+  hardware.pulseaudio.enable = lib.mkForce false;
+
   # Wireshark
   programs.wireshark.enable = true;
 
-  # Desktop environment
+  # Desktop environment packages
   environment.systemPackages = with pkgs; [
     acpi
-    ansible
     ansible
     beekeeper-studio
     bind.dnsutils
@@ -37,27 +47,20 @@
     ffmpegthumbnailer
     flashrom
     freerdp
-    heroku
-    hugo
     hwinfo
     inxi
     libsecret
     libva-utils
     lm_sensors
     memtest86-efi
-    nix-prefetch-git
     nixos-generators
     obs-studio-wrapped
     pciutils
-    rsync
     rustdesk
-    speedcrunch
     speedcrunch
     tcpdump
     tdesktop
-    termius
     usbutils
-    ventoy-full
     (vscode-with-extensions.override {
       vscodeExtensions = with vscode-extensions;
         [
@@ -82,11 +85,7 @@
         ];
     })
     vulkan-tools
-    vulnix
-    wireshark
     xdg-utils
-    yubikey-manager-qt
-    yubioath-flutter
   ];
 
   # NixOS stuff

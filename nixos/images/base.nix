@@ -1,29 +1,56 @@
-{pkgs, ...}: {
-  # This is default for GNS, but doesn't work on the ISO
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}: {
+  # Basic installation CD settings
+  imports = [
+    "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
+  ];
+
+  # Boot configuration
   boot = {
+    # Allow cross-compilation
     binfmt.emulatedSystems = ["aarch64-linux"];
+
+    # Let us see the boot messages
     consoleLogLevel = 3;
+
+    # No need for containers
     enableContainers = false;
+
+    # This is default for GNS, but doesn't work on the ISO
     initrd = {
       systemd.enable = false;
       verbose = true;
     };
   };
 
-  # Have a different user config for the ISO
-  users.users = {
-    "dragon" = {
-      extraGroups = ["wheel"];
-      home = "/home/dragon";
-      isNormalUser = true;
-      password = "dragon";
-    };
-    "root".password = "dragon";
+  # Home-manager common configurations
+  home-manager.users."nixos" = import ../../home-manager/common.nix;
+
+  # Image configuration
+  isoImage = {
+    # Add memtest86+ to the ISO
+    contents = [
+      {
+        source = pkgs.memtest86plus + "/memtest.bin";
+        target = "boot/memtest.bin";
+      }
+    ];
+
+    # The ISO image name and edition label
+    edition = "dr460nixed";
+    isoBaseName = "dr460nixed";
+    isoName = lib.mkForce "${config.isoImage.isoBaseName}-${config.system.nixos.label}.iso";
+
+    # Speed up the insanely slow compression process
+    squashfsCompression = "zstd -Xcompression-level 3";
   };
 
-  # Home-manager common configurations
-  home-manager.users."dragon" = import ../../home-manager/common.nix;
-
+  # The packages that are always needed
   environment.systemPackages = with pkgs; [
     age
     bind
@@ -84,7 +111,7 @@
     };
   };
 
-  # This is meant to be for x86_64 only, use a different config for aarch64
+  # This is meant to be for x86_64 only, need to use a different config for aarch64
   nixpkgs.hostPlatform = "x86_64-linux";
 
   # Some handy aliases and applications
