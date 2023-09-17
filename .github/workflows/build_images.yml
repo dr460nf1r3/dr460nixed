@@ -21,12 +21,10 @@ jobs:
           extra_nix_config: |
             accept-flake-config = true
             system-features = big-parallel kvm
-            extra-substituters = https://cache.garnix.io
-            extra-trusted-public-keys = cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           nix_path: nixpkgs=channel:nixos-unstable
       - name: Check flake 📝
-        run: nix flake check
+        run: nix flake --accept-flake-config check
   build-iso:
     runs-on: ubuntu-latest
     steps:
@@ -38,24 +36,22 @@ jobs:
           extra_nix_config: |
             accept-flake-config = true
             system-features = big-parallel kvm
-            extra-substituters = https://cache.garnix.io
-            extra-trusted-public-keys = cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           nix_path: nixpkgs=channel:nixos-unstable
       - name: Build ISO 📀
-        run: nix build --accept-flake-config -L .#packages.x86_64-linux.iso
+        run: nix run --accept-flake-config -L .#iso
         env:
           NIXPKGS_ALLOW_UNFREE: 1
       - name: Upload ISO 🚀
         uses: actions/upload-artifact@v3
         with:
           name: Dr460nixed ISO
-          path: result/iso/*.iso
+          path: result
       - name: Create release 📦
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
           body_path: CHANGELOG.md
-          files: result/iso/*.iso
+          files: result
           fail_on_unmatched_files: true
           token: ${{ secrets.GITHUB_TOKEN }}

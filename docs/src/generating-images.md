@@ -12,9 +12,11 @@ Lets build a regular dr460nixed ISO!
 nix build .#nixosConfigurations.dr460nixed-desktop.config.formats.install-iso
 ```
 
-This is pretty much everything needed! The result will be available at `./result/iso/*.iso`.
+You may also just run `nix run .#iso`, which builds an image using the `install-iso` format.
 
-Likewise, all other configurations may be built by simply exchanging `iso` with the desired format.
+This is pretty much everything needed! The result will be available at `./result`, which links to the corresponding path in `/nix/store`.
+
+Likewise, all other configurations may be built by simply exchanging `installer-iso` with the desired format.
 Depending on what kind of image is being built it is needed to use the `dr460nixed-base` system to built the image.
 
 ```sh
@@ -36,3 +38,7 @@ TLDR: add the following to your configuration and apply it:
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }
 ```
+
+## Provided images
+
+Refreshed ISO files are automatically built with every commit. Click the badge to have a look at the latest runs: [![Build images](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml)
