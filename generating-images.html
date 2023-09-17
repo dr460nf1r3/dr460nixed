@@ -178,8 +178,9 @@ This is important, as this function exposes all the <code>garuda-nix-subsystem</
 <p>Lets build a regular dr460nixed ISO!</p>
 <pre><code class="language-sh">nix build .#nixosConfigurations.dr460nixed-desktop.config.formats.install-iso
 </code></pre>
-<p>This is pretty much everything needed! The result will be available at <code>./result/iso/*.iso</code>.</p>
-<p>Likewise, all other configurations may be built by simply exchanging <code>iso</code> with the desired format.
+<p>You may also just run <code>nix run .#iso</code>, which builds an image using the <code>install-iso</code> format.</p>
+<p>This is pretty much everything needed! The result will be available at <code>./result</code>, which links to the corresponding path in <code>/nix/store</code>.</p>
+<p>Likewise, all other configurations may be built by simply exchanging <code>installer-iso</code> with the desired format.
 Depending on what kind of image is being built it is needed to use the <code>dr460nixed-base</code> system to built the image.</p>
 <pre><code class="language-sh">nix build .#nixosConfigurations.dr460nixed-base.config.formats.sdcard
 </code></pre>
@@ -193,6 +194,8 @@ To allow cross-compilation, please have a look at how to set up the required opt
   boot.binfmt.emulatedSystems = [ &quot;aarch64-linux&quot; ];
 }
 </code></pre>
+<h2 id="provided-images"><a class="header" href="#provided-images">Provided images</a></h2>
+<p>Refreshed ISO files are automatically built with every commit. Click the badge to have a look at the latest runs: <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml"><img src="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml/badge.svg" alt="Build images" /></a></p>
 
                     </main>
 
