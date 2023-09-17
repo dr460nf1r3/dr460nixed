@@ -1,8 +1,4 @@
-{
-  keys,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # This is default for GNS, but doesn't work on the ISO
   boot = {
     binfmt.emulatedSystems = ["aarch64-linux"];
@@ -16,18 +12,17 @@
 
   # Have a different user config for the ISO
   users.users = {
-    "nico" = {
+    "dragon" = {
       extraGroups = ["wheel"];
-      home = "/home/nico";
+      home = "/home/dragon";
       isNormalUser = true;
-      openssh.authorizedKeys.keyFiles = [keys.nico];
-      password = "dr460nixed";
+      password = "dragon";
     };
-    "root".password = "dr460nixed";
+    "root".password = "dragon";
   };
 
   # Home-manager common configurations
-  home-manager.users."nico" = import ../../home-manager/common.nix;
+  home-manager.users."dragon" = import ../../home-manager/common.nix;
 
   environment.systemPackages = with pkgs; [
     age

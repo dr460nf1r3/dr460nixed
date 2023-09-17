@@ -9,12 +9,12 @@
   };
 
   # Home-manager desktop settings
-  home-manager.users."nico" = import ../../home-manager/desktops.nix;
+  home-manager.users."dragon" = import ../../home-manager/desktops.nix;
 
   # CD's may use autologin for convenience
   services.xserver.displayManager.sddm.settings = {
     Autologin = {
-      User = "nico";
+      User = "dragon";
       Session = "plasma";
     };
   };
