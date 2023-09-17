@@ -3,6 +3,8 @@ name: Build images
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
+permissions:
+  contents: write
 on:
   push:
     branches: [main]
@@ -49,3 +51,11 @@ jobs:
         with:
           name: Dr460nixed ISO
           path: result/iso/*.iso
+      - name: Create release 📦
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          body_path: CHANGELOG.md
+          files: result/iso/*.iso
+          fail_on_unmatched_files: true
+          token: ${{ secrets.GITHUB_TOKEN }}

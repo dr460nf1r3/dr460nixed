@@ -8,6 +8,20 @@
     desktops.enable = true;
   };
 
+  # Home-manager desktop settings
+  home-manager.users."nico" = import ../../home-manager/desktops.nix;
+
+  # CD's may use autologin for convenience
+  services.xserver.displayManager.sddm.settings = {
+    Autologin = {
+      User = "nico";
+      Session = "plasma";
+    };
+  };
+
+  # Wireshark
+  programs.wireshark.enable = true;
+
   # Desktop environment
   environment.systemPackages = with pkgs; [
     acpi
@@ -58,7 +72,7 @@
           redhat.vscode-yaml
           tyriar.sort-lines
         ]
-        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        ++ vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "sweet-vscode";
             publisher = "eliverlara";

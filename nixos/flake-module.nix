@@ -16,9 +16,10 @@
 
     # Our images should be cleaner, so we use a different set of modules
     imageModules = [
-      ./modules/desktops.nix
-      ./modules/misc.nix
       ../overlays
+      ./modules/desktops.nix
+      ./modules/locales.nix
+      ./modules/misc.nix
       inputs.nixos-generators.nixosModules.all-formats
     ];
 
@@ -127,12 +128,12 @@
     nixosModules.dr460nixed = import ./modules;
 
     # Images to build via "nix build .#packages.{iso,vbox}"
-    packages.x86_64-linux = {
-      iso = pkgs.writeScriptBin "dr460nixed-iso" ''
-        ${pkgs.nix}/bin/nix build .#nixosConfigurations.dr460nixed-iso.config.formats.install-iso
+    packages.x86_64-linux = with pkgs; {
+      iso = writeScriptBin "dr460nixed-iso" ''
+        nix build .#nixosConfigurations.dr460nixed-desktop.config.formats.install-iso
       '';
-      vbox = pkgs.writeScriptBin "dr460nixed-vbox" ''
-        ${pkgs.nix}/bin/nix build .#nixosConfigurations.dr460nixed-iso.config.formats.vbox
+      vbox = writeScriptBin "dr460nixed-vbox" ''
+        nix build .#nixosConfigurations.dr460nixed-base.config.formats.virtualbox
       '';
     };
   };

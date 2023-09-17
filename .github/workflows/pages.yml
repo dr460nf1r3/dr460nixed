@@ -3,7 +3,6 @@ name: Cloudflare pages
 on:
   push:
     branches: [main]
-    paths: [docs/**, README.md]
 permissions:
   contents: write
 jobs:
