@@ -207,6 +207,9 @@
   # Enable all hardware drivers
   hardware.enableRedistributableFirmware = true;
 
+  # We use iwd instead
+  networking.wireless.enable = false;
+
   # NixOS stuff
   system.stateVersion = "23.11";
 }

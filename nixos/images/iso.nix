@@ -89,9 +89,6 @@
     yubioath-flutter
   ];
 
-  # We use iwd instead
-  networking.wireless.enable = false;
-
   # NixOS stuff
   system.stateVersion = "23.11";
 }

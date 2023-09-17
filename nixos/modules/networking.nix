@@ -18,12 +18,12 @@ in {
     nftables.enable = true;
   };
 
-  # Enable SSHD
-  services.openssh.enable = true;
+  # Enable SSHD & bandwidth usage tracking
+  services = {
+    openssh.enable = true;
+    vnstat.enable = true;
+  };
 
   # Enable Mosh, a replacement for OpenSSH
   programs.mosh.enable = true;
-
-  # Lightweight bandwidth usage tracking
-  services.vnstat.enable = true;
 }

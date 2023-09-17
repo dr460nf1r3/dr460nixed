@@ -1,6 +1,5 @@
 {
   inputs,
-  pkgs,
   self,
   ...
 }: {
@@ -21,6 +20,7 @@
       ./modules/locales.nix
       ./modules/misc.nix
       inputs.nixos-generators.nixosModules.all-formats
+      "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
     ];
 
     specialArgs = {
@@ -126,15 +126,5 @@
 
     # Expose dr460nixed and other modules for use in other flakes
     nixosModules.dr460nixed = import ./modules;
-
-    # Images to build via "nix build .#packages.{iso,vbox}"
-    packages.x86_64-linux = with pkgs; {
-      iso = writeScriptBin "dr460nixed-iso" ''
-        nix build .#nixosConfigurations.dr460nixed-desktop.config.formats.install-iso
-      '';
-      vbox = writeScriptBin "dr460nixed-vbox" ''
-        nix build .#nixosConfigurations.dr460nixed-base.config.formats.virtualbox
-      '';
-    };
   };
 }
