@@ -184,11 +184,11 @@
 <li><strong>Opt-in persistence</strong> through impermanence + ZFS snapshots</li>
 <li><strong>Mesh networked</strong> hosts with <strong>Tailscale</strong> and optional use of Mullvad VPN exit nodes</li>
 <li>Uses the custom <strong>Linux-cachyos BORE EEVDF</strong> kernel</li>
-<li>Additional packages not existing in Nixpkgs (yet) via <strong>chaotic-nyx</strong></li>
+<li>Additional packages not existing in Nixpkgs (yet) via <strong>Chaotic Nyx</strong></li>
 <li><strong>Opt-in 2FA protection</strong> of ssh and password prompts <strong>with Duo Security</strong></li>
 <li>Secrets are managed via <strong>nix-sops</strong></li>
 <li>Uses <strong>Garnix CI</strong> for automated flake checks followed by building outputs when pushing to main &amp; uploading to <strong>Garnix CI cache</strong></li>
-<li>Always up-to-date installer images are automatically built via <strong>Github actions</strong></li>
+<li>Always up-to-date live images are automatically built via <strong>Github actions</strong></li>
 </ul>
 <p>Other, smaller tweaks I particularly like about this setup include:</p>
 <ul>
@@ -198,12 +198,12 @@
 <li>No password prompts when having my <strong>Yubikey</strong> connected to my laptop</li>
 <li>Being able to easily remote-control my machines via <strong>KDEConnect</strong> and a self-hosted <strong>Rustdesk server</strong></li>
 <li>Having custom <strong>bleeding-edge Mesa</strong> builds</li>
-<li>Easy deployment of mdBook-generated documentation to Cloudflare pages</li>
+<li>Easy deployment of <strong>mdBook-generated</strong> documentation to Cloudflare pages</li>
 </ul>
 <h2 id="documentation"><a class="header" href="#documentation">Documentation</a></h2>
 <p>A fully searchable, mdBook-based documentation is available <a href="https://nixed.dr460nf1r3.org">here</a>.</p>
 <h2 id="structure"><a class="header" href="#structure">Structure</a></h2>
-<pre><code class="language-shell">├── docker-compose
+<pre><code class="language-sh">├── docker-compose
 │   ├── oracle-dragon
 │   └── tv-nixos
 ├── home-manager
