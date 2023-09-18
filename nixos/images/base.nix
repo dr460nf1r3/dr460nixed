@@ -47,7 +47,7 @@
     isoName = lib.mkForce "${config.isoImage.isoBaseName}-${config.system.nixos.label}.iso";
 
     # Speed up the insanely slow compression process
-    squashfsCompression = "zstd -Xcompression-level 3";
+    squashfsCompression = "gzip -Xcompression-level 1";
   };
 
   # The packages that are always needed

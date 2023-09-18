@@ -1,14 +1,10 @@
 {
-  inputs,
   lib,
   pkgs,
   ...
 }: {
   # Import base configuration
-  imports = [
-    ./base.nix
-    "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares.nix"
-  ];
+  imports = [./base.nix];
 
   # Enable a few selected custom settings
   dr460nixed = {

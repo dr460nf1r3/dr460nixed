@@ -15,11 +15,11 @@ This repo contains my NixOS dotfiles. Every device supported by NixOS will be ad
 - **Opt-in persistence** through impermanence + ZFS snapshots
 - **Mesh networked** hosts with **Tailscale** and optional use of Mullvad VPN exit nodes
 - Uses the custom **Linux-cachyos BORE EEVDF** kernel
-- Additional packages not existing in Nixpkgs (yet) via **chaotic-nyx**
+- Additional packages not existing in Nixpkgs (yet) via **Chaotic Nyx**
 - **Opt-in 2FA protection** of ssh and password prompts **with Duo Security**
 - Secrets are managed via **nix-sops**
 - Uses **Garnix CI** for automated flake checks followed by building outputs when pushing to main & uploading to **Garnix CI cache**
-- Always up-to-date installer images are automatically built via **Github actions**
+- Always up-to-date live images are automatically built via **Github actions**
 
 Other, smaller tweaks I particularly like about this setup include:
 
@@ -29,7 +29,7 @@ Other, smaller tweaks I particularly like about this setup include:
 - No password prompts when having my **Yubikey** connected to my laptop
 - Being able to easily remote-control my machines via **KDEConnect** and a self-hosted **Rustdesk server**
 - Having custom **bleeding-edge Mesa** builds
-- Easy deployment of mdBook-generated documentation to Cloudflare pages
+- Easy deployment of **mdBook-generated** documentation to Cloudflare pages
 
 ## Documentation
 
@@ -37,7 +37,7 @@ A fully searchable, mdBook-based documentation is available [here](https://nixed
 
 ## Structure
 
-```shell
+```sh
 ├── docker-compose
 │   ├── oracle-dragon
 │   └── tv-nixos
