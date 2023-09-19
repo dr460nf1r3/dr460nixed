@@ -11,6 +11,7 @@
     ./hardening.nix
     ./home-manager.nix
     ./locales.nix
+    ./misc.nix
     ./networking.nix
     ./nix.nix
     ./users.nix

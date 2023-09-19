@@ -21,9 +21,6 @@ with builtins; let
     sha256 = "1b643m8v7j15ixi2g6r2909vwkq05wi74ybccbdnp4rkms640y4w";
   };
 in {
-  # Theme our desktop launchers
-  imports = [./theme-launchers.nix];
-
   # Compatibility for GNOME apps
   dconf.enable = true;
 

@@ -62,6 +62,11 @@
     nix-index-database.url = "github:Mic92/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    # feature-rich and convenient fork of the Nix package manager
+    nix-super.url = "github:privatevoid-net/nix-super";
+    nix-super.inputs.flake-compat.follows = "flake-compat";
+    nix-super.inputs.nixpkgs.follows = "nixpkgs";
+
     # NixOS generators to build system images
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";

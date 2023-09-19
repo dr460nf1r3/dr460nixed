@@ -26,7 +26,7 @@
           defaultModules
           ++ [
             ./example-hostname/example-hostname.nix
-            ./modules/disko/example-disko.nix
+            ./modules/disko/example-layout.nix
             {
               _module.args.disks = ["example-disk"];
             }
@@ -38,7 +38,7 @@
       dr460nixed-base = inputs.garuda-nix.lib.garudaSystem {
         system = "x86_64-linux";
         modules =
-          imageModules ++ [./images/base.nix];
+          imageModules ++ [./modules/images/base.nix];
         inherit specialArgs;
       };
 
@@ -46,7 +46,7 @@
       dr460nixed-desktop = inputs.garuda-nix.lib.garudaSystem {
         system = "x86_64-linux";
         modules =
-          imageModules ++ [./images/iso.nix];
+          imageModules ++ [./modules/images/iso.nix];
         inherit specialArgs;
       };
     };

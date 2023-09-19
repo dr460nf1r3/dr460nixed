@@ -5,7 +5,6 @@
 }:
 with lib; let
   cfg = config.dr460nixed.hardening;
-  cfgServers = config.dr460nixed.servers.enable;
 in {
   options.dr460nixed.hardening = {
     enable =
@@ -182,14 +181,5 @@ in {
 
     # Don't lock kernel modules, this is also enabled by the hardening profile by default
     security.lockKernelModules = false;
-
-    # Technically we don't need this as we use pubkey authentication
-    services.fail2ban = mkIf cfgServers {
-      enable = true;
-      ignoreIP = [
-        "100.0.0.0/8"
-        "127.0.0.1/8"
-      ];
-    };
   };
 }

@@ -7,8 +7,11 @@
 
   # Enable a few selected custom settings
   dr460nixed = {
+    chromium = true;
     desktops.enable = true;
+    nix-super.enable = true;
     performance = true;
+    systemd-boot.enable = true;
   };
 
   # NixOS stuff

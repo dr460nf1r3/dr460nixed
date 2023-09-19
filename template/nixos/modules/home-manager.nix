@@ -7,9 +7,8 @@
 in {
   config = {
     garuda.home-manager.modules = lib.mkMerge [
-      [../../home-manager/common.nix]
+      [../../home-manager/kde.nix]
       (lib.mkIf cfg.desktops.enable [../../home-manager/desktops.nix])
-      (lib.mkIf cfg.development.enable [../../home-manager/development.nix])
     ];
   };
 }
