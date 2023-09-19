@@ -281,10 +281,8 @@ in {
       bind
       btop
       cached-nix-shell
-      cachix
       cloudflared
       duf
-      dysk
       eza
       jq
       killall
@@ -332,6 +330,7 @@ in {
       movit
       nextcloud-client
       obs-studio-wrapped
+      okular
       qbittorrent
       rustdesk
       spotdl
@@ -341,7 +340,6 @@ in {
       usbutils
       vorta
       vulkan-tools
-      xdg-ninja
     ])
     ++ optionals cfg.development.enable (with pkgs; [
       ansible
@@ -741,7 +739,7 @@ in {
       // (lib.genAttrs archives (_: [&quot;ark.desktop&quot;]))
       // (lib.genAttrs audioVideo (_: [&quot;vlc.desktop&quot;]))
       // (lib.genAttrs documents (_: [&quot;okular.desktop&quot;]))
-      // (lib.genAttrs images (_: [&quot;gwenview.desktop&quot;]))
+      // (lib.genAttrs images (_: [&quot;okular.desktop&quot;]))
       // (lib.genAttrs urls (_: [&quot;firedragon.desktop&quot;]))
     );
 }
