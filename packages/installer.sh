@@ -75,10 +75,10 @@ disko() {
 	done
 
 	while [ -z "${_VALID_DISK+x}" ]; do
-		read -rp "Enter the path of the disk of the disk you want to use, eg. \"/dev/nvme0n1\": " DISK
+		read -rp "Specify the disk you want to use, eg. \"nvme0n1\": " DISK
 		# /dev/ path's should at least be 8 characters long and be present in our system
-		# this does not prevent all possible errors (eg. /dev/nvme0 would be valid) but good enough for now
-		if [ ${#DISK} -gt 7 ] && blkid | grep "$DISK"; then
+		# this does not prevent all possible errors (eg. nvme0 would be valid) but good enough for now
+		if [ ${#DISK} -gt 2 ] && lsblk | grep "$DISK"; then
 			_VALID_DISK=1
 		else
 			echo "The disk you entered is invalid! Try again."
@@ -90,7 +90,7 @@ disko() {
 	confirm_choices
 
 	# Create partitions and set up /mnt
-	disko_runner ./nixos/modules/disko/"$DISKO_MODULE".nix "$DISK"
+	disko_runner ./nixos/modules/disko/"$DISKO_MODULE".nix /dev/"$DISK"
 }
 
 # Create initial configuration
