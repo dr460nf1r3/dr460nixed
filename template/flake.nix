@@ -181,47 +181,13 @@
       formatter = pkgs.writeShellScriptBin "alejandra" ''
         exec ${pkgs.alejandra}/bin/alejandra --quiet "$@"
       '';
-
-      # The packages this flake outputs
-      packages = let
-        # Source repl.nix for pre-setup "nix repl"
-        replPath = toString ./.;
-      in
-        with pkgs; {
-          # Builds the documentation
-          docs = runCommand "dr460nixed-docs" {nativeBuildInputs = [bash mdbook];} ''
-            bash -c "errors=$(mdbook build -d $out ${./.}/docs |& grep ERROR)
-            if [ \"$errors\" ]; then
-              exit 1
-            fi"
-          '';
-          # Builds the ISO
-          iso = writeShellScriptBin "dr460nixed-iso" ''
-            nix build .#nixosConfigurations.dr460nixed-desktop.config.formats.install-iso
-          '';
-          # Sets up repl environment with access to the flake
-          repl = writeShellScriptBin "dr460nixed-repl" ''
-            source /etc/set-environment
-            nix repl --file "${replPath}/repl.nix" "$@"
-          '';
-          # Builds the virtualbox image
-          vbox = pkgs.writeShellScriptBin "dr460nixed-vbox" ''
-            nix build .#nixosConfigurations.dr460nixed-base.config.formats.virtualbox
-          '';
-        };
-
-      # The default template for this flake
-      templates = {
-        default = self.templates.dr460nixed;
-        dr460nixed = ./template;
-      };
     };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       # Imports flake-modules
       imports = [
-        ./devshells/installer.nix
         ./nixos/flake-module.nix
+        ./packages/flake-module.nix
         inputs.pre-commit-hooks.flakeModule
       ];
 

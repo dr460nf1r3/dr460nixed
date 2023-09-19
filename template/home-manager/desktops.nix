@@ -1,1 +1,0 @@
-../../home-manager/desktops.nix

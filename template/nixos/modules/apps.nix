@@ -13,14 +13,11 @@ in {
       age
       bind
       btop
-      cached-nix-shell
-      cloudflared
       duf
       eza
       jq
       killall
       micro
-      mosh
       nettools
       nmap
       nvd
@@ -38,7 +35,6 @@ in {
     ++ optionals cfg.desktops.enable (with pkgs; [
       acpi
       appimage-run
-      asciinema
       aspell
       aspellDicts.de
       aspellDicts.en
@@ -48,8 +44,6 @@ in {
       gimp
       helvum
       hunspell
-      hunspellDicts.de_DE
-      hunspellDicts.en_US
       inkscape
       krita
       libreoffice-qt
@@ -61,135 +55,15 @@ in {
       libva-utils
       lm_sensors
       movit
-      nextcloud-client
       obs-studio-wrapped
       okular
-      qbittorrent
-      rustdesk
-      spotdl
-      syncthingtray
       tdesktop
-      tor-browser-bundle-bin
       usbutils
-      vorta
       vulkan-tools
-    ])
-    ++ optionals cfg.development.enable (with pkgs; [
-      ansible
-      beekeeper-studio
-      bind.dnsutils
-      deadnix
-      gitkraken
-      heroku
-      hugo
-      jetbrains.pycharm-professional
-      keybase-gui
-      manix
-      mongodb-compass
-      nerdctl
-      nix-prefetch-git
-      nixd
-      nixos-generators
-      nixpkgs-lint
-      nixpkgs-review
-      nodePackages_latest.prettier
-      nodejs
-      ruff
-      shellcheck
-      shfmt
-      speedcrunch
-      statix
-      termius
-      vagrant
-      ventoy-full
-      virt-manager
-      (vscode-with-extensions.override {
-        vscodeExtensions = with vscode-extensions;
-          [
-            bbenoist.nix
-            charliermarsh.ruff
-            davidanson.vscode-markdownlint
-            eamodio.gitlens
-            esbenp.prettier-vscode
-            foxundermoon.shell-format
-            github.codespaces
-            github.copilot
-            github.vscode-github-actions
-            github.vscode-pull-request-github
-            jnoortheen.nix-ide
-            kamadorueda.alejandra
-            ms-azuretools.vscode-docker
-            ms-python.python
-            ms-python.vscode-pylance
-            ms-vscode-remote.remote-ssh
-            ms-vscode.hexeditor
-            ms-vsliveshare.vsliveshare
-            njpwerner.autodocstring
-            pkief.material-icon-theme
-            redhat.vscode-xml
-            redhat.vscode-yaml
-            timonwong.shellcheck
-            tyriar.sort-lines
-          ]
-          ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-            {
-              name = "sweet-vscode";
-              publisher = "eliverlara";
-              sha256 = "sha256-kJgqMEJHyYF3GDxe1rnpTEmbfJE01tyyOFjRUp4SOds=";
-              version = "1.1.1";
-            }
-            {
-              # Available in nixpkgs, but outdated (0.4.0) at the time of adding
-              name = "vscode-tailscale";
-              publisher = "tailscale";
-              sha256 = "sha256-lwKsAYy04l1LkZPGgu9ezRQNTX7ZPzLJJ8j86ZuqNlQ=";
-              version = "0.6.2";
-            }
-          ];
-      })
-      vulnix
-      wireshark
-      xdg-utils
-      yarn
     ])
     ++ optionals cfg.yubikey (with pkgs; [
       yubikey-manager-qt
       yubioath-flutter
-    ])
-    ++ optionals cfg.school (with pkgs; [
-      speedcrunch
-      sqlite
-      sqlitebrowser
-      teams-for-linux
-      virt-manager
-    ])
-    ++ optionals cfg.live-cd (with pkgs; [
-      btrfs-progs
-      chntpw
-      cryptsetup
-      dosfstools
-      e2fsprogs
-      efibootmgr
-      flashrom
-      gnutar
-      gparted
-      hexedit
-      home-manager
-      hwinfo
-      inxi
-      memtest86-efi
-      ntfs3g
-      nvme-cli
-      p7zip
-      pciutils
-      perl
-      qemu-utils
-      rsync
-      tcpdump
-      testdisk
-      util-linux
-      wipe
-      xfsprogs
     ]);
 
   xdg.mime.defaultApplications = let

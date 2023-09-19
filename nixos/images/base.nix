@@ -12,19 +12,10 @@
 
   # Boot configuration
   boot = {
-    # Allow cross-compilation
-    binfmt.emulatedSystems = ["aarch64-linux"];
-
-    # Let us see the boot messages
-    consoleLogLevel = 3;
-
-    # No need for containers
-    enableContainers = false;
-
     # This is default for GNS, but doesn't work on the ISO
     initrd = {
       systemd.enable = false;
-      verbose = true;
+      verbose = false;
     };
   };
 
@@ -69,16 +60,10 @@
     age
     bind
     btop
-    cached-nix-shell
-    cachix
-    cloudflared
-    duf
-    dysk
     eza
     jq
     killall
     micro
-    mosh
     nettools
     nmap
     python3
@@ -103,19 +88,6 @@
     settings = {
       # Accept flake configs by default
       accept-flake-config = true;
-
-      # Test out ca-derivations (https://nixos.wiki/wiki/Ca-derivations)
-      experimental-features = ["ca-derivations"];
-
-      # For direnv GC roots
-      keep-derivations = true;
-      keep-outputs = true;
-
-      # Continue building derivations if one fails
-      keep-going = true;
-
-      # Show more log lines for failed builds
-      log-lines = 20;
 
       # Max number of parallel jobs
       max-jobs = "auto";

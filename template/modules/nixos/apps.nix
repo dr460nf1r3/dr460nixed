@@ -1,1 +1,0 @@
-../../../nixos/modules/apps.nix

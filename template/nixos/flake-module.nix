@@ -11,7 +11,6 @@
     imageModules = [
       ./modules/desktops.nix
       ./modules/locales.nix
-      ./modules/misc.nix
       inputs.nixos-generators.nixosModules.all-formats
       "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
     ];

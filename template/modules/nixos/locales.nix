@@ -1,1 +1,0 @@
-../../../nixos/modules/locales.nix
