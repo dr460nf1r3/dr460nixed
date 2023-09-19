@@ -9,8 +9,8 @@ set -e -o pipefail
 
 # Create working directory
 prepare() {
-	TMP_DIR=$(mktemp -d)
-	cd "$TMP_DIR" || exit 2
+	WORK_DIR=$(pwd)
+	cd "$WORK_DIR" || exit 2
 	git clone https://github.com/dr460nf1r3/dr460nixed.git && cd dr460nixed || exit 2
 }
 
@@ -103,15 +103,16 @@ create_config() {
 	# also apply our dr460nixed template
 	nixos-generate-config --no-filesystems --root /mnt
 	pushd "$NIX_ROOT" || exit 2
-	nix flake init --template github:dr460nf1r3/dr460nixed#dr460nixed
+	nix flake init --template "$WORK_DIR"#dr460nixed
 
-	mv nixos/hosts/example-host nixos/hosts/"$HOSTNAME"
-	mv nixos/hosts/"$HOSTNAME"/example-host.nix nixos/hosts/"$HOSTNAME"/"$HOSTNAME".nix
+	mv ./nixos/example-host ./nixos/"$HOSTNAME"
+	mv ./nixos/"$HOSTNAME"/example-host.nix ./nixos/"$HOSTNAME"/"$HOSTNAME".nix
 
-	sed -i s/example-hostname/"$HOSTNAME"/g nixos/hosts/"$HOSTNAME"/"$HOSTNAME".nix
-	sed -i s/example-user/"$USER"/g nixos/modules/users.nix
-	sed -i s/example-disko/"$DISKO_MODULE"/g nixos/flake-module.nix
-	sed -i s/example-disk/"$DISK"/g nixos/flake-module.nix
+	sed -i s/example-disk/"$DISK"/g ./nixos/flake-module.nix
+	sed -i s/example-disko/"$DISKO_MODULE"/g ./nixos/flake-module.nix
+	sed -i s/example-hostname/"$HOSTNAME"/g ./nixos/flake-module.nix
+	sed -i s/example-hostname/"$HOSTNAME"/g nixos/"$HOSTNAME"/"$HOSTNAME".nix
+	sed -i s/example-user/"$USER"/g ./nixos/modules/users.nix
 
 	popd || exit 2
 	echo "Configuration successfully created."
@@ -126,7 +127,7 @@ install_system() {
 finish() {
 	echo "The installation was finished successfully. You may now reboot into your new system."
 	umount -Rf /mnt
-	rm -rf "$TMP_DIR"
+	rm -rf "$WORK_DIR"
 }
 
 # Actually execute our functions
