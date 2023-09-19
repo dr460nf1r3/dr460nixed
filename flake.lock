@@ -482,6 +482,18 @@
         "type": "github"
       }
     },
+    "nixos-anywhere": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-4gR2Y0ziO5MxqkJJI02VhUBfwrXhkYjb8SOnVg/8vrk=",
+        "type": "file",
+        "url": "https://raw.githubusercontent.com/numtide/nixos-anywhere/main/src/nixos-anywhere.sh"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://raw.githubusercontent.com/numtide/nixos-anywhere/main/src/nixos-anywhere.sh"
+      }
+    },
     "nixos-generators": {
       "inputs": {
         "nixlib": "nixlib",
@@ -660,6 +672,7 @@
         "nix-snapshotter": "nix-snapshotter",
         "nix-super": "nix-super",
         "nixd": "nixd",
+        "nixos-anywhere": "nixos-anywhere",
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",

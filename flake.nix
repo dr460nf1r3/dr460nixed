@@ -95,6 +95,9 @@
     nix-super.inputs.flake-compat.follows = "flake-compat";
     nix-super.inputs.nixpkgs.follows = "nixpkgs";
 
+    nixos-anywhere.url = "https://raw.githubusercontent.com/numtide/nixos-anywhere/main/src/nixos-anywhere.sh";
+    nixos-anywhere.flake = false;
+
     # NixOS generators to build system images
     nixos-generators.url = "github:nix-community/nixos-generators";
     nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
@@ -189,18 +192,13 @@
             };
           })
           .shell;
-        # NixOS anywhere for easy installation of NixOS on any host
-        nixos-anywhere = builtins.fetchurl {
-          url = "https://raw.githubusercontent.com/numtide/nixos-anywhere/main/src/nixos-anywhere.sh";
-          sha256 = "0y6yh9qbz8sq4z7x7m30pjsjd1w30gcgfj8zfpdvz9v4avd6py4f";
-        };
       in rec {
         default = dr460nixed-shell;
         dr460nixed-shell = mkShell {
           devshell.name = "dr460nixed-devshell";
           commands = [
             {
-              command = "bash ${nixos-anywhere}";
+              command = "bash ${inp.nixos-anywhere}";
               help = "Helps installing NixOS on any host";
               name = "nixos-anywhere";
             }
@@ -241,40 +239,13 @@
       formatter = pkgs.writeShellScriptBin "alejandra" ''
         exec ${pkgs.alejandra}/bin/alejandra --quiet "$@"
       '';
-
-      # The packages this flake outputs
-      packages = let
-        # Source repl.nix for pre-setup "nix repl"
-        replPath = toString ./.;
-      in
-        with pkgs; {
-          # Builds the documentation
-          docs = runCommand "dr460nixed-docs" {nativeBuildInputs = [bash mdbook];} ''
-            bash -c "errors=$(mdbook build -d $out ${./.}/docs |& grep ERROR)
-            if [ \"$errors\" ]; then
-              exit 1
-            fi"
-          '';
-          # Builds the ISO
-          iso = writeShellScriptBin "dr460nixed-iso" ''
-            nix build .#nixosConfigurations.dr460nixed-desktop.config.formats.install-iso
-          '';
-          # Sets up repl environment with access to the flake
-          repl = writeShellScriptBin "dr460nixed-repl" ''
-            source /etc/set-environment
-            nix repl --file "${replPath}/repl.nix" "$@"
-          '';
-          # Builds the virtualbox image
-          vbox = pkgs.writeShellScriptBin "dr460nixed-vbox" ''
-            nix build .#nixosConfigurations.dr460nixed-base.config.formats.virtualbox
-          '';
-        };
     };
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       # Imports flake-modules
       imports = [
         ./nixos/flake-module.nix
+        ./packages/flake-module.nix
         inputs.pre-commit-hooks.flakeModule
       ];
 
