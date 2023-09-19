@@ -9,8 +9,14 @@ in {
   # We want to use NetworkManager on desktops
   networking = {
     # Pointing to our Adguard instance via Tailscale
-    nameservers = ["1.1.1.1" "1.0.0.1"];
-    networkmanager = mkIf cfg.desktops.enable or cfg.rpi {
+    # if not, Cloudflare would still be my choice
+    nameservers = [
+      "1.1.1.1"
+      "2606:4700:4700::1111"
+      "1.0.0.1"
+      "2606:4700:4700::1001"
+    ];
+    networkmanager = mkIf cfg.desktops.enable {
       dns = "none";
       enable = true;
     };

@@ -50,6 +50,20 @@
     squashfsCompression = "gzip -Xcompression-level 1";
   };
 
+  # We want to use NetworkManager on desktops
+  networking = {
+    nameservers = [
+      "1.1.1.1"
+      "2606:4700:4700::1111"
+      "1.0.0.1"
+      "2606:4700:4700::1001"
+    ];
+    networkmanager = {
+      dns = "none";
+      enable = true;
+    };
+  };
+
   # The packages that are always needed
   environment.systemPackages = with pkgs; [
     age

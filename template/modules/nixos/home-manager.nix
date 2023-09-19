@@ -1,0 +1,1 @@
+../../../nixos/modules/home-manager.nix

@@ -125,6 +125,18 @@
     };
 
     # Expose dr460nixed and other modules for use in other flakes
-    nixosModules.dr460nixed = import ./modules;
+    nixosModules = {
+      default = self.nixosModules.dr460nixed;
+      dr460nixed = import ./modules;
+    };
+
+    # The default template for this flake
+    templates = {
+      default = self.templates.dr460nixed;
+      dr460nixed = {
+        description = "A basic dr460nixed flake to build a custom flake from ❄️🐉";
+        path = ../template;
+      };
+    };
   };
 }
