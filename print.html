@@ -307,8 +307,10 @@ fi
 prepare(){
 	# Clone dr460nixed repo if it is not present, otherwise use current dir
 	if [ ! &quot;$(test -f flake.nix)&quot; ]; then
-		WORK_DIR=$(mktemp -d)/dr460nixed
-		cd &quot;WORK_DIR&quot; &amp;&amp; git clone https://github.com/dr460nf1r3/dr460nixed.git
+		test -d /tmp/dr460nixed &amp;&amp; sudo rm -rf /tmp/dr460nixed
+		WORK_DIR=/tmp/dr460nixed
+		git clone https://github.com/dr460nf1r3/dr460nixed.git &quot;$WORK_DIR&quot;
+		cd &quot;$WORK_DIR&quot;
 	else WORK_DIR=$(pwd)
 	fi
 }
