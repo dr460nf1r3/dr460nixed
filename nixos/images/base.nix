@@ -4,7 +4,12 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  # Use always up-to-date applications directly from git
+  installer = pkgs.writeShellScriptBin "installer" "nix run ${repo}#installer";
+  repl = pkgs.writeShellScriptBin "repl" "nix run ${repo}#repl";
+  repo = "github:dr460nf1r3/dr460nixed";
+in {
   # Basic installation CD settings
   imports = [
     "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
@@ -12,12 +17,15 @@
 
   # Boot configuration
   boot = {
-    # This is default for GNS, but doesn't work on the ISO
     initrd = {
+      # This is default for GNS, but doesn't work on the ISO
       systemd.enable = false;
       verbose = false;
     };
   };
+
+  # Use CachyOS kernel & a few things like ZRAM
+  dr460nixed.performance = true;
 
   # Home-manager common configurations
   home-manager.users."nixos" = import ../../home-manager/common.nix;
@@ -61,12 +69,14 @@
     bind
     btop
     eza
+    installer
     jq
     killall
     micro
     nettools
     nmap
     python3
+    repl
     sops
     tldr
     tmux
@@ -109,6 +119,11 @@
       shellAliases = {
         "nix" = "${pkgs.nix}/bin/nix --verbose --print-build-logs"; # https://github.com/NixOS/nix/pull/8323
       };
+      shellInit = lib.mkForce ''
+        echo "Welcome! ☺️
+        You may install a generic dr460nixed flake to your system by executing \"dr460nixed-installer\".
+        The flake may additionally be inspected with "nix repl" by running \"repl\"."
+      '';
     };
     git = {
       enable = true;

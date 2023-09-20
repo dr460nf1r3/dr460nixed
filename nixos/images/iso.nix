@@ -7,10 +7,7 @@
   imports = [./base.nix];
 
   # Enable a few selected custom settings
-  dr460nixed = {
-    chromium = true;
-    desktops.enable = true;
-  };
+  dr460nixed.desktops.enable = true;
 
   # Home-manager desktop settings
   home-manager.users."nixos" = import ../../home-manager/desktops.nix;
@@ -26,19 +23,13 @@
   # Fix conflict with the cd-graphical-base module (we use Pipewire)
   hardware.pulseaudio.enable = lib.mkForce false;
 
-  # Wireshark
-  programs.wireshark.enable = true;
-
   # Desktop environment packages
   environment.systemPackages = with pkgs; [
     acpi
     ansible
-    beekeeper-studio
     bind.dnsutils
     chntpw
-    chromium-flagged
     cryptsetup
-    deadnix
     efibootmgr
     ffmpegthumbnailer
     flashrom

@@ -7,7 +7,15 @@ if [ "$EUID" -ne 0 ]; then
 	exit 3
 fi
 
-WORK_DIR=$(pwd)
+# Prepare our environment
+prepare(){
+	# Clone dr460nixed repo if it is not present, otherwise use current dir
+	if [ ! "$(test -f flake.nix)" ]; then
+		WORK_DIR=$(mktemp -d)/dr460nixed
+		cd "WORK_DIR" && git clone https://github.com/dr460nf1r3/dr460nixed.git
+	else WORK_DIR=$(pwd)
+	fi
+}
 
 # Confirmation prompt
 confirm_choices() {
@@ -71,7 +79,7 @@ disko() {
 
 	while [ -z "${_VALID_DISK+x}" ]; do
 		read -rp "Specify the disk you want to use, eg. \"nvme0n1\": " DISK
-		# /dev/ path's should at least be 8 characters long and be present in our system
+		# Disk identifiers should at least be 3 characters long and be present in our system
 		# this does not prevent all possible errors (eg. nvme0 would be valid) but good enough for now
 		if [ ${#DISK} -gt 2 ] && lsblk | grep "$DISK"; then
 			_VALID_DISK=1

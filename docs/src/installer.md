@@ -1,7 +1,7 @@
 # The installer
 
-This flake features an installer, which may be used to set up a basic dr460nixed NixOS installation. It assumes that the dr460nixed ISO has been booted.
-It uses the files of the `templates` folder to run `nix init -t` from and proceeds to customize the installation with users' choices.
+This flake features an installer, which may be used to set up a basic dr460nixed NixOS installation. Both the dr460nixed ISO and regular NixOS live CDs are supported.
+The installer uses the files of the `templates` folder to run `nix init -t` from and proceeds to customize the installation with users' choices.
 Multiple disk formats are available via [pre-configured disko configurations](https://github.com/dr460nf1r3/dr460nixed/tree/main/template/nixos/modules/disko).
 Choices during the execution of the script currently include:
 
@@ -10,13 +10,13 @@ Choices during the execution of the script currently include:
 - hostname
 - username
 
-The installer may only install by wiping the destination disk.
+The installer may only install by wiping the destination disk, custom partition layouts are currently unsupported.
 
-To begin, clone the dr460nixed repository (the installer assumes its located in here, so this is mandatory) and run the installer:
+To begin, simply run the installer:
 
 ```sh
-git clone https://github.com/dr460nf1r3/dr460nixed && cd dr460nixed
-sudo nix run .#installer
+sudo installer # use this if booted into a dr460nixed ISO
+sudo nix run github:dr460nf1r3/dr460nixed#installer # regular NixOS systems
 ```
 
 Provide the needed input. After completion, a dr460nixed system is ready for you to use.

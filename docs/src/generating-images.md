@@ -41,4 +41,5 @@ TLDR: add the following to your configuration and apply it:
 
 ## Provided images
 
-Refreshed ISO files are automatically built with every commit. Click the badge to have a look at the latest runs: [![Build images](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml)
+[![Build images](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml)
+Refreshed ISO files are automatically built with every new commit. Click the badge to have a look at the latest workflow runs.
