@@ -171,6 +171,14 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="script"><a class="header" href="#script">Script</a></h1>
+<p>This is a small script which is serving as installer for this project. It basically:</p>
+<ul>
+<li>Sets up an environment to install the system from</li>
+<li>Asks for basic information such as the disk to be used or the username</li>
+<li>Sets up the partition layout via <a href="https://github.com/nix-community/disko">disko</a> and mounting the partitons to <code>/mnt</code></li>
+<li>Provides a basic, quite generic dr460nixed template and customizes it based on previous choices</li>
+<li>Executes the installation</li>
+</ul>
 <pre><code class="language-nix">#!/usr/bin/env bash
 set -e -o pipefail
 
