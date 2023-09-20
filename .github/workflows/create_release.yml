@@ -28,7 +28,10 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           nix_path: nixpkgs=channel:nixos-unstable
       - name: Build ISO 📀
-        run: nix run -L .#iso
+        run: |
+          nix run -L .#iso
+          ISO_NAME=$(realpath result | cut -d "/" -f6)
+          cp result "$ISO_NAME"
         env:
           NIXPKGS_ALLOW_UNFREE: 1
       - name: Create release 📦
@@ -36,5 +39,5 @@ jobs:
         with:
           body_path: CHANGELOG.md
           fail_on_unmatched_files: true
-          files: result
+          files: "*.iso"
           token: ${{ secrets.GITHUB_TOKEN }}

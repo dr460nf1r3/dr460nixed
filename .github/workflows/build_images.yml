@@ -29,11 +29,14 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           nix_path: nixpkgs=channel:nixos-unstable
       - name: Build ISO 📀
-        run: nix run -L .#iso
+        run: |
+          nix run -L .#iso
+          ISO_NAME=$(realpath result | cut -d \"/\" -f6)
+          cp result "$ISO_NAME"
         env:
           NIXPKGS_ALLOW_UNFREE: 1
       - name: Upload ISO 🚀
         uses: actions/upload-artifact@v3
         with:
           name: Dr460nixed ISO
-          path: result
+          path: "*.iso"
