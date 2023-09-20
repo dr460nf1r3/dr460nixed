@@ -1,14 +1,6 @@
-{
-  config,
-  lib,
-  ...
-}: let
-  cfg = config.dr460nixed;
-in {
+{config, ...}: {
   config = {
-    garuda.home-manager.modules = lib.mkMerge [
-      [../../home-manager/kde.nix]
-      (lib.mkIf cfg.desktops.enable [../../home-manager/desktops.nix])
-    ];
+    # Load this home-manager module for all users
+    garuda.home-manager.modules = [../../home-manager/kde.nix];
   };
 }

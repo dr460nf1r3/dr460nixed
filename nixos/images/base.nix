@@ -10,7 +10,7 @@
   repl = pkgs.writeShellScriptBin "repl" "nix run ${repo}#repl";
   repo = "github:dr460nf1r3/dr460nixed";
 in {
-  # Basic installation CD settings
+  # Basic installation CD settings & modules
   imports = [
     "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
   ];
@@ -27,8 +27,8 @@ in {
   # Use CachyOS kernel & a few things like ZRAM
   dr460nixed.performance = true;
 
-  # Home-manager common configurations
-  home-manager.users."nixos" = import ../../home-manager/common.nix;
+  # Basic home-manager configuration, also importing garuda-nix dotfiles
+  garuda.home-manager.modules = [../../home-manager/common.nix];
 
   # Image configuration
   isoImage = {
@@ -120,9 +120,13 @@ in {
         "nix" = "${pkgs.nix}/bin/nix --verbose --print-build-logs"; # https://github.com/NixOS/nix/pull/8323
       };
       shellInit = lib.mkForce ''
-        echo "Welcome! ☺️
-        You may install a generic dr460nixed flake to your system by executing \"dr460nixed-installer\".
-        The flake may additionally be inspected with "nix repl" by running \"repl\"."
+        set fish_greeting
+        echo "Welcome!
+        You may install a generic dr460nixed flake to your system by executing:
+          - \"installer\".
+
+        The flake may additionally be inspected with "nix repl" by running:
+          - \"repl\""
       '';
     };
     git = {

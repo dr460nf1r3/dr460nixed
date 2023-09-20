@@ -9,8 +9,8 @@
   # Enable a few selected custom settings
   dr460nixed.desktops.enable = true;
 
-  # Home-manager desktop settings
-  home-manager.users."nixos" = import ../../home-manager/desktops.nix;
+  # Home-manager configuration for desktops
+  garuda.home-manager.modules = [../../home-manager/desktops.nix];
 
   # CD's may use autologin for convenience
   services.xserver.displayManager.sddm.settings = {
