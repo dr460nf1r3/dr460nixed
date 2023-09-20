@@ -9,7 +9,7 @@
         docs =
           runCommand "dr460nixed-docs"
           {nativeBuildInputs = [bash mdbook];} ''
-            bash -c "errors=$(mdbook build -d $out ${./.}/docs |& grep ERROR)
+            bash -c "errors=$(mdbook build -d $out ${../.}/docs |& grep ERROR)
             if [ \"$errors\" ]; then
               exit 1
             fi"

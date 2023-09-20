@@ -214,6 +214,12 @@
               help = "Builds a NixOS ISO with all most important configurations";
               name = "buildiso";
             }
+            {
+              category = "dr460nixed";
+              command = "${self.packages.${system}.installer}/bin/dr460nixed-installer";
+              help = "Allows installing a basic dr460nixed installation";
+              name = "installer";
+            }
             {package = "age";}
             {package = "commitizen";}
             {package = "gnupg";}
