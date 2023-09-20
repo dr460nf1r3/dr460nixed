@@ -6,6 +6,7 @@
 - [Quick start](./quick-start.md)
 - [Generating images](generating-images.md)
 - [Installer](./installer.md)
+  - [Inspect the code](./installer/script.md)
 
 # Modules
 
