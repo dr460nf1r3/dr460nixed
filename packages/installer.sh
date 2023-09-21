@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e -o pipefail
+set -eo pipefail
 
 # Check for root rights
 if [ "$EUID" -ne 0 ]; then
@@ -8,21 +8,25 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 # Prepare our environment
-prepare(){
+prepare() {
 	# Clone dr460nixed repo if it is not present, otherwise use current dir
 	if [ ! "$(test -f flake.nix)" ]; then
 		test -d /tmp/dr460nixed && sudo rm -rf /tmp/dr460nixed
 		WORK_DIR=/tmp/dr460nixed
 		git clone https://github.com/dr460nf1r3/dr460nixed.git "$WORK_DIR"
 		cd "$WORK_DIR"
-	else WORK_DIR=$(pwd)
+	else
+		WORK_DIR=$(pwd)
 	fi
+
+	# Ensure needed "experimental" features are always enabled
+	export NIX_CONFIG="experimental-features = nix-command flakes"
 }
 
 # Confirmation prompt
 confirm_choices() {
 	# Continue if the user confirms our choice
-	read -rp "Are you sure you want to continue? [y/n] " _ANSWER
+	read -rp "Are you sure you want to continue? (destructive action ahead!) [y/n] " _ANSWER
 
 	while [ -z "${KILLIT+x}" ]; do
 		case "${_ANSWER}" in
@@ -117,12 +121,16 @@ create_config() {
 
 	sed -i s/example-disk/"$DISK"/g ./nixos/flake-module.nix
 	sed -i s/example-layout/"$DISKO_MODULE"/g ./nixos/flake-module.nix
-	sed -i s/example-hostname/"$HOSTNAME"/g ./nixos/flake-module.nix
-	sed -i s/example-hostname/"$HOSTNAME"/g nixos/"$HOSTNAME"/"$HOSTNAME".nix
+	sed -i s/example-hostname/"$HOSTNAME"/g {./nixos/flake-module.nix,nixos/"$HOSTNAME"/"$HOSTNAME".nix}
 	sed -i s/example-user/"$USER"/g ./nixos/modules/users.nix
 
+	echo "Configuration successfully created.
+You made the following choices:
+hostname: $HOSTNAME
+user: $USER"
+	confirm_choices
+
 	popd || exit 2
-	echo "Configuration successfully created."
 }
 
 # Install basic dr460nixed system
@@ -141,9 +149,5 @@ finish() {
 prepare
 disko
 create_config
-echo "You made the following choices:
-hostname: $HOSTNAME
-user: $USER"
-confirm_choices
 install_system
 finish
