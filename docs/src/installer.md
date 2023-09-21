@@ -11,6 +11,7 @@ Choices during the execution of the script currently include:
 - username
 
 The installer may only install by wiping the destination disk, custom partition layouts are currently unsupported.
+This guide currently requires an EFI-booted system as `systemd-boot` is used as bootloader. [Nix command](https://nixos.wiki/wiki/Nix_command) and [flakes](https://nixos.wiki/wiki/flakes) need to be enabled.
 
 To begin, simply run the installer:
 
