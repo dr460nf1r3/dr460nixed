@@ -276,7 +276,8 @@ Choices during the execution of the script currently include:</p>
 <li>hostname</li>
 <li>username</li>
 </ul>
-<p>The installer may only install by wiping the destination disk, custom partition layouts are currently unsupported.</p>
+<p>The installer may only install by wiping the destination disk, custom partition layouts are currently unsupported.
+This guide currently requires an EFI-booted system as <code>systemd-boot</code> is used as bootloader. <a href="https://nixos.wiki/wiki/Nix_command">Nix command</a> and <a href="https://nixos.wiki/wiki/flakes">flakes</a> need to be enabled.</p>
 <p>To begin, simply run the installer:</p>
 <pre><code class="language-sh">sudo installer # use this if booted into a dr460nixed ISO
 sudo nix run github:dr460nf1r3/dr460nixed#installer # regular NixOS systems
@@ -295,7 +296,7 @@ They may be inspected by browsing the &quot;modules&quot; section of this docume
 <li>Executes the installation</li>
 </ul>
 <pre><code class="language-nix">#!/usr/bin/env bash
-set -e -o pipefail
+set -eo pipefail
 
 # Check for root rights
 if [ &quot;$EUID&quot; -ne 0 ]; then
@@ -304,21 +305,25 @@ if [ &quot;$EUID&quot; -ne 0 ]; then
 fi
 
 # Prepare our environment
-prepare(){
+prepare() {
 	# Clone dr460nixed repo if it is not present, otherwise use current dir
 	if [ ! &quot;$(test -f flake.nix)&quot; ]; then
 		test -d /tmp/dr460nixed &amp;&amp; sudo rm -rf /tmp/dr460nixed
 		WORK_DIR=/tmp/dr460nixed
 		git clone https://github.com/dr460nf1r3/dr460nixed.git &quot;$WORK_DIR&quot;
 		cd &quot;$WORK_DIR&quot;
-	else WORK_DIR=$(pwd)
+	else
+		WORK_DIR=$(pwd)
 	fi
+
+	# Ensure needed &quot;experimental&quot; features are always enabled
+	export NIX_CONFIG=&quot;experimental-features = nix-command flakes&quot;
 }
 
 # Confirmation prompt
 confirm_choices() {
 	# Continue if the user confirms our choice
-	read -rp &quot;Are you sure you want to continue? [y/n] &quot; _ANSWER
+	read -rp &quot;Are you sure you want to continue? (destructive action ahead!) [y/n] &quot; _ANSWER
 
 	while [ -z &quot;${KILLIT+x}&quot; ]; do
 		case &quot;${_ANSWER}&quot; in
@@ -413,12 +418,16 @@ create_config() {
 
 	sed -i s/example-disk/&quot;$DISK&quot;/g ./nixos/flake-module.nix
 	sed -i s/example-layout/&quot;$DISKO_MODULE&quot;/g ./nixos/flake-module.nix
-	sed -i s/example-hostname/&quot;$HOSTNAME&quot;/g ./nixos/flake-module.nix
-	sed -i s/example-hostname/&quot;$HOSTNAME&quot;/g nixos/&quot;$HOSTNAME&quot;/&quot;$HOSTNAME&quot;.nix
+	sed -i s/example-hostname/&quot;$HOSTNAME&quot;/g {./nixos/flake-module.nix,nixos/&quot;$HOSTNAME&quot;/&quot;$HOSTNAME&quot;.nix}
 	sed -i s/example-user/&quot;$USER&quot;/g ./nixos/modules/users.nix
 
+	echo &quot;Configuration successfully created.
+You made the following choices:
+hostname: $HOSTNAME
+user: $USER&quot;
+	confirm_choices
+
 	popd || exit 2
-	echo &quot;Configuration successfully created.&quot;
 }
 
 # Install basic dr460nixed system
@@ -437,10 +446,6 @@ finish() {
 prepare
 disko
 create_config
-echo &quot;You made the following choices:
-hostname: $HOSTNAME
-user: $USER&quot;
-confirm_choices
 install_system
 finish
 </code></pre>
