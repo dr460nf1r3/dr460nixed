@@ -84,7 +84,7 @@ in {
       enable =
         mkOption
         {
-          default = true;
+          default = false;
           type = types.bool;
           description = mdDoc ''
             Enables shipping systemd journal logs to Loki.
