@@ -1,3 +1,4 @@
 .github/workflows/*
 configurations/docker-compose/**
 flake.lock
+.cz.json

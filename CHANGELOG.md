@@ -1,3 +1,29 @@
+## 1.1.0 (2023-09-21)
+
+### Feat
+
+- **images**: add yubikey image from drduh's yubikey guide
+- **installer**: include installer in ISO and support both dr460nixed/regular NixOS ISO
+- **installer**: prepare installer for a basic dr460nixed flake via template
+
+### Fix
+
+- **template**: apparently dr460nixed is not of type a-zA-Z0-9
+- **ci**: fix cut failing to provide a valid string; also disables promtail by default)
+- **installer**: enable experimental features on non-dr460nixed live cd via env var #28
+- **installer**: fix various issues that prevented the installation
+- **docs**: update path of docs, got messed up by moving packages to their own dir
+- **installer**: final fixups, add README
+- **installer**: fixup build blockers & minor enhancements
+- **installer**: fix paths, use current dir to prepare system, add image modules
+- **installer**: use a better way to check whether disk is valid, move hosts to nixos directory
+- **installer**: lots of improvements and fixes (yes, really.)
+
+### Refactor
+
+- **template**: symlinks don't work with flake templates, therefore provide the real files and strip them down
+- **flake.nix**: move packages to their own directory and make nixos-generators an input
+
 ## 1.0.0 (2023-09-17)
 
 ### Feat
