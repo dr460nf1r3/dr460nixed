@@ -42,9 +42,6 @@ in {
     # Allow unprivileged users to create user namespaces
     boot.kernel.sysctl = {"kernel.unprivileged_userns_clone" = 1;};
 
-    # Custom label for boot menu entries (mkForce to override GNS default)
-    system.nixos.label = ["dr460nixed-"];
-
     # Allow wheel group users to use sudo
     security.sudo.execWheelOnly = true;
 
