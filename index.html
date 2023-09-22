@@ -170,37 +170,56 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="my-personal-nixos-flake--system-configurations"><a class="header" href="#my-personal-nixos-flake--system-configurations">My personal NixOS flake &amp; system configurations</a></h1>
+                        <h1 id="dr460nixed-nixos-"><a class="header" href="#dr460nixed-nixos-">Dr460nixed NixOS ❄️</a></h1>
 <p><a href="https://builtwithnix.org"><img src="https://img.shields.io/static/v1?logo=nixos&amp;logoColor=white&amp;label=&amp;message=Built%20with%20Nix&amp;color=41439a" alt="built with nix" /></a> <a href="https://garnix.io"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fdr460nf1r3%2Fdr460nixed%3Fbranch%3Dmain" alt="built with garnix" /></a>
 <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml"><img src="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml/badge.svg" alt="Build images" /></a> <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml"><img src="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg" alt="Sync Tailscale ACLs" /></a></p>
-<p>This repo contains my NixOS dotfiles. Every device supported by NixOS will be added here! 😎</p>
+<p>This repository contains a framework to get started with NixOS quickly, featuring opiniated and selected default settings.
+It also contains my personal NixOS configuration, which might serve as inspiration for other peoples' setups.</p>
+<p>While starting out with NixOS, especially reading other peoples flakes proved to be very helpful, so I figured sharing my personal setup my help other people as well!
+Those who like the &quot;dr460nized&quot; look of Garuda will definitely like this one as well ☺️</p>
+<h2 id="so-how-does-it-work"><a class="header" href="#so-how-does-it-work">So how does it work?</a></h2>
+<p>ISO builds are available as well as a simple installer, which employs <code>nix flake init</code> to deploy a basic and generic version of this flake's template based on user's choices.
+Partitioning is achieved via <a href="https://github.com/nix-community/disko">disko</a> presets and the installer may be used on regular NixOS live mediums as well.
+Users may then continue building their own version of NixOS using code snippets of this repository and further linked sources.
+Furthermore, the flakes' outputs are automatically build and cached via <a href="https://garnix.io">garnix</a>.</p>
+<p>There is a <a href="https://nixed.dr460nf1r3.org">documentation available about various topics</a>, which also contains the code snippets that might provide further useful customization options.</p>
+<h2 id="how-does-it-look-like"><a class="header" href="#how-does-it-look-like">How does it look like?</a></h2>
 <p><img src="https://i.imgur.com/h3WGSJ4.jpg" alt="desktop-kde" /></p>
-<p><strong>What is inside?</strong>:</p>
+<h2 id="what-settings-does-the-installer-provide"><a class="header" href="#what-settings-does-the-installer-provide">What settings does the installer provide?</a></h2>
+<p>Right now, it basically just bootstraps a basic desktop environment with theming, Nix and OS related defaults to have common things working out of the box.</p>
+<pre><code class="language-nix">{
+  dr460nixed = {
+    chromium = true;
+    desktops.enable = true;
+    example-boot.enable = true;
+    performance = true;
+  };
+}
+</code></pre>
+<p>Which translates to:</p>
+<ul>
+<li>Enjoying a fully pre-configured <a href="https://garudalinux.org">Garuda dr460nized KDE</a> themed setup: <strong>Dr460nixed</strong> !</li>
+<li>Being able to use all of <a href="https://github.com/garuda-linux/garuda-nix-subsystem">Garuda Nix Subsystems</a> modules</li>
+<li>The custom <strong>Linux-cachyos BORE EEVDF</strong> kernel of the <a href="https://cachyos.org">Linux CachyOS</a> developers</li>
+<li>Having access to additional packages not existing in Nixpkgs (yet) via <a href="https://nyx.chaotic.cx">Chaotic Nyx</a></li>
+<li>Using <strong>Garnix CI cache</strong> for this flakes' outputs</li>
+<li>Keeping all of it well organized via <strong>flake-parts</strong></li>
+</ul>
+<p>It might receive more module options in the future, though I currently believe that showing people how to achieve things in Nix might be more useful than just providing a toggle for it.</p>
+<h2 id="what-kind-of-configuration-is-available-via-code-snippets"><a class="header" href="#what-kind-of-configuration-is-available-via-code-snippets">What kind of configuration is available via code snippets?</a></h2>
 <ul>
 <li>Multiple <strong>NixOS configurations</strong>, including <strong>desktop</strong>, <strong>server</strong>, <strong>nixos-wsl</strong> , <strong>raspberry pi</strong> &amp; <strong>live-usb</strong></li>
-<li>A fully ported &amp; configured <strong>Garuda dr460nized KDE</strong> setup: <strong>Dr460nixed</strong> !</li>
 <li>Root-on-ZFS and secure-boot enabled systems via <strong>Lanzaboote</strong></li>
 <li><strong>Opt-in persistence</strong> through impermanence + ZFS snapshots</li>
-<li><strong>Mesh networked</strong> hosts with <strong>Tailscale</strong> and optional use of Mullvad VPN exit nodes</li>
-<li>Uses the custom <strong>Linux-cachyos BORE EEVDF</strong> kernel</li>
-<li>Additional packages not existing in Nixpkgs (yet) via <strong>Chaotic Nyx</strong></li>
+<li><strong>Mesh networked</strong> hosts with <strong>Tailscale</strong></li>
 <li><strong>Opt-in 2FA protection</strong> of ssh and password prompts <strong>with Duo Security</strong></li>
-<li>Secrets are managed via <strong>nix-sops</strong></li>
-<li>Uses <strong>Garnix CI</strong> for automated flake checks followed by building outputs when pushing to main &amp; uploading to <strong>Garnix CI cache</strong></li>
-<li>Always up-to-date live images are automatically built via <strong>Github actions</strong></li>
-</ul>
-<p>Other, smaller tweaks I particularly like about this setup include:</p>
-<ul>
-<li>Keeping it well organized via <strong>flake-parts</strong></li>
+<li>Secrets managed via <strong>nix-sops</strong></li>
+<li>Always up-to-date live images automatically built via <strong>Github actions</strong></li>
 <li>Custom devshells with fully declarative <strong>pre-commit-hooks</strong></li>
-<li>A much enhanced, fancy-themed Spotify <strong>via spicetify-cli</strong></li>
-<li>No password prompts when having my <strong>Yubikey</strong> connected to my laptop</li>
-<li>Being able to easily remote-control my machines via <strong>KDEConnect</strong> and a self-hosted <strong>Rustdesk server</strong></li>
-<li>Having custom <strong>bleeding-edge Mesa</strong> builds</li>
-<li>Easy deployment of <strong>mdBook-generated</strong> documentation to Cloudflare pages</li>
+<li>No password prompts when having a <strong>Yubikey</strong> connected to a device</li>
+<li>Easily remote-controllable machines via <strong>KDEConnect</strong> and a self-hosted <strong>Rustdesk server</strong></li>
+<li>Custom <strong>bleeding-edge Mesa</strong> builds</li>
 </ul>
-<h2 id="documentation"><a class="header" href="#documentation">Documentation</a></h2>
-<p>A fully searchable, mdBook-based documentation is available <a href="https://nixed.dr460nf1r3.org">here</a>.</p>
 <h2 id="structure"><a class="header" href="#structure">Structure</a></h2>
 <pre><code class="language-sh">├── docker-compose
 │   ├── oracle-dragon

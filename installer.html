@@ -182,7 +182,7 @@ Choices during the execution of the script currently include:</p>
 <li>username</li>
 </ul>
 <p>The installer may only install by wiping the destination disk, custom partition layouts are currently unsupported.
-This guide currently requires an EFI-booted system as <code>systemd-boot</code> is used as bootloader. <a href="https://nixos.wiki/wiki/Nix_command">Nix command</a> and <a href="https://nixos.wiki/wiki/flakes">flakes</a> need to be enabled.</p>
+Both UEFI and legacy systems are supported. <a href="https://nixos.wiki/wiki/Nix_command">Nix command</a> and <a href="https://nixos.wiki/wiki/flakes">flakes</a> need to be enabled.</p>
 <p>To begin, simply run the installer:</p>
 <pre><code class="language-sh">sudo installer # use this if booted into a dr460nixed ISO
 sudo nix run github:dr460nf1r3/dr460nixed#installer # regular NixOS systems
