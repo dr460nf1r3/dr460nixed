@@ -226,6 +226,7 @@
             {package = "manix";}
             {package = "mdbook";}
             {package = "nix-melt";}
+            {package = "nixos-install-tools";}
             {package = "pre-commit";}
             {package = "rsync";}
             {package = "sops";}

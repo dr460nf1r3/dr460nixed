@@ -21,7 +21,7 @@ sudo nix run github:dr460nf1r3/dr460nixed#installer # regular NixOS systems
 ```
 
 Provide the needed input. After completion, a dr460nixed system is ready for you to use.
-You may customize it with configurations found in the main repository, since the template has been kept as generic as possible.
+You may customize it with configurations found in the main repository since the template has been kept as generic as possible.
 
-Users are expected to continue building their own flake after the installation finished. In order to do so, the dr460nixed repository has many examplery configurations available.
+Users are expected to continue building their own flake after the installation is finished. To do so, the dr460nixed repository has many exemplary configurations available.
 They may be inspected by browsing the "modules" section of this documentation.
