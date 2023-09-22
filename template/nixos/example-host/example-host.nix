@@ -11,7 +11,6 @@
     desktops.enable = true;
     example-boot.enable = true;
     performance = true;
-    systemd-boot.enable = true;
   };
 
   # NixOS stuff
