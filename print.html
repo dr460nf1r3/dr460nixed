@@ -241,23 +241,23 @@ Furthermore, the flakes' outputs are automatically build and cached via <a href=
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h1>
 <h2 id="using-the-installer"><a class="header" href="#using-the-installer">Using the installer</a></h2>
-<p>An installer has been created to easy the installation process by bootstrapping a basic flake with personal host and usernames.
-It one can be found on the <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml">ISO builds</a>, so the quickest way to get going is to download the ISO and run <code>sudo installer</code>.
+<p>An installer has been created to ease the installation process by bootstrapping a basic flake with a personal host and usernames.
+It can be found on the <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml">ISO builds</a>, so the quickest way to get going is to download the ISO and run <code>sudo installer</code>.
 It can also be used on any OS, which has <code>nix</code> available. Find more information about how to proceed <a href="./installer.html">here</a>.</p>
-<h2 id="creating-an-own-configuration-including-sops-nix"><a class="header" href="#creating-an-own-configuration-including-sops-nix">Creating an own configuration including sops-nix</a></h2>
-<p>This one is the harder way and mostly suitable for people with a basic understanding of NixOS.
-Several preparations have to be made in order to bootstrap a working installation if not using the <a href="installer.html">installer</a>:</p>
+<h2 id="creating-your-own-configuration-including-sops-nix"><a class="header" href="#creating-your-own-configuration-including-sops-nix">Creating your own configuration including sops-nix</a></h2>
+<p>This one is the harder way and is mostly suitable for people with a basic understanding of NixOS.
+Several preparations have to be made to bootstrap a working installation if not using the <a href="installer.html">installer</a>:</p>
 <ul>
 <li>A working <code>hardware-configuration.nix</code> needs to be generated for the current machine to replace mine, this includes having already partitioned disks.</li>
 <li>The hosts <code>*.nix</code> configuration should be adapted to suit the hardware's needs, eg. needed kernel modules or <code>services.xserver.videoDrivers</code> should be fitting</li>
-<li>Since <code>sops-nix</code> is used to handle secrets, my files need to be replaced with own ones. Usage instructions can be found <a href="https://github.com/Mic92/sops-nix#usage-example">here</a>, basically one needs to create an age public key from the host's ed21559 SSH private key, which is then added to <code>.sops.yaml</code> to allow the host to decrypt secrets while booting up. A fitting age key should also be generated and placed in <code>~/.config/sops/age/keys.txt</code> as described in the usage instructions - this allows decrypting the secrets file to edit it. It lives in <code>secrets/global.yaml</code> and contains the secrets and can be edited with sops <code>secrets/global.yaml</code> (opens a terminal text editor).</li>
-<li>It might be easier to supply a static password in <code>users.nix</code> for bootstrapping, since no login will be possible if the secrets management isn't properly set up yet. I had a few issues with this in the past while setting things up, so I felt giving this advice might help. Usernames are of course also to be changed, as well as SSH public keys.</li>
+<li>Since <code>sops-nix</code> is used to handle secrets, my files need to be replaced with your own ones. Usage instructions can be found <a href="https://github.com/Mic92/sops-nix#usage-example">here</a>, basically one needs to create an age public key from the host's ed21559 SSH private key, which is then added to <code>.sops.yaml</code> to allow the host to decrypt secrets while booting up. A fitting age key should also be generated and placed in <code>~/.config/sops/age/keys.txt</code> as described in the usage instructions - this allows decrypting the secrets file to edit it. It lives in <code>secrets/global.yaml</code> and contains the secrets and can be edited with sops <code>secrets/global.yaml</code> (opens a terminal text editor).</li>
+<li>It might be easier to supply a static password in <code>users.nix</code> for bootstrapping since no login will be possible if the secrets management isn't properly set up yet. I had a few issues with this in the past while setting things up, so I felt giving this advice might help. Usernames are of course also to be changed, as well as SSH public keys.</li>
 </ul>
-<p>Then, the bootstrapping process can be started. Here, <code>nix</code> is also sufficient to set up our our configuration as follows:</p>
+<p>Then, the bootstrapping process can be started. Here, <code>nix</code> + <code>nixos-install-tools</code> is sufficient to set up your our configuration as follows:</p>
 <pre><code class="language-sh">export NIX_CONFIG=&quot;experimental-features = nix-command flakes&quot; # if flakes are disabled
 nixos-install --flake .#hostname
 </code></pre>
-<p>If the operation succeeded, you will be able to boot into your new installation.</p>
+<p>If the operation succeeds, you will be able to boot into your new installation.</p>
 <p>How to proceed from here?</p>
 <ul>
 <li>Adapt the configurations like enabled modules and home-manager configs to your needs</li>
@@ -269,16 +269,16 @@ nixos-install --flake .#hostname
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="generating-images"><a class="header" href="#generating-images">Generating images</a></h1>
 <p>Images of this flake may easily be built by using <a href="https://github.com/nix-community/nixos-generators">nixos-generators</a>.
-In our case, we use it as <a href="https://github.com/nix-community/nixos-generators?tab=readme-ov-file#using-as-a-nixos-module">NixOS module</a> in order to be able to build the system via <code>garuda-nix.lib.garudaSystem</code>.
+In our case, we use it as <a href="https://github.com/nix-community/nixos-generators?tab=readme-ov-file#using-as-a-nixos-module">NixOS module</a> to be able to build the system via <code>garuda-nix.lib.garudaSystem</code>.
 This is important, as this function exposes all the <code>garuda-nix-subsystem</code> modules for us to consume.</p>
 <h2 id="how-to-get-going"><a class="header" href="#how-to-get-going">How to get going?</a></h2>
-<p>Lets build a regular dr460nixed ISO!</p>
+<p>Let's build a regular dr460nixed ISO!</p>
 <pre><code class="language-sh">nix build .#nixosConfigurations.dr460nixed-desktop.config.formats.install-iso
 </code></pre>
 <p>You may also just run <code>nix run .#iso</code>, which builds an image using the <code>install-iso</code> format.</p>
 <p>This is pretty much everything needed! The result will be available at <code>./result</code>, which links to the corresponding path in <code>/nix/store</code>.</p>
 <p>Likewise, all other configurations may be built by simply exchanging <code>installer-iso</code> with the desired format.
-Depending on what kind of image is being built it is needed to use the <code>dr460nixed-base</code> system to built the image.</p>
+Depending on what kind of image is being built it is needed to use the <code>dr460nixed-base</code> system to build the image.</p>
 <pre><code class="language-sh">nix build .#nixosConfigurations.dr460nixed-base.config.formats.sdcard
 </code></pre>
 <p>For a list of other supported formats please have a look <a href="https://github.com/nix-community/nixos-generators?tab=readme-ov-file#supported-formats">here</a>.</p>
@@ -312,8 +312,8 @@ Both UEFI and legacy systems are supported. <a href="https://nixos.wiki/wiki/Nix
 sudo nix run github:dr460nf1r3/dr460nixed#installer # regular NixOS systems
 </code></pre>
 <p>Provide the needed input. After completion, a dr460nixed system is ready for you to use.
-You may customize it with configurations found in the main repository, since the template has been kept as generic as possible.</p>
-<p>Users are expected to continue building their own flake after the installation finished. In order to do so, the dr460nixed repository has many examplery configurations available.
+You may customize it with configurations found in the main repository since the template has been kept as generic as possible.</p>
+<p>Users are expected to continue building their own flake after the installation is finished. To do so, the dr460nixed repository has many exemplary configurations available.
 They may be inspected by browsing the &quot;modules&quot; section of this documentation.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="script"><a class="header" href="#script">Script</a></h1>
 <p>This is a small script which is serving as installer for this project. It basically:</p>
@@ -3014,13 +3014,13 @@ in {
 <h2 id="main-sources"><a class="header" href="#main-sources">Main sources</a></h2>
 <p>A special thanks to <a href="https://github.com/pedrohlc">PedroHLC</a>, who always gives great advice and who is also the reason I'm using NixOS today.
 Also, I studied <a href="https://github.com/Misterio77">Mysterio77</a>'s and <a href="https://github.com/NotAShelf">NotAShelf</a>'s Nix configurations while building this one.</p>
-<h2 id="further-helpful-resources"><a class="header" href="#further-helpful-resources">Further helpful resources</a></h2>
+<h2 id="further-helpful-resources-sorted-alphabetically"><a class="header" href="#further-helpful-resources-sorted-alphabetically">Further helpful resources (sorted alphabetically)</a></h2>
 <ul>
-<li><a href="https://github.com/exploitoverload/PwNixOS">https://github.com/exploitoverload/PwNixOS</a></li>
-<li><a href="https://github.com/srid/nixos-config">https://github.com/srid/nixos-config</a></li>
-<li><a href="https://github.com/Misterio77/nix-starter-configs">https://github.com/Misterio77/nix-starter-configs</a></li>
 <li><a href="https://github.com/dch82/NixOS-Config-Base">https://github.com/dch82/NixOS-Config-Base</a></li>
+<li><a href="https://github.com/exploitoverload/PwNixOS">https://github.com/exploitoverload/PwNixOS</a></li>
+<li><a href="https://github.com/Misterio77/nix-starter-configs">https://github.com/Misterio77/nix-starter-configs</a></li>
 <li><a href="https://github.com/nix-community/dream2nix">https://github.com/nix-community/dream2nix</a></li>
+<li><a href="https://github.com/srid/nixos-config">https://github.com/srid/nixos-config</a></li>
 </ul>
 
                     </main>

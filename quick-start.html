@@ -172,23 +172,23 @@
                     <main>
                         <h1 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h1>
 <h2 id="using-the-installer"><a class="header" href="#using-the-installer">Using the installer</a></h2>
-<p>An installer has been created to easy the installation process by bootstrapping a basic flake with personal host and usernames.
-It one can be found on the <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml">ISO builds</a>, so the quickest way to get going is to download the ISO and run <code>sudo installer</code>.
+<p>An installer has been created to ease the installation process by bootstrapping a basic flake with a personal host and usernames.
+It can be found on the <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml">ISO builds</a>, so the quickest way to get going is to download the ISO and run <code>sudo installer</code>.
 It can also be used on any OS, which has <code>nix</code> available. Find more information about how to proceed <a href="./installer.html">here</a>.</p>
-<h2 id="creating-an-own-configuration-including-sops-nix"><a class="header" href="#creating-an-own-configuration-including-sops-nix">Creating an own configuration including sops-nix</a></h2>
-<p>This one is the harder way and mostly suitable for people with a basic understanding of NixOS.
-Several preparations have to be made in order to bootstrap a working installation if not using the <a href="installer.html">installer</a>:</p>
+<h2 id="creating-your-own-configuration-including-sops-nix"><a class="header" href="#creating-your-own-configuration-including-sops-nix">Creating your own configuration including sops-nix</a></h2>
+<p>This one is the harder way and is mostly suitable for people with a basic understanding of NixOS.
+Several preparations have to be made to bootstrap a working installation if not using the <a href="installer.html">installer</a>:</p>
 <ul>
 <li>A working <code>hardware-configuration.nix</code> needs to be generated for the current machine to replace mine, this includes having already partitioned disks.</li>
 <li>The hosts <code>*.nix</code> configuration should be adapted to suit the hardware's needs, eg. needed kernel modules or <code>services.xserver.videoDrivers</code> should be fitting</li>
-<li>Since <code>sops-nix</code> is used to handle secrets, my files need to be replaced with own ones. Usage instructions can be found <a href="https://github.com/Mic92/sops-nix#usage-example">here</a>, basically one needs to create an age public key from the host's ed21559 SSH private key, which is then added to <code>.sops.yaml</code> to allow the host to decrypt secrets while booting up. A fitting age key should also be generated and placed in <code>~/.config/sops/age/keys.txt</code> as described in the usage instructions - this allows decrypting the secrets file to edit it. It lives in <code>secrets/global.yaml</code> and contains the secrets and can be edited with sops <code>secrets/global.yaml</code> (opens a terminal text editor).</li>
-<li>It might be easier to supply a static password in <code>users.nix</code> for bootstrapping, since no login will be possible if the secrets management isn't properly set up yet. I had a few issues with this in the past while setting things up, so I felt giving this advice might help. Usernames are of course also to be changed, as well as SSH public keys.</li>
+<li>Since <code>sops-nix</code> is used to handle secrets, my files need to be replaced with your own ones. Usage instructions can be found <a href="https://github.com/Mic92/sops-nix#usage-example">here</a>, basically one needs to create an age public key from the host's ed21559 SSH private key, which is then added to <code>.sops.yaml</code> to allow the host to decrypt secrets while booting up. A fitting age key should also be generated and placed in <code>~/.config/sops/age/keys.txt</code> as described in the usage instructions - this allows decrypting the secrets file to edit it. It lives in <code>secrets/global.yaml</code> and contains the secrets and can be edited with sops <code>secrets/global.yaml</code> (opens a terminal text editor).</li>
+<li>It might be easier to supply a static password in <code>users.nix</code> for bootstrapping since no login will be possible if the secrets management isn't properly set up yet. I had a few issues with this in the past while setting things up, so I felt giving this advice might help. Usernames are of course also to be changed, as well as SSH public keys.</li>
 </ul>
-<p>Then, the bootstrapping process can be started. Here, <code>nix</code> is also sufficient to set up our our configuration as follows:</p>
+<p>Then, the bootstrapping process can be started. Here, <code>nix</code> + <code>nixos-install-tools</code> is sufficient to set up your our configuration as follows:</p>
 <pre><code class="language-sh">export NIX_CONFIG=&quot;experimental-features = nix-command flakes&quot; # if flakes are disabled
 nixos-install --flake .#hostname
 </code></pre>
-<p>If the operation succeeded, you will be able to boot into your new installation.</p>
+<p>If the operation succeeds, you will be able to boot into your new installation.</p>
 <p>How to proceed from here?</p>
 <ul>
 <li>Adapt the configurations like enabled modules and home-manager configs to your needs</li>

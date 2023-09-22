@@ -172,16 +172,16 @@
                     <main>
                         <h1 id="generating-images"><a class="header" href="#generating-images">Generating images</a></h1>
 <p>Images of this flake may easily be built by using <a href="https://github.com/nix-community/nixos-generators">nixos-generators</a>.
-In our case, we use it as <a href="https://github.com/nix-community/nixos-generators?tab=readme-ov-file#using-as-a-nixos-module">NixOS module</a> in order to be able to build the system via <code>garuda-nix.lib.garudaSystem</code>.
+In our case, we use it as <a href="https://github.com/nix-community/nixos-generators?tab=readme-ov-file#using-as-a-nixos-module">NixOS module</a> to be able to build the system via <code>garuda-nix.lib.garudaSystem</code>.
 This is important, as this function exposes all the <code>garuda-nix-subsystem</code> modules for us to consume.</p>
 <h2 id="how-to-get-going"><a class="header" href="#how-to-get-going">How to get going?</a></h2>
-<p>Lets build a regular dr460nixed ISO!</p>
+<p>Let's build a regular dr460nixed ISO!</p>
 <pre><code class="language-sh">nix build .#nixosConfigurations.dr460nixed-desktop.config.formats.install-iso
 </code></pre>
 <p>You may also just run <code>nix run .#iso</code>, which builds an image using the <code>install-iso</code> format.</p>
 <p>This is pretty much everything needed! The result will be available at <code>./result</code>, which links to the corresponding path in <code>/nix/store</code>.</p>
 <p>Likewise, all other configurations may be built by simply exchanging <code>installer-iso</code> with the desired format.
-Depending on what kind of image is being built it is needed to use the <code>dr460nixed-base</code> system to built the image.</p>
+Depending on what kind of image is being built it is needed to use the <code>dr460nixed-base</code> system to build the image.</p>
 <pre><code class="language-sh">nix build .#nixosConfigurations.dr460nixed-base.config.formats.sdcard
 </code></pre>
 <p>For a list of other supported formats please have a look <a href="https://github.com/nix-community/nixos-generators?tab=readme-ov-file#supported-formats">here</a>.</p>
