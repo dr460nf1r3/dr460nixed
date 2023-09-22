@@ -6,8 +6,21 @@
 }:
 with lib; let
   cfg = config.dr460nixed.systemd-boot;
+  cfgGrub = config.dr460nixed.grub;
   cfgLanza = config.dr460nixed.lanzaboote;
 in {
+  options.dr460nixed.grub = {
+    enable =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Configures the system to install GRUB to a particular device, which enables booting
+          on non-UEFI systems.
+        '';
+      };
+  };
   options.dr460nixed.systemd-boot = {
     enable =
       mkOption
@@ -45,10 +58,15 @@ in {
         "usbcore.autosuspend=-1"
         "vt.global_cursor_default=0"
       ];
-      loader = mkIf cfg.enable {
-        generationsDir.copyKernels = true;
+      lanzaboote = mkIf cfgLanza.enable {
+        enable = true;
+        pkiBundle = "/etc/secureboot";
+      };
+      loader = {
+        grub.device = mkIf cfgGrub.enable "example-disk";
+        generationsDir.copyKernels = mkIf cfg.enable true;
         timeout = 1;
-        systemd-boot = {
+        systemd-boot = mkIf cfg.enable {
           consoleMode = "max";
           editor = false;
           enable = true;
@@ -56,11 +74,6 @@ in {
       };
     };
 
-    # Needed if using Lanzaboote
-    boot.lanzaboote = mkIf cfgLanza.enable {
-      enable = true;
-      pkiBundle = "/etc/secureboot";
-    };
     environment.systemPackages = mkIf cfgLanza.enable [pkgs.sbctl];
   };
 }

@@ -107,6 +107,7 @@ create_config() {
 	NIX_ROOT=/mnt/etc/nixos
 	read -rp "Enter the hostname you want to use: " HOSTNAME
 	read -rp "Enter your desired username: " USER
+	[ -d /sys/firmware/efi ] && SYSTEM_TYPE=systemd-boot || SYSTEM_TYPE=grub
 
 	# Create config without filesystems as disko provides those already
 	# also apply our dr460nixed template
@@ -119,9 +120,10 @@ create_config() {
 	mv ./nixos/example-host ./nixos/"$HOSTNAME"
 	mv ./nixos/"$HOSTNAME"/example-host.nix ./nixos/"$HOSTNAME"/"$HOSTNAME".nix
 
-	sed -i s/example-disk/"$DISK"/g ./nixos/flake-module.nix
-	sed -i s/example-layout/"$DISKO_MODULE"/g ./nixos/flake-module.nix
+	sed -i s/example-boot/"$SYSTEM_TYPE"/g ./nixos/"$HOSTNAME"/"$HOSTNAME".nix
+	sed -i s/example-disk/"$DISK"/g .{/nixos/flake-module.nix,nixos/"$HOSTNAME"/"$HOSTNAME".nix}
 	sed -i s/example-hostname/"$HOSTNAME"/g {./nixos/flake-module.nix,nixos/"$HOSTNAME"/"$HOSTNAME".nix}
+	sed -i s/example-layout/"$DISKO_MODULE"/g ./nixos/flake-module.nix
 	sed -i s/example-user/"$USER"/g ./nixos/modules/users.nix
 
 	echo "Configuration successfully created.
