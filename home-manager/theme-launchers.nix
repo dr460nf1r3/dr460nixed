@@ -68,6 +68,15 @@ in {
       X-KDE-SubstituteUID=false
       X-KDE-Username=
     '';
+    "${appdir}/rustdesk.desktop".source = "${pkgs.makeDesktopItem {
+      name = "rustdesk";
+      exec = "rustdesk";
+      icon = "rustdesk";
+      desktopName = "RustDesk";
+      comment = "A cross-platform remote desktop software";
+      genericName = "Remote Desktop";
+      categories = ["Network"];
+    }}/share/applications/rustdesk.desktop";
     "${appdir}/keybase.desktop".text = ''
       [Desktop Entry]
       Categories=Network;
