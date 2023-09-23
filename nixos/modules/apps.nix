@@ -74,6 +74,7 @@ in {
       usbutils
       vorta
       vulkan-tools
+      yt-dlp_git
     ])
     ++ optionals cfg.development.enable (with pkgs; [
       ansible
