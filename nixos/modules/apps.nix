@@ -68,7 +68,7 @@ in {
       rustdesk
       spotdl
       syncthingtray
-      tdesktop
+      telegram-desktop_git
       tor-browser-bundle-bin
       usbutils
       vorta
