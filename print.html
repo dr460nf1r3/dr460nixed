@@ -422,7 +422,7 @@ disko() {
 
 	# Ask whether the hard drive should really be wiped
 	echo &quot;The disk you chose to format is $DISK.&quot;
-	confirm_choices &quot;This will wipe the disk you chose!&quot;
+	confirm_choices &quot;This will start the wiping process!&quot;
 
 	# Create partitions and set up /mnt
 	disko_runner ./nixos/modules/disko/&quot;$DISKO_MODULE&quot;.nix /dev/&quot;$DISK&quot;
@@ -528,6 +528,7 @@ in {
       aspellDicts.en
       chromium-flagged
       ffmpegthumbnailer
+      firefox_nightly
       freerdp
       gimp
       helvum
