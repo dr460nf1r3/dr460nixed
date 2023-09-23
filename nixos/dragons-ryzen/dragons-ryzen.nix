@@ -28,10 +28,23 @@
     hostName = "dragons-ryzen";
   };
 
-  # AMD device
+  # The services to use on this machine
   services = {
     hardware.bolt.enable = false;
-    xserver.videoDrivers = ["amdgpu"];
+    pipewire.lowLatency = {
+      enable = true;
+      quantum = 64;
+      rate = 48000;
+    };
+    xserver = {
+      displayManager.sddm.settings = {
+        Autologin = {
+          Session = "plasma";
+          User = "nico";
+        };
+      };
+      videoDrivers = ["amdgpu"];
+    };
   };
 
   # Enable a few selected custom settings
@@ -84,21 +97,6 @@
       enable = true;
       sendMails = true;
     };
-  };
-
-  # FDE enables the usage of autologin
-  services.xserver.displayManager.sddm.settings = {
-    Autologin = {
-      User = "nico";
-      Session = "plasma";
-    };
-  };
-
-  # Low-latency definitions
-  services.pipewire.lowLatency = {
-    enable = true;
-    quantum = 64;
-    rate = 48000;
   };
 
   # Virt-manager requires iptables to let guests have internet

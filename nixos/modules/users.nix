@@ -88,9 +88,9 @@ in {
   };
 
   # Allow pushing to Cachix
-  sops.secrets."api_keys/cachix" = {
-    mode = "0600";
-    owner = config.users.users.nico.name;
-    path = "/home/nico/.config/cachix/cachix.dhall";
-  };
+  # sops.secrets."api_keys/cachix" = {
+  #   mode = "0600";
+  #   owner = config.users.users.nico.name;
+  #   path = "/home/nico/.config/cachix/cachix.dhall";
+  # };
 }
