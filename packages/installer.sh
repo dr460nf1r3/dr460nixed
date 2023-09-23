@@ -96,7 +96,7 @@ disko() {
 
 	# Ask whether the hard drive should really be wiped
 	echo "The disk you chose to format is $DISK."
-	confirm_choices "This will wipe the disk you chose!"
+	confirm_choices "This will start the wiping process!"
 
 	# Create partitions and set up /mnt
 	disko_runner ./nixos/modules/disko/"$DISKO_MODULE".nix /dev/"$DISK"
