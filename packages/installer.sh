@@ -26,7 +26,7 @@ prepare() {
 # Confirmation prompt
 confirm_choices() {
 	# Continue if the user confirms our choice
-	read -rp "Are you sure you want to continue? (destructive action ahead!) [y/n] " _ANSWER
+	read -rp "Are you sure you want to continue? $1 [y/n] " _ANSWER
 
 	while [ -z "${KILLIT+x}" ]; do
 		case "${_ANSWER}" in
@@ -96,7 +96,7 @@ disko() {
 
 	# Ask whether the hard drive should really be wiped
 	echo "The disk you chose to format is $DISK."
-	confirm_choices
+	confirm_choices "This will wipe the disk you chose!"
 
 	# Create partitions and set up /mnt
 	disko_runner ./nixos/modules/disko/"$DISKO_MODULE".nix /dev/"$DISK"
@@ -130,19 +130,20 @@ create_config() {
 You made the following choices:
 hostname: $HOSTNAME
 user: $USER"
-	confirm_choices
+	confirm_choices "This starts the installation process."
 
 	popd || exit 2
 }
 
 # Install basic dr460nixed system
 install_system() {
-	nixos-install --flake "$NIX_ROOT#$HOSTNAME"
+	nixos-install --flake "$NIX_ROOT#$HOSTNAME" --verbose
 }
 
 # Notices
 finish() {
-	echo "The installation was finished successfully. You may now reboot into your new system."
+	echo "The installation finished successfully. You may now reboot into your new system."
+	confirm_choices "This will remove the temporary directory an reboot the system."
 	umount -Rf /mnt
 	rm -rf "$WORK_DIR"
 }
