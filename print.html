@@ -551,7 +551,7 @@ in {
       rustdesk
       spotdl
       syncthingtray
-      tdesktop
+      telegram-desktop_git
       tor-browser-bundle-bin
       usbutils
       vorta
@@ -2924,11 +2924,11 @@ in {
   };
 
   # Allow pushing to Cachix
-  sops.secrets.&quot;api_keys/cachix&quot; = {
-    mode = &quot;0600&quot;;
-    owner = config.users.users.nico.name;
-    path = &quot;/home/nico/.config/cachix/cachix.dhall&quot;;
-  };
+  # sops.secrets.&quot;api_keys/cachix&quot; = {
+  #   mode = &quot;0600&quot;;
+  #   owner = config.users.users.nico.name;
+  #   path = &quot;/home/nico/.config/cachix/cachix.dhall&quot;;
+  # };
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="zfs"><a class="header" href="#zfs">ZFS</a></h1>
