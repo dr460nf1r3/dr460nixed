@@ -88,4 +88,7 @@
   # Needed for impermanence
   fileSystems."/var/persistent".neededForBoot = true;
   fileSystems."/var/residues".neededForBoot = true;
+
+  # Needed for general ZFS usage
+  dr460nixed.zfs.enable = true;
 }
