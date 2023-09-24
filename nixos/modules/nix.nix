@@ -148,12 +148,12 @@ in {
     programs = {
       bash.shellAliases = {
         "rem" = "sudo nix build -v --builders ssh://${cfgRemote.host}";
-        "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host}";
+        "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake";
       };
       fish = {
         shellAbbrs = {
           "rem" = "sudo nix build -v --builders ssh://${cfgRemote.host}";
-          "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host}";
+          "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake";
         };
       };
     };

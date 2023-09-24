@@ -9,7 +9,6 @@
       ./modules
       inputs.disko.nixosModules.disko
       inputs.lanzaboote.nixosModules.lanzaboote
-      inputs.nix-snapshotter.nixosModules.default
       inputs.sops-nix.nixosModules.sops
     ];
 
@@ -53,10 +52,7 @@
             inputs.nixos-hardware.nixosModules.common-gpu-amd
             {
               _module.args.disks = ["/dev/nvme0n1"];
-              nixpkgs.overlays = [
-                inputs.nixd.overlays.default
-                inputs.nix-snapshotter.overlays.default
-              ];
+              nixpkgs.overlays = [inputs.nixd.overlays.default];
             }
           ];
         inherit specialArgs;

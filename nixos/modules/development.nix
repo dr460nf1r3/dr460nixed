@@ -48,7 +48,6 @@ in {
 
     # Libvirt & Podman with docker alias
     virtualisation = {
-      containerd.enable = true;
       docker = {
         autoPrune = {
           enable = true;
@@ -88,12 +87,6 @@ in {
       networkConfig = {
         VirtualEthernet = false;
       };
-    };
-
-    # Leverage the Nix store for enhancing containerd
-    services.nix-snapshotter = {
-      enable = true;
-      setContainerdSnapshotter = true;
     };
 
     # In case I need to fix my phone
