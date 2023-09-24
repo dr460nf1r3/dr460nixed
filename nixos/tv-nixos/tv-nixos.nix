@@ -36,6 +36,7 @@
     docker-compose-runner."tv-nixos" = {
       source = ../../docker-compose/tv-nixos;
     };
+    nix-super.enable = true;
     performance = true;
     servers = {
       enable = true;

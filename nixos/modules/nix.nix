@@ -11,7 +11,7 @@ in {
   options.dr460nixed = with lib; {
     nix-super = {
       enable = mkOption {
-        default = true;
+        default = false;
         type = types.bool;
         description = mdDoc ''
           Replaces nix with nix-super, which tracks future features of nix.
@@ -142,6 +142,20 @@ in {
           Port ${toString cfgRemote.port}
           User ${cfgRemote.user}
       '';
+    };
+
+    # Supply a shortcut for the remote builder
+    programs = {
+      bash.shellAliases = {
+        "rem" = "sudo nix build -v --builders ssh://${cfgRemote.host}";
+        "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host}";
+      };
+      fish = {
+        shellAbbrs = {
+          "rem" = "sudo nix build -v --builders ssh://${cfgRemote.host}";
+          "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host}";
+        };
+      };
     };
   };
 }
