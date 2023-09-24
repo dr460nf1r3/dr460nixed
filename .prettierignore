@@ -1,4 +1,5 @@
+.cz.json
 .github/workflows/*
+CHANGELOG.md
 configurations/docker-compose/**
 flake.lock
-.cz.json

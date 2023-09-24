@@ -1,3 +1,27 @@
+## 1.2.0 (2023-09-24)
+
+### Feat
+
+- **remote-build**: add shell alises, also disables nix-super by default
+- **boot**: add GRUB module option
+- **apps**: add yt-dlp_git from chaotic-nyx
+- **apps**: add firefox_nightly from chaotic-nyx, improve text on installer
+- **installer**: more verbosity for nixos-install and confirmation prompts
+- **template**: automatically enable options needed for a zfs system via disko module
+- **rustdesk**: provide a working desktop launcher, since the package ships none
+- **apps**: use telegram-desktop_git from chaotic-nyx instead of tdesktop
+- **installer**: automatically detect whether GRUB or systemd-boot needs to be installed
+
+### Fix
+
+- **multiple**: complete nix-snapshotter removal, improve nix remb aliases
+- **fish**: fix fish configuration not getting generated, merge shell/nico.nix
+
+### Refactor
+
+- **flake.nix**: sort inputs in another way, remove nix-snapshotter
+- **dragons-ryzen**: move join services.* settings; comment out cachix key for now
+
 ## 1.1.0 (2023-09-21)
 
 ### Feat
