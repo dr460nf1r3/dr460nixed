@@ -972,8 +972,39 @@ in {
 }:
 with lib; let
   cfg = config.dr460nixed.systemd-boot;
+  cfgGrub = config.dr460nixed.grub;
   cfgLanza = config.dr460nixed.lanzaboote;
 in {
+  options.dr460nixed.grub = {
+    enable =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Configures the system to install GRUB to a particular device, which enables booting
+          on non-UEFI systems.
+        '';
+      };
+    enableCryptodisk =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether to enable GRUB cryptodisk support.
+        '';
+      };
+    device =
+      mkOption
+      {
+        default = null;
+        type = types.str;
+        description = mdDoc ''
+          Defines which device to install GRUB to.
+        '';
+      };
+  };
   options.dr460nixed.systemd-boot = {
     enable =
       mkOption
@@ -1011,10 +1042,23 @@ in {
         &quot;usbcore.autosuspend=-1&quot;
         &quot;vt.global_cursor_default=0&quot;
       ];
-      loader = mkIf cfg.enable {
-        generationsDir.copyKernels = true;
+      lanzaboote = mkIf cfgLanza.enable {
+        enable = true;
+        pkiBundle = &quot;/etc/secureboot&quot;;
+      };
+      loader = {
+        grub = {
+          device = mkIf cfgGrub.enable cfgGrub.device;
+          enable =
+            if cfgGrub.enable
+            then true
+            else false;
+          enableCryptodisk = true;
+          useOSProber = true;
+        };
+        generationsDir.copyKernels = mkIf cfg.enable true;
         timeout = 1;
-        systemd-boot = {
+        systemd-boot = mkIf cfg.enable {
           consoleMode = &quot;max&quot;;
           editor = false;
           enable = true;
@@ -1022,11 +1066,6 @@ in {
       };
     };
 
-    # Needed if using Lanzaboote
-    boot.lanzaboote = mkIf cfgLanza.enable {
-      enable = true;
-      pkiBundle = &quot;/etc/secureboot&quot;;
-    };
     environment.systemPackages = mkIf cfgLanza.enable [pkgs.sbctl];
   };
 }
