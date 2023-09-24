@@ -321,12 +321,12 @@ in {
     programs = {
       bash.shellAliases = {
         &quot;rem&quot; = &quot;sudo nix build -v --builders ssh://${cfgRemote.host}&quot;;
-        &quot;remb&quot; = &quot;sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host}&quot;;
+        &quot;remb&quot; = &quot;sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake&quot;;
       };
       fish = {
         shellAbbrs = {
           &quot;rem&quot; = &quot;sudo nix build -v --builders ssh://${cfgRemote.host}&quot;;
-          &quot;remb&quot; = &quot;sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host}&quot;;
+          &quot;remb&quot; = &quot;sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake&quot;;
         };
       };
     };
