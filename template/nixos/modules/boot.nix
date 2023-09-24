@@ -20,6 +20,24 @@ in {
           on non-UEFI systems.
         '';
       };
+    enableCryptodisk =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether to enable GRUB cryptodisk support.
+        '';
+      };
+    device =
+      mkOption
+      {
+        default = null;
+        type = types.str;
+        description = mdDoc ''
+          Defines which device to install GRUB to.
+        '';
+      };
   };
   options.dr460nixed.systemd-boot = {
     enable =
@@ -63,7 +81,15 @@ in {
         pkiBundle = "/etc/secureboot";
       };
       loader = {
-        grub.device = mkIf cfgGrub.enable "example-disk";
+        grub = {
+          device = mkIf cfgGrub.enable cfgGrub.device;
+          enable =
+            if cfgGrub.enable
+            then true
+            else false;
+          enableCryptodisk = true;
+          useOSProber = true;
+        };
         generationsDir.copyKernels = mkIf cfg.enable true;
         timeout = 1;
         systemd-boot = mkIf cfg.enable {
