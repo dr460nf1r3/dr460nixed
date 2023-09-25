@@ -2984,7 +2984,6 @@ in {
 <pre><code class="language-nix">{
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -3036,18 +3035,19 @@ in {
     dr460nixed.smtp.enable = mkIf cfg.sendMails true;
 
     # Configure ZFS Event Daemon to use msmtp
-    services.zfs.zed.settings = mkIf cfg.sendMails {
-      ZED_DEBUG_LOG = &quot;/tmp/zed.debug.log&quot;;
-      ZED_EMAIL_ADDR = [&quot;root&quot;];
-      ZED_EMAIL_OPTS = &quot;@ADDRESS@&quot;;
-      ZED_EMAIL_PROG = &quot;${pkgs.msmtp}/bin/msmtp&quot;;
+    # commented until python2.7-oildev is fixed
+    # services.zfs.zed.settings = mkIf cfg.sendMails {
+    #   ZED_DEBUG_LOG = &quot;/tmp/zed.debug.log&quot;;
+    #   ZED_EMAIL_ADDR = [&quot;root&quot;];
+    #   ZED_EMAIL_OPTS = &quot;@ADDRESS@&quot;;
+    #   ZED_EMAIL_PROG = &quot;${pkgs.msmtp}/bin/msmtp&quot;;
 
-      ZED_NOTIFY_INTERVAL_SECS = 3600;
-      ZED_NOTIFY_VERBOSE = true;
+    #   ZED_NOTIFY_INTERVAL_SECS = 3600;
+    #   ZED_NOTIFY_VERBOSE = true;
 
-      ZED_SCRUB_AFTER_RESILVER = true;
-      ZED_USE_ENCLOSURE_LEDS = true;
-    };
+    #   ZED_SCRUB_AFTER_RESILVER = true;
+    #   ZED_USE_ENCLOSURE_LEDS = true;
+    # };
 
     # This option does not work; will return error
     services.zfs.zed.enableMail = mkIf cfg.sendMails false;
