@@ -10,11 +10,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1695536033,
-        "narHash": "sha256-/vNm3MUVkpMwwkvW35DKE5GpD6bi3lO/Xwi5odG+hss=",
+        "lastModified": 1695572475,
+        "narHash": "sha256-w14U4ukm6M6IGH43yucTWvqqJrdUzPe5RJa+vTnFg/k=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "901a7b9bff2285f33f744ecbdda2d38e59a36c83",
+        "rev": "9d36a75f2ec87131b4e9359af977453438f1dfed",
         "type": "github"
       },
       "original": {
@@ -93,11 +93,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1695380190,
-        "narHash": "sha256-v1TwBU/mKroZZPWYXujAfOHfIaQw44swa50Jgdkr7OE=",
+        "lastModified": 1695650987,
+        "narHash": "sha256-lcx9deCer/twtWrabqvVqucTzl4hKFW3pStIC8brKCw=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "98a6ab9b52f8b06db9c3116b1761bbeaf9484408",
+        "rev": "4a4d77a9aef2e2f182ee206986a98bb9b0a1a769",
         "type": "github"
       },
       "original": {
@@ -193,25 +193,19 @@
         "nix-index-database": [
           "nix-index-database"
         ],
-        "nixos-hardware": [
-          "nixos-hardware"
-        ],
         "nixpkgs": [
           "nixpkgs"
         ],
         "pre-commit-hooks": [
           "pre-commit-hooks"
-        ],
-        "spicetify-nix": [
-          "spicetify-nix"
         ]
       },
       "locked": {
-        "lastModified": 1695549286,
-        "narHash": "sha256-htN5hrg2llyr52ER24nUb0GS/A7HpwDBTcuqYf/Av/Q=",
+        "lastModified": 1695627092,
+        "narHash": "sha256-6FL5k8lqWuky8VqVwcRPfz/jdSUkChnucvieS8QvXfI=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "25ac454e4cac904f875ff6a1767b92f2a2f7f7e4",
+        "rev": "d2c27d9fdd0bde15a6e0241df9970d1a43082397",
         "type": "gitlab"
       },
       "original": {
@@ -248,11 +242,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1695509808,
-        "narHash": "sha256-rW6kfjLLYDB9xGJwoFkSNzcmLJCcN7VcD+YnDPbEM2c=",
+        "lastModified": 1695550077,
+        "narHash": "sha256-xoxR/iY69/3lTnnZDP6gf3J46DUKPcf+Y1jH03tfZXE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2d27bdcd640759a5fb1b48125fee7280adad95f7",
+        "rev": "a88df2fb101778bfd98a17556b3a2618c6c66091",
         "type": "github"
       },
       "original": {
@@ -372,11 +366,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1695517813,
-        "narHash": "sha256-U1o+lrw4OSTvUfJOprgPDrTs5zDSfI1BbY4tFOJ9AJE=",
+        "lastModified": 1695604288,
+        "narHash": "sha256-2JIL1HMPj1tqb+XoVXYgEEH51HeVs8+JlsToDewaN98=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "d36a861db11103734072ce90bf0c0517042351aa",
+        "rev": "a372dc817c6261861a0bc395ea4760d3ce093563",
         "type": "github"
       },
       "original": {
@@ -471,7 +465,7 @@
     "nixos-anywhere": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-4gR2Y0ziO5MxqkJJI02VhUBfwrXhkYjb8SOnVg/8vrk=",
+        "narHash": "sha256-b3gSh1A+XizkuUfIUv45bE7hp6uy8Fnf59bSWTiIWWY=",
         "type": "file",
         "url": "https://raw.githubusercontent.com/numtide/nixos-anywhere/main/src/nixos-anywhere.sh"
       },
@@ -573,11 +567,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1695346609,
-        "narHash": "sha256-jur+AjgRvablLA2oBvC4FD89zCXttVQDwi6OXk5x/14=",
+        "lastModified": 1695559356,
+        "narHash": "sha256-kXZ1pUoImD9OEbPCwpTz4tHsNTr4CIyIfXb3ocuR8sI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e9b4b56e5a20ac322c0c01ccab7ec697ab076ea0",
+        "rev": "261abe8a44a7e8392598d038d2e01f7b33cf26d0",
         "type": "github"
       },
       "original": {
@@ -589,8 +583,8 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1695227375,
-        "narHash": "sha256-76WTkeCu3npPZDkay2hB2Dj3cOuCiF0P41dbmXWUKtA=",
+        "lastModified": 1695318763,
+        "narHash": "sha256-FHVPDRP2AfvsxAdc+AsgFJevMz5VBmnZglFUMlxBkcY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "e12483116b3b51a185a33a272bf351e357ba9a99",
@@ -622,11 +616,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1694364351,
-        "narHash": "sha256-oadhSCqopYXxURwIA6/Anpe5IAG11q2LhvTJNP5zE6o=",
+        "lastModified": 1695576016,
+        "narHash": "sha256-71KxwRhTfVuh7kNrg3/edNjYVg9DCyKZl2QIKbhRggg=",
         "owner": "cachix",
         "repo": "pre-commit-hooks.nix",
-        "rev": "4f883a76282bc28eb952570afc3d8a1bf6f481d7",
+        "rev": "cb770e93516a1609652fa8e945a0f310e98f10c0",
         "type": "github"
       },
       "original": {
@@ -662,9 +656,7 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "pre-commit-hooks": "pre-commit-hooks",
         "sops-nix": "sops-nix",
-        "spicetify-nix": "spicetify-nix",
-        "src-chaotic-toolbox": "src-chaotic-toolbox",
-        "src-repoctl": "src-repoctl"
+        "spicetify-nix": "spicetify-nix"
       }
     },
     "rust-overlay": {
@@ -735,38 +727,6 @@
       "original": {
         "owner": "the-argus",
         "repo": "spicetify-nix",
-        "type": "github"
-      }
-    },
-    "src-chaotic-toolbox": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1695233583,
-        "narHash": "sha256-nx8cUN5UBiYuhp+ujXt23MLO45+bkCyFXbnX6oqoPLU=",
-        "owner": "chaotic-aur",
-        "repo": "toolbox",
-        "rev": "b010e6a78a24688396f816e65b012cf6a3184ba0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "chaotic-aur",
-        "repo": "toolbox",
-        "type": "github"
-      }
-    },
-    "src-repoctl": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1665410540,
-        "narHash": "sha256-hxWwyD6UHE8SSIooEQB5+dHGLgmv1bJ3G64PmKgKg58=",
-        "owner": "cassava",
-        "repo": "repoctl",
-        "rev": "86faed1474e9d8fed9b10a9b8864316e34066d6a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "cassava",
-        "repo": "repoctl",
         "type": "github"
       }
     },
