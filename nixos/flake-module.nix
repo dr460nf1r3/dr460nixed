@@ -10,6 +10,7 @@
       inputs.disko.nixosModules.disko
       inputs.lanzaboote.nixosModules.lanzaboote
       inputs.sops-nix.nixosModules.sops
+      inputs.spicetify-nix.nixosModule
     ];
 
     # Our images should be cleaner, so we use a different set of modules
