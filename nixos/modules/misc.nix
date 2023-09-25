@@ -151,7 +151,6 @@ in {
       extensions = [
         "ajhmfdgkijocedmfjonnpjfojldioehi" # Privacy Pass
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock origin
-        "doojmbjmlfjjnbmnoijecmcbfeoakpjm" # NoScript
         "edibdbjcniadpccecjdfdjjppcpchdlm" # I Still Don't Care About Cookies
         "fhnegjjodccfaliddboelcleikbmapik" # Tab Counter
         "hipekcciheckooncpjeljhnekcoolahp" # Tabliss

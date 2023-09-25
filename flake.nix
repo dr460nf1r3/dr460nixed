@@ -1,8 +1,10 @@
 {
   description = "Dr460nixed NixOS flake ❄️";
 
-  nixConfig.extra-substituters = ["https://cache.garnix.io"];
-  nixConfig.extra-trusted-public-keys = ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="];
+  nixConfig = {
+    extra-substituters = ["https://cache.garnix.io"];
+    extra-trusted-public-keys = ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="];
+  };
 
   inputs = {
     # Chaotic Nyx!
@@ -48,10 +50,8 @@
       inputs.flake-utils.follows = "flake-utils";
       inputs.home-manager.follows = "home-manager";
       inputs.nix-index-database.follows = "nix-index-database";
-      inputs.nixos-hardware.follows = "nixos-hardware";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks.follows = "pre-commit-hooks";
-      inputs.spicetify-nix.follows = "spicetify-nix";
     };
 
     # Gitignore common input
@@ -167,16 +167,6 @@
       url = "github:the-argus/spicetify-nix";
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # The Chaotic toolbox
-    src-chaotic-toolbox = {
-      url = "github:chaotic-aur/toolbox";
-      flake = false;
-    };
-    src-repoctl = {
-      url = "github:cassava/repoctl";
-      flake = false;
     };
   };
 
