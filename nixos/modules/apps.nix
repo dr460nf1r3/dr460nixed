@@ -81,6 +81,7 @@ in {
       beekeeper-studio
       bind.dnsutils
       deadnix
+      gh
       gitkraken
       heroku
       hugo
@@ -159,6 +160,7 @@ in {
       yubioath-flutter
     ])
     ++ optionals cfg.school (with pkgs; [
+      ocrmypdf
       speedcrunch
       sqlite
       sqlitebrowser
