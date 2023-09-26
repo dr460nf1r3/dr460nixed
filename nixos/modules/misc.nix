@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -33,6 +34,15 @@ with lib; let
   '';
 in {
   options.dr460nixed = {
+    adblock =
+      mkOption
+      {
+        default = true;
+        type = types.bool;
+        description = mdDoc ''
+          Whether hosts-based ad blocking should be set up.
+        '';
+      };
     auto-upgrade =
       mkOption
       {
@@ -178,5 +188,10 @@ in {
       cachyos-kernel = true;
       enable = true;
     };
+
+    # /etc/hosts based adblocker (unified hosts + fakenews)
+    networking.extraHosts =
+      lib.mkIf cfg.adblock
+      (builtins.readFile "${inputs.stevenblack-hosts}/alternates/fakenews/hosts");
   };
 }

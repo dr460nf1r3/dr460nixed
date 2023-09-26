@@ -656,7 +656,8 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "pre-commit-hooks": "pre-commit-hooks",
         "sops-nix": "sops-nix",
-        "spicetify-nix": "spicetify-nix"
+        "spicetify-nix": "spicetify-nix",
+        "stevenblack-hosts": "stevenblack-hosts"
       }
     },
     "rust-overlay": {
@@ -727,6 +728,22 @@
       "original": {
         "owner": "the-argus",
         "repo": "spicetify-nix",
+        "type": "github"
+      }
+    },
+    "stevenblack-hosts": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1695672086,
+        "narHash": "sha256-/c7anuxxQEabcZIRv5Xnwb7pXSBeKGoMOFDDeEyxLw0=",
+        "owner": "stevenblack",
+        "repo": "hosts",
+        "rev": "234b370284f9d79e0103862932ab781777fe983d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevenblack",
+        "repo": "hosts",
         "type": "github"
       }
     },

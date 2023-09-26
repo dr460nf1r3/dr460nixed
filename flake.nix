@@ -168,6 +168,12 @@
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Ad and malware blocking hosts file
+    stevenblack-hosts = {
+      url = "github:stevenblack/hosts";
+      flake = false;
+    };
   };
 
   outputs = {
