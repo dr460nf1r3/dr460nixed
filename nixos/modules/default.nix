@@ -3,7 +3,6 @@
     ../../overlays
     ./apps.nix
     ./boot.nix
-    ./chaotic/chaotic.nix
     ./common.nix
     ./desktops.nix
     ./docker-compose-runner.nix

@@ -27,10 +27,6 @@
     specialArgs = {
       inherit inputs;
       keys.nico = inputs.keys_nico;
-      sources = {
-        chaotic-toolbox = inputs.src-chaotic-toolbox;
-        repoctl = inputs.src-repoctl;
-      };
       self = {
         inherit (self) inputs;
         inherit (self) nixosModules;
