@@ -5,13 +5,16 @@
       ./modules
       inputs.disko.nixosModules.disko
       inputs.lanzaboote.nixosModules.lanzaboote
+      inputs.spicetify-nix.nixosModule
     ];
 
     # Our images should be cleaner, so we use a different set of modules
     imageModules = [
       ./modules/desktops.nix
       ./modules/locales.nix
+      ./modules/misc.nix
       inputs.nixos-generators.nixosModules.all-formats
+      inputs.spicetify-nix.nixosModule
       "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
     ];
 

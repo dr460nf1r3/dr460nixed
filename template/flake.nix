@@ -37,10 +37,8 @@
     garuda-nix.inputs.flake-utils.follows = "flake-utils";
     garuda-nix.inputs.home-manager.follows = "home-manager";
     garuda-nix.inputs.nix-index-database.follows = "nix-index-database";
-    garuda-nix.inputs.nixos-hardware.follows = "nixos-hardware";
     garuda-nix.inputs.nixpkgs.follows = "nixpkgs";
     garuda-nix.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
-    garuda-nix.inputs.spicetify-nix.follows = "spicetify-nix";
 
     # Gitignore common input
     gitignore.url = "github:hercules-ci/gitignore.nix";
@@ -90,6 +88,12 @@
     spicetify-nix.url = "github:the-argus/spicetify-nix";
     spicetify-nix.inputs.flake-utils.follows = "flake-utils";
     spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Ad and malware blocking hosts file
+    stevenblack-hosts = {
+      url = "github:stevenblack/hosts";
+      flake = false;
+    };
   };
 
   outputs = {

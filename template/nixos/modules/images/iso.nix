@@ -13,7 +13,7 @@
   };
 
   # Home-manager desktop settings
-  home-manager.users."nixos" = import ../../home-manager/desktops.nix;
+  home-manager.users."nixos" = import ../../../home-manager/kde.nix;
 
   # CD's may use autologin for convenience
   services.xserver.displayManager.sddm.settings = {
