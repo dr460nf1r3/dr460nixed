@@ -122,7 +122,7 @@ in {
             jnoortheen.nix-ide
             kamadorueda.alejandra
             ms-azuretools.vscode-docker
-            ms-python.python
+            # ms-python.python - broken python-debugpy once again?
             ms-python.vscode-pylance
             ms-vscode-remote.remote-ssh
             ms-vscode.hexeditor
