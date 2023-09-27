@@ -108,7 +108,7 @@
 
     # Have a local index of nixpkgs for fast launching of apps
     nix-index-database = {
-      url = "github:Mic92/nix-index-database";
+      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

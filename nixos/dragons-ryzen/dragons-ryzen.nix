@@ -98,6 +98,9 @@
     };
   };
 
+  # Lets try mesa_git again!
+  chaotic.mesa-git.enable = true;
+
   # Virt-manager requires iptables to let guests have internet
   networking.nftables.enable = lib.mkForce false;
 
