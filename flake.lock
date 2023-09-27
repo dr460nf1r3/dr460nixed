@@ -10,8 +10,8 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1695739845,
-        "narHash": "sha256-yHTfvV5Mns0S6yGsoB+hvLDrBA8KY3lKEMlffaVwCBg=",
+        "lastModified": 1695813277,
+        "narHash": "sha256-CjXCK3Bxyo6y9WVA9dlrOrsYGEaMzsF/Zhu6nXTy4sA=",
         "owner": "chaotic-cx",
         "repo": "nyx",
         "rev": "95a25fdcb4709f780e5c7c4015443bcf927d7f01",
