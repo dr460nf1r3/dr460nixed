@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "auto-cpufreq": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1696088758,
+        "narHash": "sha256-+2G71xhuu2zXQG7wVTLowTnqw8/uhBWQGa1y+RZ6COs=",
+        "owner": "AdnanHodzic",
+        "repo": "auto-cpufreq",
+        "rev": "1b229891bce47740875d932cb51f185288e2f4f6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AdnanHodzic",
+        "repo": "auto-cpufreq",
+        "type": "github"
+      }
+    },
     "chaotic-nyx": {
       "inputs": {
         "compare-to": "compare-to",

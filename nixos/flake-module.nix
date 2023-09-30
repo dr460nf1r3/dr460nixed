@@ -44,6 +44,7 @@
           ++ [
             ./dragons-ryzen/dragons-ryzen.nix
             ./modules/disko/zfs-encrypted.nix
+            inputs.auto-cpufreq.nixosModules.default
             inputs.impermanence.nixosModules.impermanence
             inputs.nixos-hardware.nixosModules.common-cpu-amd
             inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate

@@ -99,7 +99,24 @@
   };
 
   # Lets try mesa_git again!
-  chaotic.mesa-git.enable = true;
+  # chaotic.mesa-git.enable = true;
+
+  # Enable the auto-cpufreq service instead of
+  # power-profiles-daemon
+  services.power-profiles-daemon.enable = false;
+  programs.auto-cpufreq = {
+    enable = true;
+    settings = {
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+      battery = {
+        governor = "powersave";
+        turbo = "auto";
+      };
+    };
+  };
 
   # Virt-manager requires iptables to let guests have internet
   networking.nftables.enable = lib.mkForce false;

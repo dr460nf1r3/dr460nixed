@@ -7,6 +7,12 @@
   };
 
   inputs = {
+    # Always updated auto-cpufreq
+    auto-cpufreq = {
+      url = "github:AdnanHodzic/auto-cpufreq";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Chaotic Nyx!
     chaotic-nyx = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
