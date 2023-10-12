@@ -63,7 +63,6 @@
       user = "nico";
     };
     school = true;
-    smtp.enable = lib.mkForce false; # until python2.7-oildev is fixed
     tailscale = {
       enable = true;
       extraUpArgs = [
