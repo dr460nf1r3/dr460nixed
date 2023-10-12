@@ -561,7 +561,11 @@ in {
       telegram-desktop_git
       tor-browser-bundle-bin
       usbutils
-      vorta
+      (vivaldi.override {
+        proprietaryCodecs = true;
+        enableWidevine = false;
+      })
+      # vorta
       vulkan-tools
       yt-dlp_git
     ])
@@ -1961,6 +1965,7 @@ in {
         &quot;.yubico&quot;
         &quot;Documents&quot;
         &quot;Downloads&quot;
+        &quot;Games&quot;
         &quot;Music&quot;
         &quot;Nextcloud&quot;
         &quot;Pictures&quot;
@@ -2219,7 +2224,7 @@ in {
         '';
       };
       host = mkOption {
-        default = false;
+        default = null;
         type = types.str;
         example = &quot;dragons-ryzen&quot;;
         description = mdDoc ''
@@ -2229,7 +2234,7 @@ in {
       port = mkOption {
         default = 22;
         type = types.int;
-        example = &quot;build&quot;;
+        example = 1022;
         description = mdDoc ''
           Specifies the target port for remote builds.
         '';
@@ -2270,7 +2275,7 @@ in {
       # Allow distributed builds
       distributedBuilds = lib.mkIf cfgRemote.enableGlobally true;
 
-      # Don't warn about dirty flakes and accept flake configs by default
+      # Dont warn about dirty flakes and accept flake configs by default
       extraOptions = ''
         http-connections = 0
         warn-dirty = false
@@ -2303,7 +2308,7 @@ in {
         # Enable certain system features
         system-features = [&quot;big-parallel&quot; &quot;kvm&quot;];
 
-        # Trust the remote machines' cache signatures
+        # Trust the remote machines cache signatures
         trusted-public-keys = lib.mkIf cfgRemote.enable [&quot;${cfgRemote.trustedPublicKey}&quot;];
         trusted-substituters = lib.mkIf cfgRemote.enable [&quot;ssh-ng://${cfgRemote.host}&quot;];
       };

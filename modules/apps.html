@@ -250,7 +250,11 @@ in {
       telegram-desktop_git
       tor-browser-bundle-bin
       usbutils
-      vorta
+      (vivaldi.override {
+        proprietaryCodecs = true;
+        enableWidevine = false;
+      })
+      # vorta
       vulkan-tools
       yt-dlp_git
     ])
