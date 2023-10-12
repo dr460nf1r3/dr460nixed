@@ -1210,7 +1210,7 @@ in {
     # Only install fonts I personally use
     fonts.enableDefaultPackages = false;
 
-    # Enable the dr460nized desktop's settings
+    # Enable the dr460nized desktops settings
     garuda.dr460nized.enable = true;
 
     # Allow better Syncthing speeds
@@ -2224,7 +2224,7 @@ in {
         '';
       };
       host = mkOption {
-        default = null;
+        default = &quot;&quot;;
         type = types.str;
         example = &quot;dragons-ryzen&quot;;
         description = mdDoc ''
