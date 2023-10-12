@@ -36,7 +36,7 @@ in {
         '';
       };
       host = mkOption {
-        default = null;
+        default = "";
         type = types.str;
         example = "dragons-ryzen";
         description = mdDoc ''
