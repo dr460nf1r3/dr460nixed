@@ -169,6 +169,7 @@
         ".yubico"
         "Documents"
         "Downloads"
+        "Games"
         "Music"
         "Nextcloud"
         "Pictures"
