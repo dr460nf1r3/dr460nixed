@@ -20,13 +20,12 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
       - name: Install Nix 📦
-        uses: cachix/install-nix-action@6a9a9e84a173d90b3ffb42c5ddaf9ea033fad011  # v23
+        uses: DeterminateSystems/nix-installer-action@v6
         with:
-          extra_nix_config: |
+          extra-conf: |
             accept-flake-config = true
             system-features = big-parallel kvm
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-          nix_path: nixpkgs=channel:nixos-unstable
+          diagnostic-endpoint: ""
       - name: Build ISO 📀
         run: |
           nix run -L .#iso
