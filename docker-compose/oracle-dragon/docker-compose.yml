@@ -31,7 +31,7 @@ services:
 
   # GitHub runner for my projects
   github_runner:
-    image: myoung34/github-runner:2.310.0
+    image: myoung34/github-runner:2.310.2
     container_name: github_runner
     privileged: true
     environment:
