@@ -7,7 +7,6 @@
 }: {
   # Individual settings + low-latency Pipewire
   imports = [
-    ../modules/impermanence.nix
     ./hardware-configuration.nix
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
@@ -52,7 +51,6 @@
     desktops.enable = true;
     development.enable = true;
     gaming.enable = true;
-    lanzaboote.enable = true;
     nix-super.enable = true;
     performance = true;
     remote-build = {
@@ -91,11 +89,19 @@
     #   user = "nico";
     # };
     yubikey = true;
-    zfs = {
-      enable = true;
-      sendMails = true;
-    };
   };
+
+  # Garuda Nix Subsystem (managed via Garuda installation)
+  garuda = {
+    dr460nized.enable = true;
+    managed.config = ./garuda-managed.json;
+    subsystem.enable = true;
+  };
+
+  # Workaround build error for now
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-24.8.6"
+  ];
 
   # Lets try mesa_git again!
   # chaotic.mesa-git.enable = true;

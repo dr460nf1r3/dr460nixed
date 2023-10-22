@@ -34,7 +34,6 @@ in {
         enable = true;
         enableOnBoot = false;
         package = pkgs.docker_24;
-        storageDriver = "zfs";
       };
       libvirtd = {
         enable = true;

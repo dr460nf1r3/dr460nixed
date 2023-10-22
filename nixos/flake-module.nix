@@ -43,16 +43,12 @@
           defaultModules
           ++ [
             ./dragons-ryzen/dragons-ryzen.nix
-            ./modules/disko/zfs-encrypted.nix
             inputs.auto-cpufreq.nixosModules.default
             inputs.impermanence.nixosModules.impermanence
             inputs.nixos-hardware.nixosModules.common-cpu-amd
             inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
             inputs.nixos-hardware.nixosModules.common-gpu-amd
-            {
-              _module.args.disks = ["/dev/nvme0n1"];
-              nixpkgs.overlays = [inputs.nixd.overlays.default];
-            }
+            {nixpkgs.overlays = [inputs.nixd.overlays.default];}
           ];
         inherit specialArgs;
       };
