@@ -56,6 +56,11 @@
     systemd-boot.enable = true;
   };
 
+  # Workaround build error for now
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-24.8.6"
+  ];
+
   # Yes, autologin on this one
   services.xserver.displayManager.sddm.settings = {
     Autologin = {
