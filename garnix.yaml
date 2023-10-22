@@ -1,3 +1,5 @@
 ---
 builds:
-  exclude: [packages.*.vbox]
+  exclude:
+    - packages.*.vbox
+    - nixosConfigurations.dragons-ryzen
