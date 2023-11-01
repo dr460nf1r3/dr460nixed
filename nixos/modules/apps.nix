@@ -44,7 +44,7 @@ in {
       aspellDicts.en
       chromium-flagged
       ffmpegthumbnailer
-      firefox_nightly
+      floorp
       freerdp
       gimp
       helvum
@@ -67,16 +67,11 @@ in {
       okular
       qbittorrent
       rustdesk
-      spotdl
       syncthingtray
       telegram-desktop_git
       tor-browser-bundle-bin
       usbutils
-      (vivaldi.override {
-        proprietaryCodecs = true;
-        enableWidevine = false;
-      })
-      # vorta
+      vorta
       vulkan-tools
       yt-dlp_git
     ])
@@ -89,8 +84,6 @@ in {
       gitkraken
       heroku
       hugo
-      jetbrains.pycharm-professional
-      keybase-gui
       manix
       mongodb-compass
       nerdctl
