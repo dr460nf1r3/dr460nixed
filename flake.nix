@@ -272,7 +272,7 @@
             {package = "pre-commit";}
             {package = "rsync";}
             {package = "sops";}
-            {package = "yamlfix";}
+            # {package = "yamlfix";} - broken as of 231101
           ];
           devshell.startup.preCommitHooks.text = self.checks.${system}.pre-commit-check.shellHook;
           env = [
