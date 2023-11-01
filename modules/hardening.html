@@ -269,7 +269,7 @@ in {
 
     # Protect logins and sudo on servers via DUO
     # leaving EnvFactor enabled for other apps
-    security.duosec = lib.mkIf cfg.duosec {
+    security.duosec = mkIf cfg.duosec {
       acceptEnvFactor = true;
       autopush = true;
       failmode = &quot;safe&quot;;
@@ -281,14 +281,14 @@ in {
       secretKeyFile = config.sops.secrets.&quot;api_keys/duo&quot;.path;
       ssh.enable = true;
     };
-    sops.secrets.&quot;api_keys/duo&quot; = lib.mkIf cfg.duosec {
+    sops.secrets.&quot;api_keys/duo&quot; = mkIf cfg.duosec {
       mode = &quot;0600&quot;;
       path = &quot;/run/secrets/api_keys/duo&quot;;
     };
-    security.pam.services = lib.mkIf cfg.duosec {
+    security.pam.services = mkIf cfg.duosec {
       &quot;login&quot;.duoSecurity.enable = true;
-      &quot;sddm&quot;.duoSecurity.enable = lib.mkIf config.dr460nixed.desktops.enable true;
-      &quot;sudo&quot;.duoSecurity.enable = lib.mkIf config.dr460nixed.servers.enable true;
+      &quot;sddm&quot;.duoSecurity.enable = mkIf config.dr460nixed.desktops.enable true;
+      &quot;sudo&quot;.duoSecurity.enable = mkIf config.dr460nixed.servers.enable true;
     };
 
     # Disable root login &amp; password authentication on sshd
