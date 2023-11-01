@@ -22,7 +22,6 @@
 
   # Hostname & hostId for ZFS
   networking = {
-    hostId = "9c8011ee";
     hostName = "dragons-ryzen";
   };
 
@@ -47,12 +46,11 @@
 
   # Enable a few selected custom settings
   dr460nixed = {
-    chromium = true;
     desktops.enable = true;
     development.enable = true;
     gaming.enable = true;
-    nix-super.enable = true;
     performance = true;
+    systemd-boot.enable = true;
     remote-build = {
       enable = true;
       host = "remote-build";
@@ -89,13 +87,6 @@
     #   user = "nico";
     # };
     yubikey = true;
-  };
-
-  # Garuda Nix Subsystem (managed via Garuda installation)
-  garuda = {
-    dr460nized.enable = true;
-    managed.config = ./garuda-managed.json;
-    subsystem.enable = true;
   };
 
   # Workaround build error for now
