@@ -13,9 +13,20 @@ in {
       mkOption
       {
         default = true;
+        example = false;
         type = types.bool;
         description = mdDoc ''
           Whether the operating system should be hardened.
+        '';
+      };
+    duosec =
+      mkOption
+      {
+        default = false;
+        example = true;
+        type = types.bool;
+        description = mdDoc ''
+          Whether logins should be protected by Duo Security.
         '';
       };
   };
@@ -80,7 +91,7 @@ in {
 
     # Protect logins and sudo on servers via DUO
     # leaving EnvFactor enabled for other apps
-    security.duosec = {
+    security.duosec = mkIf cfg.duosec {
       acceptEnvFactor = true;
       autopush = true;
       failmode = "safe";
@@ -92,14 +103,14 @@ in {
       secretKeyFile = config.sops.secrets."api_keys/duo".path;
       ssh.enable = true;
     };
-    sops.secrets."api_keys/duo" = {
+    sops.secrets."api_keys/duo" = mkIf cfg.duosec {
       mode = "0600";
       path = "/run/secrets/api_keys/duo";
     };
-    security.pam.services = {
+    security.pam.services = mkIf cfg.duosec {
       "login".duoSecurity.enable = true;
-      "sddm".duoSecurity.enable = lib.mkIf config.dr460nixed.desktops.enable true;
-      "sudo".duoSecurity.enable = lib.mkIf config.dr460nixed.servers.enable true;
+      "sddm".duoSecurity.enable = mkIf config.dr460nixed.desktops.enable true;
+      "sudo".duoSecurity.enable = mkIf config.dr460nixed.servers.enable true;
     };
 
     # Disable root login & password authentication on sshd
@@ -107,12 +118,19 @@ in {
     # (for whatever reason the default config did not work a at all?
     # maybe related to https://github.com/NixOS/nixpkgs/issues/115044)
     services.openssh = {
-      extraConfig = ''
-        AllowTcpForwarding no
-        ForceCommand /usr/bin/env login_duo
-        HostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,rsa-sha2-256,rsa-sha2-512,rsa-sha2-256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com
-        PermitTunnel no
-      '';
+      extraConfig =
+        if cfg.duosec
+        then ''
+          AllowTcpForwarding no
+          ForceCommand /usr/bin/env login_duo
+          HostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,rsa-sha2-256,rsa-sha2-512,rsa-sha2-256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com
+          PermitTunnel no
+        ''
+        else ''
+          AllowTcpForwarding no
+          HostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,rsa-sha2-256,rsa-sha2-512,rsa-sha2-256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com
+          PermitTunnel no
+        '';
       settings = {
         Ciphers = [
           "aes256-gcm@openssh.com"
