@@ -177,8 +177,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="dr460nixed-nixos-"><a class="header" href="#dr460nixed-nixos-">Dr460nixed NixOS ❄️</a></h1>
-<p><a href="https://builtwithnix.org"><img src="https://img.shields.io/static/v1?logo=nixos&amp;logoColor=white&amp;label=&amp;message=Built%20with%20Nix&amp;color=41439a" alt="built with nix" /></a> <a href="https://garnix.io"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fdr460nf1r3%2Fdr460nixed%3Fbranch%3Dmain" alt="built with garnix" /></a>
-<a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml"><img src="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml/badge.svg" alt="Build images" /></a> <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml"><img src="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg" alt="Sync Tailscale ACLs" /></a></p>
+<p><a href="https://builtwithnix.org"><img src="https://img.shields.io/static/v1?logo=nixos&amp;logoColor=white&amp;label=&amp;message=Built%20with%20Nix&amp;color=41439a" alt="built with nix" /></a> <a href="https://garnix.io"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fdr460nf1r3%2Fdr460nixed%3Fbranch%3Dmain" alt="built with garnix" /></a> <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml"><img src="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg" alt="Sync Tailscale ACLs" /></a></p>
 <p>This repository contains a framework to get started with NixOS quickly, featuring opiniated and selected default settings.
 It also contains my personal NixOS configuration, which might serve as inspiration for other peoples' setups.</p>
 <p>While starting out with NixOS, especially reading other peoples flakes proved to be very helpful, so I figured sharing my personal setup my help other people as well!
@@ -247,8 +246,7 @@ Furthermore, the flakes' outputs are automatically build and cached via <a href=
 <div style="break-before: page; page-break-before: always;"></div><h1 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h1>
 <h2 id="using-the-installer"><a class="header" href="#using-the-installer">Using the installer</a></h2>
 <p>An installer has been created to ease the installation process by bootstrapping a basic flake with a personal host and usernames.
-It can be found on the <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml">ISO builds</a>, so the quickest way to get going is to download the ISO and run <code>sudo installer</code>.
-It can also be used on any OS, which has <code>nix</code> available. Find more information about how to proceed <a href="./installer.html">here</a>.</p>
+Information on how to build an ISO can be found on the <a href="./generating-images.html">here</a>. The installer can also be used on any OS, that has <code>nix</code> available. Find more information about how to proceed <a href="./installer.html">here</a>.</p>
 <h2 id="creating-your-own-configuration-including-sops-nix"><a class="header" href="#creating-your-own-configuration-including-sops-nix">Creating your own configuration including sops-nix</a></h2>
 <p>This one is the harder way and is mostly suitable for people with a basic understanding of NixOS.
 Several preparations have to be made to bootstrap a working installation if not using the <a href="installer.html">installer</a>:</p>
@@ -297,8 +295,7 @@ To allow cross-compilation, please have a look at how to set up the required opt
 }
 </code></pre>
 <h2 id="provided-images"><a class="header" href="#provided-images">Provided images</a></h2>
-<p>Refreshed ISO files are automatically built with every new commit. Click the badge to have a look at the latest workflow runs.</p>
-<p><a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml"><img src="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml/badge.svg" alt="Build images" /></a></p>
+<p>Prebuilt images used to be provided via GitHub actions, though lately builds are seemingly hitting the resource limits of the free GitHub actions VMs. Therefore, ISO builds are currently only provided with new releases.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-installer"><a class="header" href="#the-installer">The installer</a></h1>
 <p>This flake features an installer, which may be used to set up a basic dr460nixed NixOS installation. Both the dr460nixed ISO and regular NixOS live CDs are supported.
 The installer uses the files of the <code>templates</code> folder to run <code>nix init -t</code> from and proceeds to customize the installation with users' choices.
