@@ -3,8 +3,7 @@
 ## Using the installer
 
 An installer has been created to ease the installation process by bootstrapping a basic flake with a personal host and usernames.
-It can be found on the [ISO builds](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml), so the quickest way to get going is to download the ISO and run `sudo installer`.
-It can also be used on any OS, which has `nix` available. Find more information about how to proceed [here](./installer.md).
+Information on how to build an ISO can be found on the [here](./generating-images.md). The installer can also be used on any OS, that has `nix` available. Find more information about how to proceed [here](./installer.md).
 
 ## Creating your own configuration including sops-nix
 

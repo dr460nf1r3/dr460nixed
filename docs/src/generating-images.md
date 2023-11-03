@@ -41,6 +41,4 @@ TLDR: add the following to your configuration and apply it:
 
 ## Provided images
 
-Refreshed ISO files are automatically built with every new commit. Click the badge to have a look at the latest workflow runs.
-
-[![Build images](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/build_images.yml)
+Prebuilt images used to be provided via GitHub actions, though lately builds are seemingly hitting the resource limits of the free GitHub actions VMs. Therefore, ISO builds are currently only provided with new releases.
