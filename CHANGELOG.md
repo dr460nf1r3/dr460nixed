@@ -48,10 +48,11 @@
 - **template**: symlinks don't work with flake templates, therefore provide the real files and strip them down
 - **flake.nix**: move packages to their own directory and make nixos-generators an input
 
-## 1.0.0 (2023-09-17)
+## 1.0.0 (2023-09-18)
 
 ### Feat
 
+- **images**: add image name customisation and import NixOS installer profiles, activating Calamares
 - **images**: give the user a generic name
 - **images**: fix failures by including installer cd modules
 - **images**: provide more configurations for the iso; set up automatic Github releases
@@ -66,7 +67,7 @@
 - **flake,-docs**: refactor flake to provide the same nix-shell/nix develop; add mdbook for documentation generation
 - **inputs;-nix**: replace nix with nix-super; move inputs to garuda-nix-subsystem & add nix-gaming lowlatecy
 - **flake**: use common inputs by specifying follows; enable nix lock file maintenance
-- **flake**: expose dr460nixed.\* modules to other flakes
+- **flake**: expose dr460nixed.* modules to other flakes
 - **tailscale**: allow my personal devices to use Mullvad exit nodes
 - **impermanence.nix**: add more persisting directories (direnv, lorri, ..)
 - **flake**: rotate my SSH key used to authenticate
@@ -80,6 +81,10 @@
 - **development.nix**: add Garuda nspawn configuration
 - **vscode**: update ruff and tailscale extensions
 - **.cz.json**: add commitizen for commit management
+- add syncthing module; flake.nix: cleanup
+- add bfptune; add back sudo insults
+- add remove-ssh & pull-request vscode extentions
+- Duo 2FA on servers; feat: tailscale SSH
 
 ### Fix
 
