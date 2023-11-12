@@ -6,6 +6,13 @@
 }:
 with lib; let
   cfg = config.dr460nixed.development;
+
+  # Retrieve updpksums script from Arch - fix me: shebang
+  updpkgsums = pkgs.writeScriptBin "updpkgsums" (builtins.readFile updpkgsumsSrc);
+  updpkgsumsSrc = builtins.fetchurl {
+    url = "https://gitlab.archlinux.org/pacman/pacman-contrib/-/raw/master/src/updpkgsums.sh.in";
+    sha256 = "0c7fmvhdwkfmh715kwj4dkls3xzrzxxhqw2930r69yfzr1ijsppl";
+  };
 in {
   options.dr460nixed.development = {
     enable =
@@ -42,6 +49,12 @@ in {
 
     # Allow building sdcard images for Raspi
     nixpkgs.config.allowUnsupportedSystem = true;
+
+    # Supply makepkg.conf for pacman
+    environment = {
+      etc."makepkg.conf".source = "${pkgs.pacman}/etc/makepkg.conf";
+      systemPackages = [updpkgsums];
+    };
 
     # Wireshark
     programs.wireshark.enable = true;
