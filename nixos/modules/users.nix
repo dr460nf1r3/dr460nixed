@@ -17,6 +17,7 @@
     chaotic_op = uidGid 996;
     cloudflared = uidGid 976;
     dhcpcd = uidGid 976;
+    fwupd-refresh = uidGid 975;
     grafana = uidGid 995;
     influxdb2 = uidGid 994;
     loki = uidGid 993;

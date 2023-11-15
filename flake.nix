@@ -7,6 +7,12 @@
   };
 
   inputs = {
+    # Archlinux development
+    archix = {
+      url = "github:SamLukeYes/archix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Always updated auto-cpufreq
     auto-cpufreq = {
       url = "github:AdnanHodzic/auto-cpufreq";
@@ -17,6 +23,7 @@
     chaotic-nyx = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.home-manager.follows = "home-manager";
+      inputs.systems.follows = "systems";
     };
 
     # Devshell to set up a development environment
@@ -44,7 +51,10 @@
     };
 
     # Required by pre-commit-hooks
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
 
     # Garuda Linux flake - most of my system settings are here
     garuda-nix = {
@@ -179,6 +189,10 @@
     stevenblack-hosts = {
       url = "github:stevenblack/hosts";
       flake = false;
+    };
+
+    systems = {
+      url = "github:nix-systems/default";
     };
   };
 

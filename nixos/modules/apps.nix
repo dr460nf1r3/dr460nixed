@@ -94,7 +94,6 @@ in {
       nixpkgs-review
       nodePackages_latest.prettier
       nodejs
-      pacman
       ruff
       shellcheck
       shfmt
