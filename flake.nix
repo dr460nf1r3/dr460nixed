@@ -128,13 +128,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # feature-rich and convenient fork of the Nix package manager
+    # Feature-rich and convenient fork of the Nix package manager
     nix-super = {
       url = "github:privatevoid-net/nix-super";
       inputs.flake-compat.follows = "flake-compat";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Script to install NixOS on any host
     nixos-anywhere = {
       url = "https://raw.githubusercontent.com/numtide/nixos-anywhere/main/src/nixos-anywhere.sh";
       flake = false;
@@ -191,9 +192,8 @@
       flake = false;
     };
 
-    systems = {
-      url = "github:nix-systems/default";
-    };
+    # Used by multiple other flakes
+    systems.url = "github:nix-systems/default";
   };
 
   outputs = {
