@@ -18,6 +18,7 @@
     cloudflared = uidGid 976;
     dhcpcd = uidGid 976;
     fwupd-refresh = uidGid 975;
+    flatpak = uidGid 974;
     grafana = uidGid 995;
     influxdb2 = uidGid 994;
     loki = uidGid 993;

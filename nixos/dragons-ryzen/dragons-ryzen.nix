@@ -117,6 +117,9 @@
   # Virt-manager requires iptables to let guests have internet
   networking.nftables.enable = lib.mkForce false;
 
+  # Mcpe launcher
+  services.flatpak.enable = true;
+
   # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
