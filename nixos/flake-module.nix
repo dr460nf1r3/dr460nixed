@@ -70,6 +70,18 @@
         inherit specialArgs;
       };
 
+      # Dr460nized desktop image, KDE 6 version
+      dr460nixed-desktop-kde6 = inputs.garuda-nix.lib.garudaSystem {
+        system = "x86_64-linux";
+        modules =
+          imageModules
+          ++ [
+            ./images/iso-kde6.nix
+            inputs.kde2nix.nixosModules.plasma6
+          ];
+        inherit specialArgs;
+      };
+
       # For WSL, mostly used at work only
       nixos-wsl = inputs.garuda-nix.lib.garudaSystem {
         system = "x86_64-linux";
