@@ -81,11 +81,11 @@ var hljs = (function () {
               ? e
               : n
             : "start" === n[0].event
-            ? e
-            : n
+              ? e
+              : n
           : e.length
-          ? e
-          : n;
+            ? e
+            : n;
       }
       function c(e) {
         s +=
@@ -348,10 +348,10 @@ var hljs = (function () {
     return n
       ? +n
       : (function (e) {
-          return N.includes(e.toLowerCase());
-        })(e)
-      ? 0
-      : 1;
+            return N.includes(e.toLowerCase());
+          })(e)
+        ? 0
+        : 1;
   }
   const R = t,
     y = r,
@@ -718,12 +718,12 @@ var hljs = (function () {
                       e.cached_variants
                         ? e.cached_variants
                         : (function e(n) {
-                            return !!n && (n.endsWithParent || e(n.starts));
-                          })(e)
-                        ? r(e, { starts: e.starts ? r(e.starts) : null })
-                        : Object.isFrozen(e)
-                        ? r(e)
-                        : e
+                              return !!n && (n.endsWithParent || e(n.starts));
+                            })(e)
+                          ? r(e, { starts: e.starts ? r(e.starts) : null })
+                          : Object.isFrozen(e)
+                            ? r(e)
+                            : e
                     );
                   })("self" === e ? s : e);
                 }),
@@ -847,8 +847,8 @@ var hljs = (function () {
                 ? "<br>"
                 : e
               : f.tabReplace
-              ? e.replace(/\t/g, f.tabReplace)
-              : e,
+                ? e.replace(/\t/g, f.tabReplace)
+                : e,
           )
         : e;
     }
