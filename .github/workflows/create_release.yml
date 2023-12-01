@@ -36,13 +36,14 @@ jobs:
       - name: Split large ISOs 🔪
         run: |
           find . -maxdepth 1 -type f -name "*.iso" -size +2M | while read -r file; do
-          fname=$(basename "$file")
-          tar -cv --tape-length=2097000 --file="$fname"-{0..9}.tar "$fname"
+          tar -c --tape-length=2097000 --file="$file"-{0..9}.tar "$file"
+          rm -rf "$file"
           done
+          ls -l *.{iso,tar}
       - name: Create release 📦
         uses: softprops/action-gh-release@v1
         with:
           body_path: CHANGELOG.md
           fail_on_unmatched_files: true
-          files: "*.{iso,tar}"
+          files: "*.tar"
           token: ${{ secrets.GITHUB_TOKEN }}
