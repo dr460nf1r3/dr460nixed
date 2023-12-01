@@ -8,6 +8,7 @@ permissions:
 on:
   push:
     tags: ['*']
+  workflow_dispatch:
 jobs:
   build-iso:
     runs-on: ubuntu-latest
@@ -33,10 +34,16 @@ jobs:
           cp result "$ISO_NAME"
         env:
           NIXPKGS_ALLOW_UNFREE: 1
+      - name: Split large ISOs 🔪
+        run: |
+          find . -maxdepth 1 -type f -name "*.iso" -size +2M | while read file; do
+          fname=$(basename "$file")
+          tar -cv --tape-length=2097000 --file="$fname"-{0..9}.tar "$fname"
+          done
       - name: Create release 📦
         uses: softprops/action-gh-release@v1
         with:
           body_path: CHANGELOG.md
           fail_on_unmatched_files: true
-          files: "*.iso"
+          files: "*.iso?(.tar)"
           token: ${{ secrets.GITHUB_TOKEN }}
