@@ -45,6 +45,5 @@ jobs:
           body_path: CHANGELOG.md
           fail_on_unmatched_files: true
           files: |
-            *.iso
             *.tar
           token: ${{ secrets.GITHUB_TOKEN }}
