@@ -39,11 +39,12 @@ jobs:
           tar -c --tape-length=2097000 --file="$file"-{0..9}.tar "$file"
           rm -rf "$file"
           done
-          ls -l *.{iso,tar}
       - name: Create release 📦
         uses: softprops/action-gh-release@v1
         with:
           body_path: CHANGELOG.md
           fail_on_unmatched_files: true
-          files: "*.tar"
+          files: |
+            *.iso
+            *.tar
           token: ${{ secrets.GITHUB_TOKEN }}
