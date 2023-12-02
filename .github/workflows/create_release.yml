@@ -28,7 +28,7 @@ jobs:
           diagnostic-endpoint: ""
       - name: Build ISO 📀
         run: |
-          nix build .#nixosConfigurations.dr460nixed-desktop.config.formats.install-iso
+          nix run .#iso
           ISO_NAME=$(realpath result | cut -d "/" -f6)
           cp result "$ISO_NAME"
         env:
