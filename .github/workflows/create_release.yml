@@ -28,7 +28,7 @@ jobs:
           diagnostic-endpoint: ""
       - name: Build ISO 📀
         run: |
-          nix run .#iso
+          nix run -L .#iso
           ISO_NAME=$(realpath result | cut -d "/" -f6)
           cp result "$ISO_NAME"
         env:
