@@ -34,7 +34,7 @@ jobs:
         env:
           NIXPKGS_ALLOW_UNFREE: 1
       - name: Split ISO 🔪
-        run: split -b 1990M -a 1 --numeric-suffixes=1 *.iso "dr460nixed-desktop.iso.part-"
+        run: split -b 1990M -a 1 --numeric-suffixes=1 ./*.iso "dr460nixed-desktop.iso.part-"
       - name: Create release 📦
         uses: softprops/action-gh-release@v1
         with:
