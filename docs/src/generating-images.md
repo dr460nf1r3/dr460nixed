@@ -41,4 +41,11 @@ TLDR: add the following to your configuration and apply it:
 
 ## Provided images
 
-Prebuilt images used to be provided via GitHub actions, though lately builds are seemingly hitting the resource limits of the free GitHub actions VMs. Therefore, ISO builds are currently only provided with new releases.
+Prebuilt images used to be provided via GitHub actions, though lately builds are seemingly hitting the resource limits of the free GitHub actions VMs.
+Therefore, ISO builds are currently only provided with new releases.
+In order to work around the filze size limit of release attachments, ISO files need to need to be downloaded as segments.
+To join them to a full file, you can do the following:
+
+```sh
+cat dr460nixed-desktop.iso.part-* > dr460nixed-desktop.iso
+```
