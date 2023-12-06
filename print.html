@@ -297,7 +297,12 @@ To allow cross-compilation, please have a look at how to set up the required opt
 }
 </code></pre>
 <h2 id="provided-images"><a class="header" href="#provided-images">Provided images</a></h2>
-<p>Prebuilt images used to be provided via GitHub actions, though lately builds are seemingly hitting the resource limits of the free GitHub actions VMs. Therefore, ISO builds are currently only provided with new releases.</p>
+<p>Prebuilt images used to be provided via GitHub actions, though lately builds are seemingly hitting the resource limits of the free GitHub actions VMs.
+Therefore, ISO builds are currently only provided with new releases.
+In order to work around the filze size limit of release attachments, ISO files need to need to be downloaded as segments.
+To join them to a full file, you can do the following:</p>
+<pre><code class="language-sh">cat dr460nixed-desktop.iso.part-* &gt; dr460nixed-desktop.iso
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-installer"><a class="header" href="#the-installer">The installer</a></h1>
 <p>This flake features an installer, which may be used to set up a basic dr460nixed NixOS installation. Both the dr460nixed ISO and regular NixOS live CDs are supported.
 The installer uses the files of the <code>templates</code> folder to run <code>nix init -t</code> from and proceeds to customize the installation with users' choices.
