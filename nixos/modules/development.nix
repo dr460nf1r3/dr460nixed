@@ -75,20 +75,6 @@ in {
     # Allow cross-compiling to aarch64
     boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
-    # Configure nspawn containers
-    systemd.nspawn."garuda" = {
-      execConfig = {
-        Boot = true;
-      };
-      enable = true;
-      filesConfig = {
-        Bind = ["/home/nico"];
-      };
-      networkConfig = {
-        VirtualEthernet = false;
-      };
-    };
-
     # In case I need to fix my phone
     programs.adb.enable = true;
   };

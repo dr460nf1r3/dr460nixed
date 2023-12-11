@@ -18,6 +18,9 @@
     extraModulePackages = with config.boot.kernelPackages; [zenpower];
     # Without this, bluetooth does not work
     kernelModules = ["btintel"];
+    # Override the per-default false value since we need this in order for GNS
+    # boot menu to be generated
+    loader.grub.enable = lib.mkForce true;
   };
 
   # Hostname & hostId for ZFS
@@ -50,7 +53,6 @@
     development.enable = true;
     gaming.enable = true;
     performance = true;
-    systemd-boot.enable = true;
     remote-build = {
       enable = true;
       host = "remote-build";
@@ -68,34 +70,25 @@
         "--ssh"
       ];
     };
-    # syncthing = {
-    #   cert = config.sops.secrets."syncthing/dragons-ryzen_cert".path;
-    #   devices = {
-    #     pixel-6 = {
-    #       id = "EBJDXV-7KUQ2N3-EMDYCJR-XEFBULZ-WGBNLIA-O27UFJM-PZAULDR-J2L3XQX";
-    #     };
-    #     tv-nixos = {
-    #       id = "7BCXVUAC-LWRHPS5-YHQU3JW-Z5EUI7D-U3TUXMB-F65I2BI-KWDYDAB-BLHNGA5";
-    #     };
-    #   };
-    #   devicesNames = [
-    #     "pixel-6"
-    #     "tv-nixos"
-    #   ];
-    #   enable = true;
-    #   key = config.sops.secrets."syncthing/dragons-ryzen_cert".path;
-    #   user = "nico";
-    # };
     yubikey = true;
+  };
+
+  # This device is partly managed by the Garuda installation on top
+  garuda = {
+    garuda-chroot = {
+      boot-uuid = "80CC-7CE9";
+      enable = true;
+      root-uuid = "1776871a-f356-4293-b025-19186473bff1";
+      user = "nico";
+    };
+    managed.config = ../../garuda-managed.json;
+    subsystem.enable = true;
   };
 
   # Workaround build error for now
   nixpkgs.config.permittedInsecurePackages = [
     "electron-24.8.6"
   ];
-
-  # Lets try mesa_git again!
-  # chaotic.mesa-git.enable = true;
 
   # Enable the auto-cpufreq service instead of
   # power-profiles-daemon

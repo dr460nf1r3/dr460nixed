@@ -251,7 +251,6 @@ in {
       theme=Sweet-transparent-toolbar
     '';
     "${localDir}/konsole/Dr460nized.profile".source = ./kde-static/Dr460nized.profile;
-    "${localDir}/user-places.xbel".source = ./kde-static/user-places.xbel;
     ".gtkrc-2.0".source = ./kde-static/gtkrc-2.0;
   };
 }
