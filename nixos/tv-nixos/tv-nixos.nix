@@ -4,9 +4,7 @@
   ...
 }: {
   # Individual settings
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [./hardware-configuration.nix];
 
   # Bootloader
   boot = {
@@ -36,7 +34,6 @@
     docker-compose-runner."tv-nixos" = {
       source = ../../docker-compose/tv-nixos;
     };
-    nix-super.enable = true;
     performance = true;
     servers = {
       enable = true;
@@ -57,9 +54,7 @@
   };
 
   # Workaround build error for now
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-24.8.6"
-  ];
+  nixpkgs.config.permittedInsecurePackages = ["electron-24.8.6"];
 
   # Yes, autologin on this one
   services.xserver.displayManager.sddm.settings = {
