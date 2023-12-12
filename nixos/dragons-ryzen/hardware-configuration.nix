@@ -11,7 +11,17 @@
     initrd = {
       availableKernelModules = ["nvme" "xhci_pci" "usbhid" "usb_storage"];
       kernelModules = [];
-      luks.devices."luks-3c463eaa-3e83-47c4-acbc-c483f2e63532".device = "/dev/disk/by-uuid/3c463eaa-3e83-47c4-acbc-c483f2e63532";
+      luks = {
+        devices."luks-3c463eaa-3e83-47c4-acbc-c483f2e63532" = {
+          allowDiscards = true;
+          device = "/dev/disk/by-uuid/3c463eaa-3e83-47c4-acbc-c483f2e63532";
+          keyFile = "/crypto_keyfile.bin";
+          preLVM = true;
+        };
+      };
+      secrets = {
+        "/crypto_keyfile.bin" = "/crypto_keyfile.bin";
+      };
     };
     kernelModules = ["kvm-amd"];
   };
