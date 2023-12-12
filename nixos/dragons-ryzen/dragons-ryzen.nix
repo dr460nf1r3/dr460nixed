@@ -39,7 +39,7 @@
     xserver = {
       displayManager.sddm.settings = {
         Autologin = {
-          Session = "plasma-wayland";
+          Session = "plasma";
           User = "nico";
         };
       };
