@@ -16,17 +16,13 @@
     # Needed to get the touchpad working
     blacklistedKernelModules = ["elan_i2c"];
     extraModulePackages = with config.boot.kernelPackages; [zenpower];
-    # Without this, bluetooth does not work
-    kernelModules = ["btintel"];
     # Override the per-default false value since we need this in order for GNS
     # boot menu to be generated
     loader.grub.enable = lib.mkForce true;
   };
 
-  # Hostname & hostId for ZFS
-  networking = {
-    hostName = "dragons-ryzen";
-  };
+  # Hostname of this machine
+  networking.hostName = "dragons-ryzen";
 
   # The services to use on this machine
   services = {
@@ -86,26 +82,7 @@
   };
 
   # Workaround build error for now
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-24.8.6"
-  ];
-
-  # Enable the auto-cpufreq service instead of
-  # power-profiles-daemon
-  services.power-profiles-daemon.enable = false;
-  programs.auto-cpufreq = {
-    enable = true;
-    settings = {
-      charger = {
-        governor = "performance";
-        turbo = "auto";
-      };
-      battery = {
-        governor = "powersave";
-        turbo = "auto";
-      };
-    };
-  };
+  nixpkgs.config.permittedInsecurePackages = ["electron-24.8.6"];
 
   # Virt-manager requires iptables to let guests have internet
   networking.nftables.enable = lib.mkForce false;
