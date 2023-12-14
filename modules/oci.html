@@ -214,6 +214,7 @@ in {
         device = &quot;nodev&quot;;
         efiInstallAsRemovable = true;
         efiSupport = true;
+        enable = lib.mkForce true; # overrides our boot module
         extraConfig = ''
           serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
           terminal_input --append serial

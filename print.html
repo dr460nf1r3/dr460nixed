@@ -2161,7 +2161,7 @@ with lib; let
 in {
   # We want to use NetworkManager on desktops
   networking = {
-    # Pointing to our Adguard instance via Tailscale
+    # Pointing to NextDNS via Tailscale
     # if not, Cloudflare would still be my choice
     nameservers = [
       &quot;1.1.1.1&quot;
@@ -2387,6 +2387,7 @@ in {
         device = &quot;nodev&quot;;
         efiInstallAsRemovable = true;
         efiSupport = true;
+        enable = lib.mkForce true; # overrides our boot module
         extraConfig = ''
           serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
           terminal_input --append serial
