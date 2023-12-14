@@ -4,10 +4,7 @@
   ...
 }: {
   # These are the services I use on this machine
-  imports = [
-    ./adguard.nix
-    ./hardware-configuration.nix
-  ];
+  imports = [./hardware-configuration.nix];
 
   # Oracle provides DHCP
   networking = {
@@ -60,7 +57,7 @@
       source = ../../docker-compose/oracle-dragon;
     };
     grafanaStack = {
-      address = "100.86.102.115";
+      address = "100.97.215.27";
       enable = true;
     };
     oci.enable = true;
@@ -84,17 +81,12 @@
     tailscale-tls.enable = true;
   };
 
-  # Secrets for the docker-compose runner & adguardExporter
+  # Secrets for the docker-compose runner
   sops = {
     secrets."api_keys/oracle-dragon" = {
       mode = "0600";
       owner = config.users.users.nico.name;
       path = "/var/docker-compose-runner/oracle-dragon/.env";
-    };
-    secrets."api_keys/adguard" = {
-      mode = "0600";
-      owner = config.users.users.adguard.name;
-      path = "/run/secrets/api_keys/adguard";
     };
   };
 
