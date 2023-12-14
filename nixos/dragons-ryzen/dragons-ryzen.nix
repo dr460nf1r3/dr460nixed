@@ -132,6 +132,22 @@
     # };
   };
 
+  # For some reason Bluetooth only works after un-/reloading
+  # the btusb kernel module
+  systemd.services.fix-bluetooth = {
+    wantedBy = ["multi-user.target"];
+    description = "Fix bluetooth connection";
+    path = with pkgs; [kmod];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = pkgs.writeShellScript "execstart" ''
+        modprobe -r btusb
+        sleep 1
+        modprobe btusb
+      '';
+    };
+  };
+
   # NixOS stuff
   system.stateVersion = "23.11";
 }
