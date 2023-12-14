@@ -12,7 +12,7 @@ services:
     command: hbbs
     environment:
       ENCRYPTED_ONLY: 1
-      RELAY_SERVERS: 100.86.102.115:21117
+      RELAY_SERVERS: 100.97.215.27:21117
     volumes: [./rustdesk:/root]
     networks: [rustdesk-net]
     depends_on: [hbbr]
@@ -23,24 +23,33 @@ services:
     ports: [21117:21117, 21119:21119]
     environment:
       ENCRYPTED_ONLY: 1
-      RELAY_SERVERS: 100.86.102.115:21117
+      RELAY_SERVERS: 100.97.215.27:21117
     command: hbbr
     volumes: [./rustdesk:/root]
     networks: [rustdesk-net]
     restart: unless-stopped
 
-  # GitHub runner for my projects
-  github_runner:
-    image: myoung34/github-runner:2.311.0
-    container_name: github_runner
-    privileged: true
+  # Minecraft Bedrock server for the gang
+  minecraft_bedrock:
+    image: itzg/minecraft-bedrock-server
+    container_name: minecraft_bedrock
+    ports: [19132:19132/udp]
     environment:
-      REPO_URL: https://github.com/dr460nf1r3/dr460nixed
-      RUNNER_NAME: oracle-dragon
-      RUNNER_SCOPE: repo
-      RUNNER_TOKEN: ${RUNNER_TOKEN}
-      RUNNER_WORKDIR: /tmp/runner/work
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /tmp/runner:/tmp/runner
-    restart: unless-stopped
+      ALLOW_CHEATS: "true"
+      ALLOW_LIST_USERS: "Dr460nf1r3x:2535437145418579"
+      DIFFICULTY: "normal"
+      EULA: "TRUE"
+      GAMEMODE: "survival"
+      GID: 1000
+      MAX_PLAYERS: 10
+      ONLINE_MODE: "true"
+      OPS: "2535437145418579"
+      SERVER_NAME: "Utopia"
+      SERVER_PORT: 19132
+      TICK_DISTANCE: 12
+      TZ: "Europe/Berlin"
+      UID: 1000
+      VERSION: "LATEST"
+      VIEW_DISTANCE: 32
+      WHITE_LIST: "false"
+    volumes: [./minecraft/bedrock_1:/data]
