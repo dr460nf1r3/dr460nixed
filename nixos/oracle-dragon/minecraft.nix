@@ -12,9 +12,15 @@
       package = inputs.nix-minecraft.legacyPackages.aarch64-linux.paperServers.paper-1_20_4;
       jvmOpts = ((import ./aikar-flags.nix) "8G") + "-Dpaper.disableChannelLimit=true";
       serverProperties = {
+        default-player-permission-level = "visitor";
+        difficulty = "normal";
         motd = "Welcome to Utopia <3";
-        server-port = 25565;
         online-mode = true;
+        resource-pack = "https://cdn.modrinth.com/data/r4GILswZ/versions/gWTrUifI/Faithful%2064x.zip";
+        resource-pack-prompt = "This installs the Faithful x64 texture pack.";
+        resource-pack-sha1 = "88add430a01a1acb49a8e81bb96f7ba200bc80bf";
+        server-port = 25565;
+        snooper-enabled = false;
       };
       files = {
         "bukkit.yml".value = {
