@@ -73,6 +73,7 @@ in {
             "git"
             "kvm"
             "libvirtd"
+            "minecraft"
             "mysql"
             "network"
             "networkmanager"

@@ -14,7 +14,7 @@
       serverProperties = {
         motd = "Welcome to Utopia <3";
         server-port = 25565;
-        online-mode = false;
+        online-mode = true;
       };
       files = {
         "bukkit.yml".value = {
