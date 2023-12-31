@@ -28,30 +28,3 @@ services:
     volumes: [./rustdesk:/root]
     networks: [rustdesk-net]
     restart: unless-stopped
-
-  # Minecraft Bedrock server for the gang
-  minecraft_bedrock:
-    image: itzg/minecraft-bedrock-server
-    container_name: minecraft_bedrock
-    ports: [19132:19132/udp]
-    stdin_open: true
-    tty: true
-    environment:
-      ALLOW_CHEATS: "true"
-      ALLOW_LIST_USERS: "Dr460nf1r3x:2535437145418579,Kahn Inukami:2535457233470473,Katzenninja2:2535437655699468"
-      DIFFICULTY: "normal"
-      EULA: "TRUE"
-      GAMEMODE: "survival"
-      GID: 1000
-      MAX_PLAYERS: 10
-      ONLINE_MODE: "true"
-      OPS: "2535437145418579,2535457233470473"
-      SERVER_NAME: "Utopia"
-      SERVER_PORT: 19132
-      TICK_DISTANCE: 12
-      TZ: "Europe/Berlin"
-      UID: 1000
-      VERSION: "LATEST"
-      VIEW_DISTANCE: 32
-      WHITE_LIST: "true"
-    volumes: [./minecraft/bedrock_1:/data]

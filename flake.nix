@@ -135,6 +135,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Declarative Minecraft server management
+    nix-minecraft = {
+      url = "github:Infinidoge/nix-minecraft";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Feature-rich and convenient fork of the Nix package manager
     nix-super = {
       url = "github:privatevoid-net/nix-super";

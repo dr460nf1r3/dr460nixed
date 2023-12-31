@@ -1,10 +1,18 @@
 {
   config,
+  inputs,
   lib,
   ...
 }: {
   # These are the services I use on this machine
-  imports = [./hardware-configuration.nix];
+  imports = [
+    ./hardware-configuration.nix
+    ./minecraft.nix
+    inputs.nix-minecraft.nixosModules.minecraft-servers
+  ];
+
+  # Minecraft packages
+  nixpkgs.overlays = [inputs.nix-minecraft.overlay];
 
   # Oracle provides DHCP
   networking = {
@@ -13,57 +21,12 @@
     hostName = "oracle-dragon";
   };
 
-  # Provide a reverse proxy for our services
-  services.nginx = {
-    enable = true;
-    virtualHosts = {
-      "oracle-dragon.emperor-mercat.ts.net" = {
-        extraConfig = ''
-          location = /netdata {
-                return 301 /netdata/;
-          }
-          location ~ /netdata/(?<ndpath>.*) {
-            proxy_redirect off;
-            proxy_set_header Host $host;
-            proxy_set_header X-Forwarded-Host $host;
-            proxy_set_header X-Forwarded-Server $host;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_http_version 1.1;
-            proxy_pass_request_headers on;
-            proxy_set_header Connection "keep-alive";
-            proxy_store off;
-            proxy_pass http://127.0.0.1:19999/$ndpath$is_args$args;
-
-            gzip on;
-            gzip_proxied any;
-            gzip_types *;
-          }
-        '';
-        forceSSL = true;
-        http3 = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:3000";
-          proxyWebsockets = true;
-        };
-        sslCertificate = "/var/lib/tailscale-tls/cert.crt";
-        sslCertificateKey = "/var/lib/tailscale-tls/key.key";
-      };
-    };
-  };
-
   # Enable a few selected custom settings
   dr460nixed = {
     docker-compose-runner."oracle-dragon" = {
       source = ../../docker-compose/oracle-dragon;
     };
-    grafanaStack = {
-      address = "100.97.215.27";
-      enable = true;
-    };
     oci.enable = true;
-    prometheus = {
-      nginxExporter = true;
-    };
     servers = {
       enable = true;
       monitoring = true;
@@ -78,7 +41,6 @@
         "--ssh"
       ];
     };
-    tailscale-tls.enable = true;
   };
 
   # Secrets for the docker-compose runner
@@ -99,35 +61,34 @@
   # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
-  # Prerequisites for Tailscale exit node
-  boot.kernel.sysctl = {
-    "net.ipv4.ip_forward" = 1;
-    "net.ipv6.conf.all.forwarding" = 1;
+  # Cloudflared tunnel configurations
+  services.cloudflared = {
+    enable = true;
+    tunnels = {
+      "ba8379f8-de1c-474f-89ab-8d63e6bd1969" = {
+        credentialsFile = config.sops.secrets."cloudflared/oracle-dragon/cred".path;
+        default = "http_status:404";
+        ingress = {
+          "map.dr460nf1r3.org" = {
+            service = "http://localhost:8100";
+          };
+        };
+      };
+    };
+  };
+  sops.secrets."cloudflared/oracle-dragon/cred" = {
+    mode = "0600";
+    owner = config.users.users.cloudflared.name;
+    path = "/run/secrets/cloudflared/oracle-dragon/cred";
   };
 
-  # Cloudflared tunnel configurations
-  # services.cloudflared = {
-  #   enable = true;
-  #   tunnels = {
-  #     "4683a63c-967a-4704-b48a-13b240b72d79" = {
-  #       credentialsFile = config.sops.secrets."cloudflared/oracle-dragon/cred".path;
-  #       default = "http_status:404";
-  #       ingress = {
-  #         "code.dr460nf1r3.org" = {
-  #           service = "http://localhost:4444";
-  #         };
-  #         "kasm.dr460nf1r3.org" = {
-  #           service = "https://localhost:8443";
-  #         };
-  #       };
-  #     };
-  #   };
-  # };
-  # sops.secrets."cloudflared/oracle-dragon/cred" = {
-  #   mode = "0600";
-  #   owner = config.users.users.cloudflared.name;
-  #   path = "/run/secrets/cloudflared/oracle-dragon/cred";
-  # };
+  # No per-default Tmux on this machine
+  home-manager.users.nico.programs = {
+    bash = {
+      enable = true;
+      initExtra = lib.mkForce "exec fish";
+    };
+  };
 
   system.stateVersion = "22.11";
 }
