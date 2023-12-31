@@ -69,6 +69,7 @@ in {
     };
 
     # Extra Python & system packages required for Netdata to function
+    services.netdata.package = pkgs.netdata.override {withCloud = true;};
     services.netdata.python.extraPackages = ps: [ps.psycopg2];
     systemd.services.netdata = {path = with pkgs; [jq];};
 
