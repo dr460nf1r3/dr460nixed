@@ -63,7 +63,6 @@
       inputs.chaotic-nyx.follows = "chaotic-nyx";
       inputs.devshell.follows = "devshell";
       inputs.flake-parts.follows = "flake-parts";
-      inputs.flake-utils.follows = "flake-utils";
       inputs.home-manager.follows = "home-manager";
       inputs.nix-index-database.follows = "nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
