@@ -14,12 +14,14 @@
       serverProperties = {
         default-player-permission-level = "visitor";
         difficulty = "normal";
+        enforce-whitelist = true;
         motd = "Welcome to Utopia <3";
         online-mode = true;
         resource-pack = "https://cdn.modrinth.com/data/r4GILswZ/versions/gWTrUifI/Faithful%2064x.zip";
         resource-pack-sha1 = "88add430a01a1acb49a8e81bb96f7ba200bc80bf";
         server-port = 25565;
         snooper-enabled = false;
+        white-list = true;
       };
       files = {
         "bukkit.yml".value = {
