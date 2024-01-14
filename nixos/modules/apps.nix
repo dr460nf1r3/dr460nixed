@@ -142,8 +142,8 @@ in {
               # Available in nixpkgs, but outdated (0.4.0) at the time of adding
               name = "vscode-tailscale";
               publisher = "tailscale";
-              sha256 = "sha256-lwKsAYy04l1LkZPGgu9ezRQNTX7ZPzLJJ8j86ZuqNlQ=";
-              version = "0.6.2";
+              sha256 = "sha256-MKiCZ4Vu+0HS2Kl5+60cWnOtb3udyEriwc+qb/7qgUg=";
+              version = "1.0.0";
             }
           ];
       })
