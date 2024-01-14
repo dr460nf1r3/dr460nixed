@@ -86,9 +86,6 @@ in {
       "vivid"
     ];
 
-    # Disable coredumps
-    systemd.coredump.enable = false;
-
     # Protect logins and sudo on servers via DUO
     # leaving EnvFactor enabled for other apps
     security.duosec = mkIf cfg.duosec {
