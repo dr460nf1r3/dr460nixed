@@ -119,7 +119,7 @@ in {
             jnoortheen.nix-ide
             kamadorueda.alejandra
             ms-azuretools.vscode-docker
-            # ms-python.python - broken python-debugpy once again?
+            ms-python.python
             ms-python.vscode-pylance
             ms-vscode-remote.remote-ssh
             ms-vscode.hexeditor
@@ -153,7 +153,7 @@ in {
       yarn
     ])
     ++ optionals cfg.yubikey (with pkgs; [
-      yubikey-manager-qt
+      # yubikey-manager-qt
       yubioath-flutter
     ])
     ++ optionals cfg.school (with pkgs; [
