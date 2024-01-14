@@ -174,7 +174,7 @@
 
     # The source of all truth!
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
 
     # Easy linting of the flake and all kind of other stuff
     pre-commit-hooks = {
