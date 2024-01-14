@@ -270,6 +270,9 @@ in {
       nixos.enable = true;
     };
 
+    # Disable coredumps
+    systemd.coredump.enable = false;
+
     # Enable all hardware drivers
     hardware.enableRedistributableFirmware = true;
 

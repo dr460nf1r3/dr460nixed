@@ -200,12 +200,33 @@ in {
     # Programs &amp; global config
     programs = {
       bash.shellAliases = {
+        &quot;bootsda&quot; = ''
+          sudo qemu-kvm \
+          -m 4G \
+          -drive file=/dev/sda,format=raw,index=0,media=disk \
+          -net user,hostfwd=tcp:127.0.0.1:2222-:22 \
+          -net nic
+        '';
+        &quot;bootsdb&quot; = ''
+          sudo qemu-kvm
+          -m 4G \
+          -drive file=/dev/sdb,format=raw,index=0,media=disk \
+          -net user,hostfwd=tcp:127.0.0.1:2222-:22 \
+          -net nic
+        '';
         &quot;gpl&quot; = &quot;${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE&quot;;
         &quot;grep&quot; = &quot;${pkgs.ugrep}/bin/ugrep&quot;;
         &quot;nix&quot; = &quot;${pkgs.nix}/bin/nix --verbose --print-build-logs&quot;; # https://github.com/NixOS/nix/pull/8323
       };
       fish = {
         shellAbbrs = {
+          &quot;bootusb&quot; = ''
+            sudo qemu-kvm \
+            -m 4G \
+            -drive file=/dev/sda,format=raw,index=0,media=disk \
+            -net user,hostfwd=tcp:127.0.0.1:2222-:22 \
+            -net nic
+          '';
           &quot;gpl&quot; = &quot;${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE&quot;;
         };
         shellAliases = {
