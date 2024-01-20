@@ -33,7 +33,6 @@ in {
         };
         enable = true;
         enableOnBoot = false;
-        package = pkgs.docker_24;
       };
       libvirtd = {
         enable = true;

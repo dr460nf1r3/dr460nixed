@@ -40,7 +40,6 @@
       };
       enable = true;
       enableOnBoot = false;
-      package = lib.mkForce pkgs.docker_24;
     };
   };
 

@@ -55,7 +55,6 @@ in {
         };
         enable = true;
         enableOnBoot = false;
-        package = pkgs.docker_24;
         storageDriver = "overlay2";
       };
       libvirtd = {
