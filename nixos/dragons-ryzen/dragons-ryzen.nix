@@ -47,7 +47,7 @@
   dr460nixed = {
     desktops.enable = true;
     development.enable = true;
-    gaming.enable = true;
+    gaming.enable = false;
     performance = true;
     remote-build = {
       enable = true;

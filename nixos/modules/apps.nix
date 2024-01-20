@@ -65,6 +65,7 @@ in {
       nextcloud-client
       obs-studio-wrapped
       okular
+      prismlauncher
       qbittorrent
       rustdesk
       syncthingtray
