@@ -87,8 +87,9 @@
     # KDE pre-release packages
     kde2nix = {
       url = "github:nix-community/kde2nix";
-      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
       inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     };
 
     # My SSH keys
@@ -174,7 +175,7 @@
 
     # The source of all truth!
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs-stable.follows = "nixpkgs";
 
     # Easy linting of the flake and all kind of other stuff
     pre-commit-hooks = {
