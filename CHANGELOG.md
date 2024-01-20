@@ -1,3 +1,55 @@
+## 1.3.0 (2024-01-20)
+
+### Feat
+
+- **shells**: add alias/abbr for qemu-kvm booting usb drive
+- globally disable coredumps
+- **oracle-dragon**: whitelist enable
+- **oracle-dragon**: add Multiverse plugins to Minecraft
+- **oracle-dragon**: update Minecraft server settings
+- **oracle-dragon**: enable MC online mode and add myself to minecraft group
+- **oracle-dragon**: replace Minecraft Bedrock server with Paper/Geyser
+- **oracle-dragon**: update Minecraft Bedrock server config
+- **oracle-dragon**: add Minecraft Bedrock server
+- **oracle-dragon**: update Tailscale IP, deprecate Adguard in favour of NextDNS
+- **oracle-dragon**: fresh setup
+- **dragons-ryzen**: only prompt for LUKS password once during bootup
+- **dragons-ryzen**: add swapfile
+- **dragons-ryzen**: this one is a garuda-nix-subsystem again
+- **kde6**: add KDE6 nixosConfiguration to cache builds via Garnix CI
+- **dragons-ryzen**: add flatpak to allow using mpcelauncher
+- **kde2nix**: add KDE 6 flake to inputs, bump all of them
+- add archix flake for Arch development purposes (and bump inputs)
+- **development**: add some things for Arch package development
+- **duo**: make it opt-in rather than opt-out
+- **dragons-ryzen**: this is a pure NixOS device once again
+- **dragons-ryzen**: make the standalone installation a Garuda Nix Subsystem again
+- **nixd**: add nixd option evaluation and config file
+- **desktops**: default to wayland
+- **apps**: add vivaldi and persist the Games folder
+- **auto-cpufreq**: add auto-cpufreq flake and enable it on dragons-ryzen
+- **adblock**: add adblock module to template, fixup some errors
+- **dragons-ryzen**: enable chaotic.mesa-git
+- **adblock**: enable host-based adblocking on demand
+- **apps**: add github cli (gh) and ocrmypdf, also bump all inputs
+
+### Fix
+
+- **netdata**: re-enable Cloud feature
+- **dragons-ryzen**: bluetooth was still not working properly until un/reloading btusb
+- **dragons-ryzen**: set SDDM auto-login to plasma
+- **development**: don't use zfs docker driver on btrfs
+- test
+- **locales**: add missing C.UTF-8 lang
+- **devshell**: don't use yamlfix for now
+- **tv-nixos**: allow building with insecure Electron for now
+- **build**: fix build issue for real this time
+- **build**: caused by incorrect example nix option and deprecated one
+- **build**: comment python-debugpy, broken again. also alias grep to ugrep and bump chaotic-nyx/nixpkgs
+- **chaotic**: disable module completely as I currently don't use it
+- **images**: include spicetify-nix module which was removed from GNS
+- **build**: temporarily disable msmtp until python2.7-oildev is fixed; add missing module (caused by GNS update)
+
 ## 1.2.0 (2023-09-24)
 
 ### Feat
