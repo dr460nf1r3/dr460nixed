@@ -4,6 +4,7 @@
   "commitMessageAction": "update",
   "extends": ["config:base", ":gitSignOff"],
   "lockFileMaintenance": {
+    "automerge": true,
     "enabled": true,
     "extends": ["schedule:daily"]
   },
