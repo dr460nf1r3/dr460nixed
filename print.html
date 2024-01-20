@@ -558,6 +558,7 @@ in {
       nextcloud-client
       obs-studio-wrapped
       okular
+      prismlauncher
       qbittorrent
       rustdesk
       syncthingtray
@@ -635,8 +636,8 @@ in {
               # Available in nixpkgs, but outdated (0.4.0) at the time of adding
               name = &quot;vscode-tailscale&quot;;
               publisher = &quot;tailscale&quot;;
-              sha256 = &quot;sha256-lwKsAYy04l1LkZPGgu9ezRQNTX7ZPzLJJ8j86ZuqNlQ=&quot;;
-              version = &quot;0.6.2&quot;;
+              sha256 = &quot;sha256-MKiCZ4Vu+0HS2Kl5+60cWnOtb3udyEriwc+qb/7qgUg=&quot;;
+              version = &quot;1.0.0&quot;;
             }
           ];
       })
@@ -1170,9 +1171,6 @@ in {
       man.enable = false;
       nixos.enable = true;
     };
-
-    # Disable coredumps
-    systemd.coredump.enable = false;
 
     # Enable all hardware drivers
     hardware.enableRedistributableFirmware = true;
