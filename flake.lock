@@ -55,11 +55,11 @@
         "yafas": "yafas"
       },
       "locked": {
-        "lastModified": 1705759270,
-        "narHash": "sha256-l/QFi7jHwPljR+gmLQjjHCzN1DWqIdJTLYf4Dv5E3Qo=",
+        "lastModified": 1705789286,
+        "narHash": "sha256-34LxkYfTCbv7qbEBq3y48JkJia9/KtZi1QMqVrnApj0=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "0e567266fb8a634da50a03e303e081ab76f76f80",
+        "rev": "18e8728c4bd5a227d65f6dbe90715d0234d30b4a",
         "type": "github"
       },
       "original": {
@@ -291,11 +291,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1705726950,
-        "narHash": "sha256-CDrVY8l/KiD+nygLVEzjFZYXnuzSD9EAEJIPbVs1+bA=",
+        "lastModified": 1705789642,
+        "narHash": "sha256-EKsANXZmbr6BwHakHDOt0CEqnPwknqEPRCbHWItx6c0=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "d06868b1e135a067f7d22f0408dce809bd47a82d",
+        "rev": "9c7a4e1b7f739d21052ac7f44ec1f8264057e765",
         "type": "gitlab"
       },
       "original": {
@@ -332,11 +332,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1705708511,
-        "narHash": "sha256-3f4BkRY70Fj7yvuo87c4QQPAjnt571g2wJ50jY7hnYc=",
+        "lastModified": 1705794055,
+        "narHash": "sha256-mv/KrxEAZNhpPJcDqdQ709If9p2DTEYIDPo2r9xchlg=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ce4b88c465d928f4f8b75d0920f1788d5b65ca94",
+        "rev": "9b378afae72cb07471e19aefc30e8e05ef2d7a61",
         "type": "github"
       },
       "original": {
@@ -476,11 +476,11 @@
         "spectrum": "spectrum"
       },
       "locked": {
-        "lastModified": 1705757072,
-        "narHash": "sha256-jlf6CwiA55kY8RC5nAtqJkz+MjjMDxFCwnmu9GuaFIo=",
+        "lastModified": 1705789223,
+        "narHash": "sha256-NpfobCOZ/oQHjsf102LTbqnc07/RwEuoFWd6kjKZx0w=",
         "owner": "astro",
         "repo": "microvm.nix",
-        "rev": "794819cf7a2732113f0df21dc7fbe804e6bb2477",
+        "rev": "e7580e2a95915731384a1e4680b49e6b074b3700",
         "type": "github"
       },
       "original": {
@@ -499,11 +499,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1705540761,
-        "narHash": "sha256-Bj5XUG194u0AC0KL4d+nmX3Xuz56u0PVzTFYYHdqh7o=",
+        "lastModified": 1705800122,
+        "narHash": "sha256-RS6NPDz3jTX4GD4Ez3XXIxQTesMobcS8iQTQKfLyQkw=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "184c9a3f7c289f12d2732bcd6b24f0967f4a380f",
+        "rev": "3517658dda5188566c0c889cd97e9907735e671a",
         "type": "github"
       },
       "original": {
@@ -545,11 +545,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1705713628,
-        "narHash": "sha256-Z4AxGE1tFSZfj5Xy2/C396h8MqhWkKQSFFZpTz8K/40=",
+        "lastModified": 1705800431,
+        "narHash": "sha256-iVab5yzNJGvfzxiYiF+NuiLHKEyAonDJZn3q+ekp+4g=",
         "owner": "Infinidoge",
         "repo": "nix-minecraft",
-        "rev": "ca0510895503f8151dd0e9d38e05c183848a1e62",
+        "rev": "42e37de72f212aaaabf655bf4389e7218df33ecc",
         "type": "github"
       },
       "original": {
@@ -698,12 +698,12 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1705496572,
-        "narHash": "sha256-rPIe9G5EBLXdBdn9ilGc0nq082lzQd0xGGe092R/5QE=",
-        "rev": "842d9d80cfd4560648c785f8a4e6f3b096790e19",
-        "revCount": 572380,
+        "lastModified": 1705677747,
+        "narHash": "sha256-eyM3okYtMgYDgmYukoUzrmuoY4xl4FUujnsv/P6I/zI=",
+        "rev": "bbe7d8f876fbbe7c959c90ba2ae2852220573261",
+        "revCount": 573276,
         "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/NixOS/nixpkgs/0.1.572380%2Brev-842d9d80cfd4560648c785f8a4e6f3b096790e19/018d1ccc-5ecb-7493-8d22-0252128f007d/source.tar.gz"
+        "url": "https://api.flakehub.com/f/pinned/NixOS/nixpkgs/0.1.573276%2Brev-bbe7d8f876fbbe7c959c90ba2ae2852220573261/018d28dc-8ce1-71b2-b752-28895ab7bbcb/source.tar.gz"
       },
       "original": {
         "type": "tarball",
