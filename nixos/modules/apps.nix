@@ -44,7 +44,6 @@ in {
       aspellDicts.en
       chromium-flagged
       ffmpegthumbnailer
-      floorp
       freerdp
       gimp
       helvum

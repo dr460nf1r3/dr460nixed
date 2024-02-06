@@ -65,9 +65,9 @@ in {
     };
 
     # X11 keyboard layout
-    services.xserver = mkIf cfgDesktops.enable {
+    services.xserver.xkb = mkIf cfgDesktops.enable {
       layout = "de";
-      xkbVariant = "";
+      variant = "";
     };
   };
 }

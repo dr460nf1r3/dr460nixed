@@ -24,8 +24,6 @@
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.home-manager.follows = "home-manager";
       inputs.systems.follows = "systems";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.flake-utils.follows = "flake-utils";
     };
 
     # Devshell to set up a development environment
