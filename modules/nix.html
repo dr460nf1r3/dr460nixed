@@ -216,9 +216,9 @@ in {
         '';
       };
       host = mkOption {
-        default = &quot;&quot;;
+        default = "";
         type = types.str;
-        example = &quot;dragons-ryzen&quot;;
+        example = "dragons-ryzen";
         description = mdDoc ''
           Specifies the target host for remote builds.
         '';
@@ -234,7 +234,7 @@ in {
       trustedPublicKey = mkOption {
         default = null;
         type = types.str;
-        example = &quot;remote-build:8vrLBvFoMiKVKRYD//30bhUBTEEiuupfdQzl2UoMms4=&quot;;
+        example = "remote-build:8vrLBvFoMiKVKRYD//30bhUBTEEiuupfdQzl2UoMms4=";
         description = mdDoc ''
           Specifies the substitutors cache signing key for remote builds.
         '';
@@ -242,7 +242,7 @@ in {
       user = mkOption {
         default = null;
         type = types.str;
-        example = &quot;build&quot;;
+        example = "build";
         description = mdDoc ''
           Specifies the target user for remote builds.
         '';
@@ -258,9 +258,9 @@ in {
         {
           hostName = cfgRemote.host;
           maxJobs = 16;
-          protocol = &quot;ssh-ng&quot;;
-          supportedFeatures = [&quot;nixos-test&quot; &quot;benchmark&quot; &quot;big-parallel&quot; &quot;kvm&quot;];
-          systems = [&quot;x86_64-linux&quot; &quot;aarch64-linux&quot;];
+          protocol = "ssh-ng";
+          supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+          systems = ["x86_64-linux" "aarch64-linux"];
         }
       ];
 
@@ -282,7 +282,7 @@ in {
         accept-flake-config = true;
 
         # Test out ca-derivations (https://nixos.wiki/wiki/Ca-derivations)
-        experimental-features = [&quot;ca-derivations&quot;];
+        experimental-features = ["ca-derivations"];
 
         # For direnv GC roots
         keep-derivations = true;
@@ -295,14 +295,14 @@ in {
         log-lines = 20;
 
         # Max number of parallel jobs
-        max-jobs = &quot;auto&quot;;
+        max-jobs = "auto";
 
         # Enable certain system features
-        system-features = [&quot;big-parallel&quot; &quot;kvm&quot;];
+        system-features = ["big-parallel" "kvm"];
 
         # Trust the remote machines cache signatures
-        trusted-public-keys = lib.mkIf cfgRemote.enable [&quot;${cfgRemote.trustedPublicKey}&quot;];
-        trusted-substituters = lib.mkIf cfgRemote.enable [&quot;ssh-ng://${cfgRemote.host}&quot;];
+        trusted-public-keys = lib.mkIf cfgRemote.enable ["${cfgRemote.trustedPublicKey}"];
+        trusted-substituters = lib.mkIf cfgRemote.enable ["ssh-ng://${cfgRemote.host}"];
       };
     };
 
@@ -314,8 +314,8 @@ in {
     ];
 
     # Let root ssh into the remote builder seamlessly
-    home-manager.users.&quot;root&quot; = lib.mkIf cfgRemote.enable {
-      home.stateVersion = &quot;23.11&quot;; # Specify this since its otherwise unset
+    home-manager.users."root" = lib.mkIf cfgRemote.enable {
+      home.stateVersion = "23.11"; # Specify this since its otherwise unset
       programs.ssh.extraConfig = ''
         Host ${cfgRemote.host}
           HostName ${cfgRemote.host}
@@ -327,13 +327,13 @@ in {
     # Supply a shortcut for the remote builder
     programs = {
       bash.shellAliases = {
-        &quot;rem&quot; = &quot;sudo nix build -v --builders ssh://${cfgRemote.host}&quot;;
-        &quot;remb&quot; = &quot;sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake&quot;;
+        "rem" = "sudo nix build -v --builders ssh://${cfgRemote.host}";
+        "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake";
       };
       fish = {
         shellAbbrs = {
-          &quot;rem&quot; = &quot;sudo nix build -v --builders ssh://${cfgRemote.host}&quot;;
-          &quot;remb&quot; = &quot;sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake&quot;;
+          "rem" = "sudo nix build -v --builders ssh://${cfgRemote.host}";
+          "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake";
         };
       };
     };

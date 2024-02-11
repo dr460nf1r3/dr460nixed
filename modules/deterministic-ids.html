@@ -211,12 +211,12 @@ in {
           uid = mkOption {
             type = types.nullOr types.int;
             default = null;
-            description = mdDoc &quot;The uid to assign if it is missing in `users.users.&lt;name&gt;`.&quot;;
+            description = mdDoc "The uid to assign if it is missing in `users.users.&lt;name&gt;`.";
           };
           gid = mkOption {
             type = types.nullOr types.int;
             default = null;
-            description = mdDoc &quot;The gid to assign if it is missing in `users.groups.&lt;name&gt;`.&quot;;
+            description = mdDoc "The gid to assign if it is missing in `users.groups.&lt;name&gt;`.";
           };
         };
       });
@@ -247,16 +247,16 @@ in {
       (flip mapAttrsToList config.users.users (name: user: [
         {
           assertion = user.uid != null;
-          message = &quot;non-deterministic uid detected for '${name}', please assign one via `users.deterministicIds`&quot;;
+          message = "non-deterministic uid detected for '${name}', please assign one via `users.deterministicIds`";
         }
         {
           assertion = !user.autoSubUidGidRange;
-          message = &quot;non-deterministic subUids/subGids detected for: ${name}&quot;;
+          message = "non-deterministic subUids/subGids detected for: ${name}";
         }
       ]))
       ++ flip mapAttrsToList config.users.groups (name: group: {
         assertion = group.gid != null;
-        message = &quot;non-deterministic gid detected for '${name}', please assign one via `users.deterministicIds`&quot;;
+        message = "non-deterministic gid detected for '${name}', please assign one via `users.deterministicIds`";
       });
   };
 }

@@ -245,20 +245,20 @@ in {
   config = {
     boot = {
       kernelParams = [
-        &quot;acpi_backlight=native&quot;
-        &quot;iommu=full&quot;
-        &quot;page_alloc.shuffle=1&quot;
-        &quot;processor.max_cstate=5&quot;
-        &quot;quiet&quot;
-        &quot;rd.systemd.show_status=auto&quot;
-        &quot;rd.udev.log_level=3&quot;
-        &quot;rootflags=noatime&quot;
-        &quot;usbcore.autosuspend=-1&quot;
-        &quot;vt.global_cursor_default=0&quot;
+        "acpi_backlight=native"
+        "iommu=full"
+        "page_alloc.shuffle=1"
+        "processor.max_cstate=5"
+        "quiet"
+        "rd.systemd.show_status=auto"
+        "rd.udev.log_level=3"
+        "rootflags=noatime"
+        "usbcore.autosuspend=-1"
+        "vt.global_cursor_default=0"
       ];
       lanzaboote = mkIf cfgLanza.enable {
         enable = true;
-        pkiBundle = &quot;/etc/secureboot&quot;;
+        pkiBundle = "/etc/secureboot";
       };
       loader = {
         grub = {
@@ -273,7 +273,7 @@ in {
         generationsDir.copyKernels = mkIf cfg.enable true;
         timeout = 1;
         systemd-boot = mkIf cfg.enable {
-          consoleMode = &quot;max&quot;;
+          consoleMode = "max";
           editor = false;
           enable = true;
         };

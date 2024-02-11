@@ -187,9 +187,9 @@
 with lib; let
   cfg = config.dr460nixed.locales;
   cfgDesktops = config.dr460nixed.desktops;
-  de = &quot;de_DE.UTF-8&quot;;
-  defaultLocale = &quot;en_GB.UTF-8&quot;;
-  terminus-variant = &quot;120n&quot;;
+  de = "de_DE.UTF-8";
+  defaultLocale = "en_GB.UTF-8";
+  terminus-variant = "120n";
 in {
   options.dr460nixed.locales = {
     enable =
@@ -207,7 +207,7 @@ in {
     # Timezone
     time = {
       hardwareClockInLocalTime = true;
-      timeZone = &quot;Europe/Berlin&quot;;
+      timeZone = "Europe/Berlin";
     };
 
     # Common locale settings
@@ -232,23 +232,23 @@ in {
       };
 
       supportedLocales = [
-        &quot;C.UTF-8/UTF-8&quot;
-        &quot;de_DE.UTF-8/UTF-8&quot;
-        &quot;en_GB.UTF-8/UTF-8&quot;
-        &quot;en_US.UTF-8/UTF-8&quot;
+        "C.UTF-8/UTF-8"
+        "de_DE.UTF-8/UTF-8"
+        "en_GB.UTF-8/UTF-8"
+        "en_US.UTF-8/UTF-8"
       ];
     };
 
     # Console font
     console = {
-      font = &quot;${pkgs.terminus_font}/share/consolefonts/ter-${terminus-variant}.psf.gz&quot;;
-      keyMap = &quot;de&quot;;
+      font = "${pkgs.terminus_font}/share/consolefonts/ter-${terminus-variant}.psf.gz";
+      keyMap = "de";
     };
 
     # X11 keyboard layout
     services.xserver = mkIf cfgDesktops.enable {
-      layout = &quot;de&quot;;
-      xkbVariant = &quot;&quot;;
+      layout = "de";
+      xkbVariant = "";
     };
   };
 }

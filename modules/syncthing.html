@@ -201,7 +201,7 @@ in {
     key =
       mkOption
       {
-        default = &quot;&quot;;
+        default = "";
         type = types.str;
         description = mdDoc ''
           The key to use for Syncthing.
@@ -210,7 +210,7 @@ in {
     cert =
       mkOption
       {
-        default = &quot;&quot;;
+        default = "";
         type = types.str;
         description = mdDoc ''
           The cert to use for Syncthing.
@@ -262,7 +262,7 @@ in {
     user =
       mkOption
       {
-        default = &quot;&quot;;
+        default = "";
         type = types.str;
         description = mdDoc ''
           The user to run syncthing as.
@@ -273,30 +273,30 @@ in {
   config = mkIf cfg.enable {
     services.syncthing = {
       inherit (cfg) cert;
-      dataDir = &quot;/home/${cfg.user}&quot;;
+      dataDir = "/home/${cfg.user}";
       enable = true;
       inherit (cfg) key;
       settings = {
         inherit (cfg) devices;
         folders = {
-          &quot;/home/nico/Music&quot; = {
-            id = &quot;ybqqh-as53c&quot;;
+          "/home/nico/Music" = {
+            id = "ybqqh-as53c";
             devices = cfg.devicesNames;
           };
-          &quot;/home/nico/Pictures&quot; = {
-            id = &quot;9gj2u-j3m9s&quot;;
+          "/home/nico/Pictures" = {
+            id = "9gj2u-j3m9s";
             devices = cfg.devicesNames;
           };
-          &quot;/home/nico/School&quot; = {
-            id = &quot;g5jha-cnrr4&quot;;
+          "/home/nico/School" = {
+            id = "g5jha-cnrr4";
             devices = cfg.devicesNames;
           };
-          &quot;/home/nico/Sync&quot; = {
-            id = &quot;u62ge-wzsau&quot;;
+          "/home/nico/Sync" = {
+            id = "u62ge-wzsau";
             devices = cfg.devicesNames;
           };
-          &quot;/home/nico/Videos&quot; = {
-            id = &quot;nxhpo-c2j5b&quot;;
+          "/home/nico/Videos" = {
+            id = "nxhpo-c2j5b";
             devices = cfg.devicesNames;
           };
         };

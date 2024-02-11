@@ -192,12 +192,12 @@ in {
       options = {
         source = mkOption {
           default = null;
-          description = &quot;Folder containing a docker-compose file.&quot;;
+          description = "Folder containing a docker-compose file.";
           type = types.path;
         };
         envfile = mkOption {
           default = null;
-          description = &quot;Direct path to a valid .env file&quot;;
+          description = "Direct path to a valid .env file";
           type = types.nullOr types.path;
         };
       };
@@ -209,48 +209,48 @@ in {
     systemd.services =
       mapAttrs'
       (name: value:
-        nameValuePair (&quot;docker-compose-runner-&quot; + name) (
+        nameValuePair ("docker-compose-runner-" + name) (
           let
             output = derivation {
-              builder = pkgs.writeShellScript &quot;build&quot; ''
-                PATH=&quot;${pkgs.rsync}/bin:${pkgs.coreutils}/bin:${pkgs.gnused}/bin&quot;
+              builder = pkgs.writeShellScript "build" ''
+                PATH="${pkgs.rsync}/bin:${pkgs.coreutils}/bin:${pkgs.gnused}/bin"
                 set -e
-                mkdir &quot;$out&quot;
-                sed -r 's/(^\s+restart:\s*)(unless-stopped|always)(\s*($|#))/\1on-failure\3/g' &quot;$src/docker-compose.yml&quot; &gt; &quot;$out/docker-compose.yml&quot;
-                rsync -a &quot;$src/&quot; &quot;$out&quot;
+                mkdir "$out"
+                sed -r 's/(^\s+restart:\s*)(unless-stopped|always)(\s*($|#))/\1on-failure\3/g' "$src/docker-compose.yml" &gt; "$out/docker-compose.yml"
+                rsync -a "$src/" "$out"
               '';
-              name = &quot;docker-compose-runner-&quot; + name;
+              name = "docker-compose-runner-" + name;
               src = value.source;
               inherit (pkgs.hostPlatform) system;
             };
-            statepath = &quot;/var/docker-compose-runner/${name}&quot;;
+            statepath = "/var/docker-compose-runner/${name}";
           in {
-            description = &quot;docker-compose runner for ${name}&quot;;
+            description = "docker-compose runner for ${name}";
             path = with pkgs; [rsync docker-compose docker bash];
             serviceConfig = {
-              ExecStart = pkgs.writeShellScript (&quot;execstart-docker-compose-runner-&quot; + name) ''
+              ExecStart = pkgs.writeShellScript ("execstart-docker-compose-runner-" + name) ''
                 set -e
-                mkdir -p &quot;${statepath}&quot;
-                rsync -a --no-owner --size-only &quot;${output}/&quot; &quot;${statepath}&quot;
+                mkdir -p "${statepath}"
+                rsync -a --no-owner --size-only "${output}/" "${statepath}"
                 ${optionalString (value.envfile != null) ''
-                  cp &quot;${value.envfile}&quot; &quot;${statepath}/.env&quot;
-                  chmod 600 &quot;${statepath}/.env&quot;
+                  cp "${value.envfile}" "${statepath}/.env"
+                  chmod 600 "${statepath}/.env"
                 ''}
-                cd &quot;${statepath}&quot;
+                cd "${statepath}"
                 docker-compose up
               '';
-              ExecStopPost = pkgs.writeShellScript (&quot;execstop-docker-compose-runner-&quot; + name) ''
+              ExecStopPost = pkgs.writeShellScript ("execstop-docker-compose-runner-" + name) ''
                 set -e
-                cd &quot;${statepath}&quot;
+                cd "${statepath}"
                 docker-compose down
               '';
             };
             unitConfig = {
-              After = &quot;docker.service&quot;;
-              Requisite = &quot;docker.service&quot;;
-              StopPropagatedFrom = &quot;docker.service&quot;;
+              After = "docker.service";
+              Requisite = "docker.service";
+              StopPropagatedFrom = "docker.service";
             };
-            wantedBy = [&quot;multi-user.target&quot;];
+            wantedBy = ["multi-user.target"];
           }
         ))
       cfg;

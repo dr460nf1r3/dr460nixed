@@ -211,7 +211,7 @@ in {
 
   config = mkIf cfg.enable {
     # Support booting off ZFS
-    boot.supportedFilesystems = [&quot;zfs&quot;];
+    boot.supportedFilesystems = ["zfs"];
 
     # Always request encryption credentials to open rootfs
     boot.zfs.requestEncryptionCredentials = true;
@@ -220,11 +220,11 @@ in {
     services.zfs = {
       autoScrub = {
         enable = true;
-        interval = &quot;weekly&quot;;
+        interval = "weekly";
       };
       trim = {
         enable = true;
-        interval = &quot;weekly&quot;;
+        interval = "weekly";
       };
     };
 
@@ -234,10 +234,10 @@ in {
     # Configure ZFS Event Daemon to use msmtp
     # commented until python2.7-oildev is fixed
     # services.zfs.zed.settings = mkIf cfg.sendMails {
-    #   ZED_DEBUG_LOG = &quot;/tmp/zed.debug.log&quot;;
-    #   ZED_EMAIL_ADDR = [&quot;root&quot;];
-    #   ZED_EMAIL_OPTS = &quot;@ADDRESS@&quot;;
-    #   ZED_EMAIL_PROG = &quot;${pkgs.msmtp}/bin/msmtp&quot;;
+    #   ZED_DEBUG_LOG = "/tmp/zed.debug.log";
+    #   ZED_EMAIL_ADDR = ["root"];
+    #   ZED_EMAIL_OPTS = "@ADDRESS@";
+    #   ZED_EMAIL_PROG = "${pkgs.msmtp}/bin/msmtp";
 
     #   ZED_NOTIFY_INTERVAL_SECS = 3600;
     #   ZED_NOTIFY_VERBOSE = true;

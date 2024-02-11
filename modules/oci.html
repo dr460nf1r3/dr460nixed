@@ -202,16 +202,16 @@ in {
     # Taken from /proc/cmdline of Ubuntu 20.04.2 LTS on OCI
     boot = {
       kernelParams = [
-        &quot;nvme.shutdown_timeout=10&quot;
-        &quot;nvme_core.shutdown_timeout=10&quot;
-        &quot;libiscsi.debug_libiscsi_eh=1&quot;
-        &quot;crash_kexec_post_notifiers&quot;
-        &quot;console=tty1&quot;
-        &quot;console=ttyS0&quot;
-        &quot;console=ttyAMA0,115200&quot;
+        "nvme.shutdown_timeout=10"
+        "nvme_core.shutdown_timeout=10"
+        "libiscsi.debug_libiscsi_eh=1"
+        "crash_kexec_post_notifiers"
+        "console=tty1"
+        "console=ttyS0"
+        "console=ttyAMA0,115200"
       ];
       loader.grub = {
-        device = &quot;nodev&quot;;
+        device = "nodev";
         efiInstallAsRemovable = true;
         efiSupport = true;
         enable = lib.mkForce true; # overrides our boot module
@@ -225,7 +225,7 @@ in {
     };
 
     # https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/configuringntpservice.htm#Configuring_the_Oracle_Cloud_Infrastructure_NTP_Service_for_an_Instance
-    networking.timeServers = [&quot;169.254.169.254&quot;];
+    networking.timeServers = ["169.254.169.254"];
 
     # Slows down write operations considerably
     nix.settings.auto-optimise-store = lib.mkForce false;

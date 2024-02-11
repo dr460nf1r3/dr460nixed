@@ -203,24 +203,24 @@ in {
       enable = true;
       setSendmail = true;
       defaults = {
-        aliases = &quot;/etc/aliases&quot;;
-        auth = &quot;login&quot;;
+        aliases = "/etc/aliases";
+        auth = "login";
         port = 465;
-        tls = &quot;on&quot;;
-        tls_starttls = &quot;off&quot;;
-        tls_trust_file = &quot;/etc/ssl/certs/ca-certificates.crt&quot;;
+        tls = "on";
+        tls_starttls = "off";
+        tls_trust_file = "/etc/ssl/certs/ca-certificates.crt";
       };
       accounts = {
         default = {
-          from = &quot;nico@dr460nf1r3.org&quot;;
-          host = &quot;mail.garudalinux.net&quot;;
-          passwordeval = &quot;cat /run/secrets/passwords/nico@dr460nf1r3.org&quot;;
-          user = &quot;nico@dr460nf1r3.org&quot;;
+          from = "nico@dr460nf1r3.org";
+          host = "mail.garudalinux.net";
+          passwordeval = "cat /run/secrets/passwords/nico@dr460nf1r3.org";
+          user = "nico@dr460nf1r3.org";
         };
       };
     };
     environment.etc = {
-      &quot;aliases&quot;.text = ''
+      "aliases".text = ''
         root: nico@dr460nf1r3.org
       '';
     };

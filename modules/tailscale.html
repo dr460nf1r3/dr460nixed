@@ -189,41 +189,41 @@ with lib; let
 
   tailscaleJoinArgsList =
     [
-      &quot;-authkey&quot;
-      &quot;$(cat ${cfg.authFile})&quot;
+      "-authkey"
+      "$(cat ${cfg.authFile})"
     ]
     ++ cfg.extraUpArgs;
 
-  tailscaleJoinArgsString = builtins.concatStringsSep &quot; &quot; tailscaleJoinArgsList;
+  tailscaleJoinArgsString = builtins.concatStringsSep " " tailscaleJoinArgsList;
 
   tailscaleUpScript = ''
     sleep 2
-    status=&quot;$(${pkgs.tailscale}/bin/tailscale status -json | ${pkgs.jq}/bin/jq -r .BackendState)&quot;
-    if [ $status = &quot;Running&quot; ]; then # if so, then do nothing
+    status="$(${pkgs.tailscale}/bin/tailscale status -json | ${pkgs.jq}/bin/jq -r .BackendState)"
+    if [ $status = "Running" ]; then # if so, then do nothing
       exit 0
     fi
     ${pkgs.tailscale}/bin/tailscale up ${tailscaleJoinArgsString}
   '';
 in {
   options.dr460nixed.tailscale = {
-    enable = mkEnableOption &quot;Tailscale client daemon&quot;;
+    enable = mkEnableOption "Tailscale client daemon";
 
     autoConnect = mkOption {
       type = types.bool;
       default = false;
-      description = &quot;Whether to automatically connect to Tailscale using an auth key&quot;;
+      description = "Whether to automatically connect to Tailscale using an auth key";
     };
 
     authFile = mkOption {
       type = types.path;
-      example = &quot;/run/secrets/tailscale-key&quot;;
-      description = &quot;File location storing tailscale auth-key&quot;;
+      example = "/run/secrets/tailscale-key";
+      description = "File location storing tailscale auth-key";
     };
 
     extraUpArgs = mkOption {
       type = with types; listOf str;
       default = [];
-      description = &quot;Extra args for tailscale up&quot;;
+      description = "Extra args for tailscale up";
     };
   };
 
@@ -235,18 +235,18 @@ in {
     environment.systemPackages = lib.mkIf config.dr460nixed.desktops.enable [pkgs.tailscale-systray];
 
     # Allow Tailscale devices to connect
-    networking.firewall.trustedInterfaces = [&quot;tailscale0&quot;];
+    networking.firewall.trustedInterfaces = ["tailscale0"];
 
     # Connect to Tailnet automatically
     systemd.services.tailscale-autoconnect = mkIf cfg.autoConnect {
-      description = &quot;Automatic connection to Tailscale&quot;;
+      description = "Automatic connection to Tailscale";
 
       # Make sure tailscale is running before trying to connect to tailscale
-      after = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
-      wants = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
-      wantedBy = [&quot;multi-user.target&quot;];
+      after = ["network-pre.target" "tailscale.service"];
+      wants = ["network-pre.target" "tailscale.service"];
+      wantedBy = ["multi-user.target"];
 
-      serviceConfig.Type = &quot;oneshot&quot;;
+      serviceConfig.Type = "oneshot";
       script = tailscaleUpScript;
     };
   };

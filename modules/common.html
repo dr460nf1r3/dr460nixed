@@ -220,30 +220,30 @@ in {
 
   config = mkIf cfg.common.enable {
     ## A few kernel tweaks
-    boot.kernel.sysctl = {&quot;kernel.unprivileged_userns_clone&quot; = 1;};
+    boot.kernel.sysctl = {"kernel.unprivileged_userns_clone" = 1;};
 
     # Allow wheel group users to use sudo
     security.sudo.execWheelOnly = true;
 
     # This is the default sops file that will be used for all secrets
     sops = {
-      age.sshKeyPaths = [&quot;/etc/ssh/ssh_host_ed25519_key&quot;];
+      age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
       defaultSopsFile = ../../secrets/global.yaml;
     };
 
     # Increase open file limit for sudoers
     security.pam.loginLimits = [
       {
-        domain = &quot;@wheel&quot;;
-        item = &quot;nofile&quot;;
-        type = &quot;soft&quot;;
-        value = &quot;524288&quot;;
+        domain = "@wheel";
+        item = "nofile";
+        type = "soft";
+        value = "524288";
       }
       {
-        domain = &quot;@wheel&quot;;
-        item = &quot;nofile&quot;;
-        type = &quot;hard&quot;;
-        value = &quot;1048576&quot;;
+        domain = "@wheel";
+        item = "nofile";
+        type = "hard";
+        value = "1048576";
       }
     ];
 
@@ -256,7 +256,7 @@ in {
       # The GnuPG agent
       gnupg.agent = {
         enable = true;
-        pinentryFlavor = &quot;curses&quot;;
+        pinentryFlavor = "curses";
       };
     };
 
@@ -274,7 +274,7 @@ in {
     hardware.enableRedistributableFirmware = true;
 
     # Ship systemd logs to Loki &amp; Grafana
-    dr460nixed.promtail.lokiAddress = &quot;100.86.102.115&quot;;
+    dr460nixed.promtail.lokiAddress = "100.86.102.115";
   };
 }
 </code></pre>

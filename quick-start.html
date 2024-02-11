@@ -191,7 +191,7 @@ Several preparations have to be made to bootstrap a working installation if not 
 <li>It might be easier to supply a static password in <code>users.nix</code> for bootstrapping since no login will be possible if the secrets management isn't properly set up yet. I had a few issues with this in the past while setting things up, so I felt giving this advice might help. Usernames are of course also to be changed, as well as SSH public keys.</li>
 </ul>
 <p>Then, the bootstrapping process can be started. Here, <code>nix</code> + <code>nixos-install-tools</code> is sufficient to set up your our configuration as follows:</p>
-<pre><code class="language-sh">export NIX_CONFIG=&quot;experimental-features = nix-command flakes&quot; # if flakes are disabled
+<pre><code class="language-sh">export NIX_CONFIG="experimental-features = nix-command flakes" # if flakes are disabled
 nixos-install --flake .#hostname
 </code></pre>
 <p>If the operation succeeds, you will be able to boot into your new installation.</p>

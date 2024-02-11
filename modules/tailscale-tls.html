@@ -189,81 +189,81 @@ with lib; let
   domainExpression =
     if cfg.domain-override != null
     then cfg.domain-override
-    else &quot;$(${pkgs.tailscale}/bin/tailscale cert 2&gt;&amp;1 | grep use | cut -d '\&quot;' -f2)&quot;;
+    else "$(${pkgs.tailscale}/bin/tailscale cert 2&gt;&amp;1 | grep use | cut -d '\"' -f2)";
 in {
   options.dr460nixed.tailscale-tls = {
-    enable = mkEnableOption &quot;Automatic Tailscale certificates renewal&quot;;
+    enable = mkEnableOption "Automatic Tailscale certificates renewal";
 
     target = mkOption {
       type = types.str;
-      description = &quot;Where to put certificates&quot;;
-      default = &quot;/var/lib/tailscale-tls&quot;;
+      description = "Where to put certificates";
+      default = "/var/lib/tailscale-tls";
     };
 
     mode = mkOption {
       type = types.str;
-      description = &quot;File mode for certificates&quot;;
-      default = &quot;0640&quot;;
+      description = "File mode for certificates";
+      default = "0640";
     };
 
     domain-override = mkOption {
       type = types.nullOr types.str;
-      description = &quot;Override domain. Defaults to suggested one by tailscale&quot;;
+      description = "Override domain. Defaults to suggested one by tailscale";
       default = null;
     };
   };
 
   config = mkIf cfg.enable {
     users.users.tailscale-tls = {
-      group = &quot;tailscale-tls&quot;;
-      home = &quot;/var/lib/tailscale-tls&quot;;
+      group = "tailscale-tls";
+      home = "/var/lib/tailscale-tls";
       isSystemUser = true;
     };
 
     users.groups.tailscale-tls = {};
 
     systemd.services.tailscale-tls = {
-      description = &quot;Automatic Tailscale certificates&quot;;
+      description = "Automatic Tailscale certificates";
 
-      after = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
-      wants = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
-      wantedBy = [&quot;multi-user.target&quot;];
+      after = ["network-pre.target" "tailscale.service"];
+      wants = ["network-pre.target" "tailscale.service"];
+      wantedBy = ["multi-user.target"];
 
-      serviceConfig.Type = &quot;oneshot&quot;;
+      serviceConfig.Type = "oneshot";
       script = ''
-        status=&quot;Starting&quot;
+        status="Starting"
 
-        until [ $status = &quot;Running&quot; ]; do
+        until [ $status = "Running" ]; do
           sleep 2
           status=$(${pkgs.tailscale}/bin/tailscale status -json | ${pkgs.jq}/bin/jq -r .BackendState)
         done
 
-        mkdir -p &quot;${cfg.target}&quot;
+        mkdir -p "${cfg.target}"
 
         DOMAIN=${domainExpression}
 
         ${pkgs.tailscale}/bin/tailscale cert \
-          --cert-file &quot;${cfg.target}/cert.crt&quot; \
-          --key-file &quot;${cfg.target}/key.key&quot; \
-          &quot;$DOMAIN&quot;
+          --cert-file "${cfg.target}/cert.crt" \
+          --key-file "${cfg.target}/key.key" \
+          "$DOMAIN"
 
-        chown -R tailscale-tls:tailscale-tls &quot;${cfg.target}&quot;
+        chown -R tailscale-tls:tailscale-tls "${cfg.target}"
 
-        chmod ${cfg.mode} &quot;${cfg.target}/cert.crt&quot; &quot;${cfg.target}/key.key&quot;
+        chmod ${cfg.mode} "${cfg.target}/cert.crt" "${cfg.target}/key.key"
       '';
     };
 
     systemd.timers.tailscale-tls = {
-      description = &quot;Automatic Tailscale certificates renewal&quot;;
+      description = "Automatic Tailscale certificates renewal";
 
-      after = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
-      wants = [&quot;network-pre.target&quot; &quot;tailscale.service&quot;];
-      wantedBy = [&quot;multi-user.target&quot;];
+      after = ["network-pre.target" "tailscale.service"];
+      wants = ["network-pre.target" "tailscale.service"];
+      wantedBy = ["multi-user.target"];
 
       timerConfig = {
-        OnCalendar = &quot;weekly&quot;;
-        Persistent = &quot;true&quot;;
-        Unit = &quot;schedule-test.service&quot;;
+        OnCalendar = "weekly";
+        Persistent = "true";
+        Unit = "schedule-test.service";
       };
     };
   };

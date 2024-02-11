@@ -216,54 +216,54 @@ in {
       # The Magic SysRq key is a key combo that allows users connected to the
       # system console of a Linux kernel to perform some low-level commands.
       # Disable it, since we don't need it, and is a potential security concern.
-      &quot;kernel.sysrq&quot; = 0;
+      "kernel.sysrq" = 0;
       # Restrict ptrace() usage to processes with a pre-defined relationship
       # (e.g., parent/child)
-      &quot;kernel.yama.ptrace_scope&quot; = 2;
+      "kernel.yama.ptrace_scope" = 2;
       # Hide kptrs even for processes with CAP_SYSLOG
-      &quot;kernel.kptr_restrict&quot; = 2;
+      "kernel.kptr_restrict" = 2;
       # Disable ftrace debugging
-      &quot;kernel.ftrace_enabled&quot; = false;
+      "kernel.ftrace_enabled" = false;
     };
 
     boot.blacklistedKernelModules = [
       # Obscure network protocols
-      &quot;ax25&quot;
-      &quot;netrom&quot;
-      &quot;rose&quot;
+      "ax25"
+      "netrom"
+      "rose"
       # Old or rare or insufficiently audited filesystems
-      &quot;adfs&quot;
-      &quot;affs&quot;
-      &quot;befs&quot;
-      &quot;bfs&quot;
-      &quot;btusb&quot;
-      &quot;cifs&quot;
-      &quot;cramfs&quot;
-      &quot;cramfs&quot;
-      &quot;efs&quot;
-      &quot;erofs&quot;
-      &quot;exofs&quot;
-      &quot;f2fs&quot;
-      &quot;freevxfs&quot;
-      &quot;freevxfs&quot;
-      &quot;gfs2&quot;
-      &quot;hfs&quot;
-      &quot;hfsplus&quot;
-      &quot;hpfs&quot;
-      &quot;jffs2&quot;
-      &quot;jfs&quot;
-      &quot;ksmbd&quot;
-      &quot;minix&quot;
-      &quot;nfs&quot;
-      &quot;nfsv3&quot;
-      &quot;nfsv4&quot;
-      &quot;nilfs2&quot;
-      &quot;omfs&quot;
-      &quot;qnx4&quot;
-      &quot;qnx6&quot;
-      &quot;sysv&quot;
-      &quot;udf&quot;
-      &quot;vivid&quot;
+      "adfs"
+      "affs"
+      "befs"
+      "bfs"
+      "btusb"
+      "cifs"
+      "cramfs"
+      "cramfs"
+      "efs"
+      "erofs"
+      "exofs"
+      "f2fs"
+      "freevxfs"
+      "freevxfs"
+      "gfs2"
+      "hfs"
+      "hfsplus"
+      "hpfs"
+      "jffs2"
+      "jfs"
+      "ksmbd"
+      "minix"
+      "nfs"
+      "nfsv3"
+      "nfsv4"
+      "nilfs2"
+      "omfs"
+      "qnx4"
+      "qnx6"
+      "sysv"
+      "udf"
+      "vivid"
     ];
 
     # Protect logins and sudo on servers via DUO
@@ -271,23 +271,23 @@ in {
     security.duosec = mkIf cfg.duosec {
       acceptEnvFactor = true;
       autopush = true;
-      failmode = &quot;safe&quot;;
-      host = &quot;api-a7b9f5f3.duosecurity.com&quot;;
-      integrationKey = &quot;DID3CH2NCQ2H24L1GUUN&quot;;
+      failmode = "safe";
+      host = "api-a7b9f5f3.duosecurity.com";
+      integrationKey = "DID3CH2NCQ2H24L1GUUN";
       pam.enable = true;
       prompts = 1;
       pushinfo = true;
-      secretKeyFile = config.sops.secrets.&quot;api_keys/duo&quot;.path;
+      secretKeyFile = config.sops.secrets."api_keys/duo".path;
       ssh.enable = true;
     };
-    sops.secrets.&quot;api_keys/duo&quot; = mkIf cfg.duosec {
-      mode = &quot;0600&quot;;
-      path = &quot;/run/secrets/api_keys/duo&quot;;
+    sops.secrets."api_keys/duo" = mkIf cfg.duosec {
+      mode = "0600";
+      path = "/run/secrets/api_keys/duo";
     };
     security.pam.services = mkIf cfg.duosec {
-      &quot;login&quot;.duoSecurity.enable = true;
-      &quot;sddm&quot;.duoSecurity.enable = mkIf config.dr460nixed.desktops.enable true;
-      &quot;sudo&quot;.duoSecurity.enable = mkIf config.dr460nixed.servers.enable true;
+      "login".duoSecurity.enable = true;
+      "sddm".duoSecurity.enable = mkIf config.dr460nixed.desktops.enable true;
+      "sudo".duoSecurity.enable = mkIf config.dr460nixed.servers.enable true;
     };
 
     # Disable root login &amp; password authentication on sshd
@@ -310,27 +310,27 @@ in {
         '';
       settings = {
         Ciphers = [
-          &quot;aes256-gcm@openssh.com&quot;
-          &quot;aes256-ctr,aes192-ctr&quot;
-          &quot;aes128-ctr&quot;
-          &quot;aes128-gcm@openssh.com&quot;
-          &quot;chacha20-poly1305@openssh.com&quot;
+          "aes256-gcm@openssh.com"
+          "aes256-ctr,aes192-ctr"
+          "aes128-ctr"
+          "aes128-gcm@openssh.com"
+          "chacha20-poly1305@openssh.com"
         ];
         KbdInteractiveAuthentication = false;
         KexAlgorithms = [
-          &quot;curve25519-sha256&quot;
-          &quot;curve25519-sha256@libssh.org&quot;
-          &quot;diffie-hellman-group16-sha512&quot;
-          &quot;diffie-hellman-group18-sha512&quot;
-          &quot;sntrup761x25519-sha512@openssh.com&quot;
+          "curve25519-sha256"
+          "curve25519-sha256@libssh.org"
+          "diffie-hellman-group16-sha512"
+          "diffie-hellman-group18-sha512"
+          "sntrup761x25519-sha512@openssh.com"
         ];
         Macs = [
-          &quot;hmac-sha2-512-etm@openssh.com&quot;
-          &quot;hmac-sha2-256-etm@openssh.com&quot;
-          &quot;umac-128-etm@openssh.com&quot;
+          "hmac-sha2-512-etm@openssh.com"
+          "hmac-sha2-256-etm@openssh.com"
+          "umac-128-etm@openssh.com"
         ];
         PasswordAuthentication = false;
-        PermitRootLogin = &quot;no&quot;;
+        PermitRootLogin = "no";
         X11Forwarding = false;
       };
     };
@@ -338,59 +338,59 @@ in {
     # Client side SSH configuration
     programs.ssh = {
       ciphers = [
-        &quot;aes256-gcm@openssh.com&quot;
-        &quot;aes256-ctr,aes192-ctr&quot;
-        &quot;aes128-ctr&quot;
-        &quot;aes128-gcm@openssh.com&quot;
-        &quot;chacha20-poly1305@openssh.com&quot;
+        "aes256-gcm@openssh.com"
+        "aes256-ctr,aes192-ctr"
+        "aes128-ctr"
+        "aes128-gcm@openssh.com"
+        "chacha20-poly1305@openssh.com"
       ];
       hostKeyAlgorithms = [
-        &quot;ssh-ed25519&quot;
-        &quot;ssh-ed25519-cert-v01@openssh.com&quot;
-        &quot;sk-ssh-ed25519@openssh.com&quot;
-        &quot;sk-ssh-ed25519-cert-v01@openssh.com&quot;
-        &quot;rsa-sha2-512&quot;
-        &quot;rsa-sha2-512-cert-v01@openssh.com&quot;
-        &quot;rsa-sha2-256&quot;
-        &quot;rsa-sha2-256-cert-v01@openssh.com&quot;
+        "ssh-ed25519"
+        "ssh-ed25519-cert-v01@openssh.com"
+        "sk-ssh-ed25519@openssh.com"
+        "sk-ssh-ed25519-cert-v01@openssh.com"
+        "rsa-sha2-512"
+        "rsa-sha2-512-cert-v01@openssh.com"
+        "rsa-sha2-256"
+        "rsa-sha2-256-cert-v01@openssh.com"
       ];
       kexAlgorithms = [
-        &quot;curve25519-sha256&quot;
-        &quot;curve25519-sha256@libssh.org&quot;
-        &quot;diffie-hellman-group16-sha512&quot;
-        &quot;diffie-hellman-group18-sha512&quot;
-        &quot;sntrup761x25519-sha512@openssh.com&quot;
+        "curve25519-sha256"
+        "curve25519-sha256@libssh.org"
+        "diffie-hellman-group16-sha512"
+        "diffie-hellman-group18-sha512"
+        "sntrup761x25519-sha512@openssh.com"
       ];
       knownHosts = {
         aur-rsa = {
-          hostNames = [&quot;aur.archlinux.org&quot;];
-          publicKey = &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDKF9vAFWdgm9Bi8uc+tYRBmXASBb5cB5iZsB7LOWWFeBrLp3r14w0/9S2vozjgqY5sJLDPONWoTTaVTbhe3vwO8CBKZTEt1AcWxuXNlRnk9FliR1/eNB9uz/7y1R0+c1Md+P98AJJSJWKN12nqIDIhjl2S1vOUvm7FNY43fU2knIhEbHybhwWeg+0wxpKwcAd/JeL5i92Uv03MYftOToUijd1pqyVFdJvQFhqD4v3M157jxS5FTOBrccAEjT+zYmFyD8WvKUa9vUclRddNllmBJdy4NyLB8SvVZULUPrP3QOlmzemeKracTlVOUG1wsDbxknF1BwSCU7CmU6UFP90kpWIyz66bP0bl67QAvlIc52Yix7pKJPbw85+zykvnfl2mdROsaT8p8R9nwCdFsBc9IiD0NhPEHcyHRwB8fokXTajk2QnGhL+zP5KnkmXnyQYOCUYo3EKMXIlVOVbPDgRYYT/XqvBuzq5S9rrU70KoI/S5lDnFfx/+lPLdtcnnEPk=&quot;;
+          hostNames = ["aur.archlinux.org"];
+          publicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDKF9vAFWdgm9Bi8uc+tYRBmXASBb5cB5iZsB7LOWWFeBrLp3r14w0/9S2vozjgqY5sJLDPONWoTTaVTbhe3vwO8CBKZTEt1AcWxuXNlRnk9FliR1/eNB9uz/7y1R0+c1Md+P98AJJSJWKN12nqIDIhjl2S1vOUvm7FNY43fU2knIhEbHybhwWeg+0wxpKwcAd/JeL5i92Uv03MYftOToUijd1pqyVFdJvQFhqD4v3M157jxS5FTOBrccAEjT+zYmFyD8WvKUa9vUclRddNllmBJdy4NyLB8SvVZULUPrP3QOlmzemeKracTlVOUG1wsDbxknF1BwSCU7CmU6UFP90kpWIyz66bP0bl67QAvlIc52Yix7pKJPbw85+zykvnfl2mdROsaT8p8R9nwCdFsBc9IiD0NhPEHcyHRwB8fokXTajk2QnGhL+zP5KnkmXnyQYOCUYo3EKMXIlVOVbPDgRYYT/XqvBuzq5S9rrU70KoI/S5lDnFfx/+lPLdtcnnEPk=";
         };
         aur-ed25519 = {
-          hostNames = [&quot;aur.archlinux.org&quot;];
-          publicKey = &quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuBKrPzbawxA/k2g6NcyV5jmqwJ2s+zpgZGZ7tpLIcN&quot;;
+          hostNames = ["aur.archlinux.org"];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuBKrPzbawxA/k2g6NcyV5jmqwJ2s+zpgZGZ7tpLIcN";
         };
         github-rsa = {
-          hostNames = [&quot;github.com&quot;];
-          publicKey = &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk=&quot;;
+          hostNames = ["github.com"];
+          publicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk=";
         };
         github-ed25519 = {
-          hostNames = [&quot;github.com&quot;];
-          publicKey = &quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl&quot;;
+          hostNames = ["github.com"];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
         };
         gitlab-rsa = {
-          hostNames = [&quot;gitlab.com&quot;];
-          publicKey = &quot;ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9&quot;;
+          hostNames = ["gitlab.com"];
+          publicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9";
         };
         gitlab-ed25519 = {
-          hostNames = [&quot;gitlab.com&quot;];
-          publicKey = &quot;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf&quot;;
+          hostNames = ["gitlab.com"];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf";
         };
       };
       macs = [
-        &quot;hmac-sha2-512-etm@openssh.com&quot;
-        &quot;hmac-sha2-256-etm@openssh.com&quot;
-        &quot;umac-128-etm@openssh.com&quot;
+        "hmac-sha2-512-etm@openssh.com"
+        "hmac-sha2-256-etm@openssh.com"
+        "umac-128-etm@openssh.com"
       ];
     };
 
@@ -398,7 +398,7 @@ in {
     security.apparmor.enable = false;
 
     # Timeout TTY after 1 hour
-    programs.bash.interactiveShellInit = &quot;if [[ $(tty) =~ /dev\\/tty[1-6] ]]; then TMOUT=3600; fi&quot;;
+    programs.bash.interactiveShellInit = "if [[ $(tty) =~ /dev\\/tty[1-6] ]]; then TMOUT=3600; fi";
 
     # Don't lock kernel modules, this is also enabled by the hardening profile by default
     security.lockKernelModules = false;
@@ -410,8 +410,8 @@ in {
     services.fail2ban = mkIf cfgServers {
       enable = true;
       ignoreIP = [
-        &quot;100.0.0.0/8&quot;
-        &quot;127.0.0.1/8&quot;
+        "100.0.0.0/8"
+        "127.0.0.1/8"
       ];
     };
   };

@@ -222,26 +222,26 @@ in {
     services.netdata.enable = mkIf cfg.monitoring true;
     services.netdata.config = {
       global = {
-        &quot;dbengine disk space&quot; = &quot;512&quot;;
-        &quot;memory mode&quot; = &quot;dbengine&quot;;
-        &quot;update every&quot; = &quot;2&quot;;
+        "dbengine disk space" = "512";
+        "memory mode" = "dbengine";
+        "update every" = "2";
       };
-      ml = {&quot;enabled&quot; = &quot;yes&quot;;};
+      ml = {"enabled" = "yes";};
     };
     services.netdata.configDir = {
-      &quot;go.d.conf&quot; = pkgs.writeText &quot;go.d.conf&quot; ''
+      "go.d.conf" = pkgs.writeText "go.d.conf" ''
         enabled: yes
         modules:
           nginx: yes
           web_log: yes
       '';
-      &quot;python.d.conf&quot; = pkgs.writeText &quot;python.d.conf&quot; ''
+      "python.d.conf" = pkgs.writeText "python.d.conf" ''
         postgres: no
         web_log: no
       '';
-      &quot;go.d/nginx.conf&quot; =
+      "go.d/nginx.conf" =
         mkIf config.services.nginx.enable
-        (pkgs.writeText &quot;nginx.conf&quot; ''
+        (pkgs.writeText "nginx.conf" ''
           jobs:
             - name: local
               url: http://127.0.0.1/nginx_status
@@ -254,11 +254,11 @@ in {
     systemd.services.netdata = {path = with pkgs; [jq];};
 
     # Connect to Netdata Cloud easily
-    services.netdata.claimTokenFile = config.sops.secrets.&quot;api_keys/netdata&quot;.path;
-    sops.secrets.&quot;api_keys/netdata&quot; = {
-      mode = &quot;0600&quot;;
-      owner = &quot;netdata&quot;;
-      path = &quot;/run/secrets/api_keys/netdata&quot;;
+    services.netdata.claimTokenFile = config.sops.secrets."api_keys/netdata".path;
+    sops.secrets."api_keys/netdata" = {
+      mode = "0600";
+      owner = "netdata";
+      path = "/run/secrets/api_keys/netdata";
     };
 
     # The Nginx QUIC package with Brotli modules
@@ -277,8 +277,8 @@ in {
 
     # Upstream resolvers
     services.nginx.resolver = {
-      addresses = [&quot;100.100.100.100&quot;];
-      valid = &quot;60s&quot;;
+      addresses = ["100.100.100.100"];
+      valid = "60s";
     };
 
     # Global Nginx configuration
@@ -289,9 +289,9 @@ in {
     # Logformat to use for Netdata &amp; extra config that doesn't exist as separate key in NixOS
     services.nginx.commonHttpConfig = ''
       # Custom log format for Netdata to analyze
-      log_format              custom '&quot;$http_referer&quot; &quot;$http_user_agent&quot; '
+      log_format              custom '"$http_referer" "$http_user_agent" '
                               '$remote_addr - $remote_user [$time_local] '
-                              '&quot;$request&quot; $status $body_bytes_sent';
+                              '"$request" $status $body_bytes_sent';
 
       # Brotli compression
       brotli                  on;
@@ -321,7 +321,7 @@ in {
     # Enable this so we don't get annoyed by the ACME TOS
     security.acme = {
       acceptTerms = true;
-      defaults.email = &quot;root@dr460nf1r3.org&quot;;
+      defaults.email = "root@dr460nf1r3.org";
     };
   };
 }

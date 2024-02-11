@@ -186,222 +186,222 @@
   # This was recently added to Chaotic Nyx
   chaotic.zfs-impermanence-on-shutdown = {
     enable = true;
-    snapshot = &quot;start&quot;;
-    volume = &quot;zroot/ROOT/empty&quot;;
+    snapshot = "start";
+    volume = "zroot/ROOT/empty";
   };
 
   # Persistent files
-  environment.persistence.&quot;/var/persistent&quot; = {
+  environment.persistence."/var/persistent" = {
     hideMounts = true;
     directories =
       [
-        &quot;/etc/NetworkManager/system-connections&quot;
-        &quot;/etc/nixos&quot;
-        &quot;/etc/secureboot&quot;
-        &quot;/var/cache/chaotic&quot;
-        &quot;/var/cache/tailscale&quot;
-        &quot;/var/lib/AccountsService/icons&quot;
-        &quot;/var/lib/bluetooth&quot;
-        &quot;/var/lib/chaotic&quot;
-        &quot;/var/lib/containers&quot;
-        &quot;/var/lib/flatpak&quot;
-        &quot;/var/lib/libvirt&quot;
-        &quot;/var/lib/machines&quot;
-        &quot;/var/lib/sddm&quot;
-        &quot;/var/lib/systemd&quot;
-        &quot;/var/lib/tailscale&quot;
-        &quot;/var/lib/upower&quot;
-        &quot;/var/lib/vnstat&quot;
+        "/etc/NetworkManager/system-connections"
+        "/etc/nixos"
+        "/etc/secureboot"
+        "/var/cache/chaotic"
+        "/var/cache/tailscale"
+        "/var/lib/AccountsService/icons"
+        "/var/lib/bluetooth"
+        "/var/lib/chaotic"
+        "/var/lib/containers"
+        "/var/lib/flatpak"
+        "/var/lib/libvirt"
+        "/var/lib/machines"
+        "/var/lib/sddm"
+        "/var/lib/systemd"
+        "/var/lib/tailscale"
+        "/var/lib/upower"
+        "/var/lib/vnstat"
         {
-          directory = &quot;/var/lib/iwd&quot;;
-          mode = &quot;u=rwx,g=,o=&quot;;
+          directory = "/var/lib/iwd";
+          mode = "u=rwx,g=,o=";
         }
       ]
       ++ lib.optionals config.security.acme.acceptTerms [
         {
-          directory = &quot;/var/lib/acme&quot;;
-          user = &quot;acme&quot;;
-          group = &quot;acme&quot;;
-          mode = &quot;0755&quot;;
+          directory = "/var/lib/acme";
+          user = "acme";
+          group = "acme";
+          mode = "0755";
         }
       ]
       ++ lib.optionals config.services.printing.enable [
         {
-          directory = &quot;/var/lib/cups&quot;;
-          user = &quot;root&quot;;
-          group = &quot;root&quot;;
-          mode = &quot;0700&quot;;
+          directory = "/var/lib/cups";
+          user = "root";
+          group = "root";
+          mode = "0700";
         }
       ]
       ++ lib.optionals config.services.fail2ban.enable [
         {
-          directory = &quot;/var/lib/fail2ban&quot;;
-          user = &quot;fail2ban&quot;;
-          group = &quot;fail2ban&quot;;
-          mode = &quot;0750&quot;;
+          directory = "/var/lib/fail2ban";
+          user = "fail2ban";
+          group = "fail2ban";
+          mode = "0750";
         }
       ]
       ++ lib.optionals config.services.postgresql.enable [
         {
-          directory = &quot;/var/lib/postgresql&quot;;
-          user = &quot;postgres&quot;;
-          group = &quot;postgres&quot;;
-          mode = &quot;0700&quot;;
+          directory = "/var/lib/postgresql";
+          user = "postgres";
+          group = "postgres";
+          mode = "0700";
         }
       ]
       ++ lib.optionals config.services.loki.enable [
         {
-          directory = &quot;/var/lib/loki&quot;;
-          user = &quot;loki&quot;;
-          group = &quot;loki&quot;;
-          mode = &quot;0700&quot;;
+          directory = "/var/lib/loki";
+          user = "loki";
+          group = "loki";
+          mode = "0700";
         }
       ]
       ++ lib.optionals config.services.grafana.enable [
         {
           directory = config.services.grafana.dataDir;
-          user = &quot;grafana&quot;;
-          group = &quot;grafana&quot;;
-          mode = &quot;0700&quot;;
+          user = "grafana";
+          group = "grafana";
+          mode = "0700";
         }
       ]
       ++ lib.optionals config.services.vaultwarden.enable [
         {
-          directory = &quot;/var/lib/vaultwarden&quot;;
-          user = &quot;vaultwarden&quot;;
-          group = &quot;vaultwarden&quot;;
-          mode = &quot;0700&quot;;
+          directory = "/var/lib/vaultwarden";
+          user = "vaultwarden";
+          group = "vaultwarden";
+          mode = "0700";
         }
       ]
       ++ lib.optionals config.services.influxdb2.enable [
         {
-          directory = &quot;/var/lib/influxdb2&quot;;
-          user = &quot;influxdb2&quot;;
-          group = &quot;influxdb2&quot;;
-          mode = &quot;0700&quot;;
+          directory = "/var/lib/influxdb2";
+          user = "influxdb2";
+          group = "influxdb2";
+          mode = "0700";
         }
       ]
       ++ lib.optionals config.services.telegraf.enable [
         {
-          directory = &quot;/var/lib/telegraf&quot;;
-          user = &quot;telegraf&quot;;
-          group = &quot;telegraf&quot;;
-          mode = &quot;0700&quot;;
+          directory = "/var/lib/telegraf";
+          user = "telegraf";
+          group = "telegraf";
+          mode = "0700";
         }
       ]
       ++ lib.optionals config.services.adguardhome.enable [
         {
-          directory = &quot;/var/lib/private/AdGuardHome&quot;;
-          user = &quot;root&quot;;
-          group = &quot;root&quot;;
-          mode = &quot;0700&quot;;
+          directory = "/var/lib/private/AdGuardHome";
+          user = "root";
+          group = "root";
+          mode = "0700";
         }
       ];
-    files = [&quot;/var/lib/dbus/machine-id&quot;];
-    users.&quot;root&quot; = {
-      home = &quot;/root&quot;;
+    files = ["/var/lib/dbus/machine-id"];
+    users."root" = {
+      home = "/root";
       directories = [
         {
-          directory = &quot;.gnupg&quot;;
-          mode = &quot;0700&quot;;
+          directory = ".gnupg";
+          mode = "0700";
         }
         {
-          directory = &quot;.ssh&quot;;
-          mode = &quot;0700&quot;;
+          directory = ".ssh";
+          mode = "0700";
         }
       ];
     };
-    users.&quot;nico&quot; = {
+    users."nico" = {
       directories = [
-        &quot;.android&quot;
-        &quot;.ansible&quot;
-        &quot;.config&quot;
-        &quot;.firedragon&quot;
-        &quot;.gitkraken&quot;
-        &quot;.java&quot;
-        &quot;.local/share/JetBrains&quot;
-        &quot;.local/share/Nextcloud&quot;
-        &quot;.local/share/PrismLauncher&quot;
-        &quot;.local/share/Steam&quot;
-        &quot;.local/share/TelegramDesktop&quot;
-        &quot;.local/share/Vorta&quot;
-        &quot;.local/share/applications&quot;
-        &quot;.local/share/baloo&quot;
-        &quot;.local/share/containers&quot;
-        &quot;.local/share/direnv&quot;
-        &quot;.local/share/dolphin&quot;
-        &quot;.local/share/fish&quot;
-        &quot;.local/share/heroku&quot;
-        &quot;.local/share/kactivitymanagerd&quot;
-        &quot;.local/share/klipper&quot;
-        &quot;.local/share/knewstuff3&quot;
-        &quot;.local/share/konsole&quot;
-        &quot;.local/share/krita&quot;
-        &quot;.local/share/kscreen&quot;
-        &quot;.local/share/kwalletd&quot;
-        &quot;.local/share/lutris&quot;
-        &quot;.local/share/plasma&quot;
-        &quot;.local/share/tor-browser&quot;
-        &quot;.mozilla&quot;
-        &quot;.thunderbird&quot;
-        &quot;.tldrc&quot;
-        &quot;.var&quot;
-        &quot;.yubico&quot;
-        &quot;Documents&quot;
-        &quot;Downloads&quot;
-        &quot;Games&quot;
-        &quot;Music&quot;
-        &quot;Nextcloud&quot;
-        &quot;Pictures&quot;
-        &quot;School&quot;
-        &quot;Sync&quot;
-        &quot;Videos&quot;
+        ".android"
+        ".ansible"
+        ".config"
+        ".firedragon"
+        ".gitkraken"
+        ".java"
+        ".local/share/JetBrains"
+        ".local/share/Nextcloud"
+        ".local/share/PrismLauncher"
+        ".local/share/Steam"
+        ".local/share/TelegramDesktop"
+        ".local/share/Vorta"
+        ".local/share/applications"
+        ".local/share/baloo"
+        ".local/share/containers"
+        ".local/share/direnv"
+        ".local/share/dolphin"
+        ".local/share/fish"
+        ".local/share/heroku"
+        ".local/share/kactivitymanagerd"
+        ".local/share/klipper"
+        ".local/share/knewstuff3"
+        ".local/share/konsole"
+        ".local/share/krita"
+        ".local/share/kscreen"
+        ".local/share/kwalletd"
+        ".local/share/lutris"
+        ".local/share/plasma"
+        ".local/share/tor-browser"
+        ".mozilla"
+        ".thunderbird"
+        ".tldrc"
+        ".var"
+        ".yubico"
+        "Documents"
+        "Downloads"
+        "Games"
+        "Music"
+        "Nextcloud"
+        "Pictures"
+        "School"
+        "Sync"
+        "Videos"
         {
-          directory = &quot;.gnupg&quot;;
-          mode = &quot;0700&quot;;
+          directory = ".gnupg";
+          mode = "0700";
         }
         {
-          directory = &quot;.local/share/keybase&quot;;
-          mode = &quot;0700&quot;;
+          directory = ".local/share/keybase";
+          mode = "0700";
         }
         {
-          directory = &quot;.local/share/keyrings&quot;;
-          mode = &quot;0700&quot;;
+          directory = ".local/share/keyrings";
+          mode = "0700";
         }
         {
-          directory = &quot;.ssh&quot;;
-          mode = &quot;0700&quot;;
+          directory = ".ssh";
+          mode = "0700";
         }
       ];
     };
   };
 
   # Not important but persistent files
-  environment.persistence.&quot;/var/residues&quot; = {
+  environment.persistence."/var/residues" = {
     hideMounts = true;
     directories = [
-      &quot;/var/cache&quot;
-      &quot;/var/log&quot;
+      "/var/cache"
+      "/var/log"
     ];
     users.nico = {
       directories = [
-        &quot;.cache/bookmarksrunner&quot;
-        &quot;.cache/chromium&quot;
-        &quot;.cache/firedragon&quot;
-        &quot;.cache/konsole&quot;
-        &quot;.cache/lutris&quot;
-        &quot;.cache/mesa_shader_cache&quot;
-        &quot;.cache/mozilla&quot;
-        &quot;.cache/nix&quot;
-        &quot;.cache/nix-index&quot;
-        &quot;.cache/plasmashell&quot;
-        &quot;.cache/spotify&quot;
-        &quot;.cache/starship&quot;
-        &quot;.cache/thunderbird&quot;
-        &quot;.cache/virt-manager&quot;
-        &quot;.local/share/Trash&quot;
-        &quot;.local/state/wireplumber&quot;
-        &quot;.steam&quot;
+        ".cache/bookmarksrunner"
+        ".cache/chromium"
+        ".cache/firedragon"
+        ".cache/konsole"
+        ".cache/lutris"
+        ".cache/mesa_shader_cache"
+        ".cache/mozilla"
+        ".cache/nix"
+        ".cache/nix-index"
+        ".cache/plasmashell"
+        ".cache/spotify"
+        ".cache/starship"
+        ".cache/thunderbird"
+        ".cache/virt-manager"
+        ".local/share/Trash"
+        ".local/state/wireplumber"
+        ".steam"
       ];
     };
   };

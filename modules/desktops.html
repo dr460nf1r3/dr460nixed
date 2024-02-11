@@ -212,7 +212,7 @@ in {
     services.syncthing.openDefaultPorts = true;
 
     # # Kernel paramters &amp; settings
-    boot.kernelParams = [&quot;mitigations=off&quot;];
+    boot.kernelParams = ["mitigations=off"];
 
     # Fancy themed, enhanced Spotify
     programs.spicetify = {
@@ -245,8 +245,8 @@ in {
     # Pipewire configuration
     environment.etc = {
       # Allow pipewire to dynamically adjust the rate sent to the devices based on the playback stream
-      &quot;pipewire/pipewire.conf.d/99-allowed-rates.conf&quot;.text = builtins.toJSON {
-        &quot;context.properties&quot;.&quot;default.clock.allowed-rates&quot; = [
+      "pipewire/pipewire.conf.d/99-allowed-rates.conf".text = builtins.toJSON {
+        "context.properties"."default.clock.allowed-rates" = [
           44100
           48000
           88200
@@ -256,14 +256,14 @@ in {
         ];
       };
       # If resampling is required, use a higher quality. 15 is overkill and too cpu expensive without any obvious audible advantage
-      &quot;pipewire/pipewire-pulse.conf.d/99-resample.conf&quot;.text = builtins.toJSON {
-        &quot;stream.properties&quot;.&quot;resample.quality&quot; = 10;
+      "pipewire/pipewire-pulse.conf.d/99-resample.conf".text = builtins.toJSON {
+        "stream.properties"."resample.quality" = 10;
       };
-      &quot;pipewire/client.conf.d/99-resample.conf&quot;.text = builtins.toJSON {
-        &quot;stream.properties&quot;.&quot;resample.quality&quot; = 10;
+      "pipewire/client.conf.d/99-resample.conf".text = builtins.toJSON {
+        "stream.properties"."resample.quality" = 10;
       };
-      &quot;pipewire/client-rt.conf.d/99-resample.conf&quot;.text = builtins.toJSON {
-        &quot;stream.properties&quot;.&quot;resample.quality&quot; = 10;
+      "pipewire/client-rt.conf.d/99-resample.conf".text = builtins.toJSON {
+        "stream.properties"."resample.quality" = 10;
       };
     };
   };

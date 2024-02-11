@@ -226,8 +226,8 @@
 in {
   # This is needed for early set up of user accounts
   sops.secrets = {
-    &quot;passwords/nico&quot;.neededForUsers = true;
-    &quot;passwords/root&quot;.neededForUsers = true;
+    "passwords/nico".neededForUsers = true;
+    "passwords/root".neededForUsers = true;
   };
 
   users = {
@@ -239,43 +239,43 @@ in {
         autoSubUidGidRange = false; # Use fixed UIDs/GIDs
         extraGroups =
           [
-            &quot;audio&quot;
-            &quot;video&quot;
-            &quot;wheel&quot;
+            "audio"
+            "video"
+            "wheel"
           ]
           ++ ifTheyExist [
-            &quot;adbusers&quot;
-            &quot;chaotic_op&quot;
-            &quot;deluge&quot;
-            &quot;disk&quot;
-            &quot;docker&quot;
-            &quot;flatpak&quot;
-            &quot;git&quot;
-            &quot;kvm&quot;
-            &quot;libvirtd&quot;
-            &quot;minecraft&quot;
-            &quot;mysql&quot;
-            &quot;network&quot;
-            &quot;networkmanager&quot;
-            &quot;podman&quot;
-            &quot;systemd-journal&quot;
-            &quot;wireshark&quot;
+            "adbusers"
+            "chaotic_op"
+            "deluge"
+            "disk"
+            "docker"
+            "flatpak"
+            "git"
+            "kvm"
+            "libvirtd"
+            "minecraft"
+            "mysql"
+            "network"
+            "networkmanager"
+            "podman"
+            "systemd-journal"
+            "wireshark"
           ];
-        hashedPasswordFile = config.sops.secrets.&quot;passwords/nico&quot;.path;
-        home = &quot;/home/nico&quot;;
+        hashedPasswordFile = config.sops.secrets."passwords/nico".path;
+        home = "/home/nico";
         isNormalUser = true;
         openssh.authorizedKeys.keyFiles = [keys.nico];
       };
       # Lock root password
-      root.hashedPasswordFile = config.sops.secrets.&quot;passwords/root&quot;.path;
+      root.hashedPasswordFile = config.sops.secrets."passwords/root".path;
     };
   };
 
   # Allow pushing to Cachix
-  # sops.secrets.&quot;api_keys/cachix&quot; = {
-  #   mode = &quot;0600&quot;;
+  # sops.secrets."api_keys/cachix" = {
+  #   mode = "0600";
   #   owner = config.users.users.nico.name;
-  #   path = &quot;/home/nico/.config/cachix/cachix.dhall&quot;;
+  #   path = "/home/nico/.config/cachix/cachix.dhall";
   # };
 }
 </code></pre>

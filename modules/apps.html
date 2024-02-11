@@ -313,17 +313,17 @@ in {
           ]
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             {
-              name = &quot;sweet-vscode&quot;;
-              publisher = &quot;eliverlara&quot;;
-              sha256 = &quot;sha256-kJgqMEJHyYF3GDxe1rnpTEmbfJE01tyyOFjRUp4SOds=&quot;;
-              version = &quot;1.1.1&quot;;
+              name = "sweet-vscode";
+              publisher = "eliverlara";
+              sha256 = "sha256-kJgqMEJHyYF3GDxe1rnpTEmbfJE01tyyOFjRUp4SOds=";
+              version = "1.1.1";
             }
             {
               # Available in nixpkgs, but outdated (0.4.0) at the time of adding
-              name = &quot;vscode-tailscale&quot;;
-              publisher = &quot;tailscale&quot;;
-              sha256 = &quot;sha256-MKiCZ4Vu+0HS2Kl5+60cWnOtb3udyEriwc+qb/7qgUg=&quot;;
-              version = &quot;1.0.0&quot;;
+              name = "vscode-tailscale";
+              publisher = "tailscale";
+              sha256 = "sha256-MKiCZ4Vu+0HS2Kl5+60cWnOtb3udyEriwc+qb/7qgUg=";
+              version = "1.0.0";
             }
           ];
       })
@@ -376,285 +376,285 @@ in {
   xdg.mime.defaultApplications = let
     # Take from the respective mimetype files
     images = [
-      &quot;image/bmp&quot;
-      &quot;image/gif&quot;
-      &quot;image/jpeg&quot;
-      &quot;image/jpg&quot;
-      &quot;image/pjpeg&quot;
-      &quot;image/png&quot;
-      &quot;image/svg+xml&quot;
-      &quot;image/svg+xml-compressed&quot;
-      &quot;image/tiff&quot;
-      &quot;image/vnd.wap.wbmp;image/x-icns&quot;
-      &quot;image/x-bmp&quot;
-      &quot;image/x-gray&quot;
-      &quot;image/x-icb&quot;
-      &quot;image/x-ico&quot;
-      &quot;image/x-pcx&quot;
-      &quot;image/x-png&quot;
-      &quot;image/x-portable-anymap&quot;
-      &quot;image/x-portable-bitmap&quot;
-      &quot;image/x-portable-graymap&quot;
-      &quot;image/x-portable-pixmap&quot;
-      &quot;image/x-xbitmap&quot;
-      &quot;image/x-xpixmap&quot;
+      "image/bmp"
+      "image/gif"
+      "image/jpeg"
+      "image/jpg"
+      "image/pjpeg"
+      "image/png"
+      "image/svg+xml"
+      "image/svg+xml-compressed"
+      "image/tiff"
+      "image/vnd.wap.wbmp;image/x-icns"
+      "image/x-bmp"
+      "image/x-gray"
+      "image/x-icb"
+      "image/x-ico"
+      "image/x-pcx"
+      "image/x-png"
+      "image/x-portable-anymap"
+      "image/x-portable-bitmap"
+      "image/x-portable-graymap"
+      "image/x-portable-pixmap"
+      "image/x-xbitmap"
+      "image/x-xpixmap"
     ];
     urls = [
-      &quot;text/html&quot;
-      &quot;x-scheme-handler/about&quot;
-      &quot;x-scheme-handler/http&quot;
-      &quot;x-scheme-handler/https&quot;
-      &quot;x-scheme-handler/unknown&quot;
+      "text/html"
+      "x-scheme-handler/about"
+      "x-scheme-handler/http"
+      "x-scheme-handler/https"
+      "x-scheme-handler/unknown"
     ];
     documents = [
-      &quot;application/illustrator&quot;
-      &quot;application/oxps&quot;
-      &quot;application/pdf&quot;
-      &quot;application/postscript&quot;
-      &quot;application/vnd.comicbook+zip&quot;
-      &quot;application/vnd.comicbook-rar&quot;
-      &quot;application/vnd.ms-xpsdocument&quot;
-      &quot;application/x-bzdvi&quot;
-      &quot;application/x-bzpdf&quot;
-      &quot;application/x-bzpostscript&quot;
-      &quot;application/x-cb7&quot;
-      &quot;application/x-cbr&quot;
-      &quot;application/x-cbt&quot;
-      &quot;application/x-cbz&quot;
-      &quot;application/x-dvi&quot;
-      &quot;application/x-ext-cb7&quot;
-      &quot;application/x-ext-cbr&quot;
-      &quot;application/x-ext-cbt&quot;
-      &quot;application/x-ext-cbz&quot;
-      &quot;application/x-ext-djv&quot;
-      &quot;application/x-ext-djvu&quot;
-      &quot;application/x-ext-dvi&quot;
-      &quot;application/x-ext-eps&quot;
-      &quot;application/x-ext-pdf&quot;
-      &quot;application/x-ext-ps&quot;
-      &quot;application/x-gzdvi&quot;
-      &quot;application/x-gzpdf&quot;
-      &quot;application/x-gzpostscript&quot;
-      &quot;application/x-xzpdf&quot;
-      &quot;image/tiff&quot;
-      &quot;image/vnd.djvu+multipage&quot;
-      &quot;image/x-bzeps&quot;
-      &quot;image/x-eps&quot;
-      &quot;image/x-gzeps&quot;
+      "application/illustrator"
+      "application/oxps"
+      "application/pdf"
+      "application/postscript"
+      "application/vnd.comicbook+zip"
+      "application/vnd.comicbook-rar"
+      "application/vnd.ms-xpsdocument"
+      "application/x-bzdvi"
+      "application/x-bzpdf"
+      "application/x-bzpostscript"
+      "application/x-cb7"
+      "application/x-cbr"
+      "application/x-cbt"
+      "application/x-cbz"
+      "application/x-dvi"
+      "application/x-ext-cb7"
+      "application/x-ext-cbr"
+      "application/x-ext-cbt"
+      "application/x-ext-cbz"
+      "application/x-ext-djv"
+      "application/x-ext-djvu"
+      "application/x-ext-dvi"
+      "application/x-ext-eps"
+      "application/x-ext-pdf"
+      "application/x-ext-ps"
+      "application/x-gzdvi"
+      "application/x-gzpdf"
+      "application/x-gzpostscript"
+      "application/x-xzpdf"
+      "image/tiff"
+      "image/vnd.djvu+multipage"
+      "image/x-bzeps"
+      "image/x-eps"
+      "image/x-gzeps"
     ];
     audioVideo = [
-      &quot;application/mxf&quot;
-      &quot;application/ogg&quot;
-      &quot;application/sdp&quot;
-      &quot;application/smil&quot;
-      &quot;application/streamingmedia&quot;
-      &quot;application/vnd.apple.mpegurl&quot;
-      &quot;application/vnd.ms-asf&quot;
-      &quot;application/vnd.rn-realmedia&quot;
-      &quot;application/vnd.rn-realmedia-vbr&quot;
-      &quot;application/x-cue&quot;
-      &quot;application/x-extension-m4a&quot;
-      &quot;application/x-extension-mp4&quot;
-      &quot;application/x-matroska&quot;
-      &quot;application/x-mpegurl&quot;
-      &quot;application/x-ogg&quot;
-      &quot;application/x-ogm&quot;
-      &quot;application/x-ogm-audio&quot;
-      &quot;application/x-ogm-video&quot;
-      &quot;application/x-shorten&quot;
-      &quot;application/x-smil&quot;
-      &quot;application/x-streamingmedia&quot;
-      &quot;audio/3gpp&quot;
-      &quot;audio/3gpp2&quot;
-      &quot;audio/AMR&quot;
-      &quot;audio/aac&quot;
-      &quot;audio/ac3&quot;
-      &quot;audio/aiff&quot;
-      &quot;audio/amr-wb&quot;
-      &quot;audio/dv&quot;
-      &quot;audio/eac3&quot;
-      &quot;audio/flac&quot;
-      &quot;audio/m3u&quot;
-      &quot;audio/m4a&quot;
-      &quot;audio/mp1&quot;
-      &quot;audio/mp2&quot;
-      &quot;audio/mp3&quot;
-      &quot;audio/mp4&quot;
-      &quot;audio/mpeg&quot;
-      &quot;audio/mpeg2&quot;
-      &quot;audio/mpeg3&quot;
-      &quot;audio/mpegurl&quot;
-      &quot;audio/mpg&quot;
-      &quot;audio/musepack&quot;
-      &quot;audio/ogg&quot;
-      &quot;audio/opus&quot;
-      &quot;audio/rn-mpeg&quot;
-      &quot;audio/scpls&quot;
-      &quot;audio/vnd.dolby.heaac.1&quot;
-      &quot;audio/vnd.dolby.heaac.2&quot;
-      &quot;audio/vnd.dts&quot;
-      &quot;audio/vnd.dts.hd&quot;
-      &quot;audio/vnd.rn-realaudio&quot;
-      &quot;audio/vorbis&quot;
-      &quot;audio/wav&quot;
-      &quot;audio/webm&quot;
-      &quot;audio/x-aac&quot;
-      &quot;audio/x-adpcm&quot;
-      &quot;audio/x-aiff&quot;
-      &quot;audio/x-ape&quot;
-      &quot;audio/x-m4a&quot;
-      &quot;audio/x-matroska&quot;
-      &quot;audio/x-mp1&quot;
-      &quot;audio/x-mp2&quot;
-      &quot;audio/x-mp3&quot;
-      &quot;audio/x-mpegurl&quot;
-      &quot;audio/x-mpg&quot;
-      &quot;audio/x-ms-asf&quot;
-      &quot;audio/x-ms-wma&quot;
-      &quot;audio/x-musepack&quot;
-      &quot;audio/x-pls&quot;
-      &quot;audio/x-pn-au&quot;
-      &quot;audio/x-pn-realaudio&quot;
-      &quot;audio/x-pn-wav&quot;
-      &quot;audio/x-pn-windows-pcm&quot;
-      &quot;audio/x-realaudio&quot;
-      &quot;audio/x-scpls&quot;
-      &quot;audio/x-shorten&quot;
-      &quot;audio/x-tta&quot;
-      &quot;audio/x-vorbis&quot;
-      &quot;audio/x-vorbis+ogg&quot;
-      &quot;audio/x-wav&quot;
-      &quot;audio/x-wavpack&quot;
-      &quot;video/3gp&quot;
-      &quot;video/3gpp&quot;
-      &quot;video/3gpp2&quot;
-      &quot;video/avi&quot;
-      &quot;video/divx&quot;
-      &quot;video/dv&quot;
-      &quot;video/fli&quot;
-      &quot;video/flv&quot;
-      &quot;video/mkv&quot;
-      &quot;video/mp2t&quot;
-      &quot;video/mp4&quot;
-      &quot;video/mp4v-es&quot;
-      &quot;video/mpeg&quot;
-      &quot;video/msvideo&quot;
-      &quot;video/ogg&quot;
-      &quot;video/quicktime&quot;
-      &quot;video/vnd.divx&quot;
-      &quot;video/vnd.mpegurl&quot;
-      &quot;video/vnd.rn-realvideo&quot;
-      &quot;video/webm&quot;
-      &quot;video/x-avi&quot;
-      &quot;video/x-flc&quot;
-      &quot;video/x-flic&quot;
-      &quot;video/x-flv&quot;
-      &quot;video/x-m4v&quot;
-      &quot;video/x-matroska&quot;
-      &quot;video/x-mpeg2&quot;
-      &quot;video/x-mpeg3&quot;
-      &quot;video/x-ms-afs&quot;
-      &quot;video/x-ms-asf&quot;
-      &quot;video/x-ms-wmv&quot;
-      &quot;video/x-ms-wmx&quot;
-      &quot;video/x-ms-wvxvideo&quot;
-      &quot;video/x-msvideo&quot;
-      &quot;video/x-ogm&quot;
-      &quot;video/x-ogm+ogg&quot;
-      &quot;video/x-theora&quot;
-      &quot;video/x-theora+ogg&quot;
+      "application/mxf"
+      "application/ogg"
+      "application/sdp"
+      "application/smil"
+      "application/streamingmedia"
+      "application/vnd.apple.mpegurl"
+      "application/vnd.ms-asf"
+      "application/vnd.rn-realmedia"
+      "application/vnd.rn-realmedia-vbr"
+      "application/x-cue"
+      "application/x-extension-m4a"
+      "application/x-extension-mp4"
+      "application/x-matroska"
+      "application/x-mpegurl"
+      "application/x-ogg"
+      "application/x-ogm"
+      "application/x-ogm-audio"
+      "application/x-ogm-video"
+      "application/x-shorten"
+      "application/x-smil"
+      "application/x-streamingmedia"
+      "audio/3gpp"
+      "audio/3gpp2"
+      "audio/AMR"
+      "audio/aac"
+      "audio/ac3"
+      "audio/aiff"
+      "audio/amr-wb"
+      "audio/dv"
+      "audio/eac3"
+      "audio/flac"
+      "audio/m3u"
+      "audio/m4a"
+      "audio/mp1"
+      "audio/mp2"
+      "audio/mp3"
+      "audio/mp4"
+      "audio/mpeg"
+      "audio/mpeg2"
+      "audio/mpeg3"
+      "audio/mpegurl"
+      "audio/mpg"
+      "audio/musepack"
+      "audio/ogg"
+      "audio/opus"
+      "audio/rn-mpeg"
+      "audio/scpls"
+      "audio/vnd.dolby.heaac.1"
+      "audio/vnd.dolby.heaac.2"
+      "audio/vnd.dts"
+      "audio/vnd.dts.hd"
+      "audio/vnd.rn-realaudio"
+      "audio/vorbis"
+      "audio/wav"
+      "audio/webm"
+      "audio/x-aac"
+      "audio/x-adpcm"
+      "audio/x-aiff"
+      "audio/x-ape"
+      "audio/x-m4a"
+      "audio/x-matroska"
+      "audio/x-mp1"
+      "audio/x-mp2"
+      "audio/x-mp3"
+      "audio/x-mpegurl"
+      "audio/x-mpg"
+      "audio/x-ms-asf"
+      "audio/x-ms-wma"
+      "audio/x-musepack"
+      "audio/x-pls"
+      "audio/x-pn-au"
+      "audio/x-pn-realaudio"
+      "audio/x-pn-wav"
+      "audio/x-pn-windows-pcm"
+      "audio/x-realaudio"
+      "audio/x-scpls"
+      "audio/x-shorten"
+      "audio/x-tta"
+      "audio/x-vorbis"
+      "audio/x-vorbis+ogg"
+      "audio/x-wav"
+      "audio/x-wavpack"
+      "video/3gp"
+      "video/3gpp"
+      "video/3gpp2"
+      "video/avi"
+      "video/divx"
+      "video/dv"
+      "video/fli"
+      "video/flv"
+      "video/mkv"
+      "video/mp2t"
+      "video/mp4"
+      "video/mp4v-es"
+      "video/mpeg"
+      "video/msvideo"
+      "video/ogg"
+      "video/quicktime"
+      "video/vnd.divx"
+      "video/vnd.mpegurl"
+      "video/vnd.rn-realvideo"
+      "video/webm"
+      "video/x-avi"
+      "video/x-flc"
+      "video/x-flic"
+      "video/x-flv"
+      "video/x-m4v"
+      "video/x-matroska"
+      "video/x-mpeg2"
+      "video/x-mpeg3"
+      "video/x-ms-afs"
+      "video/x-ms-asf"
+      "video/x-ms-wmv"
+      "video/x-ms-wmx"
+      "video/x-ms-wvxvideo"
+      "video/x-msvideo"
+      "video/x-ogm"
+      "video/x-ogm+ogg"
+      "video/x-theora"
+      "video/x-theora+ogg"
     ];
     archives = [
-      &quot;application/bzip2&quot;
-      &quot;application/gzip&quot;
-      &quot;application/vnd.android.package-archive&quot;
-      &quot;application/vnd.debian.binary-package&quot;
-      &quot;application/vnd.ms-cab-compressed&quot;
-      &quot;application/x-7z-compressed&quot;
-      &quot;application/x-7z-compressed-tar&quot;
-      &quot;application/x-ace&quot;
-      &quot;application/x-alz&quot;
-      &quot;application/x-ar&quot;
-      &quot;application/x-archive&quot;
-      &quot;application/x-arj&quot;
-      &quot;application/x-brotli&quot;
-      &quot;application/x-bzip&quot;
-      &quot;application/x-bzip-brotli-tar&quot;
-      &quot;application/x-bzip-compressed-tar&quot;
-      &quot;application/x-bzip1&quot;
-      &quot;application/x-bzip1-compressed-tar&quot;
-      &quot;application/x-cabinet&quot;
-      &quot;application/x-cd-image&quot;
-      &quot;application/x-chrome-extension&quot;
-      &quot;application/x-compress&quot;
-      &quot;application/x-compressed-tar&quot;
-      &quot;application/x-cpio&quot;
-      &quot;application/x-deb&quot;
-      &quot;application/x-ear&quot;
-      &quot;application/x-gtar&quot;
-      &quot;application/x-gzip&quot;
-      &quot;application/x-gzpostscript&quot;
-      &quot;application/x-java-archive&quot;
-      &quot;application/x-lha&quot;
-      &quot;application/x-lhz&quot;
-      &quot;application/x-lrzip&quot;
-      &quot;application/x-lrzip-compressed-tar&quot;
-      &quot;application/x-lz4&quot;
-      &quot;application/x-lz4-compressed-tar&quot;
-      &quot;application/x-lzip&quot;
-      &quot;application/x-lzip-compressed-tar&quot;
-      &quot;application/x-lzma&quot;
-      &quot;application/x-lzma-compressed-tar&quot;
-      &quot;application/x-lzop&quot;
-      &quot;application/x-ms-dos-executable&quot;
-      &quot;application/x-ms-wim&quot;
-      &quot;application/x-rar&quot;
-      &quot;application/x-rar-compressed&quot;
-      &quot;application/x-rpm&quot;
-      &quot;application/x-rzip&quot;
-      &quot;application/x-rzip-compressed-tar&quot;
-      &quot;application/x-source-rpm&quot;
-      &quot;application/x-stuffit&quot;
-      &quot;application/x-tar&quot;
-      &quot;application/x-tarz&quot;
-      &quot;application/x-tzo&quot;
-      &quot;application/x-war&quot;
-      &quot;application/x-xar&quot;
-      &quot;application/x-xz&quot;
-      &quot;application/x-xz-compressed-tar&quot;
-      &quot;application/x-zip&quot;
-      &quot;application/x-zip-compressed&quot;
-      &quot;application/x-zoo&quot;
-      &quot;application/x-zstd-compressed-tar&quot;
-      &quot;application/zip&quot;
-      &quot;application/zstd&quot;
+      "application/bzip2"
+      "application/gzip"
+      "application/vnd.android.package-archive"
+      "application/vnd.debian.binary-package"
+      "application/vnd.ms-cab-compressed"
+      "application/x-7z-compressed"
+      "application/x-7z-compressed-tar"
+      "application/x-ace"
+      "application/x-alz"
+      "application/x-ar"
+      "application/x-archive"
+      "application/x-arj"
+      "application/x-brotli"
+      "application/x-bzip"
+      "application/x-bzip-brotli-tar"
+      "application/x-bzip-compressed-tar"
+      "application/x-bzip1"
+      "application/x-bzip1-compressed-tar"
+      "application/x-cabinet"
+      "application/x-cd-image"
+      "application/x-chrome-extension"
+      "application/x-compress"
+      "application/x-compressed-tar"
+      "application/x-cpio"
+      "application/x-deb"
+      "application/x-ear"
+      "application/x-gtar"
+      "application/x-gzip"
+      "application/x-gzpostscript"
+      "application/x-java-archive"
+      "application/x-lha"
+      "application/x-lhz"
+      "application/x-lrzip"
+      "application/x-lrzip-compressed-tar"
+      "application/x-lz4"
+      "application/x-lz4-compressed-tar"
+      "application/x-lzip"
+      "application/x-lzip-compressed-tar"
+      "application/x-lzma"
+      "application/x-lzma-compressed-tar"
+      "application/x-lzop"
+      "application/x-ms-dos-executable"
+      "application/x-ms-wim"
+      "application/x-rar"
+      "application/x-rar-compressed"
+      "application/x-rpm"
+      "application/x-rzip"
+      "application/x-rzip-compressed-tar"
+      "application/x-source-rpm"
+      "application/x-stuffit"
+      "application/x-tar"
+      "application/x-tarz"
+      "application/x-tzo"
+      "application/x-war"
+      "application/x-xar"
+      "application/x-xz"
+      "application/x-xz-compressed-tar"
+      "application/x-zip"
+      "application/x-zip-compressed"
+      "application/x-zoo"
+      "application/x-zstd-compressed-tar"
+      "application/zip"
+      "application/zstd"
     ];
     code = [
-      &quot;application/x-shellscript&quot;
-      &quot;text/english&quot;
-      &quot;text/plain&quot;
-      &quot;text/x-c&quot;
-      &quot;text/x-c++&quot;
-      &quot;text/x-c++hdr&quot;
-      &quot;text/x-c++src&quot;
-      &quot;text/x-chdr&quot;
-      &quot;text/x-csrc&quot;
-      &quot;text/x-java&quot;
-      &quot;text/x-makefile&quot;
-      &quot;text/x-moc&quot;
-      &quot;text/x-pascal&quot;
-      &quot;text/x-tcl&quot;
-      &quot;text/x-tex&quot;
+      "application/x-shellscript"
+      "text/english"
+      "text/plain"
+      "text/x-c"
+      "text/x-c++"
+      "text/x-c++hdr"
+      "text/x-c++src"
+      "text/x-chdr"
+      "text/x-csrc"
+      "text/x-java"
+      "text/x-makefile"
+      "text/x-moc"
+      "text/x-pascal"
+      "text/x-tcl"
+      "text/x-tex"
     ];
   in
     lib.mkForce (
       # Overriding garuda-nix flakes defaults here
-      (lib.genAttrs code (_: [&quot;code.desktop&quot;]))
-      // (lib.genAttrs archives (_: [&quot;ark.desktop&quot;]))
-      // (lib.genAttrs audioVideo (_: [&quot;vlc.desktop&quot;]))
-      // (lib.genAttrs documents (_: [&quot;okular.desktop&quot;]))
-      // (lib.genAttrs images (_: [&quot;okular.desktop&quot;]))
-      // (lib.genAttrs urls (_: [&quot;firedragon.desktop&quot;]))
+      (lib.genAttrs code (_: ["code.desktop"]))
+      // (lib.genAttrs archives (_: ["ark.desktop"]))
+      // (lib.genAttrs audioVideo (_: ["vlc.desktop"]))
+      // (lib.genAttrs documents (_: ["okular.desktop"]))
+      // (lib.genAttrs images (_: ["okular.desktop"]))
+      // (lib.genAttrs urls (_: ["firedragon.desktop"]))
     );
 }
 </code></pre>
