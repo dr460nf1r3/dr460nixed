@@ -142,5 +142,16 @@
         path = ../template;
       };
     };
+
+    # Home configuration for my Garuda Linux
+    homeConfigurations."nico" = inputs.home-manager.lib.homeManagerConfiguration {
+      extraSpecialArgs = {inherit inputs;};
+      pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+      modules = [
+        ../home-manager/standalone.nix
+        ../home-manager/nico/nico.nix
+        inputs.spicetify-nix.homeManagerModule
+      ];
+    };
   };
 }
