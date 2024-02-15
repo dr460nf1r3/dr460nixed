@@ -1,4 +1,8 @@
-{pkgs, ...}:
+{
+  lib,
+  pkgs,
+  ...
+}:
 with builtins; let
   configDir = ".config";
 
@@ -23,7 +27,6 @@ in {
   # Import individual configuration snippets
   imports = [
     ./common.nix
-    ./theme-launchers.nix
     ./misc.nix
   ];
   # Enable Kvantum theme and GTK & place a few bigger files
@@ -47,8 +50,25 @@ in {
     # this also allows us to use remote builders to reduce build times and batter usage
     builders-use-substitutes = true;
 
-    experimental-features = ["flakes" "nix-command"];
+    # Enable experimental features
+    experimental-features = [
+      "auto-allocate-uids"
+      "flakes"
+      "nix-command"
+    ];
   };
+
+  # Disable those as they are not needed in standalone
+  services = {
+    gpg-agent = {
+      enableExtraSocket = lib.mkForce false;
+      enableScDaemon = lib.mkForce false;
+    };
+    syncthing = {
+      enable = lib.mkForce false;
+    };
+  };
+  programs.mangohud.enable = lib.mkForce false;
 
   # Use micro as editor
   home.sessionVariables = {
@@ -85,7 +105,6 @@ in {
       "gpush" = "git push";
       "ip" = "ip --color=auto";
       "jctl" = "journalctl -p 3 -xb";
-      "ls" = "eza -al --color=always --group-directories-first --icons";
       "psmem" = "ps auxf | sort -nr -k 4";
       "psmem10" = "ps auxf | sort -nr -k 4 | head -1";
       "su" = "sudo su -";
@@ -100,6 +119,14 @@ in {
     direnv = {
       enable = true;
       nix-direnv.enable = true;
+    };
+
+    # Eza for a better ls
+    eza = {
+      enableAliases = true;
+      enable = true;
+      git = true;
+      icons = true;
     };
 
     # The fish shell, default for terminals
@@ -141,7 +168,6 @@ in {
         "gitlog" = "git log --oneline --graph --decorate --all";
         "ip" = "ip --color=auto";
         "jctl" = "journalctl -p 3 -xb";
-        "ls" = "eza -al --color=always --group-directories-first --icons";
         "psmem" = "ps auxf | sort -nr -k 4";
         "psmem10" = "ps auxf | sort -nr -k 4 | head -1";
         "vdir" = "vdir --color=auto";
@@ -155,6 +181,9 @@ in {
 
     # This is needed to make use of the home-manager
     home-manager.enable = true;
+
+    # Nix index for faster search
+    nix-index.enable = true;
 
     # The starship prompt
     starship = {
@@ -208,113 +237,56 @@ in {
     };
   };
 
+  # Only CLI apps
   home.packages = with pkgs; [
     age
+    alejandra
+    ansible
+    appimage-run
+    asciinema
     bind
+    bind.dnsutils
     btop
     cached-nix-shell
     cloudflared
+    deadnix
     duf
     eza
-    jq
-    killall
-    micro
-    mosh
-    nettools
-    nmap
-    nvd
-    sops
-    tldr
-    tmux
-    traceroute
-    ugrep
-    wget
-    whois
-    appimage-run
-    asciinema
-    # telegram-desktop_git
-    alejandra
-    ansible
-    #beekeeper-studio
-    bind.dnsutils
-    deadnix
     gh
-    #gitkraken
     heroku
     hugo
+    jq
+    killall
     manix
+    micro
     mongodb-compass
+    mosh
     nerdctl
+    nettools
     nix-prefetch-git
     nixd
     nixos-generators
     nixpkgs-lint
     nixpkgs-review
+    nmap
     nodePackages_latest.prettier
     nodejs
+    nvd
     ruff
     shellcheck
     shfmt
-
-    #speedcrunch
-    statix
-    #termius
-    vagrant
-    ventoy-full
-    (vscode-with-extensions.override {
-      vscodeExtensions = with vscode-extensions;
-        [
-          bbenoist.nix
-          # charliermarsh.ruff
-          davidanson.vscode-markdownlint
-          eamodio.gitlens
-          esbenp.prettier-vscode
-          foxundermoon.shell-format
-          github.codespaces
-          github.copilot
-          github.vscode-github-actions
-          github.vscode-pull-request-github
-          jnoortheen.nix-ide
-          kamadorueda.alejandra
-          ms-azuretools.vscode-docker
-          ms-python.python
-          ms-python.vscode-pylance
-          ms-vscode-remote.remote-ssh
-          ms-vscode.hexeditor
-          ms-vsliveshare.vsliveshare
-          njpwerner.autodocstring
-          pkief.material-icon-theme
-          redhat.vscode-xml
-          redhat.vscode-yaml
-          timonwong.shellcheck
-          tyriar.sort-lines
-        ]
-        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            name = "sweet-vscode";
-            publisher = "eliverlara";
-            sha256 = "sha256-kJgqMEJHyYF3GDxe1rnpTEmbfJE01tyyOFjRUp4SOds=";
-            version = "1.1.1";
-          }
-          {
-            # Available in nixpkgs, but outdated (0.4.0) at the time of adding
-            name = "vscode-tailscale";
-            publisher = "tailscale";
-            sha256 = "sha256-MKiCZ4Vu+0HS2Kl5+60cWnOtb3udyEriwc+qb/7qgUg=";
-            version = "1.0.0";
-          }
-        ];
-    })
-    vulnix
-    #wireshark
-    #xdg-utils
-    yarn
-
-    #speedcrunch
+    sops
     sqlite
-    #sqlitebrowser
-    #teams-for-linux
-    #virt-manager
+    statix
+    tldr
+    tmux
+    traceroute
+    ugrep
+    ventoy-full
+    vulnix
+    wget
+    whois
+    yarn
   ];
 
   # Don't change this

@@ -21,9 +21,6 @@
       warn-dirty = false
     '';
     settings = {
-      # Test out ca-derivations (https://nixos.wiki/wiki/Ca-derivations)
-      experimental-features = ["ca-derivations"];
-
       # A few extra binary caches and their public keys
       substituters = [
         "https://cache.garnix.io"

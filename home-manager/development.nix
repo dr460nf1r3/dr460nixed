@@ -87,4 +87,7 @@
       "editor.defaultFormatter" = "jnoortheen.nix-ide";
     };
   };
+
+  # GitHub CLI
+  programs.gh.settings.git_protocol = "ssh";
 }
