@@ -98,11 +98,11 @@
         "yafas": "yafas"
       },
       "locked": {
-        "lastModified": 1708450303,
-        "narHash": "sha256-DPfm8RAdeu0W0t5brQx6oEFDoVHAn62GbLF1PAqFXyA=",
+        "lastModified": 1708479227,
+        "narHash": "sha256-L40EoO1LpTpOXjUW7k6wZZnh9myxI6k2bCHYJbOibok=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "bcc38cf311e845079573850249306490e07e6c2a",
+        "rev": "bbb2742afba724e1eb498d2c2963c13b30229f5a",
         "type": "github"
       },
       "original": {
@@ -833,11 +833,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1708305364,
-        "narHash": "sha256-6m58olvOak9+2UgWfkV4ZWJRs+93eTepQd/cINtRSWE=",
+        "lastModified": 1708478105,
+        "narHash": "sha256-PdsoOusWA5Y0n15ivodpz63+9RWXTjqDvHg5yfXFiXg=",
         "owner": "Infinidoge",
         "repo": "nix-minecraft",
-        "rev": "1a5a7a0b0aaada25c21481d63d75acd7ed52d904",
+        "rev": "b5847bf0f5ded2b731468a562ab3e4a1f0db9ae6",
         "type": "github"
       },
       "original": {
