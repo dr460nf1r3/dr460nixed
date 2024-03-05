@@ -243,10 +243,10 @@ in {
     };
 
     # Pipewire configuration
-    environment.etc = {
+    services.pipewire.extraConfig.pipewire = {
       # Allow pipewire to dynamically adjust the rate sent to the devices based on the playback stream
-      "pipewire/pipewire.conf.d/99-allowed-rates.conf".text = builtins.toJSON {
-        "context.properties"."default.clock.allowed-rates" = [
+      "pipewire/pipewire.conf.d/99-allowed-rates.conf" = {
+        "context.properties.default.clock.allowed-rates" = [
           44100
           48000
           88200
@@ -256,14 +256,14 @@ in {
         ];
       };
       # If resampling is required, use a higher quality. 15 is overkill and too cpu expensive without any obvious audible advantage
-      "pipewire/pipewire-pulse.conf.d/99-resample.conf".text = builtins.toJSON {
-        "stream.properties"."resample.quality" = 10;
+      "pipewire/pipewire-pulse.conf.d/99-resample.conf" = {
+        "stream.properties.resample.quality" = 10;
       };
-      "pipewire/client.conf.d/99-resample.conf".text = builtins.toJSON {
-        "stream.properties"."resample.quality" = 10;
+      "pipewire/client.conf.d/99-resample.conf" = {
+        "stream.properties.resample.quality" = 10;
       };
-      "pipewire/client-rt.conf.d/99-resample.conf".text = builtins.toJSON {
-        "stream.properties"."resample.quality" = 10;
+      "pipewire/client-rt.conf.d/99-resample.conf" = {
+        "stream.properties.resample.quality" = 10;
       };
     };
   };
