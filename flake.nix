@@ -84,14 +84,6 @@
     # Reset rootfs every reboot
     impermanence.url = "github:nix-community/impermanence";
 
-    # KDE pre-release packages
-    kde2nix = {
-      url = "github:nix-community/kde2nix";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
-    };
-
     # My SSH keys
     keys_nico = {
       url = "https://github.com/dr460nf1r3.keys";

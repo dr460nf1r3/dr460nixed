@@ -20,7 +20,7 @@ let
       xserverCfg = config.services.xserver;
 
       pinentryFlavour =
-        if xserverCfg.desktopManager.lxqt.enable || xserverCfg.desktopManager.plasma5.enable
+        if xserverCfg.desktopManager.lxqt.enable || xserverCfg.desktopManager.plasma6.enable
         then "qt"
         else if xserverCfg.desktopManager.xfce.enable
         then "gtk2"
@@ -164,10 +164,7 @@ let
     supportedSystems = ["x86_64-linux"];
   };
 
-  # Choose the one you like:
-  #nixos-yubikey = nixos.iso_minimal; # No graphical environment
-  #nixos-yubikey = nixos.iso_gnome;
-  nixos-yubikey = nixos.iso_plasma5;
+  nixos-yubikey = nixos.iso_plasma6;
 in {
   inherit nixos-yubikey;
 }
