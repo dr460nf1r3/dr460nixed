@@ -185,7 +185,7 @@ in {
 
     # Enhabce performance tweaks
     garuda.performance-tweaks = lib.mkIf cfg.performance {
-      cachyos-kernel = true;
+      # cachyos-kernel = true; # TODO: re-add once "error: attribute 'zfs_2_2' missing" is fixed
       enable = true;
     };
 
