@@ -10,8 +10,11 @@
       "locked": {
         "lastModified": 1709791671,
         "narHash": "sha256-WfGuBKYByiK/pGosdCnn8pFzcAGpj+X3xcddYuf7xzc=",
+        "lastModified": 1709791671,
+        "narHash": "sha256-WfGuBKYByiK/pGosdCnn8pFzcAGpj+X3xcddYuf7xzc=",
         "owner": "SamLukeYes",
         "repo": "archix",
+        "rev": "b33c5a74b992eb045a9e3463333ea55747639697",
         "rev": "b33c5a74b992eb045a9e3463333ea55747639697",
         "type": "github"
       },
@@ -1315,8 +1318,11 @@
       "locked": {
         "lastModified": 1709697924,
         "narHash": "sha256-uEBeU593vUHMP0JhG0GpexzlwsGUcL414rkzCFPtm2Q=",
+        "lastModified": 1709697924,
+        "narHash": "sha256-uEBeU593vUHMP0JhG0GpexzlwsGUcL414rkzCFPtm2Q=",
         "owner": "xddxdd",
         "repo": "nur-packages",
+        "rev": "50f41f8fd91481c21136e8a44d1f14294333dccd",
         "rev": "50f41f8fd91481c21136e8a44d1f14294333dccd",
         "type": "github"
       },
