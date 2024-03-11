@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -76,7 +77,7 @@ in {
       # The GnuPG agent
       gnupg.agent = {
         enable = true;
-        pinentryFlavor = "curses";
+        pinentryPackage = lib.mkForce pkgs.pinentry-curses;
       };
     };
 
