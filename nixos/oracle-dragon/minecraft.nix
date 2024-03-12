@@ -43,9 +43,9 @@
         };
         "plugins/Chunky.jar" = pkgs.fetchurl rec {
           pname = "Chunky";
-          version = "1.3.92";
+          version = "1.3.136";
           url = "https://hangarcdn.papermc.io/plugins/pop4959/${pname}/versions/${version}/PAPER/${pname}-${version}.jar";
-          hash = "sha256-ABHfKJK0LQI2ZLt1D83897RAnE9xWu6+34IOlwTh17w=";
+          hash = "sha256-rVLFb+CkP+rmZJ4kHgtpp1TeL7yn/kQOCnH/YFzxTdg=";
         };
         "plugins/EssentialsX.jar" = pkgs.fetchurl rec {
           pname = "EssentialsX";
@@ -54,7 +54,7 @@
           hash = "sha256-gC6jC9pGDKRZfoGJJYFpM8EjsI2BJqgU+sKNA6Yb9UI=";
         };
         "plugins/Floodgate.jar" = let
-          build = "87";
+          build = "96";
         in
           pkgs.fetchurl rec {
             pname = "Floodgate";
@@ -63,13 +63,13 @@
             hash = "sha256-IBNCI0aot8tQo+RuNrvxCETVDVCKR70RXdb9mg9KXLM=";
           };
         "plugins/Geyser.jar" = let
-          build = "410";
+          build = "459";
         in
           pkgs.fetchurl rec {
             pname = "Geyser";
-            version = "2.2.0";
+            version = "2.2.2";
             url = "https://download.geysermc.org/v2/projects/geyser/versions/${version}/builds/${build}/downloads/spigot";
-            hash = "sha256-bh2nKl/b+8JkNuoYvFPCuuVGH8JfSZD/ryI1h/aEUOM=";
+            hash = "sha256-OZDt0eOcx+bbGbfRjjnkrEo+P7eREDt2VTmk3jHFPmo=";
           };
         "plugins/GeyserHacks.jar" = pkgs.fetchurl rec {
           pname = "GeyserHacks";
@@ -97,15 +97,15 @@
         };
         "plugins/ViaBackwards.jar" = pkgs.fetchurl rec {
           pname = "ViaBackwards";
-          version = "4.9.1";
+          version = "4.9.2";
           url = "https://github.com/ViaVersion/${pname}/releases/download/${version}/${pname}-${version}.jar";
-          hash = "sha256-j/mjgQwOn6C8VKtVcc/9gFSWzWLevaUwZDOZl7vXqGs=";
+          hash = "sha256-CWMpaHARNbkqnUaGT0JCjWrRYOjRHhWDqacUo/N+CH4=";
         };
         "plugins/ViaVersion.jar" = pkgs.fetchurl rec {
           pname = "ViaVersion";
-          version = "4.9.2";
+          version = "4.9.3";
           url = "https://github.com/ViaVersion/${pname}/releases/download/${version}/${pname}-${version}.jar";
-          hash = "sha256-jVBjs4hEV464xM0Edp1nGCefyIePG5/H7aavP/+9/o0=";
+          hash = "sha256-cJCUUUIyYTas2eC5kK+zzod1YVTlWQ0ktvIG1pxHCrA=";
         };
       };
     };
