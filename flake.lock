@@ -98,11 +98,11 @@
         "yafas": "yafas"
       },
       "locked": {
-        "lastModified": 1710176362,
-        "narHash": "sha256-ZHgwM1dlO20lZTvAVBZDRW+rdET4f44sanHoP32cSpU=",
+        "lastModified": 1710202400,
+        "narHash": "sha256-5KDpU4la6A4e5sLUKFA/Gq7OTW0fds05ERrUxjQPSKs=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "25cb2038393e2a342d4b07678f49719a498fea8a",
+        "rev": "64ae864a93ff9c95a87d36d4aa36cd315ff046c8",
         "type": "github"
       },
       "original": {
@@ -163,12 +163,12 @@
         "owner": "girlbossceo",
         "repo": "conduwuit",
         "rev": "e888a0a745ac979abe6a687ff24b8c5e7b7b79ed",
-        "type": "gitlab"
+        "type": "github"
       },
       "original": {
         "owner": "girlbossceo",
         "repo": "conduwuit",
-        "type": "gitlab"
+        "type": "github"
       }
     },
     "crane": {
@@ -733,11 +733,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1710033370,
-        "narHash": "sha256-f44y3CIkskEbs6rnMU+QQfLvqPkM3JuVaiKrtnX/we8=",
+        "lastModified": 1710205763,
+        "narHash": "sha256-zKw1fUDwJFB2KgFS7/2w8KmdbJEgoq6ORyELH54G98E=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "7ad732aefc2c5187d63d1d171294f03fae9d4445",
+        "rev": "629e13dd88d1f3372d66ea13b948409d879aa494",
         "type": "github"
       },
       "original": {
@@ -1205,11 +1205,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1710039806,
-        "narHash": "sha256-vC2fo/phnetp6ub/nRv6mgAi5LbhJ6ujGQWrRD2VgNs=",
+        "lastModified": 1710195194,
+        "narHash": "sha256-KFxCJp0T6TJOz1IOKlpRdpsCr9xsvlVuWY/VCiAFnTE=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "f8d5c8baa83fe620a28c0db633be9db3e34474b4",
+        "rev": "e52d8117b330f690382f1d16d81ae43daeb4b880",
         "type": "github"
       },
       "original": {
