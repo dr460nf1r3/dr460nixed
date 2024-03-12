@@ -8,8 +8,6 @@ with lib; let
 in {
   # We want to use NetworkManager on desktops
   networking = {
-    # Pointing to our Adguard instance via Tailscale
-    # if not, Cloudflare would still be my choice
     nameservers = [
       "1.1.1.1"
       "2606:4700:4700::1111"

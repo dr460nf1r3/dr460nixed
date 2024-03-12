@@ -1,11 +1,37 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }:
 with lib; let
   cfg = config.dr460nixed;
+  chromium-gate = pkgs.writeShellScriptBin "chromium-gate" ''
+    set -o errexit
+
+    CHROMIUM="${pkgs.chromium-flagged}/bin/chromium"
+    KDIALOG="${pkgs.libsForQt5.kdialog}/bin/kdialog"
+    ZFS="${pkgs.zfs}/bin/zfs"
+
+    echo 'Handling encrypted Chromium profile'
+    if [ "$USER" != 'nico' ] || [ -f "$HOME/.config/chromium" ]; then
+      exec "$CHROMIUM" "$@"
+    else
+      "$KDIALOG" --title "Chromium gatekeeper" --password "Please provide the password for the Chromium vault 🔑" |\
+        (sudo "$ZFS" load-key zroot/data/chromium \
+        || ("$KDIALOG" --title "Chromium gatekeeper" --error "Unable to load ZFS key, loading fresh profile instead!" \
+        && "$CHROMIUM" "$@" && false))
+      sudo "$ZFS" mount zroot/data/chromium \
+        || ("$KDIALOG" --title "Chromium gatekeeper" --error "Unable to mount ZFS partition, loading fresh profile instead!" \
+        && "$CHROMIUM" "$@" && false)
+
+      "$CHROMIUM" "$@"
+
+      sudo "$ZFS" umount -f zroot/data/chromium
+      sudo "$ZFS" unload-key zroot/data/chromium
+    fi
+  '';
 in {
   options.dr460nixed = {
     adblock =
@@ -35,6 +61,24 @@ in {
           Whether this device uses should use Chromium.
         '';
       };
+    chromium-gate =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether to protect Chromium with a password with a ZFS encrypted partition.
+        '';
+      };
+    live-cd =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether this is live CD.
+        '';
+      };
     performance =
       mkOption
       {
@@ -42,6 +86,15 @@ in {
         type = types.bool;
         description = mdDoc ''
           Whether this device should be optimized for performance.
+        '';
+      };
+    school =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether this device uses should be used for school.
         '';
       };
     tor =
@@ -108,7 +161,6 @@ in {
       extensions = [
         "ajhmfdgkijocedmfjonnpjfojldioehi" # Privacy Pass
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock origin
-        "doojmbjmlfjjnbmnoijecmcbfeoakpjm" # NoScript
         "edibdbjcniadpccecjdfdjjppcpchdlm" # I Still Don't Care About Cookies
         "fhnegjjodccfaliddboelcleikbmapik" # Tab Counter
         "hipekcciheckooncpjeljhnekcoolahp" # Tabliss
@@ -127,8 +179,7 @@ in {
 
     # SUID Sandbox
     security.chromiumSuidSandbox.enable = mkIf cfg.chromium true;
-
-    # Enhance performance tweaks
+    # Enhabce performance tweaks
     garuda.performance-tweaks = lib.mkIf cfg.performance {
       cachyos-kernel = true;
       enable = true;

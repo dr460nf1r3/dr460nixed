@@ -11,7 +11,7 @@ in {
   options.dr460nixed = with lib; {
     nix-super = {
       enable = mkOption {
-        default = true;
+        default = false;
         type = types.bool;
         description = mdDoc ''
           Replaces nix with nix-super, which tracks future features of nix.
@@ -36,7 +36,7 @@ in {
         '';
       };
       host = mkOption {
-        default = false;
+        default = "";
         type = types.str;
         example = "dragons-ryzen";
         description = mdDoc ''
@@ -46,7 +46,7 @@ in {
       port = mkOption {
         default = 22;
         type = types.int;
-        example = "build";
+        example = 1022;
         description = mdDoc ''
           Specifies the target port for remote builds.
         '';
@@ -87,7 +87,7 @@ in {
       # Allow distributed builds
       distributedBuilds = lib.mkIf cfgRemote.enableGlobally true;
 
-      # Don't warn about dirty flakes and accept flake configs by default
+      # Dont warn about dirty flakes and accept flake configs by default
       extraOptions = ''
         http-connections = 0
         warn-dirty = false
@@ -120,7 +120,7 @@ in {
         # Enable certain system features
         system-features = ["big-parallel" "kvm"];
 
-        # Trust the remote machines' cache signatures
+        # Trust the remote machines cache signatures
         trusted-public-keys = lib.mkIf cfgRemote.enable ["${cfgRemote.trustedPublicKey}"];
         trusted-substituters = lib.mkIf cfgRemote.enable ["ssh-ng://${cfgRemote.host}"];
       };

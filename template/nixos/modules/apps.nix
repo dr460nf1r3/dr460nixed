@@ -57,12 +57,10 @@ in {
       movit
       obs-studio-wrapped
       okular
-      tdesktop
       usbutils
       vulkan-tools
     ])
     ++ optionals cfg.yubikey (with pkgs; [
-      yubikey-manager-qt
       yubioath-flutter
     ]);
 

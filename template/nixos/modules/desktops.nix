@@ -25,8 +25,11 @@ in {
     # Only install fonts I personally use
     fonts.enableDefaultPackages = false;
 
-    # Enable the dr460nized desktop's settings
+    # Enable the dr460nized desktops settings
     garuda.dr460nized.enable = true;
+
+    # # Kernel paramters & settings
+    boot.kernelParams = ["mitigations=off"];
 
     # Fancy themed, enhanced Spotify
     programs.spicetify = {

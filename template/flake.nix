@@ -34,7 +34,6 @@
     garuda-nix.inputs.chaotic-nyx.follows = "chaotic-nyx";
     garuda-nix.inputs.devshell.follows = "devshell";
     garuda-nix.inputs.flake-parts.follows = "flake-parts";
-    garuda-nix.inputs.flake-utils.follows = "flake-utils";
     garuda-nix.inputs.home-manager.follows = "home-manager";
     garuda-nix.inputs.nix-index-database.follows = "nix-index-database";
     garuda-nix.inputs.nixpkgs.follows = "nixpkgs";

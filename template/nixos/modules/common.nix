@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -39,7 +40,7 @@ in {
   };
 
   config = mkIf cfg.common.enable {
-    # Allow unprivileged users to create user namespaces
+    ## A few kernel tweaks
     boot.kernel.sysctl = {"kernel.unprivileged_userns_clone" = 1;};
 
     # Allow wheel group users to use sudo
@@ -70,7 +71,7 @@ in {
       # The GnuPG agent
       gnupg.agent = {
         enable = true;
-        pinentryFlavor = "curses";
+        pinentryPackage = lib.mkForce pkgs.pinentry-curses;
       };
     };
 
