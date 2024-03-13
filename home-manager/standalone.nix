@@ -123,7 +123,6 @@ in {
 
     # Eza for a better ls
     eza = {
-      enableAliases = true;
       enable = true;
       git = true;
       icons = true;
