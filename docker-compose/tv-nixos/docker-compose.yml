@@ -47,7 +47,7 @@ services:
       - /home/nico/Pictures:/photoprism/originals
       - ./storage:/photoprism/storage
   mariadb:
-    image: mariadb:10.11
+    image: mariadb:11.3
     restart: unless-stopped
     stop_grace_period: 5s
     security_opt: [seccomp:unconfined, apparmor:unconfined]
