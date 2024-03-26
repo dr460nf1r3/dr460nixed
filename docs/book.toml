@@ -10,5 +10,5 @@ title = "Dr460nixed flake documentation"
 additional-css = ["theme/css/custom.css"]
 default-theme = "dark"
 git-repository-icon = "fa-github"
-git-repository-url = "https://gitlab.com/dr460nf1r3/dr460nixed"
+git-repository-url = "https://github.com/dr460nf1r3/dr460nixed"
 site-url = "https://nixed.dr460nf1r3.org"
