@@ -1243,11 +1243,11 @@
     "stevenblack-hosts": {
       "flake": false,
       "locked": {
-        "lastModified": 1711246132,
-        "narHash": "sha256-0keQEhEe2OWbjmkXODM2NxB/AHimD6MjxIr8n8gj+Qw=",
+        "lastModified": 1711673465,
+        "narHash": "sha256-VnMRgby5ONbUxP3xit4x8bFEMRAqoGRY8l+tqJZXSL4=",
         "owner": "stevenblack",
         "repo": "hosts",
-        "rev": "3e12f3989b1ddaa846bf895f64e6978e7183f9bc",
+        "rev": "f6d230e9a8fa05fb3f46107dac419eedcdd0fadd",
         "type": "github"
       },
       "original": {
