@@ -32,3 +32,4 @@ rules:
 
 ignore: |
   .pre-commit-config.yaml
+  secrets/global.yaml
