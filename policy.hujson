@@ -15,10 +15,10 @@
 			"src":    ["autogroup:shared"],
 			"dst":    ["tag:others:*"],
 		},
-		// All users can use exit nodes
+		// Admin and clients can use exit nodes
 		{
 			"action": "accept",
-			"src":    ["dr460nf1r3@github", "tag:dragons", "tag:others"],
+			"src":    ["dr460nf1r3@github", "autogroup:member"],
 			"dst":    ["autogroup:internet:*"],
 		},
 		// The Tailscale admin can access everything
@@ -47,15 +47,29 @@
 
 	// Allow my personal devices to use Mullvad exit nodes
 	"nodeAttrs": [{
-		"target": ["dr460nf1r3@github"],
+		"target": ["dr460nf1r3@github", "tag:dragons"],
 		"attr":   ["mullvad"],
-	}],
+	}, {"target": ["*"], "app": {"tailscale.com/app-connectors": [{
+		"name":       "reddit",
+		"connectors": ["tag:connector"],
+		"domains":    ["reddit.com", "*.reddit.com"],
+	}]}}],
+
+	// Auto approver for connector nodes
+	"autoApprovers": {
+		"routes": {
+			"0.0.0.0/0": ["tag:connector"],
+			"::/0":      ["tag:connector"],
+		},
+	},
 
 	// Define tagOwners via autogroups
 	"tagOwners": {
-		// admins own devices with tag:dragons
+		// Tag for connector nodes
+		"tag:connector": ["dr460nf1r3@github"],
+		// Admins own devices with tag:dragons
 		"tag:dragons": ["dr460nf1r3@github"],
-		// admins own devices with tag:others
+		// Admins own devices with tag:others
 		"tag:others": ["dr460nf1r3@github"],
 	},
 }
