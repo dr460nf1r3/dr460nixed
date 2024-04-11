@@ -865,7 +865,7 @@
     "nixos-anywhere": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-O3/l8YI2PauqQmAmchgjNtJ2E0JsrE5a74e67TMWxxM=",
+        "narHash": "sha256-mFVwm3imPPD1jF9fvPzA10ebNhJC4YgsqQOdu7jdg9Y=",
         "type": "file",
         "url": "https://raw.githubusercontent.com/numtide/nixos-anywhere/main/src/nixos-anywhere.sh"
       },
