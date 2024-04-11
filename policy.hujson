@@ -40,7 +40,7 @@
 		{
 			"action": "accept",
 			"src":    ["dr460nf1r3@github"],
-			"dst":    ["tag:dragons", "tag:others", "dr460nf1r3@github"],
+			"dst":    ["dr460nf1r3@github", "autogroup:member"],
 			"users":  ["nico"],
 		},
 	],
