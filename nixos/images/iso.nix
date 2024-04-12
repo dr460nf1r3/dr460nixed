@@ -13,7 +13,7 @@
   garuda.home-manager.modules = [../../home-manager/desktops.nix];
 
   # CD's may use autologin for convenience
-  services.xserver.displayManager.sddm.settings = {
+  services.displayManager.sddm.settings = {
     Autologin = {
       User = "nixos";
       Session = "plasma";

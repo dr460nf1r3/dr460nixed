@@ -31,6 +31,10 @@
   # Required by nixos-wsl
   networking.nftables.enable = lib.mkForce false;
 
+  # Suppress warning about this one having no effect
+  # we ship adblocking capabilities here usually
+  networking.extraHosts = lib.mkForce [];
+
   # Use the newer Docker 24
   virtualisation = {
     docker = {

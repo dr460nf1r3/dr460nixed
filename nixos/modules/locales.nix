@@ -6,7 +6,6 @@
 }:
 with lib; let
   cfg = config.dr460nixed.locales;
-  cfgDesktops = config.dr460nixed.desktops;
   de = "de_DE.UTF-8";
   defaultLocale = "en_GB.UTF-8";
   terminus-variant = "120n";
@@ -63,12 +62,6 @@ in {
     console = {
       font = "${pkgs.terminus_font}/share/consolefonts/ter-${terminus-variant}.psf.gz";
       keyMap = "de";
-    };
-
-    # X11 keyboard layout
-    services.xserver.xkb = mkIf cfgDesktops.enable {
-      layout = "de";
-      variant = "";
     };
   };
 }
