@@ -101,19 +101,6 @@
           ];
         inherit specialArgs;
       };
-
-      # My old laptop serving as TV
-      tv-nixos = inputs.garuda-nix.lib.garudaSystem {
-        system = "x86_64-linux";
-        modules =
-          defaultModules
-          ++ [
-            ./tv-nixos/tv-nixos.nix
-            inputs.nixos-hardware.nixosModules.common-gpu-intel
-            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t470s
-          ];
-        inherit specialArgs;
-      };
     };
 
     # Expose dr460nixed and other modules for use in other flakes
