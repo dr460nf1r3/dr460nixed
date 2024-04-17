@@ -40,7 +40,7 @@
 		{
 			"action": "accept",
 			"src":    ["dr460nf1r3@github"],
-			"dst":    ["dr460nf1r3@github", "tag:dragons","tag:others", "tag:connector"],
+			"dst":    ["dr460nf1r3@github", "tag:dragons", "tag:others", "tag:connector"],
 			"users":  ["nico"],
 		},
 	],
@@ -49,11 +49,18 @@
 	"nodeAttrs": [{
 		"target": ["dr460nf1r3@github", "tag:dragons"],
 		"attr":   ["mullvad"],
-	}, {"target": ["*"], "app": {"tailscale.com/app-connectors": [{
-		"name":       "reddit",
-		"connectors": ["tag:connector"],
-		"domains":    ["reddit.com", "*.reddit.com"],
-	}]}}],
+	}, {"target": ["*"], "app": {"tailscale.com/app-connectors": [
+		{
+			"name":       "reddit",
+			"connectors": ["tag:connector"],
+			"domains":    ["reddit.com", "*.reddit.com"],
+		},
+		{
+			"name":       "netflix",
+			"connectors": ["tag:dragons"],
+			"domains":    ["netflix.com", "*.netflix.com"],
+		},
+	]}}],
 
 	// Auto approver for connector nodes
 	"autoApprovers": {
