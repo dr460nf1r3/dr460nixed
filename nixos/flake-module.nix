@@ -90,6 +90,17 @@
         inherit specialArgs;
       };
 
+      # Homeserver on Proxmox
+      pve-dragon-1 = inputs.garuda-nix.lib.garudaSystem {
+        system = "x86_64-linux";
+        modules =
+          defaultModules
+          ++ [
+            ./pve-dragon-1/pve-dragon-1.nix
+          ];
+        inherit specialArgs;
+      };
+
       # My Raspberry Pi 4B
       rpi-dragon = inputs.garuda-nix.lib.garudaSystem {
         system = "aarch64-linux";

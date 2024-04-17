@@ -3,3 +3,5 @@
 CHANGELOG.md
 configurations/docker-compose/**
 flake.lock
+nixos/**
+secrets/global.yaml
