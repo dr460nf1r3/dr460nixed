@@ -10,6 +10,20 @@
         fi
       '';
     };
+    # Easy terminal tabbing
+    tmux = {
+      baseIndex = 1;
+      clock24 = true;
+      enable = true;
+      extraConfig = ''
+        set -g default-shell ${pkgs.fish}/bin/fish
+        set -g default-terminal "screen-256color"
+        set -g status-bg black
+      '';
+      historyLimit = 10000;
+      newSession = true;
+      sensibleOnTop = false;
+    };
   };
 
   # General nix settings
@@ -49,11 +63,4 @@
       max-jobs = "auto";
     };
   };
-
-  # TODO: find out why this package is actually relevant for this config when the active version reports 2.19.3?
-  # Should be irrelevant for my use case anyways as I don't use this config on a shared machine.
-  # https://github.com/NixOS/nix/security/advisories/GHSA-2ffj-w4mj-pg37
-  nixpkgs.config.permittedInsecurePackages = [
-    "nix-2.16.2"
-  ];
 }
