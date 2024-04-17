@@ -33,7 +33,7 @@
 
   # Suppress warning about this one having no effect
   # we ship adblocking capabilities here usually
-  networking.extraHosts = lib.mkForce [];
+  networking.extraHosts = lib.mkForce '''';
 
   # Use the newer Docker 24
   virtualisation = {
