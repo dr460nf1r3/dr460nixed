@@ -32,6 +32,14 @@
   # Hostname of this machine
   networking.hostName = "pve-dragon-1";
 
+  # Some of the services I require
+  services.syncthing = {
+    enable = true;
+    guiAddress = "pve-dragon-1.emperor-mercat.ts.net:8384";
+    openDefaultPorts = true;
+    settings.options.urAccepted = -1;
+  };
+
   # NixOS stuff
   system.stateVersion = "23.11";
 }
