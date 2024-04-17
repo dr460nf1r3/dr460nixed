@@ -72,9 +72,6 @@
           "map.dr460nf1r3.org" = {
             service = "http://localhost:8100";
           };
-          "collab.dr460nf1r3.org" = {
-            service = "http://localhost:8065";
-          };
         };
       };
     };
@@ -91,15 +88,6 @@
       enable = true;
       initExtra = lib.mkForce "exec fish";
     };
-  };
-
-  # Mattermost server
-  services.mattermost = {
-    enable = true;
-    environmentFile = /var/lib/mattermost/.env;
-    mutableConfig = true;
-    preferNixConfig = true;
-    siteUrl = "https://collab.dr460nf1r3.org";
   };
 
   # Required for using app connectors in Tailscale
