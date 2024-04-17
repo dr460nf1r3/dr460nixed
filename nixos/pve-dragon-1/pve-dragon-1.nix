@@ -1,11 +1,13 @@
 {lib, ...}: {
-  # Individual settings + low-latency Pipewire
-  imports = [
-    ./hardware-configuration.nix
-  ];
+  imports = [./hardware-configuration.nix];
 
   # Boot options
   boot = {
+    # Required for using app connectors in Tailscale
+    kernel.sysctl = {
+      "net.ipv4.ip_forward" = 1;
+      "net.ipv6.conf.all.forwarding" = 1;
+    };
     loader = {
       grub = {
         device = "nodev";
@@ -17,11 +19,18 @@
     };
   };
 
+  dr460nixed = {
+    servers = {
+      enable = true;
+      monitoring = true;
+    };
+    smtp.enable = true;
+    tailscale.enable = true;
+    tailscale-tls.enable = true;
+  };
+
   # Hostname of this machine
   networking.hostName = "pve-dragon-1";
-
-  # Home-manager individual settings
-  home-manager.users."nico" = import ../../home-manager/nico/nico.nix;
 
   # NixOS stuff
   system.stateVersion = "23.11";

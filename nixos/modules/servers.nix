@@ -38,6 +38,9 @@ in {
     # Automatic server upgrades
     dr460nixed.auto-upgrade = true;
 
+    # No custom aliases
+    dr460nixed.shells.enable = false;
+
     # Enable the Netdata daemon
     services.netdata.enable = mkIf cfg.monitoring true;
     services.netdata.config = {
