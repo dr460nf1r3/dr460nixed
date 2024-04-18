@@ -95,9 +95,7 @@
         system = "x86_64-linux";
         modules =
           defaultModules
-          ++ [
-            ./pve-dragon-1/pve-dragon-1.nix
-          ];
+          ++ [./pve-dragon-1/pve-dragon-1.nix];
         inherit specialArgs;
       };
 
