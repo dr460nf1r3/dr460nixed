@@ -60,7 +60,11 @@
 			"connectors": ["tag:dragons"],
 			"domains":    ["netflix.com", "*.netflix.com"],
 		},
-	]}}],
+	]}}, {
+		// Funnel policy, allowing the use this feature
+		"target": ["autogroup:member", "tag:dragons", "tag:others"],
+		"attr":   ["funnel"],
+	}],
 
 	// Auto approver for connector nodes
 	"autoApprovers": {
