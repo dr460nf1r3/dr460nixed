@@ -21,6 +21,7 @@
     flatpak = uidGid 974;
     grafana = uidGid 995;
     influxdb2 = uidGid 994;
+    jellyfin = uidGid 970;
     loki = uidGid 993;
     minecraft = uidGid 973;
     netdata = uidGid 979;

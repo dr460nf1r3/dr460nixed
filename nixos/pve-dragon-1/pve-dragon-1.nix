@@ -65,6 +65,12 @@
     path = "/run/secrets/cloudflared/pve-dragon-1/cred";
   };
 
+  # Jellyfin media server
+  services.jellyfin = {
+    openFirewall = true;
+    enable = true;
+  };
+
   # NixOS stuff
   system.stateVersion = "23.11";
 }
