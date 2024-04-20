@@ -70,6 +70,18 @@
         inherit specialArgs;
       };
 
+      # Free tier e2 micro instance on GCP
+      google-dragon = inputs.garuda-nix.lib.garudaSystem {
+        system = "x86_64-linux";
+        modules =
+          defaultModules
+          ++ [
+            ./google-dragon/google-dragon.nix
+            "${toString inputs.nixpkgs}/nixos/modules/virtualisation/google-compute-image.nix"
+          ];
+        inherit specialArgs;
+      };
+
       # For WSL, mostly used at work only
       nixos-wsl = inputs.garuda-nix.lib.garudaSystem {
         system = "x86_64-linux";
