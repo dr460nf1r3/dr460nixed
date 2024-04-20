@@ -221,6 +221,14 @@ in {
     # No custom aliases
     dr460nixed.shells.enable = false;
 
+    # These aren't needed on servers, but default on GNS
+    garuda = {
+      audio.pipewire.enable = false;
+      hardware.enable = false;
+      networking.enable = false;
+    };
+    boot.plymouth.enable = true;
+
     # Enable the Netdata daemon
     services.netdata.enable = mkIf cfg.monitoring true;
     services.netdata.config = {
