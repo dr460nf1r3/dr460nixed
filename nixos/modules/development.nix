@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -57,18 +56,14 @@ in {
         enableOnBoot = false;
         storageDriver = "overlay2";
       };
-      libvirtd = {
-        enable = true;
-        parallelShutdown = 2;
-        qemu = {
-          ovmf = {
-            enable = true;
-            packages = [pkgs.OVMFFull.fd];
-          };
-          swtpm.enable = true;
-        };
-      };
       lxd.enable = false;
+      virtualbox.host = {
+        enable = true;
+        enableKvm = true;
+        enableHardening = false;
+        enableExtensionPack = true;
+        addNetworkInterface = false;
+      };
     };
 
     # Allow cross-compiling to aarch64
