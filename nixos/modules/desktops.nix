@@ -61,5 +61,8 @@ in {
         new-releases
       ];
     };
+
+    # Bitwarden client for additional convenience
+    programs.goldwarden.enable = true;
   };
 }

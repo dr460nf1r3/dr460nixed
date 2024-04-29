@@ -1,18 +1,18 @@
 ---
 keys:
+  - &dragons-ryzen age13rltkd4pwwrtcazm5dxpqwthlnl8e52am0ufklupvgghu00pypysq4ps6d
   - &google-dragon age1vncyy520dymwgucn7m888pexeq4t2v260nn79t9psgex7yd284xsgqzpdz
-  - &nico age1vc3r79rf5mtx7wla0u394lr3nqveqf6edjwe0fmf0s7umncyqaaqjl9w78
+  - &nico age1hvfhax6eysywun0up8um52yj435z99xq3wpu2py54je263hmjfqsjguk0z
   - &oracle-dragon age1g8hzfc2heln349ah2fykv8fwq6hlxwvveu6rx6vq82e5tx6l8ygsa0gnxq
   - &pve-dragon-1 age1e0k9ya63r9apy5mx6amk0ph4qywq9gcylyvnhf836v8ea7c2acssal6z2h
   - &rpi-dragon age19gle3kmstnprnagmasp3ul9yvcy0qa3rrdvzz57ar4l8naqfryvqs2mnka
-  - &slim-lair age1amrvulahe6tayc9d054pvfyk0wr4psekjj05p27fdav7m6x34fzsqd6e5l
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
       - age:
+          - *dragons-ryzen
           - *google-dragon
           - *nico
           - *oracle-dragon
           - *pve-dragon-1
           - *rpi-dragon
-          - *slim-lair

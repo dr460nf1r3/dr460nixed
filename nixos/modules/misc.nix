@@ -159,18 +159,16 @@ in {
       defaultSearchProviderSuggestURL = "https://searx.dr460nf1r3.org/autocomplete?q=%s";
       enable = true;
       extensions = [
-        "ajhmfdgkijocedmfjonnpjfojldioehi" # Privacy Pass
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock origin
-        "edibdbjcniadpccecjdfdjjppcpchdlm" # I Still Don't Care About Cookies
-        "fhnegjjodccfaliddboelcleikbmapik" # Tab Counter
+        "doojmbjmlfjjnbmnoijecmcbfeoakpjm" # NoScript
         "hipekcciheckooncpjeljhnekcoolahp" # Tabliss
         "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly
+        "mdjildafknihdffpkfmmpnpoiajfjnjd" # Consent-O-Matic
         "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-        "oladmjdebphlnjjcnomfhhbfdldiimaf;https://raw.githubusercontent.com/libredirect/libredirect/master/src/updates/updates.xml" # Libredirect
       ];
       extraOpts = {
-        "HomepageLocation" = "https://searx.dr460nf1r3.org";
+        "HomepageLocation" = "https://searx.garudalinux.org";
         "QuicAllowed" = true;
         "RestoreOnStartup" = true;
         "ShowHomeButton" = true;

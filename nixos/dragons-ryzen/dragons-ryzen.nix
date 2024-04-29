@@ -1,13 +1,13 @@
 {
   config,
   inputs,
-  lib,
   pkgs,
   ...
 }: {
   # Individual settings + low-latency Pipewire
   imports = [
     ./hardware-configuration.nix
+    ../modules/impermanence.nix
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
 
@@ -16,9 +16,7 @@
     # Needed to get the touchpad working
     blacklistedKernelModules = ["elan_i2c"];
     extraModulePackages = with config.boot.kernelPackages; [zenpower];
-    # Override the per-default false value since we need this in order for GNS
-    # boot menu to be generated
-    loader.grub.enable = lib.mkForce true;
+    supportedFilesystems = ["btrfs"];
   };
 
   # Hostname of this machine
@@ -32,19 +30,20 @@
       quantum = 64;
       rate = 48000;
     };
-    xserver = {
-      displayManager.sddm.settings = {
-        Autologin = {
-          Session = "plasma";
-          User = "nico";
-        };
+    displayManager.sddm.settings = {
+      Autologin = {
+        Session = "plasma";
+        User = "nico";
       };
+    };
+    xserver = {
       videoDrivers = ["amdgpu"];
     };
   };
 
   # Enable a few selected custom settings
   dr460nixed = {
+    chromium = true;
     desktops.enable = true;
     development.enable = true;
     gaming.enable = false;
@@ -66,32 +65,9 @@
         "--ssh"
       ];
     };
+    systemd-boot.enable = true;
     yubikey = true;
   };
-
-  # This device is partly managed by the Garuda installation on top
-  garuda = {
-    garuda-chroot = {
-      boot-uuid = "80CC-7CE9";
-      enable = true;
-      root-uuid = "1776871a-f356-4293-b025-19186473bff1";
-      user = "nico";
-    };
-    managed.config = ../../garuda-managed.json;
-    subsystem.enable = true;
-  };
-
-  # Workaround build error for now
-  nixpkgs.config.permittedInsecurePackages = ["electron-24.8.6"];
-
-  # Virt-manager requires iptables to let guests have internet
-  networking.nftables.enable = lib.mkForce false;
-
-  # Mcpe launcher
-  services.flatpak.enable = true;
-
-  # Currently plagued by https://github.com/NixOS/nixpkgs/issues/180175
-  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   # RADV video decode & general usage
   environment.variables = {
@@ -107,28 +83,10 @@
 
   # A few secrets
   sops.secrets = {
-    "machine-id/slim-lair" = {
-      path = "/etc/machine-id";
-      mode = "0600";
-    };
-    "passwords/nico@dr460nf1r3.org" = {
-      mode = "0600";
-      path = "/run/secrets/passwords/nico@dr460nf1r3.org";
-    };
     # "ssh_keys/id_rsa" = {
     #   mode = "0600";
     #   owner = config.users.users.nico.name;
     #   path = "/home/nico/.ssh/id_rsa";
-    # };
-    # "syncthing/dragons-ryzen_key" = {
-    #   mode = "0600";
-    #   owner = config.users.users.nico.name;
-    #   path = "/home/nico/.config/syncthing/key.pem";
-    # };
-    # "syncthing/dragons-ryzen_cert" = {
-    #   mode = "0640";
-    #   owner = config.users.users.nico.name;
-    #   path = "/home/nico/.config/syncthing/cert.pem";
     # };
   };
 

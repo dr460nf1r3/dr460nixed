@@ -7,45 +7,54 @@
   imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
   boot = {
-    extraModulePackages = [];
     initrd = {
-      availableKernelModules = ["nvme" "xhci_pci" "usbhid" "usb_storage"];
+      availableKernelModules = ["nvme" "xhci_pci" "usbhid" "usb_storage" "sd_mod"];
       kernelModules = [];
-      luks = {
-        devices."luks-3c463eaa-3e83-47c4-acbc-c483f2e63532" = {
-          allowDiscards = true;
-          device = "/dev/disk/by-uuid/3c463eaa-3e83-47c4-acbc-c483f2e63532";
-          keyFile = "/crypto_keyfile.bin";
-          preLVM = true;
-        };
-      };
-      secrets = {
-        "/crypto_keyfile.bin" = "/crypto_keyfile.bin";
-      };
+      luks.devices."crypted".device = "/dev/disk/by-uuid/482c62f6-be95-419d-afb0-77f5940a4583";
     };
     kernelModules = ["kvm-amd"];
+    extraModulePackages = [];
   };
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/1776871a-f356-4293-b025-19186473bff1";
+      device = "/dev/disk/by-uuid/7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
       fsType = "btrfs";
-      options = ["subvol=@nix-subsystem"];
+      options = ["subvol=root" "compress=zstd" "noatime"];
+    };
+    "/home" = {
+      device = "/dev/disk/by-uuid/7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
+      fsType = "btrfs";
+      options = ["subvol=home" "compress=zstd" "noatime"];
+      neededForBoot = true;
     };
     "/nix" = {
-      device = "/dev/disk/by-uuid/1776871a-f356-4293-b025-19186473bff1";
+      device = "/dev/disk/by-uuid/7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
       fsType = "btrfs";
-      options = ["subvol=@nix"];
+      options = ["subvol=nix" "compress=zstd" "noatime"];
+    };
+    "/persist" = {
+      device = "/dev/disk/by-uuid/7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
+      fsType = "btrfs";
+      options = ["subvol=persist" "compress=zstd" "noatime"];
+      neededForBoot = true;
+    };
+    "/var/log" = {
+      device = "/dev/disk/by-uuid/7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
+      fsType = "btrfs";
+      options = ["subvol=log" "compress=zstd" "noatime"];
+      neededForBoot = true;
+    };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/1E05-4C2D";
+      fsType = "vfat";
+      options = ["fmask=0022" "dmask=0022"];
     };
   };
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 8196;
-    }
-  ];
+  swapDevices = [{device = "/persist/.swapfile";}];
 
+  networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

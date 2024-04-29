@@ -1,28 +1,64 @@
 {
-  config,
   lib,
+  config,
   ...
 }: {
-  # This was recently added to Chaotic Nyx
-  chaotic.zfs-impermanence-on-shutdown = {
+  # Rollback function for BTRFS rootfs
+  # This assumes we have a LUKS volume named "crypted"
+  # https://mt-caret.github.io/blog/posts/2020-06-29-optin-state.html
+  boot.initrd = {
     enable = true;
-    snapshot = "start";
-    volume = "zroot/ROOT/empty";
+    supportedFilesystems = ["btrfs"];
+
+    systemd.services.restore-root = {
+      description = "Rollback BTRFS rootfs";
+      wantedBy = ["initrd.target"];
+      after = ["systemd-cryptsetup@crypted.service"];
+      before = ["sysroot.mount"];
+      unitConfig.DefaultDependencies = "no";
+      serviceConfig.Type = "oneshot";
+      script = ''
+        mkdir -p /mnt
+
+        # We first mount the btrfs root to /mnt
+        # so we can manipulate btrfs subvolumes.
+        mount -o subvol=/ /dev/mapper/crypted /mnt
+
+        # While we're tempted to just delete /root and create
+        # a new snapshot from /root-blank, /root is already
+        # populated at this point with a number of subvolumes,
+        # which makes `btrfs subvolume delete` fail.
+        # So, we remove them first.
+        btrfs subvolume list -o /mnt/root |
+        cut -f9 -d' ' |
+        while read subvolume; do
+          echo "deleting /$subvolume subvolume..."
+          btrfs subvolume delete "/mnt/$subvolume"
+        done &&
+        echo "deleting /root subvolume..." &&
+        btrfs subvolume delete /mnt/root
+
+        echo "restoring blank /root subvolume..."
+        btrfs subvolume snapshot /mnt/root-blank /mnt/root
+
+        # Once we're done rolling back to a blank snapshot,
+        # we can unmount /mnt and continue on the boot process.
+        umount /mnt
+      '';
+    };
   };
 
   # Persistent files
-  environment.persistence."/var/persistent" = {
+  environment.persistence."/persist" = {
     hideMounts = true;
     directories =
       [
         "/etc/NetworkManager/system-connections"
         "/etc/nixos"
         "/etc/secureboot"
-        "/var/cache/chaotic"
         "/var/cache/tailscale"
         "/var/lib/AccountsService/icons"
         "/var/lib/bluetooth"
-        "/var/lib/chaotic"
         "/var/lib/containers"
         "/var/lib/flatpak"
         "/var/lib/libvirt"
@@ -30,8 +66,10 @@
         "/var/lib/sddm"
         "/var/lib/systemd"
         "/var/lib/tailscale"
+        "/var/lib/nixos"
         "/var/lib/upower"
         "/var/lib/vnstat"
+        "/var/cache"
         {
           directory = "/var/lib/iwd";
           mode = "u=rwx,g=,o=";
@@ -117,7 +155,6 @@
           mode = "0700";
         }
       ];
-    files = ["/var/lib/dbus/machine-id"];
     users."root" = {
       home = "/root";
       directories = [
@@ -176,35 +213,7 @@
         "School"
         "Sync"
         "Videos"
-        {
-          directory = ".gnupg";
-          mode = "0700";
-        }
-        {
-          directory = ".local/share/keybase";
-          mode = "0700";
-        }
-        {
-          directory = ".local/share/keyrings";
-          mode = "0700";
-        }
-        {
-          directory = ".ssh";
-          mode = "0700";
-        }
-      ];
-    };
-  };
 
-  # Not important but persistent files
-  environment.persistence."/var/residues" = {
-    hideMounts = true;
-    directories = [
-      "/var/cache"
-      "/var/log"
-    ];
-    users.nico = {
-      directories = [
         ".cache/bookmarksrunner"
         ".cache/chromium"
         ".cache/firedragon"
@@ -222,6 +231,22 @@
         ".local/share/Trash"
         ".local/state/wireplumber"
         ".steam"
+        {
+          directory = ".gnupg";
+          mode = "0700";
+        }
+        {
+          directory = ".local/share/keybase";
+          mode = "0700";
+        }
+        {
+          directory = ".local/share/keyrings";
+          mode = "0700";
+        }
+        {
+          directory = ".ssh";
+          mode = "0700";
+        }
       ];
     };
   };

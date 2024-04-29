@@ -4,5 +4,4 @@ builds:
     - packages.*.vbox
     - nixosConfigurations.dr460nixed-base
     - nixosConfigurations.dr460nixed-desktop
-    - nixosConfigurations.dr460nixed-desktop-kde6
     - nixosConfigurations.dragons-ryzen

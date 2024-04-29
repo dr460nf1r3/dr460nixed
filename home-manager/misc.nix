@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   # Thunderbird configuration
   programs.thunderbird = {
     enable = true;
@@ -21,8 +21,10 @@
 
   # Enable the smartcard daemon for commit signing
   services.gpg-agent = {
+    enable = true;
     enableExtraSocket = true;
     enableScDaemon = true;
+    pinentryPackage = pkgs.pinentry-qt;
   };
 
   # Syncthing to sync files between devices
@@ -32,7 +34,7 @@
 
   # MangoHUD to monitor performance while gaming
   programs.mangohud = {
-    enable = true;
+    enable = false;
     settings = {
       arch = true;
       background_alpha = "0.05";
