@@ -10,7 +10,7 @@
             ESP = {
               label = "EFI";
               name = "ESP";
-              size = "512M";
+              size = "1024M";
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -27,11 +27,6 @@
                 type = "luks";
                 name = "crypted";
                 extraOpenArgs = ["--allow-discards"];
-                # if you want to use the key for interactive login be sure there is no trailing newline
-                # for example use `echo -n "password" > /tmp/secret.key`
-                #passwordFile = "/tmp/secret.key"; # Interactive
-                settings.keyFile = "/tmp/secret.key";
-                additionalKeyFiles = ["/tmp/additionalSecret.key"];
                 content = {
                   type = "btrfs";
                   extraArgs = ["-f"];
@@ -46,6 +41,14 @@
                     };
                     "/nix" = {
                       mountpoint = "/nix";
+                      mountOptions = ["compress=zstd" "noatime"];
+                    };
+                    "/persist" = {
+                      mountpoint = "/persist";
+                      mountOptions = ["compress=zstd" "noatime"];
+                    };
+                    "/log" = {
+                      mountpoint = "/var/log";
                       mountOptions = ["compress=zstd" "noatime"];
                     };
                   };
