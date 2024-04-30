@@ -10,21 +10,11 @@
     # Archlinux development
     archix = {
       url = "github:SamLukeYes/archix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Always updated auto-cpufreq
-    auto-cpufreq = {
-      url = "github:AdnanHodzic/auto-cpufreq";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
 
     # Chaotic Nyx!
-    chaotic-nyx = {
-      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-      inputs.home-manager.follows = "home-manager";
-      inputs.systems.follows = "systems";
-    };
+    chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # Devshell to set up a development environment
     devshell = {
@@ -35,25 +25,13 @@
     # Disko for Nix-managed partition management
     disko = {
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Required by some other flakes
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
 
     # Required by some other flakes
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-
-    # Required by pre-commit-hooks
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-      inputs.systems.follows = "systems";
+      inputs.nixpkgs-lib.follows = "chaotic-nyx/nixpkgs";
     };
 
     # Garuda Linux flake - most of my system settings are here
@@ -65,20 +43,26 @@
       inputs.flake-parts.follows = "flake-parts";
       inputs.home-manager.follows = "home-manager";
       inputs.nix-index-database.follows = "nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
       inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     };
 
     # Gitignore common input
     gitignore = {
       url = "github:hercules-ci/gitignore.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
 
     # Home-manager for managing my home directory
     home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      follows = "chaotic-nyx/home-manager";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
+    };
+
+    # Ad and malware blocking hosts file
+    hosts = {
+      url = "github:StevenBlack/hosts";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
 
     # Reset rootfs every reboot
@@ -93,53 +77,56 @@
     # Lanzaboote for secure boot support
     lanzaboote = {
       url = "github:nix-community/lanzaboote/master";
-      inputs.flake-compat.follows = "flake-compat";
+      inputs.crane.follows = "chaotic-nyx/crane";
+      inputs.flake-compat.follows = "chaotic-nyx/flake-compat";
       inputs.flake-parts.follows = "flake-parts";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "chaotic-nyx/flake-utils";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
     };
 
     # MicroVMs based on Nix
     microvm = {
       url = "github:astro/microvm.nix";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "chaotic-nyx/flake-utils";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
 
     # Nixd language server
     nixd = {
       url = "github:nix-community/nixd";
       inputs.flake-parts.follows = "flake-parts";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
 
     # Nix gaming-related packages and modules
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
       inputs.flake-parts.follows = "flake-parts";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
 
     # Have a local index of nixpkgs for fast launching of apps
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
 
     # Declarative Minecraft server management
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "chaotic-nyx/flake-compat";
+      inputs.flake-utils.follows = "chaotic-nyx/flake-utils";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
 
     # Feature-rich and convenient fork of the Nix package manager
     nix-super = {
       url = "github:privatevoid-net/nix-super";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "chaotic-nyx/flake-compat";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
+      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     };
 
     # Script to install NixOS on any host
@@ -151,7 +138,7 @@
     # NixOS generators to build system images
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
 
     # NixOS hardware database
@@ -160,47 +147,37 @@
     # NixOS WSL
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "chaotic-nyx/flake-compat";
+      inputs.flake-utils.follows = "chaotic-nyx/flake-utils";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
 
     # The source of all truth!
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.follows = "nixpkgs";
+    nixpkgs.follows = "chaotic-nyx/nixpkgs";
 
     # Easy linting of the flake and all kind of other stuff
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.flake-utils.follows = "flake-utils";
+      inputs.flake-compat.follows = "chaotic-nyx/flake-compat";
+      inputs.flake-utils.follows = "chaotic-nyx/flake-utils";
       inputs.gitignore.follows = "gitignore";
-      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "chaotic-nyx/nixpkgs";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
 
     # Secrets management
     sops-nix = {
       url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
+      inputs.nixpkgs-stable.follows = "chaotic-nyx/nixpkgs";
     };
 
     # Spicetify
     spicetify-nix = {
       url = "github:the-argus/spicetify-nix";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "chaotic-nyx/flake-utils";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
     };
-
-    # Ad and malware blocking hosts file
-    stevenblack-hosts = {
-      url = "github:stevenblack/hosts";
-      flake = false;
-    };
-
-    # Used by multiple other flakes
-    systems.url = "github:nix-systems/default";
   };
 
   outputs = {

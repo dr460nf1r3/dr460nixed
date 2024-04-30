@@ -11,6 +11,7 @@
       inputs.lanzaboote.nixosModules.lanzaboote
       inputs.sops-nix.nixosModules.sops
       inputs.spicetify-nix.nixosModule
+      inputs.hosts.nixosModule
     ];
 
     # Our images should be cleaner, so we use a different set of modules
@@ -44,7 +45,6 @@
           ++ [
             ./dragons-ryzen/dragons-ryzen.nix
             inputs.archix.nixosModules.default
-            inputs.auto-cpufreq.nixosModules.default
             inputs.impermanence.nixosModules.impermanence
             inputs.nixos-hardware.nixosModules.common-cpu-amd
             inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
