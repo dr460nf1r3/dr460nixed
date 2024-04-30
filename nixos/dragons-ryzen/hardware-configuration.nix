@@ -13,7 +13,6 @@
       luks.devices."crypted".device = "/dev/disk/by-uuid/482c62f6-be95-419d-afb0-77f5940a4583";
     };
     kernelModules = ["kvm-amd"];
-    extraModulePackages = [];
   };
 
   fileSystems = {
@@ -42,7 +41,7 @@
     "/var/log" = {
       device = "/dev/disk/by-uuid/7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
       fsType = "btrfs";
-      options = ["subvol=log" "compress=zstd" "noatime"];
+      options = ["subvol=log" "compress=zstd" "noatime" "noexec"];
       neededForBoot = true;
     };
     "/boot" = {
