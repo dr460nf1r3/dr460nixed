@@ -64,7 +64,7 @@ in {
       enable =
         mkOption
         {
-          default = true;
+          default = false;
           type = types.bool;
           description = mdDoc ''
             Enables Prometheus' node_exporter.

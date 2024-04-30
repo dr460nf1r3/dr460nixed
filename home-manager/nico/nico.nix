@@ -49,6 +49,10 @@ in {
         "o" = "mosh ${user}@oracle-dragon.emperor-mercat.ts.net";
       };
     };
+    gh = {
+      enable = true;
+      settings.git_protocol = "ssh";
+    };
     git = {
       diff-so-fancy.enable = true;
       enable = true;

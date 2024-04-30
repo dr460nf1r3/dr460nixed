@@ -15,12 +15,6 @@ in {
       };
       primary = true;
       realName = "Nico Jensch";
-      signature = {
-        text = ''
-          Sent from NixOS
-        '';
-        showSignature = "append";
-      };
       thunderbird.enable = true;
       smtp = {
         host = mailserver;
@@ -30,22 +24,12 @@ in {
     };
     accounts.garuda-personal = {
       address = "dr460nf1r3@garudalinux.org";
-      gpg = {
-        inherit key;
-        signByDefault = false;
-      };
       imap = {
         host = mailserver;
         port = 993;
       };
       realName = "Nico (dr460nf1r3)";
       thunderbird.enable = true;
-      signature = {
-        text = ''
-          Sent from NixOS
-        '';
-        showSignature = "append";
-      };
       smtp = {
         host = mailserver;
         port = 465;
@@ -54,21 +38,11 @@ in {
     };
     accounts.garuda-team = {
       address = "team@garudalinux.org";
-      gpg = {
-        inherit key;
-        signByDefault = false;
-      };
       imap = {
         host = mailserver;
         port = 993;
       };
       realName = "Garuda Team";
-      signature = {
-        text = ''
-          Sent from NixOS
-        '';
-        showSignature = "append";
-      };
       thunderbird.enable = true;
       smtp = {
         host = mailserver;

@@ -32,6 +32,12 @@
     enable = true;
   };
 
+  # Nextcloud sync client
+  services.nextcloud-client = {
+    enable = true;
+    startInBackground = true;
+  };
+
   # MangoHUD to monitor performance while gaming
   programs.mangohud = {
     enable = false;

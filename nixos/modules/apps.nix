@@ -54,14 +54,13 @@ in {
       krita
       libreoffice-qt
       libsForQt5.kdenlive
-      libsForQt5.kleopatra
-      libsForQt5.krdc
-      libsForQt5.krfb
+      kdePackages.kleopatra
+      kdePackages.krdc
+      kdePackages.krfb
       libsecret
       libva-utils
       lm_sensors
       movit
-      nextcloud-client
       obs-studio-wrapped
       okular
       prismlauncher
@@ -100,9 +99,7 @@ in {
       speedcrunch
       statix
       termius
-      vagrant
       ventoy-full
-      virt-manager
       (vscode-with-extensions.override {
         vscodeExtensions = with vscode-extensions;
           [
@@ -148,12 +145,11 @@ in {
           ];
       })
       vulnix
-      wireshark
       xdg-utils
       yarn
     ])
     ++ optionals cfg.yubikey (with pkgs; [
-      # yubikey-manager-qt
+      yubikey-manager-qt
       yubioath-flutter
     ])
     ++ optionals cfg.school (with pkgs; [
@@ -162,7 +158,6 @@ in {
       sqlite
       sqlitebrowser
       teams-for-linux
-      virt-manager
     ])
     ++ optionals cfg.live-cd (with pkgs; [
       btrfs-progs
@@ -474,6 +469,6 @@ in {
       // (lib.genAttrs audioVideo (_: ["vlc.desktop"]))
       // (lib.genAttrs documents (_: ["okular.desktop"]))
       // (lib.genAttrs images (_: ["okular.desktop"]))
-      // (lib.genAttrs urls (_: ["firedragon.desktop"]))
+      // (lib.genAttrs urls (_: ["chromium.desktop"]))
     );
 }

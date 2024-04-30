@@ -36,19 +36,6 @@ in {
 
   # Enable Kvantum theme and GTK & place a few bigger files
   home.file = lib.mkIf immutable {
-    "${configDir}/autostart/nextcloud-client.desktop".text = ''
-      [Desktop Entry]
-      Exec=${pkgs.nextcloud-client}/bin/nextcloud --background
-      Icon=Nextcloud
-      Name=Nextcloud
-      StartupNotify=false
-      Terminal=false
-      Type=Application
-      X-KDE-autostart-after=panel
-      X-KDE-autostart-phase=2
-      X-KDE-autostart-after=panel
-      X-KDE-autostart-phase=2
-    '';
     "${configDir}/autostart/jdsp-gui.desktop".text = ''
       [Desktop Entry]
       Exec=${pkgs.jamesdsp}/bin/jamesdsp --tray
@@ -164,6 +151,9 @@ in {
       Number=2
       Rows=1
 
+      [NightColor]
+      Active=true
+
       [Effect-blur]
       NoiseStrength=0
 
@@ -172,40 +162,33 @@ in {
       Stiffness=10
       WobblynessLevel=1
 
-      [NightColor]
-      Active=true
-
       [Plugins]
       blurEnabled=true
-      forceblurEnabled=true
-      kwin4_effect_dimscreenEnabled=true
-      kwin4_effect_eyeonscreenEnabled=true
-      kwin4_effect_squashEnabled=false
+      squashEnabled=false
       magiclampEnabled=true
-      overviewEnabled=true
       wobblywindowsEnabled=true
 
-      [Script-forceblur]
-      blurExceptMatching=true
-      blurMatching=false
-      patterns=Peek
+      [TabBox]
+      LayoutName=coverswitch
 
       [Windows]
       BorderlessMaximizedWindows=true
 
+      [Xwayland]
+      Scale=1
+
       [org.kde.kdecoration2]
+      BorderSizeAuto=false
       ButtonsOnLeft=XAI
       ButtonsOnRight=
-      library=org.kde.kwin.aurorae
-      theme=__aurorae__svg__Sweet-Dark
     '';
     "${configDir}/plasma-localerc".text = ''
       [Formats]
-      LANG=en_US.UTF-8
+      LANG=en_GB.UTF-8
     '';
     "${configDir}/plasmarc".text = ''
       [Theme]
-      name=Dr460nized
+      name=Sweet
 
       [Wallpapers]
       usersWallpapers=/usr/share/wallpapers/
@@ -223,9 +206,9 @@ in {
     '';
     "${configDir}/touchpadrc".text = ''
       [parameters]
-      InvertHorizScroll=LeftButton
-      InvertVertScroll=false
-      OneFingerTapButton=true
+      InvertVertScroll=true
+      InvertHorizScroll=true
+      OneFingerTapButton=LeftButton
       Tapping=true
       ThreeFingerTapButton=MiddleButton
       TwoFingerTapButton=RightButton

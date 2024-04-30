@@ -56,10 +56,10 @@
 @define-color theme_selected_fg_color_breeze #fefefe;
 @define-color theme_text_color_breeze #d3dae3;
 @define-color theme_titlebar_background_backdrop_breeze #2f343f;
-@define-color theme_titlebar_background_breeze #2f343f;
+@define-color theme_titlebar_background_breeze #0c0e14;
 @define-color theme_titlebar_background_light_breeze #181b28;
 @define-color theme_titlebar_foreground_backdrop_breeze #666a73;
-@define-color theme_titlebar_foreground_breeze #d3dae3;
+@define-color theme_titlebar_foreground_breeze #c9cbd1;
 @define-color theme_titlebar_foreground_insensitive_backdrop_breeze #666a73;
 @define-color theme_titlebar_foreground_insensitive_breeze #666a73;
 @define-color theme_unfocused_base_color_breeze #161925;

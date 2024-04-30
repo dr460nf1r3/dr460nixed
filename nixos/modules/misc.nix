@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -155,8 +154,8 @@ in {
     # Basic chromium settings (system-wide)
     programs.chromium = mkIf cfg.chromium {
       defaultSearchProviderEnabled = true;
-      defaultSearchProviderSearchURL = "https://searx.dr460nf1r3.org/search?q=%s";
-      defaultSearchProviderSuggestURL = "https://searx.dr460nf1r3.org/autocomplete?q=%s";
+      defaultSearchProviderSearchURL = "https://searx.garudalinux.org/search?q=%s";
+      defaultSearchProviderSuggestURL = "https://searx.garudalinux.org/autocomplete?q=%s";
       enable = true;
       extensions = [
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock origin
@@ -168,11 +167,11 @@ in {
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
       ];
       extraOpts = {
-        "HomepageLocation" = "https://searx.garudalinux.org";
         "QuicAllowed" = true;
         "RestoreOnStartup" = true;
         "ShowHomeButton" = true;
       };
+      homepageLocation = "https://searx.garudalinux.org";
     };
 
     # SUID Sandbox
@@ -182,14 +181,14 @@ in {
     environment.systemPackages = mkIf cfg.chromium-gate [chromium-gate];
 
     # Enhabce performance tweaks
-    garuda.performance-tweaks = lib.mkIf cfg.performance {
-      cachyos-kernel = true;
+    garuda.performance-tweaks.enable = lib.mkIf cfg.performance true;
+    boot.kernelPackages = lib.mkIf cfg.performance pkgs.linuxPackages_cachyos-lto;
+
+    # /etc/hosts based adblocker
+    networking.stevenBlackHosts = lib.mkIf cfg.adblock {
+      blockFakenews = true;
+      blockGambling = true;
       enable = true;
     };
-
-    # /etc/hosts based adblocker (unified hosts + fakenews)
-    networking.extraHosts =
-      lib.mkIf cfg.adblock
-      (builtins.readFile "${inputs.stevenblack-hosts}/alternates/fakenews/hosts");
   };
 }
