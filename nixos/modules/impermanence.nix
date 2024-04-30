@@ -9,7 +9,6 @@
   boot.initrd = {
     enable = true;
     supportedFilesystems = ["btrfs"];
-
     systemd.services.restore-root = {
       description = "Rollback BTRFS rootfs";
       wantedBy = ["initrd.target"];
@@ -47,6 +46,11 @@
       '';
     };
   };
+
+  # Rollback results in sudo lectures after each reboot
+  security.sudo.extraConfig = ''
+    Defaults lecture = never
+  '';
 
   # Persistent files
   environment.persistence."/persist" = {
@@ -170,6 +174,7 @@
     };
     users."nico" = {
       directories = [
+        # Important user data
         ".android"
         ".ansible"
         ".config"
@@ -200,6 +205,7 @@
         ".local/share/plasma"
         ".local/share/tor-browser"
         ".mozilla"
+        ".steam"
         ".thunderbird"
         ".tldrc"
         ".var"
@@ -213,7 +219,8 @@
         "School"
         "Sync"
         "Videos"
-
+        "VirtualBox VMs"
+        # Cache stuff, not actual user data
         ".cache/bookmarksrunner"
         ".cache/chromium"
         ".cache/firedragon"
@@ -230,7 +237,6 @@
         ".cache/virt-manager"
         ".local/share/Trash"
         ".local/state/wireplumber"
-        ".steam"
         {
           directory = ".gnupg";
           mode = "0700";
