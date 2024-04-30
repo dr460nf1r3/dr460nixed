@@ -547,14 +547,13 @@ in {
       krita
       libreoffice-qt
       libsForQt5.kdenlive
-      libsForQt5.kleopatra
-      libsForQt5.krdc
-      libsForQt5.krfb
+      kdePackages.kleopatra
+      kdePackages.krdc
+      kdePackages.krfb
       libsecret
       libva-utils
       lm_sensors
       movit
-      nextcloud-client
       obs-studio-wrapped
       okular
       prismlauncher
@@ -593,9 +592,7 @@ in {
       speedcrunch
       statix
       termius
-      vagrant
       ventoy-full
-      virt-manager
       (vscode-with-extensions.override {
         vscodeExtensions = with vscode-extensions;
           [
@@ -641,12 +638,11 @@ in {
           ];
       })
       vulnix
-      wireshark
       xdg-utils
       yarn
     ])
     ++ optionals cfg.yubikey (with pkgs; [
-      # yubikey-manager-qt
+      yubikey-manager-qt
       yubioath-flutter
     ])
     ++ optionals cfg.school (with pkgs; [
@@ -655,7 +651,6 @@ in {
       sqlite
       sqlitebrowser
       teams-for-linux
-      virt-manager
     ])
     ++ optionals cfg.live-cd (with pkgs; [
       btrfs-progs
@@ -967,7 +962,7 @@ in {
       // (lib.genAttrs audioVideo (_: ["vlc.desktop"]))
       // (lib.genAttrs documents (_: ["okular.desktop"]))
       // (lib.genAttrs images (_: ["okular.desktop"]))
-      // (lib.genAttrs urls (_: ["firedragon.desktop"]))
+      // (lib.genAttrs urls (_: ["chromium.desktop"]))
     );
 }
 </code></pre>
@@ -1121,8 +1116,12 @@ in {
   };
 
   config = mkIf cfg.common.enable {
-    ## A few kernel tweaks
-    boot.kernel.sysctl = {"kernel.unprivileged_userns_clone" = 1;};
+    # A few kernel tweaks
+    boot = {
+      kernel.sysctl = {"kernel.unprivileged_userns_clone" = 1;};
+      kernelParams = ["noresume"];
+    };
+    systemd.enableUnifiedCgroupHierarchy = true;
 
     # Allow wheel group users to use sudo
     security.sudo.execWheelOnly = true;
@@ -1175,8 +1174,11 @@ in {
     # Enable all hardware drivers
     hardware.enableRedistributableFirmware = true;
 
-    # Ship systemd logs to Loki &amp; Grafana
-    dr460nixed.promtail.lokiAddress = "100.86.102.115";
+    # No need for that in real NixOS systems
+    garuda.garuda-nix-manager.enable = false;
+
+    # Custom label for boot menu entries (otherwise set to "garuda-nix-subsystem")
+    system.nixos.label = lib.mkForce (builtins.concatStringsSep "-" ["dr460nixed-"] + config.system.nixos.version);
   };
 }
 </code></pre>
@@ -1395,11 +1397,11 @@ in {
       };
       lxd.enable = false;
       virtualbox.host = {
-        enable = true;
-        enableKvm = true;
-        enableHardening = false;
-        enableExtensionPack = true;
         addNetworkInterface = false;
+        enable = true;
+        enableExtensionPack = true;
+        enableHardening = false;
+        enableKvm = true;
       };
     };
 
@@ -1776,7 +1778,6 @@ in {
   boot.initrd = {
     enable = true;
     supportedFilesystems = ["btrfs"];
-
     systemd.services.restore-root = {
       description = "Rollback BTRFS rootfs";
       wantedBy = ["initrd.target"];
@@ -1814,6 +1815,11 @@ in {
       '';
     };
   };
+
+  # Rollback results in sudo lectures after each reboot
+  security.sudo.extraConfig = ''
+    Defaults lecture = never
+  '';
 
   # Persistent files
   environment.persistence."/persist" = {
@@ -1937,6 +1943,7 @@ in {
     };
     users."nico" = {
       directories = [
+        # Important user data
         ".android"
         ".ansible"
         ".config"
@@ -1967,6 +1974,7 @@ in {
         ".local/share/plasma"
         ".local/share/tor-browser"
         ".mozilla"
+        ".steam"
         ".thunderbird"
         ".tldrc"
         ".var"
@@ -1980,7 +1988,8 @@ in {
         "School"
         "Sync"
         "Videos"
-
+        "VirtualBox VMs"
+        # Cache stuff, not actual user data
         ".cache/bookmarksrunner"
         ".cache/chromium"
         ".cache/firedragon"
@@ -1997,7 +2006,6 @@ in {
         ".cache/virt-manager"
         ".local/share/Trash"
         ".local/state/wireplumber"
-        ".steam"
         {
           directory = ".gnupg";
           mode = "0700";
@@ -2163,12 +2171,13 @@ in {
       # https://github.com/tailscale/tailscale/issues/8223
       dispatcherScripts = [
         {
-          source = pkgs.writeShellScriptBin "restartTailscaled" ''
+          source = pkgs.writeScript "restartTailscaled" ''
+            #!/usr/bin/env ${pkgs.bash}/bin/bash
             if [[ "$1" != "wlan0" ]]; then
               exit 0
             fi
             if [[ "$2" == "up" ]]; then
-              if [[ $(ping -W 1 -c 1 garudalinux.org) != 0 ]]; then
+              if [[ $(${pkgs.iputils}/bin/ping -W 1 -c 1 garudalinux.org) != 0 ]]; then
                 logger "Wlan0 up, restarting tailscaled"
                 ${pkgs.systemd}/bin/systemctl restart tailscaled
               fi

@@ -220,8 +220,12 @@ in {
   };
 
   config = mkIf cfg.common.enable {
-    ## A few kernel tweaks
-    boot.kernel.sysctl = {"kernel.unprivileged_userns_clone" = 1;};
+    # A few kernel tweaks
+    boot = {
+      kernel.sysctl = {"kernel.unprivileged_userns_clone" = 1;};
+      kernelParams = ["noresume"];
+    };
+    systemd.enableUnifiedCgroupHierarchy = true;
 
     # Allow wheel group users to use sudo
     security.sudo.execWheelOnly = true;
@@ -274,8 +278,11 @@ in {
     # Enable all hardware drivers
     hardware.enableRedistributableFirmware = true;
 
-    # Ship systemd logs to Loki &amp; Grafana
-    dr460nixed.promtail.lokiAddress = "100.86.102.115";
+    # No need for that in real NixOS systems
+    garuda.garuda-nix-manager.enable = false;
+
+    # Custom label for boot menu entries (otherwise set to "garuda-nix-subsystem")
+    system.nixos.label = lib.mkForce (builtins.concatStringsSep "-" ["dr460nixed-"] + config.system.nixos.version);
   };
 }
 </code></pre>

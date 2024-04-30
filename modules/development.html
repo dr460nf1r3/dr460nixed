@@ -238,11 +238,11 @@ in {
       };
       lxd.enable = false;
       virtualbox.host = {
-        enable = true;
-        enableKvm = true;
-        enableHardening = false;
-        enableExtensionPack = true;
         addNetworkInterface = false;
+        enable = true;
+        enableExtensionPack = true;
+        enableHardening = false;
+        enableKvm = true;
       };
     };
 
