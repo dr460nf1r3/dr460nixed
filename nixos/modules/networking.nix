@@ -22,12 +22,13 @@ in {
       # https://github.com/tailscale/tailscale/issues/8223
       dispatcherScripts = [
         {
-          source = pkgs.writeShellScriptBin "restartTailscaled" ''
+          source = pkgs.writeScript "restartTailscaled" ''
+            #!/usr/bin/env ${pkgs.bash}/bin/bash
             if [[ "$1" != "wlan0" ]]; then
               exit 0
             fi
             if [[ "$2" == "up" ]]; then
-              if [[ $(ping -W 1 -c 1 garudalinux.org) != 0 ]]; then
+              if [[ $(${pkgs.iputils}/bin/ping -W 1 -c 1 garudalinux.org) != 0 ]]; then
                 logger "Wlan0 up, restarting tailscaled"
                 ${pkgs.systemd}/bin/systemctl restart tailscaled
               fi
