@@ -59,6 +59,7 @@
       [
         "/etc/NetworkManager/system-connections"
         "/etc/nixos"
+        "/etc/pacman.d/gnupg"
         "/etc/secureboot"
         "/var/cache/tailscale"
         "/var/lib/AccountsService/icons"
@@ -66,6 +67,7 @@
         "/var/lib/containers"
         "/var/lib/flatpak"
         "/var/lib/libvirt"
+        "/var/lib/pacman"
         "/var/lib/machines"
         "/var/lib/sddm"
         "/var/lib/systemd"
@@ -183,6 +185,7 @@
         ".java"
         ".local/share/Nextcloud"
         ".local/share/PrismLauncher"
+        ".local/share/SpeedCrunch"
         ".local/share/Steam"
         ".local/share/TelegramDesktop"
         ".local/share/Vorta"
@@ -202,7 +205,6 @@
         ".local/share/lutris"
         ".local/share/plasma"
         ".local/share/plasma-systemmonitor"
-        ".local/share/SpeedCrunch"
         ".mozilla/native-messaging-hosts"
         ".pki"
         ".steam"
@@ -253,9 +255,6 @@
       ];
       files = [
         ".bash_history"
-        ".cache/icon-cache.kcache"
-        ".cache/ksvg-elements"
-        ".local/share/user-places.xbel"
         ".wakatime.bdb"
         ".wakatime.cfg"
       ];
