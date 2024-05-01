@@ -93,8 +93,11 @@ in {
         warn-dirty = false
       '';
 
-      # Make use of nix-super if it is enabled
-      package = lib.mkIf cfgSuper.enable pkgs.nixSuper;
+      # Make use of nix-super if it is enabled, else use latest available
+      package =
+        if cfgSuper.enable
+        then pkgs.nixSuper
+        else pkgs.nixVersions.nix_2_22;
 
       # Nix.conf settings
       settings = {
@@ -120,9 +123,25 @@ in {
         # Enable certain system features
         system-features = ["big-parallel" "kvm"];
 
+        # Build inside sandboxed environments
+        sandbox = pkgs.stdenv.isLinux;
+
         # Trust the remote machines cache signatures
-        trusted-public-keys = lib.mkIf cfgRemote.enable ["${cfgRemote.trustedPublicKey}"];
         trusted-substituters = lib.mkIf cfgRemote.enable ["ssh-ng://${cfgRemote.host}"];
+
+        # Specify the path to the nix registry
+        flake-registry = "/etc/nix/registry.json";
+
+        substituters = [
+          "https://cache.nixos.org/" # official binary cache (yes the trailing slash is really neccacery)
+          "https://nix-community.cachix.org" # nix-community cache
+          "https://nix-gaming.cachix.org" # nix-gaming
+          "https://nixpkgs-unfree.cachix.org" # unfree-package cache
+          "https://numtide.cachix.org" # another unfree package cache
+          "https://catppuccin.cachix.org" # a cache for ctp nix
+          "https://pre-commit-hooks.cachix.org" # pre commit hooks
+          "https://cache.garnix.io" # extra things here and there
+        ];
       };
     };
 
@@ -132,6 +151,21 @@ in {
         nixSuper = inputs.nix-super.packages.x86_64-linux.default;
       })
     ];
+
+    environment = {
+      etc = with inputs; {
+        # set channels (backwards compatibility)
+        "nix/flake-channels/system".source = self;
+        "nix/flake-channels/nixpkgs".source = nixpkgs;
+        "nix/flake-channels/home-manager".source = home-manager;
+
+        # preserve current flake in /etc
+        "nixos/flake".source = self;
+      };
+
+      # Git is reqired for flakes, and cachix for binary substituters
+      systemPackages = with pkgs; [git cachix];
+    };
 
     # Let root ssh into the remote builder seamlessly
     home-manager.users."root" = lib.mkIf cfgRemote.enable {
