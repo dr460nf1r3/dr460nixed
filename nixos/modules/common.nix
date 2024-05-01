@@ -42,10 +42,19 @@ in {
   config = mkIf cfg.common.enable {
     # A few kernel tweaks
     boot = {
-      kernel.sysctl = {"kernel.unprivileged_userns_clone" = 1;};
       kernelParams = ["noresume"];
     };
     systemd.enableUnifiedCgroupHierarchy = true;
+
+    # Disable unprivileged user namespaces, unless containers are enabled
+    security = {
+      # User namespaces are required for sandboxing
+      allowUserNamespaces = true;
+      # This is only required for containers
+      unprivilegedUsernsClone = config.virtualisation.containers.enable;
+      # Force-enable the Page Table Isolation (PTI) Linux kernel feature
+      forcePageTableIsolation = true;
+    };
 
     # Allow wheel group users to use sudo
     security.sudo.execWheelOnly = true;
