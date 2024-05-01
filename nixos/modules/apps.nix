@@ -87,7 +87,7 @@ in {
       okular
       prismlauncher
       qbittorrent
-      rustdesk
+      rustdesk-flutter
       syncthingtray
       telegram-desktop_git
       tor-browser-bundle-bin
