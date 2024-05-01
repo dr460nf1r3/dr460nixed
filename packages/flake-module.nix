@@ -1,10 +1,17 @@
 {
-  perSystem = {pkgs, ...}: {
+  perSystem = {
+    inputs',
+    pkgs,
+    ...
+  }: {
     packages = let
       # Source repl.nix for pre-setup "nix repl"
       replPath = toString ./.;
     in
       with pkgs; {
+        # Create catppuccin wallpapers
+        catppuccinifier-cli = inputs'.catppuccinifier.packages.cli;
+
         # Builds the documentation
         docs =
           runCommand "dr460nixed-docs"
