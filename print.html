@@ -245,6 +245,13 @@ Furthermore, the flakes' outputs are automatically build and cached via <a href=
 ├── overlays
 └── secrets
 </code></pre>
+<h2 id="credits"><a class="header" href="#credits">Credits</a></h2>
+<p>Inspiration for parts of this configurations came from these awesome people's setups ❄️</p>
+<ul>
+<li>https://github.com/PedroHLC/system-setup</li>
+<li>https://github.com/Misterio77/nix-config</li>
+<li>https://github.com/isabelroses/dotfiles</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h1>
 <h2 id="using-the-installer"><a class="header" href="#using-the-installer">Using the installer</a></h2>
 <p>An installer has been created to ease the installation process by bootstrapping a basic flake with a personal host and usernames.
@@ -493,11 +500,13 @@ finish
 <div style="break-before: page; page-break-before: always;"></div><h1 id="apps"><a class="header" href="#apps">Apps</a></h1>
 <pre><code class="language-nix">{
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }:
 with lib; let
+  catppuccinifier-cli = inputs.catppuccinifier.packages.x86_64-linux.cli;
   cfg = config.dr460nixed;
 in {
   # These are the packages I always need
@@ -516,12 +525,14 @@ in {
       mosh
       nettools
       nmap
+      nom
       nvd
       python3
       sops
       tldr
       tmux
       traceroute
+      tmuxPlugins.catppuccin
       ugrep
       wget
       whois
@@ -535,9 +546,27 @@ in {
       aspell
       aspellDicts.de
       aspellDicts.en
+      (catppuccin.override {
+        accent = "maroon";
+        variant = "mocha";
+        themeList = ["bat" "btop" "kvantum"];
+      })
+      (catppuccin-kde.override {
+        accents = ["maroon"];
+        flavour = ["mocha"];
+        winDecStyles = ["classic"];
+      })
+      (catppuccin-gtk.override {
+        accents = ["maroon"];
+        variant = "mocha";
+      })
+      (catppuccin-papirus-folders.override {
+        accent = "maroon";
+        flavor = "mocha";
+      })
+      catppuccinifier-cli
       chromium-flagged
       ffmpegthumbnailer
-      freerdp
       gimp
       helvum
       hunspell
@@ -546,7 +575,7 @@ in {
       inkscape
       krita
       libreoffice-qt
-      libsForQt5.kdenlive
+      kdePackages.kdenlive
       kdePackages.kleopatra
       kdePackages.krdc
       kdePackages.krfb
@@ -572,6 +601,7 @@ in {
       beekeeper-studio
       bind.dnsutils
       deadnix
+      distrobox
       gh
       gitkraken
       heroku
@@ -597,6 +627,8 @@ in {
         vscodeExtensions = with vscode-extensions;
           [
             bbenoist.nix
+            catppuccin.catppuccin-vsc
+            catppuccin.catppuccin-vsc-icons
             charliermarsh.ruff
             davidanson.vscode-markdownlint
             eamodio.gitlens
@@ -620,14 +652,9 @@ in {
             redhat.vscode-yaml
             timonwong.shellcheck
             tyriar.sort-lines
+            wakatime.vscode-wakatime
           ]
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-            {
-              name = "sweet-vscode";
-              publisher = "eliverlara";
-              sha256 = "sha256-kJgqMEJHyYF3GDxe1rnpTEmbfJE01tyyOFjRUp4SOds=";
-              version = "1.1.1";
-            }
             {
               # Available in nixpkgs, but outdated (0.4.0) at the time of adding
               name = "vscode-tailscale";
@@ -637,7 +664,6 @@ in {
             }
           ];
       })
-      vulnix
       xdg-utils
       yarn
     ])
@@ -977,6 +1003,7 @@ with lib; let
   cfg = config.dr460nixed.systemd-boot;
   cfgGrub = config.dr460nixed.grub;
   cfgLanza = config.dr460nixed.lanzaboote;
+  inherit (pkgs) plymouth;
 in {
   options.dr460nixed.grub = {
     enable =
@@ -1067,6 +1094,20 @@ in {
           enable = true;
         };
       };
+      plymouth = {
+        theme = lib.mkForce "catppuccin-mocha";
+        themePackages = [(pkgs.catppuccin-plymouth.override {variant = "mocha";})];
+      };
+    };
+
+    # Make plymouth work with sleep
+    powerManagement = {
+      powerDownCommands = ''
+        ${plymouth} --show-splash
+      '';
+      resumeCommands = ''
+        ${plymouth} --quit
+      '';
     };
 
     environment.systemPackages = mkIf cfgLanza.enable [pkgs.sbctl];
@@ -1118,10 +1159,19 @@ in {
   config = mkIf cfg.common.enable {
     # A few kernel tweaks
     boot = {
-      kernel.sysctl = {"kernel.unprivileged_userns_clone" = 1;};
       kernelParams = ["noresume"];
     };
     systemd.enableUnifiedCgroupHierarchy = true;
+
+    # Disable unprivileged user namespaces, unless containers are enabled
+    security = {
+      # User namespaces are required for sandboxing
+      allowUserNamespaces = true;
+      # This is only required for containers
+      unprivilegedUsernsClone = config.virtualisation.containers.enable;
+      # Force-enable the Page Table Isolation (PTI) Linux kernel feature
+      forcePageTableIsolation = true;
+    };
 
     # Allow wheel group users to use sudo
     security.sudo.execWheelOnly = true;
@@ -1147,6 +1197,10 @@ in {
         value = "1048576";
       }
     ];
+
+    # Theming
+    catppuccin.enable = true;
+    console.catppuccin.enable = true;
 
     # Always needed applications
     programs = {
@@ -1213,11 +1267,14 @@ in {
     # Enable the dr460nized desktops settings
     garuda.dr460nized.enable = true;
 
+    environment = {
+      variables = {
+        VISUAL = lib.mkForce "vscode";
+      };
+    };
+
     # Allow better Syncthing speeds
     services.syncthing.openDefaultPorts = true;
-
-    # # Kernel paramters &amp; settings
-    boot.kernelParams = ["mitigations=off"];
 
     # Fancy themed, enhanced Spotify
     programs.spicetify = {
@@ -1340,6 +1397,7 @@ in {
 <pre><code class="language-nix">{
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -1377,6 +1435,9 @@ in {
 
     # Conflicts with virtualisation.containers if enabled
     boot.enableContainers = false;
+
+    # Wakatime plugin
+    environment.systemPackages = with pkgs; [fishPlugins.wakatime-fish];
 
     # Allow building sdcard images for Raspi
     nixpkgs.config.allowUnsupportedSystem = true;
@@ -1950,15 +2011,12 @@ in {
         ".firedragon"
         ".gitkraken"
         ".java"
-        ".local/share/JetBrains"
         ".local/share/Nextcloud"
         ".local/share/PrismLauncher"
         ".local/share/Steam"
         ".local/share/TelegramDesktop"
         ".local/share/Vorta"
-        ".local/share/applications"
         ".local/share/baloo"
-        ".local/share/containers"
         ".local/share/direnv"
         ".local/share/dolphin"
         ".local/share/fish"
@@ -1967,17 +2025,20 @@ in {
         ".local/share/klipper"
         ".local/share/knewstuff3"
         ".local/share/konsole"
+        ".local/share/kpeoplevcard"
         ".local/share/krita"
         ".local/share/kscreen"
         ".local/share/kwalletd"
         ".local/share/lutris"
         ".local/share/plasma"
-        ".local/share/tor-browser"
-        ".mozilla"
+        ".local/share/plasma-systemmonitor"
+        ".local/share/SpeedCrunch"
+        ".mozilla/native-messaging-hosts"
+        ".pki"
         ".steam"
-        ".thunderbird"
+        ".thunderbird/default"
         ".tldrc"
-        ".var"
+        ".wakatime"
         ".yubico"
         "Documents"
         "Downloads"
@@ -1997,14 +2058,11 @@ in {
         ".cache/lutris"
         ".cache/mesa_shader_cache"
         ".cache/mozilla"
-        ".cache/nix"
-        ".cache/nix-index"
-        ".cache/plasmashell"
         ".cache/spotify"
-        ".cache/starship"
+        ".cache/systemsettings"
         ".cache/thunderbird"
-        ".cache/virt-manager"
         ".local/share/Trash"
+        ".local/state/syncthing"
         ".local/state/wireplumber"
         {
           directory = ".gnupg";
@@ -2023,6 +2081,14 @@ in {
           mode = "0700";
         }
       ];
+      files = [
+        ".bash_history"
+        ".cache/icon-cache.kcache"
+        ".cache/ksvg-elements"
+        ".local/share/user-places.xbel"
+        ".wakatime.bdb"
+        ".wakatime.cfg"
+      ];
     };
   };
 }
@@ -2031,14 +2097,12 @@ in {
 <pre><code class="language-nix">{
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
   cfg = config.dr460nixed.locales;
   de = "de_DE.UTF-8";
   defaultLocale = "en_GB.UTF-8";
-  terminus-variant = "120n";
 in {
   options.dr460nixed.locales = {
     enable =
@@ -2089,10 +2153,7 @@ in {
     };
 
     # Console font
-    console = {
-      font = "${pkgs.terminus_font}/share/consolefonts/ter-${terminus-variant}.psf.gz";
-      keyMap = "de";
-    };
+    console.keyMap = "de";
   };
 }
 </code></pre>
@@ -2300,8 +2361,11 @@ in {
         warn-dirty = false
       '';
 
-      # Make use of nix-super if it is enabled
-      package = lib.mkIf cfgSuper.enable pkgs.nixSuper;
+      # Make use of nix-super if it is enabled, else use latest available
+      package =
+        if cfgSuper.enable
+        then pkgs.nixSuper
+        else pkgs.nixVersions.nix_2_22;
 
       # Nix.conf settings
       settings = {
@@ -2327,9 +2391,25 @@ in {
         # Enable certain system features
         system-features = ["big-parallel" "kvm"];
 
+        # Build inside sandboxed environments
+        sandbox = pkgs.stdenv.isLinux;
+
         # Trust the remote machines cache signatures
-        trusted-public-keys = lib.mkIf cfgRemote.enable ["${cfgRemote.trustedPublicKey}"];
         trusted-substituters = lib.mkIf cfgRemote.enable ["ssh-ng://${cfgRemote.host}"];
+
+        # Specify the path to the nix registry
+        flake-registry = "/etc/nix/registry.json";
+
+        substituters = [
+          "https://cache.nixos.org/" # official binary cache (yes the trailing slash is really neccacery)
+          "https://nix-community.cachix.org" # nix-community cache
+          "https://nix-gaming.cachix.org" # nix-gaming
+          "https://nixpkgs-unfree.cachix.org" # unfree-package cache
+          "https://numtide.cachix.org" # another unfree package cache
+          "https://catppuccin.cachix.org" # a cache for ctp nix
+          "https://pre-commit-hooks.cachix.org" # pre commit hooks
+          "https://cache.garnix.io" # extra things here and there
+        ];
       };
     };
 
@@ -2339,6 +2419,21 @@ in {
         nixSuper = inputs.nix-super.packages.x86_64-linux.default;
       })
     ];
+
+    environment = {
+      etc = with inputs; {
+        # set channels (backwards compatibility)
+        "nix/flake-channels/system".source = self;
+        "nix/flake-channels/nixpkgs".source = nixpkgs;
+        "nix/flake-channels/home-manager".source = home-manager;
+
+        # preserve current flake in /etc
+        "nixos/flake".source = self;
+      };
+
+      # Git is reqired for flakes, and cachix for binary substituters
+      systemPackages = with pkgs; [git cachix];
+    };
 
     # Let root ssh into the remote builder seamlessly
     home-manager.users."root" = lib.mkIf cfgRemote.enable {
@@ -3044,6 +3139,40 @@ in {
     };
   };
 
+  security.sudo.extraRules = [
+    {
+      # allow wheel group to run nixos-rebuild without password
+      groups = ["wheel"];
+      commands = let
+        currentSystem = "/run/current-system/";
+        storePath = "/nix/store/";
+      in [
+        {
+          command = "${storePath}/*/bin/switch-to-configuration";
+          options = ["SETENV" "NOPASSWD"];
+        }
+        {
+          command = "${currentSystem}/sw/bin/nix-store";
+          options = ["SETENV" "NOPASSWD"];
+        }
+        {
+          command = "${currentSystem}/sw/bin/nixos-rebuild";
+          options = ["NOPASSWD"];
+        }
+        {
+          # let wheel group collect garbage without password
+          command = "${currentSystem}/sw/bin/nix-collect-garbage";
+          options = ["SETENV" "NOPASSWD"];
+        }
+        {
+          # let wheel group interact with systemd without password
+          command = "${currentSystem}/sw/bin/systemctl";
+          options = ["NOPASSWD"];
+        }
+      ];
+    }
+  ];
+
   # Allow pushing to Cachix
   # sops.secrets."api_keys/cachix" = {
   #   mode = "0600";
@@ -3131,7 +3260,7 @@ in {
   };
 }
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="credits"><a class="header" href="#credits">Credits</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="credits-1"><a class="header" href="#credits-1">Credits</a></h1>
 <h2 id="main-sources"><a class="header" href="#main-sources">Main sources</a></h2>
 <p>A special thanks to <a href="https://github.com/pedrohlc">PedroHLC</a>, who always gives great advice and who is also the reason I'm using NixOS today.
 Also, I studied <a href="https://github.com/Misterio77">Mysterio77</a>'s and <a href="https://github.com/NotAShelf">NotAShelf</a>'s Nix configurations while building this one.</p>

@@ -361,15 +361,12 @@
         ".firedragon"
         ".gitkraken"
         ".java"
-        ".local/share/JetBrains"
         ".local/share/Nextcloud"
         ".local/share/PrismLauncher"
         ".local/share/Steam"
         ".local/share/TelegramDesktop"
         ".local/share/Vorta"
-        ".local/share/applications"
         ".local/share/baloo"
-        ".local/share/containers"
         ".local/share/direnv"
         ".local/share/dolphin"
         ".local/share/fish"
@@ -378,17 +375,20 @@
         ".local/share/klipper"
         ".local/share/knewstuff3"
         ".local/share/konsole"
+        ".local/share/kpeoplevcard"
         ".local/share/krita"
         ".local/share/kscreen"
         ".local/share/kwalletd"
         ".local/share/lutris"
         ".local/share/plasma"
-        ".local/share/tor-browser"
-        ".mozilla"
+        ".local/share/plasma-systemmonitor"
+        ".local/share/SpeedCrunch"
+        ".mozilla/native-messaging-hosts"
+        ".pki"
         ".steam"
-        ".thunderbird"
+        ".thunderbird/default"
         ".tldrc"
-        ".var"
+        ".wakatime"
         ".yubico"
         "Documents"
         "Downloads"
@@ -408,14 +408,11 @@
         ".cache/lutris"
         ".cache/mesa_shader_cache"
         ".cache/mozilla"
-        ".cache/nix"
-        ".cache/nix-index"
-        ".cache/plasmashell"
         ".cache/spotify"
-        ".cache/starship"
+        ".cache/systemsettings"
         ".cache/thunderbird"
-        ".cache/virt-manager"
         ".local/share/Trash"
+        ".local/state/syncthing"
         ".local/state/wireplumber"
         {
           directory = ".gnupg";
@@ -433,6 +430,14 @@
           directory = ".ssh";
           mode = "0700";
         }
+      ];
+      files = [
+        ".bash_history"
+        ".cache/icon-cache.kcache"
+        ".cache/ksvg-elements"
+        ".local/share/user-places.xbel"
+        ".wakatime.bdb"
+        ".wakatime.cfg"
       ];
     };
   };

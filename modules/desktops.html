@@ -208,11 +208,14 @@ in {
     # Enable the dr460nized desktops settings
     garuda.dr460nized.enable = true;
 
+    environment = {
+      variables = {
+        VISUAL = lib.mkForce "vscode";
+      };
+    };
+
     # Allow better Syncthing speeds
     services.syncthing.openDefaultPorts = true;
-
-    # # Kernel paramters &amp; settings
-    boot.kernelParams = ["mitigations=off"];
 
     # Fancy themed, enhanced Spotify
     programs.spicetify = {

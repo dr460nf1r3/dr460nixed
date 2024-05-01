@@ -188,6 +188,7 @@ with lib; let
   cfg = config.dr460nixed.systemd-boot;
   cfgGrub = config.dr460nixed.grub;
   cfgLanza = config.dr460nixed.lanzaboote;
+  inherit (pkgs) plymouth;
 in {
   options.dr460nixed.grub = {
     enable =
@@ -278,6 +279,20 @@ in {
           enable = true;
         };
       };
+      plymouth = {
+        theme = lib.mkForce "catppuccin-mocha";
+        themePackages = [(pkgs.catppuccin-plymouth.override {variant = "mocha";})];
+      };
+    };
+
+    # Make plymouth work with sleep
+    powerManagement = {
+      powerDownCommands = ''
+        ${plymouth} --show-splash
+      '';
+      resumeCommands = ''
+        ${plymouth} --quit
+      '';
     };
 
     environment.systemPackages = mkIf cfgLanza.enable [pkgs.sbctl];
