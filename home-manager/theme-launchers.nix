@@ -13,25 +13,6 @@
 in {
   # All of these either have no BeautyLine icon or their description sucks
   home.file = {
-    "${appdir}/com.borgbase.Vorta.desktop".text = ''
-      [Desktop Entry]
-      Categories=Utility;Archiving;Qt;
-      Comment=
-      Exec=${pkgs.vorta}/bin/vorta
-      GenericName=Backup Software
-      Icon=org.kde.kbackup
-      Keywords=borg;
-      Name=Vorta
-      NoDisplay=false
-      Path=
-      StartupNotify=true
-      StartupWMClass=vorta
-      Terminal=false
-      TerminalOptions=
-      Type=Application
-      X-KDE-SubstituteUID=false
-      X-KDE-Username=
-    '';
     "${appdir}/btop.desktop".text = ''
       [Desktop Entry]
       Categories=System;Monitor;ConsoleOnly;
@@ -48,32 +29,6 @@ in {
       TerminalOptions=
       Type=Application
       Version=1.0
-      X-KDE-SubstituteUID=false
-      X-KDE-Username=
-    '';
-    "${appdir}/rustdesk.desktop".source = "${pkgs.makeDesktopItem {
-      name = "rustdesk";
-      exec = "rustdesk";
-      icon = "rustdesk";
-      desktopName = "RustDesk";
-      comment = "A cross-platform remote desktop software";
-      genericName = "Remote Desktop";
-      categories = ["Network"];
-    }}/share/applications/rustdesk.desktop";
-    "${appdir}/org.pipewire.Helvum.desktop".text = ''
-      [Desktop Entry]
-      Categories=AudioVideo;Audio;Video;Midi;Settings;GNOME;GTK;
-      Comment=A patchbay for pipewire
-      Exec=${pkgs.helvum}/bin/helvum
-      GenericName=Patchbay
-      Icon=gnome-sound-properties
-      Name=Helvum
-      NoDisplay=false
-      Path=
-      StartupNotify=true
-      Terminal=false
-      TerminalOptions=
-      Type=Application
       X-KDE-SubstituteUID=false
       X-KDE-Username=
     '';

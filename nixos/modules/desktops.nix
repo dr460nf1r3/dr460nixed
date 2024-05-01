@@ -39,8 +39,12 @@ in {
 
     # Fancy themed, enhanced Spotify
     programs.spicetify = {
+      colorScheme = "mocha";
       enable = true;
-      theme = spicePkgs.themes.Comfy;
+      enabledCustomApps = with spicePkgs.apps; [
+        lyrics-plus
+        new-releases
+      ];
       enabledExtensions = with spicePkgs.extensions; [
         autoSkipVideo
         bookmark
@@ -55,14 +59,11 @@ in {
         seekSong
         songStats
       ];
+      theme = spicePkgs.themes.catppuccin;
       injectCss = true;
-      replaceColors = true;
       overwriteAssets = true;
+      replaceColors = true;
       sidebarConfig = true;
-      enabledCustomApps = with spicePkgs.apps; [
-        lyrics-plus
-        new-releases
-      ];
     };
 
     # Bitwarden client for additional convenience
