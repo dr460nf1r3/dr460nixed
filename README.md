@@ -81,3 +81,11 @@ It might receive more module options in the future, though I currently believe t
 ├── overlays
 └── secrets
 ```
+
+## Credits
+
+Inspiration for parts of this configurations came from these awesome people's setups ❄️
+
+- https://github.com/PedroHLC/system-setup
+- https://github.com/Misterio77/nix-config
+- https://github.com/isabelroses/dotfiles
