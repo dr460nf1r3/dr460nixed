@@ -91,6 +91,7 @@ in {
       usbutils
       vorta
       vulkan-tools
+      xdg-utils
       yt-dlp_git
     ])
     ++ optionals cfg.development.enable (with pkgs; [

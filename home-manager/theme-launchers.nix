@@ -64,7 +64,7 @@ in {
       Exec=${pkgs.libreoffice-qt}/bin/soffice %U
       GenericName[en_GB]=Office
       GenericName=Office
-      Icon=org.libreoffice.LibreOffice-startcenter
+      Icon=libreoffice
       MimeType=application/vnd.openofficeorg.extension;x-scheme-handler/vnd.libreoffice.cmis;x-scheme-handler/vnd.sun.star.webdav;x-scheme-handler/vnd.sun.star.webdavs;x-scheme-handler/vnd.libreoffice.command;x-scheme-handler/ms-word;x-scheme-handler/ms-powerpoint;x-scheme-handler/ms-excel;x-scheme-handler/ms-visio;x-scheme-handler/ms-access;
       Name=LibreOffice
       NoDisplay=false
@@ -236,7 +236,7 @@ in {
       Exec=${pkgs.libreoffice-qt}/bin/soffice --writer %U
       GenericName[en_GB]=Word Processor
       GenericName=Word Processor
-      Icon=org.libreoffice.LibreOffice-writer
+      Icon=libreoffice-writer
       InitialPreference=5
       Keywords=Text;Letter;Fax;Document;OpenDocument Text;Microsoft Word;Microsoft Works;Lotus WordPro;OpenOffice Writer;CV;odt;doc;docx;rtf;
       MimeType=application/vnd.oasis.opendocument.text;application/vnd.oasis.opendocument.text-template;application/vnd.oasis.opendocument.text-web;application/vnd.oasis.opendocument.text-master;application/vnd.oasis.opendocument.text-master-template;application/vnd.sun.xml.writer;application/vnd.sun.xml.writer.template;application/vnd.sun.xml.writer.global;application/msword;application/vnd.ms-word;application/x-doc;application/x-hwp;application/rtf;text/rtf;application/vnd.wordperfect;application/wordperfect;application/vnd.lotus-wordpro;application/vnd.openxmlformats-officedocument.wordprocessingml.document;application/vnd.ms-word.document.macroEnabled.12;application/vnd.openxmlformats-officedocument.wordprocessingml.template;application/vnd.ms-word.template.macroEnabled.12;application/vnd.ms-works;application/vnd.stardivision.writer-global;application/x-extension-txt;application/x-t602;text/plain;application/vnd.oasis.opendocument.text-flat-xml;application/x-fictionbook+xml;application/macwriteii;application/x-aportisdoc;application/prs.plucker;application/vnd.palm;application/clarisworks;application/x-sony-bbeb;application/x-abiword;application/x-iwork-pages-sffpages;application/vnd.apple.pages;application/x-mswrite;application/x-starwriter;
@@ -250,6 +250,23 @@ in {
       X-GIO-NoFuse=true
       X-KDE-Protocols=file,http,ftp,webdav,webdavs
       X-KDE-SubstituteUID=false
+    '';
+    "${appdir}/goldwarden.desktop".text = ''
+      [Desktop Entry]
+      Categories=GNOME;GTK;Utility;
+      Comment=A Bitwarden compatible desktop password manager
+      Exec=/nix/store/1dkmfachcp4fx06kqc2zdc1885pn0jx0-goldwarden-0.2.13-unstable-2024-03-14/bin/goldwarden-gui
+      Icon=bitwarden
+      Keywords=password;ssh;auto-type;keys;
+      Name=Goldwarden
+      NoDisplay=false
+      Path=
+      StartupNotify=true
+      Terminal=false
+      TerminalOptions=
+      Type=Application
+      X-KDE-SubstituteUID=false
+      X-KDE-Username=
     '';
   };
 }

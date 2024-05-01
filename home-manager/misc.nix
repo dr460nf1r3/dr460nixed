@@ -63,4 +63,8 @@
       wine = true;
     };
   };
+
+  home.file = {
+    ".local/share/user-places.xbel".source = ./kde-static/user-places.xbel;
+  };
 }
