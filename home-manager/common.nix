@@ -82,7 +82,10 @@
       catppuccin.enable = true;
       config.theme = lib.mkForce "Catppuccin Mocha";
     };
-    btop.catppuccin.enable = true;
+    btop = {
+      catppuccin.enable = true;
+      settings.color_theme = lib.mkForce "catppuccin_mocha.theme";
+    };
     fish.catppuccin.enable = true;
     micro = {
       catppuccin.enable = true;
