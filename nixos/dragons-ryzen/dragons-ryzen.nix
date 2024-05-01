@@ -1,6 +1,5 @@
 {
   lib,
-  config,
   inputs,
   pkgs,
   ...
@@ -110,20 +109,6 @@
 
   # Home-manager individual settings
   home-manager.users."nico" = import ../../home-manager/nico/nico.nix;
-
-  # A few secrets
-  sops.secrets = {
-    "ssh_keys/id_rsa" = {
-      mode = "0600";
-      owner = config.users.users.nico.name;
-      path = "/home/nico/.ssh/id_rsa";
-    };
-    "ssh_keys/id_ed25519" = {
-      mode = "0600";
-      owner = config.users.users.nico.name;
-      path = "/home/nico/.ssh/id_ed25519";
-    };
-  };
 
   # For some reason Bluetooth only works after un-/reloading
   # the btusb kernel module
