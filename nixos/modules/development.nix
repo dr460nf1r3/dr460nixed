@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -38,6 +39,9 @@ in {
 
     # Conflicts with virtualisation.containers if enabled
     boot.enableContainers = false;
+
+    # Wakatime plugin
+    environment.systemPackages = with pkgs; [fishPlugins.wakatime-fish];
 
     # Allow building sdcard images for Raspi
     nixpkgs.config.allowUnsupportedSystem = true;
