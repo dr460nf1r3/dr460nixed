@@ -23,7 +23,10 @@ in {
     # ProtonGE-Custom
     chaotic.steam.extraCompatPackages = with pkgs; [proton-ge-custom];
 
-    # Enable Garuda's gaming module
-    garuda.gaming.enable = true;
+    # Gamemode
+    programs.gamemode.enable = true;
+
+    # Enable Steam
+    programs.steam.enable = true;
   };
 }

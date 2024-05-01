@@ -40,9 +40,7 @@ in {
   in
     required-packages
     ++ optionals cfg.desktops.enable (with pkgs; [
-      acpi
       appimage-run
-      asciinema
       aspell
       aspellDicts.de
       aspellDicts.en
@@ -85,7 +83,6 @@ in {
       movit
       obs-studio-wrapped
       okular
-      prismlauncher
       qbittorrent
       rustdesk-flutter
       syncthingtray
@@ -99,8 +96,6 @@ in {
     ++ optionals cfg.development.enable (with pkgs; [
       ansible
       beekeeper-studio
-      bind.dnsutils
-      deadnix
       distrobox
       gh
       gitkraken
@@ -108,19 +103,13 @@ in {
       hugo
       manix
       mongodb-compass
-      nerdctl
       nix-prefetch-git
       nixd
       nixos-generators
       nixpkgs-lint
       nixpkgs-review
-      nodePackages_latest.prettier
       nodejs
-      ruff
-      shellcheck
-      shfmt
       speedcrunch
-      statix
       termius
       ventoy-full
       (vscode-with-extensions.override {
@@ -144,10 +133,7 @@ in {
             ms-python.python
             ms-python.vscode-pylance
             ms-vscode-remote.remote-ssh
-            ms-vscode.hexeditor
             ms-vsliveshare.vsliveshare
-            njpwerner.autodocstring
-            pkief.material-icon-theme
             redhat.vscode-xml
             redhat.vscode-yaml
             timonwong.shellcheck
@@ -164,7 +150,6 @@ in {
             }
           ];
       })
-      xdg-utils
       yarn
     ])
     ++ optionals cfg.yubikey (with pkgs; [
@@ -172,11 +157,12 @@ in {
       yubioath-flutter
     ])
     ++ optionals cfg.school (with pkgs; [
-      ocrmypdf
       speedcrunch
-      sqlite
-      sqlitebrowser
       teams-for-linux
+    ])
+    ++ optionals cfg.gaming.enable (with pkgs; [
+      lutris
+      prismlauncher
     ])
     ++ optionals cfg.live-cd (with pkgs; [
       btrfs-progs
