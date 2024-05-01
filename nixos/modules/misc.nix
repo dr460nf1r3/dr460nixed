@@ -158,7 +158,9 @@ in {
       defaultSearchProviderSuggestURL = "https://searx.garudalinux.org/autocomplete?q=%s";
       enable = true;
       extensions = [
+        "bkkmolkhemgaeaeggcmfbghljjjoofoh" # Catppuccin theme
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock origin
+        "clngdbkpkpeebahjckkjfobafhncgmne" # Stylus
         "doojmbjmlfjjnbmnoijecmcbfeoakpjm" # NoScript
         "hipekcciheckooncpjeljhnekcoolahp" # Tabliss
         "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly

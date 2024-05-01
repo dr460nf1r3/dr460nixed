@@ -2,8 +2,14 @@
   description = "Dr460nixed NixOS flake ❄️";
 
   nixConfig = {
-    extra-substituters = ["https://cache.garnix.io"];
-    extra-trusted-public-keys = ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="];
+    extra-substituters = [
+      "https://cache.garnix.io"
+      "https://nix-gaming.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+    ];
   };
 
   inputs = {
@@ -15,6 +21,21 @@
 
     # Chaotic Nyx!
     chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
+    # Beautiful pastel theming
+    catppuccin.url = "github:catppuccin/nix";
+    catppuccinifier = {
+      url = "github:lighttigerXIV/catppuccinifier";
+      inputs = {
+        nixpkgs.follows = "chaotic-nyx/nixpkgs";
+        flake-utils.follows = "chaotic-nyx/flake-utils";
+        crane.follows = "chaotic-nyx/crane";
+      };
+    };
+    catppuccin-vsc = {
+      url = "github:catppuccin/vscode";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
+    };
 
     # Devshell to set up a development environment
     devshell = {
@@ -85,20 +106,6 @@
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
     };
 
-    # MicroVMs based on Nix
-    microvm = {
-      url = "github:astro/microvm.nix";
-      inputs.flake-utils.follows = "chaotic-nyx/flake-utils";
-      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
-    };
-
-    # Nixd language server
-    nixd = {
-      url = "github:nix-community/nixd";
-      inputs.flake-parts.follows = "flake-parts";
-      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
-    };
-
     # Nix gaming-related packages and modules
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
@@ -127,12 +134,6 @@
       inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
       inputs.pre-commit-hooks.follows = "pre-commit-hooks";
-    };
-
-    # Script to install NixOS on any host
-    nixos-anywhere = {
-      url = "https://raw.githubusercontent.com/numtide/nixos-anywhere/main/src/nixos-anywhere.sh";
-      flake = false;
     };
 
     # NixOS generators to build system images
@@ -238,11 +239,6 @@
           devshell.name = "dr460nixed-devshell";
           commands = [
             {
-              command = "bash ${inp.nixos-anywhere}";
-              help = "Helps installing NixOS on any host";
-              name = "nixos-anywhere";
-            }
-            {
               category = "dr460nixed";
               command = "${self.packages.${system}.repl}/bin/dr460nixed-repl";
               help = "Start a repl shell with all flake outputs available";
@@ -266,6 +262,7 @@
             {package = "manix";}
             {package = "mdbook";}
             {package = "nix-melt";}
+            {package = "nixos-anywhere";}
             {package = "nixos-install-tools";}
             {package = "pre-commit";}
             {package = "rsync";}

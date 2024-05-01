@@ -72,6 +72,10 @@ in {
       }
     ];
 
+    # Theming
+    catppuccin.enable = true;
+    console.catppuccin.enable = true;
+
     # Always needed applications
     programs = {
       git = {

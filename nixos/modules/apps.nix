@@ -1,10 +1,12 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }:
 with lib; let
+  catppuccinifier-cli = inputs.catppuccinifier.packages.x86_64-linux.cli;
   cfg = config.dr460nixed;
 in {
   # These are the packages I always need
@@ -23,12 +25,14 @@ in {
       mosh
       nettools
       nmap
+      nom
       nvd
       python3
       sops
       tldr
       tmux
       traceroute
+      tmuxPlugins.catppuccin
       ugrep
       wget
       whois
@@ -42,9 +46,27 @@ in {
       aspell
       aspellDicts.de
       aspellDicts.en
+      (catppuccin.override {
+        accent = "maroon";
+        variant = "mocha";
+        themeList = ["bat" "btop" "kvantum"];
+      })
+      (catppuccin-kde.override {
+        accents = ["maroon"];
+        flavour = ["mocha"];
+        winDecStyles = ["classic"];
+      })
+      (catppuccin-gtk.override {
+        accents = ["maroon"];
+        variant = "mocha";
+      })
+      (catppuccin-papirus-folders.override {
+        accent = "maroon";
+        flavor = "mocha";
+      })
+      catppuccinifier-cli
       chromium-flagged
       ffmpegthumbnailer
-      freerdp
       gimp
       helvum
       hunspell
@@ -53,7 +75,7 @@ in {
       inkscape
       krita
       libreoffice-qt
-      libsForQt5.kdenlive
+      kdePackages.kdenlive
       kdePackages.kleopatra
       kdePackages.krdc
       kdePackages.krfb
@@ -79,6 +101,7 @@ in {
       beekeeper-studio
       bind.dnsutils
       deadnix
+      distrobox
       gh
       gitkraken
       heroku
@@ -104,6 +127,8 @@ in {
         vscodeExtensions = with vscode-extensions;
           [
             bbenoist.nix
+            catppuccin.catppuccin-vsc
+            catppuccin.catppuccin-vsc-icons
             charliermarsh.ruff
             davidanson.vscode-markdownlint
             eamodio.gitlens
@@ -127,14 +152,9 @@ in {
             redhat.vscode-yaml
             timonwong.shellcheck
             tyriar.sort-lines
+            wakatime.vscode-wakatime
           ]
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-            {
-              name = "sweet-vscode";
-              publisher = "eliverlara";
-              sha256 = "sha256-kJgqMEJHyYF3GDxe1rnpTEmbfJE01tyyOFjRUp4SOds=";
-              version = "1.1.1";
-            }
             {
               # Available in nixpkgs, but outdated (0.4.0) at the time of adding
               name = "vscode-tailscale";
@@ -144,7 +164,6 @@ in {
             }
           ];
       })
-      vulnix
       xdg-utils
       yarn
     ])

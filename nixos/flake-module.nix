@@ -7,11 +7,19 @@
     # Default modules to use in all systems
     defaultModules = [
       ./modules
+      inputs.catppuccin.nixosModules.catppuccin
       inputs.disko.nixosModules.disko
+      inputs.hosts.nixosModule
       inputs.lanzaboote.nixosModules.lanzaboote
       inputs.sops-nix.nixosModules.sops
       inputs.spicetify-nix.nixosModule
-      inputs.hosts.nixosModule
+      {
+        home-manager.users."nico" = {
+          imports = [
+            inputs.catppuccin.homeManagerModules.catppuccin
+          ];
+        };
+      }
     ];
 
     # Our images should be cleaner, so we use a different set of modules
@@ -49,7 +57,6 @@
             inputs.nixos-hardware.nixosModules.common-cpu-amd
             inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
             inputs.nixos-hardware.nixosModules.common-gpu-amd
-            {nixpkgs.overlays = [inputs.nixd.overlays.default];}
           ];
         inherit specialArgs;
       };

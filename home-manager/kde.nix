@@ -4,7 +4,7 @@
   ...
 }:
 with builtins; let
-  immutable = true;
+  immutable = false;
 
   configDir = ".config";
   kvantumDir = ".config/Kvantum";
@@ -30,6 +30,21 @@ with builtins; let
 in {
   # Theme our desktop launchers
   imports = [./theme-launchers.nix];
+
+  # Theme stuff for desktops
+  gtk = {
+    enable = true;
+    font = {
+      name = "Fira Sans";
+      size = 10;
+    };
+    catppuccin = {
+      enable = true;
+      size = "standard";
+      tweaks = ["normal"];
+    };
+  };
+  xdg.enable = true;
 
   # Compatibility for GNOME apps
   dconf.enable = true;
