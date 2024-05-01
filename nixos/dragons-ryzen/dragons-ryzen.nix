@@ -52,7 +52,7 @@
     chromium = true;
     desktops.enable = true;
     development.enable = true;
-    gaming.enable = false;
+    gaming.enable = true;
     lanzaboote.enable = true;
     performance = true;
     remote-build = {
@@ -86,7 +86,6 @@
   environment.variables = {
     QT_STYLE_OVERRIDE = lib.mkForce "";
     GTK_THEME = lib.mkForce "";
-    NIXOS_OZONE_WL = lib.mkForce "";
   };
 
   # Chaotic Nyx stuff
