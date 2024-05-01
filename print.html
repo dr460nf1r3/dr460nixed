@@ -540,9 +540,7 @@ in {
   in
     required-packages
     ++ optionals cfg.desktops.enable (with pkgs; [
-      acpi
       appimage-run
-      asciinema
       aspell
       aspellDicts.de
       aspellDicts.en
@@ -585,9 +583,8 @@ in {
       movit
       obs-studio-wrapped
       okular
-      prismlauncher
       qbittorrent
-      rustdesk
+      rustdesk-flutter
       syncthingtray
       telegram-desktop_git
       tor-browser-bundle-bin
@@ -599,8 +596,6 @@ in {
     ++ optionals cfg.development.enable (with pkgs; [
       ansible
       beekeeper-studio
-      bind.dnsutils
-      deadnix
       distrobox
       gh
       gitkraken
@@ -608,19 +603,13 @@ in {
       hugo
       manix
       mongodb-compass
-      nerdctl
       nix-prefetch-git
       nixd
       nixos-generators
       nixpkgs-lint
       nixpkgs-review
-      nodePackages_latest.prettier
       nodejs
-      ruff
-      shellcheck
-      shfmt
       speedcrunch
-      statix
       termius
       ventoy-full
       (vscode-with-extensions.override {
@@ -644,10 +633,7 @@ in {
             ms-python.python
             ms-python.vscode-pylance
             ms-vscode-remote.remote-ssh
-            ms-vscode.hexeditor
             ms-vsliveshare.vsliveshare
-            njpwerner.autodocstring
-            pkief.material-icon-theme
             redhat.vscode-xml
             redhat.vscode-yaml
             timonwong.shellcheck
@@ -664,7 +650,6 @@ in {
             }
           ];
       })
-      xdg-utils
       yarn
     ])
     ++ optionals cfg.yubikey (with pkgs; [
@@ -672,11 +657,12 @@ in {
       yubioath-flutter
     ])
     ++ optionals cfg.school (with pkgs; [
-      ocrmypdf
       speedcrunch
-      sqlite
-      sqlitebrowser
       teams-for-linux
+    ])
+    ++ optionals cfg.gaming.enable (with pkgs; [
+      lutris
+      prismlauncher
     ])
     ++ optionals cfg.live-cd (with pkgs; [
       btrfs-progs
@@ -1278,8 +1264,12 @@ in {
 
     # Fancy themed, enhanced Spotify
     programs.spicetify = {
+      colorScheme = "mocha";
       enable = true;
-      theme = spicePkgs.themes.Comfy;
+      enabledCustomApps = with spicePkgs.apps; [
+        lyrics-plus
+        new-releases
+      ];
       enabledExtensions = with spicePkgs.extensions; [
         autoSkipVideo
         bookmark
@@ -1294,14 +1284,11 @@ in {
         seekSong
         songStats
       ];
+      theme = spicePkgs.themes.catppuccin;
       injectCss = true;
-      replaceColors = true;
       overwriteAssets = true;
+      replaceColors = true;
       sidebarConfig = true;
-      enabledCustomApps = with spicePkgs.apps; [
-        lyrics-plus
-        new-releases
-      ];
     };
 
     # Bitwarden client for additional convenience
@@ -1582,8 +1569,11 @@ in {
     # ProtonGE-Custom
     chaotic.steam.extraCompatPackages = with pkgs; [proton-ge-custom];
 
-    # Enable Garuda's gaming module
-    garuda.gaming.enable = true;
+    # Gamemode
+    programs.gamemode.enable = true;
+
+    # Enable Steam
+    programs.steam.enable = true;
   };
 }
 </code></pre>
@@ -3066,6 +3056,7 @@ in {
     dhcpcd = uidGid 976;
     fwupd-refresh = uidGid 975;
     flatpak = uidGid 974;
+    gamemode = uidGid 969;
     grafana = uidGid 995;
     influxdb2 = uidGid 994;
     jellyfin = uidGid 970;
