@@ -68,6 +68,14 @@
       max-jobs = "auto";
     };
   };
+
+  # I don't use docs, so just disable them
+  manual = {
+    html.enable = false;
+    json.enable = false;
+    manpages.enable = false;
+  };
+
   # Complete theming
   programs = {
     bat = {

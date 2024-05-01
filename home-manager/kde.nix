@@ -82,16 +82,6 @@ in {
     "${configDir}/jamesdsp/irs/movie.irs".source = movie;
     "${configDir}/jamesdsp/irs/music.irs".source = music;
     "${configDir}/jamesdsp/irs/voice.irs".source = voice;
-    "${configDir}/gtk-3.0/colors.css".source = ./kde-static/gtk-3.0/colors.css;
-    "${configDir}/gtk-3.0/gtk.css".text = ''
-      @import 'colors.css';
-    '';
-    "${configDir}/gtk-3.0/settings.ini".source = ./kde-static/gtk-3.0/settings.ini;
-    "${configDir}/gtk-4.0/colors.css".source = ./kde-static/gtk-4.0/colors.css;
-    "${configDir}/gtk-4.0/gtk.css".text = ''
-      @import 'colors.css';
-    '';
-    "${configDir}/gtk-4.0/settings.ini".source = ./kde-static/gtk-4.0/settings.ini;
     "${configDir}/kactivitymanagerdrc".text = ''
       [activities]
       a73843f1-cb8a-4315-9fc2-4990d798e827=Default
@@ -241,6 +231,6 @@ in {
       theme=Sweet-transparent-toolbar
     '';
     "${localDir}/konsole/Dr460nized.profile".source = ./kde-static/Dr460nized.profile;
-    ".gtkrc-2.0".source = ./kde-static/gtkrc-2.0;
+    "${localDir}/user-places.xbel".source = ./kde-static/user-places.xbel;
   };
 }

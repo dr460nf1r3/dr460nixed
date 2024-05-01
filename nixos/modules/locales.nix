@@ -1,14 +1,12 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
   cfg = config.dr460nixed.locales;
   de = "de_DE.UTF-8";
   defaultLocale = "en_GB.UTF-8";
-  terminus-variant = "120n";
 in {
   options.dr460nixed.locales = {
     enable =
@@ -59,9 +57,6 @@ in {
     };
 
     # Console font
-    console = {
-      font = "${pkgs.terminus_font}/share/consolefonts/ter-${terminus-variant}.psf.gz";
-      keyMap = "de";
-    };
+    console.keyMap = "de";
   };
 }
