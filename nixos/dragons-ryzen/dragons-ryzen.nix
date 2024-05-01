@@ -16,6 +16,7 @@
   boot = {
     # Needed to get the touchpad working
     blacklistedKernelModules = ["elan_i2c"];
+    initrd.kernelModules = ["amdgpu"];
     supportedFilesystems = ["btrfs"];
   };
 
@@ -53,6 +54,7 @@
     desktops.enable = true;
     development.enable = true;
     gaming.enable = false;
+    lanzaboote.enable = true;
     performance = true;
     remote-build = {
       enable = true;
@@ -71,15 +73,21 @@
         "--ssh"
       ];
     };
-    systemd-boot.enable = true;
     yubikey = true;
   };
 
   # Garuda Nix subsystem modules
   garuda.btrfs-maintenance = {
-    deduplication = true;
+    deduplication = false;
     enable = true;
     uuid = "7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
+  };
+
+  # Override GNS defaults
+  environment.variables = {
+    QT_STYLE_OVERRIDE = lib.mkForce "";
+    GTK_THEME = lib.mkForce "";
+    NIXOS_OZONE_WL = lib.mkForce "";
   };
 
   # Chaotic Nyx stuff

@@ -21,12 +21,6 @@
       fsType = "btrfs";
       options = ["subvol=root" "compress=zstd" "noatime"];
     };
-    "/home" = {
-      device = "/dev/disk/by-uuid/7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
-      fsType = "btrfs";
-      options = ["subvol=home" "compress=zstd" "noatime"];
-      neededForBoot = true;
-    };
     "/nix" = {
       device = "/dev/disk/by-uuid/7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
       fsType = "btrfs";
