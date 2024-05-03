@@ -64,7 +64,6 @@ in {
       })
       catppuccinifier-cli
       chromium-flagged
-      ffmpegthumbnailer
       gimp
       helvum
       hunspell
@@ -100,6 +99,7 @@ in {
       distrobox
       gh
       gitkraken
+      jetbrains.webstorm
       heroku
       hugo
       manix
