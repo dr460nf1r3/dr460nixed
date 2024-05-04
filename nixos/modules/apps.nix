@@ -49,6 +49,7 @@ in {
         variant = "mocha";
         themeList = ["bat" "btop" "kvantum"];
       })
+      catppuccin-cursors
       (catppuccin-kde.override {
         accents = ["maroon"];
         flavour = ["mocha"];

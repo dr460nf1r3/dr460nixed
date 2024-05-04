@@ -64,7 +64,16 @@
     };
   };
 
+  # Lets hardcode this since I won't be changing it anyways
   home.file = {
     ".local/share/user-places.xbel".source = ./kde-static/user-places.xbel;
+  };
+
+  # This is needed to get the cursor on apps like Webstorm
+  home.pointerCursor = {
+    name = "Catppuccin-Mocha-Maroon-Cursors";
+    size = 24;
+    package = pkgs.catppuccin-cursors;
+    x11.defaultCursor = "Catppuccin-Mocha-Maroon-Cursors";
   };
 }
