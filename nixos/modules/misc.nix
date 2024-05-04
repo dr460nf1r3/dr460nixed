@@ -163,6 +163,7 @@ in {
         "clngdbkpkpeebahjckkjfobafhncgmne" # Stylus
         "doojmbjmlfjjnbmnoijecmcbfeoakpjm" # NoScript
         "hipekcciheckooncpjeljhnekcoolahp" # Tabliss
+        "hlepfoohegkhhmjieoechaddaejaokhf" # Github Refined
         "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly
         "mdjildafknihdffpkfmmpnpoiajfjnjd" # Consent-O-Matic
         "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
@@ -183,11 +184,11 @@ in {
     environment.systemPackages = mkIf cfg.chromium-gate [chromium-gate];
 
     # Enhabce performance tweaks
-    garuda.performance-tweaks.enable = lib.mkIf cfg.performance true;
-    boot.kernelPackages = lib.mkIf cfg.performance pkgs.linuxPackages_cachyos-lto;
+    garuda.performance-tweaks.enable = mkIf cfg.performance true;
+    boot.kernelPackages = mkIf cfg.performance pkgs.linuxPackages_cachyos;
 
     # /etc/hosts based adblocker
-    networking.stevenBlackHosts = lib.mkIf cfg.adblock {
+    networking.stevenBlackHosts = mkIf cfg.adblock {
       blockFakenews = true;
       blockGambling = true;
       enable = true;
