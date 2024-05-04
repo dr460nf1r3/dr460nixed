@@ -45,6 +45,14 @@ in {
   # Compatibility for GNOME apps
   dconf.enable = true;
 
+  # This is needed to get the cursor on apps like Webstorm
+  home.pointerCursor = {
+    name = "Catppuccin-Mocha-Maroon-Cursors";
+    size = 24;
+    package = pkgs.catppuccin-cursors;
+    x11.defaultCursor = "Catppuccin-Mocha-Maroon-Cursors";
+  };
+
   # Enable Kvantum theme and GTK & place a few bigger files
   home.file =
     if immutable
@@ -236,5 +244,6 @@ in {
       "${configDir}/jamesdsp/irs/movie.irs".source = movie;
       "${configDir}/jamesdsp/irs/music.irs".source = music;
       "${configDir}/jamesdsp/irs/voice.irs".source = voice;
+      "${localDir}/user-places.xbel".source = ./kde-static/user-places.xbel;
     };
 }

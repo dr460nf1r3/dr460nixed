@@ -117,7 +117,7 @@
   <title>Chaotic-AUR</title>
   <info>
    <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="knetattach"/>
+    <bookmark:icon name="folder-cat-mocha-maroon-publicshare-open"/>
    </metadata>
    <metadata owner="http://www.kde.org">
     <ID>1714378634/1</ID>
@@ -128,7 +128,7 @@
   <title>Dr460nixed</title>
   <info>
    <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="bookmarks"/>
+    <bookmark:icon name="folder-cat-mocha-maroon-yandex-disk"/>
    </metadata>
    <metadata owner="http://www.kde.org">
     <ID>1714378770/8</ID>
@@ -139,7 +139,7 @@
   <title>Garuda Linux</title>
   <info>
    <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="start-here-kde-plasma"/>
+    <bookmark:icon name="folder-cat-mocha-maroon-gitlab"/>
    </metadata>
    <metadata owner="http://www.kde.org">
     <ID>1714378636/2</ID>
@@ -150,7 +150,7 @@
   <title>Infrastructure</title>
   <info>
    <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="default-folder-templates"/>
+    <bookmark:icon name="folder-cat-mocha-maroon-script"/>
    </metadata>
    <metadata owner="http://www.kde.org">
     <ID>1714378730/6</ID>
@@ -161,7 +161,7 @@
   <title>Misc stuff</title>
   <info>
    <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="user-identity"/>
+    <bookmark:icon name="folder-cat-mocha-maroon-recent"/>
    </metadata>
    <metadata owner="http://www.kde.org">
     <ID>1714378639/3</ID>
@@ -172,7 +172,7 @@
   <title>PKGBUILDs</title>
   <info>
    <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="default-folder-documents"/>
+    <bookmark:icon name="folder-cat-mocha-maroon-templates"/>
    </metadata>
    <metadata owner="http://www.kde.org">
     <ID>1714378734/7</ID>
@@ -183,7 +183,7 @@
   <title>Work area</title>
   <info>
    <metadata owner="http://freedesktop.org">
-    <bookmark:icon name="folder-bookmark"/>
+    <bookmark:icon name="folder-cat-mocha-maroon-visiting"/>
    </metadata>
    <metadata owner="http://www.kde.org">
     <ID>1714378652/5</ID>
