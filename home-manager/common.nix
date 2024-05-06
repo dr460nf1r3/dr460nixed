@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   # Invididual terminal app configs
   programs = {
     # Common Bash aliases & tmux autostart for SSH sessions
@@ -75,24 +71,4 @@
     json.enable = false;
     manpages.enable = false;
   };
-
-  # Complete theming
-  programs = {
-    bat = {
-      catppuccin.enable = true;
-      config.theme = lib.mkForce "Catppuccin Mocha";
-    };
-    btop = {
-      catppuccin.enable = true;
-      settings.color_theme = lib.mkForce "catppuccin_mocha.theme";
-    };
-    fish.catppuccin.enable = true;
-    micro = {
-      catppuccin.enable = true;
-      settings.colorscheme = lib.mkForce "catppuccin-mocha";
-    };
-    starship.catppuccin.enable = true;
-  };
-  catppuccin.enable = true;
-  catppuccin.accent = "maroon";
 }

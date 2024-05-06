@@ -7,19 +7,11 @@
     # Default modules to use in all systems
     defaultModules = [
       ./modules
-      inputs.catppuccin.nixosModules.catppuccin
       inputs.disko.nixosModules.disko
       inputs.hosts.nixosModule
       inputs.lanzaboote.nixosModules.lanzaboote
       inputs.sops-nix.nixosModules.sops
       inputs.spicetify-nix.nixosModule
-      {
-        home-manager.users."nico" = {
-          imports = [
-            inputs.catppuccin.homeManagerModules.catppuccin
-          ];
-        };
-      }
     ];
 
     # Our images should be cleaner, so we use a different set of modules

@@ -27,32 +27,8 @@ in {
   # Theme our desktop launchers
   imports = [./theme-launchers.nix];
 
-  # Theme stuff for desktops
-  gtk = {
-    enable = true;
-    font = {
-      name = "Fira Sans";
-      size = 10;
-    };
-    catppuccin = {
-      enable = true;
-      size = "standard";
-      tweaks = ["normal"];
-    };
-  };
-  xdg.enable = true;
-
   # Compatibility for GNOME apps
   dconf.enable = true;
-
-  # This is needed to get the cursor on apps like Webstorm
-  home.pointerCursor = {
-    name = "Catppuccin-Mocha-Maroon-Cursors";
-    size = 24;
-    package = pkgs.catppuccin-cursors;
-    x11.defaultCursor = "Catppuccin-Mocha-Maroon-Cursors";
-  };
-
   # Enable Kvantum theme and GTK & place a few bigger files
   home.file =
     if immutable
