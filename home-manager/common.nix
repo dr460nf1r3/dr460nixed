@@ -13,7 +13,6 @@
     # Easy terminal tabbing
     tmux = {
       baseIndex = 1;
-      catppuccin.enable = true;
       clock24 = true;
       enable = true;
       extraConfig = ''
