@@ -544,25 +544,6 @@ in {
       aspell
       aspellDicts.de
       aspellDicts.en
-      (catppuccin.override {
-        accent = "maroon";
-        variant = "mocha";
-        themeList = ["bat" "btop" "kvantum"];
-      })
-      catppuccin-cursors
-      (catppuccin-kde.override {
-        accents = ["maroon"];
-        flavour = ["mocha"];
-        winDecStyles = ["classic"];
-      })
-      (catppuccin-gtk.override {
-        accents = ["maroon"];
-        variant = "mocha";
-      })
-      (catppuccin-papirus-folders.override {
-        accent = "maroon";
-        flavor = "mocha";
-      })
       catppuccinifier-cli
       chromium-flagged
       gimp
@@ -1186,10 +1167,6 @@ in {
       }
     ];
 
-    # Theming
-    catppuccin.enable = true;
-    console.catppuccin.enable = true;
-
     # Always needed applications
     programs = {
       git = {
@@ -1252,8 +1229,8 @@ in {
     # Only install fonts I personally use
     fonts.enableDefaultPackages = false;
 
-    # Enable the dr460nized desktops settings
-    garuda.dr460nized.enable = true;
+    # Enable the Catppuccinified desktops settings
+    garuda.catppuccin.enable = true;
 
     environment = {
       variables = {
