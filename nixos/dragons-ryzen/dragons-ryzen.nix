@@ -76,12 +76,10 @@
   };
 
   # Garuda Nix subsystem modules
-  garuda = {
-    btrfs-maintenance = {
-      deduplication = false;
-      enable = true;
-      uuid = "7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
-    };
+  garuda.btrfs-maintenance = {
+    deduplication = false;
+    enable = true;
+    uuid = "7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
   };
 
   # Override GNS defaults

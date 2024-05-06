@@ -56,8 +56,8 @@
 
     # Garuda Linux flake - most of my system settings are here
     garuda-nix = {
-      url = "/home/nico/Documents/misc/garuda-nix-subsystem";
-      # url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
+      # url = "/home/nico/Documents/misc/garuda-nix-subsystem";
+      url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
       inputs.chaotic-nyx.follows = "chaotic-nyx";
       inputs.devshell.follows = "devshell";
       inputs.flake-parts.follows = "flake-parts";

@@ -482,17 +482,18 @@
         ]
       },
       "locked": {
-        "lastModified": 1715018173,
-        "narHash": "sha256-5iSUWltPU+jl3IxhYJCKbCKJJ37PXpod1nA8Ntdm8XQ=",
-        "ref": "refs/heads/catppuccin",
-        "rev": "3c8f56dbd97736bf8d7e3c2496df4b6eba374651",
-        "revCount": 433,
-        "type": "git",
-        "url": "file:///home/nico/Documents/misc/garuda-nix-subsystem"
+        "lastModified": 1715021016,
+        "narHash": "sha256-MxoaqBS7+/nNImdOy+HUb80lQnP0h+CX/hl+JKddyns=",
+        "owner": "garuda-linux",
+        "repo": "garuda-nix-subsystem",
+        "rev": "d0fff5d9d43b6b89364db3c935b1735943398b5e",
+        "type": "gitlab"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/nico/Documents/misc/garuda-nix-subsystem"
+        "owner": "garuda-linux",
+        "ref": "main",
+        "repo": "garuda-nix-subsystem",
+        "type": "gitlab"
       }
     },
     "gitignore": {
@@ -962,11 +963,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1715013469,
-        "narHash": "sha256-fu5i1FsLFVvtnK1+s1IOrM7aXIEbr0A4koeHL35KlXw=",
+        "lastModified": 1715017675,
+        "narHash": "sha256-4bMsnv8KLzz8HWvYzeIjKqRF7IRCLSjo3EC862+L2Dk=",
         "owner": "nix-community",
         "repo": "nixos-wsl",
-        "rev": "106a1ef5b05ae5e63e60ea0a9a83f9940d1c23a6",
+        "rev": "1cb8f3c13dee0d40437a9b4b1cf943c06c0cddc4",
         "type": "github"
       },
       "original": {
