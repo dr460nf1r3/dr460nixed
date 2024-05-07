@@ -94,10 +94,7 @@ in {
       '';
 
       # Make use of nix-super if it is enabled, else use latest available
-      package =
-        if cfgSuper.enable
-        then pkgs.nixSuper
-        else pkgs.nixVersions.nix_2_22;
+      package = lib.mkIf cfgSuper.enable pkgs.nixSuper;
 
       # Nix.conf settings
       settings = {
@@ -106,6 +103,9 @@ in {
 
         # Test out ca-derivations (https://nixos.wiki/wiki/Ca-derivations)
         experimental-features = ["ca-derivations"];
+
+        # Lix cache
+        extra-substituters = ["https://cache.lix.systems"];
 
         # For direnv GC roots
         keep-derivations = true;
@@ -142,6 +142,8 @@ in {
           "https://pre-commit-hooks.cachix.org" # pre commit hooks
           "https://cache.garnix.io" # extra things here and there
         ];
+
+        trusted-public-keys = ["cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="];
       };
     };
 

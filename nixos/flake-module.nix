@@ -10,6 +10,7 @@
       inputs.disko.nixosModules.disko
       inputs.hosts.nixosModule
       inputs.lanzaboote.nixosModules.lanzaboote
+      inputs.lix-module.nixosModules.default
       inputs.sops-nix.nixosModules.sops
       inputs.spicetify-nix.nixosModule
     ];

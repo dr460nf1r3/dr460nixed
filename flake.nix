@@ -105,6 +105,18 @@
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
     };
 
+    # The Lix package manager (fork of Nix)
+    lix = {
+      url = "git+https://git@git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1";
+      flake = false;
+    };
+    lix-module = {
+      url = "git+https://git.lix.systems/lix-project/nixos-module";
+      inputs.flake-utils.follows = "chaotic-nyx/flake-utils";
+      inputs.lix.follows = "lix";
+      inputs.nixpkgs.follows = "chaotic-nyx/nixpkgs";
+    };
+
     # Nix gaming-related packages and modules
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
