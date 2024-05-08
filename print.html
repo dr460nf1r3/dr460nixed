@@ -579,11 +579,14 @@ in {
       ansible
       beekeeper-studio
       distrobox
+      dive
+      docker-compose
+      fishPlugins.wakatime-fish
       gh
       gitkraken
-      jetbrains.webstorm
       heroku
       hugo
+      jetbrains.webstorm
       manix
       mongodb-compass
       nix-prefetch-git
@@ -591,7 +594,9 @@ in {
       nixos-generators
       nixpkgs-lint
       nixpkgs-review
-      nodejs
+      nodejs_22 # 24 not available
+      podman-compose
+      podman-tui
       speedcrunch
       termius
       ventoy-full
@@ -1363,7 +1368,6 @@ in {
 <pre><code class="language-nix">{
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -1402,9 +1406,6 @@ in {
     # Conflicts with virtualisation.containers if enabled
     boot.enableContainers = false;
 
-    # Wakatime plugin
-    environment.systemPackages = with pkgs; [fishPlugins.wakatime-fish];
-
     # Allow building sdcard images for Raspi
     nixpkgs.config.allowUnsupportedSystem = true;
 
@@ -1413,16 +1414,15 @@ in {
 
     # Libvirt &amp; Podman with docker alias
     virtualisation = {
-      docker = {
-        autoPrune = {
-          enable = true;
-          flags = ["--all"];
-        };
-        enable = true;
-        enableOnBoot = false;
-        storageDriver = "overlay2";
-      };
+      containers.enable = true;
       lxd.enable = false;
+      podman = {
+        autoPrune.enable = true;
+        defaultNetwork.settings.dns_enabled = true;
+        dockerCompat = true;
+        dockerSocket.enable = true;
+        enable = true;
+      };
       virtualbox.host = {
         addNetworkInterface = false;
         enable = true;
@@ -1990,6 +1990,7 @@ in {
         ".local/share/TelegramDesktop"
         ".local/share/Vorta"
         ".local/share/baloo"
+        ".local/share/containers"
         ".local/share/direnv"
         ".local/share/dolphin"
         ".local/share/fish"
@@ -2025,6 +2026,7 @@ in {
         # Cache stuff, not actual user data
         ".cache/bookmarksrunner"
         ".cache/chromium"
+        ".cache/containers"
         ".cache/firedragon"
         ".cache/konsole"
         ".cache/lutris"
@@ -2036,6 +2038,7 @@ in {
         ".local/share/Trash"
         ".local/state/syncthing"
         ".local/state/wireplumber"
+        # Special permissions needed for those
         {
           directory = ".gnupg";
           mode = "0700";
@@ -3017,8 +3020,9 @@ in {
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="users"><a class="header" href="#users">Users</a></h1>
 <pre><code class="language-nix">{
-  keys,
   config,
+  keys,
+  lib,
   ...
 }: let
   # Use fixed UIDs/GIDs
@@ -3050,6 +3054,7 @@ in {
     nscd = uidGid 990;
     plocate = uidGid 989;
     polkituser = uidGid 988;
+    podman = uidGid 968;
     promtail = uidGid 987;
     rtkit = uidGid 986;
     sshd = uidGid 985;
@@ -3105,6 +3110,18 @@ in {
         home = "/home/nico";
         isNormalUser = true;
         openssh.authorizedKeys.keyFiles = [keys.nico];
+        subGidRanges = lib.mkIf config.virtualisation.podman.enable [
+          {
+            count = 65536;
+            startGid = 615536;
+          }
+        ];
+        subUidRanges = [
+          {
+            count = 65536;
+            startUid = 615536;
+          }
+        ];
       };
       # Lock root password
       root.hashedPasswordFile = config.sops.secrets."passwords/root".path;
