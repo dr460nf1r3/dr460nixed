@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -40,9 +39,6 @@ in {
     # Conflicts with virtualisation.containers if enabled
     boot.enableContainers = false;
 
-    # Wakatime plugin
-    environment.systemPackages = with pkgs; [fishPlugins.wakatime-fish];
-
     # Allow building sdcard images for Raspi
     nixpkgs.config.allowUnsupportedSystem = true;
 
@@ -51,16 +47,15 @@ in {
 
     # Libvirt & Podman with docker alias
     virtualisation = {
-      docker = {
-        autoPrune = {
-          enable = true;
-          flags = ["--all"];
-        };
-        enable = true;
-        enableOnBoot = false;
-        storageDriver = "overlay2";
-      };
+      containers.enable = true;
       lxd.enable = false;
+      podman = {
+        autoPrune.enable = true;
+        defaultNetwork.settings.dns_enabled = true;
+        dockerCompat = true;
+        dockerSocket.enable = true;
+        enable = true;
+      };
       virtualbox.host = {
         addNetworkInterface = false;
         enable = true;

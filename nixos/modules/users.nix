@@ -1,6 +1,7 @@
 {
-  keys,
   config,
+  keys,
+  lib,
   ...
 }: let
   # Use fixed UIDs/GIDs
@@ -32,6 +33,7 @@
     nscd = uidGid 990;
     plocate = uidGid 989;
     polkituser = uidGid 988;
+    podman = uidGid 968;
     promtail = uidGid 987;
     rtkit = uidGid 986;
     sshd = uidGid 985;
@@ -87,6 +89,18 @@ in {
         home = "/home/nico";
         isNormalUser = true;
         openssh.authorizedKeys.keyFiles = [keys.nico];
+        subGidRanges = lib.mkIf config.virtualisation.podman.enable [
+          {
+            count = 65536;
+            startGid = 615536;
+          }
+        ];
+        subUidRanges = [
+          {
+            count = 65536;
+            startUid = 615536;
+          }
+        ];
       };
       # Lock root password
       root.hashedPasswordFile = config.sops.secrets."passwords/root".path;

@@ -191,6 +191,7 @@
         ".local/share/TelegramDesktop"
         ".local/share/Vorta"
         ".local/share/baloo"
+        ".local/share/containers"
         ".local/share/direnv"
         ".local/share/dolphin"
         ".local/share/fish"
@@ -226,6 +227,7 @@
         # Cache stuff, not actual user data
         ".cache/bookmarksrunner"
         ".cache/chromium"
+        ".cache/containers"
         ".cache/firedragon"
         ".cache/konsole"
         ".cache/lutris"
@@ -237,6 +239,7 @@
         ".local/share/Trash"
         ".local/state/syncthing"
         ".local/state/wireplumber"
+        # Special permissions needed for those
         {
           directory = ".gnupg";
           mode = "0700";

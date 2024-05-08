@@ -79,11 +79,14 @@ in {
       ansible
       beekeeper-studio
       distrobox
+      dive
+      docker-compose
+      fishPlugins.wakatime-fish
       gh
       gitkraken
-      jetbrains.webstorm
       heroku
       hugo
+      jetbrains.webstorm
       manix
       mongodb-compass
       nix-prefetch-git
@@ -91,7 +94,9 @@ in {
       nixos-generators
       nixpkgs-lint
       nixpkgs-review
-      nodejs
+      nodejs_22 # 24 not available
+      podman-compose
+      podman-tui
       speedcrunch
       termius
       ventoy-full
