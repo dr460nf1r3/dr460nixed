@@ -87,6 +87,10 @@ in {
       hugo
       jetbrains.webstorm
       manix
+      mdbook
+      mdbook-admonish
+      mdbook-emojicodes
+      mdbook-linkcheck
       mongodb-compass
       nix-prefetch-git
       nixd
