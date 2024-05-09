@@ -1,0 +1,3314 @@
+<!DOCTYPE HTML>
+<html lang="en" class="mocha" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Dr460nixed ❄️ documentation</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="Contains the documentation for the dr460nixed flake.">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="./mdbook-admonish.css">
+        <link rel="stylesheet" href="theme/css/custom.css">
+        <link rel="stylesheet" href="./theme/catppuccin.css">
+        <link rel="stylesheet" href="./theme/catppuccin-admonish.css">
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "mocha" : "mocha";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('mocha')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Welcome</li><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="quick-start.html"><strong aria-hidden="true">2.</strong> Quick start</a></li><li class="chapter-item expanded "><a href="generating-images.html"><strong aria-hidden="true">3.</strong> Generating images</a></li><li class="chapter-item expanded "><a href="installer.html"><strong aria-hidden="true">4.</strong> Installer</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="installer/script.html"><strong aria-hidden="true">4.1.</strong> Inspect the code</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Modules</li><li class="chapter-item expanded "><a href="modules/apps.html"><strong aria-hidden="true">5.</strong> apps</a></li><li class="chapter-item expanded "><a href="modules/boot.html"><strong aria-hidden="true">6.</strong> boot</a></li><li class="chapter-item expanded "><a href="modules/common.html"><strong aria-hidden="true">7.</strong> common</a></li><li class="chapter-item expanded "><a href="modules/desktops.html"><strong aria-hidden="true">8.</strong> desktops</a></li><li class="chapter-item expanded "><a href="modules/deterministic-ids.html"><strong aria-hidden="true">9.</strong> deterministic-ids</a></li><li class="chapter-item expanded "><a href="modules/development.html"><strong aria-hidden="true">10.</strong> development</a></li><li class="chapter-item expanded "><a href="modules/docker-compose-runner.html"><strong aria-hidden="true">11.</strong> docker-compose-runner</a></li><li class="chapter-item expanded "><a href="modules/gaming.html"><strong aria-hidden="true">12.</strong> gaming</a></li><li class="chapter-item expanded "><a href="modules/hardening.html"><strong aria-hidden="true">13.</strong> hardening</a></li><li class="chapter-item expanded "><a href="modules/impermanence.html"><strong aria-hidden="true">14.</strong> impermanence</a></li><li class="chapter-item expanded "><a href="modules/locales.html"><strong aria-hidden="true">15.</strong> locales</a></li><li class="chapter-item expanded "><a href="modules/msmtp.html"><strong aria-hidden="true">16.</strong> msmtp</a></li><li class="chapter-item expanded "><a href="modules/networking.html"><strong aria-hidden="true">17.</strong> networking</a></li><li class="chapter-item expanded "><a href="modules/nix.html"><strong aria-hidden="true">18.</strong> nix</a></li><li class="chapter-item expanded "><a href="modules/oci.html"><strong aria-hidden="true">19.</strong> oci</a></li><li class="chapter-item expanded "><a href="modules/servers.html"><strong aria-hidden="true">20.</strong> servers</a></li><li class="chapter-item expanded "><a href="modules/shells.html"><strong aria-hidden="true">21.</strong> shells</a></li><li class="chapter-item expanded "><a href="modules/syncthing.html"><strong aria-hidden="true">22.</strong> syncthing</a></li><li class="chapter-item expanded "><a href="modules/tailscale-tls.html"><strong aria-hidden="true">23.</strong> tailscale-tls</a></li><li class="chapter-item expanded "><a href="modules/tailscale.html"><strong aria-hidden="true">24.</strong> tailscale</a></li><li class="chapter-item expanded "><a href="modules/users.html"><strong aria-hidden="true">25.</strong> users</a></li><li class="chapter-item expanded "><a href="modules/zfs.html"><strong aria-hidden="true">26.</strong> zfs</a></li><li class="chapter-item expanded affix "><li class="part-title">Misc</li><li class="chapter-item expanded "><a href="credits.html"><strong aria-hidden="true">27.</strong> Credits</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="latte">Latte</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="frappe">Frappé</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="macchiato">Macchiato</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mocha">Mocha</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Dr460nixed ❄️ documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/dr460nf1r3/dr460nixed" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="dr460nixed-nixos-"><a class="header" href="#dr460nixed-nixos-">Dr460nixed NixOS ❄️</a></h1>
+<p><a href="https://builtwithnix.org"><img src="https://img.shields.io/static/v1?logo=nixos&amp;logoColor=white&amp;label=&amp;message=Built%20with%20Nix&amp;color=41439a" alt="built with nix" /></a> <a href="https://garnix.io"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fdr460nf1r3%2Fdr460nixed%3Fbranch%3Dmain" alt="built with garnix" /></a> <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml"><img src="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg" alt="Sync Tailscale ACLs" /></a></p>
+<p>This repository contains a framework to get started with NixOS quickly, featuring opiniated and selected default settings.
+It also contains my personal NixOS configuration, which might serve as inspiration for other peoples' setups.</p>
+<p>While starting out with NixOS, especially reading other peoples flakes proved to be very helpful, so I figured sharing my personal setup my help other people as well!
+Those who like the "dr460nized" look of Garuda will definitely like this one as well ☺️</p>
+<h2 id="so-how-does-it-work"><a class="header" href="#so-how-does-it-work">So how does it work?</a></h2>
+<p>ISO builds are available as well as a simple installer, which employs <code>nix flake init</code> to deploy a basic and generic version of this flake's template based on user's choices.
+Partitioning is achieved via <a href="https://github.com/nix-community/disko">disko</a> presets and the installer may be used on regular NixOS live mediums as well.
+Users may then continue building their own version of NixOS using code snippets of this repository and further linked sources.
+Furthermore, the flakes' outputs are automatically build and cached via <a href="https://garnix.io">garnix</a>.</p>
+<p>There is a <a href="https://nixed.dr460nf1r3.org">documentation available about various topics</a>, which also contains the code snippets that might provide further useful customization options.</p>
+<h2 id="how-does-it-look-like"><a class="header" href="#how-does-it-look-like">How does it look like?</a></h2>
+<p><img src="https://i.imgur.com/h3WGSJ4.jpg" alt="desktop-kde" /></p>
+<h2 id="what-settings-does-the-installer-provide"><a class="header" href="#what-settings-does-the-installer-provide">What settings does the installer provide?</a></h2>
+<p>Right now, it basically just bootstraps a basic desktop environment with theming, Nix and OS related defaults to have common things working out of the box.</p>
+<pre><code class="language-nix">{
+  dr460nixed = {
+    chromium = true;
+    desktops.enable = true;
+    example-boot.enable = true;
+    performance = true;
+  };
+}
+</code></pre>
+<p>Which translates to:</p>
+<ul>
+<li>Enjoying a fully pre-configured <a href="https://garudalinux.org">Garuda dr460nized KDE</a> themed setup: <strong>Dr460nixed</strong> !</li>
+<li>Being able to use all of <a href="https://github.com/garuda-linux/garuda-nix-subsystem">Garuda Nix Subsystems</a> modules</li>
+<li>The custom <strong>Linux-cachyos BORE EEVDF</strong> kernel of the <a href="https://cachyos.org">Linux CachyOS</a> developers</li>
+<li>Having access to additional packages not existing in Nixpkgs (yet) via <a href="https://nyx.chaotic.cx">Chaotic Nyx</a></li>
+<li>Using <strong>Garnix CI cache</strong> for this flakes' outputs</li>
+<li>Keeping all of it well organized via <strong>flake-parts</strong></li>
+</ul>
+<p>It might receive more module options in the future, though I currently believe that showing people how to achieve things in Nix might be more useful than just providing a toggle for it.</p>
+<h2 id="what-kind-of-configuration-is-available-via-code-snippets"><a class="header" href="#what-kind-of-configuration-is-available-via-code-snippets">What kind of configuration is available via code snippets?</a></h2>
+<ul>
+<li>Multiple <strong>NixOS configurations</strong>, including <strong>desktop</strong>, <strong>server</strong>, <strong>nixos-wsl</strong> , <strong>raspberry pi</strong> &amp; <strong>live-usb</strong></li>
+<li>Root-on-ZFS and secure-boot enabled systems via <strong>Lanzaboote</strong></li>
+<li><strong>Opt-in persistence</strong> through impermanence + ZFS snapshots</li>
+<li><strong>Mesh networked</strong> hosts with <strong>Tailscale</strong></li>
+<li><strong>Opt-in 2FA protection</strong> of ssh and password prompts <strong>with Duo Security</strong></li>
+<li>Secrets managed via <strong>nix-sops</strong></li>
+<li>Always up-to-date live images automatically built via <strong>Github actions</strong></li>
+<li>Custom devshells with fully declarative <strong>pre-commit-hooks</strong></li>
+<li>No password prompts when having a <strong>Yubikey</strong> connected to a device</li>
+<li>Easily remote-controllable machines via <strong>KDEConnect</strong> and a self-hosted <strong>Rustdesk server</strong></li>
+<li>Custom <strong>bleeding-edge Mesa</strong> builds</li>
+</ul>
+<h2 id="structure"><a class="header" href="#structure">Structure</a></h2>
+<pre><code class="language-sh">├── docker-compose
+│   ├── oracle-dragon
+│   └── tv-nixos
+├── home-manager
+├── nixos
+│   ├── dragons-ryzen
+│   ├── images
+│   ├── modules
+│   │   ├── chaotic
+│   │   └── disko
+│   ├── nixos-wsl
+│   ├── oracle-dragon
+│   ├── rpi-dragon
+│   └── tv-nixos
+├── overlays
+└── secrets
+</code></pre>
+<h2 id="credits"><a class="header" href="#credits">Credits</a></h2>
+<p>Inspiration for parts of this configurations came from these awesome people's setups ❄️</p>
+<ul>
+<li>https://github.com/PedroHLC/system-setup</li>
+<li>https://github.com/Misterio77/nix-config</li>
+<li>https://github.com/isabelroses/dotfiles</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h1>
+<h2 id="using-the-installer"><a class="header" href="#using-the-installer">Using the installer</a></h2>
+<p>An installer has been created to ease the installation process by bootstrapping a basic flake with a personal host and usernames.
+Information on how to build an ISO can be found on the <a href="./generating-images.html">here</a>. The installer can also be used on any OS, that has <code>nix</code> available. Find more information about how to proceed <a href="./installer.html">here</a>.</p>
+<h2 id="creating-your-own-configuration-including-sops-nix"><a class="header" href="#creating-your-own-configuration-including-sops-nix">Creating your own configuration including sops-nix</a></h2>
+<p>This one is the harder way and is mostly suitable for people with a basic understanding of NixOS.
+Several preparations have to be made to bootstrap a working installation if not using the <a href="installer.html">installer</a>:</p>
+<ul>
+<li>A working <code>hardware-configuration.nix</code> needs to be generated for the current machine to replace mine, this includes having already partitioned disks.</li>
+<li>The hosts <code>*.nix</code> configuration should be adapted to suit the hardware's needs, eg. needed kernel modules or <code>services.xserver.videoDrivers</code> should be fitting</li>
+<li>Since <code>sops-nix</code> is used to handle secrets, my files need to be replaced with your own ones. Usage instructions can be found <a href="https://github.com/Mic92/sops-nix#usage-example">here</a>, basically one needs to create an age public key from the host's ed21559 SSH private key, which is then added to <code>.sops.yaml</code> to allow the host to decrypt secrets while booting up. A fitting age key should also be generated and placed in <code>~/.config/sops/age/keys.txt</code> as described in the usage instructions - this allows decrypting the secrets file to edit it. It lives in <code>secrets/global.yaml</code> and contains the secrets and can be edited with sops <code>secrets/global.yaml</code> (opens a terminal text editor).</li>
+<li>It might be easier to supply a static password in <code>users.nix</code> for bootstrapping since no login will be possible if the secrets management isn't properly set up yet. I had a few issues with this in the past while setting things up, so I felt giving this advice might help. Usernames are of course also to be changed, as well as SSH public keys.</li>
+</ul>
+<p>Then, the bootstrapping process can be started. Here, <code>nix</code> + <code>nixos-install-tools</code> is sufficient to set up your our configuration as follows:</p>
+<pre><code class="language-sh">export NIX_CONFIG="experimental-features = nix-command flakes" # if flakes are disabled
+nixos-install --flake .#hostname
+</code></pre>
+<p>If the operation succeeds, you will be able to boot into your new installation.</p>
+<p>How to proceed from here?</p>
+<ul>
+<li>Adapt the configurations like enabled modules and home-manager configs to your needs</li>
+<li>Set up CI to build your custom system configurations</li>
+<li>Enable secure boot via Lanzaboote</li>
+<li>Add your hosts to Tailscale, if you want to be using it. I can warmly recommend it for connecting with any kind of host!</li>
+<li>Build an ISO to play around with <code>nix run .#iso</code></li>
+<li>... so much more. It never ends ❄️</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="generating-images"><a class="header" href="#generating-images">Generating images</a></h1>
+<p>Images of this flake may easily be built by using <a href="https://github.com/nix-community/nixos-generators">nixos-generators</a>.
+In our case, we use it as <a href="https://github.com/nix-community/nixos-generators?tab=readme-ov-file#using-as-a-nixos-module">NixOS module</a> to be able to build the system via <code>garuda-nix.lib.garudaSystem</code>.
+This is important, as this function exposes all the <code>garuda-nix-subsystem</code> modules for us to consume.</p>
+<h2 id="how-to-get-going"><a class="header" href="#how-to-get-going">How to get going?</a></h2>
+<p>Let's build a regular dr460nixed ISO!</p>
+<pre><code class="language-sh">nix build .#nixosConfigurations.dr460nixed-desktop.config.formats.install-iso
+</code></pre>
+<p>You may also just run <code>nix run .#iso</code>, which builds an image using the <code>install-iso</code> format.</p>
+<p>This is pretty much everything needed! The result will be available at <code>./result</code>, which links to the corresponding path in <code>/nix/store</code>.</p>
+<p>Likewise, all other configurations may be built by simply exchanging <code>installer-iso</code> with the desired format.
+Depending on what kind of image is being built it is needed to use the <code>dr460nixed-base</code> system to build the image.</p>
+<pre><code class="language-sh">nix build .#nixosConfigurations.dr460nixed-base.config.formats.sdcard
+</code></pre>
+<p>For a list of other supported formats please have a look <a href="https://github.com/nix-community/nixos-generators?tab=readme-ov-file#supported-formats">here</a>.</p>
+<h2 id="cross-compiling"><a class="header" href="#cross-compiling">Cross-compiling</a></h2>
+<p>It is also possible to build images for other architectures, eg. the Raspberry Pi.
+To allow cross-compilation, please have a look at how to set up the required options <a href="https://github.com/nix-community/nixos-generators?tab=readme-ov-file#cross-compiling">here</a>.</p>
+<p>TLDR: add the following to your configuration and apply it:</p>
+<pre><code class="language-nix">{
+  # Enable binfmt emulation of aarch64-linux.
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+}
+</code></pre>
+<h2 id="provided-images"><a class="header" href="#provided-images">Provided images</a></h2>
+<p>Prebuilt images used to be provided via GitHub actions, though lately builds are seemingly hitting the resource limits of the free GitHub actions VMs.
+Therefore, ISO builds are currently only provided with new releases.
+In order to work around the filze size limit of release attachments, ISO files need to need to be downloaded as segments.
+To join them to a full file, you can do the following:</p>
+<pre><code class="language-sh">cat dr460nixed-desktop.iso.part-* &gt; dr460nixed-desktop.iso
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-installer"><a class="header" href="#the-installer">The installer</a></h1>
+<p>This flake features an installer, which may be used to set up a basic dr460nixed NixOS installation. Both the dr460nixed ISO and regular NixOS live CDs are supported.
+The installer uses the files of the <code>templates</code> folder to run <code>nix init -t</code> from and proceeds to customize the installation with users' choices.
+Multiple disk formats are available via <a href="https://github.com/dr460nf1r3/dr460nixed/tree/main/template/nixos/modules/disko">pre-configured disko configurations</a>.
+Choices during the execution of the script currently include:</p>
+<ul>
+<li>the disk to install NixOS on</li>
+<li>the partition layout to use during the process</li>
+<li>hostname</li>
+<li>username</li>
+</ul>
+<p>The installer may only install by wiping the destination disk, custom partition layouts are currently unsupported.
+Both UEFI and legacy systems are supported. <a href="https://nixos.wiki/wiki/Nix_command">Nix command</a> and <a href="https://nixos.wiki/wiki/flakes">flakes</a> need to be enabled.</p>
+<p>To begin, simply run the installer:</p>
+<pre><code class="language-sh">sudo installer # use this if booted into a dr460nixed ISO
+sudo nix run github:dr460nf1r3/dr460nixed#installer # regular NixOS systems
+</code></pre>
+<p>Provide the needed input. After completion, a dr460nixed system is ready for you to use.
+You may customize it with configurations found in the main repository since the template has been kept as generic as possible.</p>
+<p>Users are expected to continue building their own flake after the installation is finished. To do so, the dr460nixed repository has many exemplary configurations available.
+They may be inspected by browsing the "modules" section of this documentation.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="script"><a class="header" href="#script">Script</a></h1>
+<p>This is a small script which is serving as installer for this project. It basically:</p>
+<ul>
+<li>Sets up an environment to install the system from</li>
+<li>Asks for basic information such as the disk to be used or the username</li>
+<li>Sets up the partition layout via <a href="https://github.com/nix-community/disko">disko</a> and mounting the partitons to <code>/mnt</code></li>
+<li>Provides a basic, quite generic dr460nixed template and customizes it based on previous choices</li>
+<li>Executes the installation</li>
+</ul>
+<pre><code class="language-nix">#!/usr/bin/env bash
+set -eo pipefail
+
+# Check for root rights
+if [ "$EUID" -ne 0 ]; then
+	echo "I can only run as root!"
+	exit 3
+fi
+
+# Prepare our environment
+prepare() {
+	# Clone dr460nixed repo if it is not present, otherwise use current dir
+	if [ ! "$(test -f flake.nix)" ]; then
+		test -d /tmp/dr460nixed &amp;&amp; sudo rm -rf /tmp/dr460nixed
+		WORK_DIR=/tmp/dr460nixed
+		git clone https://github.com/dr460nf1r3/dr460nixed.git "$WORK_DIR"
+		cd "$WORK_DIR"
+	else
+		WORK_DIR=$(pwd)
+	fi
+
+	# Ensure needed "experimental" features are always enabled
+	export NIX_CONFIG="experimental-features = nix-command flakes"
+}
+
+# Confirmation prompt
+confirm_choices() {
+	# Continue if the user confirms our choice
+	read -rp "Are you sure you want to continue? $1 [y/n] " _ANSWER
+
+	while [ -z "${KILLIT+x}" ]; do
+		case "${_ANSWER}" in
+		y | yes | Y | YES)
+			KILLIT=1
+			;;
+		n | no | N | NO)
+			exit 1
+			;;
+		*)
+			read -rp "Invalid input. Only yes or no is valid: " _ANSWER
+			;;
+		esac
+	done
+}
+
+# Create a runner for disko, directly from git
+disko_runner() {
+	nix run github:nix-community/disko -- --mode disko "$1" --arg disks "[ \"$2\" ]"
+}
+
+# Create partitions using disko and mount them to /mnt
+disko() {
+	echo "The following partition layouts are available:
+1) BTRFS with subvolumes
+2) BTRFS on LUKS with subvolumes
+3) Simple EFI
+4) ZFS (recommended)
+5) ZFS encrypted"
+
+	read -rp "Enter the numer of the partition layout you want to use: " _LAYOUT
+
+	# https://stackoverflow.com/questions/3601515/how-to-check-if-a-variable-is-set-in-bash
+	while [ -z "${DISKO_MODULE+x}" ]; do
+		case "${_LAYOUT}" in
+		1)
+			DISKO_MODULE=btrfs-subvolumes
+			;;
+		2)
+			DISKO_MODULE=luks-btrfs-subvolumes
+			;;
+		3)
+			DISKO_MODULE=simple-efi
+			;;
+		4)
+			DISKO_MODULE=zfs-encrypted
+			;;
+		5)
+			DISKO_MODULE=zfs
+			;;
+		*)
+			read -rp "Invalid input. Enter the numer of the partition layout you want to use: " _LAYOUT
+			;;
+		esac
+	done
+
+	while [ -z "${_VALID_DISK+x}" ]; do
+		read -rp "Specify the disk you want to use, eg. \"nvme0n1\": " DISK
+		# Disk identifiers should at least be 3 characters long and be present in our system
+		# this does not prevent all possible errors (eg. nvme0 would be valid) but good enough for now
+		if [ ${#DISK} -gt 2 ] &amp;&amp; lsblk | grep "$DISK"; then
+			_VALID_DISK=1
+		else
+			echo "The disk you entered is invalid! Try again."
+		fi
+	done
+
+	# Ask whether the hard drive should really be wiped
+	echo "The disk you chose to format is $DISK."
+	confirm_choices "This will start the wiping process!"
+
+	# Create partitions and set up /mnt
+	disko_runner ./nixos/modules/disko/"$DISKO_MODULE".nix /dev/"$DISK"
+}
+
+# Create initial configuration
+create_config() {
+	NIX_ROOT=/mnt/etc/nixos
+	read -rp "Enter the hostname you want to use: " HOSTNAME
+	read -rp "Enter your desired username: " USER
+	[ -d /sys/firmware/efi ] &amp;&amp; SYSTEM_TYPE=systemd-boot || SYSTEM_TYPE=grub
+
+	# Create config without filesystems as disko provides those already
+	# also apply our dr460nixed template
+	nixos-generate-config --no-filesystems --root /mnt
+	pushd "$NIX_ROOT" || exit 2
+	nix flake init --template "$WORK_DIR"#dr460nixed
+
+	mv ./hardware-configuration.nix ./nixos/example-host
+	rm ./configuration.nix # we are using flakes, no need for that anymore
+	mv ./nixos/example-host ./nixos/"$HOSTNAME"
+	mv ./nixos/"$HOSTNAME"/example-host.nix ./nixos/"$HOSTNAME"/"$HOSTNAME".nix
+
+	sed -i s/example-boot/"$SYSTEM_TYPE"/g ./nixos/"$HOSTNAME"/"$HOSTNAME".nix
+	sed -i s/example-disk/"$DISK"/g .{/nixos/flake-module.nix,nixos/"$HOSTNAME"/"$HOSTNAME".nix}
+	sed -i s/example-hostname/"$HOSTNAME"/g {./nixos/flake-module.nix,nixos/"$HOSTNAME"/"$HOSTNAME".nix}
+	sed -i s/example-layout/"$DISKO_MODULE"/g ./nixos/flake-module.nix
+	sed -i s/example-user/"$USER"/g ./nixos/modules/users.nix
+
+	echo "Configuration successfully created.
+You made the following choices:
+hostname: $HOSTNAME
+user: $USER"
+	confirm_choices "This starts the installation process."
+
+	popd || exit 2
+}
+
+# Install basic dr460nixed system
+install_system() {
+	nixos-install --flake "$NIX_ROOT#$HOSTNAME" --verbose
+}
+
+# Notices
+finish() {
+	echo "The installation finished successfully. You may now reboot into your new system."
+	confirm_choices "This will remove the temporary directory an reboot the system."
+	umount -Rf /mnt
+	rm -rf "$WORK_DIR"
+}
+
+# Actually execute our functions
+prepare
+disko
+create_config
+install_system
+finish
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="apps"><a class="header" href="#apps">Apps</a></h1>
+<pre><code class="language-nix">{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  catppuccinifier-cli = inputs.catppuccinifier.packages.x86_64-linux.cli;
+  cfg = config.dr460nixed;
+in {
+  # These are the packages I always need
+  environment.systemPackages = with pkgs; let
+    required-packages = [
+      age
+      bind
+      btop
+      cached-nix-shell
+      cloudflared
+      duf
+      eza
+      jq
+      killall
+      micro
+      mosh
+      nettools
+      nmap
+      nvd
+      python3
+      sops
+      tldr
+      tmux
+      traceroute
+      tmuxPlugins.catppuccin
+      ugrep
+      wget
+      whois
+    ];
+  in
+    required-packages
+    ++ optionals cfg.desktops.enable (with pkgs; [
+      appimage-run
+      aspell
+      aspellDicts.de
+      aspellDicts.en
+      catppuccinifier-cli
+      chromium-flagged
+      gimp
+      helvum
+      hunspell
+      hunspellDicts.de_DE
+      hunspellDicts.en_US
+      inkscape
+      krita
+      libreoffice-qt
+      kdePackages.kdenlive
+      kdePackages.kleopatra
+      kdePackages.krdc
+      kdePackages.krfb
+      libsecret
+      libva-utils
+      lm_sensors
+      movit
+      obs-studio-wrapped
+      okular
+      qbittorrent
+      rustdesk-flutter
+      syncthingtray
+      telegram-desktop_git
+      tor-browser-bundle-bin
+      usbutils
+      vorta
+      vulkan-tools
+      xdg-utils
+      yt-dlp_git
+    ])
+    ++ optionals cfg.development.enable (with pkgs; [
+      ansible
+      beekeeper-studio
+      distrobox
+      dive
+      docker-compose
+      fishPlugins.wakatime-fish
+      gh
+      gitkraken
+      heroku
+      hugo
+      jetbrains.webstorm
+      manix
+      mdbook
+      mdbook-admonish
+      mdbook-emojicodes
+      mdbook-linkcheck
+      mongodb-compass
+      nix-prefetch-git
+      nixd
+      nixos-generators
+      nixpkgs-lint
+      nixpkgs-review
+      nodejs_22 # 24 not available
+      podman-compose
+      podman-tui
+      speedcrunch
+      termius
+      ventoy-full
+      (vscode-with-extensions.override {
+        vscodeExtensions = with vscode-extensions;
+          [
+            bbenoist.nix
+            catppuccin.catppuccin-vsc
+            catppuccin.catppuccin-vsc-icons
+            charliermarsh.ruff
+            davidanson.vscode-markdownlint
+            eamodio.gitlens
+            esbenp.prettier-vscode
+            foxundermoon.shell-format
+            github.codespaces
+            github.copilot
+            github.vscode-github-actions
+            github.vscode-pull-request-github
+            jnoortheen.nix-ide
+            kamadorueda.alejandra
+            ms-azuretools.vscode-docker
+            ms-python.python
+            ms-python.vscode-pylance
+            ms-vscode-remote.remote-ssh
+            ms-vsliveshare.vsliveshare
+            redhat.vscode-xml
+            redhat.vscode-yaml
+            timonwong.shellcheck
+            tyriar.sort-lines
+            wakatime.vscode-wakatime
+          ]
+          ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+            {
+              # Available in nixpkgs, but outdated (0.4.0) at the time of adding
+              name = "vscode-tailscale";
+              publisher = "tailscale";
+              sha256 = "sha256-MKiCZ4Vu+0HS2Kl5+60cWnOtb3udyEriwc+qb/7qgUg=";
+              version = "1.0.0";
+            }
+          ];
+      })
+      yarn
+    ])
+    ++ optionals cfg.yubikey (with pkgs; [
+      yubikey-manager-qt
+      yubioath-flutter
+    ])
+    ++ optionals cfg.school (with pkgs; [
+      speedcrunch
+      teams-for-linux
+    ])
+    ++ optionals cfg.gaming.enable (with pkgs; [
+      lutris
+      prismlauncher
+    ])
+    ++ optionals cfg.live-cd (with pkgs; [
+      btrfs-progs
+      chntpw
+      cryptsetup
+      dosfstools
+      e2fsprogs
+      efibootmgr
+      flashrom
+      gnutar
+      gparted
+      hexedit
+      home-manager
+      hwinfo
+      inxi
+      memtest86-efi
+      ntfs3g
+      nvme-cli
+      p7zip
+      pciutils
+      perl
+      qemu-utils
+      rsync
+      tcpdump
+      testdisk
+      util-linux
+      wipe
+      xfsprogs
+    ]);
+
+  xdg.mime.defaultApplications = let
+    # Take from the respective mimetype files
+    images = [
+      "image/bmp"
+      "image/gif"
+      "image/jpeg"
+      "image/jpg"
+      "image/pjpeg"
+      "image/png"
+      "image/svg+xml"
+      "image/svg+xml-compressed"
+      "image/tiff"
+      "image/vnd.wap.wbmp;image/x-icns"
+      "image/x-bmp"
+      "image/x-gray"
+      "image/x-icb"
+      "image/x-ico"
+      "image/x-pcx"
+      "image/x-png"
+      "image/x-portable-anymap"
+      "image/x-portable-bitmap"
+      "image/x-portable-graymap"
+      "image/x-portable-pixmap"
+      "image/x-xbitmap"
+      "image/x-xpixmap"
+    ];
+    urls = [
+      "text/html"
+      "x-scheme-handler/about"
+      "x-scheme-handler/http"
+      "x-scheme-handler/https"
+      "x-scheme-handler/unknown"
+    ];
+    documents = [
+      "application/illustrator"
+      "application/oxps"
+      "application/pdf"
+      "application/postscript"
+      "application/vnd.comicbook+zip"
+      "application/vnd.comicbook-rar"
+      "application/vnd.ms-xpsdocument"
+      "application/x-bzdvi"
+      "application/x-bzpdf"
+      "application/x-bzpostscript"
+      "application/x-cb7"
+      "application/x-cbr"
+      "application/x-cbt"
+      "application/x-cbz"
+      "application/x-dvi"
+      "application/x-ext-cb7"
+      "application/x-ext-cbr"
+      "application/x-ext-cbt"
+      "application/x-ext-cbz"
+      "application/x-ext-djv"
+      "application/x-ext-djvu"
+      "application/x-ext-dvi"
+      "application/x-ext-eps"
+      "application/x-ext-pdf"
+      "application/x-ext-ps"
+      "application/x-gzdvi"
+      "application/x-gzpdf"
+      "application/x-gzpostscript"
+      "application/x-xzpdf"
+      "image/tiff"
+      "image/vnd.djvu+multipage"
+      "image/x-bzeps"
+      "image/x-eps"
+      "image/x-gzeps"
+    ];
+    audioVideo = [
+      "application/mxf"
+      "application/ogg"
+      "application/sdp"
+      "application/smil"
+      "application/streamingmedia"
+      "application/vnd.apple.mpegurl"
+      "application/vnd.ms-asf"
+      "application/vnd.rn-realmedia"
+      "application/vnd.rn-realmedia-vbr"
+      "application/x-cue"
+      "application/x-extension-m4a"
+      "application/x-extension-mp4"
+      "application/x-matroska"
+      "application/x-mpegurl"
+      "application/x-ogg"
+      "application/x-ogm"
+      "application/x-ogm-audio"
+      "application/x-ogm-video"
+      "application/x-shorten"
+      "application/x-smil"
+      "application/x-streamingmedia"
+      "audio/3gpp"
+      "audio/3gpp2"
+      "audio/AMR"
+      "audio/aac"
+      "audio/ac3"
+      "audio/aiff"
+      "audio/amr-wb"
+      "audio/dv"
+      "audio/eac3"
+      "audio/flac"
+      "audio/m3u"
+      "audio/m4a"
+      "audio/mp1"
+      "audio/mp2"
+      "audio/mp3"
+      "audio/mp4"
+      "audio/mpeg"
+      "audio/mpeg2"
+      "audio/mpeg3"
+      "audio/mpegurl"
+      "audio/mpg"
+      "audio/musepack"
+      "audio/ogg"
+      "audio/opus"
+      "audio/rn-mpeg"
+      "audio/scpls"
+      "audio/vnd.dolby.heaac.1"
+      "audio/vnd.dolby.heaac.2"
+      "audio/vnd.dts"
+      "audio/vnd.dts.hd"
+      "audio/vnd.rn-realaudio"
+      "audio/vorbis"
+      "audio/wav"
+      "audio/webm"
+      "audio/x-aac"
+      "audio/x-adpcm"
+      "audio/x-aiff"
+      "audio/x-ape"
+      "audio/x-m4a"
+      "audio/x-matroska"
+      "audio/x-mp1"
+      "audio/x-mp2"
+      "audio/x-mp3"
+      "audio/x-mpegurl"
+      "audio/x-mpg"
+      "audio/x-ms-asf"
+      "audio/x-ms-wma"
+      "audio/x-musepack"
+      "audio/x-pls"
+      "audio/x-pn-au"
+      "audio/x-pn-realaudio"
+      "audio/x-pn-wav"
+      "audio/x-pn-windows-pcm"
+      "audio/x-realaudio"
+      "audio/x-scpls"
+      "audio/x-shorten"
+      "audio/x-tta"
+      "audio/x-vorbis"
+      "audio/x-vorbis+ogg"
+      "audio/x-wav"
+      "audio/x-wavpack"
+      "video/3gp"
+      "video/3gpp"
+      "video/3gpp2"
+      "video/avi"
+      "video/divx"
+      "video/dv"
+      "video/fli"
+      "video/flv"
+      "video/mkv"
+      "video/mp2t"
+      "video/mp4"
+      "video/mp4v-es"
+      "video/mpeg"
+      "video/msvideo"
+      "video/ogg"
+      "video/quicktime"
+      "video/vnd.divx"
+      "video/vnd.mpegurl"
+      "video/vnd.rn-realvideo"
+      "video/webm"
+      "video/x-avi"
+      "video/x-flc"
+      "video/x-flic"
+      "video/x-flv"
+      "video/x-m4v"
+      "video/x-matroska"
+      "video/x-mpeg2"
+      "video/x-mpeg3"
+      "video/x-ms-afs"
+      "video/x-ms-asf"
+      "video/x-ms-wmv"
+      "video/x-ms-wmx"
+      "video/x-ms-wvxvideo"
+      "video/x-msvideo"
+      "video/x-ogm"
+      "video/x-ogm+ogg"
+      "video/x-theora"
+      "video/x-theora+ogg"
+    ];
+    archives = [
+      "application/bzip2"
+      "application/gzip"
+      "application/vnd.android.package-archive"
+      "application/vnd.debian.binary-package"
+      "application/vnd.ms-cab-compressed"
+      "application/x-7z-compressed"
+      "application/x-7z-compressed-tar"
+      "application/x-ace"
+      "application/x-alz"
+      "application/x-ar"
+      "application/x-archive"
+      "application/x-arj"
+      "application/x-brotli"
+      "application/x-bzip"
+      "application/x-bzip-brotli-tar"
+      "application/x-bzip-compressed-tar"
+      "application/x-bzip1"
+      "application/x-bzip1-compressed-tar"
+      "application/x-cabinet"
+      "application/x-cd-image"
+      "application/x-chrome-extension"
+      "application/x-compress"
+      "application/x-compressed-tar"
+      "application/x-cpio"
+      "application/x-deb"
+      "application/x-ear"
+      "application/x-gtar"
+      "application/x-gzip"
+      "application/x-gzpostscript"
+      "application/x-java-archive"
+      "application/x-lha"
+      "application/x-lhz"
+      "application/x-lrzip"
+      "application/x-lrzip-compressed-tar"
+      "application/x-lz4"
+      "application/x-lz4-compressed-tar"
+      "application/x-lzip"
+      "application/x-lzip-compressed-tar"
+      "application/x-lzma"
+      "application/x-lzma-compressed-tar"
+      "application/x-lzop"
+      "application/x-ms-dos-executable"
+      "application/x-ms-wim"
+      "application/x-rar"
+      "application/x-rar-compressed"
+      "application/x-rpm"
+      "application/x-rzip"
+      "application/x-rzip-compressed-tar"
+      "application/x-source-rpm"
+      "application/x-stuffit"
+      "application/x-tar"
+      "application/x-tarz"
+      "application/x-tzo"
+      "application/x-war"
+      "application/x-xar"
+      "application/x-xz"
+      "application/x-xz-compressed-tar"
+      "application/x-zip"
+      "application/x-zip-compressed"
+      "application/x-zoo"
+      "application/x-zstd-compressed-tar"
+      "application/zip"
+      "application/zstd"
+    ];
+    code = [
+      "application/x-shellscript"
+      "text/english"
+      "text/plain"
+      "text/x-c"
+      "text/x-c++"
+      "text/x-c++hdr"
+      "text/x-c++src"
+      "text/x-chdr"
+      "text/x-csrc"
+      "text/x-java"
+      "text/x-makefile"
+      "text/x-moc"
+      "text/x-pascal"
+      "text/x-tcl"
+      "text/x-tex"
+    ];
+  in
+    lib.mkForce (
+      # Overriding garuda-nix flakes defaults here
+      (lib.genAttrs code (_: ["code.desktop"]))
+      // (lib.genAttrs archives (_: ["ark.desktop"]))
+      // (lib.genAttrs audioVideo (_: ["vlc.desktop"]))
+      // (lib.genAttrs documents (_: ["okular.desktop"]))
+      // (lib.genAttrs images (_: ["okular.desktop"]))
+      // (lib.genAttrs urls (_: ["chromium.desktop"]))
+    );
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="boot"><a class="header" href="#boot">Boot</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.systemd-boot;
+  cfgGrub = config.dr460nixed.grub;
+  cfgLanza = config.dr460nixed.lanzaboote;
+  inherit (pkgs) plymouth;
+in {
+  options.dr460nixed.grub = {
+    enable =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Configures the system to install GRUB to a particular device, which enables booting
+          on non-UEFI systems.
+        '';
+      };
+    enableCryptodisk =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether to enable GRUB cryptodisk support.
+        '';
+      };
+    device =
+      mkOption
+      {
+        default = null;
+        type = types.str;
+        description = mdDoc ''
+          Defines which device to install GRUB to.
+        '';
+      };
+  };
+  options.dr460nixed.systemd-boot = {
+    enable =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Configures common options for a quiet systemd-boot.
+        '';
+      };
+  };
+  options.dr460nixed.lanzaboote = {
+    enable =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Configures common options using Lanzaboote as secure boot manager.
+        '';
+      };
+  };
+
+  config = {
+    boot = {
+      kernelParams = [
+        "acpi_backlight=native"
+        "iommu=full"
+        "page_alloc.shuffle=1"
+        "processor.max_cstate=5"
+        "quiet"
+        "rd.systemd.show_status=auto"
+        "rd.udev.log_level=3"
+        "rootflags=noatime"
+        "usbcore.autosuspend=-1"
+        "vt.global_cursor_default=0"
+      ];
+      lanzaboote = mkIf cfgLanza.enable {
+        enable = true;
+        pkiBundle = "/etc/secureboot";
+      };
+      loader = {
+        grub = {
+          device = mkIf cfgGrub.enable cfgGrub.device;
+          enable =
+            if cfgGrub.enable
+            then true
+            else false;
+          enableCryptodisk = true;
+          useOSProber = true;
+        };
+        generationsDir.copyKernels = mkIf cfg.enable true;
+        timeout = 1;
+        systemd-boot = mkIf cfg.enable {
+          consoleMode = "max";
+          editor = false;
+          enable = true;
+        };
+      };
+    };
+
+    # Make plymouth work with sleep
+    powerManagement = {
+      powerDownCommands = ''
+        ${plymouth} --show-splash
+      '';
+      resumeCommands = ''
+        ${plymouth} --quit
+      '';
+    };
+
+    environment.systemPackages = mkIf cfgLanza.enable [pkgs.sbctl];
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="common"><a class="header" href="#common">COmmon</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed;
+in {
+  options.dr460nixed = {
+    common = {
+      enable =
+        mkOption
+        {
+          default = true;
+          type = types.bool;
+          description = mdDoc ''
+            Whether to enable common system configurations.
+          '';
+        };
+    };
+    rpi =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether this is a Raspberry Pi.
+        '';
+      };
+    nodocs =
+      mkOption
+      {
+        default = true;
+        type = types.bool;
+        description = mdDoc ''
+          Whether to disable the documentation.
+        '';
+      };
+  };
+
+  config = mkIf cfg.common.enable {
+    # A few kernel tweaks
+    boot = {
+      kernelParams = ["noresume"];
+    };
+    systemd.enableUnifiedCgroupHierarchy = true;
+
+    # Disable unprivileged user namespaces, unless containers are enabled
+    security = {
+      # User namespaces are required for sandboxing
+      allowUserNamespaces = true;
+      # This is only required for containers
+      unprivilegedUsernsClone = config.virtualisation.containers.enable;
+      # Force-enable the Page Table Isolation (PTI) Linux kernel feature
+      forcePageTableIsolation = true;
+    };
+
+    # Allow wheel group users to use sudo
+    security.sudo.execWheelOnly = true;
+
+    # This is the default sops file that will be used for all secrets
+    sops = {
+      age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+      defaultSopsFile = ../../secrets/global.yaml;
+    };
+
+    # Increase open file limit for sudoers
+    security.pam.loginLimits = [
+      {
+        domain = "@wheel";
+        item = "nofile";
+        type = "soft";
+        value = "524288";
+      }
+      {
+        domain = "@wheel";
+        item = "nofile";
+        type = "hard";
+        value = "1048576";
+      }
+    ];
+
+    # Always needed applications
+    programs = {
+      git = {
+        enable = true;
+        lfs.enable = true;
+      };
+      # The GnuPG agent
+      gnupg.agent = {
+        enable = true;
+        pinentryPackage = lib.mkForce pkgs.pinentry-curses;
+      };
+    };
+
+    # Who needs documentation when there is the internet? #bl04t3d
+    documentation = mkIf cfg.nodocs {
+      dev.enable = false;
+      doc.enable = false;
+      enable = true;
+      info.enable = false;
+      man.enable = false;
+      nixos.enable = true;
+    };
+
+    # Enable all hardware drivers
+    hardware.enableRedistributableFirmware = true;
+
+    # No need for that in real NixOS systems
+    garuda.garuda-nix-manager.enable = false;
+
+    # Custom label for boot menu entries (otherwise set to "garuda-nix-subsystem")
+    system.nixos.label = lib.mkForce (builtins.concatStringsSep "-" ["dr460nixed-"] + config.system.nixos.version);
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="desktops"><a class="header" href="#desktops">Desktops</a></h1>
+<pre><code class="language-nix">{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.desktops;
+  spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
+in {
+  options.dr460nixed.desktops = {
+    enable =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether to enable basic dr460nized desktop theming.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    # Only install fonts I personally use
+    fonts.enableDefaultPackages = false;
+
+    # Enable the Catppuccinified desktops settings
+    garuda.catppuccin.enable = true;
+
+    environment = {
+      variables = {
+        VISUAL = lib.mkForce "vscode";
+      };
+    };
+
+    # Allow better Syncthing speeds
+    services.syncthing.openDefaultPorts = true;
+
+    # Fancy themed, enhanced Spotify
+    programs.spicetify = {
+      colorScheme = "catppuccin-mocha";
+      enable = true;
+      enabledCustomApps = with spicePkgs.apps; [
+        lyrics-plus
+        new-releases
+      ];
+      enabledExtensions = with spicePkgs.extensions; [
+        autoSkipVideo
+        bookmark
+        fullAlbumDate
+        fullAppDisplayMod
+        genre
+        groupSession
+        hidePodcasts
+        history
+        playlistIcons
+        popupLyrics
+        seekSong
+        songStats
+      ];
+      theme = spicePkgs.themes.Comfy;
+      injectCss = true;
+      overwriteAssets = true;
+      replaceColors = true;
+      sidebarConfig = true;
+    };
+
+    # Bitwarden client for additional convenience
+    programs.goldwarden.enable = true;
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="deterministic-ids"><a class="header" href="#deterministic-ids">Deterministic ids</a></h1>
+<pre><code class="language-nix"># https://github.com/oddlama/nix-config/blob/main/modules/system/deteministic-ids.nix
+{
+  lib,
+  config,
+  ...
+}: let
+  inherit
+    (lib)
+    concatLists
+    flip
+    mapAttrsToList
+    mdDoc
+    mkDefault
+    mkIf
+    mkOption
+    types
+    ;
+
+  cfg = config.users.deterministicIds;
+in {
+  options = {
+    users.deterministicIds = mkOption {
+      default = {};
+      description = mdDoc ''
+        Maps a user or group name to its expected uid/gid values. If a user/group is
+        used on the system without specifying a uid/gid, this module will assign the
+        corresponding ids defined here, or show an error if the definition is missing.
+      '';
+      type = types.attrsOf (types.submodule {
+        options = {
+          uid = mkOption {
+            type = types.nullOr types.int;
+            default = null;
+            description = mdDoc "The uid to assign if it is missing in `users.users.&lt;name&gt;`.";
+          };
+          gid = mkOption {
+            type = types.nullOr types.int;
+            default = null;
+            description = mdDoc "The gid to assign if it is missing in `users.groups.&lt;name&gt;`.";
+          };
+        };
+      });
+    };
+
+    users.users = mkOption {
+      type = types.attrsOf (types.submodule ({name, ...}: {
+        config.uid = let
+          deterministicUid = cfg.${name}.uid or null;
+        in
+          mkIf (deterministicUid != null) (mkDefault deterministicUid);
+      }));
+    };
+
+    users.groups = mkOption {
+      type = types.attrsOf (types.submodule ({name, ...}: {
+        config.gid = let
+          deterministicGid = cfg.${name}.gid or null;
+        in
+          mkIf (deterministicGid != null) (mkDefault deterministicGid);
+      }));
+    };
+  };
+
+  config = {
+    assertions =
+      concatLists
+      (flip mapAttrsToList config.users.users (name: user: [
+        {
+          assertion = user.uid != null;
+          message = "non-deterministic uid detected for '${name}', please assign one via `users.deterministicIds`";
+        }
+        {
+          assertion = !user.autoSubUidGidRange;
+          message = "non-deterministic subUids/subGids detected for: ${name}";
+        }
+      ]))
+      ++ flip mapAttrsToList config.users.groups (name: group: {
+        assertion = group.gid != null;
+        message = "non-deterministic gid detected for '${name}', please assign one via `users.deterministicIds`";
+      });
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="development"><a class="header" href="#development">Development</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.development;
+in {
+  options.dr460nixed.development = {
+    enable =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enables commonly used development tools.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    # Import secrets needed for development
+    sops.secrets."api_keys/sops" = {
+      mode = "0600";
+      owner = config.users.users.nico.name;
+      path = "/home/nico/.config/sops/age/keys.txt";
+    };
+    sops.secrets."api_keys/heroku" = {
+      mode = "0600";
+      owner = config.users.users.nico.name;
+      path = "/home/nico/.netrc";
+    };
+    sops.secrets."api_keys/cloudflared" = {
+      mode = "0600";
+      owner = config.users.users.nico.name;
+      path = "/home/nico/.cloudflared/cert.pem";
+    };
+
+    # Conflicts with virtualisation.containers if enabled
+    boot.enableContainers = false;
+
+    # Allow building sdcard images for Raspi
+    nixpkgs.config.allowUnsupportedSystem = true;
+
+    # Wireshark
+    programs.wireshark.enable = true;
+
+    # Libvirt &amp; Podman with docker alias
+    virtualisation = {
+      containers.enable = true;
+      lxd.enable = false;
+      podman = {
+        autoPrune.enable = true;
+        defaultNetwork.settings.dns_enabled = true;
+        dockerCompat = true;
+        dockerSocket.enable = true;
+        enable = true;
+      };
+      virtualbox.host = {
+        addNetworkInterface = false;
+        enable = true;
+        enableExtensionPack = true;
+        enableHardening = false;
+        enableKvm = true;
+      };
+    };
+
+    # Allow cross-compiling to aarch64
+    boot.binfmt.emulatedSystems = ["aarch64-linux"];
+
+    # In case I need to fix my phone
+    programs.adb.enable = true;
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="docker-compose-runner"><a class="header" href="#docker-compose-runner">Docker compose runner</a></h1>
+<pre><code class="language-nix">{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.docker-compose-runner;
+in {
+  options.dr460nixed.docker-compose-runner = mkOption {
+    type = types.attrsOf (types.submodule {
+      options = {
+        source = mkOption {
+          default = null;
+          description = "Folder containing a docker-compose file.";
+          type = types.path;
+        };
+        envfile = mkOption {
+          default = null;
+          description = "Direct path to a valid .env file";
+          type = types.nullOr types.path;
+        };
+      };
+    });
+    default = {};
+  };
+
+  config = {
+    systemd.services =
+      mapAttrs'
+      (name: value:
+        nameValuePair ("docker-compose-runner-" + name) (
+          let
+            output = derivation {
+              builder = pkgs.writeShellScript "build" ''
+                PATH="${pkgs.rsync}/bin:${pkgs.coreutils}/bin:${pkgs.gnused}/bin"
+                set -e
+                mkdir "$out"
+                sed -r 's/(^\s+restart:\s*)(unless-stopped|always)(\s*($|#))/\1on-failure\3/g' "$src/docker-compose.yml" &gt; "$out/docker-compose.yml"
+                rsync -a "$src/" "$out"
+              '';
+              name = "docker-compose-runner-" + name;
+              src = value.source;
+              inherit (pkgs.hostPlatform) system;
+            };
+            statepath = "/var/docker-compose-runner/${name}";
+          in {
+            description = "docker-compose runner for ${name}";
+            path = with pkgs; [rsync docker-compose docker bash];
+            serviceConfig = {
+              ExecStart = pkgs.writeShellScript ("execstart-docker-compose-runner-" + name) ''
+                set -e
+                mkdir -p "${statepath}"
+                rsync -a --no-owner --size-only "${output}/" "${statepath}"
+                ${optionalString (value.envfile != null) ''
+                  cp "${value.envfile}" "${statepath}/.env"
+                  chmod 600 "${statepath}/.env"
+                ''}
+                cd "${statepath}"
+                docker-compose up
+              '';
+              ExecStopPost = pkgs.writeShellScript ("execstop-docker-compose-runner-" + name) ''
+                set -e
+                cd "${statepath}"
+                docker-compose down
+              '';
+            };
+            unitConfig = {
+              After = "docker.service";
+              Requisite = "docker.service";
+              StopPropagatedFrom = "docker.service";
+            };
+            wantedBy = ["multi-user.target"];
+          }
+        ))
+      cfg;
+    environment.systemPackages = mkIf (cfg != {}) [pkgs.docker-compose];
+    virtualisation.docker.enable = mkIf (cfg != {}) true;
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="gaming"><a class="header" href="#gaming">Gaming</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.gaming;
+in {
+  options.dr460nixed.gaming = {
+    enable =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether this device is used for gaming.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    # ProtonGE-Custom
+    chaotic.steam.extraCompatPackages = with pkgs; [proton-ge-custom];
+
+    # Gamemode
+    programs.gamemode.enable = true;
+
+    # Enable Steam
+    programs.steam.enable = true;
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hardening"><a class="header" href="#hardening">Hardening</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.hardening;
+  cfgServers = config.dr460nixed.servers.enable;
+in {
+  options.dr460nixed.hardening = {
+    enable =
+      mkOption
+      {
+        default = true;
+        example = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether the operating system should be hardened.
+        '';
+      };
+    duosec =
+      mkOption
+      {
+        default = false;
+        example = true;
+        type = types.bool;
+        description = mdDoc ''
+          Whether logins should be protected by Duo Security.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    boot.kernel.sysctl = {
+      # The Magic SysRq key is a key combo that allows users connected to the
+      # system console of a Linux kernel to perform some low-level commands.
+      # Disable it, since we don't need it, and is a potential security concern.
+      "kernel.sysrq" = 0;
+      # Restrict ptrace() usage to processes with a pre-defined relationship
+      # (e.g., parent/child)
+      "kernel.yama.ptrace_scope" = 2;
+      # Hide kptrs even for processes with CAP_SYSLOG
+      "kernel.kptr_restrict" = 2;
+      # Disable ftrace debugging
+      "kernel.ftrace_enabled" = false;
+    };
+
+    boot.blacklistedKernelModules = [
+      # Obscure network protocols
+      "ax25"
+      "netrom"
+      "rose"
+      # Old or rare or insufficiently audited filesystems
+      "adfs"
+      "affs"
+      "befs"
+      "bfs"
+      "btusb"
+      "cifs"
+      "cramfs"
+      "cramfs"
+      "efs"
+      "erofs"
+      "exofs"
+      "f2fs"
+      "freevxfs"
+      "freevxfs"
+      "gfs2"
+      "hfs"
+      "hfsplus"
+      "hpfs"
+      "jffs2"
+      "jfs"
+      "ksmbd"
+      "minix"
+      "nfs"
+      "nfsv3"
+      "nfsv4"
+      "nilfs2"
+      "omfs"
+      "qnx4"
+      "qnx6"
+      "sysv"
+      "udf"
+      "vivid"
+    ];
+
+    # Protect logins and sudo on servers via DUO
+    # leaving EnvFactor enabled for other apps
+    security.duosec = mkIf cfg.duosec {
+      acceptEnvFactor = true;
+      autopush = true;
+      failmode = "safe";
+      host = "api-a7b9f5f3.duosecurity.com";
+      integrationKey = "DID3CH2NCQ2H24L1GUUN";
+      pam.enable = true;
+      prompts = 1;
+      pushinfo = true;
+      secretKeyFile = config.sops.secrets."api_keys/duo".path;
+      ssh.enable = true;
+    };
+    sops.secrets."api_keys/duo" = mkIf cfg.duosec {
+      mode = "0600";
+      path = "/run/secrets/api_keys/duo";
+    };
+    security.pam.services = mkIf cfg.duosec {
+      "login".duoSecurity.enable = true;
+      "sddm".duoSecurity.enable = mkIf config.dr460nixed.desktops.enable true;
+      "sudo".duoSecurity.enable = mkIf config.dr460nixed.servers.enable true;
+    };
+
+    # Disable root login &amp; password authentication on sshd
+    # also, apply recommendations of ssh-audit.com and enable Duo 2FA
+    # (for whatever reason the default config did not work a at all?
+    # maybe related to https://github.com/NixOS/nixpkgs/issues/115044)
+    services.openssh = {
+      extraConfig =
+        if cfg.duosec
+        then ''
+          AllowTcpForwarding no
+          ForceCommand /usr/bin/env login_duo
+          HostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,rsa-sha2-256,rsa-sha2-512,rsa-sha2-256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com
+          PermitTunnel no
+        ''
+        else ''
+          AllowTcpForwarding no
+          HostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,rsa-sha2-256,rsa-sha2-512,rsa-sha2-256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com
+          PermitTunnel no
+        '';
+      settings = {
+        Ciphers = [
+          "aes256-gcm@openssh.com"
+          "aes256-ctr,aes192-ctr"
+          "aes128-ctr"
+          "aes128-gcm@openssh.com"
+          "chacha20-poly1305@openssh.com"
+        ];
+        KbdInteractiveAuthentication = false;
+        KexAlgorithms = [
+          "curve25519-sha256"
+          "curve25519-sha256@libssh.org"
+          "diffie-hellman-group16-sha512"
+          "diffie-hellman-group18-sha512"
+          "sntrup761x25519-sha512@openssh.com"
+        ];
+        Macs = [
+          "hmac-sha2-512-etm@openssh.com"
+          "hmac-sha2-256-etm@openssh.com"
+          "umac-128-etm@openssh.com"
+        ];
+        PasswordAuthentication = false;
+        PermitRootLogin = "no";
+        X11Forwarding = false;
+      };
+    };
+
+    # Client side SSH configuration
+    programs.ssh = {
+      ciphers = [
+        "aes256-gcm@openssh.com"
+        "aes256-ctr,aes192-ctr"
+        "aes128-ctr"
+        "aes128-gcm@openssh.com"
+        "chacha20-poly1305@openssh.com"
+      ];
+      hostKeyAlgorithms = [
+        "ssh-ed25519"
+        "ssh-ed25519-cert-v01@openssh.com"
+        "sk-ssh-ed25519@openssh.com"
+        "sk-ssh-ed25519-cert-v01@openssh.com"
+        "rsa-sha2-512"
+        "rsa-sha2-512-cert-v01@openssh.com"
+        "rsa-sha2-256"
+        "rsa-sha2-256-cert-v01@openssh.com"
+      ];
+      kexAlgorithms = [
+        "curve25519-sha256"
+        "curve25519-sha256@libssh.org"
+        "diffie-hellman-group16-sha512"
+        "diffie-hellman-group18-sha512"
+        "sntrup761x25519-sha512@openssh.com"
+      ];
+      knownHosts = {
+        aur-rsa = {
+          hostNames = ["aur.archlinux.org"];
+          publicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDKF9vAFWdgm9Bi8uc+tYRBmXASBb5cB5iZsB7LOWWFeBrLp3r14w0/9S2vozjgqY5sJLDPONWoTTaVTbhe3vwO8CBKZTEt1AcWxuXNlRnk9FliR1/eNB9uz/7y1R0+c1Md+P98AJJSJWKN12nqIDIhjl2S1vOUvm7FNY43fU2knIhEbHybhwWeg+0wxpKwcAd/JeL5i92Uv03MYftOToUijd1pqyVFdJvQFhqD4v3M157jxS5FTOBrccAEjT+zYmFyD8WvKUa9vUclRddNllmBJdy4NyLB8SvVZULUPrP3QOlmzemeKracTlVOUG1wsDbxknF1BwSCU7CmU6UFP90kpWIyz66bP0bl67QAvlIc52Yix7pKJPbw85+zykvnfl2mdROsaT8p8R9nwCdFsBc9IiD0NhPEHcyHRwB8fokXTajk2QnGhL+zP5KnkmXnyQYOCUYo3EKMXIlVOVbPDgRYYT/XqvBuzq5S9rrU70KoI/S5lDnFfx/+lPLdtcnnEPk=";
+        };
+        aur-ed25519 = {
+          hostNames = ["aur.archlinux.org"];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEuBKrPzbawxA/k2g6NcyV5jmqwJ2s+zpgZGZ7tpLIcN";
+        };
+        github-rsa = {
+          hostNames = ["github.com"];
+          publicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCj7ndNxQowgcQnjshcLrqPEiiphnt+VTTvDP6mHBL9j1aNUkY4Ue1gvwnGLVlOhGeYrnZaMgRK6+PKCUXaDbC7qtbW8gIkhL7aGCsOr/C56SJMy/BCZfxd1nWzAOxSDPgVsmerOBYfNqltV9/hWCqBywINIR+5dIg6JTJ72pcEpEjcYgXkE2YEFXV1JHnsKgbLWNlhScqb2UmyRkQyytRLtL+38TGxkxCflmO+5Z8CSSNY7GidjMIZ7Q4zMjA2n1nGrlTDkzwDCsw+wqFPGQA179cnfGWOWRVruj16z6XyvxvjJwbz0wQZ75XK5tKSb7FNyeIEs4TT4jk+S4dhPeAUC5y+bDYirYgM4GC7uEnztnZyaVWQ7B381AK4Qdrwt51ZqExKbQpTUNn+EjqoTwvqNj4kqx5QUCI0ThS/YkOxJCXmPUWZbhjpCg56i+2aB6CmK2JGhn57K5mj0MNdBXA4/WnwH6XoPWJzK5Nyu2zB3nAZp+S5hpQs+p1vN1/wsjk=";
+        };
+        github-ed25519 = {
+          hostNames = ["github.com"];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl";
+        };
+        gitlab-rsa = {
+          hostNames = ["gitlab.com"];
+          publicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9";
+        };
+        gitlab-ed25519 = {
+          hostNames = ["gitlab.com"];
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf";
+        };
+      };
+      macs = [
+        "hmac-sha2-512-etm@openssh.com"
+        "hmac-sha2-256-etm@openssh.com"
+        "umac-128-etm@openssh.com"
+      ];
+    };
+
+    # The hardening profile enables Apparmor by default, we don't want this to happen
+    security.apparmor.enable = false;
+
+    # Timeout TTY after 1 hour
+    programs.bash.interactiveShellInit = "if [[ $(tty) =~ /dev\\/tty[1-6] ]]; then TMOUT=3600; fi";
+
+    # Don't lock kernel modules, this is also enabled by the hardening profile by default
+    security.lockKernelModules = false;
+
+    # Run security analysis
+    environment.systemPackages = with pkgs; [lynis];
+
+    # Technically we don't need this as we use pubkey authentication
+    services.fail2ban = mkIf cfgServers {
+      enable = true;
+      ignoreIP = [
+        "100.0.0.0/8"
+        "127.0.0.1/8"
+      ];
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="impermanence"><a class="header" href="#impermanence">Impermanence</a></h1>
+<pre><code class="language-nix">{
+  lib,
+  config,
+  ...
+}: {
+  # Rollback function for BTRFS rootfs
+  # This assumes we have a LUKS volume named "crypted"
+  # https://mt-caret.github.io/blog/posts/2020-06-29-optin-state.html
+  boot.initrd = {
+    enable = true;
+    supportedFilesystems = ["btrfs"];
+    systemd.services.restore-root = {
+      description = "Rollback BTRFS rootfs";
+      wantedBy = ["initrd.target"];
+      after = ["systemd-cryptsetup@crypted.service"];
+      before = ["sysroot.mount"];
+      unitConfig.DefaultDependencies = "no";
+      serviceConfig.Type = "oneshot";
+      script = ''
+        mkdir -p /mnt
+
+        # We first mount the btrfs root to /mnt
+        # so we can manipulate btrfs subvolumes.
+        mount -o subvol=/ /dev/mapper/crypted /mnt
+
+        # While we're tempted to just delete /root and create
+        # a new snapshot from /root-blank, /root is already
+        # populated at this point with a number of subvolumes,
+        # which makes `btrfs subvolume delete` fail.
+        # So, we remove them first.
+        btrfs subvolume list -o /mnt/root |
+        cut -f9 -d' ' |
+        while read subvolume; do
+          echo "deleting /$subvolume subvolume..."
+          btrfs subvolume delete "/mnt/$subvolume"
+        done &amp;&amp;
+        echo "deleting /root subvolume..." &amp;&amp;
+        btrfs subvolume delete /mnt/root
+
+        echo "restoring blank /root subvolume..."
+        btrfs subvolume snapshot /mnt/root-blank /mnt/root
+
+        # Once we're done rolling back to a blank snapshot,
+        # we can unmount /mnt and continue on the boot process.
+        umount /mnt
+      '';
+    };
+  };
+
+  # Rollback results in sudo lectures after each reboot
+  security.sudo.extraConfig = ''
+    Defaults lecture = never
+  '';
+
+  # Persistent files
+  environment.persistence."/persist" = {
+    hideMounts = true;
+    directories =
+      [
+        "/etc/NetworkManager/system-connections"
+        "/etc/nixos"
+        "/etc/pacman.d/gnupg"
+        "/etc/secureboot"
+        "/var/cache/tailscale"
+        "/var/lib/AccountsService/icons"
+        "/var/lib/bluetooth"
+        "/var/lib/containers"
+        "/var/lib/flatpak"
+        "/var/lib/libvirt"
+        "/var/lib/pacman"
+        "/var/lib/machines"
+        "/var/lib/sddm"
+        "/var/lib/systemd"
+        "/var/lib/tailscale"
+        "/var/lib/nixos"
+        "/var/lib/upower"
+        "/var/lib/vnstat"
+        "/var/cache"
+        {
+          directory = "/var/lib/iwd";
+          mode = "u=rwx,g=,o=";
+        }
+      ]
+      ++ lib.optionals config.security.acme.acceptTerms [
+        {
+          directory = "/var/lib/acme";
+          user = "acme";
+          group = "acme";
+          mode = "0755";
+        }
+      ]
+      ++ lib.optionals config.services.printing.enable [
+        {
+          directory = "/var/lib/cups";
+          user = "root";
+          group = "root";
+          mode = "0700";
+        }
+      ]
+      ++ lib.optionals config.services.fail2ban.enable [
+        {
+          directory = "/var/lib/fail2ban";
+          user = "fail2ban";
+          group = "fail2ban";
+          mode = "0750";
+        }
+      ]
+      ++ lib.optionals config.services.postgresql.enable [
+        {
+          directory = "/var/lib/postgresql";
+          user = "postgres";
+          group = "postgres";
+          mode = "0700";
+        }
+      ]
+      ++ lib.optionals config.services.loki.enable [
+        {
+          directory = "/var/lib/loki";
+          user = "loki";
+          group = "loki";
+          mode = "0700";
+        }
+      ]
+      ++ lib.optionals config.services.grafana.enable [
+        {
+          directory = config.services.grafana.dataDir;
+          user = "grafana";
+          group = "grafana";
+          mode = "0700";
+        }
+      ]
+      ++ lib.optionals config.services.vaultwarden.enable [
+        {
+          directory = "/var/lib/vaultwarden";
+          user = "vaultwarden";
+          group = "vaultwarden";
+          mode = "0700";
+        }
+      ]
+      ++ lib.optionals config.services.influxdb2.enable [
+        {
+          directory = "/var/lib/influxdb2";
+          user = "influxdb2";
+          group = "influxdb2";
+          mode = "0700";
+        }
+      ]
+      ++ lib.optionals config.services.telegraf.enable [
+        {
+          directory = "/var/lib/telegraf";
+          user = "telegraf";
+          group = "telegraf";
+          mode = "0700";
+        }
+      ]
+      ++ lib.optionals config.services.adguardhome.enable [
+        {
+          directory = "/var/lib/private/AdGuardHome";
+          user = "root";
+          group = "root";
+          mode = "0700";
+        }
+      ];
+    users."root" = {
+      home = "/root";
+      directories = [
+        {
+          directory = ".gnupg";
+          mode = "0700";
+        }
+        {
+          directory = ".ssh";
+          mode = "0700";
+        }
+      ];
+    };
+    users."nico" = {
+      directories = [
+        # Important user data
+        ".android"
+        ".ansible"
+        ".config"
+        ".firedragon"
+        ".gitkraken"
+        ".java"
+        ".local/share/JetBrains"
+        ".local/share/Nextcloud"
+        ".local/share/PrismLauncher"
+        ".local/share/SpeedCrunch"
+        ".local/share/Steam"
+        ".local/share/TelegramDesktop"
+        ".local/share/Vorta"
+        ".local/share/baloo"
+        ".local/share/containers"
+        ".local/share/direnv"
+        ".local/share/dolphin"
+        ".local/share/fish"
+        ".local/share/heroku"
+        ".local/share/kactivitymanagerd"
+        ".local/share/klipper"
+        ".local/share/knewstuff3"
+        ".local/share/konsole"
+        ".local/share/kpeoplevcard"
+        ".local/share/krita"
+        ".local/share/kscreen"
+        ".local/share/kwalletd"
+        ".local/share/lutris"
+        ".local/share/plasma"
+        ".local/share/plasma-systemmonitor"
+        ".mozilla/native-messaging-hosts"
+        ".pki"
+        ".steam"
+        ".thunderbird/default"
+        ".tldrc"
+        ".wakatime"
+        ".yubico"
+        "Documents"
+        "Downloads"
+        "Games"
+        "Music"
+        "Nextcloud"
+        "Pictures"
+        "School"
+        "Sync"
+        "Videos"
+        "VirtualBox VMs"
+        # Cache stuff, not actual user data
+        ".cache/JetBrains"
+        ".cache/bookmarksrunner"
+        ".cache/chromium"
+        ".cache/containers"
+        ".cache/firedragon"
+        ".cache/konsole"
+        ".cache/lutris"
+        ".cache/mesa_shader_cache"
+        ".cache/mozilla"
+        ".cache/spotify"
+        ".cache/systemsettings"
+        ".cache/thunderbird"
+        ".local/share/Trash"
+        ".local/state/syncthing"
+        ".local/state/wireplumber"
+        # Special permissions needed for those
+        {
+          directory = ".gnupg";
+          mode = "0700";
+        }
+        {
+          directory = ".local/share/keybase";
+          mode = "0700";
+        }
+        {
+          directory = ".local/share/keyrings";
+          mode = "0700";
+        }
+        {
+          directory = ".ssh";
+          mode = "0700";
+        }
+      ];
+      files = [
+        ".bash_history"
+        ".wakatime.bdb"
+        ".wakatime.cfg"
+      ];
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="locales"><a class="header" href="#locales">Locales</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.locales;
+  de = "de_DE.UTF-8";
+  defaultLocale = "en_GB.UTF-8";
+in {
+  options.dr460nixed.locales = {
+    enable =
+      mkOption
+      {
+        default = true;
+        type = types.bool;
+        description = mdDoc ''
+          Whether the operating system be having a default set of locales set.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    # Timezone
+    time = {
+      hardwareClockInLocalTime = true;
+      timeZone = "Europe/Berlin";
+    };
+
+    # Common locale settings
+    i18n = {
+      inherit defaultLocale;
+
+      extraLocaleSettings = {
+        LANG = defaultLocale;
+        LC_COLLATE = defaultLocale;
+        LC_CTYPE = defaultLocale;
+        LC_MESSAGES = defaultLocale;
+
+        LC_ADDRESS = de;
+        LC_IDENTIFICATION = de;
+        LC_MEASUREMENT = de;
+        LC_MONETARY = de;
+        LC_NAME = de;
+        LC_NUMERIC = de;
+        LC_PAPER = de;
+        LC_TELEPHONE = de;
+        LC_TIME = de;
+      };
+
+      supportedLocales = [
+        "C.UTF-8/UTF-8"
+        "de_DE.UTF-8/UTF-8"
+        "en_GB.UTF-8/UTF-8"
+        "en_US.UTF-8/UTF-8"
+      ];
+    };
+
+    # Console font
+    console.keyMap = "de";
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="msmtp"><a class="header" href="#msmtp">MSMTP</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.smtp;
+in {
+  options.dr460nixed.smtp = {
+    enable =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enable sending mails via CMD using msmtp.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    programs.msmtp = {
+      enable = true;
+      setSendmail = true;
+      defaults = {
+        aliases = "/etc/aliases";
+        auth = "login";
+        port = 465;
+        tls = "on";
+        tls_starttls = "off";
+        tls_trust_file = "/etc/ssl/certs/ca-certificates.crt";
+      };
+      accounts = {
+        default = {
+          from = "nico@dr460nf1r3.org";
+          host = "mail.garudalinux.net";
+          passwordeval = "cat /run/secrets/passwords/nico@dr460nf1r3.org";
+          user = "nico@dr460nf1r3.org";
+        };
+      };
+    };
+    environment.etc = {
+      "aliases".text = ''
+        root: nico@dr460nf1r3.org
+      '';
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="networking"><a class="header" href="#networking">Networking</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed;
+in {
+  # We want to use NetworkManager on desktops
+  networking = {
+    # Pointing to NextDNS via Tailscale
+    # if not, Cloudflare would still be my choice
+    nameservers = [
+      "1.1.1.1"
+      "2606:4700:4700::1111"
+      "1.0.0.1"
+      "2606:4700:4700::1001"
+    ];
+    networkmanager = mkIf cfg.desktops.enable {
+      # This is required to workaround Tailscale not recovering from net change
+      # https://github.com/tailscale/tailscale/issues/8223
+      dispatcherScripts = [
+        {
+          source = pkgs.writeScript "restartTailscaled" ''
+            #!/usr/bin/env ${pkgs.bash}/bin/bash
+            if [[ "$1" != "wlan0" ]]; then
+              exit 0
+            fi
+            if [[ "$2" == "up" ]]; then
+              if [[ $(${pkgs.iputils}/bin/ping -W 1 -c 1 garudalinux.org) != 0 ]]; then
+                logger "Wlan0 up, restarting tailscaled"
+                ${pkgs.systemd}/bin/systemctl restart tailscaled
+              fi
+            fi
+          '';
+          type = "basic";
+        }
+      ];
+      dns = "none";
+      enable = true;
+    };
+
+    # Enable nftables instead of iptables
+    nftables.enable = true;
+  };
+
+  # Enable SSHD &amp; bandwidth usage tracking
+  services = {
+    openssh.enable = true;
+    vnstat.enable = true;
+  };
+
+  # Enable Mosh, a replacement for OpenSSH
+  programs.mosh.enable = true;
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="nix"><a class="header" href="#nix">Nix</a></h1>
+<pre><code class="language-nix">{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfgRemote = config.dr460nixed.remote-build;
+  cfgSuper = config.dr460nixed.nix-super;
+in {
+  options.dr460nixed = with lib; {
+    nix-super = {
+      enable = mkOption {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Replaces nix with nix-super, which tracks future features of nix.
+        '';
+      };
+    };
+    remote-build = {
+      enable = mkOption {
+        default = false;
+        example = true;
+        type = types.bool;
+        description = mdDoc ''
+          Enable the capability of building via nix on a remote machine when specified via command line flag.
+        '';
+      };
+      enableGlobally = mkOption {
+        default = false;
+        example = true;
+        type = types.bool;
+        description = mdDoc ''
+          Enables remote builds via enableDistributedBuild rather than making it opt-in via command line.
+        '';
+      };
+      host = mkOption {
+        default = "";
+        type = types.str;
+        example = "dragons-ryzen";
+        description = mdDoc ''
+          Specifies the target host for remote builds.
+        '';
+      };
+      port = mkOption {
+        default = 22;
+        type = types.int;
+        example = 1022;
+        description = mdDoc ''
+          Specifies the target port for remote builds.
+        '';
+      };
+      trustedPublicKey = mkOption {
+        default = null;
+        type = types.str;
+        example = "remote-build:8vrLBvFoMiKVKRYD//30bhUBTEEiuupfdQzl2UoMms4=";
+        description = mdDoc ''
+          Specifies the substitutors cache signing key for remote builds.
+        '';
+      };
+      user = mkOption {
+        default = null;
+        type = types.str;
+        example = "build";
+        description = mdDoc ''
+          Specifies the target user for remote builds.
+        '';
+      };
+    };
+  };
+
+  config = {
+    # General nix settings
+    nix = {
+      # The remote builder to use for distributed builds
+      buildMachines = lib.mkIf cfgRemote.enable [
+        {
+          hostName = cfgRemote.host;
+          maxJobs = 16;
+          protocol = "ssh-ng";
+          supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
+          systems = ["x86_64-linux" "aarch64-linux"];
+        }
+      ];
+
+      # Allow distributed builds
+      distributedBuilds = lib.mkIf cfgRemote.enableGlobally true;
+
+      # Dont warn about dirty flakes and accept flake configs by default
+      extraOptions = ''
+        http-connections = 0
+        warn-dirty = false
+      '';
+
+      # Make use of nix-super if it is enabled, else use latest available
+      package = lib.mkIf cfgSuper.enable pkgs.nixSuper;
+
+      # Nix.conf settings
+      settings = {
+        # Accept flake configs by default
+        accept-flake-config = true;
+
+        # Test out ca-derivations (https://nixos.wiki/wiki/Ca-derivations)
+        experimental-features = ["ca-derivations"];
+
+        # Lix cache
+        extra-substituters = ["https://cache.lix.systems"];
+
+        # For direnv GC roots
+        keep-derivations = true;
+        keep-outputs = true;
+
+        # Continue building derivations if one fails
+        keep-going = true;
+
+        # Show more log lines for failed builds
+        log-lines = 20;
+
+        # Max number of parallel jobs
+        max-jobs = "auto";
+
+        # Enable certain system features
+        system-features = ["big-parallel" "kvm"];
+
+        # Build inside sandboxed environments
+        sandbox = pkgs.stdenv.isLinux;
+
+        # Trust the remote machines cache signatures
+        trusted-substituters = lib.mkIf cfgRemote.enable ["ssh-ng://${cfgRemote.host}"];
+
+        # Specify the path to the nix registry
+        flake-registry = "/etc/nix/registry.json";
+
+        substituters = [
+          "https://cache.nixos.org/" # official binary cache (yes the trailing slash is really neccacery)
+          "https://nix-community.cachix.org" # nix-community cache
+          "https://nix-gaming.cachix.org" # nix-gaming
+          "https://nixpkgs-unfree.cachix.org" # unfree-package cache
+          "https://numtide.cachix.org" # another unfree package cache
+          "https://catppuccin.cachix.org" # a cache for ctp nix
+          "https://pre-commit-hooks.cachix.org" # pre commit hooks
+          "https://cache.garnix.io" # extra things here and there
+        ];
+
+        trusted-public-keys = ["cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="];
+      };
+    };
+
+    # Nix-super - https://github.com/privatevoid-net/nix-super
+    nixpkgs.overlays = lib.mkIf cfgSuper.enable [
+      (_: _prev: {
+        nixSuper = inputs.nix-super.packages.x86_64-linux.default;
+      })
+    ];
+
+    environment = {
+      etc = with inputs; {
+        # set channels (backwards compatibility)
+        "nix/flake-channels/system".source = self;
+        "nix/flake-channels/nixpkgs".source = nixpkgs;
+        "nix/flake-channels/home-manager".source = home-manager;
+
+        # preserve current flake in /etc
+        "nixos/flake".source = self;
+      };
+
+      # Git is reqired for flakes, and cachix for binary substituters
+      systemPackages = with pkgs; [git cachix];
+    };
+
+    # Let root ssh into the remote builder seamlessly
+    home-manager.users."root" = lib.mkIf cfgRemote.enable {
+      home.stateVersion = "23.11"; # Specify this since its otherwise unset
+      programs.ssh.extraConfig = ''
+        Host ${cfgRemote.host}
+          HostName ${cfgRemote.host}
+          Port ${toString cfgRemote.port}
+          User ${cfgRemote.user}
+      '';
+    };
+
+    # Supply a shortcut for the remote builder
+    programs = {
+      bash.shellAliases = {
+        "rem" = "sudo nix build -v --builders ssh://${cfgRemote.host}";
+        "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake";
+      };
+      fish = {
+        shellAbbrs = {
+          "rem" = "sudo nix build -v --builders ssh://${cfgRemote.host}";
+          "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake";
+        };
+      };
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="oci"><a class="header" href="#oci">OCI</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.oci;
+in {
+  options.dr460nixed.oci = {
+    enable =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enable common options for Oracle cloud instances.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    # Taken from /proc/cmdline of Ubuntu 20.04.2 LTS on OCI
+    boot = {
+      kernelParams = [
+        "nvme.shutdown_timeout=10"
+        "nvme_core.shutdown_timeout=10"
+        "libiscsi.debug_libiscsi_eh=1"
+        "crash_kexec_post_notifiers"
+        "console=tty1"
+        "console=ttyS0"
+        "console=ttyAMA0,115200"
+      ];
+      loader.grub = {
+        device = "nodev";
+        efiInstallAsRemovable = true;
+        efiSupport = true;
+        enable = lib.mkForce true; # overrides our boot module
+        extraConfig = ''
+          serial --unit=0 --speed=115200 --word=8 --parity=no --stop=1
+          terminal_input --append serial
+          terminal_output --append serial
+        '';
+        splashImage = null;
+      };
+    };
+
+    # https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/configuringntpservice.htm#Configuring_the_Oracle_Cloud_Infrastructure_NTP_Service_for_an_Instance
+    networking.timeServers = ["169.254.169.254"];
+
+    # Slows down write operations considerably
+    nix.settings.auto-optimise-store = lib.mkForce false;
+
+    # This is needed as the packages are marked unsupported
+    hardware.cpu = {
+      amd.updateMicrocode = lib.mkForce false;
+      intel.updateMicrocode = lib.mkForce false;
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="servers"><a class="header" href="#servers">Servers</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.servers;
+in {
+  options.dr460nixed.servers = {
+    enable =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether this device is a server.
+        '';
+      };
+    monitoring =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Whether to enable monitoring via Netdata.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    # The common used config is not available
+    programs.fish.shellInit = mkForce ''
+      set fish_greeting
+      fastfetch -l nixos
+    '';
+
+    # Automatic server upgrades
+    dr460nixed.auto-upgrade = true;
+
+    # No custom aliases
+    dr460nixed.shells.enable = false;
+
+    # These aren't needed on servers, but default on GNS
+    garuda = {
+      audio.pipewire.enable = false;
+      hardware.enable = false;
+      networking.enable = false;
+    };
+    boot.plymouth.enable = true;
+
+    # Enable the Netdata daemon
+    services.netdata.enable = mkIf cfg.monitoring true;
+    services.netdata.config = {
+      global = {
+        "dbengine disk space" = "512";
+        "memory mode" = "dbengine";
+        "update every" = "2";
+      };
+      ml = {"enabled" = "yes";};
+    };
+    services.netdata.configDir = {
+      "go.d.conf" = pkgs.writeText "go.d.conf" ''
+        enabled: yes
+        modules:
+          nginx: yes
+          web_log: yes
+      '';
+      "python.d.conf" = pkgs.writeText "python.d.conf" ''
+        postgres: no
+        web_log: no
+      '';
+      "go.d/nginx.conf" =
+        mkIf config.services.nginx.enable
+        (pkgs.writeText "nginx.conf" ''
+          jobs:
+            - name: local
+              url: http://127.0.0.1/nginx_status
+        '');
+    };
+
+    # Extra Python &amp; system packages required for Netdata to function
+    services.netdata.package = pkgs.netdata.override {withCloud = true;};
+    services.netdata.python.extraPackages = ps: [ps.psycopg2];
+    systemd.services.netdata = {path = with pkgs; [jq];};
+
+    # Connect to Netdata Cloud easily
+    services.netdata.claimTokenFile = config.sops.secrets."api_keys/netdata".path;
+    sops.secrets."api_keys/netdata" = {
+      mode = "0600";
+      owner = "netdata";
+      path = "/run/secrets/api_keys/netdata";
+    };
+
+    # The Nginx QUIC package with Brotli modules
+    services.nginx.package = pkgs.nginxQuic.override {doCheck = false;};
+    services.nginx.additionalModules = with pkgs; [nginxModules.brotli];
+
+    # Recommended settings replacing custom configuration
+    services.nginx = {
+      recommendedGzipSettings = true;
+      recommendedOptimisation = true;
+      recommendedTlsSettings = true;
+    };
+
+    # Statuspage for Netdata to consume
+    services.nginx.statusPage = true;
+
+    # Upstream resolvers
+    services.nginx.resolver = {
+      addresses = ["100.100.100.100"];
+      valid = "60s";
+    };
+
+    # Global Nginx configuration
+    services.nginx.appendConfig = ''
+      worker_processes auto;
+    '';
+
+    # Logformat to use for Netdata &amp; extra config that doesn't exist as separate key in NixOS
+    services.nginx.commonHttpConfig = ''
+      # Custom log format for Netdata to analyze
+      log_format              custom '"$http_referer" "$http_user_agent" '
+                              '$remote_addr - $remote_user [$time_local] '
+                              '"$request" $status $body_bytes_sent';
+
+      # Brotli compression
+      brotli                  on;
+      brotli_comp_level       6;
+      brotli_static           on;
+      brotli_types            application/atom+xml application/javascript application/json application/rss+xml
+                              application/vnd.ms-fontobject application/x-font-opentype application/x-font-truetype
+                              application/x-font-ttf application/x-javascript application/xhtml+xml application/xml
+                              font/eot font/opentype font/otf font/truetype image/svg+xml image/vnd.microsoft.icon
+                              image/x-icon image/x-win-bitmap text/css text/javascript text/plain text/xml;
+    '';
+
+    # Diffie-Hellman parameter for DHE ciphersuites
+    security.dhparams = mkIf config.services.nginx.enable {
+      defaultBitSize = 3072;
+      enable = true;
+      params.nginx = {};
+    };
+    services.nginx.sslDhparam = config.security.dhparams.params.nginx.path;
+
+    # Need to explicitly open our web server ports
+    networking.firewall = mkIf config.services.nginx.enable {
+      allowedTCPPorts = [80 443];
+      allowedUDPPorts = [443];
+    };
+
+    # Enable this so we don't get annoyed by the ACME TOS
+    security.acme = {
+      acceptTerms = true;
+      defaults.email = "root@dr460nf1r3.org";
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="shells"><a class="header" href="#shells">Shells</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = config.dr460nixed.shells;
+in {
+  options.dr460nixed.shells.enable = with lib;
+    mkOption
+    {
+      default = true;
+      type = types.bool;
+      description = mdDoc ''
+        Whether the shell should receive our aliases and themes.
+      '';
+    };
+
+  config = lib.mkIf cfg.enable {
+    # Programs &amp; global config
+    programs = {
+      bash.shellAliases = {
+        "bootsda" = ''
+          sudo qemu-kvm \
+          -m 4G \
+          -drive file=/dev/sda,format=raw,index=0,media=disk \
+          -net user,hostfwd=tcp:127.0.0.1:2222-:22 \
+          -net nic
+        '';
+        "bootsdb" = ''
+          sudo qemu-kvm
+          -m 4G \
+          -drive file=/dev/sdb,format=raw,index=0,media=disk \
+          -net user,hostfwd=tcp:127.0.0.1:2222-:22 \
+          -net nic
+        '';
+        "gpl" = "${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
+        "grep" = "${pkgs.ugrep}/bin/ugrep";
+        "nix" = "${pkgs.nix}/bin/nix --verbose --print-build-logs"; # https://github.com/NixOS/nix/pull/8323
+      };
+      fish = {
+        shellAbbrs = {
+          "bootusb" = ''
+            sudo qemu-kvm \
+            -m 4G \
+            -drive file=/dev/sda,format=raw,index=0,media=disk \
+            -net user,hostfwd=tcp:127.0.0.1:2222-:22 \
+            -net nic
+          '';
+          "gpl" = "${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
+        };
+        shellAliases = {
+          "grep" = "${pkgs.ugrep}/bin/ugrep";
+          "nix" = "${pkgs.nix}/bin/nix --verbose --print-build-logs"; # https://github.com/NixOS/nix/pull/8323
+        };
+      };
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="syncthing"><a class="header" href="#syncthing">Syncthing</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.syncthing;
+  settingsFormat = pkgs.formats.json {};
+in {
+  options.dr460nixed.syncthing = {
+    enable =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enable common file synchronisation between devices.
+        '';
+      };
+    key =
+      mkOption
+      {
+        default = "";
+        type = types.str;
+        description = mdDoc ''
+          The key to use for Syncthing.
+        '';
+      };
+    cert =
+      mkOption
+      {
+        default = "";
+        type = types.str;
+        description = mdDoc ''
+          The cert to use for Syncthing.
+        '';
+      };
+    devices =
+      mkOption
+      {
+        default = [];
+        type = types.attrsOf (types.submodule ({name, ...}: {
+          freeformType = settingsFormat.type;
+          options = {
+            name = mkOption {
+              type = types.str;
+              default = name;
+              description = lib.mdDoc ''
+                The name of the device.
+              '';
+            };
+            id = mkOption {
+              type = types.str;
+              description = mdDoc ''
+                The device ID. See &lt;https://docs.syncthing.net/dev/device-ids.html&gt;.
+              '';
+            };
+            autoAcceptFolders = mkOption {
+              type = types.bool;
+              default = false;
+              description = mdDoc ''
+                Automatically create or share folders that this device advertises at the default path.
+                See &lt;https://docs.syncthing.net/users/config.html?highlight=autoaccept#config-file-format&gt;.
+              '';
+            };
+          };
+        }));
+        description = mdDoc ''
+          The devices to sync with.
+        '';
+      };
+    devicesNames =
+      mkOption
+      {
+        default = [];
+        type = types.listOf types.str;
+        description = mdDoc ''
+          The names of the devices to sync with.
+        '';
+      };
+    user =
+      mkOption
+      {
+        default = "";
+        type = types.str;
+        description = mdDoc ''
+          The user to run syncthing as.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    services.syncthing = {
+      inherit (cfg) cert;
+      dataDir = "/home/${cfg.user}";
+      enable = true;
+      inherit (cfg) key;
+      settings = {
+        inherit (cfg) devices;
+        folders = {
+          "/home/nico/Music" = {
+            id = "ybqqh-as53c";
+            devices = cfg.devicesNames;
+          };
+          "/home/nico/Pictures" = {
+            id = "9gj2u-j3m9s";
+            devices = cfg.devicesNames;
+          };
+          "/home/nico/School" = {
+            id = "g5jha-cnrr4";
+            devices = cfg.devicesNames;
+          };
+          "/home/nico/Sync" = {
+            id = "u62ge-wzsau";
+            devices = cfg.devicesNames;
+          };
+          "/home/nico/Videos" = {
+            id = "nxhpo-c2j5b";
+            devices = cfg.devicesNames;
+          };
+        };
+        options = {
+          localAnnounceEnabled = true;
+          urAccepted = -1;
+        };
+      };
+      inherit (cfg) user;
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tailscale-tls"><a class="header" href="#tailscale-tls">Tailscale TLS</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.tailscale-tls;
+  domainExpression =
+    if cfg.domain-override != null
+    then cfg.domain-override
+    else "$(${pkgs.tailscale}/bin/tailscale cert 2&gt;&amp;1 | grep use | cut -d '\"' -f2)";
+in {
+  options.dr460nixed.tailscale-tls = {
+    enable = mkEnableOption "Automatic Tailscale certificates renewal";
+
+    target = mkOption {
+      type = types.str;
+      description = "Where to put certificates";
+      default = "/var/lib/tailscale-tls";
+    };
+
+    mode = mkOption {
+      type = types.str;
+      description = "File mode for certificates";
+      default = "0640";
+    };
+
+    domain-override = mkOption {
+      type = types.nullOr types.str;
+      description = "Override domain. Defaults to suggested one by tailscale";
+      default = null;
+    };
+  };
+
+  config = mkIf cfg.enable {
+    users.users.tailscale-tls = {
+      group = "tailscale-tls";
+      home = "/var/lib/tailscale-tls";
+      isSystemUser = true;
+    };
+
+    users.groups.tailscale-tls = {};
+
+    systemd.services.tailscale-tls = {
+      description = "Automatic Tailscale certificates";
+
+      after = ["network-pre.target" "tailscale.service"];
+      wants = ["network-pre.target" "tailscale.service"];
+      wantedBy = ["multi-user.target"];
+
+      serviceConfig.Type = "oneshot";
+      script = ''
+        status="Starting"
+
+        until [ $status = "Running" ]; do
+          sleep 2
+          status=$(${pkgs.tailscale}/bin/tailscale status -json | ${pkgs.jq}/bin/jq -r .BackendState)
+        done
+
+        mkdir -p "${cfg.target}"
+
+        DOMAIN=${domainExpression}
+
+        ${pkgs.tailscale}/bin/tailscale cert \
+          --cert-file "${cfg.target}/cert.crt" \
+          --key-file "${cfg.target}/key.key" \
+          "$DOMAIN"
+
+        chown -R tailscale-tls:tailscale-tls "${cfg.target}"
+
+        chmod ${cfg.mode} "${cfg.target}/cert.crt" "${cfg.target}/key.key"
+      '';
+    };
+
+    systemd.timers.tailscale-tls = {
+      description = "Automatic Tailscale certificates renewal";
+
+      after = ["network-pre.target" "tailscale.service"];
+      wants = ["network-pre.target" "tailscale.service"];
+      wantedBy = ["multi-user.target"];
+
+      timerConfig = {
+        OnCalendar = "weekly";
+        Persistent = "true";
+        Unit = "schedule-test.service";
+      };
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tailscale"><a class="header" href="#tailscale">Tailscale</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.tailscale;
+
+  tailscaleJoinArgsList =
+    [
+      "-authkey"
+      "$(cat ${cfg.authFile})"
+    ]
+    ++ cfg.extraUpArgs;
+
+  tailscaleJoinArgsString = builtins.concatStringsSep " " tailscaleJoinArgsList;
+
+  tailscaleUpScript = ''
+    sleep 2
+    status="$(${pkgs.tailscale}/bin/tailscale status -json | ${pkgs.jq}/bin/jq -r .BackendState)"
+    if [ $status = "Running" ]; then # if so, then do nothing
+      exit 0
+    fi
+    ${pkgs.tailscale}/bin/tailscale up ${tailscaleJoinArgsString}
+  '';
+in {
+  options.dr460nixed.tailscale = {
+    enable = mkEnableOption "Tailscale client daemon";
+
+    autoConnect = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Whether to automatically connect to Tailscale using an auth key";
+    };
+
+    authFile = mkOption {
+      type = types.path;
+      example = "/run/secrets/tailscale-key";
+      description = "File location storing tailscale auth-key";
+    };
+
+    extraUpArgs = mkOption {
+      type = with types; listOf str;
+      default = [];
+      description = "Extra args for tailscale up";
+    };
+  };
+
+  config = mkIf cfg.enable {
+    # Enable Tailscale service
+    services.tailscale.enable = true;
+
+    # Install Tailscale systray
+    environment.systemPackages = lib.mkIf config.dr460nixed.desktops.enable [pkgs.tailscale-systray];
+
+    # Allow Tailscale devices to connect
+    networking.firewall.trustedInterfaces = ["tailscale0"];
+
+    # Connect to Tailnet automatically
+    systemd.services.tailscale-autoconnect = mkIf cfg.autoConnect {
+      description = "Automatic connection to Tailscale";
+
+      # Make sure tailscale is running before trying to connect to tailscale
+      after = ["network-pre.target" "tailscale.service"];
+      wants = ["network-pre.target" "tailscale.service"];
+      wantedBy = ["multi-user.target"];
+
+      serviceConfig.Type = "oneshot";
+      script = tailscaleUpScript;
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="users"><a class="header" href="#users">Users</a></h1>
+<pre><code class="language-nix">{
+  config,
+  keys,
+  lib,
+  ...
+}: let
+  # Use fixed UIDs/GIDs
+  deterministicIds = let
+    uidGid = id: {
+      gid = id;
+      uid = id;
+    };
+  in {
+    acme = uidGid 999;
+    adbusers = uidGid 998;
+    adguard = uidGid 977;
+    avahi = uidGid 997;
+    chaotic_op = uidGid 996;
+    cloudflared = uidGid 972;
+    code-server = uidGid 967;
+    dhcpcd = uidGid 976;
+    fwupd-refresh = uidGid 975;
+    flatpak = uidGid 974;
+    gamemode = uidGid 969;
+    grafana = uidGid 995;
+    influxdb2 = uidGid 994;
+    jellyfin = uidGid 970;
+    loki = uidGid 993;
+    minecraft = uidGid 973;
+    netdata = uidGid 979;
+    nico = uidGid 1000;
+    nm-iodine = uidGid 992;
+    node-exporter = uidGid 991;
+    nscd = uidGid 990;
+    plocate = uidGid 989;
+    polkituser = uidGid 988;
+    podman = uidGid 968;
+    promtail = uidGid 987;
+    rtkit = uidGid 986;
+    sshd = uidGid 985;
+    systemd-coredump = uidGid 984;
+    systemd-oom = uidGid 983;
+    tailscale-tls = uidGid 978;
+    telegraf = uidGid 982;
+    vnstatd = uidGid 981;
+    wireshark = uidGid 980;
+  };
+
+  # Add groups to user only if they exist
+  ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
+in {
+  # This is needed for early set up of user accounts
+  sops.secrets = {
+    "passwords/nico".neededForUsers = true;
+    "passwords/root".neededForUsers = true;
+  };
+
+  users = {
+    inherit deterministicIds;
+    # All users are immuntable; if a password is required it needs to be set via passwordFile
+    mutableUsers = false;
+    users = {
+      nico = {
+        autoSubUidGidRange = false; # Use fixed UIDs/GIDs
+        extraGroups =
+          [
+            "audio"
+            "video"
+            "wheel"
+          ]
+          ++ ifTheyExist [
+            "adbusers"
+            "chaotic_op"
+            "deluge"
+            "disk"
+            "docker"
+            "flatpak"
+            "git"
+            "kvm"
+            "libvirtd"
+            "minecraft"
+            "mysql"
+            "network"
+            "networkmanager"
+            "podman"
+            "systemd-journal"
+            "wireshark"
+          ];
+        hashedPasswordFile = config.sops.secrets."passwords/nico".path;
+        home = "/home/nico";
+        isNormalUser = true;
+        openssh.authorizedKeys.keyFiles = [keys.nico];
+        subGidRanges = lib.mkIf config.virtualisation.podman.enable [
+          {
+            count = 65536;
+            startGid = 615536;
+          }
+        ];
+        subUidRanges = [
+          {
+            count = 65536;
+            startUid = 615536;
+          }
+        ];
+      };
+      # Lock root password
+      root.hashedPasswordFile = config.sops.secrets."passwords/root".path;
+    };
+  };
+
+  security.sudo.extraRules = [
+    {
+      # allow wheel group to run nixos-rebuild without password
+      groups = ["wheel"];
+      commands = let
+        currentSystem = "/run/current-system/";
+        storePath = "/nix/store/";
+      in [
+        {
+          command = "${storePath}/*/bin/switch-to-configuration";
+          options = ["SETENV" "NOPASSWD"];
+        }
+        {
+          command = "${currentSystem}/sw/bin/nix-store";
+          options = ["SETENV" "NOPASSWD"];
+        }
+        {
+          command = "${currentSystem}/sw/bin/nixos-rebuild";
+          options = ["NOPASSWD"];
+        }
+        {
+          # let wheel group collect garbage without password
+          command = "${currentSystem}/sw/bin/nix-collect-garbage";
+          options = ["SETENV" "NOPASSWD"];
+        }
+        {
+          # let wheel group interact with systemd without password
+          command = "${currentSystem}/sw/bin/systemctl";
+          options = ["NOPASSWD"];
+        }
+      ];
+    }
+  ];
+
+  # Allow pushing to Cachix
+  # sops.secrets."api_keys/cachix" = {
+  #   mode = "0600";
+  #   owner = config.users.users.nico.name;
+  #   path = "/home/nico/.config/cachix/cachix.dhall";
+  # };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="zfs"><a class="header" href="#zfs">ZFS</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.dr460nixed.zfs;
+in {
+  options.dr460nixed.zfs = {
+    enable =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Configures common options for using ZFS on NixOS.
+        '';
+      };
+  };
+  options.dr460nixed.zfs = {
+    sendMails =
+      mkOption
+      {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enables sending status reports about ZFS maintainance via email.
+        '';
+      };
+  };
+
+  config = mkIf cfg.enable {
+    # Support booting off ZFS
+    boot.supportedFilesystems = ["zfs"];
+
+    # Always request encryption credentials to open rootfs
+    boot.zfs.requestEncryptionCredentials = true;
+
+    # Useful ZFS maintenance
+    services.zfs = {
+      autoScrub = {
+        enable = true;
+        interval = "weekly";
+      };
+      trim = {
+        enable = true;
+        interval = "weekly";
+      };
+    };
+
+    # Enable configuration of msmtp
+    dr460nixed.smtp.enable = mkIf cfg.sendMails true;
+
+    # Configure ZFS Event Daemon to use msmtp
+    # commented until python2.7-oildev is fixed
+    # services.zfs.zed.settings = mkIf cfg.sendMails {
+    #   ZED_DEBUG_LOG = "/tmp/zed.debug.log";
+    #   ZED_EMAIL_ADDR = ["root"];
+    #   ZED_EMAIL_OPTS = "@ADDRESS@";
+    #   ZED_EMAIL_PROG = "${pkgs.msmtp}/bin/msmtp";
+
+    #   ZED_NOTIFY_INTERVAL_SECS = 3600;
+    #   ZED_NOTIFY_VERBOSE = true;
+
+    #   ZED_SCRUB_AFTER_RESILVER = true;
+    #   ZED_USE_ENCLOSURE_LEDS = true;
+    # };
+
+    # This option does not work; will return error
+    services.zfs.zed.enableMail = mkIf cfg.sendMails false;
+
+    # Metrics
+    services.telegraf.extraConfig.inputs = lib.mkIf config.services.telegraf.enable {
+      zfs.poolMetrics = true;
+    };
+  };
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="credits-1"><a class="header" href="#credits-1">Credits</a></h1>
+<h2 id="main-sources"><a class="header" href="#main-sources">Main sources</a></h2>
+<p>A special thanks to <a href="https://github.com/pedrohlc">PedroHLC</a>, who always gives great advice and who is also the reason I'm using NixOS today.
+Also, I studied <a href="https://github.com/Misterio77">Mysterio77</a>'s and <a href="https://github.com/NotAShelf">NotAShelf</a>'s Nix configurations while building this one.</p>
+<h2 id="further-helpful-resources-sorted-alphabetically"><a class="header" href="#further-helpful-resources-sorted-alphabetically">Further helpful resources (sorted alphabetically)</a></h2>
+<ul>
+<li><a href="https://github.com/dch82/NixOS-Config-Base">https://github.com/dch82/NixOS-Config-Base</a></li>
+<li><a href="https://github.com/exploitoverload/PwNixOS">https://github.com/exploitoverload/PwNixOS</a></li>
+<li><a href="https://github.com/Misterio77/nix-starter-configs">https://github.com/Misterio77/nix-starter-configs</a></li>
+<li><a href="https://github.com/nix-community/dream2nix">https://github.com/nix-community/dream2nix</a></li>
+<li><a href="https://github.com/srid/nixos-config">https://github.com/srid/nixos-config</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
