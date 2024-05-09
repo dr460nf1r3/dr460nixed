@@ -1,12 +1,13 @@
 {
   inputs,
   lib,
+  ...
 }: {
   imports = ["${toString inputs.nixpkgs}/nixos/modules/virtualisation/google-compute-image.nix"];
 
   dr460nixed = {
     grub = {
-      devices = ["/dev/sda"];
+      device = "/dev/sda";
       enable = true;
     };
     servers = {

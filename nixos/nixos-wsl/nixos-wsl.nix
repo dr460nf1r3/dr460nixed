@@ -119,8 +119,6 @@
         config.enable = true;
       };
       shellAbbrs = {
-        "reb" = " sudo nixos-rebuild switch -L";
-        "roll" = "sudo nixos-rebuild switch --rollback";
         "su" = "sudo su -";
         "tarnow" = "tar acf ";
         "test" = "sudo nixos-rebuild switch --test";
