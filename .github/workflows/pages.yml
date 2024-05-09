@@ -3,6 +3,9 @@ name: Cloudflare pages
 on:
   push:
     branches: [main]
+    paths:
+      - docs/**
+      - .github/workflows/pages.yml
 permissions:
   contents: write
 jobs:
