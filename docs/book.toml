@@ -14,10 +14,6 @@ git-repository-icon = "fa-github"
 git-repository-url = "https://github.com/dr460nf1r3/dr460nixed"
 site-url = "https://nixed.dr460nf1r3.org"
 
-[output.linkcheck]
-follow-web-links = true
-optional = true
-
 [preprocessor]
 
 [preprocessor.admonish]
