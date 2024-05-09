@@ -17,6 +17,7 @@
     avahi = uidGid 997;
     chaotic_op = uidGid 996;
     cloudflared = uidGid 972;
+    code-server = uidGid 967;
     dhcpcd = uidGid 976;
     fwupd-refresh = uidGid 975;
     flatpak = uidGid 974;

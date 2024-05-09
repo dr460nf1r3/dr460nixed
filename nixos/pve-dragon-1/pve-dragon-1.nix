@@ -3,7 +3,10 @@
   lib,
   ...
 }: {
-  imports = [./hardware-configuration.nix];
+  imports = [
+    ./code-server.nix
+    ./hardware-configuration.nix
+  ];
 
   # Boot options
   boot = {
@@ -51,10 +54,13 @@
   services.cloudflared = {
     enable = true;
     tunnels = {
-      "ba8379f8-de1c-474f-89ab-8d63e6bd1969" = {
+      "ab1428df-f957-44d7-a419-c31a57d68543" = {
         credentialsFile = config.sops.secrets."cloudflared/pve-dragon-1/cred".path;
         default = "http_status:404";
         ingress = {
+          "code.dr460nf1r3.org" = {
+            service = "http://localhost:4444";
+          };
         };
       };
     };
