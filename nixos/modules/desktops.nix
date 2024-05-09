@@ -39,7 +39,7 @@ in {
 
     # Fancy themed, enhanced Spotify
     programs.spicetify = {
-      colorScheme = "mocha";
+      colorScheme = "catppuccin-mocha";
       enable = true;
       enabledCustomApps = with spicePkgs.apps; [
         lyrics-plus
@@ -59,7 +59,7 @@ in {
         seekSong
         songStats
       ];
-      theme = spicePkgs.themes.catppuccin;
+      theme = spicePkgs.themes.Comfy;
       injectCss = true;
       overwriteAssets = true;
       replaceColors = true;

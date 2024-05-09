@@ -225,6 +225,7 @@
         "Videos"
         "VirtualBox VMs"
         # Cache stuff, not actual user data
+        ".cache/JetBrains"
         ".cache/bookmarksrunner"
         ".cache/chromium"
         ".cache/containers"

@@ -25,7 +25,6 @@ in {
       mosh
       nettools
       nmap
-      nom
       nvd
       python3
       sops
