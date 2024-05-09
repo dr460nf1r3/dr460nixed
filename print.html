@@ -529,7 +529,6 @@ in {
       mosh
       nettools
       nmap
-      nom
       nvd
       python3
       sops
@@ -1072,10 +1071,6 @@ in {
           enable = true;
         };
       };
-      plymouth = {
-        theme = lib.mkForce "catppuccin-mocha";
-        themePackages = [(pkgs.catppuccin-plymouth.override {variant = "mocha";})];
-      };
     };
 
     # Make plymouth work with sleep
@@ -1252,7 +1247,7 @@ in {
 
     # Fancy themed, enhanced Spotify
     programs.spicetify = {
-      colorScheme = "mocha";
+      colorScheme = "catppuccin-mocha";
       enable = true;
       enabledCustomApps = with spicePkgs.apps; [
         lyrics-plus
@@ -1272,7 +1267,7 @@ in {
         seekSong
         songStats
       ];
-      theme = spicePkgs.themes.catppuccin;
+      theme = spicePkgs.themes.Comfy;
       injectCss = true;
       overwriteAssets = true;
       replaceColors = true;
@@ -2028,6 +2023,7 @@ in {
         "Videos"
         "VirtualBox VMs"
         # Cache stuff, not actual user data
+        ".cache/JetBrains"
         ".cache/bookmarksrunner"
         ".cache/chromium"
         ".cache/containers"
@@ -2436,6 +2432,7 @@ in {
           "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake";
         };
       };
+      nh.flake = /home/nico/Documents/misc/dr460nixed;
     };
   };
 }

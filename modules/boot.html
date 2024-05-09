@@ -283,10 +283,6 @@ in {
           enable = true;
         };
       };
-      plymouth = {
-        theme = lib.mkForce "catppuccin-mocha";
-        themePackages = [(pkgs.catppuccin-plymouth.override {variant = "mocha";})];
-      };
     };
 
     # Make plymouth work with sleep
