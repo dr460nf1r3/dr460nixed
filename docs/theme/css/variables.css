@@ -2,11 +2,13 @@
 
 :root {
   --sidebar-width: 300px;
+  --sidebar-resize-indicator-width: 8px;
+  --sidebar-resize-indicator-space: 2px;
   --page-padding: 15px;
   --content-max-width: 750px;
   --menu-bar-height: 50px;
-  --mono-font: "Jetbrains Mono", Consolas, "Ubuntu Mono", Menlo,
-    "DejaVu Sans Mono", monospace, monospace;
+  --mono-font: "Jetbrains Mono", "Source Code Pro", Consolas, "Ubuntu Mono",
+    Menlo, "DejaVu Sans Mono", monospace, monospace;
   --code-font-size: 0.875em
     /* please adjust the ace font size accordingly in editor.js */;
 }
@@ -38,6 +40,8 @@
 
   --quote-bg: hsl(226, 15%, 17%);
   --quote-border: hsl(226, 15%, 22%);
+
+  --warning-border: #ff8e00;
 
   --table-border-color: hsl(210, 25%, 13%);
   --table-header-bg: hsl(210, 25%, 28%);
@@ -81,6 +85,8 @@
   --quote-bg: hsl(234, 21%, 18%);
   --quote-border: hsl(234, 21%, 23%);
 
+  --warning-border: #ff8e00;
+
   --table-border-color: hsl(200, 7%, 13%);
   --table-header-bg: hsl(200, 7%, 28%);
   --table-alternate-bg: hsl(200, 7%, 11%);
@@ -122,6 +128,8 @@
 
   --quote-bg: hsl(197, 37%, 96%);
   --quote-border: hsl(197, 37%, 91%);
+
+  --warning-border: #ff8e00;
 
   --table-border-color: hsl(0, 0%, 95%);
   --table-header-bg: hsl(0, 0%, 80%);
@@ -165,6 +173,8 @@
   --quote-bg: hsl(226, 15%, 17%);
   --quote-border: hsl(226, 15%, 22%);
 
+  --warning-border: #ff8e00;
+
   --table-border-color: hsl(226, 23%, 16%);
   --table-header-bg: hsl(226, 23%, 31%);
   --table-alternate-bg: hsl(226, 23%, 14%);
@@ -206,6 +216,8 @@
 
   --quote-bg: hsl(60, 5%, 75%);
   --quote-border: hsl(60, 5%, 70%);
+
+  --warning-border: #ff8e00;
 
   --table-border-color: hsl(60, 9%, 82%);
   --table-header-bg: #b3a497;
@@ -249,6 +261,8 @@
 
     --quote-bg: hsl(234, 21%, 18%);
     --quote-border: hsl(234, 21%, 23%);
+
+    --warning-border: #ff8e00;
 
     --table-border-color: hsl(200, 7%, 13%);
     --table-header-bg: hsl(200, 7%, 28%);
