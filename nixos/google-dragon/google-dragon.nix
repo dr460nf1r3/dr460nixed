@@ -1,5 +1,14 @@
-_: {
+{
+  inputs,
+  lib,
+}: {
+  imports = ["${toString inputs.nixpkgs}/nixos/modules/virtualisation/google-compute-image.nix"];
+
   dr460nixed = {
+    grub = {
+      devices = ["/dev/sda"];
+      enable = true;
+    };
     servers = {
       enable = true;
       monitoring = true;
@@ -11,6 +20,9 @@ _: {
 
   # Hostname of this machine
   networking.hostName = "google-dragon";
+
+  # Clashing gcp.nix / GNS
+  boot.loader.timeout = lib.mkForce 0;
 
   # NixOS stuff
   system.stateVersion = "23.11";
