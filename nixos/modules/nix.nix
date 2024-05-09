@@ -192,7 +192,6 @@ in {
           "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake";
         };
       };
-      nh.flake = /home/nico/Documents/misc/dr460nixed;
     };
   };
 }

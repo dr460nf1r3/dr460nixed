@@ -47,6 +47,9 @@
     fi
   '';
 
+  # I store my flake here
+  programs.nh.flake = /home/nico/Documents/misc/dr460nixed;
+
   # Enable a few selected custom settings
   dr460nixed = {
     chromium = true;
@@ -80,12 +83,6 @@
     deduplication = false;
     enable = true;
     uuid = "7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
-  };
-
-  # Override GNS defaults
-  environment.variables = {
-    QT_STYLE_OVERRIDE = lib.mkForce "";
-    GTK_THEME = lib.mkForce "";
   };
 
   # Chaotic Nyx stuff
