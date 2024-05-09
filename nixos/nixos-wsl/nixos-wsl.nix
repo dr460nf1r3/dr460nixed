@@ -121,7 +121,6 @@
       shellAbbrs = {
         "su" = "sudo su -";
         "tarnow" = "tar acf ";
-        "test" = "sudo nixos-rebuild switch --test";
         "untar" = "tar zxvf ";
       };
       shellAliases = {
