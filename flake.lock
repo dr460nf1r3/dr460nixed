@@ -162,11 +162,11 @@
         "yafas": "yafas"
       },
       "locked": {
-        "lastModified": 1715191753,
-        "narHash": "sha256-XtFdfNws433grs4Yi70Wyu/hHGwJSAlJqiqkyi0PcLs=",
+        "lastModified": 1715269830,
+        "narHash": "sha256-D9Oz2MvmXwrmYjAIjb3v1Yi3HOuCl/JrC9vwVtNs7TE=",
         "owner": "chaotic-cx",
         "repo": "nyx",
-        "rev": "986bdd8abf617176a67a463c81c4d18d2bc7913f",
+        "rev": "dcb0f06376629577a71a5322566acaf5c33bc232",
         "type": "github"
       },
       "original": {
@@ -241,11 +241,11 @@
         "rocksdb": "rocksdb"
       },
       "locked": {
-        "lastModified": 1715140745,
-        "narHash": "sha256-ypZHG+F4EOLhpc02mOTr6H50ybgF4qPsVrpLf58Oi1c=",
+        "lastModified": 1715195205,
+        "narHash": "sha256-NT+3dsamSO7IVH6sgJcATMvY86/7Wugs4VO9Q3wcPxY=",
         "owner": "girlbossceo",
         "repo": "conduwuit",
-        "rev": "245c34e65918738e6d07685aadfe97da9a274791",
+        "rev": "e4e1636da8d87a1fcaf5a65ce9ad14ac69d8f23a",
         "type": "github"
       },
       "original": {
@@ -497,11 +497,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1715249989,
-        "narHash": "sha256-Hkjxf0m1N5gg6etIUqx7W3/PT7egRJ8RJ+viDWhMEQA=",
+        "lastModified": 1715329425,
+        "narHash": "sha256-sw32b1qQTZ1VUGIYJ0mKifAqdkl/i2LxTCJ0fslhmAw=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "fe27301424893a85a9da0544c5c2924146456b2e",
+        "rev": "713c8a055109e5bddbd1a6e68f616c3e19ee7ee3",
         "type": "gitlab"
       },
       "original": {
@@ -598,11 +598,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1714803703,
-        "narHash": "sha256-4m9wG6mZR0I2d7itErhpY0JqSHomNnUdoKfkjnYp+wI=",
+        "lastModified": 1715173236,
+        "narHash": "sha256-Ulq7fV0V1TqbYTXcDcRYrnMBwAvXJGfv4fnpaXXpsY0=",
         "owner": "Jovian-Experiments",
         "repo": "Jovian-NixOS",
-        "rev": "d0799ebebfb37fd2df6409dc8da622738c5930bb",
+        "rev": "c8af9ea43d928f1e1f2c0ac100e75519ea76565d",
         "type": "github"
       },
       "original": {
@@ -624,11 +624,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1715135703,
-        "narHash": "sha256-/9rPkntcxPtHTnX1aFRuL6/c9CQiOA6GLod8Dto8uLI=",
+        "lastModified": 1715212294,
+        "narHash": "sha256-TCbaUwTMjPxqujk3ULI/pxTizvSk5MS+WguFPH3dyCA=",
         "owner": "martinvonz",
         "repo": "jj",
-        "rev": "dbba2edc572d64a4ff81625a3a925aff697393aa",
+        "rev": "9a5b001d58353afb7ea6cb894c22d80878b811ae",
         "type": "github"
       },
       "original": {
@@ -739,11 +739,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1715202703,
-        "narHash": "sha256-khZE2rZ4MAVI51ZhQxZRTzl+ym8KVUYMfUrFbWUfgzE=",
+        "lastModified": 1715278311,
+        "narHash": "sha256-Z787hdZuwBhQCQOeOmln5j9cCKxDWql7tbF1ukKDFZU=",
         "ref": "refs/heads/main",
-        "rev": "d15ff50703ea83b595249eb3e67d2e668235d5a6",
-        "revCount": 73,
+        "rev": "c8ab1e79ba0140bc75731c75177242089506260b",
+        "revCount": 75,
         "type": "git",
         "url": "https://git.lix.systems/lix-project/nixos-module"
       },
@@ -815,11 +815,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1714872073,
-        "narHash": "sha256-Gybo6MqJ2tva9vMaSxOgie8uVObiP0LxD2FMokiR0X4=",
+        "lastModified": 1715269120,
+        "narHash": "sha256-AcN0Zv7E2mPpB4JsKCFeKz7X0VQgFSCFXplsxj6oens=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "b85b9c3afa1bfee0150580eb76c52e572a85a6a9",
+        "rev": "8960f1a63dab72f971044c217c6936cc527e679b",
         "type": "github"
       },
       "original": {
@@ -910,11 +910,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1715217605,
-        "narHash": "sha256-gX0Fdx6S2gcgVchI2FjCi2ZyDzYeTbzZieP/fKXrR4I=",
+        "lastModified": 1715304061,
+        "narHash": "sha256-iFtaM+G51qYTBb1rroD/TBx5f2/oHjDBUIEptQJsKmo=",
         "owner": "Infinidoge",
         "repo": "nix-minecraft",
-        "rev": "190e89258b9a9bca018427ce04a48109dd1c610b",
+        "rev": "6ec9f2bac00a7f5ca7133303b926d7d67a2e6167",
         "type": "github"
       },
       "original": {
