@@ -68,6 +68,7 @@ in {
       syncthingtray
       telegram-desktop_git
       tor-browser-bundle-bin
+      trayscale
       usbutils
       vorta
       vulkan-tools
