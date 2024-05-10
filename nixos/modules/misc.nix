@@ -162,6 +162,7 @@ in {
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock origin
         "clngdbkpkpeebahjckkjfobafhncgmne" # Stylus
         "doojmbjmlfjjnbmnoijecmcbfeoakpjm" # NoScript
+        "fpnmgdkabkmnadcjpehmlllkndpkmiak" # Wayback Machine
         "hipekcciheckooncpjeljhnekcoolahp" # Tabliss
         "hlepfoohegkhhmjieoechaddaejaokhf" # Github Refined
         "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly

@@ -43,15 +43,6 @@
     };
   };
 
-  # Secrets for the docker-compose runner
-  sops = {
-    secrets."api_keys/oracle-dragon" = {
-      mode = "0600";
-      owner = config.users.users.nico.name;
-      path = "/var/docker-compose-runner/oracle-dragon/.env";
-    };
-  };
-
   # Garuda Nix subsystem options
   garuda = {
     hardware.enable = false;

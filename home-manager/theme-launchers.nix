@@ -251,22 +251,5 @@ in {
       X-KDE-Protocols=file,http,ftp,webdav,webdavs
       X-KDE-SubstituteUID=false
     '';
-    "${appdir}/goldwarden.desktop".text = ''
-      [Desktop Entry]
-      Categories=GNOME;GTK;Utility;
-      Comment=A Bitwarden compatible desktop password manager
-      Exec=/nix/store/1dkmfachcp4fx06kqc2zdc1885pn0jx0-goldwarden-0.2.13-unstable-2024-03-14/bin/goldwarden-gui
-      Icon=bitwarden
-      Keywords=password;ssh;auto-type;keys;
-      Name=Goldwarden
-      NoDisplay=false
-      Path=
-      StartupNotify=true
-      Terminal=false
-      TerminalOptions=
-      Type=Application
-      X-KDE-SubstituteUID=false
-      X-KDE-Username=
-    '';
   };
 }

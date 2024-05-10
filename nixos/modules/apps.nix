@@ -13,6 +13,7 @@ in {
   environment.systemPackages = with pkgs; let
     required-packages = [
       age
+      atuin
       bind
       btop
       cached-nix-shell

@@ -45,7 +45,7 @@ in {
     # Wireshark
     programs.wireshark.enable = true;
 
-    # Libvirt & Podman with docker alias
+    # Virtualbox KVM & Podman with docker alias
     virtualisation = {
       containers.enable = true;
       lxd.enable = false;

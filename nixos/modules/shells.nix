@@ -36,9 +36,11 @@ in {
         '';
         "gpl" = "${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
         "grep" = "${pkgs.ugrep}/bin/ugrep";
-        "nix" = "${pkgs.nix}/bin/nix --verbose --print-build-logs"; # https://github.com/NixOS/nix/pull/8323
       };
       fish = {
+        interactiveShellInit = ''
+          atuin init fish | source
+        '';
         shellAbbrs = {
           "bootusb" = ''
             sudo qemu-kvm \
@@ -51,7 +53,6 @@ in {
         };
         shellAliases = {
           "grep" = "${pkgs.ugrep}/bin/ugrep";
-          "nix" = "${pkgs.nix}/bin/nix --verbose --print-build-logs"; # https://github.com/NixOS/nix/pull/8323
         };
       };
     };
