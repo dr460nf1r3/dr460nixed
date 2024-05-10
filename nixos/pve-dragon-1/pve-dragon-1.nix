@@ -50,6 +50,17 @@
     settings.options.urAccepted = -1;
   };
 
+  # Paperless document management
+  services.paperless = {
+    enable = true;
+    passwordFile = config.sops.secrets."passwords/paperless".path;
+  };
+  sops.secrets."passwords/paperless" = {
+    mode = "0600";
+    owner = config.users.users.paperless.name;
+    path = "/run/secrets/cloudflared/pve-dragon-1/cred";
+  };
+
   # Cloudflared tunnel configurations
   services.cloudflared = {
     enable = true;
