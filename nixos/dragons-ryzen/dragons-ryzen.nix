@@ -1,5 +1,4 @@
 {
-  lib,
   inputs,
   pkgs,
   ...
@@ -24,28 +23,13 @@
 
   # The services to use on this machine
   services = {
-    # This is going to be a device with autologin
-    # straight to desktop. No display manager needed.
-    displayManager = {
-      enable = lib.mkForce false;
-      sddm.enable = false;
-    };
-    getty.autologinUser = "nico";
     hardware.bolt.enable = false;
     pipewire.lowLatency = {
       enable = true;
       quantum = 64;
       rate = 48000;
     };
-    xserver.enable = false;
   };
-
-  # Needed for autologin in TTY to start the desktop session
-  programs.bash.loginShellInit = ''
-    if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-        exec startplasma-wayland
-    fi
-  '';
 
   # I store my flake here
   programs.nh.flake = /home/nico/Documents/misc/dr460nixed;
@@ -79,10 +63,17 @@
   };
 
   # Garuda Nix subsystem modules
-  garuda.btrfs-maintenance = {
-    deduplication = false;
-    enable = true;
-    uuid = "7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
+  garuda = {
+    btrfs-maintenance = {
+      deduplication = false;
+      enable = true;
+      uuid = "7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
+    };
+    noSddmAutologin = {
+      enable = true;
+      startupCommand = "startplasma-wayland";
+      user = "nico";
+    };
   };
 
   # Chaotic Nyx stuff

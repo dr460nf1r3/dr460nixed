@@ -22,9 +22,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # Only install fonts I personally use
-    fonts.enableDefaultPackages = false;
-
     # Enable the Catppuccinified desktops settings
     garuda.catppuccin.enable = true;
 
@@ -65,8 +62,5 @@ in {
       replaceColors = true;
       sidebarConfig = true;
     };
-
-    # Bitwarden client for additional convenience
-    programs.goldwarden.enable = true;
   };
 }
