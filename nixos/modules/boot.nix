@@ -89,7 +89,7 @@ in {
             then true
             else false;
           enableCryptodisk = true;
-          useOSProber = true;
+          useOSProber = false;
         };
         generationsDir.copyKernels = mkIf cfg.enable true;
         timeout = 1;
