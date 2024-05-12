@@ -7,6 +7,7 @@
   imports = ["${toString inputs.nixpkgs}/nixos/modules/virtualisation/google-compute-image.nix"];
 
   dr460nixed = {
+    auto-upgrade = false;
     grub = {
       device = "/dev/sda";
       enable = true;
@@ -26,8 +27,13 @@
   # Clashing gcp.nix / GNS
   boot.loader.timeout = lib.mkForce 0;
 
-  # Swap to not die on simple Nix expressions
+  # Swap and lower priority to not die on simple Nix expressions
   swapDevices = [{device = "/swapfile";}];
+  nix = {
+    daemonCPUSchedPolicy = "idle";
+    daemonIOSchedClass = "idle";
+    daemonIOSchedPriority = 7;
+  };
 
   # Since this machine is super slow, its only going to be
   # an uptime monitor
@@ -39,6 +45,18 @@
     };
   };
 
+  # Lets try to workaround failing DNS lookups in Uptime Kuma
+  # by caching DNS requests locally
+  # https://github.com/louislam/uptime-kuma/issues/4731#issuecomment-2089461474
+  services.resolved = {
+    enable = true;
+    extraConfig = ''
+      [Resolve]
+      DNS=100.100.100.100 1.1.1.1
+      Domains=~.
+    '';
+  };
+
   # Cloudflared tunnel configurations
   services.cloudflared = {
     enable = true;
@@ -48,7 +66,7 @@
         default = "http_status:404";
         ingress = {
           "uptime.dr460nf1r3.org" = {
-            service = "http://127.0.0.1:3001";
+            service = "http://localhost:3001";
           };
         };
       };
