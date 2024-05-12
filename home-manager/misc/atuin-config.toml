@@ -1,0 +1,75 @@
+auto_sync = true
+ctrl_n_shortcuts = false
+cwd_filter = []
+db_path = "~/.local/share/atuinhistory.db"
+dialect = "uk"
+enter_accept = true
+exit_mode = "return-original"
+filter_mode = "global"
+filter_mode_shell_up_key_binding = "global"
+history_filter = [
+  "^secret-cmd",
+  "^innocuous-cmd .*--secret=.+",
+]
+history_format = "{time}\t{command}\t{duration}"
+inline_height = 10
+invert = false
+key_path = "~/.local/share/atuin/key"
+keymap_cursor = { emacs = "blink-block", vim_insert = "blink-block", vim_normal = "steady-block" }
+keymap_mode = "auto"
+local_timeout = 5
+max_preview_height = 4
+network_connect_timeout = 5
+network_timeout = 5
+prefers_reduced_motion = false
+scroll_context_lines = 1
+search_mode = "fuzzy"
+search_mode_shell_up_key_binding = "fuzzy"
+secrets_filter = true
+session_path = "~/.local/share/atuin/session"
+show_help = false
+show_preview = false
+show_tabs = true
+style = "auto"
+sync_address = "https://api.atuin.sh"
+sync_frequency = "30m"
+timezone = "local"
+update_check = false
+word_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+word_jump_mode = "emacs"
+workspaces = false
+
+[stats]
+common_prefix = ["sudo"]
+common_subcommands = [
+  "apt",
+  "cargo",
+  "composer",
+  "dnf",
+  "docker",
+  "git",
+  "go",
+  "ip",
+  "kubectl",
+  "nix",
+  "nmcli",
+  "npm",
+  "pecl",
+  "pnpm",
+  "podman",
+  "port",
+  "systemctl",
+  "tmux",
+  "yarn",
+]
+ignored_commands = [
+  "cd",
+  "ls",
+  "micro",
+]
+
+[keys]
+scroll_exits = false
+
+[sync]
+records = true

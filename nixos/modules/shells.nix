@@ -38,9 +38,6 @@ in {
         "grep" = "${pkgs.ugrep}/bin/ugrep";
       };
       fish = {
-        interactiveShellInit = ''
-          atuin init fish | source
-        '';
         shellAbbrs = {
           "bootusb" = ''
             sudo qemu-kvm \

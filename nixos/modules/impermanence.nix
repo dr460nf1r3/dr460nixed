@@ -190,6 +190,7 @@
         ".local/share/Steam"
         ".local/share/TelegramDesktop"
         ".local/share/Vorta"
+        ".local/share/atuin"
         ".local/share/baloo"
         ".local/share/containers"
         ".local/share/direnv"

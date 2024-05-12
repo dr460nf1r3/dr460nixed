@@ -64,10 +64,14 @@
     };
   };
 
+  # Atuin config
+  home.file.".config/atuin/config.toml".source = ./misc/atuin-config.toml;
+
   # I don't use docs, so just disable them
   manual = {
     html.enable = false;
     json.enable = false;
     manpages.enable = false;
   };
+  programs.man.enable = false;
 }
