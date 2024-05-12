@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }: {
   # These are the services I use on this machine
@@ -82,9 +83,12 @@
   };
 
   # Required for using app connectors in Tailscale
-  boot.kernel.sysctl = {
-    "net.ipv4.ip_forward" = 1;
-    "net.ipv6.conf.all.forwarding" = 1;
+  boot = {
+    kernel.sysctl = {
+      "net.ipv4.ip_forward" = 1;
+      "net.ipv6.conf.all.forwarding" = 1;
+    };
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   system.stateVersion = "22.11";

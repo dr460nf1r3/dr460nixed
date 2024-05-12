@@ -36,7 +36,7 @@ in {
     '';
 
     # The excellent CachyOS kernel
-    boot.kernelPackages = pkgs.linuxPackages_cachyos-server;
+    boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_cachyos-server;
 
     # Automatic server upgrades
     dr460nixed.auto-upgrade = lib.mkDefault true;

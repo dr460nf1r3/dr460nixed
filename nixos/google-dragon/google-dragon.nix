@@ -61,7 +61,7 @@
   services.cloudflared = {
     enable = true;
     tunnels = {
-      "e2b1b2eb-aeb5-4886-b031-7b21213ca8b2" = {
+      "12879bb4-1707-445d-a8e4-cb38c222d43d" = {
         credentialsFile = config.sops.secrets."cloudflared/google-dragon/cred".path;
         default = "http_status:404";
         ingress = {
@@ -75,7 +75,7 @@
   sops.secrets."cloudflared/google-dragon/cred" = {
     mode = "0600";
     owner = config.users.users.cloudflared.name;
-    path = "/run/secrets/cloudflared/google-dragon/cred";
+    path = "/var/lib/cloudflared/cred";
   };
 
   # NixOS stuff
