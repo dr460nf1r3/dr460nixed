@@ -35,11 +35,14 @@ in {
       fastfetch -l nixos
     '';
 
+    # The excellent CachyOS kernel
+    boot.kernelPackages = pkgs.linuxPackages_cachyos-server;
+
     # Automatic server upgrades
-    dr460nixed.auto-upgrade = true;
+    dr460nixed.auto-upgrade = lib.mkDefault true;
 
     # No custom aliases
-    dr460nixed.shells.enable = false;
+    dr460nixed.shells.enable = lib.mkDefault false;
 
     # These aren't needed on servers, but default on GNS
     garuda = {
@@ -147,6 +150,12 @@ in {
     networking.firewall = mkIf config.services.nginx.enable {
       allowedTCPPorts = [80 443];
       allowedUDPPorts = [443];
+    };
+
+    # Make cloudflared happy (https://github.com/lucas-clemente/quic-go/wiki/UDP-Receive-Buffer-Size)
+    boot.kernel.sysctl = lib.mkIf config.services.cloudflared.enable {
+      "net.core.rmem_max" = 7500000;
+      "net.core.wmem_max" = 7500000;
     };
 
     # Enable this so we don't get annoyed by the ACME TOS

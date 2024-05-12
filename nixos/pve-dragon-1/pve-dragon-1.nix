@@ -58,7 +58,7 @@
   sops.secrets."passwords/paperless" = {
     mode = "0600";
     owner = config.users.users.paperless.name;
-    path = "/run/secrets/cloudflared/pve-dragon-1/cred";
+    path = "/var/lib/paperless/cred";
   };
 
   # Cloudflared tunnel configurations
@@ -72,6 +72,9 @@
           "code.dr460nf1r3.org" = {
             service = "http://localhost:4444";
           };
+          "paperless.dr460nf1r3.org" = {
+            service = "http://localhost:28981";
+          };
         };
       };
     };
@@ -79,7 +82,7 @@
   sops.secrets."cloudflared/pve-dragon-1/cred" = {
     mode = "0600";
     owner = config.users.users.cloudflared.name;
-    path = "/run/secrets/cloudflared/pve-dragon-1/cred";
+    path = "/var/lib/cloudflared/cred";
   };
 
   # For running containers from within code-server
