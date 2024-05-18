@@ -166,6 +166,7 @@ in {
         "hipekcciheckooncpjeljhnekcoolahp" # Tabliss
         "hlepfoohegkhhmjieoechaddaejaokhf" # Github Refined
         "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly
+        "mdjgbjnbdnhneejmmaabmccfehigbjbe" # Cloudflare Optics
         "mdjildafknihdffpkfmmpnpoiajfjnjd" # Consent-O-Matic
         "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
@@ -186,7 +187,7 @@ in {
 
     # Enhabce performance tweaks
     garuda.performance-tweaks.enable = mkIf cfg.performance true;
-    boot.kernelPackages = mkIf cfg.performance pkgs.linuxPackages_cachyos;
+    boot.kernelPackages = mkIf cfg.performance pkgs.linuxPackages_cachyos-lto;
 
     # /etc/hosts based adblocker
     networking.stevenBlackHosts = mkIf cfg.adblock {

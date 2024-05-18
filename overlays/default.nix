@@ -13,6 +13,7 @@
           "--ignore-gpu-blacklist"
           "--smooth-scrolling"
         ];
+        enableWideVine = true;
       };
       # OBS with plugins
       obs-studio-wrapped = final.wrapOBS.override {inherit (final) obs-studio;} {
