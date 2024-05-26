@@ -28,7 +28,7 @@ in {
     # Enable the dr460nized desktops settings
     garuda.dr460nized.enable = true;
 
-    # # Kernel paramters & settings
+    # # Kernel parameters & settings
     boot.kernelParams = ["mitigations=off"];
 
     # Fancy themed, enhanced Spotify

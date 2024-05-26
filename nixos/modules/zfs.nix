@@ -24,7 +24,7 @@ in {
         default = false;
         type = types.bool;
         description = mdDoc ''
-          Enables sending status reports about ZFS maintainance via email.
+          Enables sending status reports about ZFS maintenance via email.
         '';
       };
   };

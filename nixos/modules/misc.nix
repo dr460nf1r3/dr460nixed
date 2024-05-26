@@ -185,7 +185,7 @@ in {
     # Chromium gate (thanks Pedro!)
     environment.systemPackages = mkIf cfg.chromium-gate [chromium-gate];
 
-    # Enhabce performance tweaks
+    # Enhance performance tweaks
     garuda.performance-tweaks.enable = mkIf cfg.performance true;
     boot.kernelPackages = mkIf cfg.performance pkgs.linuxPackages_cachyos-lto;
 

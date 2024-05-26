@@ -1,4 +1,4 @@
-{inputs, ...}: {
+_: {
   # Override applications with useful things I want to have
   nixpkgs.overlays = let
     thisConfigsOverlay = final: _prev: {
@@ -26,7 +26,6 @@
       };
     };
   in [
-    inputs.catppuccin-vsc.overlays.default
     thisConfigsOverlay
   ];
 }

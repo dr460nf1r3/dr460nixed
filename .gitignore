@@ -1,5 +1,7 @@
 *.iso
+.devenv
 .direnv
 .pre-commit-config.yaml
+devenv.local.nix
 result
 result/

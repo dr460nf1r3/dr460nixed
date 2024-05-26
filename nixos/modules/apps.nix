@@ -1,12 +1,10 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
 }:
 with lib; let
-  catppuccinifier-cli = inputs.catppuccinifier.packages.x86_64-linux.cli;
   cfg = config.dr460nixed;
 in {
   # These are the packages I always need
@@ -99,7 +97,9 @@ in {
       nixos-generators
       nixpkgs-lint
       nixpkgs-review
-      nodejs_22 # 24 not available
+      nodePackages_latest.pnpm
+      nodePackages_latest.node-gyp
+      nodejs_22
       podman-compose
       podman-tui
       speedcrunch
@@ -143,7 +143,9 @@ in {
             }
           ];
       })
-      yarn
+      (yarn.override {
+        nodejs = null; # Use my system nodejs
+      })
     ])
     ++ optionals cfg.yubikey (with pkgs; [
       yubikey-manager-qt

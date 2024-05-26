@@ -133,17 +133,24 @@ in {
         flake-registry = "/etc/nix/registry.json";
 
         substituters = [
-          "https://cache.nixos.org/" # official binary cache (yes the trailing slash is really neccacery)
+          "https://cache.garnix.io" # extra things here and there
+          "https://catppuccin.cachix.org" # a cache for Catppuccin-nix
+          "https://devenv.cachix.org" # Devenv cache
           "https://nix-community.cachix.org" # nix-community cache
           "https://nix-gaming.cachix.org" # nix-gaming
           "https://nixpkgs-unfree.cachix.org" # unfree-package cache
           "https://numtide.cachix.org" # another unfree package cache
-          "https://catppuccin.cachix.org" # a cache for ctp nix
-          "https://pre-commit-hooks.cachix.org" # pre commit hooks
-          "https://cache.garnix.io" # extra things here and there
+          "https://pre-commit-hooks.cachix.org" # pre-commit hooks
         ];
-
-        trusted-public-keys = ["cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="];
+        trusted-public-keys = [
+          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+          "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
+          "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+          "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+          "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
+          "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
+          "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
+        ];
       };
     };
 
@@ -157,15 +164,15 @@ in {
     environment = {
       etc = with inputs; {
         # set channels (backwards compatibility)
-        "nix/flake-channels/system".source = self;
-        "nix/flake-channels/nixpkgs".source = nixpkgs;
         "nix/flake-channels/home-manager".source = home-manager;
+        "nix/flake-channels/nixpkgs".source = nixpkgs;
+        "nix/flake-channels/system".source = self;
 
         # preserve current flake in /etc
         "nixos/flake".source = self;
       };
 
-      # Git is reqired for flakes, and cachix for binary substituters
+      # Git is required for flakes, and cachix for binary substituters
       systemPackages = with pkgs; [git cachix];
     };
 

@@ -178,7 +178,7 @@ in {
 
     # SUID Sandbox
     security.chromiumSuidSandbox.enable = mkIf cfg.chromium true;
-    # Enhabce performance tweaks
+    # Enhance performance tweaks
     garuda.performance-tweaks = lib.mkIf cfg.performance {
       cachyos-kernel = true;
       enable = true;

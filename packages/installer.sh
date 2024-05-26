@@ -57,7 +57,7 @@ disko() {
 4) ZFS (recommended)
 5) ZFS encrypted"
 
-	read -rp "Enter the numer of the partition layout you want to use: " _LAYOUT
+	read -rp "Enter the number of the partition layout you want to use: " _LAYOUT
 
 	# https://stackoverflow.com/questions/3601515/how-to-check-if-a-variable-is-set-in-bash
 	while [ -z "${DISKO_MODULE+x}" ]; do
@@ -78,7 +78,7 @@ disko() {
 			DISKO_MODULE=zfs
 			;;
 		*)
-			read -rp "Invalid input. Enter the numer of the partition layout you want to use: " _LAYOUT
+			read -rp "Invalid input. Enter the number of the partition layout you want to use: " _LAYOUT
 			;;
 		esac
 	done

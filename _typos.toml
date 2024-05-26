@@ -1,0 +1,13 @@
+[default]
+extend-ignore-identifiers-re = [
+    "crypted",
+    "immortalis",
+    "odf"
+]
+
+[files]
+extend-exclude = [
+    "CHANGELOG.md",
+    "global.yaml",
+    "*.css"
+]
