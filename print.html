@@ -341,7 +341,7 @@ They may be inspected by browsing the "modules" section of this documentation.</
 <ul>
 <li>Sets up an environment to install the system from</li>
 <li>Asks for basic information such as the disk to be used or the username</li>
-<li>Sets up the partition layout via <a href="https://github.com/nix-community/disko">disko</a> and mounting the partitons to <code>/mnt</code></li>
+<li>Sets up the partition layout via <a href="https://github.com/nix-community/disko">disko</a> and mounting the partitions to <code>/mnt</code></li>
 <li>Provides a basic, quite generic dr460nixed template and customizes it based on previous choices</li>
 <li>Executes the installation</li>
 </ul>
@@ -404,7 +404,7 @@ disko() {
 4) ZFS (recommended)
 5) ZFS encrypted"
 
-	read -rp "Enter the numer of the partition layout you want to use: " _LAYOUT
+	read -rp "Enter the number of the partition layout you want to use: " _LAYOUT
 
 	# https://stackoverflow.com/questions/3601515/how-to-check-if-a-variable-is-set-in-bash
 	while [ -z "${DISKO_MODULE+x}" ]; do
@@ -425,7 +425,7 @@ disko() {
 			DISKO_MODULE=zfs
 			;;
 		*)
-			read -rp "Invalid input. Enter the numer of the partition layout you want to use: " _LAYOUT
+			read -rp "Invalid input. Enter the number of the partition layout you want to use: " _LAYOUT
 			;;
 		esac
 	done
@@ -505,19 +505,18 @@ finish
 <div style="break-before: page; page-break-before: always;"></div><h1 id="apps"><a class="header" href="#apps">Apps</a></h1>
 <pre><code class="language-nix">{
   config,
-  inputs,
   lib,
   pkgs,
   ...
 }:
 with lib; let
-  catppuccinifier-cli = inputs.catppuccinifier.packages.x86_64-linux.cli;
   cfg = config.dr460nixed;
 in {
   # These are the packages I always need
   environment.systemPackages = with pkgs; let
     required-packages = [
       age
+      atuin
       bind
       btop
       cached-nix-shell
@@ -573,6 +572,7 @@ in {
       syncthingtray
       telegram-desktop_git
       tor-browser-bundle-bin
+      trayscale
       usbutils
       vorta
       vulkan-tools
@@ -602,7 +602,9 @@ in {
       nixos-generators
       nixpkgs-lint
       nixpkgs-review
-      nodejs_22 # 24 not available
+      nodePackages_latest.pnpm
+      nodePackages_latest.node-gyp
+      nodejs_22
       podman-compose
       podman-tui
       speedcrunch
@@ -646,7 +648,9 @@ in {
             }
           ];
       })
-      yarn
+      (yarn.override {
+        nodejs = null; # Use my system nodejs
+      })
     ])
     ++ optionals cfg.yubikey (with pkgs; [
       yubikey-manager-qt
@@ -1066,7 +1070,7 @@ in {
             then true
             else false;
           enableCryptodisk = true;
-          useOSProber = true;
+          useOSProber = false;
         };
         generationsDir.copyKernels = mkIf cfg.enable true;
         timeout = 1;
@@ -1182,6 +1186,9 @@ in {
         enable = true;
         lfs.enable = true;
       };
+      fish.interactiveShellInit = ''
+        atuin init fish | source
+      '';
       # The GnuPG agent
       gnupg.agent = {
         enable = true;
@@ -1235,9 +1242,6 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # Only install fonts I personally use
-    fonts.enableDefaultPackages = false;
-
     # Enable the Catppuccinified desktops settings
     garuda.catppuccin.enable = true;
 
@@ -1278,9 +1282,6 @@ in {
       replaceColors = true;
       sidebarConfig = true;
     };
-
-    # Bitwarden client for additional convenience
-    programs.goldwarden.enable = true;
   };
 }
 </code></pre>
@@ -1416,7 +1417,7 @@ in {
     # Wireshark
     programs.wireshark.enable = true;
 
-    # Libvirt &amp; Podman with docker alias
+    # Virtualbox KVM &amp; Podman with docker alias
     virtualisation = {
       containers.enable = true;
       lxd.enable = false;
@@ -1993,6 +1994,7 @@ in {
         ".local/share/Steam"
         ".local/share/TelegramDesktop"
         ".local/share/Vorta"
+        ".local/share/atuin"
         ".local/share/baloo"
         ".local/share/containers"
         ".local/share/direnv"
@@ -2378,17 +2380,24 @@ in {
         flake-registry = "/etc/nix/registry.json";
 
         substituters = [
-          "https://cache.nixos.org/" # official binary cache (yes the trailing slash is really neccacery)
+          "https://cache.garnix.io" # extra things here and there
+          "https://catppuccin.cachix.org" # a cache for Catppuccin-nix
+          "https://devenv.cachix.org" # Devenv cache
           "https://nix-community.cachix.org" # nix-community cache
           "https://nix-gaming.cachix.org" # nix-gaming
           "https://nixpkgs-unfree.cachix.org" # unfree-package cache
           "https://numtide.cachix.org" # another unfree package cache
-          "https://catppuccin.cachix.org" # a cache for ctp nix
-          "https://pre-commit-hooks.cachix.org" # pre commit hooks
-          "https://cache.garnix.io" # extra things here and there
+          "https://pre-commit-hooks.cachix.org" # pre-commit hooks
         ];
-
-        trusted-public-keys = ["cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="];
+        trusted-public-keys = [
+          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+          "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
+          "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+          "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+          "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
+          "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
+          "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
+        ];
       };
     };
 
@@ -2402,15 +2411,15 @@ in {
     environment = {
       etc = with inputs; {
         # set channels (backwards compatibility)
-        "nix/flake-channels/system".source = self;
-        "nix/flake-channels/nixpkgs".source = nixpkgs;
         "nix/flake-channels/home-manager".source = home-manager;
+        "nix/flake-channels/nixpkgs".source = nixpkgs;
+        "nix/flake-channels/system".source = self;
 
         # preserve current flake in /etc
         "nixos/flake".source = self;
       };
 
-      # Git is reqired for flakes, and cachix for binary substituters
+      # Git is required for flakes, and cachix for binary substituters
       systemPackages = with pkgs; [git cachix];
     };
 
@@ -2540,11 +2549,14 @@ in {
       fastfetch -l nixos
     '';
 
+    # The excellent CachyOS kernel
+    boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_cachyos-server;
+
     # Automatic server upgrades
-    dr460nixed.auto-upgrade = true;
+    dr460nixed.auto-upgrade = lib.mkDefault true;
 
     # No custom aliases
-    dr460nixed.shells.enable = false;
+    dr460nixed.shells.enable = lib.mkDefault false;
 
     # These aren't needed on servers, but default on GNS
     garuda = {
@@ -2654,6 +2666,12 @@ in {
       allowedUDPPorts = [443];
     };
 
+    # Make cloudflared happy (https://github.com/lucas-clemente/quic-go/wiki/UDP-Receive-Buffer-Size)
+    boot.kernel.sysctl = lib.mkIf config.services.cloudflared.enable {
+      "net.core.rmem_max" = 7500000;
+      "net.core.wmem_max" = 7500000;
+    };
+
     # Enable this so we don't get annoyed by the ACME TOS
     security.acme = {
       acceptTerms = true;
@@ -2701,7 +2719,6 @@ in {
         '';
         "gpl" = "${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
         "grep" = "${pkgs.ugrep}/bin/ugrep";
-        "nix" = "${pkgs.nix}/bin/nix --verbose --print-build-logs"; # https://github.com/NixOS/nix/pull/8323
       };
       fish = {
         shellAbbrs = {
@@ -2716,7 +2733,6 @@ in {
         };
         shellAliases = {
           "grep" = "${pkgs.ugrep}/bin/ugrep";
-          "nix" = "${pkgs.nix}/bin/nix --verbose --print-build-logs"; # https://github.com/NixOS/nix/pull/8323
         };
       };
     };
@@ -3060,8 +3076,10 @@ in {
     nscd = uidGid 990;
     plocate = uidGid 989;
     polkituser = uidGid 988;
+    paperless = uidGid 966;
     podman = uidGid 968;
     promtail = uidGid 987;
+    redis-paperless = uidGid 965;
     rtkit = uidGid 986;
     sshd = uidGid 985;
     systemd-coredump = uidGid 984;
@@ -3203,7 +3221,7 @@ in {
         default = false;
         type = types.bool;
         description = mdDoc ''
-          Enables sending status reports about ZFS maintainance via email.
+          Enables sending status reports about ZFS maintenance via email.
         '';
       };
   };

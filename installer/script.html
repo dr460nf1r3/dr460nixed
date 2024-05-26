@@ -187,7 +187,7 @@
 <ul>
 <li>Sets up an environment to install the system from</li>
 <li>Asks for basic information such as the disk to be used or the username</li>
-<li>Sets up the partition layout via <a href="https://github.com/nix-community/disko">disko</a> and mounting the partitons to <code>/mnt</code></li>
+<li>Sets up the partition layout via <a href="https://github.com/nix-community/disko">disko</a> and mounting the partitions to <code>/mnt</code></li>
 <li>Provides a basic, quite generic dr460nixed template and customizes it based on previous choices</li>
 <li>Executes the installation</li>
 </ul>
@@ -250,7 +250,7 @@ disko() {
 4) ZFS (recommended)
 5) ZFS encrypted"
 
-	read -rp "Enter the numer of the partition layout you want to use: " _LAYOUT
+	read -rp "Enter the number of the partition layout you want to use: " _LAYOUT
 
 	# https://stackoverflow.com/questions/3601515/how-to-check-if-a-variable-is-set-in-bash
 	while [ -z "${DISKO_MODULE+x}" ]; do
@@ -271,7 +271,7 @@ disko() {
 			DISKO_MODULE=zfs
 			;;
 		*)
-			read -rp "Invalid input. Enter the numer of the partition layout you want to use: " _LAYOUT
+			read -rp "Invalid input. Enter the number of the partition layout you want to use: " _LAYOUT
 			;;
 		esac
 	done
