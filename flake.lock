@@ -88,11 +88,11 @@
     },
     "catppuccin": {
       "locked": {
-        "lastModified": 1716337435,
-        "narHash": "sha256-eZqH1vLI9eKL/N5toXxOrQO80G0y4pWZrYCp472YBVQ=",
+        "lastModified": 1716934277,
+        "narHash": "sha256-BTRLOEcZnj2jLttdOq3AfKSvsFZNVKkrTpdpINDGW4k=",
         "owner": "catppuccin",
         "repo": "nix",
-        "rev": "fea5242c0eacc5efa81be0e36206a62e889dbd82",
+        "rev": "96681f62faa285ad0c8dce2cdae6b0a1d0a8f094",
         "type": "github"
       },
       "original": {
@@ -503,11 +503,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1716696234,
-        "narHash": "sha256-smTZFYTmQBBVxiq4Te2kwZv0P5xmMzH1PS6b76MkKNs=",
+        "lastModified": 1717089612,
+        "narHash": "sha256-nJ5HB4+DIqIp8KNPi0wVOBPNiDo5/xJioFYTI1cbjbI=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "121a3cc366687ccd5f2cc4d7d11f45688b8494ec",
+        "rev": "ad2b6c8466bf963e293f1f5142fc0f3768af216e",
         "type": "gitlab"
       },
       "original": {

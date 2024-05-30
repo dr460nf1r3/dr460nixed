@@ -87,9 +87,6 @@ in {
         enable = true;
         lfs.enable = true;
       };
-      fish.interactiveShellInit = ''
-        atuin init fish | source
-      '';
       # The GnuPG agent
       gnupg.agent = {
         enable = true;

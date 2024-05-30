@@ -211,12 +211,16 @@
             "pre-commit-hooks"
           ];
         };
+        difftastic.enable = true;
         enterShell = ''
           echo "Welcome to Dr460nixed's ❄️ devenv!"
         '';
-        languages.nix = {
-          enable = true;
-          lsp.package = pkgs.nixd;
+        languages = {
+          nix = {
+            enable = true;
+            lsp.package = pkgs.nixd;
+          };
+          shell.enable = true;
         };
         name = "Dr460nixed";
       };

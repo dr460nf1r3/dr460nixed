@@ -16,17 +16,16 @@ in {
         "b1" = "ssh -p23 u342919@u342919.${hetznerStoragebox}";
         "b2" = "ssh -p23 u358867@u358867.${hetznerStoragebox}";
         "g" = "mosh ${user}@google-dragon.emperor-mercat.ts.net";
-        "g1" = "ssh -p 666 ${user}@${immortalis}";
+        "g1" = "ssh -p666 ${user}@${immortalis}";
         "g2" = "ssh ${user}@${immortalis}";
-        "g3" = "ssh -p 223 ${user}@116.202.208.112";
-        "g4" = "ssh -p 224 ${user}@${immortalis}";
-        "g5" = "ssh -p 225 ${user}@${immortalis}";
-        "g6" = "ssh -p 226 ${user}@${immortalis}";
-        "g7" = "ssh -p 227 ${user}@116.202.208.112";
-        "g8" = "ssh -p 222 ${user}@${immortalis}";
-        "g9" = "ssh -p 229 ${user}@${immortalis} ${forwardPostgres}";
-        "m" = "mosh ${user}@garuda-mail.kanyu-bushi.ts.net";
-        "o" = "mosh ${user}@oracle-dragon.emperor-mercat.ts.net";
+        # "g3" got replaced when infra 4.0 got introduced
+        "g4" = "ssh -p224 ${user}@${immortalis}";
+        "g5" = "ssh -p225 ${user}@${immortalis}";
+        "g6" = "ssh -p226 ${user}@${immortalis}";
+        "g7" = "ssh -p227 ${user}@116.202.208.112";
+        "g8" = "ssh -p222 ${user}@${immortalis}";
+        "g9" = "ssh -p229 ${user}@${immortalis} ${forwardPostgres}";
+        "m" = "ssh -p1022 ${user}@94.16.112.218";
       };
     };
     # Fish receives auto-expanding abbreviations (much cooler!)
@@ -36,17 +35,16 @@ in {
         "b1" = "ssh -p23 u342919@u342919.${hetznerStoragebox}";
         "b2" = "ssh -p23 u358867@u358867.${hetznerStoragebox}";
         "g" = "mosh ${user}@google-dragon.emperor-mercat.ts.net";
-        "g1" = "ssh -p 666 ${user}@${immortalis}";
+        "g1" = "ssh -p666 ${user}@${immortalis}";
         "g2" = "ssh ${user}@${immortalis}";
-        "g3" = "ssh -p 223 ${user}@116.202.208.112";
-        "g4" = "ssh -p 224 ${user}@${immortalis}";
-        "g5" = "ssh -p 225 ${user}@${immortalis}";
-        "g6" = "ssh -p 226 ${user}@${immortalis}";
-        "g7" = "ssh -p 227 ${user}@116.202.208.112";
-        "g8" = "ssh -p 222 ${user}@${immortalis}";
-        "g9" = "ssh -p 229 ${user}@${immortalis} ${forwardPostgres}";
-        "m" = "mosh ${user}@garuda-mail.kanyu-bushi.ts.net";
-        "o" = "mosh ${user}@oracle-dragon.emperor-mercat.ts.net";
+        # "g3" got replaced when infra 4.0 got introduced
+        "g4" = "ssh -p224 ${user}@${immortalis}";
+        "g5" = "ssh -p225 ${user}@${immortalis}";
+        "g6" = "ssh -p226 ${user}@${immortalis}";
+        "g7" = "ssh -p227 ${user}@116.202.208.112";
+        "g8" = "ssh -p222 ${user}@${immortalis}";
+        "g9" = "ssh -p229 ${user}@${immortalis} ${forwardPostgres}";
+        "m" = "ssh -p1022 ${user}@94.16.112.218";
       };
     };
     gh = {
@@ -54,7 +52,7 @@ in {
       settings.git_protocol = "ssh";
     };
     git = {
-      diff-so-fancy.enable = true;
+      difftastic.enable = true;
       enable = true;
       extraConfig = {
         color.ui = "auto";

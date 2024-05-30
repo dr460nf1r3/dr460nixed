@@ -11,7 +11,6 @@ in {
   environment.systemPackages = with pkgs; let
     required-packages = [
       age
-      atuin
       bind
       btop
       cached-nix-shell
@@ -99,7 +98,7 @@ in {
       nixpkgs-review
       nodePackages_latest.pnpm
       nodePackages_latest.node-gyp
-      nodejs_22
+      nodejs_latest
       podman-compose
       podman-tui
       speedcrunch
