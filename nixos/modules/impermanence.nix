@@ -67,7 +67,6 @@
         "/var/lib/containers"
         "/var/lib/flatpak"
         "/var/lib/libvirt"
-        "/var/lib/pacman"
         "/var/lib/machines"
         "/var/lib/sddm"
         "/var/lib/systemd"

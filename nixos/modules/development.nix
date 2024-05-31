@@ -1,10 +1,23 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
   cfg = config.dr460nixed.development;
+
+  # Building inside a container is most likely the easiest solution
+  build-arch = pkgs.writeScriptBin "makepkg-up" ''
+    ${pkgs.podman}/bin/podman build -t arch-devel:latest - < ${dockerfile}
+  '';
+  dockerfile = ./static/Dockerfile;
+  enter-arch = pkgs.writeScriptBin "enter-arch" ''
+    ${pkgs.podman}/bin/podman run --rm -it -v $PWD:/build -w /build arch-devel:latest /bin/fish
+  '';
+  makepkg = pkgs.writeScriptBin "makepkg" ''
+    ${pkgs.podman}/bin/podman run --rm -it -v $PWD:/build -w /build arch-devel:latest makepkg "$@"
+  '';
 in {
   options.dr460nixed.development = {
     enable =
@@ -64,6 +77,13 @@ in {
         enableKvm = true;
       };
     };
+
+    # Archlinux development
+    environment.systemPackages = [
+      build-arch
+      enter-arch
+      makepkg
+    ];
 
     # Allow cross-compiling to aarch64
     boot.binfmt.emulatedSystems = ["aarch64-linux"];

@@ -91,6 +91,7 @@ in {
       mdbook-emojicodes
       mdbook-linkcheck
       mongodb-compass
+      nil
       nix-prefetch-git
       nixd
       nixos-generators
@@ -139,6 +140,12 @@ in {
               publisher = "tailscale";
               sha256 = "sha256-MKiCZ4Vu+0HS2Kl5+60cWnOtb3udyEriwc+qb/7qgUg=";
               version = "1.0.0";
+            }
+            {
+              name = "typescript-explicit-types";
+              publisher = "nick-lvov-dev";
+              sha256 = "sha256-9GA9JvFuwWs6QNdowwMLSp3E7J/zH89MGewNw8q+1QQ=";
+              version = "0.0.1";
             }
           ];
       })

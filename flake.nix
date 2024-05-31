@@ -13,13 +13,6 @@
   };
 
   inputs = {
-    # Archlinux development
-    archix = {
-      url = "github:SamLukeYes/archix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.xddxdd.follows = "xddxdd-nur";
-    };
-
     # Chaotic Nyx!
     chaotic-nyx = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
@@ -96,14 +89,6 @@
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
     };
 
-    # Both required for containers in devenv
-    mk-shell-bin.url = "github:rrbutani/nix-mk-shell-bin";
-    nix2container = {
-      url = "github:nlewo/nix2container";
-      inputs.flake-utils.follows = "chaotic-nyx/flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Nix gaming-related packages and modules
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
@@ -176,18 +161,6 @@
       inputs.flake-utils.follows = "chaotic-nyx/flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # While not using directly, this is pulled in by Archix flake
-    # Lets override the inputs with the already in place ones. Also,
-    # nvfetcher seems to be used to update packages of the flake and is not needed here
-    xddxdd-nur = {
-      url = "github:xddxdd/nur-packages";
-      inputs.flake-parts.follows = "flake-parts";
-      inputs.nix-index-database.follows = "nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nvfetcher.follows = "";
-      inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
-    };
   };
 
   outputs = {
@@ -197,7 +170,11 @@
     ...
   } @ inp: let
     inputs = inp;
-    perSystem = {pkgs, ...}: {
+    perSystem = {
+      lib,
+      pkgs,
+      ...
+    }: {
       devenv.shells.default = {
         imports = [
           ./devenv/pre-commit.nix
@@ -211,6 +188,8 @@
             "pre-commit-hooks"
           ];
         };
+        # https://github.com/cachix/devenv/issues/528#issuecomment-1556108767
+        containers = lib.mkForce {};
         difftastic.enable = true;
         enterShell = ''
           echo "Welcome to Dr460nixed's ❄️ devenv!"
