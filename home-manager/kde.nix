@@ -29,6 +29,7 @@ in {
 
   # Compatibility for GNOME apps
   dconf.enable = true;
+
   # Enable Kvantum theme and GTK & place a few bigger files
   home.file =
     if immutable

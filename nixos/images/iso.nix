@@ -10,13 +10,12 @@
   dr460nixed.desktops.enable = true;
 
   # Home-manager configuration for desktops
-  garuda.home-manager.modules = [../../home-manager/desktops.nix];
-
-  # CD's may use autologin for convenience
-  services.displayManager.sddm.settings = {
-    Autologin = {
-      User = "nixos";
-      Session = "plasma";
+  garuda = {
+    home-manager.modules = [../../home-manager/desktops.nix];
+    noSddmAutologin = {
+      enable = true;
+      startupCommand = "startplasma-wayland";
+      user = "nixos";
     };
   };
 
