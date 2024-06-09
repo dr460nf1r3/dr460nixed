@@ -86,8 +86,8 @@ in {
     ];
 
     # Local instances
-    networking.hostsFile = {
-      "127.0.0.1" = ["metrics.chaotic.local"];
+    networking.hosts = {
+      "127.0.0.1" = ["metrics.chaotic.local" "backend.chaotic.local" ];
     };
 
     # Allow cross-compiling to aarch64
