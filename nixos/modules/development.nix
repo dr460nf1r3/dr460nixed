@@ -13,10 +13,10 @@ with lib; let
   '';
   dockerfile = ./static/Dockerfile;
   enter-arch = pkgs.writeScriptBin "enter-arch" ''
-    ${pkgs.podman}/bin/podman run --rm -it -v $PWD:/build -w /build arch-devel:latest /bin/fish
+    ${pkgs.podman}/bin/podman run --rm -it -v $PWD:/build -w /build -u builder arch-devel:latest /bin/fish
   '';
   makepkg = pkgs.writeScriptBin "makepkg" ''
-    ${pkgs.podman}/bin/podman run --rm -it -v $PWD:/build -w /build arch-devel:latest makepkg "$@"
+    ${pkgs.podman}/bin/podman run --rm -it -v $PWD:/build -w /build -u builder arch-devel:latest makepkg "$@"
   '';
 in {
   options.dr460nixed.development = {
@@ -84,6 +84,11 @@ in {
       enter-arch
       makepkg
     ];
+
+    # Local instances
+    networking.hostsFile = {
+      "127.0.0.1" = ["metrics.chaotic.local"];
+    };
 
     # Allow cross-compiling to aarch64
     boot.binfmt.emulatedSystems = ["aarch64-linux"];
