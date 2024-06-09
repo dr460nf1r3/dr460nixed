@@ -20,7 +20,7 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
       - name: Install Nix 📦
-        uses: DeterminateSystems/nix-installer-action@v11
+        uses: DeterminateSystems/nix-installer-action@v12
         with:
           extra-conf: |
             accept-flake-config = true
