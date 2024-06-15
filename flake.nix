@@ -22,7 +22,6 @@
     # Devenv to set up a development environment
     devenv = {
       url = "github:cachix/devenv";
-      inputs.flake-compat.follows = "chaotic-nyx/flake-compat";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     };
@@ -81,10 +80,7 @@
     # Lanzaboote for secure boot support
     lanzaboote = {
       url = "github:nix-community/lanzaboote/master";
-      inputs.crane.follows = "chaotic-nyx/crane";
-      inputs.flake-compat.follows = "chaotic-nyx/flake-compat";
       inputs.flake-parts.follows = "flake-parts";
-      inputs.flake-utils.follows = "chaotic-nyx/flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
     };
