@@ -31,9 +31,6 @@
     };
   };
 
-  # I store my flake here
-  programs.nh.flake = /home/nico/Documents/misc/dr460nixed;
-
   # Enable a few selected custom settings
   dr460nixed = {
     chromium = true;
