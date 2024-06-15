@@ -75,7 +75,7 @@
   };
 
   # Atuin config
-  home.file.".config/fastfetch/config.json".source = ./misc/config.jsonc;
+  home.file.".config/fastfetch/config.jsonc".source = ./misc/config.jsonc;
 
   # I don't use docs, so just disable them
   manual = {

@@ -6,7 +6,7 @@
     "width": 24,
   },
   "display": {
-    "separator": " -> ",
+    "separator": " ",
   },
   "modules": [
     {
