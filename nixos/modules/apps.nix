@@ -63,6 +63,7 @@ in {
       okular
       qbittorrent
       rustdesk-flutter
+      signal-desktop
       syncthingtray
       telegram-desktop_git
       tor-browser-bundle-bin
