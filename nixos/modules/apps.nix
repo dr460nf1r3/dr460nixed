@@ -69,6 +69,7 @@ in {
       tor-browser-bundle-bin
       trayscale
       usbutils
+      vesktop
       vorta
       vulkan-tools
       xdg-utils
@@ -76,7 +77,7 @@ in {
     ])
     ++ optionals cfg.development.enable (with pkgs; [
       ansible
-      beekeeper-studio
+      # beekeeper-studio 404 on source as of 22.07
       distrobox
       dive
       docker-compose

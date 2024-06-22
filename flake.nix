@@ -17,11 +17,13 @@
     chaotic-nyx = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.home-manager.follows = "home-manager";
+      inputs.systems.follows = "systems";
     };
 
     # Devenv to set up a development environment
     devenv = {
       url = "github:cachix/devenv";
+      inputs.flake-compat.follows = "flake-compat";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     };
@@ -33,9 +35,18 @@
     };
 
     # Required by some other flakes
+    flake-compat.url = "github:edolstra/flake-compat";
+
+    # Required by some other flakes
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
+    # Another thing required by other flakes
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
     };
 
     # Garuda Linux flake - most of my system settings are here
@@ -80,7 +91,9 @@
     # Lanzaboote for secure boot support
     lanzaboote = {
       url = "github:nix-community/lanzaboote/master";
+      inputs.flake-compat.follows = "flake-compat";
       inputs.flake-parts.follows = "flake-parts";
+      inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
     };
@@ -101,15 +114,15 @@
     # Declarative Minecraft server management
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
-      inputs.flake-compat.follows = "chaotic-nyx/flake-compat";
-      inputs.flake-utils.follows = "chaotic-nyx/flake-utils";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Feature-rich and convenient fork of the Nix package manager
     nix-super = {
       url = "github:privatevoid-net/nix-super";
-      inputs.flake-compat.follows = "chaotic-nyx/flake-compat";
+      inputs.flake-compat.follows = "flake-compat";
       inputs.flake-parts.follows = "flake-parts";
       # inputs.nixpkgs.follows = "nixpkgs"; # Broken as of 240518, needs own instance
       inputs.pre-commit-hooks.follows = "pre-commit-hooks";
@@ -127,8 +140,8 @@
     # NixOS WSL
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
-      inputs.flake-compat.follows = "chaotic-nyx/flake-compat";
-      inputs.flake-utils.follows = "chaotic-nyx/flake-utils";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -138,7 +151,7 @@
     # Easy linting of the flake and all kind of other stuff
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
-      inputs.flake-compat.follows = "chaotic-nyx/flake-compat";
+      inputs.flake-compat.follows = "flake-compat";
       inputs.gitignore.follows = "gitignore";
       inputs.nixpkgs-stable.follows = "nixpkgs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -154,9 +167,12 @@
     # Spicetify
     spicetify-nix = {
       url = "github:the-argus/spicetify-nix";
-      inputs.flake-utils.follows = "chaotic-nyx/flake-utils";
+      inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Systems flake
+    systems.url = "github:nix-systems/x86_64-linux";
   };
 
   outputs = {
