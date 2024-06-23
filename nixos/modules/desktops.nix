@@ -62,5 +62,10 @@ in {
       replaceColors = true;
       sidebarConfig = true;
     };
+
+    # Disable QML cache for better performance / less issues
+    environment.variables = {
+      QML_DISABLE_DISK_CACHE = "1";
+    };
   };
 }

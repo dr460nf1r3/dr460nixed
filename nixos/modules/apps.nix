@@ -37,11 +37,12 @@ in {
   in
     required-packages
     ++ optionals cfg.desktops.enable (with pkgs; [
+      _64gram
       appimage-run
       aspell
       aspellDicts.de
       aspellDicts.en
-      catppuccinifier-cli
+      catppuccinifier-gui
       chromium-flagged
       gimp
       helvum
