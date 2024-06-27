@@ -67,11 +67,12 @@
       enable = true;
       uuid = "7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
     };
-    noSddmAutologin = {
-      enable = true;
-      startupCommand = "startplasma-wayland";
-      user = "nico";
-    };
+  };
+
+  # Autologin due to FDE
+  services.displayManager.autoLogin = {
+    enable = true;
+    user = "nico";
   };
 
   # Chaotic Nyx stuff
