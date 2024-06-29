@@ -140,7 +140,10 @@ in {
 
     # Enable the smartcard daemon
     hardware.gpgSmartcards.enable = mkIf cfg.yubikey true;
-    services.pcscd.enable = mkIf cfg.yubikey true;
+    services.pcscd = {
+      enable = mkIf cfg.yubikey true;
+      plugins = [pkgs.ccid];
+    };
     services.udev.packages = mkIf cfg.yubikey [pkgs.yubikey-personalization];
 
     # Configure as challenge-response for instant login,

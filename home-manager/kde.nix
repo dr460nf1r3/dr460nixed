@@ -30,21 +30,42 @@ in {
   # Compatibility for GNOME apps
   dconf.enable = true;
 
-  # Enable Kvantum theme and GTK & place a few bigger files
+  # Auto-start a few tray apps
+  systemd.user.services = {
+    jamesdsp = {
+      Unit = {
+        Description = "JamesDSP daemon";
+        Requires = ["dbus.service"];
+        After = ["graphical-session-pre.target"];
+        PartOf = ["graphical-session.target" "pipewire.service"];
+      };
+      Install.WantedBy = ["graphical-session.target"];
+      Service = {
+        ExecStart = "${pkgs.jamesdsp}/bin/jamesdsp --tray";
+        Restart = "on-failure";
+        RestartSec = 5;
+      };
+    };
+    trayscale = {
+      Unit = {
+        Description = "Trayscale daemon";
+        Requires = ["dbus.service"];
+        After = ["graphical-session-pre.target"];
+        PartOf = ["graphical-session.target" "pipewire.service"];
+      };
+      Install.WantedBy = ["graphical-session.target"];
+      Service = {
+        ExecStart = "${pkgs.trayscale}/bin/trayscale --hide-window";
+        Restart = "on-failure";
+        RestartSec = 5;
+      };
+    };
+  };
+
+  # Enable Kvantum theme and GTK & place a few bigger   files
   home.file =
     if immutable
     then {
-      "${configDir}/autostart/jdsp-gui.desktop".text = ''
-        [Desktop Entry]
-        Exec=${pkgs.jamesdsp}/bin/jamesdsp --tray
-        Icon=jamesdsp
-        Name=JamesDSP for Linux
-        StartupNotify=false
-        Terminal=false
-        Type=Application
-        X-KDE-autostart-after=panel
-        X-KDE-autostart-phase=2
-      '';
       "${configDir}/autostart/org.telegram.desktop".text = ''
         [Desktop Entry]
         Exec=${pkgs.tdesktop}/bin/telegram-desktop -autostart

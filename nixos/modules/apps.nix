@@ -37,7 +37,6 @@ in {
   in
     required-packages
     ++ optionals cfg.desktops.enable (with pkgs; [
-      _64gram
       appimage-run
       aspell
       aspellDicts.de
@@ -78,10 +77,9 @@ in {
     ])
     ++ optionals cfg.development.enable (with pkgs; [
       ansible
-      # beekeeper-studio 404 on source as of 22.07
-      distrobox
+      beekeeper-studio
+      distrobox_git
       dive
-      docker-compose
       fishPlugins.wakatime-fish
       gh
       gitkraken
@@ -100,8 +98,8 @@ in {
       nixos-generators
       nixpkgs-lint
       nixpkgs-review
-      nodePackages_latest.pnpm
       nodePackages_latest.node-gyp
+      nodePackages_latest.pnpm
       nodejs_latest
       podman-compose
       podman-tui
