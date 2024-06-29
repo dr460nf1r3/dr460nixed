@@ -7,16 +7,32 @@
 with lib; let
   cfg = config.dr460nixed.development;
 
-  # Building inside a container is most likely the easiest solution
-  build-arch = pkgs.writeScriptBin "makepkg-up" ''
-    ${pkgs.podman}/bin/podman build -t arch-devel:latest - < ${dockerfile}
+  # Distrobox setup scripts
+  additionalPackages = ''
+    --additional-packages "git tmux micro fish fastfetch wlroots"
   '';
-  dockerfile = ./static/Dockerfile;
-  enter-arch = pkgs.writeScriptBin "enter-arch" ''
-    ${pkgs.podman}/bin/podman run --rm -it -v $PWD:/build -w /build -u builder arch-devel:latest /bin/fish
-  '';
-  makepkg = pkgs.writeScriptBin "makepkg" ''
-    ${pkgs.podman}/bin/podman run --rm -it -v $PWD:/build -w /build -u builder arch-devel:latest makepkg "$@"
+  distrobox-setup = pkgs.writeScriptBin "distrobox-setup" ''
+    distrobox create --name arch \
+      --init --image quay.io/toolbx/arch-toolbox:latest \
+      --additional-packages "git tmux micro fish base-devel pacman-contrib fastfetch" \
+      --init-hooks "pacman-key --init && pacman-key --recv-key 0706B90D37D9B881 3056513887B78AEB --keyserver keyserver.ubuntu.com && pacman-key --lsign-key 0706B90D37D9B881 3056513887B78AEB && pacman --noconfirm -U 'https://geo-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' && pacman --noconfirm -U 'https://geo-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' && echo '[multilib]' >>/etc/pacman.conf && echo 'Include = /etc/pacman.d/mirrorlist' >>/etc/pacman.conf && echo '[garuda]' >>/etc/pacman.conf && echo 'Include = /etc/pacman.d/chaotic-mirrorlist' >>/etc/pacman.conf && echo '[chaotic-aur]' >>/etc/pacman.conf && echo 'Include = /etc/pacman.d/chaotic-mirrorlist' >>/etc/pacman.conf"
+    distrobox generate-entry arch
+    distrobox create --name debian \
+      --init --image quay.io/toolbx-images/debian-toolbox:unstable \
+      ${additionalPackages}
+    distrobox generate-entry debian
+    distrobox create --name steamos \
+      --init --image ghcr.io/linuxserver/steamos:latest \
+      ${additionalPackages}
+    distrobox generate-entry steamos
+    distrobox create --name void \
+      --init --image ghcr.io/void-linux/void-glibc-full:latest \
+      ${additionalPackages}
+    distrobox generate-entry void
+    distrobox create --name kali \
+      --init --image docker.io/kalilinux/kali-rolling:latest \
+      ${additionalPackages}
+    distrobox generate-entry kali
   '';
 in {
   options.dr460nixed.development = {
@@ -80,9 +96,7 @@ in {
 
     # Archlinux development
     environment.systemPackages = [
-      build-arch
-      enter-arch
-      makepkg
+      distrobox-setup
     ];
 
     # Local instances

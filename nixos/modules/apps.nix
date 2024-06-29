@@ -41,7 +41,7 @@ in {
       aspell
       aspellDicts.de
       aspellDicts.en
-      catppuccinifier-gui
+      catppuccinifier-cli
       chromium-flagged
       gimp
       helvum
