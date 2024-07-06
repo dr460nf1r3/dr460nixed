@@ -41,6 +41,7 @@ in {
       aspell
       aspellDicts.de
       aspellDicts.en
+      boxbuddy
       catppuccinifier-cli
       chromium-flagged
       gimp
