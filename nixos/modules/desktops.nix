@@ -37,7 +37,9 @@ in {
     # Fancy themed, enhanced Spotify
     programs.spicetify = {
       colorScheme = "catppuccin-mocha";
-      enable = true;
+      # spicetify-Comfy> rm: cannot remove '/nix/store/9n60w3h9rlgkb1mk6smhhb4vxq9bjga2-spicetify-Comfy/snap.yaml': No such file or directory  
+      # as of 20240714
+      enable = false;
       enabledCustomApps = with spicePkgs.apps; [
         lyrics-plus
         new-releases

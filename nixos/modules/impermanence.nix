@@ -258,9 +258,9 @@
         }
       ];
       files = [
-        ".bash_history"
-        ".wakatime.bdb"
-        ".wakatime.cfg"
+       ".bash_history"
+       ".wakatime.bdb"
+       ".wakatime.cfg"
       ];
     };
   };

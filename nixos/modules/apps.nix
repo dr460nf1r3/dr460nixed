@@ -86,6 +86,7 @@ in {
       gitkraken
       heroku
       hugo
+      jetbrains.pycharm-professional
       jetbrains.webstorm
       manix
       mdbook
