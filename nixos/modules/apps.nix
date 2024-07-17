@@ -44,6 +44,7 @@ in {
       boxbuddy
       catppuccinifier-cli
       chromium-flagged
+      firedragon
       gimp
       helvum
       hunspell

@@ -4,6 +4,7 @@ builds:
     - devShells.*.default
     - nixosConfigurations.dr460nixed-base
     - nixosConfigurations.dr460nixed-desktop
+    - nixosConfigurations.oracle-dragon
     - packages.*.container-processes
     - packages.*.container-shell
     - packages.*.vbox
