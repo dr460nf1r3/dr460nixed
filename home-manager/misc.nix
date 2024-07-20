@@ -2,6 +2,7 @@
   # Thunderbird configuration
   programs.thunderbird = {
     enable = true;
+    package = pkgs.thunderbird-128;
     profiles."default" = {
       isDefault = true;
       settings = {
@@ -17,7 +18,7 @@
         "offline.send.unsent_messages" = 1;
       };
     };
-  };
+    };
 
   # Enable the smartcard daemon for commit signing
   services.gpg-agent = {

@@ -89,7 +89,7 @@ in {
         addNetworkInterface = false;
         enable = true;
         enableExtensionPack = true;
-        enableHardening = false;
+        enableHardening = true;
         enableKvm = true;
       };
     };
