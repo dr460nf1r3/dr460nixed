@@ -6,18 +6,8 @@
   ...
 }: let
   cfgRemote = config.dr460nixed.remote-build;
-  cfgSuper = config.dr460nixed.nix-super;
 in {
   options.dr460nixed = with lib; {
-    nix-super = {
-      enable = mkOption {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Replaces nix with nix-super, which tracks future features of nix.
-        '';
-      };
-    };
     remote-build = {
       enable = mkOption {
         default = false;
@@ -93,9 +83,6 @@ in {
         warn-dirty = false
       '';
 
-      # Make use of nix-super if it is enabled, else use latest available
-      package = lib.mkIf cfgSuper.enable pkgs.nixSuper;
-
       # Nix.conf settings
       settings = {
         # Accept flake configs by default
@@ -153,13 +140,6 @@ in {
         ];
       };
     };
-
-    # Nix-super - https://github.com/privatevoid-net/nix-super
-    nixpkgs.overlays = lib.mkIf cfgSuper.enable [
-      (_: _prev: {
-        nixSuper = inputs.nix-super.packages.x86_64-linux.default;
-      })
-    ];
 
     environment = {
       etc = with inputs; {

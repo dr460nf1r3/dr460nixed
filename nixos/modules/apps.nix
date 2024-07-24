@@ -41,6 +41,7 @@ in {
       aspell
       aspellDicts.de
       aspellDicts.en
+      birdtray
       boxbuddy
       catppuccinifier-cli
       chromium-flagged
@@ -87,6 +88,8 @@ in {
       gitkraken
       heroku
       hugo
+      jetbrains.datagrip
+      jetbrains.idea-ultimate
       jetbrains.pycharm-professional
       jetbrains.webstorm
       manix

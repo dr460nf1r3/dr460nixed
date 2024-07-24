@@ -18,7 +18,7 @@
         "offline.send.unsent_messages" = 1;
       };
     };
-    };
+  };
 
   # Enable the smartcard daemon for commit signing
   services.gpg-agent = {

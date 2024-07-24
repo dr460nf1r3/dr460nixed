@@ -93,9 +93,20 @@
       url = "github:nix-community/lanzaboote/master";
       inputs.flake-compat.follows = "flake-compat";
       inputs.flake-parts.follows = "flake-parts";
-      inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
+    };
+
+    # Lets give Lix another try
+    lix = {
+      url = "https://git.lix.systems/lix-project/lix/archive/2.90.0.tar.gz";
+      flake = false;
+    };
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0.tar.gz";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.lix.follows = "lix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Nix gaming-related packages and modules
@@ -117,15 +128,6 @@
       inputs.flake-compat.follows = "flake-compat";
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Feature-rich and convenient fork of the Nix package manager
-    nix-super = {
-      url = "github:privatevoid-net/nix-super";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.flake-parts.follows = "flake-parts";
-      # inputs.nixpkgs.follows = "nixpkgs"; # Broken as of 240518, needs own instance
-      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     };
 
     # NixOS generators to build system images

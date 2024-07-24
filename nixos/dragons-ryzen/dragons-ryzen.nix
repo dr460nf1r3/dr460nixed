@@ -38,7 +38,6 @@
     development.enable = true;
     gaming.enable = true;
     lanzaboote.enable = true;
-    nix-super.enable = true;
     performance = true;
     remote-build = {
       enable = true;
