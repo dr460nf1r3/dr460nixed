@@ -168,8 +168,8 @@
 
     # Spicetify
     spicetify-nix = {
-      url = "github:the-argus/spicetify-nix";
-      inputs.flake-utils.follows = "flake-utils";
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.flake-compat.follows = "flake-compat";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
