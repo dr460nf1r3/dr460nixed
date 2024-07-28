@@ -83,6 +83,9 @@ in {
         warn-dirty = false
       '';
 
+      # Set the nix path, needed e.g. for Nixd
+      nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+
       # Nix.conf settings
       settings = {
         # Accept flake configs by default
@@ -122,7 +125,6 @@ in {
         substituters = [
           "https://cache.garnix.io" # extra things here and there
           "https://catppuccin.cachix.org" # a cache for Catppuccin-nix
-          "https://devenv.cachix.org" # Devenv cache
           "https://nix-community.cachix.org" # nix-community cache
           "https://nix-gaming.cachix.org" # nix-gaming
           "https://nixpkgs-unfree.cachix.org" # unfree-package cache
@@ -132,7 +134,6 @@ in {
         trusted-public-keys = [
           "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
           "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
-          "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
           "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
           "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
           "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="

@@ -1,8 +1,6 @@
 *.iso
-.devenv
 .direnv
 .idea
 .pre-commit-config.yaml
-devenv.local.nix
 result
 result/

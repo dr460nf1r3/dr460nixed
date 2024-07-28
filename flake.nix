@@ -4,11 +4,9 @@
   nixConfig = {
     extra-substituters = [
       "https://cache.garnix.io"
-      "https://devenv.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
     ];
   };
 
@@ -20,12 +18,10 @@
       inputs.systems.follows = "systems";
     };
 
-    # Devenv to set up a development environment
-    devenv = {
-      url = "github:cachix/devenv";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
+    # Devshell to set up a development environment
+    devshell = {
+      url = "github:numtide/devshell";
+      flake = false;
     };
 
     # Disko for Nix-managed partition management
@@ -178,44 +174,100 @@
   };
 
   outputs = {
-    devenv,
     flake-parts,
+    nixpkgs,
     pre-commit-hooks,
+    self,
     ...
   } @ inp: let
     inputs = inp;
     perSystem = {
-      lib,
       pkgs,
+      system,
       ...
     }: {
-      devenv.shells.default = {
-        imports = [
-          ./devenv/pre-commit.nix
-          ./devenv/packages.nix
-        ];
-        cachix = {
-          enable = true;
-          pull = [
-            "chaotic-nyx"
-            "dr460nf1r3"
-            "pre-commit-hooks"
+      # This basically allows using the devshell as flake app
+      apps.default = self.outputs.devShells.${system}.default.flakeApp;
+
+      # Pre-commit hooks are set up automatically via nix-shell / nix develop
+      checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        hooks = {
+          actionlint.enable = true;
+          alejandra-quiet = {
+            description = "Run Alejandra in quiet mode";
+            enable = true;
+            entry = ''
+              ${pkgs.alejandra}/bin/alejandra --quiet
+            '';
+            files = "\\.nix$";
+            name = "alejandra";
+          };
+          commitizen.enable = true;
+          deadnix.enable = true;
+          nil.enable = true;
+          prettier.enable = true;
+          yamllint.enable = true;
+          statix.enable = true;
+        };
+        src = ./.;
+      };
+
+      # Handy devshell for working with this flake
+      devShells = let
+        # Import the devshell module as module rather than a flake input
+        makeDevshell = import "${inp.devshell}/modules" pkgs;
+        mkShell = config:
+          (makeDevshell {
+            configuration = {
+              inherit config;
+              imports = [];
+            };
+          })
+          .shell;
+      in rec {
+        default = dr460nixed-shell;
+        dr460nixed-shell = mkShell {
+          devshell.name = "dr460nixed-devshell";
+          commands = [
+            {
+              category = "dr460nixed";
+              command = "${self.packages.${system}.repl}/bin/dr460nixed-repl";
+              help = "Start a repl shell with all flake outputs available";
+              name = "repl";
+            }
+            {
+              category = "dr460nixed";
+              command = "nix build .#iso";
+              help = "Builds a NixOS ISO with all most important configurations";
+              name = "buildiso";
+            }
+            {
+              category = "dr460nixed";
+              command = "${self.packages.${system}.installer}/bin/dr460nixed-installer";
+              help = "Allows installing a basic dr460nixed installation";
+              name = "installer";
+            }
+            {package = "age";}
+            {package = "commitizen";}
+            {package = "gnupg";}
+            {package = "manix";}
+            {package = "mdbook";}
+            {package = "nix-melt";}
+            {package = "nixos-anywhere";}
+            {package = "nixos-install-tools";}
+            {package = "pre-commit";}
+            {package = "rsync";}
+            {package = "sops";}
+            {package = "yamlfix";}
+          ];
+          devshell.startup.preCommitHooks.text = self.checks.${system}.pre-commit-check.shellHook;
+          env = [
+            {
+              name = "NIX_PATH";
+              value = "${nixpkgs}";
+            }
           ];
         };
-        # https://github.com/cachix/devenv/issues/528#issuecomment-1556108767
-        containers = lib.mkForce {};
-        difftastic.enable = true;
-        enterShell = ''
-          echo "Welcome to Dr460nixed's ❄️ devenv!"
-        '';
-        languages = {
-          nix = {
-            enable = true;
-            lsp.package = pkgs.nixd;
-          };
-          shell.enable = true;
-        };
-        name = "Dr460nixed";
       };
 
       # By default, alejandra is WAY to verbose
@@ -229,7 +281,6 @@
       imports = [
         ./nixos/flake-module.nix
         ./packages/flake-module.nix
-        inputs.devenv.flakeModule
         inputs.pre-commit-hooks.flakeModule
       ];
 
