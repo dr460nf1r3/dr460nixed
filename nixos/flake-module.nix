@@ -146,7 +146,7 @@
       modules = [
         ../home-manager/standalone.nix
         ../home-manager/nico/nico.nix
-        inputs.spicetify-nix.homeManagerModule
+        inputs.spicetify-nix.homeManagerModules.default
       ];
     };
   };
