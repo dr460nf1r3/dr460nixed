@@ -93,13 +93,13 @@
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
     };
 
-    # Lets give Lix another try
+    # Lets give Lix another try, and be brave enough to try main
     lix = {
-      url = "https://git.lix.systems/lix-project/lix/archive/2.90.0.tar.gz";
+      url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
       flake = false;
     };
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
       inputs.flake-utils.follows = "flake-utils";
       inputs.lix.follows = "lix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -203,11 +203,17 @@
             name = "alejandra";
           };
           commitizen.enable = true;
+          # check-json.enable = true;
+          # check-yaml.enable = true;
+          detect-private-keys.enable = true;
           deadnix.enable = true;
+          flake-checker.enable = true;
           nil.enable = true;
           prettier.enable = true;
+          pre-commit-hook-ensure-sops.enable = true;
           yamllint.enable = true;
           statix.enable = true;
+          # typos.enable = true;
         };
         src = ./.;
       };

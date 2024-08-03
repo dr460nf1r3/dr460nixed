@@ -41,10 +41,7 @@ in {
 
   config = mkIf cfg.common.enable {
     # A few kernel tweaks
-    boot = {
-      kernelParams = ["noresume"];
-    };
-    systemd.enableUnifiedCgroupHierarchy = true;
+    boot.kernelParams = ["noresume"];
 
     # Disable unprivileged user namespaces, unless containers are enabled
     security = {

@@ -22,6 +22,7 @@
       ./modules/locales.nix
       ./modules/misc.nix
       inputs.hosts.nixosModule
+      inputs.lix-module.nixosModules.default
       inputs.nixos-generators.nixosModules.all-formats
       inputs.spicetify-nix.nixosModules.default
       "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
@@ -146,6 +147,7 @@
       modules = [
         ../home-manager/standalone.nix
         ../home-manager/nico/nico.nix
+        inputs.chaotic-nyx.homeManagerModules.default
         inputs.spicetify-nix.homeManagerModules.default
       ];
     };
