@@ -3,6 +3,19 @@
   programs = {
     # Common Bash aliases & tmux autostart for SSH sessions
     bash = {
+      bashrcExtra = ''
+        export PATH=$HOME/.local/bin:$PATH
+
+        if [[ ! -v ENV_CLEANED ]]; then
+          export ENV_CLEANED=1
+          QT_PLUGIN_PATH_MOD="$(echo $QT_PLUGIN_PATH | tr ':' '\n' | grep "/" | awk '!x[$0]++' | head -c -1 | tr '\n' ':')"
+          XDG_DATA_DIRS_MOD="$(echo $XDG_DATA_DIRS | tr ':' '\n' | grep "/" | awk '!x[$0]++' | head -c -1 | tr '\n' ':')"
+          XDG_CONFIG_DIRS_MOD="$(echo $XDG_CONFIG_DIRS | tr ':' '\n' | grep "/" | awk '!x[$0]++' | head -c -1 | tr '\n' ':')"
+          export QT_PLUGIN_PATH=$QT_PLUGIN_PATH_MOD
+          export XDG_DATA_DIRS=$XDG_DATA_DIRS_MOD
+          export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS_MOD
+        fi
+      '';
       enable = true;
       initExtra = ''
         if [ -z "$TMUX" ] &&  [ "$SSH_CLIENT" != "" ]; then
