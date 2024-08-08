@@ -36,6 +36,7 @@
     polkituser = uidGid 988;
     paperless = uidGid 966;
     podman = uidGid 968;
+    proc = uidGid 971;
     promtail = uidGid 987;
     redis-paperless = uidGid 965;
     rtkit = uidGid 986;

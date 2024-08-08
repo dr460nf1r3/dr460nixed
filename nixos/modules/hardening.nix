@@ -1,5 +1,6 @@
 {
   config,
+  # inputs,
   lib,
   pkgs,
   ...
@@ -32,19 +33,27 @@ in {
   };
 
   config = mkIf cfg.enable {
-    boot.kernel.sysctl = {
-      # The Magic SysRq key is a key combo that allows users connected to the
-      # system console of a Linux kernel to perform some low-level commands.
-      # Disable it, since we don't need it, and is a potential security concern.
-      "kernel.sysrq" = 0;
-      # Restrict ptrace() usage to processes with a pre-defined relationship
-      # (e.g., parent/child)
-      "kernel.yama.ptrace_scope" = 2;
-      # Hide kptrs even for processes with CAP_SYSLOG
-      "kernel.kptr_restrict" = 2;
-      # Disable ftrace debugging
-      "kernel.ftrace_enabled" = false;
-    };
+    # Disable some of it
+    #    nm-overrides = {
+    #      compatibility = {
+    #        binfmt-misc.enable = true;
+    #        ip-forward.enable = true;
+    #      };
+    #      desktop = {
+    #        allow-multilib.enable = true;
+    #        allow-unprivileged-userns.enable = true;
+    #        home-exec.enable = true;
+    #        tmp-exec.enable = true;
+    #        usbguard-allow-at-boot.enable = true;
+    #      };
+    #      performance = {
+    #        allow-smt.enable = true;
+    #      };
+    #      security = {
+    #        tcp-timestamp-disable.enable = true;
+    #        disable-intelme-kmodules.enable = true;
+    #      };
+    #    };
 
     boot.blacklistedKernelModules = [
       # Obscure network protocols
@@ -134,7 +143,6 @@ in {
           "aes256-ctr,aes192-ctr"
           "aes128-ctr"
           "aes128-gcm@openssh.com"
-          "chacha20-poly1305@openssh.com"
         ];
         KbdInteractiveAuthentication = false;
         KexAlgorithms = [
@@ -213,9 +221,6 @@ in {
         "umac-128-etm@openssh.com"
       ];
     };
-
-    # The hardening profile enables Apparmor by default, we don't want this to happen
-    security.apparmor.enable = false;
 
     # Timeout TTY after 1 hour
     programs.bash.interactiveShellInit = "if [[ $(tty) =~ /dev\\/tty[1-6] ]]; then TMOUT=3600; fi";

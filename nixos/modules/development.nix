@@ -90,7 +90,7 @@ in {
         enable = true;
         enableExtensionPack = true;
         enableHardening = true;
-        enableKvm = true;
+        # enableKvm = true; patch is currently failing
       };
     };
 

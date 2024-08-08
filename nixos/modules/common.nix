@@ -3,11 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed;
 in {
-  options.dr460nixed = {
+  options.dr460nixed = with lib; {
     common = {
       enable =
         mkOption
@@ -39,7 +38,7 @@ in {
       };
   };
 
-  config = mkIf cfg.common.enable {
+  config = lib.mkIf cfg.common.enable {
     # A few kernel tweaks
     boot.kernelParams = ["noresume"];
 
@@ -92,7 +91,7 @@ in {
     };
 
     # Who needs documentation when there is the internet? #bl04t3d
-    documentation = mkIf cfg.nodocs {
+    documentation = lib.mkIf cfg.nodocs {
       dev.enable = false;
       doc.enable = false;
       enable = true;
@@ -106,6 +105,9 @@ in {
 
     # No need for that in real NixOS systems
     garuda.garuda-nix-manager.enable = false;
+
+    # Disable Ananicy because of an evaluation failure (20240807)
+    services.ananicy.enable = false;
 
     # Custom label for boot menu entries (otherwise set to "garuda-nix-subsystem")
     system.nixos.label = lib.mkForce (builtins.concatStringsSep "-" ["dr460nixed-"] + config.system.nixos.version);

@@ -126,6 +126,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Convenient system hardening
+    nix-mineral = {
+      url = "github:cynicsketch/nix-mineral";
+      flake = false;
+    };
+
     # NixOS generators to build system images
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
@@ -203,8 +209,8 @@
             name = "alejandra";
           };
           commitizen.enable = true;
-          # check-json.enable = true;
-          # check-yaml.enable = true;
+          check-json.enable = true;
+          check-yaml.enable = true;
           detect-private-keys.enable = true;
           deadnix.enable = true;
           flake-checker.enable = true;
@@ -213,7 +219,7 @@
           pre-commit-hook-ensure-sops.enable = true;
           yamllint.enable = true;
           statix.enable = true;
-          # typos.enable = true;
+          typos.enable = true;
         };
         src = ./.;
       };

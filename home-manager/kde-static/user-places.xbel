@@ -5,7 +5,7 @@
   <metadata owner="http://www.kde.org">
    <kde_places_version>4</kde_places_version>
    <GroupState-Places-IsHidden>false</GroupState-Places-IsHidden>
-   <GroupState-Remote-IsHidden>true</GroupState-Remote-IsHidden>
+   <GroupState-Remote-IsHidden>false</GroupState-Remote-IsHidden>
    <GroupState-Devices-IsHidden>false</GroupState-Devices-IsHidden>
    <GroupState-RemovableDevices-IsHidden>false</GroupState-RemovableDevices-IsHidden>
    <GroupState-Tags-IsHidden>false</GroupState-Tags-IsHidden>
@@ -199,6 +199,18 @@
    <metadata owner="http://www.kde.org">
     <ID>1714292961/4</ID>
     <isSystemItem>true</isSystemItem>
+   </metadata>
+  </info>
+ </bookmark>
+ <bookmark href="ftp://fitz.box">
+  <title>FritzBox</title>
+  <info>
+   <metadata owner="http://freedesktop.org">
+    <bookmark:icon name="network-server-database-symbolic"/>
+   </metadata>
+   <metadata owner="http://www.kde.org">
+    <ID>1723118140/1</ID>
+    <OnlyInApp>dolphin</OnlyInApp>
    </metadata>
   </info>
  </bookmark>

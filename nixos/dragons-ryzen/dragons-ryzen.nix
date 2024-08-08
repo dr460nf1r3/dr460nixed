@@ -7,6 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ../modules/impermanence.nix
+    # "${inputs.nix-mineral}/nix-mineral.nix"
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
 
