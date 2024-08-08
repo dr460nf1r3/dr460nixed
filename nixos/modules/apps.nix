@@ -155,6 +155,7 @@ in {
       (yarn.override {
         nodejs = null; # Use my system nodejs
       })
+      zed-editor_git
     ])
     ++ optionals cfg.yubikey (with pkgs; [
       yubikey-manager-qt

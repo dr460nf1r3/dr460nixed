@@ -2,20 +2,26 @@
 
 [![built with nix](https://img.shields.io/static/v1?logo=nixos&logoColor=white&label=&message=Built%20with%20Nix&color=41439a)](https://builtwithnix.org) [![built with garnix](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fdr460nf1r3%2Fdr460nixed%3Fbranch%3Dmain)](https://garnix.io) [![Sync Tailscale ACLs](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg)](https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml)
 
-This repository contains a framework to get started with NixOS quickly, featuring opiniated and selected default settings.
-It also contains my personal NixOS configuration, which might serve as inspiration for other peoples' setups.
+This repository contains a framework to get started with NixOS quickly, featuring opinionated and selected default
+settings.
+It also contains my personal NixOS configuration, which might serve as inspiration for other people's setups.
 
-While starting out with NixOS, especially reading other peoples flakes proved to be very helpful, so I figured sharing my personal setup my help other people as well!
+While starting out with NixOS, especially reading other peoples flakes proved to be very helpful, so I figured sharing
+my personal setup my help other people as well!
 Those who like the "dr460nized" look of Garuda will definitely like this one as well ☺️
 
 ## So how does it work?
 
-ISO builds are available as well as a simple installer, which employs `nix flake init` to deploy a basic and generic version of this flake's template based on user's choices.
-Partitioning is achieved via [disko](https://github.com/nix-community/disko) presets and the installer may be used on regular NixOS live mediums as well.
-Users may then continue building their own version of NixOS using code snippets of this repository and further linked sources.
-Furthermore, the flakes' outputs are automatically build and cached via [garnix](https://garnix.io).
+ISO builds are available as well as a simple installer, which employs `nix flake init` to deploy a basic and generic
+version of this flake's template based on user's choices.
+Partitioning is achieved via [disko](https://github.com/nix-community/disko) presets, and the installer may be used on
+regular NixOS live mediums as well.
+Users may then continue building their own version of NixOS using code snippets of this repository and further linked
+sources.
+Furthermore, the flakes' outputs are automatically built and cached via [garnix](https://garnix.io).
 
-There is a [documentation available about various topics](https://nixed.dr460nf1r3.org), which also contains the code snippets that might provide further useful customization options.
+There is a [documentation available about various topics](https://nixed.dr460nf1r3.org), which also contains the code
+snippets that might provide further useful customization options.
 
 ## How does it look like?
 
@@ -23,7 +29,8 @@ There is a [documentation available about various topics](https://nixed.dr460nf1
 
 ## What settings does the installer provide?
 
-Right now, it basically just bootstraps a basic desktop environment with theming, Nix and OS related defaults to have common things working out of the box.
+Right now, it basically just bootstraps a basic desktop environment with theming,
+Nix, and OS-related defaults to have common things working out of the box.
 
 ```nix
 {
@@ -45,7 +52,8 @@ Which translates to:
 - Using **Garnix CI cache** for this flakes' outputs
 - Keeping all of it well organized via **flake-parts**
 
-It might receive more module options in the future, though I currently believe that showing people how to achieve things in Nix might be more useful than just providing a toggle for it.
+It might receive more module options in the future, though I currently believe that showing people how to achieve things
+in Nix might be more useful than just providing a toggle for it.
 
 ## What kind of configuration is available via code snippets?
 
@@ -84,7 +92,7 @@ It might receive more module options in the future, though I currently believe t
 
 ## Credits
 
-Inspiration for parts of this configurations came from these awesome people's setups ❄️
+Inspiration for parts of this configuration came from these awesome people's setups ❄️
 
 - https://github.com/PedroHLC/system-setup
 - https://github.com/Misterio77/nix-config
