@@ -18,7 +18,7 @@ in {
         "g" = "mosh ${user}@google-dragon.emperor-mercat.ts.net";
         "g1" = "ssh -p666 ${user}@${immortalis}";
         "g2" = "ssh ${user}@${immortalis}";
-        # "g3" got replaced when infra 4.0 got introduced
+        "g3" = "ssh -p1022 ${user}@216.158.66.108";
         "g4" = "ssh -p224 ${user}@${immortalis}";
         "g5" = "ssh -p225 ${user}@${immortalis}";
         "g6" = "ssh -p226 ${user}@${immortalis}";
@@ -26,6 +26,10 @@ in {
         "g8" = "ssh -p222 ${user}@${immortalis}";
         "g9" = "ssh -p229 ${user}@${immortalis} ${forwardPostgres}";
         "m" = "ssh -p1022 ${user}@94.16.112.218";
+        "ob1" = "ssh nico@observer-1";
+        "ob2" = "ssh nico@observer-2";
+        "pve" = "ssh nico@dragons-pve";
+        "pve1" = "ssh nico@pve-dragon-1";
       };
     };
     # Fish receives auto-expanding abbreviations (much cooler!)
@@ -37,7 +41,7 @@ in {
         "g" = "mosh ${user}@google-dragon.emperor-mercat.ts.net";
         "g1" = "ssh -p666 ${user}@${immortalis}";
         "g2" = "ssh ${user}@${immortalis}";
-        # "g3" got replaced when infra 4.0 got introduced
+        "g3" = "ssh -p1022 ${user}@216.158.66.108";
         "g4" = "ssh -p224 ${user}@${immortalis}";
         "g5" = "ssh -p225 ${user}@${immortalis}";
         "g6" = "ssh -p226 ${user}@${immortalis}";
@@ -45,6 +49,10 @@ in {
         "g8" = "ssh -p222 ${user}@${immortalis}";
         "g9" = "ssh -p229 ${user}@${immortalis} ${forwardPostgres}";
         "m" = "ssh -p1022 ${user}@94.16.112.218";
+        "ob1" = "ssh nico@observer-1";
+        "ob2" = "ssh nico@observer-2";
+        "pve" = "ssh nico@dragons-pve";
+        "pve1" = "ssh nico@pve-dragon-1";
       };
     };
     gh = {

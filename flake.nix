@@ -161,6 +161,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Proxmox on NixOS - this one needs its own Nixpkgs instance
+    proxmox-nixos = {
+      url = "github:SaumonNet/proxmox-nixos";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.utils.follows = "flake-utils";
+    };
+
     # Secrets management
     sops-nix = {
       url = "github:Mic92/sops-nix";

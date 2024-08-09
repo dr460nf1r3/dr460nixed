@@ -124,6 +124,7 @@ in {
 
         substituters = [
           "https://cache.garnix.io" # extra things here and there
+          "https://cache.saumon.network/proxmox-nixos" # proxmox on NixOS
           "https://catppuccin.cachix.org" # a cache for Catppuccin-nix
           "https://nix-community.cachix.org" # nix-community cache
           "https://nix-gaming.cachix.org" # nix-gaming
@@ -139,6 +140,7 @@ in {
           "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
           "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
           "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
+          "proxmox-nixos:nveXDuVVhFDRFx8Dn19f1WDEaNRJjPrF2CPD2D+m1ys="
         ];
       };
     };
