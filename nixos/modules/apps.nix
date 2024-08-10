@@ -104,12 +104,15 @@ in {
       nixos-generators
       nixpkgs-lint
       nixpkgs-review
+      nodePackages_latest.bash-language-server
       nodePackages_latest.node-gyp
       nodePackages_latest.pnpm
       nodePackages_latest.node2nix
       nodejs_latest
       podman-compose
       podman-tui
+      shellcheck
+      shfmt
       speedcrunch
       termius
       ventoy-full
@@ -130,6 +133,7 @@ in {
             vscode-extensions.github.vscode-pull-request-github
             vscode-extensions.jnoortheen.nix-ide
             vscode-extensions.kamadorueda.alejandra
+            vscode-extensions.mads-hartmann.bash-ide-vscode
             vscode-extensions.ms-azuretools.vscode-docker
             vscode-extensions.ms-python.python
             vscode-extensions.ms-python.vscode-pylance
