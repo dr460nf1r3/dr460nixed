@@ -2,11 +2,10 @@
   config,
   lib,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.oci;
 in {
-  options.dr460nixed.oci = {
+  options.dr460nixed.oci = with lib; {
     enable =
       mkOption
       {
@@ -18,7 +17,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Taken from /proc/cmdline of Ubuntu 20.04.2 LTS on OCI
     boot = {
       kernelParams = [

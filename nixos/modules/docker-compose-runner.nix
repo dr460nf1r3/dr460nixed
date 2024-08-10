@@ -3,11 +3,10 @@
   pkgs,
   config,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.docker-compose-runner;
 in {
-  options.dr460nixed.docker-compose-runner = mkOption {
+  options.dr460nixed.docker-compose-runner = lib.mkOption (with lib; {
     type = types.attrsOf (types.submodule {
       options = {
         source = mkOption {
@@ -23,13 +22,13 @@ in {
       };
     });
     default = {};
-  };
+  });
 
   config = {
     systemd.services =
-      mapAttrs'
+      lib.mapAttrs'
       (name: value:
-        nameValuePair ("docker-compose-runner-" + name) (
+        lib.nameValuePair ("docker-compose-runner-" + name) (
           let
             output = derivation {
               builder = pkgs.writeShellScript "build" ''
@@ -52,7 +51,7 @@ in {
                 set -e
                 mkdir -p "${statepath}"
                 rsync -a --no-owner --size-only "${output}/" "${statepath}"
-                ${optionalString (value.envfile != null) ''
+                ${lib.optionalString (value.envfile != null) ''
                   cp "${value.envfile}" "${statepath}/.env"
                   chmod 600 "${statepath}/.env"
                 ''}
@@ -74,7 +73,7 @@ in {
           }
         ))
       cfg;
-    environment.systemPackages = mkIf (cfg != {}) [pkgs.docker-compose];
-    virtualisation.docker.enable = mkIf (cfg != {}) true;
+    environment.systemPackages = lib.mkIf (cfg != {}) [pkgs.docker-compose];
+    virtualisation.docker.enable = lib.mkIf (cfg != {}) true;
   };
 }

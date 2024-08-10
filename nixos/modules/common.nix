@@ -106,9 +106,6 @@ in {
     # No need for that in real NixOS systems
     garuda.garuda-nix-manager.enable = false;
 
-    # Disable Ananicy because of an evaluation failure (20240807)
-    services.ananicy.enable = false;
-
     # Custom label for boot menu entries (otherwise set to "garuda-nix-subsystem")
     system.nixos.label = lib.mkForce (builtins.concatStringsSep "-" ["dr460nixed-"] + config.system.nixos.version);
   };

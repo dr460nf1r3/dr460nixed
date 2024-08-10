@@ -3,15 +3,14 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.tailscale-tls;
   domainExpression =
     if cfg.domain-override != null
     then cfg.domain-override
     else "$(${pkgs.tailscale}/bin/tailscale cert 2>&1 | grep use | cut -d '\"' -f2)";
 in {
-  options.dr460nixed.tailscale-tls = {
+  options.dr460nixed.tailscale-tls = with lib; {
     enable = mkEnableOption "Automatic Tailscale certificates renewal";
 
     target = mkOption {
@@ -33,7 +32,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     users.users.tailscale-tls = {
       group = "tailscale-tls";
       home = "/var/lib/tailscale-tls";

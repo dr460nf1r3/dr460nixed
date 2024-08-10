@@ -3,94 +3,93 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.syncthing;
   settingsFormat = pkgs.formats.json {};
 in {
   options.dr460nixed.syncthing = {
     enable =
-      mkOption
+      lib.mkOption
       {
         default = false;
-        type = types.bool;
-        description = mdDoc ''
+        type = lib.types.bool;
+        description = lib.mdDoc ''
           Enable common file synchronisation between devices.
         '';
       };
     key =
-      mkOption
+      lib.mkOption
       {
         default = "";
-        type = types.str;
-        description = mdDoc ''
+        type = lib.types.str;
+        description = lib.mdDoc ''
           The key to use for Syncthing.
         '';
       };
     cert =
-      mkOption
+      lib.mkOption
       {
         default = "";
-        type = types.str;
-        description = mdDoc ''
+        type = lib.types.str;
+        description = lib.mdDoc ''
           The cert to use for Syncthing.
         '';
       };
     devices =
-      mkOption
+      lib.mkOption
       {
         default = [];
-        type = types.attrsOf (types.submodule ({name, ...}: {
+        type = lib.types.attrsOf (lib.types.submodule ({name, ...}: {
           freeformType = settingsFormat.type;
           options = {
-            name = mkOption {
-              type = types.str;
+            name = lib.mkOption {
+              type = lib.types.str;
               default = name;
               description = lib.mdDoc ''
                 The name of the device.
               '';
             };
-            id = mkOption {
-              type = types.str;
-              description = mdDoc ''
+            id = lib.mkOption {
+              type = lib.types.str;
+              description = lib.mdDoc ''
                 The device ID. See <https://docs.syncthing.net/dev/device-ids.html>.
               '';
             };
-            autoAcceptFolders = mkOption {
-              type = types.bool;
+            autoAcceptFolders = lib.mkOption {
+              type = lib.types.bool;
               default = false;
-              description = mdDoc ''
+              description = lib.mdDoc ''
                 Automatically create or share folders that this device advertises at the default path.
                 See <https://docs.syncthing.net/users/config.html?highlight=autoaccept#config-file-format>.
               '';
             };
           };
         }));
-        description = mdDoc ''
+        description = lib.mdDoc ''
           The devices to sync with.
         '';
       };
     devicesNames =
-      mkOption
+      lib.mkOption
       {
         default = [];
-        type = types.listOf types.str;
-        description = mdDoc ''
+        type = lib.types.listOf lib.types.str;
+        description = lib.mdDoc ''
           The names of the devices to sync with.
         '';
       };
     user =
-      mkOption
+      lib.mkOption
       {
         default = "";
-        type = types.str;
-        description = mdDoc ''
+        type = lib.types.str;
+        description = lib.mdDoc ''
           The user to run syncthing as.
         '';
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     services.syncthing = {
       inherit (cfg) cert;
       dataDir = "/home/${cfg.user}";

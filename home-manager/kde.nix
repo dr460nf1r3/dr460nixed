@@ -1,5 +1,4 @@
-{pkgs, ...}:
-with builtins; let
+{pkgs, ...}: let
   immutable = false;
 
   configDir = ".config";
@@ -7,19 +6,19 @@ with builtins; let
   localDir = ".local/share";
 
   # JamesDSP Dolby presets
-  game = fetchurl {
+  game = pkgs.fetchurl {
     url = "https://cloud-aio.garudalinux.org/s/3rfRX3Kir6Ye9zA/download/game.irs";
     sha256 = "0d1lfbzca6wqfqxd6knzshc00khhgfqmk36s5xf1wyh703sdxk79";
   };
-  movie = fetchurl {
+  movie = pkgs.fetchurl {
     url = "https://cloud-aio.garudalinux.org/s/8QGwnD97cffSjTQ/download/movie.irs";
     sha256 = "1r3s8crbmvzm71yqrkp8d8x4xyd3najz82ck6vbh1v9kq6jclc0w";
   };
-  music = fetchurl {
+  music = pkgs.fetchurl {
     url = "https://cloud-aio.garudalinux.org/s/r78YKszgFd3eJy7/download/music-balanced.irs";
     sha256 = "1szssbqk3dnaqhg3syrzq9zqfb18phph5yy5m3xfnjgllj2yphy0";
   };
-  voice = fetchurl {
+  voice = pkgs.fetchurl {
     url = "https://cloud-aio.garudalinux.org/s/wRARtXi5eXnSrQN/download/voice.irs";
     sha256 = "1b643m8v7j15ixi2g6r2909vwkq05wi74ybccbdnp4rkms640y4w";
   };

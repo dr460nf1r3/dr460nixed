@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.development;
 
   # Distrobox setup scripts
@@ -35,7 +34,7 @@ with lib; let
     distrobox generate-entry kali
   '';
 in {
-  options.dr460nixed.development = {
+  options.dr460nixed.development = with lib; {
     enable =
       mkOption
       {
@@ -47,7 +46,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Import secrets needed for development
     sops.secrets."api_keys/sops" = {
       mode = "0600";
@@ -90,7 +89,7 @@ in {
         enable = true;
         enableExtensionPack = true;
         enableHardening = true;
-        # enableKvm = true; patch is currently failing
+        # enableKvm = true; # patch is currently failing
       };
     };
 

@@ -4,12 +4,11 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.desktops;
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
 in {
-  options.dr460nixed.desktops = {
+  options.dr460nixed.desktops = with lib; {
     enable =
       mkOption
       {
@@ -21,7 +20,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Enable the Catppuccinified desktops settings
     garuda.catppuccin.enable = true;
 

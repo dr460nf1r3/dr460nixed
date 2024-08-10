@@ -4,8 +4,7 @@
   config,
   sources,
   ...
-}:
-with lib; let
+}: let
   cfg = config.services.chaotic;
   toolbox = pkgs.stdenv.mkDerivation {
     buildFlags = "PREFIX=${placeholder "out"}";
@@ -46,7 +45,7 @@ with lib; let
   };
   repodir = "${cfg.repos-dir}/${cfg.db-name}";
 in {
-  options.services.chaotic = {
+  options.services.chaotic = with lib; {
     enable = mkEnableOption "Chaotic-AUR";
     db-name = mkOption {
       type = types.str;
@@ -102,7 +101,7 @@ in {
     cluster = mkOption {default = false;};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     users.groups = {"chaotic_op" = {};};
     environment.systemPackages = [
       pkgs.arch-install-scripts
@@ -151,7 +150,7 @@ in {
         export CAUR_DEPLOY_LOGS_FILTERED=$CAUR_DEPLOY_LOGS/filtered
         export CAUR_DEPLOY_LAST=${repodir}/lastupdate
 
-        ${optionalString (!cfg.cluster) ''
+        ${lib.optionalString (!cfg.cluster) ''
           export CAUR_URL=http://${cfg.host}/''${CAUR_DB_NAME}/x86_64
           export CAUR_FILL_DEST=http://${cfg.host}/''${CAUR_DB_NAME}/pkgs.files.txt
         ''}
@@ -241,7 +240,7 @@ in {
       };
     };
     services.nginx.enable = !cfg.cluster;
-    services.nginx.virtualHosts.${cfg.host} = mkIf (!cfg.cluster) {
+    services.nginx.virtualHosts.${cfg.host} = lib.mkIf (!cfg.cluster) {
       extraConfig = ''
         autoindex on;
         autoindex_exact_size off;
@@ -249,7 +248,7 @@ in {
       root = cfg.repos-dir;
       inherit (cfg) useACMEHost;
     };
-    networking.hosts = mkIf (!cfg.cluster) {"127.0.0.1" = [cfg.host];};
+    networking.hosts = lib.mkIf (!cfg.cluster) {"127.0.0.1" = [cfg.host];};
 
     # Handy aliases for our maintainers
     programs.bash = {

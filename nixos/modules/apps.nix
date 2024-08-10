@@ -3,13 +3,12 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed;
 in {
   # These are the packages I always need
-  environment.systemPackages = with pkgs; let
-    required-packages = [
+  environment.systemPackages = let
+    required-packages = with pkgs; [
       age
       bind
       btop
@@ -36,7 +35,7 @@ in {
     ];
   in
     required-packages
-    ++ optionals cfg.desktops.enable (with pkgs; [
+    ++ lib.optionals cfg.desktops.enable (with pkgs; [
       appimage-run
       aspell
       aspellDicts.de
@@ -79,7 +78,7 @@ in {
       xdg-utils
       yt-dlp_git
     ])
-    ++ optionals cfg.development.enable (with pkgs; [
+    ++ lib.optionals cfg.development.enable (with pkgs; [
       ansible
       beekeeper-studio
       distrobox_git
@@ -115,34 +114,34 @@ in {
       termius
       ventoy-full
       (vscode-with-extensions.override {
-        vscodeExtensions = with vscode-extensions;
+        vscodeExtensions =
           [
-            bbenoist.nix
-            catppuccin.catppuccin-vsc
-            catppuccin.catppuccin-vsc-icons
-            charliermarsh.ruff
-            davidanson.vscode-markdownlint
-            eamodio.gitlens
-            esbenp.prettier-vscode
-            foxundermoon.shell-format
-            github.codespaces
-            github.copilot
-            github.vscode-github-actions
-            github.vscode-pull-request-github
-            jnoortheen.nix-ide
-            kamadorueda.alejandra
-            ms-azuretools.vscode-docker
-            ms-python.python
-            ms-python.vscode-pylance
-            ms-vscode-remote.remote-ssh
-            ms-vsliveshare.vsliveshare
-            redhat.vscode-xml
-            redhat.vscode-yaml
-            timonwong.shellcheck
-            tyriar.sort-lines
-            wakatime.vscode-wakatime
+            vscode-extensions.bbenoist.nix
+            vscode-extensions.catppuccin.catppuccin-vsc
+            vscode-extensions.catppuccin.catppuccin-vsc-icons
+            vscode-extensions.charliermarsh.ruff
+            vscode-extensions.davidanson.vscode-markdownlint
+            vscode-extensions.eamodio.gitlens
+            vscode-extensions.esbenp.prettier-vscode
+            vscode-extensions.foxundermoon.shell-format
+            vscode-extensions.github.codespaces
+            vscode-extensions.github.copilot
+            vscode-extensions.github.vscode-github-actions
+            vscode-extensions.github.vscode-pull-request-github
+            vscode-extensions.jnoortheen.nix-ide
+            vscode-extensions.kamadorueda.alejandra
+            vscode-extensions.ms-azuretools.vscode-docker
+            vscode-extensions.ms-python.python
+            vscode-extensions.ms-python.vscode-pylance
+            vscode-extensions.ms-vscode-remote.remote-ssh
+            vscode-extensions.ms-vsliveshare.vsliveshare
+            vscode-extensions.redhat.vscode-xml
+            vscode-extensions.redhat.vscode-yaml
+            vscode-extensions.timonwong.shellcheck
+            vscode-extensions.tyriar.sort-lines
+            vscode-extensions.wakatime.vscode-wakatime
           ]
-          ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          ++ vscode-utils.extensionsFromVscodeMarketplace [
             {
               # Available in nixpkgs, but outdated (0.4.0) at the time of adding
               name = "vscode-tailscale";
@@ -157,19 +156,19 @@ in {
       })
       zed-editor_git
     ])
-    ++ optionals cfg.yubikey (with pkgs; [
+    ++ lib.optionals cfg.yubikey (with pkgs; [
       yubikey-manager-qt
       yubioath-flutter
     ])
-    ++ optionals cfg.school (with pkgs; [
+    ++ lib.optionals cfg.school (with pkgs; [
       speedcrunch
       teams-for-linux
     ])
-    ++ optionals cfg.gaming.enable (with pkgs; [
+    ++ lib.optionals cfg.gaming.enable (with pkgs; [
       lutris
       prismlauncher
     ])
-    ++ optionals cfg.live-cd (with pkgs; [
+    ++ lib.optionals cfg.live-cd (with pkgs; [
       btrfs-progs
       chntpw
       cryptsetup

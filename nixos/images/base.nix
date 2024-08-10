@@ -64,26 +64,26 @@ in {
   };
 
   # The packages that are always needed
-  environment.systemPackages = with pkgs; [
-    age
-    bind
-    btop
-    eza
+  environment.systemPackages = [
+    pkgs.age
+    pkgs.bind
+    pkgs.btop
+    pkgs.eza
     installer
-    jq
-    killall
-    micro
-    nettools
-    nmap
-    python3
+    pkgs.jq
+    pkgs.killall
+    pkgs.micro
+    pkgs.nettools
+    pkgs.nmap
+    pkgs.python3
     repl
-    sops
-    tldr
-    tmux
-    traceroute
-    ugrep
-    wget
-    whois
+    pkgs.sops
+    pkgs.tldr
+    pkgs.tmux
+    pkgs.traceroute
+    pkgs.ugrep
+    pkgs.wget
+    pkgs.whois
   ];
 
   # General nix settings

@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed;
 in {
   # We want to use NetworkManager on desktops
@@ -17,7 +16,7 @@ in {
       "1.0.0.1"
       "2606:4700:4700::1001"
     ];
-    networkmanager = mkIf cfg.desktops.enable {
+    networkmanager = lib.mkIf cfg.desktops.enable {
       # This is required to workaround Tailscale not recovering from net change
       # https://github.com/tailscale/tailscale/issues/8223
       dispatcherScripts = [

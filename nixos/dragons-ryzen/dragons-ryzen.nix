@@ -22,6 +22,12 @@
   # Hostname of this machine
   networking.hostName = "dragons-ryzen";
 
+  # Ucode updates for the CPU
+  services.ucodenix = {
+    enable = true;
+    cpuSerialNumber = "0086-0F01-0000-0000-0000-0000";
+  };
+
   # The services to use on this machine
   services = {
     hardware.bolt.enable = false;

@@ -2,11 +2,10 @@
   config,
   lib,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.smtp;
 in {
-  options.dr460nixed.smtp = {
+  options.dr460nixed.smtp = with lib; {
     enable =
       mkOption
       {
@@ -18,7 +17,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.msmtp = {
       enable = true;
       setSendmail = true;

@@ -3,14 +3,13 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.systemd-boot;
   cfgGrub = config.dr460nixed.grub;
   cfgLanza = config.dr460nixed.lanzaboote;
   inherit (pkgs) plymouth;
 in {
-  options.dr460nixed.grub = {
+  options.dr460nixed.grub = with lib; {
     enable =
       mkOption
       {
@@ -40,7 +39,7 @@ in {
         '';
       };
   };
-  options.dr460nixed.systemd-boot = {
+  options.dr460nixed.systemd-boot = with lib; {
     enable =
       mkOption
       {
@@ -51,7 +50,7 @@ in {
         '';
       };
   };
-  options.dr460nixed.lanzaboote = {
+  options.dr460nixed.lanzaboote = with lib; {
     enable =
       mkOption
       {
@@ -77,13 +76,13 @@ in {
         "usbcore.autosuspend=-1"
         "vt.global_cursor_default=0"
       ];
-      lanzaboote = mkIf cfgLanza.enable {
+      lanzaboote = lib.mkIf cfgLanza.enable {
         enable = true;
         pkiBundle = "/etc/secureboot";
       };
       loader = {
         grub = {
-          device = mkIf cfgGrub.enable cfgGrub.device;
+          device = lib.mkIf cfgGrub.enable cfgGrub.device;
           enable =
             if cfgGrub.enable
             then true
@@ -91,9 +90,9 @@ in {
           enableCryptodisk = true;
           useOSProber = false;
         };
-        generationsDir.copyKernels = mkIf cfg.enable true;
+        generationsDir.copyKernels = lib.mkIf cfg.enable true;
         timeout = 1;
-        systemd-boot = mkIf cfg.enable {
+        systemd-boot = lib.mkIf cfg.enable {
           consoleMode = "max";
           editor = false;
           enable = true;
@@ -111,6 +110,6 @@ in {
       '';
     };
 
-    environment.systemPackages = mkIf cfgLanza.enable [pkgs.sbctl];
+    environment.systemPackages = lib.mkIf cfgLanza.enable [pkgs.sbctl];
   };
 }

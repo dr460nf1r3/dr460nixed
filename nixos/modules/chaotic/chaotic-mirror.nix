@@ -4,8 +4,7 @@
   config,
   sources,
   ...
-}:
-with lib; let
+}: let
   cfg = config.services.chaotic-mirror;
   repo = derivation {
     name = "chaotic-mirror";
@@ -30,13 +29,13 @@ with lib; let
     inherit (pkgs.hostPlatform) system;
   };
 in {
-  options.services.chaotic-mirror = {
+  options.services.chaotic-mirror = with lib; {
     enable = mkEnableOption "Chaotic Mirror service";
     domain = mkOption {type = types.str;};
     email = mkOption {type = types.str;};
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     systemd.services.chaotic-mirror = {
       wantedBy = ["multi-user.target"];
       description = "Start the chaotic-aur mirror";

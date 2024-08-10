@@ -2,11 +2,10 @@
   config,
   lib,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.zfs;
 in {
-  options.dr460nixed.zfs = {
+  options.dr460nixed.zfs = with lib; {
     enable =
       mkOption
       {
@@ -16,8 +15,6 @@ in {
           Configures common options for using ZFS on NixOS.
         '';
       };
-  };
-  options.dr460nixed.zfs = {
     sendMails =
       mkOption
       {
@@ -29,7 +26,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Support booting off ZFS
     boot.supportedFilesystems = ["zfs"];
 
@@ -49,7 +46,7 @@ in {
     };
 
     # Enable configuration of msmtp
-    dr460nixed.smtp.enable = mkIf cfg.sendMails true;
+    dr460nixed.smtp.enable = lib.mkIf cfg.sendMails true;
 
     # Configure ZFS Event Daemon to use msmtp
     # commented until python2.7-oildev is fixed
@@ -67,7 +64,7 @@ in {
     # };
 
     # This option does not work; will return error
-    services.zfs.zed.enableMail = mkIf cfg.sendMails false;
+    services.zfs.zed.enableMail = lib.mkIf cfg.sendMails false;
 
     # Metrics
     services.telegraf.extraConfig.inputs = lib.mkIf config.services.telegraf.enable {

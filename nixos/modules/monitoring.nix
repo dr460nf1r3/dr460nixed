@@ -2,15 +2,14 @@
   config,
   lib,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed;
   # adguardExporter = builtins.fetchurl {
   #   url = "https://github.com/ebrianne/adguard-exporter/releases/latest/download/adguard_exporter-linux-arm64";
   #   sha256 = "sha256:0y2gyw1xc366a70sblpjybl7alx70ppjzi5s4zzbm7swsa5vqqds";
   # };
 in {
-  options.dr460nixed = {
+  options.dr460nixed = with lib; {
     grafanaStack = {
       enable =
         mkOption
@@ -105,10 +104,10 @@ in {
   config = {
     services.prometheus = {
       port = 3020;
-      enable = mkIf cfg.grafanaStack.enable true;
+      enable = lib.mkIf cfg.grafanaStack.enable true;
 
-      exporters = mkIf cfg.prometheus.enable {
-        blackbox = mkIf cfg.prometheus.blackboxExporter {
+      exporters = lib.mkIf cfg.prometheus.enable {
+        blackbox = lib.mkIf cfg.prometheus.blackboxExporter {
           enable = true;
           port = 9115;
           configFile = "/var/lib/prometheus/blackbox.yml";
@@ -118,7 +117,7 @@ in {
           enabledCollectors = ["systemd"];
           enable = true;
         };
-        nginx = mkIf cfg.prometheus.nginxExporter {
+        nginx = lib.mkIf cfg.prometheus.nginxExporter {
           enable = true;
         };
       };
@@ -170,7 +169,7 @@ in {
     };
 
     # Loki for system logs
-    services.loki = mkIf cfg.grafanaStack.enable {
+    services.loki = lib.mkIf cfg.grafanaStack.enable {
       enable = true;
       configuration = {
         auth_enabled = false;
@@ -242,7 +241,7 @@ in {
 
     # promtail: port 3031 (8031)
     #
-    services.promtail = mkIf cfg.promtail.enable {
+    services.promtail = lib.mkIf cfg.promtail.enable {
       enable = true;
       configuration = {
         server = {
@@ -316,7 +315,7 @@ in {
     systemd.services.promtail.serviceConfig.RestartSec = "600"; # Retry every 10 minutes
 
     # Grafana on port 3010 (8010)
-    services.grafana = mkIf cfg.grafanaStack.enable {
+    services.grafana = lib.mkIf cfg.grafanaStack.enable {
       enable = true;
       provision = {
         enable = true;
@@ -354,10 +353,10 @@ in {
     };
 
     # Also enable promtail on the Grafana host
-    dr460nixed.promtail.enable = mkIf cfg.grafanaStack.enable true;
+    dr460nixed.promtail.enable = lib.mkIf cfg.grafanaStack.enable true;
 
     # Nginx reverse proxy
-    services.nginx = mkIf cfg.grafanaStack.enable {
+    services.nginx = lib.mkIf cfg.grafanaStack.enable {
       enable = true;
       upstreams = {
         "grafana" = {

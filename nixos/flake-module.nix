@@ -13,6 +13,7 @@
       inputs.lix-module.nixosModules.default
       inputs.sops-nix.nixosModules.sops
       inputs.spicetify-nix.nixosModules.default
+      inputs.ucodenix.nixosModules.ucodenix
     ];
 
     # Our images should be cleaner, so we use a different set of modules

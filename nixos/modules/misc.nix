@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed;
   chromium-gate = pkgs.writeShellScriptBin "chromium-gate" ''
     set -o errexit
@@ -32,7 +31,7 @@ with lib; let
     fi
   '';
 in {
-  options.dr460nixed = {
+  options.dr460nixed = with lib; {
     adblock =
       mkOption
       {
@@ -118,7 +117,7 @@ in {
 
   config = {
     # Automatic system upgrades via git and flakes
-    system.autoUpgrade = mkIf cfg.auto-upgrade {
+    system.autoUpgrade = lib.mkIf cfg.auto-upgrade {
       allowReboot = true;
       dates = "04:00";
       enable = true;
@@ -131,7 +130,7 @@ in {
     };
 
     # Enable the tor network
-    services.tor = mkIf cfg.tor {
+    services.tor = lib.mkIf cfg.tor {
       client.dns.enable = true;
       client.enable = true;
       enable = true;
@@ -139,23 +138,23 @@ in {
     };
 
     # Enable the smartcard daemon
-    hardware.gpgSmartcards.enable = mkIf cfg.yubikey true;
+    hardware.gpgSmartcards.enable = lib.mkIf cfg.yubikey true;
     services.pcscd = {
-      enable = mkIf cfg.yubikey true;
+      enable = lib.mkIf cfg.yubikey true;
       plugins = [pkgs.ccid];
     };
-    services.udev.packages = mkIf cfg.yubikey [pkgs.yubikey-personalization];
+    services.udev.packages = lib.mkIf cfg.yubikey [pkgs.yubikey-personalization];
 
     # Configure as challenge-response for instant login,
     # can't provide the secrets as the challenge gets updated
-    security.pam.yubico = mkIf cfg.yubikey {
+    security.pam.yubico = lib.mkIf cfg.yubikey {
       debug = false;
       enable = true;
       mode = "challenge-response";
     };
 
     # Basic chromium settings (system-wide)
-    programs.chromium = mkIf cfg.chromium {
+    programs.chromium = lib.mkIf cfg.chromium {
       defaultSearchProviderEnabled = true;
       defaultSearchProviderSearchURL = "https://searx.garudalinux.org/search?q=%s";
       defaultSearchProviderSuggestURL = "https://searx.garudalinux.org/autocomplete?q=%s";
@@ -183,17 +182,17 @@ in {
     };
 
     # SUID Sandbox
-    security.chromiumSuidSandbox.enable = mkIf cfg.chromium true;
+    security.chromiumSuidSandbox.enable = lib.mkIf cfg.chromium true;
 
     # Chromium gate (thanks Pedro!)
-    environment.systemPackages = mkIf cfg.chromium-gate [chromium-gate];
+    environment.systemPackages = lib.mkIf cfg.chromium-gate [chromium-gate];
 
     # Enhance performance tweaks
-    garuda.performance-tweaks.enable = mkIf cfg.performance true;
-    boot.kernelPackages = mkIf cfg.performance pkgs.linuxPackages_cachyos-lto;
+    garuda.performance-tweaks.enable = lib.mkIf cfg.performance true;
+    boot.kernelPackages = lib.mkIf cfg.performance pkgs.linuxPackages_cachyos-lto;
 
     # /etc/hosts based adblocker
-    networking.stevenBlackHosts = mkIf cfg.adblock {
+    networking.stevenBlackHosts = lib.mkIf cfg.adblock {
       blockFakenews = true;
       blockGambling = true;
       enable = true;

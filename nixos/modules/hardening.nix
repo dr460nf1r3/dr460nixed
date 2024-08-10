@@ -4,12 +4,11 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.hardening;
   cfgServers = config.dr460nixed.servers.enable;
 in {
-  options.dr460nixed.hardening = {
+  options.dr460nixed.hardening = with lib; {
     enable =
       mkOption
       {
@@ -32,7 +31,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Disable some of it
     #    nm-overrides = {
     #      compatibility = {
@@ -97,7 +96,7 @@ in {
 
     # Protect logins and sudo on servers via DUO
     # leaving EnvFactor enabled for other apps
-    security.duosec = mkIf cfg.duosec {
+    security.duosec = lib.mkIf cfg.duosec {
       acceptEnvFactor = true;
       autopush = true;
       failmode = "safe";
@@ -109,14 +108,14 @@ in {
       secretKeyFile = config.sops.secrets."api_keys/duo".path;
       ssh.enable = true;
     };
-    sops.secrets."api_keys/duo" = mkIf cfg.duosec {
+    sops.secrets."api_keys/duo" = lib.mkIf cfg.duosec {
       mode = "0600";
       path = "/run/secrets/api_keys/duo";
     };
-    security.pam.services = mkIf cfg.duosec {
+    security.pam.services = lib.mkIf cfg.duosec {
       "login".duoSecurity.enable = true;
-      "sddm".duoSecurity.enable = mkIf config.dr460nixed.desktops.enable true;
-      "sudo".duoSecurity.enable = mkIf config.dr460nixed.servers.enable true;
+      "sddm".duoSecurity.enable = lib.mkIf config.dr460nixed.desktops.enable true;
+      "sudo".duoSecurity.enable = lib.mkIf config.dr460nixed.servers.enable true;
     };
 
     # Disable root login & password authentication on sshd
@@ -232,7 +231,7 @@ in {
     environment.systemPackages = with pkgs; [lynis];
 
     # Technically we don't need this as we use pubkey authentication
-    services.fail2ban = mkIf cfgServers {
+    services.fail2ban = lib.mkIf cfgServers {
       enable = true;
       ignoreIP = [
         "100.0.0.0/8"

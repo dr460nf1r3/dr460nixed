@@ -2,13 +2,12 @@
   config,
   lib,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.locales;
   de = "de_DE.UTF-8";
   defaultLocale = "en_GB.UTF-8";
 in {
-  options.dr460nixed.locales = {
+  options.dr460nixed.locales = with lib; {
     enable =
       mkOption
       {
@@ -20,7 +19,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Timezone
     time = {
       hardwareClockInLocalTime = true;

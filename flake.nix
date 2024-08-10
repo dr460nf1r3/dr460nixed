@@ -182,6 +182,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Fresh ucode packages
+    ucodenix = {
+      url = "github:e-tho/ucodenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Systems flake
     systems.url = "github:nix-systems/x86_64-linux";
   };
