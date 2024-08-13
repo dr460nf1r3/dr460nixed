@@ -64,6 +64,7 @@ in {
       movit
       obs-studio-wrapped
       okular
+      plasmusic-toolbar
       qbittorrent
       rustdesk-flutter
       signal-desktop
@@ -87,6 +88,7 @@ in {
       gh
       gitkraken
       heroku
+      hoppscotch
       hugo
       jetbrains.datagrip
       jetbrains.idea-ultimate

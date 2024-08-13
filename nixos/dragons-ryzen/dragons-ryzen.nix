@@ -83,7 +83,10 @@
 
   # Chaotic Nyx stuff
   chaotic = {
-    mesa-git.enable = true;
+    mesa-git = {
+      enable = true;
+      fallbackSpecialisation = false;
+    };
     scx = {
       enable = true;
       scheduler = "scx_rustland";
