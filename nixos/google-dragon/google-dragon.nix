@@ -35,28 +35,6 @@
     daemonIOSchedPriority = 7;
   };
 
-  # Since this machine is super slow, its only going to be
-  # an uptime monitor
-  services.uptime-kuma = {
-    appriseSupport = true;
-    enable = true;
-    settings = {
-      UPTIME_KUMA_HOST = "0.0.0.0";
-    };
-  };
-
-  # Lets try to workaround failing DNS lookups in Uptime Kuma
-  # by caching DNS requests locally
-  # https://github.com/louislam/uptime-kuma/issues/4731#issuecomment-2089461474
-  services.resolved = {
-    enable = true;
-    extraConfig = ''
-      [Resolve]
-      DNS=100.100.100.100 1.1.1.1
-      Domains=~.
-    '';
-  };
-
   # Cloudflared tunnel configurations
   services.cloudflared = {
     enable = true;
@@ -64,11 +42,6 @@
       "12879bb4-1707-445d-a8e4-cb38c222d43d" = {
         credentialsFile = config.sops.secrets."cloudflared/google-dragon/cred".path;
         default = "http_status:404";
-        ingress = {
-          "uptime.dr460nf1r3.org" = {
-            service = "http://localhost:3001";
-          };
-        };
       };
     };
   };

@@ -26,10 +26,10 @@ in {
         "g8" = "ssh -p222 ${user}@${immortalis}";
         "g9" = "ssh -p229 ${user}@${immortalis} ${forwardPostgres}";
         "m" = "ssh -p1022 ${user}@94.16.112.218";
-        "ob1" = "ssh nico@observer-1";
-        "ob2" = "ssh nico@observer-2";
-        "pve" = "ssh nico@dragons-pve";
-        "pve1" = "ssh nico@pve-dragon-1";
+        "ob1" = "ssh ${user}@observer-1";
+        "ob2" = "ssh ${user}@observer-2";
+        "pve" = "ssh ${user}@dragons-pve";
+        "pve1" = "ssh ${user}@pve-dragon-1";
       };
     };
     # Fish receives auto-expanding abbreviations (much cooler!)
@@ -49,10 +49,10 @@ in {
         "g8" = "ssh -p222 ${user}@${immortalis}";
         "g9" = "ssh -p229 ${user}@${immortalis} ${forwardPostgres}";
         "m" = "ssh -p1022 ${user}@94.16.112.218";
-        "ob1" = "ssh nico@observer-1";
-        "ob2" = "ssh nico@observer-2";
-        "pve" = "ssh nico@dragons-pve";
-        "pve1" = "ssh nico@pve-dragon-1";
+        "ob1" = "ssh ${user}@observer-1";
+        "ob2" = "ssh ${user}@observer-2";
+        "pve" = "ssh ${user}@dragons-pve";
+        "pve1" = "ssh ${user}@pve-dragon-1";
       };
     };
     gh = {
