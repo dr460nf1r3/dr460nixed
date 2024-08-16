@@ -3,13 +3,12 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed;
 in {
   # These are the packages I always need
-  environment.systemPackages = with pkgs; let
-    required-packages = [
+  environment.systemPackages = let
+    required-packages = with pkgs; [
       age
       bind
       btop
@@ -32,7 +31,7 @@ in {
     ];
   in
     required-packages
-    ++ optionals cfg.desktops.enable (with pkgs; [
+    ++ lib.optionals cfg.desktops.enable (with pkgs; [
       acpi
       appimage-run
       aspell
@@ -60,7 +59,7 @@ in {
       usbutils
       vulkan-tools
     ])
-    ++ optionals cfg.yubikey (with pkgs; [
+    ++ lib.optionals cfg.yubikey (with pkgs; [
       yubioath-flutter
     ]);
 

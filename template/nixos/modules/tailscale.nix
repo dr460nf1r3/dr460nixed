@@ -3,8 +3,7 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.tailscale;
 
   tailscaleJoinArgsList =
@@ -25,7 +24,7 @@ with lib; let
     ${pkgs.tailscale}/bin/tailscale up ${tailscaleJoinArgsString}
   '';
 in {
-  options.dr460nixed.tailscale = {
+  options.dr460nixed.tailscale = with lib; {
     enable = mkEnableOption "Tailscale client daemon";
 
     autoConnect = mkOption {
@@ -47,7 +46,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Enable Tailscale service
     services.tailscale.enable = true;
 
@@ -58,7 +57,7 @@ in {
     networking.firewall.trustedInterfaces = ["tailscale0"];
 
     # Connect to Tailnet automatically
-    systemd.services.tailscale-autoconnect = mkIf cfg.autoConnect {
+    systemd.services.tailscale-autoconnect = lib.mkIf cfg.autoConnect {
       description = "Automatic connection to Tailscale";
 
       # Make sure tailscale is running before trying to connect to tailscale

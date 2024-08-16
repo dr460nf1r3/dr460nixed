@@ -137,6 +137,7 @@ in {
             vscode-extensions.kamadorueda.alejandra
             vscode-extensions.mads-hartmann.bash-ide-vscode
             vscode-extensions.ms-azuretools.vscode-docker
+            vscode-extensions.ms-vscode.makefile-tools
             vscode-extensions.ms-python.python
             vscode-extensions.ms-python.vscode-pylance
             vscode-extensions.ms-vscode-remote.remote-ssh

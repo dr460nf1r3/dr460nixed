@@ -4,6 +4,7 @@
     defaultModules = [
       ./modules
       inputs.disko.nixosModules.disko
+      inputs.hosts.nixosModule
       inputs.lanzaboote.nixosModules.lanzaboote
       inputs.spicetify-nix.nixosModule
     ];
@@ -13,6 +14,7 @@
       ./modules/desktops.nix
       ./modules/locales.nix
       ./modules/misc.nix
+      inputs.hosts.nixosModule
       inputs.nixos-generators.nixosModules.all-formats
       inputs.spicetify-nix.nixosModule
       "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"

@@ -6,18 +6,8 @@
   ...
 }: let
   cfgRemote = config.dr460nixed.remote-build;
-  cfgSuper = config.dr460nixed.nix-super;
 in {
   options.dr460nixed = with lib; {
-    nix-super = {
-      enable = mkOption {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Replaces nix with nix-super, which tracks future features of nix.
-        '';
-      };
-    };
     remote-build = {
       enable = mkOption {
         default = false;
@@ -93,8 +83,8 @@ in {
         warn-dirty = false
       '';
 
-      # Make use of nix-super if it is enabled
-      package = lib.mkIf cfgSuper.enable pkgs.nixSuper;
+      # Set the nix path, needed e.g. for Nixd
+      nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
       # Nix.conf settings
       settings = {
@@ -120,28 +110,72 @@ in {
         # Enable certain system features
         system-features = ["big-parallel" "kvm"];
 
+        # Build inside sandboxed environments
+        sandbox = pkgs.stdenv.isLinux;
+
         # Trust the remote machines cache signatures
-        trusted-public-keys = lib.mkIf cfgRemote.enable ["${cfgRemote.trustedPublicKey}"];
         trusted-substituters = lib.mkIf cfgRemote.enable ["ssh-ng://${cfgRemote.host}"];
+
+        # Specify the path to the nix registry
+        flake-registry = "/etc/nix/registry.json";
+
+        substituters = [
+          "https://cache.garnix.io" # extra things here and there
+          "https://nix-community.cachix.org" # nix-community cache
+          "https://nix-gaming.cachix.org" # nix-gaming
+          "https://nixpkgs-unfree.cachix.org" # unfree-package cache
+          "https://numtide.cachix.org" # another unfree package cache
+          "https://pre-commit-hooks.cachix.org" # pre-commit hooks
+        ];
+        trusted-public-keys = [
+          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+          "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
+          "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
+          "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
+        ];
       };
     };
 
-    # Nix-super - https://github.com/privatevoid-net/nix-super
-    nixpkgs.overlays = lib.mkIf cfgSuper.enable [
-      (_: _prev: {
-        nixSuper = inputs.nix-super.packages.x86_64-linux.default;
-      })
-    ];
+    environment = {
+      etc = with inputs; {
+        # set channels (backwards compatibility)
+        "nix/flake-channels/home-manager".source = home-manager;
+        "nix/flake-channels/nixpkgs".source = nixpkgs;
+        "nix/flake-channels/system".source = self;
+
+        # preserve current flake in /etc
+        "nixos/flake".source = self;
+      };
+
+      # Git is required for flakes, and cachix for binary substituters
+      systemPackages = with pkgs; [git cachix];
+    };
 
     # Let root ssh into the remote builder seamlessly
     home-manager.users."root" = lib.mkIf cfgRemote.enable {
-      home.stateVersion = "23.11"; # Specify this since its otherwise unset
+      home.stateVersion = "24.05"; # Specify this since its otherwise unset
       programs.ssh.extraConfig = ''
         Host ${cfgRemote.host}
           HostName ${cfgRemote.host}
           Port ${toString cfgRemote.port}
           User ${cfgRemote.user}
       '';
+    };
+
+    # Supply a shortcut for the remote builder
+    programs = {
+      bash.shellAliases = {
+        "rem" = "sudo nix build -v --builders ssh://${cfgRemote.host}";
+        "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake";
+      };
+      fish = {
+        shellAbbrs = {
+          "rem" = "sudo nix build -v --builders ssh://${cfgRemote.host}";
+          "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake";
+        };
+      };
     };
   };
 }

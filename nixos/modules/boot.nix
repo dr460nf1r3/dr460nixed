@@ -101,7 +101,7 @@ in {
     };
 
     # Make plymouth work with sleep
-    powerManagement = {
+    powerManagement = lib.mkIf config.boot.plymouth.enable {
       powerDownCommands = ''
         ${plymouth} --show-splash
       '';

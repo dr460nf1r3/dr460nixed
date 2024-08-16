@@ -162,7 +162,7 @@ in {
 
     # Let root ssh into the remote builder seamlessly
     home-manager.users."root" = lib.mkIf cfgRemote.enable {
-      home.stateVersion = "23.11"; # Specify this since its otherwise unset
+      home.stateVersion = "24.05"; # Specify this since its otherwise unset
       programs.ssh.extraConfig = ''
         Host ${cfgRemote.host}
           HostName ${cfgRemote.host}

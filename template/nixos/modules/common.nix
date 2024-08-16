@@ -3,11 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed;
 in {
-  options.dr460nixed = {
+  options.dr460nixed = with lib; {
     common = {
       enable =
         mkOption
@@ -39,9 +38,19 @@ in {
       };
   };
 
-  config = mkIf cfg.common.enable {
-    ## A few kernel tweaks
-    boot.kernel.sysctl = {"kernel.unprivileged_userns_clone" = 1;};
+  config = lib.mkIf cfg.common.enable {
+    # A few kernel tweaks
+    boot.kernelParams = ["noresume"];
+
+    # Disable unprivileged user namespaces, unless containers are enabled
+    security = {
+      # User namespaces are required for sandboxing
+      allowUserNamespaces = true;
+      # This is only required for containers
+      unprivilegedUsernsClone = config.virtualisation.containers.enable;
+      # Force-enable the Page Table Isolation (PTI) Linux kernel feature
+      forcePageTableIsolation = true;
+    };
 
     # Allow wheel group users to use sudo
     security.sudo.execWheelOnly = true;
@@ -76,7 +85,7 @@ in {
     };
 
     # Who needs documentation when there is the internet? #bl04t3d
-    documentation = mkIf cfg.nodocs {
+    documentation = lib.mkIf cfg.nodocs {
       dev.enable = false;
       doc.enable = false;
       enable = true;
@@ -87,5 +96,11 @@ in {
 
     # Enable all hardware drivers
     hardware.enableRedistributableFirmware = true;
+
+    # No need for that in real NixOS systems
+    garuda.garuda-nix-manager.enable = false;
+
+    # Custom label for boot menu entries (otherwise set to "garuda-nix-subsystem")
+    system.nixos.label = lib.mkForce (builtins.concatStringsSep "-" ["dr460nixed-"] + config.system.nixos.version);
   };
 }

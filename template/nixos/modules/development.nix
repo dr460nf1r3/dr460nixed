@@ -3,11 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.development;
 in {
-  options.dr460nixed.development = {
+  options.dr460nixed.development = with lib; {
     enable =
       mkOption
       {
@@ -19,7 +18,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Libvirt & Podman with docker alias
     virtualisation = {
       docker = {

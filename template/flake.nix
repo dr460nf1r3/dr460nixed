@@ -1,102 +1,129 @@
 {
   description = "Dr460nixed NixOS flake ❄️";
 
-  nixConfig.extra-substituters = ["https://cache.garnix.io"];
-  nixConfig.extra-trusted-public-keys = ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="];
+  nixConfig = {
+    extra-substituters = [
+      "https://cache.garnix.io"
+    ];
+    extra-trusted-public-keys = [
+      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+    ];
+  };
 
   inputs = {
     # Chaotic Nyx!
-    chaotic-nyx.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    chaotic-nyx.inputs.home-manager.follows = "home-manager";
+    chaotic-nyx = {
+      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+      inputs.home-manager.follows = "home-manager";
+      inputs.systems.follows = "systems";
+    };
 
     # Devshell to set up a development environment
-    devshell.url = "github:numtide/devshell";
-    devshell.flake = false;
+    devshell = {
+      url = "github:numtide/devshell";
+      flake = false;
+    };
 
     # Disko for Nix-managed partition management
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Required by some other flakes
     flake-compat.url = "github:edolstra/flake-compat";
-    flake-compat.flake = false;
 
     # Required by some other flakes
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
 
-    # Required by pre-commit-hooks
-    flake-utils.url = "github:numtide/flake-utils";
+    # Another thing required by other flakes
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
 
     # Garuda Linux flake - most of my system settings are here
-    # garuda-nix.url = "/home/nico/Documents/misc/garuda-nix-subsystem";
-    garuda-nix.url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
-    garuda-nix.inputs.chaotic-nyx.follows = "chaotic-nyx";
-    garuda-nix.inputs.devshell.follows = "devshell";
-    garuda-nix.inputs.flake-parts.follows = "flake-parts";
-    garuda-nix.inputs.home-manager.follows = "home-manager";
-    garuda-nix.inputs.nix-index-database.follows = "nix-index-database";
-    garuda-nix.inputs.nixpkgs.follows = "nixpkgs";
-    garuda-nix.inputs.pre-commit-hooks.follows = "pre-commit-hooks";
-
-    # Gitignore common input
-    gitignore.url = "github:hercules-ci/gitignore.nix";
-    gitignore.inputs.nixpkgs.follows = "nixpkgs";
+    garuda-nix = {
+      # url = "/home/nico/Documents/misc/garuda-nix-subsystem";
+      url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
+      inputs.chaotic-nyx.follows = "chaotic-nyx";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.home-manager.follows = "home-manager";
+      inputs.nix-index-database.follows = "nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
+    };
 
     # Home-manager for managing my home directory
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Ad and malware blocking hosts file
+    hosts = {
+      url = "github:StevenBlack/hosts";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Lanzaboote for secure boot support
-    lanzaboote.url = "github:nix-community/lanzaboote/master";
-    lanzaboote.inputs.flake-compat.follows = "flake-compat";
-    lanzaboote.inputs.flake-parts.follows = "flake-parts";
-    lanzaboote.inputs.flake-utils.follows = "flake-utils";
-    lanzaboote.inputs.nixpkgs.follows = "nixpkgs";
-    lanzaboote.inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/master";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
+    };
+
+    # Nix gaming-related packages and modules
+    nix-gaming = {
+      url = "github:fufexan/nix-gaming";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Have a local index of nixpkgs for fast launching of apps
-    nix-index-database.url = "github:Mic92/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-
-    # feature-rich and convenient fork of the Nix package manager
-    nix-super.url = "github:privatevoid-net/nix-super";
-    nix-super.inputs.flake-compat.follows = "flake-compat";
-    nix-super.inputs.nixpkgs.follows = "nixpkgs";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # NixOS generators to build system images
-    nixos-generators.url = "github:nix-community/nixos-generators";
-    nixos-generators.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # NixOS hardware database
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     # The source of all truth!
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # Easy linting of the flake and all kind of other stuff
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
-    pre-commit-hooks.inputs.flake-compat.follows = "flake-compat";
-    pre-commit-hooks.inputs.flake-utils.follows = "flake-utils";
-    pre-commit-hooks.inputs.gitignore.follows = "gitignore";
-    pre-commit-hooks.inputs.nixpkgs.follows = "nixpkgs";
-    pre-commit-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+    pre-commit-hooks = {
+      url = "github:cachix/pre-commit-hooks.nix";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.gitignore.follows = "gitignore";
+      inputs.nixpkgs-stable.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Spicetify
-    spicetify-nix.url = "github:the-argus/spicetify-nix";
-    spicetify-nix.inputs.flake-utils.follows = "flake-utils";
-    spicetify-nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Ad and malware blocking hosts file
-    stevenblack-hosts = {
-      url = "github:stevenblack/hosts";
-      flake = false;
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Systems flake
+    systems.url = "github:nix-systems/x86_64-linux";
   };
 
   outputs = {
-    devshell,
     flake-parts,
     nixpkgs,
     pre-commit-hooks,
@@ -126,11 +153,17 @@
             name = "alejandra";
           };
           commitizen.enable = true;
+          check-json.enable = true;
+          check-yaml.enable = true;
+          detect-private-keys.enable = true;
           deadnix.enable = true;
+          flake-checker.enable = true;
           nil.enable = true;
           prettier.enable = true;
+          pre-commit-hook-ensure-sops.enable = true;
           yamllint.enable = true;
           statix.enable = true;
+          typos.enable = true;
         };
         src = ./.;
       };

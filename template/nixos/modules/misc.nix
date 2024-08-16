@@ -3,36 +3,10 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed;
-  chromium-gate = pkgs.writeShellScriptBin "chromium-gate" ''
-    set -o errexit
-
-    CHROMIUM="${pkgs.chromium-flagged}/bin/chromium"
-    KDIALOG="${pkgs.libsForQt5.kdialog}/bin/kdialog"
-    ZFS="${pkgs.zfs}/bin/zfs"
-
-    echo 'Handling encrypted Chromium profile'
-    if [ "$USER" != 'nico' ] || [ -f "$HOME/.config/chromium" ]; then
-      exec "$CHROMIUM" "$@"
-    else
-      "$KDIALOG" --title "Chromium gatekeeper" --password "Please provide the password for the Chromium vault 🔑" |\
-        (sudo "$ZFS" load-key zroot/data/chromium \
-        || ("$KDIALOG" --title "Chromium gatekeeper" --error "Unable to load ZFS key, loading fresh profile instead!" \
-        && "$CHROMIUM" "$@" && false))
-      sudo "$ZFS" mount zroot/data/chromium \
-        || ("$KDIALOG" --title "Chromium gatekeeper" --error "Unable to mount ZFS partition, loading fresh profile instead!" \
-        && "$CHROMIUM" "$@" && false)
-
-      "$CHROMIUM" "$@"
-
-      sudo "$ZFS" umount -f zroot/data/chromium
-      sudo "$ZFS" unload-key zroot/data/chromium
-    fi
-  '';
 in {
-  options.dr460nixed = {
+  options.dr460nixed = with lib; {
     adblock =
       mkOption
       {
@@ -117,12 +91,12 @@ in {
   };
 
   config = {
-    # Automatic system upgrades via git and flakes
-    system.autoUpgrade = mkIf cfg.auto-upgrade {
+    # Automatic system upgrades via git and flakes - CHANGE THE "flake"!
+    system.autoUpgrade = lib.mkIf cfg.auto-upgrade {
       allowReboot = true;
       dates = "04:00";
       enable = true;
-      flake = "github:dr460nf1r3/dr460nixed";
+      flake = null;
       randomizedDelaySec = "1h";
       rebootWindow = {
         lower = "00:00";
@@ -131,7 +105,7 @@ in {
     };
 
     # Enable the tor network
-    services.tor = mkIf cfg.tor {
+    services.tor = lib.mkIf cfg.tor {
       client.dns.enable = true;
       client.enable = true;
       enable = true;
@@ -139,54 +113,52 @@ in {
     };
 
     # Enable the smartcard daemon
-    hardware.gpgSmartcards.enable = mkIf cfg.yubikey true;
-    services.pcscd.enable = mkIf cfg.yubikey true;
-    services.udev.packages = mkIf cfg.yubikey [pkgs.yubikey-personalization];
+    hardware.gpgSmartcards.enable = lib.mkIf cfg.yubikey true;
+    services.pcscd = {
+      enable = lib.mkIf cfg.yubikey true;
+      plugins = [pkgs.ccid];
+    };
+    services.udev.packages = lib.mkIf cfg.yubikey [pkgs.yubikey-personalization];
 
     # Configure as challenge-response for instant login,
     # can't provide the secrets as the challenge gets updated
-    security.pam.yubico = mkIf cfg.yubikey {
+    security.pam.yubico = lib.mkIf cfg.yubikey {
       debug = false;
       enable = true;
       mode = "challenge-response";
     };
 
     # Basic chromium settings (system-wide)
-    programs.chromium = mkIf cfg.chromium {
+    programs.chromium = lib.mkIf cfg.chromium {
       defaultSearchProviderEnabled = true;
-      defaultSearchProviderSearchURL = "https://searx.dr460nf1r3.org/search?q=%s";
-      defaultSearchProviderSuggestURL = "https://searx.dr460nf1r3.org/autocomplete?q=%s";
+      defaultSearchProviderSearchURL = "https://searx.garudalinux.org/search?q=%s";
+      defaultSearchProviderSuggestURL = "https://searx.garudalinux.org/autocomplete?q=%s";
       enable = true;
       extensions = [
-        "ajhmfdgkijocedmfjonnpjfojldioehi" # Privacy Pass
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock origin
-        "edibdbjcniadpccecjdfdjjppcpchdlm" # I Still Don't Care About Cookies
-        "fhnegjjodccfaliddboelcleikbmapik" # Tab Counter
         "hipekcciheckooncpjeljhnekcoolahp" # Tabliss
-        "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly
-        "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
-        "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-        "oladmjdebphlnjjcnomfhhbfdldiimaf;https://raw.githubusercontent.com/libredirect/libredirect/master/src/updates/updates.xml" # Libredirect
+        "mdjildafknihdffpkfmmpnpoiajfjnjd" # Consent-O-Matic
       ];
       extraOpts = {
-        "HomepageLocation" = "https://searx.dr460nf1r3.org";
         "QuicAllowed" = true;
         "RestoreOnStartup" = true;
         "ShowHomeButton" = true;
       };
+      homepageLocation = "https://searx.garudalinux.org";
     };
 
     # SUID Sandbox
-    security.chromiumSuidSandbox.enable = mkIf cfg.chromium true;
+    security.chromiumSuidSandbox.enable = lib.mkIf cfg.chromium true;
+
     # Enhance performance tweaks
-    garuda.performance-tweaks = lib.mkIf cfg.performance {
-      cachyos-kernel = true;
+    garuda.performance-tweaks.enable = lib.mkIf cfg.performance true;
+    boot.kernelPackages = lib.mkIf cfg.performance pkgs.linuxPackages_cachyos-lto;
+
+    # /etc/hosts based adblocker
+    networking.stevenBlackHosts = lib.mkIf cfg.adblock {
+      blockFakenews = true;
+      blockGambling = true;
       enable = true;
     };
-
-    # /etc/hosts based adblocker (unified hosts + fakenews)
-    networking.extraHosts =
-      lib.mkIf cfg.adblock
-      (builtins.readFile "${inputs.stevenblack-hosts}/alternates/fakenews/hosts");
   };
 }

@@ -2,11 +2,10 @@
   config,
   lib,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.zfs;
 in {
-  options.dr460nixed.zfs = {
+  options.dr460nixed.zfs = with lib; {
     enable =
       mkOption
       {
@@ -18,7 +17,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Support booting off ZFS
     boot.supportedFilesystems = ["zfs"];
 
