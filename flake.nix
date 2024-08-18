@@ -277,7 +277,7 @@
             {package = "gnupg";}
             {package = "manix";}
             {package = "mdbook";}
-            {package = "nix-melt";}
+            # {package = "nix-melt";} - currently broken due to Rust 1.80
             {package = "nixos-anywhere";}
             {package = "nixos-install-tools";}
             {package = "pre-commit";}
