@@ -63,6 +63,7 @@ in {
       lm_sensors
       movit
       obs-studio-wrapped
+      obsidian
       okular
       plasmusic-toolbar
       qbittorrent
