@@ -90,6 +90,14 @@ in {
       };
     };
 
+    # https://gitlab.com/ananicy-cpp/ananicy-cpp/-/issues/40#note_1986279383
+    systemd.services.ananicy-cpp = {
+      serviceConfig = {
+        Delegate-cpu = "cpuset io memory pids";
+        ExecStartPre = "${pkgs.coreutils}/bin/sleep 30";
+      };
+    };
+
     # Who needs documentation when there is the internet? #bl04t3d
     documentation = lib.mkIf cfg.nodocs {
       dev.enable = false;
