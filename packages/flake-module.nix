@@ -14,6 +14,9 @@
           fi"
         '';
 
+      # Godot
+      godot4-mono = pkgs.callPackage ./godot4-mono {};
+
       # Installs a basic dr460nixed template
       installer = pkgs.writeShellApplication {
         name = "dr460nixed-installer";
