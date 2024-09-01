@@ -10,7 +10,7 @@
       inputs.disko.nixosModules.disko
       inputs.hosts.nixosModule
       inputs.lanzaboote.nixosModules.lanzaboote
-      inputs.lix-module.nixosModules.default
+      inputs.lix-module.nixosModules.lixFromNixpkgs
       inputs.sops-nix.nixosModules.sops
       inputs.spicetify-nix.nixosModules.default
       inputs.ucodenix.nixosModules.ucodenix
@@ -23,7 +23,7 @@
       ./modules/locales.nix
       ./modules/misc.nix
       inputs.hosts.nixosModule
-      inputs.lix-module.nixosModules.default
+      inputs.lix-module.nixosModules.lixFromNixpkgs
       inputs.nixos-generators.nixosModules.all-formats
       inputs.spicetify-nix.nixosModules.default
       "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"

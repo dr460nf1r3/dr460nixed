@@ -5,6 +5,27 @@
   ...
 }: let
   cfg = config.dr460nixed;
+  extra-path = with pkgs; [
+    dotnetCorePackages.sdk_8_0_3xx
+    dotnetPackages.Nuget
+    godot_4
+    godot_4-export-templates
+    mono
+    msbuild
+  ];
+  extra-lib = [];
+  rider = pkgs.jetbrains.rider.overrideAttrs (attrs: {
+    postInstall =
+      ''
+        # Wrap rider with extra tools and libraries
+        mv $out/bin/rider $out/bin/.rider-toolless
+        makeWrapper $out/bin/.rider-toolless $out/bin/rider \
+          --argv0 rider \
+          --prefix PATH : "${lib.makeBinPath extra-path}" \
+          --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath extra-lib}"
+      ''
+      + attrs.postInstall or "";
+  });
 in {
   # These are the packages I always need
   environment.systemPackages = let
@@ -88,6 +109,8 @@ in {
       fishPlugins.wakatime-fish
       gh
       gitkraken
+      godot_4
+      godot_4-export-templates
       heroku
       hoppscotch
       hugo
@@ -114,6 +137,7 @@ in {
       nodejs_latest
       podman-compose
       podman-tui
+      rider
       shellcheck
       shfmt
       speedcrunch

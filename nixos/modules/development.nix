@@ -13,21 +13,8 @@
   distrobox-setup = pkgs.writeScriptBin "distrobox-setup" ''
     distrobox create --name arch \
       --init --image quay.io/toolbx/arch-toolbox:latest \
-      --additional-packages "git tmux micro fish base-devel pacman-contrib fastfetch" \
-      --init-hooks "pacman-key --init && pacman-key --recv-key 0706B90D37D9B881 3056513887B78AEB --keyserver keyserver.ubuntu.com && pacman-key --lsign-key 0706B90D37D9B881 3056513887B78AEB && pacman --noconfirm -U 'https://geo-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' && pacman --noconfirm -U 'https://geo-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' && echo '[multilib]' >>/etc/pacman.conf && echo 'Include = /etc/pacman.d/mirrorlist' >>/etc/pacman.conf && echo '[garuda]' >>/etc/pacman.conf && echo 'Include = /etc/pacman.d/chaotic-mirrorlist' >>/etc/pacman.conf && echo '[chaotic-aur]' >>/etc/pacman.conf && echo 'Include = /etc/pacman.d/chaotic-mirrorlist' >>/etc/pacman.conf"
+      --additional-packages "git tmux micro fish base-devel pacman-contrib fastfetch"
     distrobox generate-entry arch
-    distrobox create --name debian \
-      --init --image quay.io/toolbx-images/debian-toolbox:unstable \
-      ${additionalPackages}
-    distrobox generate-entry debian
-    distrobox create --name steamos \
-      --init --image ghcr.io/linuxserver/steamos:latest \
-      ${additionalPackages}
-    distrobox generate-entry steamos
-    distrobox create --name void \
-      --init --image ghcr.io/void-linux/void-glibc-full:latest \
-      ${additionalPackages}
-    distrobox generate-entry void
     distrobox create --name kali \
       --init --image docker.io/kalilinux/kali-rolling:latest \
       ${additionalPackages}
@@ -93,6 +80,9 @@ in {
       };
     };
 
+    # For Redis
+    boot.kernel.sysctl = {"vm.overcommit_memory" = "1";};
+
     # Archlinux development
     environment.systemPackages = [
       distrobox-setup
@@ -102,6 +92,9 @@ in {
     networking.hosts = {
       "127.0.0.1" = ["metrics.chaotic.local" "backend.chaotic.local"];
     };
+
+    # Godot C# not available yet
+    services.flatpak.enable = true;
 
     # Allow cross-compiling to aarch64
     boot.binfmt.emulatedSystems = ["aarch64-linux"];
