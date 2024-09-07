@@ -5,11 +5,11 @@
   ...
 }: let
   cfg = config.dr460nixed;
+  godot = pkgs.godot_4-mono;
   extra-path = with pkgs; [
     dotnetCorePackages.sdk_8_0_3xx
     dotnetPackages.Nuget
-    godot_4
-    godot_4-export-templates
+    godot
     mono
     msbuild
   ];
@@ -109,8 +109,7 @@ in {
       fishPlugins.wakatime-fish
       gh
       gitkraken
-      godot_4
-      godot_4-export-templates
+      godot
       heroku
       hoppscotch
       hugo

@@ -76,7 +76,7 @@ in {
         enable = true;
         enableExtensionPack = true;
         enableHardening = true;
-        # enableKvm = true; # patch is currently failing
+        enableKvm = true;
       };
     };
 

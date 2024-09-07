@@ -1,4 +1,4 @@
-{
+{pkgs, ...}: {
   # VSCode settings
   programs.vscode.userSettings = {
     "editor.fontFamily" = "'Jetbrains Mono Nerd Font'; 'monospace'; monospace";
@@ -44,6 +44,20 @@
     "[nix]" = {
       "editor.defaultFormatter" = "jnoortheen.nix-ide";
     };
+  };
+
+  # Required for Godot to be able to find Rider
+  home.file = {
+    ".local/share/applications/jetbrains-rider.desktop".source = let
+      desktopFile = pkgs.makeDesktopItem {
+        name = "jetbrains-rider";
+        desktopName = "Rider";
+        exec = "rider";
+        icon = "rider";
+        type = "Application";
+        extraConfig.NoDisplay = "true";
+      };
+    in "${desktopFile}/share/applications/jetbrains-rider.desktop";
   };
 
   # GitHub CLI
