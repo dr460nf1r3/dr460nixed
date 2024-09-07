@@ -36,8 +36,8 @@
   })
   (fetchNuGet {
     pname = "Microsoft.AspNetCore.App.Ref";
-    version = "6.0.32";
-    hash = "sha256-1mQTxwruzhm20YdlZefrYuy7xrBs17pH4Vo0K3Tl7Fc=";
+    version = "6.0.33";
+    hash = "sha256-GcPiO+iI0JsHYlqURAmzWjOnDX2jDCUY4jYaIwr8ojs=";
   })
   (fetchNuGet {
     pname = "Microsoft.Bcl.AsyncInterfaces";
@@ -236,13 +236,13 @@
   })
   (fetchNuGet {
     pname = "Microsoft.NETCore.App.Host.win-x86";
-    version = "6.0.32";
-    hash = "sha256-SVtylPsKrlynyh/0QL0hfxo23SBCd7Cj4jCUf4rkuK8=";
+    version = "6.0.33";
+    hash = "sha256-OybB5ATvnnPEsKAdn5a/UdjSPcT78wlf38YNmuRWBZg=";
   })
   (fetchNuGet {
     pname = "Microsoft.NETCore.App.Ref";
-    version = "6.0.32";
-    hash = "sha256-Fm3RUZNcro434rIu3c7unGviGeGBjXj2dGnr2mmrM2g=";
+    version = "6.0.33";
+    hash = "sha256-BiGUcXo1FQTlZdR6ndhUQ8lrYG3KaGXNXRVF+Fc3L28=";
   })
   (fetchNuGet {
     pname = "Microsoft.NETCore.Platforms";

@@ -8,8 +8,6 @@
   scons,
   python3,
   mkNugetDeps,
-  mkNugetSource,
-  writeText,
   vulkan-loader,
   libGL,
   libX11,
@@ -36,46 +34,18 @@
   withSpeechd ? true,
   withFontconfig ? true,
   withUdev ? true,
-  withTouch ? true,
-  dotnet-sdk,
+  deps ? ./deps.nix,
   mono,
-  dotnet-runtime,
   callPackage,
-  pkgs,
+  dotnet-sdk_8,
+  dotnet-runtime_8,
 }:
-assert lib.asserts.assertOneOf "withPrecision" withPrecision ["single" "double"]; let
-  mkSconsFlagsFromAttrSet = lib.mapAttrsToList (k: v:
-    if builtins.isString v
-    then "${k}=${v}"
-    else "${k}=${builtins.toJSON v}");
-in
+assert lib.asserts.assertOneOf "withPrecision" withPrecision ["single" "double"];
   stdenv.mkDerivation rec {
     pname = "godot4-mono";
     version = "4.3-stable";
     commitHash = "77dcf97d82cbfe4e4615475fa52ca03da645dbd8";
     sourceHash = "sha256-v2lBD3GEL8CoIwBl3UoLam0dJxkLGX0oneH6DiWkEsM=";
-
-    nugetDeps = mkNugetDeps {
-      name = "deps";
-      nugetDeps = import ./deps.nix;
-    };
-
-    shouldConfigureNuget = true;
-
-    nugetSource = mkNugetSource {
-      name = "${pname}-nuget-source";
-      description = "A Nuget source with dependencies for ${pname}";
-      deps = [nugetDeps];
-    };
-
-    nugetConfig = writeText "NuGet.Config" ''
-      <?xml version="1.0" encoding="utf-8"?>
-      <configuration>
-        <packageSources>
-          <add key="${pname}-deps" value="${nugetSource}/lib" />
-        </packageSources>
-      </configuration>
-    '';
 
     src = fetchFromGitHub {
       owner = "godotengine";
@@ -83,6 +53,8 @@ in
       rev = commitHash;
       hash = sourceHash;
     };
+
+    keepNugetConfig = deps == null;
 
     nativeBuildInputs = [
       pkg-config
@@ -92,13 +64,19 @@ in
       speechd
       wayland-scanner
       mono
-      pkgs.dotnet-sdk_8
-      pkgs.dotnet-runtime_8
+      dotnet-sdk_8
+      dotnet-runtime_8
     ];
 
-    buildInputs = [
-      scons
-    ];
+    buildInputs =
+      [
+        scons
+      ]
+      ++ lib.optional (deps != null)
+      (mkNugetDeps {
+        name = "deps";
+        nugetDeps = import deps;
+      });
 
     runtimeDependencies =
       [
@@ -117,8 +95,8 @@ in
         alsa-lib
         mono
         wayland-scanner
-        pkgs.dotnet-sdk_8
-        pkgs.dotnet-runtime_8
+        dotnet-sdk_8
+        dotnet-runtime_8
       ]
       ++ lib.optional withPulseaudio libpulseaudio
       ++ lib.optional withDbus dbus
@@ -158,12 +136,6 @@ in
       echo "Setting up buildhome."
       mkdir buildhome
       export HOME="$PWD"/buildhome
-
-      if [ -n "$shouldConfigureNuget" ]; then
-        echo "Configuring NuGet."
-        mkdir -p ~/.nuget/NuGet
-        ln -s "$nugetConfig" ~/.nuget/NuGet/NuGet.Config
-      fi
     '';
 
     buildPhase = ''
