@@ -189,7 +189,7 @@ in {
 
     # Enhance performance tweaks
     garuda.performance-tweaks.enable = lib.mkIf cfg.performance true;
-    boot.kernelPackages = lib.mkIf cfg.performance pkgs.linuxPackages_cachyos-lto;
+    boot.kernelPackages = lib.mkIf cfg.performance pkgs.linuxPackages_cachyos;
 
     # /etc/hosts based adblocker
     networking.stevenBlackHosts = lib.mkIf cfg.adblock {
@@ -197,5 +197,8 @@ in {
       blockGambling = true;
       enable = true;
     };
+
+    # School stuff uses Teams / OneDrive, sadly
+    services.onedrive.enable = lib.mkIf cfg.school true;
   };
 }
