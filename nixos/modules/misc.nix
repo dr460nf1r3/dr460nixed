@@ -168,7 +168,6 @@ in {
         "hipekcciheckooncpjeljhnekcoolahp" # Tabliss
         "hlepfoohegkhhmjieoechaddaejaokhf" # Github Refined
         "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly
-        "mdjgbjnbdnhneejmmaabmccfehigbjbe" # Cloudflare Optics
         "mdjildafknihdffpkfmmpnpoiajfjnjd" # Consent-O-Matic
         "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden

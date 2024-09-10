@@ -23,6 +23,7 @@
     flatpak = uidGid 974;
     gamemode = uidGid 969;
     grafana = uidGid 995;
+    incus-admin = uidGid 665;
     influxdb2 = uidGid 994;
     jellyfin = uidGid 970;
     loki = uidGid 993;
