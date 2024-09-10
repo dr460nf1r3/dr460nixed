@@ -74,7 +74,7 @@ in {
       hunspellDicts.en_US
       inkscape
       krita
-      libreoffice-qt
+      libreoffice-qt6-fresh
       kdePackages.kdenlive
       kdePackages.kleopatra
       kdePackages.krdc

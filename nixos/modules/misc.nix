@@ -168,7 +168,6 @@ in {
         "hipekcciheckooncpjeljhnekcoolahp" # Tabliss
         "hlepfoohegkhhmjieoechaddaejaokhf" # Github Refined
         "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly
-        "mdjgbjnbdnhneejmmaabmccfehigbjbe" # Cloudflare Optics
         "mdjildafknihdffpkfmmpnpoiajfjnjd" # Consent-O-Matic
         "mnjggcdmjocbbbhaepdhchncahnbgone" # SponsorBlock
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
@@ -199,6 +198,6 @@ in {
     };
 
     # School stuff uses Teams / OneDrive, sadly
-    services.onedrive.enable = lib.mkIf cfg.school true;
+    # services.onedrive.enable = lib.mkIf cfg.school true;
   };
 }

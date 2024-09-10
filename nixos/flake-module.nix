@@ -41,6 +41,14 @@
   in {
     # All the system configurations
     nixosConfigurations = {
+      dev-container = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          "${inputs.nixpkgs}/nixos/modules/virtualisation/lxc-container.nix"
+          ./modules/dev-container/dev-container.nix
+        ];
+      };
+
       # My main device (Lenovo Slim 7)
       dragons-ryzen = inputs.garuda-nix.lib.garudaSystem {
         system = "x86_64-linux";

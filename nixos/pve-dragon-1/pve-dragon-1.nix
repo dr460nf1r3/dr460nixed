@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
   imports = [
@@ -96,6 +97,58 @@
       enable = true;
     };
   };
+
+  # Some trial stuff for NixOS containers
+  virtualisation.incus = {
+    enable = true;
+    package = pkgs.incus;
+    preseed = {
+      config = {
+        "core.https_address" = "127.0.0.1:8443";
+      };
+      networks = [
+        {
+          config = {
+            "ipv4.address" = "10.0.0.1/24";
+            "ipv4.nat" = "true";
+          };
+          name = "incusbr0";
+          type = "bridge";
+        }
+      ];
+      profiles = [
+        {
+          devices = {
+            eth0 = {
+              name = "eth0";
+              network = "incusbr0";
+              type = "nic";
+            };
+            root = {
+              path = "/";
+              pool = "default";
+              size = "35GiB";
+              type = "disk";
+            };
+          };
+          name = "default";
+        }
+      ];
+      storage_pools = [
+        {
+          config = {
+            source = "/var/lib/incus/storage-pools/default";
+          };
+          driver = "dir";
+          name = "default";
+        }
+      ];
+    };
+    ui.enable = true;
+    socketActivation = true;
+  };
+  users.users.nico.extraGroups = ["incus-admin"];
+  networking.firewall.trustedInterfaces = ["incusbr0"];
 
   # NixOS stuff
   system.stateVersion = "23.11";
