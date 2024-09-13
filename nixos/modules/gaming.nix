@@ -19,13 +19,13 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    # ProtonGE-Custom
-    chaotic.steam.extraCompatPackages = with pkgs; [proton-ge-custom];
-
     # Gamemode
     programs.gamemode.enable = true;
 
     # Enable Steam
-    programs.steam.enable = true;
+    programs.steam = {
+      enable = true;
+      extraCompatPackages = with pkgs; [proton-ge-custom];
+    };
   };
 }
