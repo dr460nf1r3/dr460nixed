@@ -486,7 +486,7 @@
         "narHash": "sha256-zNW/rqNJwhq2lYmQf19wJerRuNimjhxHKmzrWWFJYts=",
         "rev": "622a2253a071a1fb97a4d3c8103a91114acc1140",
         "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/622a2253a071a1fb97a4d3c8103a91114acc1140.tar.gz?rev=622a2253a071a1fb97a4d3c8103a91114acc1140"
+        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/622a2253a071a1fb97a4d3c8103a91114acc1140.tar.gz"
       },
       "original": {
         "type": "tarball",
@@ -773,11 +773,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1726745158,
-        "narHash": "sha256-D5AegvGoEjt4rkKedmxlSEmC+nNLMBPWFxvmYnVLhjk=",
+        "lastModified": 1727514110,
+        "narHash": "sha256-0YRcOxJG12VGDFH8iS8pJ0aYQQUAgo/r3ZAL+cSh9nk=",
         "owner": "cachix",
         "repo": "pre-commit-hooks.nix",
-        "rev": "4e743a6920eab45e8ba0fbe49dc459f1423a4b74",
+        "rev": "85f7a7177c678de68224af3402ab8ee1bcee25c8",
         "type": "github"
       },
       "original": {
@@ -987,20 +987,20 @@
       },
       "locked": {
         "dir": "packaging/nix",
-        "lastModified": 1727227288,
-        "narHash": "sha256-82fIhNN93zk0vmc5rltsbYJlD96AHzEFY2q1KizLP0A=",
+        "lastModified": 1726768365,
+        "narHash": "sha256-5yQJ3krsZioC+Nim4/oaOjKp3CXFWolTFMpXnUBcYtE=",
         "ref": "refs/heads/main",
-        "rev": "5cc1c3f23e2ecc9e03267c097e990d1702416852",
-        "revCount": 730,
+        "rev": "e42043a26639cfb69d14c6945ecdebe2bb3c42fc",
+        "revCount": 727,
         "submodules": true,
         "type": "git",
-        "url": "https://github.com/Open-Wine-Components/umu-launcher/"
+        "url": "https://github.com/Open-Wine-Components/umu-launcher/?dir=packaging/nix"
       },
       "original": {
         "dir": "packaging/nix",
         "submodules": true,
         "type": "git",
-        "url": "https://github.com/Open-Wine-Components/umu-launcher/"
+        "url": "https://github.com/Open-Wine-Components/umu-launcher/?dir=packaging/nix"
       }
     }
   },
