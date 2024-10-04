@@ -71,6 +71,10 @@ in {
         dockerSocket.enable = true;
         enable = true;
       };
+      # docker = {
+      #   enable = true;
+      #   autoPrune.enable = true;
+      # };
       virtualbox.host = {
         addNetworkInterface = false;
         enable = true;
@@ -92,9 +96,6 @@ in {
     networking.hosts = {
       "127.0.0.1" = ["metrics.chaotic.local" "backend.chaotic.local"];
     };
-
-    # Godot C# not available yet
-    services.flatpak.enable = true;
 
     # Allow cross-compiling to aarch64
     boot.binfmt.emulatedSystems = ["aarch64-linux"];

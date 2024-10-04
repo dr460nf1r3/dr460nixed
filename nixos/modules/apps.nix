@@ -182,8 +182,8 @@ in {
             }
           ];
       })
-      (yarn.override {
-        nodejs = null; # Use my system nodejs
+      (yarn-berry.override {
+        nodejs = pkgs.nodejs_latest;
       })
       zed-editor_git
     ])
