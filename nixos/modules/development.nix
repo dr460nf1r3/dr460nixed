@@ -67,14 +67,14 @@ in {
       podman = {
         autoPrune.enable = true;
         defaultNetwork.settings.dns_enabled = true;
-        dockerCompat = true;
-        dockerSocket.enable = true;
+        # dockerCompat = true;
+        # dockerSocket.enable = true;
         enable = true;
       };
-      # docker = {
-      #   enable = true;
-      #   autoPrune.enable = true;
-      # };
+      docker = {
+        enable = true;
+        autoPrune.enable = true;
+      };
       virtualbox.host = {
         addNetworkInterface = false;
         enable = true;

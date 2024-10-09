@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -73,8 +74,10 @@ in {
       hunspellDicts.de_DE
       hunspellDicts.en_US
       inkscape
+      inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
       krita
       libreoffice-qt6-fresh
+      kde-rounded-corners
       kdePackages.kdenlive
       kdePackages.kleopatra
       kdePackages.krdc

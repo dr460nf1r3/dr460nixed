@@ -34,34 +34,34 @@ in {
     '';
     "${appdir}/startcenter.desktop".text = ''
       [Desktop Action Base]
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --base
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --base
       Name=Base
 
       [Desktop Action Calc]
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --calc
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --calc
       Name=Calc
 
       [Desktop Action Draw]
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --draw
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --draw
       Name=Draw
 
       [Desktop Action Impress]
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --impress
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --impress
       Name=Impress
 
       [Desktop Action Math]
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --math
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --math
       Name=Math
 
       [Desktop Action Writer]
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --writer
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --writer
       Name=Writer
 
       [Desktop Entry]
       Actions=Writer;Calc;Impress;Draw;Base;Math;
       Categories=Office;X-Red-Hat-Base;X-SuSE-Core-Office;
       Comment=Launch applications to create text documents, spreadsheets, presentations, drawings, formulas, and databases, or open recently used documents.
-      Exec=${pkgs.libreoffice-qt}/bin/soffice %U
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice %U
       GenericName[en_GB]=Office
       GenericName=Office
       Icon=libreoffice
@@ -79,7 +79,7 @@ in {
     '';
     "${appdir}/math.desktop".text = ''
       [Desktop Action NewDocument]
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --math
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --math
       Icon=document-new
       Name[en_GB]=New Formula
       Name=New Formula
@@ -88,7 +88,7 @@ in {
       Actions=NewDocument;
       Categories=Office;Education;Science;Math;X-Red-Hat-Base;
       Comment=Create and edit scientific formulas and equations.
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --math %U
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --math %U
       GenericName[en_GB]=Formula Editor
       GenericName=Formula Editor
       Icon=org.libreoffice.LibreOffice.math
@@ -108,7 +108,7 @@ in {
     '';
     "${appdir}/impress.desktop".text = ''
       [Desktop Action NewDocument]
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --impress
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --impress
       Icon=document-new
       Name[en_GB]=New Presentation
       Name=New Presentation
@@ -117,7 +117,7 @@ in {
       Actions=NewDocument;
       Categories=Office;Presentation;X-Red-Hat-Base;
       Comment=Create and edit presentations for slideshows, meetings and Web pages.
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --impress %U
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --impress %U
       GenericName[en_GB]=Presentation
       GenericName=Presentation
       Icon=org.libreoffice.LibreOffice.impress
@@ -137,7 +137,7 @@ in {
     '';
     "${appdir}/draw.desktop".text = ''
       [Desktop Action NewDocument]
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --draw
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --draw
       Icon=document-new
       Name[en_GB]=New Drawing
       Name=New Drawing
@@ -146,7 +146,7 @@ in {
       Actions=NewDocument;
       Categories=Office;FlowChart;Graphics;2DGraphics;VectorGraphics;X-Red-Hat-Base;
       Comment=Create and edit drawings, flow charts and logos.
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --draw %U
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --draw %U
       GenericName[en_GB]=Drawing Program
       GenericName=Drawing Program
       Icon=org.libreoffice.LibreOffice.draw
@@ -166,7 +166,7 @@ in {
     '';
     "${appdir}/calc.desktop".text = ''
       [Desktop Action NewDocument]
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --calc
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --calc
       Icon=document-new
       Name[en_GB]=New Spreadsheet
       Name=New Spreadsheet
@@ -175,7 +175,7 @@ in {
       Actions=NewDocument;
       Categories=Office;Spreadsheet;X-Red-Hat-Base;
       Comment=Perform calculations, analyze information and manage lists in spreadsheets.
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --calc %U
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --calc %U
       GenericName[en_GB]=Spreadsheet
       GenericName=Spreadsheet
       Icon=org.libreoffice.LibreOffice.calc
@@ -195,7 +195,7 @@ in {
     '';
     "${appdir}/base.desktop".text = ''
       [Desktop Action NewDocument]
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --base
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --base
       Icon=document-new
       Name[en_GB]=New Database
       Name=New Database
@@ -204,7 +204,7 @@ in {
       Actions=NewDocument;
       Categories=Office;Database;X-Red-Hat-Base;
       Comment=Manage databases, create queries and reports to track and manage your information.
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --base %U
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --base %U
       GenericName[en_GB]=Database Development
       GenericName=Database Development
       Icon=org.libreoffice.LibreOffice.base
@@ -224,7 +224,7 @@ in {
     '';
     "${appdir}/writer.desktop".text = ''
       [Desktop Action NewDocument]
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --writer
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --writer
       Icon=document-new
       Name[en_GB]=New Document
       Name=New Document
@@ -233,7 +233,7 @@ in {
       Actions=NewDocument;
       Categories=Office;WordProcessor;X-Red-Hat-Base;
       Comment=Create and edit text and graphics in letters, reports, documents and Web pages.
-      Exec=${pkgs.libreoffice-qt}/bin/soffice --writer %U
+      Exec=${pkgs.libreoffice-qt6-fresh}/bin/soffice --writer %U
       GenericName[en_GB]=Word Processor
       GenericName=Word Processor
       Icon=libreoffice-writer

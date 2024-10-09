@@ -83,6 +83,12 @@
       flake = false;
     };
 
+    # Kwin effects for blur
+    kwin-effects-forceblur = {
+      url = "github:taj-ny/kwin-effects-forceblur";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Lanzaboote for secure boot support
     lanzaboote = {
       url = "github:nix-community/lanzaboote/master";
@@ -95,6 +101,7 @@
     # Lets give Lix another try
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
+      inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -103,6 +110,7 @@
       url = "github:fufexan/nix-gaming";
       inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.umu.follows = "";
     };
 
     # Have a local index of nixpkgs for fast launching of apps
