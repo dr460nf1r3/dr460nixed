@@ -116,9 +116,7 @@ in {
       heroku
       hoppscotch
       hugo
-      jetbrains.datagrip
       jetbrains.idea-ultimate
-      jetbrains.pycharm-professional
       jetbrains.webstorm
       manix
       mdbook

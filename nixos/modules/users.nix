@@ -40,6 +40,7 @@
     proc = uidGid 971;
     promtail = uidGid 987;
     redis-paperless = uidGid 965;
+    resolvconf = uidGid 964;
     rtkit = uidGid 986;
     sshd = uidGid 985;
     systemd-coredump = uidGid 984;
