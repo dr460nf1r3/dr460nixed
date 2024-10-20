@@ -1,11 +1,16 @@
-{pkgs, ...}: {
-  environment.systemPackages = with pkgs; [chromium jetbrains.webstorm nodejs];
+{
+  lib,
+  pkgs,
+  ...
+}: {
+  environment.systemPackages = with pkgs; [chromium jetbrains.webstorm nodejs_latest];
 
   # Enable Plasma
-  services.xserver.desktopManager.plasma6.enable = true;
-
+  services.desktopManager = {
+    plasma6.enable = true;
+    sddm.enable = true;
+  };
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
 
   users.users.nico = {
     isNormalUser = true;
@@ -32,4 +37,7 @@
       }
     });
   '';
+
+  # Fix conflict
+  programs.ssh.setXAuthLocation = lib.mkForce true;
 }
