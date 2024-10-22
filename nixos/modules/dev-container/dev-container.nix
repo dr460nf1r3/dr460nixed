@@ -6,11 +6,11 @@
   environment.systemPackages = with pkgs; [chromium jetbrains.webstorm nodejs_latest];
 
   # Enable Plasma
-  services.desktopManager = {
-    plasma6.enable = true;
-    sddm.enable = true;
+  services = {
+    desktopManager.plasma6.enable = true;
+    displayManager.sddm.enable = true;
+    xserver.enable = true;
   };
-  services.xserver.enable = true;
 
   users.users.nico = {
     isNormalUser = true;

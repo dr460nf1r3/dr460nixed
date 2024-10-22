@@ -39,7 +39,7 @@ in {
   dconf.enable = true;
 
   nixpkgs.config.allowUnfree = true;
-  nix.package = pkgs.nixFlakes;
+  nix.package = pkgs.nixVersions.stable;
 
   nix.settings = {
     # Allow using flakes & automatically optimize the nix store
