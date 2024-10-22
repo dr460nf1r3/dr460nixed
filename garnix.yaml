@@ -1,6 +1,7 @@
 ---
 builds:
   exclude:
+    - nixosConfigurations.dev-container
     - nixosConfigurations.dr460nixed-base
     - nixosConfigurations.dr460nixed-desktop
     - nixosConfigurations.oracle-dragon

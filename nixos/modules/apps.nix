@@ -6,27 +6,27 @@
   ...
 }: let
   cfg = config.dr460nixed;
-  godot = pkgs.godot_4-mono;
-  extra-path = with pkgs; [
-    dotnetCorePackages.sdk_8_0_3xx
-    dotnetPackages.Nuget
-    godot
-    mono
-    msbuild
-  ];
-  extra-lib = [];
-  rider = pkgs.jetbrains.rider.overrideAttrs (attrs: {
-    postInstall =
-      ''
-        # Wrap rider with extra tools and libraries
-        mv $out/bin/rider $out/bin/.rider-toolless
-        makeWrapper $out/bin/.rider-toolless $out/bin/rider \
-          --argv0 rider \
-          --prefix PATH : "${lib.makeBinPath extra-path}" \
-          --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath extra-lib}"
-      ''
-      + attrs.postInstall or "";
-  });
+  # godot = pkgs.godot_4-mono;
+  # extra-path = with pkgs; [
+  #   dotnetCorePackages.sdk_8_0_3xx
+  #   dotnetPackages.Nuget
+  #   godot
+  #   mono
+  #   msbuild
+  # ];
+  # extra-lib = [];
+  # rider = pkgs.jetbrains.rider.overrideAttrs (attrs: {
+  #   postInstall =
+  #     ''
+  #       # Wrap rider with extra tools and libraries
+  #       mv $out/bin/rider $out/bin/.rider-toolless
+  #       makeWrapper $out/bin/.rider-toolless $out/bin/rider \
+  #         --argv0 rider \
+  #         --prefix PATH : "${lib.makeBinPath extra-path}" \
+  #         --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath extra-lib}"
+  #     ''
+  #     + attrs.postInstall or "";
+  # });
 in {
   # These are the packages I always need
   environment.systemPackages = let
@@ -112,7 +112,7 @@ in {
       fishPlugins.wakatime-fish
       gh
       gitkraken
-      godot
+      # godot
       heroku
       hoppscotch
       hugo
@@ -133,11 +133,10 @@ in {
       nodePackages_latest.bash-language-server
       nodePackages_latest.node-gyp
       nodePackages_latest.pnpm
-      nodePackages_latest.node2nix
       nodejs_latest
       podman-compose
       podman-tui
-      rider
+      # rider
       shellcheck
       shfmt
       speedcrunch
