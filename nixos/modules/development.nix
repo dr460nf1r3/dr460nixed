@@ -80,7 +80,7 @@ in {
         enable = true;
         enableExtensionPack = true;
         enableHardening = true;
-        enableKvm = true;
+        # enableKvm = true;
       };
     };
 
