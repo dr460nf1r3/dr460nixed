@@ -31,29 +31,22 @@ in {
   # These are the packages I always need
   environment.systemPackages = let
     required-packages = with pkgs; [
-      age
       bind
       btop
       cached-nix-shell
-      cloudflared
       duf
       eza
       jq
       killall
       micro
-      mosh
       nettools
-      nmap
-      nvd
       python3
-      sops
       tldr
       tmux
       traceroute
       tmuxPlugins.catppuccin
       ugrep
       wget
-      whois
     ];
   in
     required-packages
@@ -62,20 +55,16 @@ in {
       aspell
       aspellDicts.de
       aspellDicts.en
-      birdtray
       boxbuddy
+      brave
       catppuccinifier-cli
       chromium-flagged
       firedragon
-      firefox_nightly
       gimp
-      helvum
       hunspell
       hunspellDicts.de_DE
       hunspellDicts.en_US
-      inkscape
       inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
-      krita
       libreoffice-qt6-fresh
       kde-rounded-corners
       kdePackages.kdenlive
@@ -90,12 +79,10 @@ in {
       obsidian
       okular
       plasmusic-toolbar
-      qbittorrent
       rustdesk-flutter
       signal-desktop
       syncthingtray
       telegram-desktop_git
-      tor-browser-bundle-bin
       trayscale
       usbutils
       vesktop
@@ -107,23 +94,23 @@ in {
     ++ lib.optionals cfg.development.enable (with pkgs; [
       ansible
       beekeeper-studio
+      cloudflared
+      cmake
+      deno
       distrobox_git
-      dive
       fishPlugins.wakatime-fish
       gh
-      gitkraken
       # godot
+      gnumake
       heroku
       hoppscotch
       hugo
       jetbrains.idea-ultimate
       jetbrains.webstorm
-      manix
       mdbook
       mdbook-admonish
       mdbook-emojicodes
       mdbook-linkcheck
-      mongodb-compass
       nil
       nix-prefetch-git
       nixd
@@ -131,14 +118,12 @@ in {
       nixpkgs-lint
       nixpkgs-review
       nodePackages_latest.bash-language-server
-      nodePackages_latest.node-gyp
       nodePackages_latest.pnpm
       nodejs_latest
-      podman-compose
-      podman-tui
       # rider
       shellcheck
       shfmt
+      sops
       speedcrunch
       termius
       ventoy-full

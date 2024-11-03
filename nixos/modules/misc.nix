@@ -161,11 +161,11 @@ in {
       enable = true;
       extensions = [
         "bkkmolkhemgaeaeggcmfbghljjjoofoh" # Catppuccin theme
-        "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock origin
+        # "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock origin
         "clngdbkpkpeebahjckkjfobafhncgmne" # Stylus
         "doojmbjmlfjjnbmnoijecmcbfeoakpjm" # NoScript
-        "fpnmgdkabkmnadcjpehmlllkndpkmiak" # Wayback Machine
-        "hipekcciheckooncpjeljhnekcoolahp" # Tabliss
+        # "fpnmgdkabkmnadcjpehmlllkndpkmiak" # Wayback Machine
+        # "hipekcciheckooncpjeljhnekcoolahp" # Tabliss
         "hlepfoohegkhhmjieoechaddaejaokhf" # Github Refined
         "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly
         "mdjildafknihdffpkfmmpnpoiajfjnjd" # Consent-O-Matic
@@ -177,7 +177,6 @@ in {
         "RestoreOnStartup" = true;
         "ShowHomeButton" = true;
       };
-      homepageLocation = "https://searx.garudalinux.org";
     };
 
     # SUID Sandbox
