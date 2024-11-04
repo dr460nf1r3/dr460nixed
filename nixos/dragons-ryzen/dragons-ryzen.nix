@@ -89,7 +89,7 @@
     };
     scx = {
       enable = true;
-      scheduler = "scx_rustland";
+      package = pkgs.scx.rustland;
     };
   };
 
@@ -100,7 +100,7 @@
   };
 
   # Enable the touchpad & secure boot, as well as add the ipman script
-  environment.systemPackages = with pkgs; [libinput radeontop scx];
+  environment.systemPackages = with pkgs; [libinput radeontop];
 
   # Home-manager individual settings
   home-manager.users."nico" = import ../../home-manager/nico/nico.nix;

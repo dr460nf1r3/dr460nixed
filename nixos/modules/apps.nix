@@ -98,6 +98,7 @@ in {
       cmake
       deno
       distrobox_git
+      docker-compose
       fishPlugins.wakatime-fish
       gh
       # godot
@@ -106,6 +107,7 @@ in {
       hoppscotch
       hugo
       jetbrains.idea-ultimate
+      jetbrains-toolbox
       jetbrains.webstorm
       mdbook
       mdbook-admonish
