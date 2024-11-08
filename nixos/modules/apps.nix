@@ -107,7 +107,6 @@ in {
       hoppscotch
       hugo
       jetbrains.idea-ultimate
-      jetbrains-toolbox
       jetbrains.webstorm
       mdbook
       mdbook-admonish
