@@ -41,6 +41,14 @@
   in {
     # All the system configurations
     nixosConfigurations = {
+      cup-dragon = inputs.garuda-nix.lib.garudaSystem {
+        system = "x86_64-linux";
+        modules =
+          defaultModules
+          ++ [./cup-dragon/cup-dragon.nix];
+        inherit specialArgs;
+      };
+
       dev-container = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
@@ -80,18 +88,6 @@
         inherit specialArgs;
       };
 
-      # Free tier e2 micro instance on GCP
-      google-dragon = inputs.garuda-nix.lib.garudaSystem {
-        system = "x86_64-linux";
-        modules =
-          defaultModules
-          ++ [
-            ./google-dragon/google-dragon.nix
-            "${toString inputs.nixpkgs}/nixos/modules/virtualisation/google-compute-image.nix"
-          ];
-        inherit specialArgs;
-      };
-
       # For WSL, mostly used at work only
       nixos-wsl = inputs.garuda-nix.lib.garudaSystem {
         system = "x86_64-linux";
@@ -104,32 +100,12 @@
         inherit specialArgs;
       };
 
-      # Free Tier Oracle aarch64 VM
-      oracle-dragon = inputs.garuda-nix.lib.garudaSystem {
-        system = "aarch64-linux";
-        modules =
-          defaultModules ++ [./oracle-dragon/oracle-dragon.nix];
-        inherit specialArgs;
-      };
-
       # Homeserver on Proxmox
       pve-dragon-1 = inputs.garuda-nix.lib.garudaSystem {
         system = "x86_64-linux";
         modules =
           defaultModules
           ++ [./pve-dragon-1/pve-dragon-1.nix];
-        inherit specialArgs;
-      };
-
-      # My Raspberry Pi 4B
-      rpi-dragon = inputs.garuda-nix.lib.garudaSystem {
-        system = "aarch64-linux";
-        modules =
-          defaultModules
-          ++ [
-            ./rpi-dragon/rpi-dragon.nix
-            inputs.nixos-hardware.nixosModules.raspberry-pi-4
-          ];
         inherit specialArgs;
       };
     };

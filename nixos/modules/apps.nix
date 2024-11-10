@@ -106,6 +106,7 @@ in {
       heroku
       hoppscotch
       hugo
+      jetbrains.gateway
       jetbrains.idea-ultimate
       jetbrains.webstorm
       mdbook
