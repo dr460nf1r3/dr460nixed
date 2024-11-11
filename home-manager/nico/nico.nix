@@ -1,5 +1,5 @@
 _: let
-  forwardPostgres = "-L 5432:127.0.0.1:5432";
+  forwardPostgres = "-L 5433:127.0.0.1:5432";
   hetznerStoragebox = "your-storagebox.de";
   immortalis = "immortalis.kanyu-bushi.ts.net";
   user = "nico";
@@ -15,7 +15,7 @@ in {
       shellAliases = {
         "b1" = "ssh -p23 u342919@u342919.${hetznerStoragebox}";
         "b2" = "ssh -p23 u358867@u358867.${hetznerStoragebox}";
-        "g" = "mosh ${user}@google-dragon.emperor-mercat.ts.net";
+        "c" = "ssh ${user}@cup-dragon";
         "g1" = "ssh -p666 ${user}@${immortalis}";
         "g2" = "ssh ${user}@${immortalis}";
         "g3" = "ssh -p1022 ${user}@216.158.66.108";
@@ -26,8 +26,6 @@ in {
         "g8" = "ssh -p222 ${user}@${immortalis}";
         "g9" = "ssh -p229 ${user}@${immortalis} ${forwardPostgres}";
         "m" = "ssh -p1022 ${user}@94.16.112.218";
-        "ob1" = "ssh ${user}@observer-1";
-        "ob2" = "ssh ${user}@observer-2";
         "pve" = "ssh ${user}@dragons-pve";
         "pve1" = "ssh ${user}@pve-dragon-1";
       };
@@ -38,7 +36,7 @@ in {
       shellAbbrs = {
         "b1" = "ssh -p23 u342919@u342919.${hetznerStoragebox}";
         "b2" = "ssh -p23 u358867@u358867.${hetznerStoragebox}";
-        "g" = "mosh ${user}@google-dragon.emperor-mercat.ts.net";
+        "c" = "ssh ${user}@cup-dragon";
         "g1" = "ssh -p666 ${user}@${immortalis}";
         "g2" = "ssh ${user}@${immortalis}";
         "g3" = "ssh -p1022 ${user}@216.158.66.108";
@@ -49,8 +47,6 @@ in {
         "g8" = "ssh -p222 ${user}@${immortalis}";
         "g9" = "ssh -p229 ${user}@${immortalis} ${forwardPostgres}";
         "m" = "ssh -p1022 ${user}@94.16.112.218";
-        "ob1" = "ssh ${user}@observer-1";
-        "ob2" = "ssh ${user}@observer-2";
         "pve" = "ssh ${user}@dragons-pve";
         "pve1" = "ssh ${user}@pve-dragon-1";
       };

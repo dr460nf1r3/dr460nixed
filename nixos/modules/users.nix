@@ -21,6 +21,7 @@
     dhcpcd = uidGid 976;
     fwupd-refresh = uidGid 975;
     flatpak = uidGid 974;
+    forgejo = uidGid 963;
     gamemode = uidGid 969;
     grafana = uidGid 995;
     incus-admin = uidGid 665;

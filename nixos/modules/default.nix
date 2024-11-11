@@ -4,8 +4,8 @@
     ./apps.nix
     ./boot.nix
     ./common.nix
+    ./compose-runner.nix
     ./desktops.nix
-    ./docker-compose-runner.nix
     ./deterministic-ids.nix
     ./development.nix
     ./gaming.nix

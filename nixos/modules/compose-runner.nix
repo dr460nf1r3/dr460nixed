@@ -4,14 +4,14 @@
   config,
   ...
 }: let
-  cfg = config.dr460nixed.docker-compose-runner;
+  cfg = config.dr460nixed.compose-runner;
 in {
-  options.dr460nixed.docker-compose-runner = lib.mkOption (with lib; {
+  options.dr460nixed.compose-runner = lib.mkOption (with lib; {
     type = types.attrsOf (types.submodule {
       options = {
         source = mkOption {
           default = null;
-          description = "Folder containing a docker-compose file.";
+          description = "Folder containing a compose file.";
           type = types.path;
         };
         envfile = mkOption {
@@ -28,26 +28,26 @@ in {
     systemd.services =
       lib.mapAttrs'
       (name: value:
-        lib.nameValuePair ("docker-compose-runner-" + name) (
+        lib.nameValuePair ("compose-runner-" + name) (
           let
             output = derivation {
               builder = pkgs.writeShellScript "build" ''
                 PATH="${pkgs.rsync}/bin:${pkgs.coreutils}/bin:${pkgs.gnused}/bin"
                 set -e
                 mkdir "$out"
-                sed -r 's/(^\s+restart:\s*)(unless-stopped|always)(\s*($|#))/\1on-failure\3/g' "$src/docker-compose.yml" > "$out/docker-compose.yml"
+                sed -r 's/(^\s+restart:\s*)(unless-stopped|always)(\s*($|#))/\1on-failure\3/g' "$src/compose.yml" > "$out/compose.yml"
                 rsync -a "$src/" "$out"
               '';
-              name = "docker-compose-runner-" + name;
+              name = "compose-runner-" + name;
               src = value.source;
               inherit (pkgs.hostPlatform) system;
             };
-            statepath = "/var/docker-compose-runner/${name}";
+            statepath = "/var/compose-runner/${name}";
           in {
-            description = "docker-compose runner for ${name}";
-            path = with pkgs; [rsync docker-compose docker bash];
+            description = "Compose runner for ${name}";
+            path = with pkgs; [rsync docker-compose podman bash];
             serviceConfig = {
-              ExecStart = pkgs.writeShellScript ("execstart-docker-compose-runner-" + name) ''
+              ExecStart = pkgs.writeShellScript ("execstart-compose-runner-" + name) ''
                 set -e
                 mkdir -p "${statepath}"
                 rsync -a --no-owner --size-only "${output}/" "${statepath}"
@@ -56,24 +56,26 @@ in {
                   chmod 600 "${statepath}/.env"
                 ''}
                 cd "${statepath}"
-                docker-compose up
+                docker compose up
               '';
-              ExecStopPost = pkgs.writeShellScript ("execstop-docker-compose-runner-" + name) ''
+              ExecStopPost = pkgs.writeShellScript ("execstop-compose-runner-" + name) ''
                 set -e
                 cd "${statepath}"
-                docker-compose down
+                docker compose down
               '';
             };
             unitConfig = {
-              After = "docker.service";
-              Requisite = "docker.service";
-              StopPropagatedFrom = "docker.service";
+              After = "podman.socket";
+              Requisite = "podman.socket";
+              StopPropagatedFrom = "podman.socket";
             };
             wantedBy = ["multi-user.target"];
           }
         ))
       cfg;
     environment.systemPackages = lib.mkIf (cfg != {}) [pkgs.docker-compose];
-    virtualisation.docker.enable = lib.mkIf (cfg != {}) true;
+    virtualisation.podman.enable = lib.mkIf (cfg != {}) true;
+    networking.firewall.interfaces."podman1".allowedUDPPorts = lib.mkIf (cfg != {}) [53];
+    virtualisation.podman.defaultNetwork.settings = {dns_enabled = true;};
   };
 }

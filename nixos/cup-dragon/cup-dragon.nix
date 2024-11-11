@@ -4,7 +4,9 @@
   ...
 }: {
   imports = [
+    ./forgejo.nix
     ./hardware-configuration.nix
+    ./matrix.nix
   ];
 
   # Boot options
@@ -25,21 +27,40 @@
     };
   };
 
-  # This machine is a Proxmox VM
-  services.qemuGuest.enable = true;
+  # This machine is a VM
+  services = {
+    nginx.enable = true;
+    openssh.ports = [666];
+    qemuGuest.enable = true;
+  };
+
+  networking = {
+    defaultGateway6 = {
+      address = "fe80::1";
+      interface = "ens3";
+    };
+    hostName = "cup-dragon";
+    interfaces.ens3.ipv6.addresses = [
+      {
+        address = "2a03:4000:42:4c::";
+        prefixLength = 64;
+      }
+    ];
+  };
 
   dr460nixed = {
+    compose-runner = {
+      "cup-dragon" = {
+        source = ../../compose/cup-dragon;
+      };
+    };
     servers = {
       enable = true;
       monitoring = true;
     };
     smtp.enable = true;
     tailscale.enable = true;
-    tailscale-tls.enable = true;
   };
-
-  # Hostname of this machine
-  networking.hostName = "cup-dragon";
 
   # Some of the services I require
   services.syncthing = {
@@ -56,7 +77,10 @@
       "76dc88f1-c290-4405-a1be-9d0249e376d3" = {
         credentialsFile = config.sops.secrets."cloudflared/cup-dragon/cred".path;
         default = "http_status:404";
-        ingress = {};
+        ingress = {
+          "uptime.dr460nf1r3.org" = "http://127.0.0.1:3001";
+          "dev.dr460nf1r3.org" = "http://127.0.0.1:3010";
+        };
       };
     };
   };

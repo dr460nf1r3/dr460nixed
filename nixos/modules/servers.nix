@@ -95,7 +95,7 @@ in {
     };
 
     # The Nginx QUIC package with Brotli modules
-    services.nginx.package = pkgs.nginxQuic.override {doCheck = false;};
+    services.nginx.package = pkgs.nginxQuic;
     services.nginx.additionalModules = with pkgs; [nginxModules.brotli];
 
     # Recommended settings replacing custom configuration
@@ -135,6 +135,9 @@ in {
                               application/x-font-ttf application/x-javascript application/xhtml+xml application/xml
                               font/eot font/opentype font/otf font/truetype image/svg+xml image/vnd.microsoft.icon
                               image/x-icon image/x-win-bitmap text/css text/javascript text/plain text/xml;
+
+      # Misc
+      aio threads;
     '';
 
     # Diffie-Hellman parameter for DHE ciphersuites
