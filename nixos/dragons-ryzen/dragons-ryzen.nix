@@ -25,7 +25,7 @@
   # Ucode updates for the CPU
   services.ucodenix = {
     enable = true;
-    cpuSerialNumber = "0086-0F01-0000-0000-0000-0000";
+    cpuModelId = "00860F01";
   };
 
   # The services to use on this machine
