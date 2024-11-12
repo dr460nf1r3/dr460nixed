@@ -79,8 +79,9 @@
         credentialsFile = config.sops.secrets."cloudflared/cup-dragon/cred".path;
         default = "http_status:404";
         ingress = {
-          "uptime.dr460nf1r3.org" = "http://127.0.0.1:3001";
           "dev.dr460nf1r3.org" = "http://127.0.0.1:3010";
+          "searx.dr460nf1r3.org" = "http://127.0.0.1:8080";
+          "uptime.dr460nf1r3.org" = "http://127.0.0.1:3001";
         };
       };
     };

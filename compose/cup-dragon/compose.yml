@@ -36,3 +36,21 @@ services:
       - 127.0.0.1:3010:3000
       - 127.0.0.1:3011:3001
     shm_size: "1gb"
+
+  searxng:
+    image: ghcr.io/privau/searxng:latest
+    container_name: searxng
+    environment:
+      - BASE_URL=https://searx.dr460nf1r3.org
+      - CONTACT=root@dr460nf1r3.org
+      - DONATION_URL=https://github.com/dr460nf1r3
+      - IMAGE_PROXY=true
+      - LIMITER=true
+      - NAME=Dragon's Searx
+      - REDIS_URL=redis://searxng-redis:6379/0
+      - TZ=Europe/Berlin
+    ports:
+      - 127.0.0.1:8080:8080
+  searxng-redis:
+    image: redis:alpine
+    container_name: searxng-redis
