@@ -7,6 +7,7 @@
     ./forgejo.nix
     ./hardware-configuration.nix
     ./matrix.nix
+    ./wakapi.nix
   ];
 
   # Boot options

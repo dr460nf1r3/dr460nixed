@@ -49,6 +49,7 @@
     tailscale-tls = uidGid 978;
     telegraf = uidGid 982;
     vnstatd = uidGid 981;
+    wakapi = uidGid 962;
     wireshark = uidGid 980;
   };
 
