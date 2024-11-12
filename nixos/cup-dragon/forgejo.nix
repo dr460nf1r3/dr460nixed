@@ -1,19 +1,29 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }: let
   cfg = config.services.forgejo;
   srv = cfg.settings.server;
+  theme = pkgs.fetchzip {
+    url = "https://github.com/catppuccin/gitea/releases/download/v1.0.1/catppuccin-gitea.tar.gz";
+    sha256 = "sha256-et5luA3SI7iOcEIQ3CVIu0+eiLs8C/8mOitYlWQa/uI=";
+    stripRoot = false;
+  };
 in {
   services.nginx = {
     virtualHosts.${cfg.settings.server.DOMAIN} = {
-      forceSSL = true;
-      enableACME = true;
       extraConfig = ''
         client_max_body_size 512M;
       '';
+      forceSSL = true;
+      http3 = true;
+      http3_hq = true;
+      kTLS = true;
       locations."/".proxyPass = "http://localhost:${toString srv.HTTP_PORT}";
+      quic = true;
+      useACMEHost = "dr460nf1r3.org";
     };
   };
 
@@ -22,23 +32,31 @@ in {
     database.type = "postgres";
     lfs.enable = true;
     settings = {
-      server = {
-        DOMAIN = "git.dr460nf1r3.org";
-        ROOT_URL = "https://${srv.DOMAIN}/";
-        HTTP_PORT = 3000;
-      };
-      session.COOKIE_SECURE = true;
-      service.DISABLE_REGISTRATION = true;
-      actions = {
-        ENABLED = true;
-        DEFAULT_ACTIONS_URL = "github";
+      actions.ENABLED = true;
+      DEFAULT = {
+        APP_NAME = "Dragon's Git forge";
+        APP_SLOGAN = "The place where dragons forge their code";
       };
       mailer = {
         ENABLED = true;
-        SMTP_ADDR = "mail.garudalinux.net";
         FROM = "noreply@${srv.DOMAIN}";
-        USER = "noreply@${srv.DOMAIN}";
         PASSWD = config.sops.secrets."mail/forgejo".path;
+        SMTP_ADDR = "mail.garudalinux.net";
+        USER = "noreply@${srv.DOMAIN}";
+      };
+      other = {
+        SHOW_FOOTER_VERSION = false;
+      };
+      server = {
+        DOMAIN = "git.dr460nf1r3.org";
+        HTTP_PORT = 3050;
+        ROOT_URL = "https://${srv.DOMAIN}/";
+      };
+      service.DISABLE_REGISTRATION = true;
+      session.COOKIE_SECURE = true;
+      ui = {
+        DEFAULT_THEME = "catppuccin-maroon-auto";
+        THEMES = "catppuccin-rosewater-auto,catppuccin-flamingo-auto,catppuccin-pink-auto,catppuccin-mauve-auto,catppuccin-red-auto,catppuccin-maroon-auto,catppuccin-peach-auto,catppuccin-yellow-auto,catppuccin-green-auto,catppuccin-teal-auto,catppuccin-sky-auto,catppuccin-sapphire-auto,catppuccin-blue-auto,catppuccin-lavender-auto";
       };
     };
   };
@@ -46,7 +64,7 @@ in {
   sops.secrets."mail/forgejo" = {
     mode = "0400";
     owner = config.users.users.forgejo.name;
-    path = "/var/lib/forgejo/mail";
+    path = "/var/lib/forgejo/.mail";
   };
   sops.secrets."passwords/forgejo" = {
     mode = "0400";
@@ -54,13 +72,37 @@ in {
     path = "/var/lib/forgejo/.password";
   };
 
+  # Link Catppuccin themes and ensure admin user
   systemd.services.forgejo.preStart = let
     adminCmd = "${lib.getExe cfg.package} admin user";
     pwd = config.sops.secrets."passwords/forgejo";
     user = "root";
   in ''
     ${adminCmd} create --admin --email "root@localhost" --username ${user} --password "$(tr -d '\n' < ${pwd.path})" || true
-    ## uncomment this line to change an admin user which was already created
     # ${adminCmd} change-password --username ${user} --password "$(tr -d '\n' < ${pwd.path})" || true
+
+    rm -rf ${config.services.forgejo.stateDir}/custom/public/assets
+    mkdir -p ${config.services.forgejo.stateDir}/custom/public/assets
+    ln -sf ${theme} ${config.services.forgejo.stateDir}/custom/public/assets/css
   '';
+
+  # Runner for Forgejo Actions
+  services.gitea-actions-runner = {
+    package = pkgs.forgejo-actions-runner;
+    instances.default = {
+      enable = true;
+      name = "cup-dragon-1";
+      url = "https://git.dr460nf1r3.org";
+      tokenFile = config.sops.secrets."api_keys/forgejo_runner".path;
+      labels = [
+        "ubuntu-latest:docker://node:16-bullseye"
+        "ubuntu-22.04:docker://node:16-bullseye"
+        "native:host"
+      ];
+    };
+  };
+  sops.secrets."api_keys/forgejo_runner" = {
+    mode = "0400";
+    path = "/var/lib/gitea-runner/.token";
+  };
 }

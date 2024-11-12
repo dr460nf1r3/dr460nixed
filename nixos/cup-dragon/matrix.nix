@@ -34,6 +34,13 @@ in {
   };
   services.nginx = {
     virtualHosts."${matrix_hostname}" = {
+      extraConfig = ''
+        merge_slashes off;
+      '';
+      forceSSL = true;
+      http3 = true;
+      http3_hq = true;
+      kTLS = true;
       listen = [
         {
           addr = "0.0.0.0";
@@ -56,7 +63,6 @@ in {
           ssl = true;
         }
       ];
-
       locations."/_matrix/" = {
         proxyPass = "http://backend_conduit$request_uri";
         proxyWebsockets = true;
@@ -80,10 +86,8 @@ in {
           add_header Access-Control-Allow-Origin "*";
         '';
       };
-
-      extraConfig = ''
-        merge_slashes off;
-      '';
+      quic = true;
+      useACMEHost = "dr460nf1r3.org";
     };
 
     upstreams = {

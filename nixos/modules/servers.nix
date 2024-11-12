@@ -49,7 +49,7 @@ in {
       hardware.enable = false;
       networking.enable = false;
     };
-    boot.plymouth.enable = true;
+    boot.plymouth.enable = false;
 
     # Enable the Netdata daemon
     services.netdata.enable = lib.mkIf cfg.monitoring true;
@@ -148,6 +148,18 @@ in {
     };
     services.nginx.sslDhparam = config.security.dhparams.params.nginx.path;
 
+    # Default catch-all for unknown domains
+    services.nginx.virtualHosts."_" = lib.mkIf config.services.nginx.enable {
+      addSSL = true;
+      extraConfig = ''
+        log_not_found off;
+        return 404;
+      '';
+      http3 = true;
+      quic = true;
+      useACMEHost = "dr460nf1r3.org";
+    };
+
     # Need to explicitly open our web server ports
     networking.firewall = lib.mkIf config.services.nginx.enable {
       allowedTCPPorts = [80 443];
@@ -160,10 +172,24 @@ in {
       "net.core.wmem_max" = 7500000;
     };
 
-    # Enable this so we don't get annoyed by the ACME TOS
+    # SSL certs for the server
     security.acme = {
       acceptTerms = true;
-      defaults.email = "root@dr460nf1r3.org";
+      defaults = {
+        group = "nginx";
+        email = "root@dr460nf1r3.org";
+      };
+      certs."dr460nf1r3.org" = {
+        extraDomainNames = ["*.dr460nf1r3.org"];
+        dnsProvider = "cloudflare";
+        dnsPropagationCheck = true;
+        credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
+      };
+    };
+    sops.secrets."api_keys/cloudflare" = {
+      mode = "0400";
+      owner = "acme";
+      path = "/run/secrets/api_keys/cloudflare";
     };
   };
 }

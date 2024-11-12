@@ -56,12 +56,12 @@ in {
                   chmod 600 "${statepath}/.env"
                 ''}
                 cd "${statepath}"
-                docker compose up
+                docker-compose up
               '';
               ExecStopPost = pkgs.writeShellScript ("execstop-compose-runner-" + name) ''
                 set -e
                 cd "${statepath}"
-                docker compose down
+                docker-compose down
               '';
             };
             unitConfig = {
