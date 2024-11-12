@@ -8,7 +8,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="Contains the documentation for the dr460nixed flake.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -123,7 +123,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -185,20 +185,27 @@
                     <main>
                         <h1 id="dr460nixed-nixos-"><a class="header" href="#dr460nixed-nixos-">Dr460nixed NixOS ❄️</a></h1>
 <p><a href="https://builtwithnix.org"><img src="https://img.shields.io/static/v1?logo=nixos&amp;logoColor=white&amp;label=&amp;message=Built%20with%20Nix&amp;color=41439a" alt="built with nix" /></a> <a href="https://garnix.io"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fdr460nf1r3%2Fdr460nixed%3Fbranch%3Dmain" alt="built with garnix" /></a> <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml"><img src="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg" alt="Sync Tailscale ACLs" /></a></p>
-<p>This repository contains a framework to get started with NixOS quickly, featuring opiniated and selected default settings.
-It also contains my personal NixOS configuration, which might serve as inspiration for other peoples' setups.</p>
-<p>While starting out with NixOS, especially reading other peoples flakes proved to be very helpful, so I figured sharing my personal setup my help other people as well!
+<p>This repository contains a framework to get started with NixOS quickly, featuring opinionated and selected default
+settings.
+It also contains my personal NixOS configuration, which might serve as inspiration for other people's setups.</p>
+<p>While starting out with NixOS, especially reading other peoples flakes proved to be very helpful, so I figured sharing
+my personal setup my help other people as well!
 Those who like the "dr460nized" look of Garuda will definitely like this one as well ☺️</p>
 <h2 id="so-how-does-it-work"><a class="header" href="#so-how-does-it-work">So how does it work?</a></h2>
-<p>ISO builds are available as well as a simple installer, which employs <code>nix flake init</code> to deploy a basic and generic version of this flake's template based on user's choices.
-Partitioning is achieved via <a href="https://github.com/nix-community/disko">disko</a> presets and the installer may be used on regular NixOS live mediums as well.
-Users may then continue building their own version of NixOS using code snippets of this repository and further linked sources.
-Furthermore, the flakes' outputs are automatically build and cached via <a href="https://garnix.io">garnix</a>.</p>
-<p>There is a <a href="https://nixed.dr460nf1r3.org">documentation available about various topics</a>, which also contains the code snippets that might provide further useful customization options.</p>
+<p>ISO builds are available as well as a simple installer, which employs <code>nix flake init</code> to deploy a basic and generic
+version of this flake's template based on user's choices.
+Partitioning is achieved via <a href="https://github.com/nix-community/disko">disko</a> presets, and the installer may be used on
+regular NixOS live mediums as well.
+Users may then continue building their own version of NixOS using code snippets of this repository and further linked
+sources.
+Furthermore, the flakes' outputs are automatically built and cached via <a href="https://garnix.io">garnix</a>.</p>
+<p>There is a <a href="https://nixed.dr460nf1r3.org">documentation available about various topics</a>, which also contains the code
+snippets that might provide further useful customization options.</p>
 <h2 id="how-does-it-look-like"><a class="header" href="#how-does-it-look-like">How does it look like?</a></h2>
 <p><img src="https://i.imgur.com/h3WGSJ4.jpg" alt="desktop-kde" /></p>
 <h2 id="what-settings-does-the-installer-provide"><a class="header" href="#what-settings-does-the-installer-provide">What settings does the installer provide?</a></h2>
-<p>Right now, it basically just bootstraps a basic desktop environment with theming, Nix and OS related defaults to have common things working out of the box.</p>
+<p>Right now, it basically just bootstraps a basic desktop environment with theming,
+Nix, and OS-related defaults to have common things working out of the box.</p>
 <pre><code class="language-nix">{
   dr460nixed = {
     chromium = true;
@@ -217,7 +224,8 @@ Furthermore, the flakes' outputs are automatically build and cached via <a href=
 <li>Using <strong>Garnix CI cache</strong> for this flakes' outputs</li>
 <li>Keeping all of it well organized via <strong>flake-parts</strong></li>
 </ul>
-<p>It might receive more module options in the future, though I currently believe that showing people how to achieve things in Nix might be more useful than just providing a toggle for it.</p>
+<p>It might receive more module options in the future, though I currently believe that showing people how to achieve things
+in Nix might be more useful than just providing a toggle for it.</p>
 <h2 id="what-kind-of-configuration-is-available-via-code-snippets"><a class="header" href="#what-kind-of-configuration-is-available-via-code-snippets">What kind of configuration is available via code snippets?</a></h2>
 <ul>
 <li>Multiple <strong>NixOS configurations</strong>, including <strong>desktop</strong>, <strong>server</strong>, <strong>nixos-wsl</strong> , <strong>raspberry pi</strong> &amp; <strong>live-usb</strong></li>
@@ -251,7 +259,7 @@ Furthermore, the flakes' outputs are automatically build and cached via <a href=
 └── secrets
 </code></pre>
 <h2 id="credits"><a class="header" href="#credits">Credits</a></h2>
-<p>Inspiration for parts of this configurations came from these awesome people's setups ❄️</p>
+<p>Inspiration for parts of this configuration came from these awesome people's setups ❄️</p>
 <ul>
 <li>https://github.com/PedroHLC/system-setup</li>
 <li>https://github.com/Misterio77/nix-config</li>
@@ -505,58 +513,73 @@ finish
 <div style="break-before: page; page-break-before: always;"></div><h1 id="apps"><a class="header" href="#apps">Apps</a></h1>
 <pre><code class="language-nix">{
   config,
+  inputs,
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed;
+  # godot = pkgs.godot_4-mono;
+  # extra-path = with pkgs; [
+  #   dotnetCorePackages.sdk_8_0_3xx
+  #   dotnetPackages.Nuget
+  #   godot
+  #   mono
+  #   msbuild
+  # ];
+  # extra-lib = [];
+  # rider = pkgs.jetbrains.rider.overrideAttrs (attrs: {
+  #   postInstall =
+  #     ''
+  #       # Wrap rider with extra tools and libraries
+  #       mv $out/bin/rider $out/bin/.rider-toolless
+  #       makeWrapper $out/bin/.rider-toolless $out/bin/rider \
+  #         --argv0 rider \
+  #         --prefix PATH : "${lib.makeBinPath extra-path}" \
+  #         --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath extra-lib}"
+  #     ''
+  #     + attrs.postInstall or "";
+  # });
 in {
   # These are the packages I always need
-  environment.systemPackages = with pkgs; let
-    required-packages = [
-      age
-      atuin
+  environment.systemPackages = let
+    required-packages = with pkgs; [
       bind
       btop
       cached-nix-shell
-      cloudflared
       duf
       eza
       jq
       killall
       micro
-      mosh
       nettools
-      nmap
-      nvd
       python3
-      sops
       tldr
       tmux
       traceroute
       tmuxPlugins.catppuccin
       ugrep
       wget
-      whois
     ];
   in
     required-packages
-    ++ optionals cfg.desktops.enable (with pkgs; [
+    ++ lib.optionals cfg.desktops.enable (with pkgs; [
       appimage-run
       aspell
       aspellDicts.de
       aspellDicts.en
+      boxbuddy
+      brave
       catppuccinifier-cli
       chromium-flagged
+      firedragon
       gimp
-      helvum
       hunspell
       hunspellDicts.de_DE
       hunspellDicts.en_US
-      inkscape
-      krita
-      libreoffice-qt
+      inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
+      libreoffice-qt6-fresh
+      kde-rounded-corners
       kdePackages.kdenlive
       kdePackages.kleopatra
       kdePackages.krdc
@@ -566,79 +589,90 @@ in {
       lm_sensors
       movit
       obs-studio-wrapped
+      obsidian
       okular
-      qbittorrent
+      plasmusic-toolbar
       rustdesk-flutter
+      signal-desktop
       syncthingtray
       telegram-desktop_git
-      tor-browser-bundle-bin
       trayscale
       usbutils
+      vesktop
       vorta
       vulkan-tools
       xdg-utils
       yt-dlp_git
     ])
-    ++ optionals cfg.development.enable (with pkgs; [
+    ++ lib.optionals cfg.development.enable (with pkgs; [
       ansible
       beekeeper-studio
-      distrobox
-      dive
+      cloudflared
+      cmake
+      deno
+      distrobox_git
       docker-compose
       fishPlugins.wakatime-fish
       gh
-      gitkraken
+      # godot
+      gnumake
       heroku
+      hoppscotch
       hugo
+      jetbrains.gateway
+      jetbrains.idea-ultimate
       jetbrains.webstorm
-      manix
       mdbook
       mdbook-admonish
       mdbook-emojicodes
       mdbook-linkcheck
-      mongodb-compass
+      nil
       nix-prefetch-git
       nixd
       nixos-generators
       nixpkgs-lint
       nixpkgs-review
+      nodePackages_latest.bash-language-server
       nodePackages_latest.pnpm
-      nodePackages_latest.node-gyp
-      nodejs_22
-      podman-compose
-      podman-tui
+      nodejs_latest
+      # rider
+      shellcheck
+      shfmt
+      sops
       speedcrunch
       termius
       ventoy-full
       (vscode-with-extensions.override {
-        vscodeExtensions = with vscode-extensions;
+        vscodeExtensions =
           [
-            bbenoist.nix
-            catppuccin.catppuccin-vsc
-            catppuccin.catppuccin-vsc-icons
-            charliermarsh.ruff
-            davidanson.vscode-markdownlint
-            eamodio.gitlens
-            esbenp.prettier-vscode
-            foxundermoon.shell-format
-            github.codespaces
-            github.copilot
-            github.vscode-github-actions
-            github.vscode-pull-request-github
-            jnoortheen.nix-ide
-            kamadorueda.alejandra
-            ms-azuretools.vscode-docker
-            ms-python.python
-            ms-python.vscode-pylance
-            ms-vscode-remote.remote-ssh
-            ms-vsliveshare.vsliveshare
-            redhat.vscode-xml
-            redhat.vscode-yaml
-            timonwong.shellcheck
-            tyriar.sort-lines
-            wakatime.vscode-wakatime
+            vscode-extensions.bbenoist.nix
+            vscode-extensions.catppuccin.catppuccin-vsc
+            vscode-extensions.catppuccin.catppuccin-vsc-icons
+            vscode-extensions.charliermarsh.ruff
+            vscode-extensions.davidanson.vscode-markdownlint
+            vscode-extensions.eamodio.gitlens
+            vscode-extensions.esbenp.prettier-vscode
+            vscode-extensions.foxundermoon.shell-format
+            vscode-extensions.github.codespaces
+            vscode-extensions.github.copilot
+            vscode-extensions.github.vscode-github-actions
+            vscode-extensions.github.vscode-pull-request-github
+            vscode-extensions.jnoortheen.nix-ide
+            vscode-extensions.kamadorueda.alejandra
+            vscode-extensions.mads-hartmann.bash-ide-vscode
+            vscode-extensions.ms-azuretools.vscode-docker
+            vscode-extensions.ms-vscode.makefile-tools
+            vscode-extensions.ms-python.python
+            vscode-extensions.ms-python.vscode-pylance
+            vscode-extensions.ms-vscode-remote.remote-ssh
+            vscode-extensions.ms-vsliveshare.vsliveshare
+            vscode-extensions.redhat.vscode-xml
+            vscode-extensions.redhat.vscode-yaml
+            vscode-extensions.timonwong.shellcheck
+            vscode-extensions.tyriar.sort-lines
+            vscode-extensions.wakatime.vscode-wakatime
           ]
-          ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          ++ vscode-utils.extensionsFromVscodeMarketplace [
             {
               # Available in nixpkgs, but outdated (0.4.0) at the time of adding
               name = "vscode-tailscale";
@@ -648,23 +682,24 @@ in {
             }
           ];
       })
-      (yarn.override {
-        nodejs = null; # Use my system nodejs
+      (yarn-berry.override {
+        nodejs = pkgs.nodejs_latest;
       })
+      zed-editor_git
     ])
-    ++ optionals cfg.yubikey (with pkgs; [
+    ++ lib.optionals cfg.yubikey (with pkgs; [
       yubikey-manager-qt
       yubioath-flutter
     ])
-    ++ optionals cfg.school (with pkgs; [
+    ++ lib.optionals cfg.school (with pkgs; [
       speedcrunch
       teams-for-linux
     ])
-    ++ optionals cfg.gaming.enable (with pkgs; [
+    ++ lib.optionals cfg.gaming.enable (with pkgs; [
       lutris
       prismlauncher
     ])
-    ++ optionals cfg.live-cd (with pkgs; [
+    ++ lib.optionals cfg.live-cd (with pkgs; [
       btrfs-progs
       chntpw
       cryptsetup
@@ -984,14 +1019,13 @@ in {
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.systemd-boot;
   cfgGrub = config.dr460nixed.grub;
   cfgLanza = config.dr460nixed.lanzaboote;
   inherit (pkgs) plymouth;
 in {
-  options.dr460nixed.grub = {
+  options.dr460nixed.grub = with lib; {
     enable =
       mkOption
       {
@@ -1021,7 +1055,7 @@ in {
         '';
       };
   };
-  options.dr460nixed.systemd-boot = {
+  options.dr460nixed.systemd-boot = with lib; {
     enable =
       mkOption
       {
@@ -1032,7 +1066,7 @@ in {
         '';
       };
   };
-  options.dr460nixed.lanzaboote = {
+  options.dr460nixed.lanzaboote = with lib; {
     enable =
       mkOption
       {
@@ -1058,13 +1092,13 @@ in {
         "usbcore.autosuspend=-1"
         "vt.global_cursor_default=0"
       ];
-      lanzaboote = mkIf cfgLanza.enable {
+      lanzaboote = lib.mkIf cfgLanza.enable {
         enable = true;
         pkiBundle = "/etc/secureboot";
       };
       loader = {
         grub = {
-          device = mkIf cfgGrub.enable cfgGrub.device;
+          device = lib.mkIf cfgGrub.enable cfgGrub.device;
           enable =
             if cfgGrub.enable
             then true
@@ -1072,9 +1106,9 @@ in {
           enableCryptodisk = true;
           useOSProber = false;
         };
-        generationsDir.copyKernels = mkIf cfg.enable true;
+        generationsDir.copyKernels = lib.mkIf cfg.enable true;
         timeout = 1;
-        systemd-boot = mkIf cfg.enable {
+        systemd-boot = lib.mkIf cfg.enable {
           consoleMode = "max";
           editor = false;
           enable = true;
@@ -1083,7 +1117,7 @@ in {
     };
 
     # Make plymouth work with sleep
-    powerManagement = {
+    powerManagement = lib.mkIf config.boot.plymouth.enable {
       powerDownCommands = ''
         ${plymouth} --show-splash
       '';
@@ -1092,7 +1126,7 @@ in {
       '';
     };
 
-    environment.systemPackages = mkIf cfgLanza.enable [pkgs.sbctl];
+    environment.systemPackages = lib.mkIf cfgLanza.enable [pkgs.sbctl];
   };
 }
 </code></pre>
@@ -1102,11 +1136,10 @@ in {
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed;
 in {
-  options.dr460nixed = {
+  options.dr460nixed = with lib; {
     common = {
       enable =
         mkOption
@@ -1138,12 +1171,9 @@ in {
       };
   };
 
-  config = mkIf cfg.common.enable {
+  config = lib.mkIf cfg.common.enable {
     # A few kernel tweaks
-    boot = {
-      kernelParams = ["noresume"];
-    };
-    systemd.enableUnifiedCgroupHierarchy = true;
+    boot.kernelParams = ["noresume"];
 
     # Disable unprivileged user namespaces, unless containers are enabled
     security = {
@@ -1186,9 +1216,6 @@ in {
         enable = true;
         lfs.enable = true;
       };
-      fish.interactiveShellInit = ''
-        atuin init fish | source
-      '';
       # The GnuPG agent
       gnupg.agent = {
         enable = true;
@@ -1196,8 +1223,16 @@ in {
       };
     };
 
+    # https://gitlab.com/ananicy-cpp/ananicy-cpp/-/issues/40#note_1986279383
+    systemd.services.ananicy-cpp = {
+      serviceConfig = {
+        Delegate-cpu = "cpuset io memory pids";
+        ExecStartPre = "${pkgs.coreutils}/bin/sleep 30";
+      };
+    };
+
     # Who needs documentation when there is the internet? #bl04t3d
-    documentation = mkIf cfg.nodocs {
+    documentation = lib.mkIf cfg.nodocs {
       dev.enable = false;
       doc.enable = false;
       enable = true;
@@ -1224,12 +1259,11 @@ in {
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.desktops;
-  spicePkgs = inputs.spicetify-nix.packages.${pkgs.system}.default;
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
 in {
-  options.dr460nixed.desktops = {
+  options.dr460nixed.desktops = with lib; {
     enable =
       mkOption
       {
@@ -1241,7 +1275,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Enable the Catppuccinified desktops settings
     garuda.catppuccin.enable = true;
 
@@ -1259,28 +1293,29 @@ in {
       colorScheme = "catppuccin-mocha";
       enable = true;
       enabledCustomApps = with spicePkgs.apps; [
-        lyrics-plus
-        new-releases
+        lyricsPlus
+        newReleases
       ];
       enabledExtensions = with spicePkgs.extensions; [
         autoSkipVideo
+        beautifulLyrics
+        betterGenres
         bookmark
         fullAlbumDate
         fullAppDisplayMod
-        genre
         groupSession
         hidePodcasts
         history
         playlistIcons
-        popupLyrics
         seekSong
         songStats
       ];
-      theme = spicePkgs.themes.Comfy;
-      injectCss = true;
-      overwriteAssets = true;
-      replaceColors = true;
-      sidebarConfig = true;
+      theme = spicePkgs.themes.comfy;
+    };
+
+    # Disable QML cache for better performance / less issues
+    environment.variables = {
+      QML_DISABLE_DISK_CACHE = "1";
     };
   };
 }
@@ -1373,12 +1408,27 @@ in {
 <pre><code class="language-nix">{
   config,
   lib,
+  pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.development;
+
+  # Distrobox setup scripts
+  additionalPackages = ''
+    --additional-packages "git tmux micro fish fastfetch wlroots"
+  '';
+  distrobox-setup = pkgs.writeScriptBin "distrobox-setup" ''
+    distrobox create --name arch \
+      --init --image quay.io/toolbx/arch-toolbox:latest \
+      --additional-packages "git tmux micro fish base-devel pacman-contrib fastfetch"
+    distrobox generate-entry arch
+    distrobox create --name kali \
+      --init --image docker.io/kalilinux/kali-rolling:latest \
+      ${additionalPackages}
+    distrobox generate-entry kali
+  '';
 in {
-  options.dr460nixed.development = {
+  options.dr460nixed.development = with lib; {
     enable =
       mkOption
       {
@@ -1390,7 +1440,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Import secrets needed for development
     sops.secrets."api_keys/sops" = {
       mode = "0600";
@@ -1424,17 +1474,34 @@ in {
       podman = {
         autoPrune.enable = true;
         defaultNetwork.settings.dns_enabled = true;
-        dockerCompat = true;
-        dockerSocket.enable = true;
+        # dockerCompat = true;
+        # dockerSocket.enable = true;
         enable = true;
+      };
+      docker = {
+        enable = true;
+        autoPrune.enable = true;
       };
       virtualbox.host = {
         addNetworkInterface = false;
         enable = true;
         enableExtensionPack = true;
-        enableHardening = false;
-        enableKvm = true;
+        enableHardening = true;
+        # enableKvm = true;
       };
+    };
+
+    # For Redis
+    boot.kernel.sysctl = {"vm.overcommit_memory" = "1";};
+
+    # Archlinux development
+    environment.systemPackages = [
+      distrobox-setup
+    ];
+
+    # Local instances
+    networking.hosts = {
+      "127.0.0.1" = ["metrics.chaotic.local" "backend.chaotic.local"];
     };
 
     # Allow cross-compiling to aarch64
@@ -1445,99 +1512,17 @@ in {
   };
 }
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="docker-compose-runner"><a class="header" href="#docker-compose-runner">Docker compose runner</a></h1>
-<pre><code class="language-nix">{
-  lib,
-  pkgs,
-  config,
-  ...
-}:
-with lib; let
-  cfg = config.dr460nixed.docker-compose-runner;
-in {
-  options.dr460nixed.docker-compose-runner = mkOption {
-    type = types.attrsOf (types.submodule {
-      options = {
-        source = mkOption {
-          default = null;
-          description = "Folder containing a docker-compose file.";
-          type = types.path;
-        };
-        envfile = mkOption {
-          default = null;
-          description = "Direct path to a valid .env file";
-          type = types.nullOr types.path;
-        };
-      };
-    });
-    default = {};
-  };
-
-  config = {
-    systemd.services =
-      mapAttrs'
-      (name: value:
-        nameValuePair ("docker-compose-runner-" + name) (
-          let
-            output = derivation {
-              builder = pkgs.writeShellScript "build" ''
-                PATH="${pkgs.rsync}/bin:${pkgs.coreutils}/bin:${pkgs.gnused}/bin"
-                set -e
-                mkdir "$out"
-                sed -r 's/(^\s+restart:\s*)(unless-stopped|always)(\s*($|#))/\1on-failure\3/g' "$src/docker-compose.yml" &gt; "$out/docker-compose.yml"
-                rsync -a "$src/" "$out"
-              '';
-              name = "docker-compose-runner-" + name;
-              src = value.source;
-              inherit (pkgs.hostPlatform) system;
-            };
-            statepath = "/var/docker-compose-runner/${name}";
-          in {
-            description = "docker-compose runner for ${name}";
-            path = with pkgs; [rsync docker-compose docker bash];
-            serviceConfig = {
-              ExecStart = pkgs.writeShellScript ("execstart-docker-compose-runner-" + name) ''
-                set -e
-                mkdir -p "${statepath}"
-                rsync -a --no-owner --size-only "${output}/" "${statepath}"
-                ${optionalString (value.envfile != null) ''
-                  cp "${value.envfile}" "${statepath}/.env"
-                  chmod 600 "${statepath}/.env"
-                ''}
-                cd "${statepath}"
-                docker-compose up
-              '';
-              ExecStopPost = pkgs.writeShellScript ("execstop-docker-compose-runner-" + name) ''
-                set -e
-                cd "${statepath}"
-                docker-compose down
-              '';
-            };
-            unitConfig = {
-              After = "docker.service";
-              Requisite = "docker.service";
-              StopPropagatedFrom = "docker.service";
-            };
-            wantedBy = ["multi-user.target"];
-          }
-        ))
-      cfg;
-    environment.systemPackages = mkIf (cfg != {}) [pkgs.docker-compose];
-    virtualisation.docker.enable = mkIf (cfg != {}) true;
-  };
-}
-</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="docker-compose-runner"><a class="header" href="#docker-compose-runner">docker-compose-runner</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="gaming"><a class="header" href="#gaming">Gaming</a></h1>
 <pre><code class="language-nix">{
   config,
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.gaming;
 in {
-  options.dr460nixed.gaming = {
+  options.dr460nixed.gaming = with lib; {
     enable =
       mkOption
       {
@@ -1549,30 +1534,30 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
-    # ProtonGE-Custom
-    chaotic.steam.extraCompatPackages = with pkgs; [proton-ge-custom];
-
+  config = lib.mkIf cfg.enable {
     # Gamemode
     programs.gamemode.enable = true;
 
     # Enable Steam
-    programs.steam.enable = true;
+    programs.steam = {
+      enable = true;
+      extraCompatPackages = with pkgs; [proton-ge-custom];
+    };
   };
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hardening"><a class="header" href="#hardening">Hardening</a></h1>
 <pre><code class="language-nix">{
   config,
+  # inputs,
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.hardening;
   cfgServers = config.dr460nixed.servers.enable;
 in {
-  options.dr460nixed.hardening = {
+  options.dr460nixed.hardening = with lib; {
     enable =
       mkOption
       {
@@ -1595,20 +1580,28 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
-    boot.kernel.sysctl = {
-      # The Magic SysRq key is a key combo that allows users connected to the
-      # system console of a Linux kernel to perform some low-level commands.
-      # Disable it, since we don't need it, and is a potential security concern.
-      "kernel.sysrq" = 0;
-      # Restrict ptrace() usage to processes with a pre-defined relationship
-      # (e.g., parent/child)
-      "kernel.yama.ptrace_scope" = 2;
-      # Hide kptrs even for processes with CAP_SYSLOG
-      "kernel.kptr_restrict" = 2;
-      # Disable ftrace debugging
-      "kernel.ftrace_enabled" = false;
-    };
+  config = lib.mkIf cfg.enable {
+    # Disable some of it
+    #    nm-overrides = {
+    #      compatibility = {
+    #        binfmt-misc.enable = true;
+    #        ip-forward.enable = true;
+    #      };
+    #      desktop = {
+    #        allow-multilib.enable = true;
+    #        allow-unprivileged-userns.enable = true;
+    #        home-exec.enable = true;
+    #        tmp-exec.enable = true;
+    #        usbguard-allow-at-boot.enable = true;
+    #      };
+    #      performance = {
+    #        allow-smt.enable = true;
+    #      };
+    #      security = {
+    #        tcp-timestamp-disable.enable = true;
+    #        disable-intelme-kmodules.enable = true;
+    #      };
+    #    };
 
     boot.blacklistedKernelModules = [
       # Obscure network protocols
@@ -1652,7 +1645,7 @@ in {
 
     # Protect logins and sudo on servers via DUO
     # leaving EnvFactor enabled for other apps
-    security.duosec = mkIf cfg.duosec {
+    security.duosec = lib.mkIf cfg.duosec {
       acceptEnvFactor = true;
       autopush = true;
       failmode = "safe";
@@ -1664,14 +1657,14 @@ in {
       secretKeyFile = config.sops.secrets."api_keys/duo".path;
       ssh.enable = true;
     };
-    sops.secrets."api_keys/duo" = mkIf cfg.duosec {
+    sops.secrets."api_keys/duo" = lib.mkIf cfg.duosec {
       mode = "0600";
       path = "/run/secrets/api_keys/duo";
     };
-    security.pam.services = mkIf cfg.duosec {
+    security.pam.services = lib.mkIf cfg.duosec {
       "login".duoSecurity.enable = true;
-      "sddm".duoSecurity.enable = mkIf config.dr460nixed.desktops.enable true;
-      "sudo".duoSecurity.enable = mkIf config.dr460nixed.servers.enable true;
+      "sddm".duoSecurity.enable = lib.mkIf config.dr460nixed.desktops.enable true;
+      "sudo".duoSecurity.enable = lib.mkIf config.dr460nixed.servers.enable true;
     };
 
     # Disable root login &amp; password authentication on sshd
@@ -1698,7 +1691,6 @@ in {
           "aes256-ctr,aes192-ctr"
           "aes128-ctr"
           "aes128-gcm@openssh.com"
-          "chacha20-poly1305@openssh.com"
         ];
         KbdInteractiveAuthentication = false;
         KexAlgorithms = [
@@ -1778,9 +1770,6 @@ in {
       ];
     };
 
-    # The hardening profile enables Apparmor by default, we don't want this to happen
-    security.apparmor.enable = false;
-
     # Timeout TTY after 1 hour
     programs.bash.interactiveShellInit = "if [[ $(tty) =~ /dev\\/tty[1-6] ]]; then TMOUT=3600; fi";
 
@@ -1791,7 +1780,7 @@ in {
     environment.systemPackages = with pkgs; [lynis];
 
     # Technically we don't need this as we use pubkey authentication
-    services.fail2ban = mkIf cfgServers {
+    services.fail2ban = lib.mkIf cfgServers {
       enable = true;
       ignoreIP = [
         "100.0.0.0/8"
@@ -1871,7 +1860,6 @@ in {
         "/var/lib/containers"
         "/var/lib/flatpak"
         "/var/lib/libvirt"
-        "/var/lib/pacman"
         "/var/lib/machines"
         "/var/lib/sddm"
         "/var/lib/systemd"
@@ -1994,13 +1982,14 @@ in {
         ".local/share/Steam"
         ".local/share/TelegramDesktop"
         ".local/share/Vorta"
-        ".local/share/atuin"
         ".local/share/baloo"
         ".local/share/containers"
         ".local/share/direnv"
         ".local/share/dolphin"
         ".local/share/fish"
+        ".local/share/godot"
         ".local/share/heroku"
+        ".local/share/jupyter"
         ".local/share/kactivitymanagerd"
         ".local/share/klipper"
         ".local/share/knewstuff3"
@@ -2012,6 +2001,7 @@ in {
         ".local/share/lutris"
         ".local/share/plasma"
         ".local/share/plasma-systemmonitor"
+        ".local/share/zed"
         ".mozilla/native-messaging-hosts"
         ".pki"
         ".steam"
@@ -2077,13 +2067,12 @@ in {
   config,
   lib,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.locales;
   de = "de_DE.UTF-8";
   defaultLocale = "en_GB.UTF-8";
 in {
-  options.dr460nixed.locales = {
+  options.dr460nixed.locales = with lib; {
     enable =
       mkOption
       {
@@ -2095,7 +2084,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Timezone
     time = {
       hardwareClockInLocalTime = true;
@@ -2141,11 +2130,10 @@ in {
   config,
   lib,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.smtp;
 in {
-  options.dr460nixed.smtp = {
+  options.dr460nixed.smtp = with lib; {
     enable =
       mkOption
       {
@@ -2157,7 +2145,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     programs.msmtp = {
       enable = true;
       setSendmail = true;
@@ -2192,8 +2180,7 @@ in {
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed;
 in {
   # We want to use NetworkManager on desktops
@@ -2206,7 +2193,7 @@ in {
       "1.0.0.1"
       "2606:4700:4700::1001"
     ];
-    networkmanager = mkIf cfg.desktops.enable {
+    networkmanager = lib.mkIf cfg.desktops.enable {
       # This is required to workaround Tailscale not recovering from net change
       # https://github.com/tailscale/tailscale/issues/8223
       dispatcherScripts = [
@@ -2253,18 +2240,8 @@ in {
   ...
 }: let
   cfgRemote = config.dr460nixed.remote-build;
-  cfgSuper = config.dr460nixed.nix-super;
 in {
   options.dr460nixed = with lib; {
-    nix-super = {
-      enable = mkOption {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Replaces nix with nix-super, which tracks future features of nix.
-        '';
-      };
-    };
     remote-build = {
       enable = mkOption {
         default = false;
@@ -2340,8 +2317,8 @@ in {
         warn-dirty = false
       '';
 
-      # Make use of nix-super if it is enabled, else use latest available
-      package = lib.mkIf cfgSuper.enable pkgs.nixSuper;
+      # Set the nix path, needed e.g. for Nixd
+      nixPath = ["nixpkgs=${inputs.nixpkgs}"];
 
       # Nix.conf settings
       settings = {
@@ -2381,8 +2358,8 @@ in {
 
         substituters = [
           "https://cache.garnix.io" # extra things here and there
+          # "https://cache.saumon.network/proxmox-nixos" # proxmox on NixOS - SSL failure as of 240817
           "https://catppuccin.cachix.org" # a cache for Catppuccin-nix
-          "https://devenv.cachix.org" # Devenv cache
           "https://nix-community.cachix.org" # nix-community cache
           "https://nix-gaming.cachix.org" # nix-gaming
           "https://nixpkgs-unfree.cachix.org" # unfree-package cache
@@ -2392,21 +2369,15 @@ in {
         trusted-public-keys = [
           "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
           "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
-          "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
           "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
           "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
           "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
           "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
+          # "proxmox-nixos:nveXDuVVhFDRFx8Dn19f1WDEaNRJjPrF2CPD2D+m1ys="
         ];
       };
     };
-
-    # Nix-super - https://github.com/privatevoid-net/nix-super
-    nixpkgs.overlays = lib.mkIf cfgSuper.enable [
-      (_: _prev: {
-        nixSuper = inputs.nix-super.packages.x86_64-linux.default;
-      })
-    ];
 
     environment = {
       etc = with inputs; {
@@ -2425,7 +2396,7 @@ in {
 
     # Let root ssh into the remote builder seamlessly
     home-manager.users."root" = lib.mkIf cfgRemote.enable {
-      home.stateVersion = "23.11"; # Specify this since its otherwise unset
+      home.stateVersion = "24.05"; # Specify this since its otherwise unset
       programs.ssh.extraConfig = ''
         Host ${cfgRemote.host}
           HostName ${cfgRemote.host}
@@ -2455,11 +2426,10 @@ in {
   config,
   lib,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.oci;
 in {
-  options.dr460nixed.oci = {
+  options.dr460nixed.oci = with lib; {
     enable =
       mkOption
       {
@@ -2471,7 +2441,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Taken from /proc/cmdline of Ubuntu 20.04.2 LTS on OCI
     boot = {
       kernelParams = [
@@ -2517,11 +2487,10 @@ in {
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.servers;
 in {
-  options.dr460nixed.servers = {
+  options.dr460nixed.servers = with lib; {
     enable =
       mkOption
       {
@@ -2542,9 +2511,9 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # The common used config is not available
-    programs.fish.shellInit = mkForce ''
+    programs.fish.shellInit = lib.mkForce ''
       set fish_greeting
       fastfetch -l nixos
     '';
@@ -2564,10 +2533,10 @@ in {
       hardware.enable = false;
       networking.enable = false;
     };
-    boot.plymouth.enable = true;
+    boot.plymouth.enable = false;
 
     # Enable the Netdata daemon
-    services.netdata.enable = mkIf cfg.monitoring true;
+    services.netdata.enable = lib.mkIf cfg.monitoring true;
     services.netdata.config = {
       global = {
         "dbengine disk space" = "512";
@@ -2588,7 +2557,7 @@ in {
         web_log: no
       '';
       "go.d/nginx.conf" =
-        mkIf config.services.nginx.enable
+        lib.mkIf config.services.nginx.enable
         (pkgs.writeText "nginx.conf" ''
           jobs:
             - name: local
@@ -2610,7 +2579,7 @@ in {
     };
 
     # The Nginx QUIC package with Brotli modules
-    services.nginx.package = pkgs.nginxQuic.override {doCheck = false;};
+    services.nginx.package = pkgs.nginxQuic;
     services.nginx.additionalModules = with pkgs; [nginxModules.brotli];
 
     # Recommended settings replacing custom configuration
@@ -2650,18 +2619,33 @@ in {
                               application/x-font-ttf application/x-javascript application/xhtml+xml application/xml
                               font/eot font/opentype font/otf font/truetype image/svg+xml image/vnd.microsoft.icon
                               image/x-icon image/x-win-bitmap text/css text/javascript text/plain text/xml;
+
+      # Misc
+      aio threads;
     '';
 
     # Diffie-Hellman parameter for DHE ciphersuites
-    security.dhparams = mkIf config.services.nginx.enable {
+    security.dhparams = lib.mkIf config.services.nginx.enable {
       defaultBitSize = 3072;
       enable = true;
       params.nginx = {};
     };
     services.nginx.sslDhparam = config.security.dhparams.params.nginx.path;
 
+    # Default catch-all for unknown domains
+    services.nginx.virtualHosts."_" = lib.mkIf config.services.nginx.enable {
+      addSSL = true;
+      extraConfig = ''
+        log_not_found off;
+        return 404;
+      '';
+      http3 = true;
+      quic = true;
+      useACMEHost = "dr460nf1r3.org";
+    };
+
     # Need to explicitly open our web server ports
-    networking.firewall = mkIf config.services.nginx.enable {
+    networking.firewall = lib.mkIf config.services.nginx.enable {
       allowedTCPPorts = [80 443];
       allowedUDPPorts = [443];
     };
@@ -2672,10 +2656,24 @@ in {
       "net.core.wmem_max" = 7500000;
     };
 
-    # Enable this so we don't get annoyed by the ACME TOS
+    # SSL certs for the server
     security.acme = {
       acceptTerms = true;
-      defaults.email = "root@dr460nf1r3.org";
+      defaults = {
+        group = "nginx";
+        email = "root@dr460nf1r3.org";
+      };
+      certs."dr460nf1r3.org" = {
+        extraDomainNames = ["*.dr460nf1r3.org"];
+        dnsProvider = "cloudflare";
+        dnsPropagationCheck = true;
+        credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
+      };
+    };
+    sops.secrets."api_keys/cloudflare" = {
+      mode = "0400";
+      owner = "acme";
+      path = "/run/secrets/api_keys/cloudflare";
     };
   };
 }
@@ -2745,94 +2743,93 @@ in {
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.syncthing;
   settingsFormat = pkgs.formats.json {};
 in {
   options.dr460nixed.syncthing = {
     enable =
-      mkOption
+      lib.mkOption
       {
         default = false;
-        type = types.bool;
-        description = mdDoc ''
+        type = lib.types.bool;
+        description = lib.mdDoc ''
           Enable common file synchronisation between devices.
         '';
       };
     key =
-      mkOption
+      lib.mkOption
       {
         default = "";
-        type = types.str;
-        description = mdDoc ''
+        type = lib.types.str;
+        description = lib.mdDoc ''
           The key to use for Syncthing.
         '';
       };
     cert =
-      mkOption
+      lib.mkOption
       {
         default = "";
-        type = types.str;
-        description = mdDoc ''
+        type = lib.types.str;
+        description = lib.mdDoc ''
           The cert to use for Syncthing.
         '';
       };
     devices =
-      mkOption
+      lib.mkOption
       {
         default = [];
-        type = types.attrsOf (types.submodule ({name, ...}: {
+        type = lib.types.attrsOf (lib.types.submodule ({name, ...}: {
           freeformType = settingsFormat.type;
           options = {
-            name = mkOption {
-              type = types.str;
+            name = lib.mkOption {
+              type = lib.types.str;
               default = name;
               description = lib.mdDoc ''
                 The name of the device.
               '';
             };
-            id = mkOption {
-              type = types.str;
-              description = mdDoc ''
+            id = lib.mkOption {
+              type = lib.types.str;
+              description = lib.mdDoc ''
                 The device ID. See &lt;https://docs.syncthing.net/dev/device-ids.html&gt;.
               '';
             };
-            autoAcceptFolders = mkOption {
-              type = types.bool;
+            autoAcceptFolders = lib.mkOption {
+              type = lib.types.bool;
               default = false;
-              description = mdDoc ''
+              description = lib.mdDoc ''
                 Automatically create or share folders that this device advertises at the default path.
                 See &lt;https://docs.syncthing.net/users/config.html?highlight=autoaccept#config-file-format&gt;.
               '';
             };
           };
         }));
-        description = mdDoc ''
+        description = lib.mdDoc ''
           The devices to sync with.
         '';
       };
     devicesNames =
-      mkOption
+      lib.mkOption
       {
         default = [];
-        type = types.listOf types.str;
-        description = mdDoc ''
+        type = lib.types.listOf lib.types.str;
+        description = lib.mdDoc ''
           The names of the devices to sync with.
         '';
       };
     user =
-      mkOption
+      lib.mkOption
       {
         default = "";
-        type = types.str;
-        description = mdDoc ''
+        type = lib.types.str;
+        description = lib.mdDoc ''
           The user to run syncthing as.
         '';
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     services.syncthing = {
       inherit (cfg) cert;
       dataDir = "/home/${cfg.user}";
@@ -2878,15 +2875,14 @@ in {
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.tailscale-tls;
   domainExpression =
     if cfg.domain-override != null
     then cfg.domain-override
     else "$(${pkgs.tailscale}/bin/tailscale cert 2&gt;&amp;1 | grep use | cut -d '\"' -f2)";
 in {
-  options.dr460nixed.tailscale-tls = {
+  options.dr460nixed.tailscale-tls = with lib; {
     enable = mkEnableOption "Automatic Tailscale certificates renewal";
 
     target = mkOption {
@@ -2908,7 +2904,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     users.users.tailscale-tls = {
       group = "tailscale-tls";
       home = "/var/lib/tailscale-tls";
@@ -2970,8 +2966,7 @@ in {
   lib,
   pkgs,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.tailscale;
 
   tailscaleJoinArgsList =
@@ -2992,7 +2987,7 @@ with lib; let
     ${pkgs.tailscale}/bin/tailscale up ${tailscaleJoinArgsString}
   '';
 in {
-  options.dr460nixed.tailscale = {
+  options.dr460nixed.tailscale = with lib; {
     enable = mkEnableOption "Tailscale client daemon";
 
     autoConnect = mkOption {
@@ -3014,7 +3009,7 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Enable Tailscale service
     services.tailscale.enable = true;
 
@@ -3025,7 +3020,7 @@ in {
     networking.firewall.trustedInterfaces = ["tailscale0"];
 
     # Connect to Tailnet automatically
-    systemd.services.tailscale-autoconnect = mkIf cfg.autoConnect {
+    systemd.services.tailscale-autoconnect = lib.mkIf cfg.autoConnect {
       description = "Automatic connection to Tailscale";
 
       # Make sure tailscale is running before trying to connect to tailscale
@@ -3063,8 +3058,10 @@ in {
     dhcpcd = uidGid 976;
     fwupd-refresh = uidGid 975;
     flatpak = uidGid 974;
+    forgejo = uidGid 963;
     gamemode = uidGid 969;
     grafana = uidGid 995;
+    incus-admin = uidGid 665;
     influxdb2 = uidGid 994;
     jellyfin = uidGid 970;
     loki = uidGid 993;
@@ -3078,8 +3075,10 @@ in {
     polkituser = uidGid 988;
     paperless = uidGid 966;
     podman = uidGid 968;
+    proc = uidGid 971;
     promtail = uidGid 987;
     redis-paperless = uidGid 965;
+    resolvconf = uidGid 964;
     rtkit = uidGid 986;
     sshd = uidGid 985;
     systemd-coredump = uidGid 984;
@@ -3199,11 +3198,10 @@ in {
   config,
   lib,
   ...
-}:
-with lib; let
+}: let
   cfg = config.dr460nixed.zfs;
 in {
-  options.dr460nixed.zfs = {
+  options.dr460nixed.zfs = with lib; {
     enable =
       mkOption
       {
@@ -3213,8 +3211,6 @@ in {
           Configures common options for using ZFS on NixOS.
         '';
       };
-  };
-  options.dr460nixed.zfs = {
     sendMails =
       mkOption
       {
@@ -3226,7 +3222,7 @@ in {
       };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Support booting off ZFS
     boot.supportedFilesystems = ["zfs"];
 
@@ -3246,7 +3242,7 @@ in {
     };
 
     # Enable configuration of msmtp
-    dr460nixed.smtp.enable = mkIf cfg.sendMails true;
+    dr460nixed.smtp.enable = lib.mkIf cfg.sendMails true;
 
     # Configure ZFS Event Daemon to use msmtp
     # commented until python2.7-oildev is fixed
@@ -3264,7 +3260,7 @@ in {
     # };
 
     # This option does not work; will return error
-    services.zfs.zed.enableMail = mkIf cfg.sendMails false;
+    services.zfs.zed.enableMail = lib.mkIf cfg.sendMails false;
 
     # Metrics
     services.telegraf.extraConfig.inputs = lib.mkIf config.services.telegraf.enable {
