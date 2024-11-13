@@ -11,6 +11,9 @@
   };
 
   inputs = {
+    # Ayugram
+    ayugram-desktop.url = "github:/ayugram-port/ayugram-desktop/release";
+
     # Chaotic Nyx!
     chaotic-nyx = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
@@ -184,10 +187,7 @@
     };
 
     # Fresh ucode packages
-    ucodenix = {
-      url = "github:e-tho/ucodenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    ucodenix.url = "github:e-tho/ucodenix";
 
     # Systems flake
     systems.url = "github:nix-systems/x86_64-linux";

@@ -19,6 +19,9 @@ let
     {
       "m.homeserver": {
         "base_url": "https://${matrix_hostname}"
+      },
+      "org.matrix.msc3575.proxy": {
+        "url": "https://matrix.dr460nf1r3.org"
       }
     }
   '';
@@ -27,9 +30,10 @@ in {
     enable = true;
     package = pkgs.conduwuit_git;
     settings.global = {
-      server_name = matrix_hostname;
       allow_registration = false;
       database_backend = "rocksdb";
+      inherit server_name;
+      new_user_displayname_suffix = "";
     };
   };
   services.nginx = {
@@ -73,14 +77,12 @@ in {
       };
       locations."=/.well-known/matrix/server" = {
         alias = "${well_known_server}";
-
         extraConfig = ''
           default_type application/json;
         '';
       };
       locations."=/.well-known/matrix/client" = {
         alias = "${well_known_client}";
-
         extraConfig = ''
           default_type application/json;
           add_header Access-Control-Allow-Origin "*";
@@ -101,6 +103,4 @@ in {
 
   networking.firewall.allowedTCPPorts = [80 443 8448];
   networking.firewall.allowedUDPPorts = [80 443 8448];
-
-  # ACME data must be readable by the NGINX user
 }

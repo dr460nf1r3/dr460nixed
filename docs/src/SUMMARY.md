@@ -16,7 +16,7 @@
 - [desktops](./modules/desktops.md)
 - [deterministic-ids](./modules/deterministic-ids.md)
 - [development](./modules/development.md)
-- [docker-compose-runner](./modules/docker-compose-runner.md)
+- [compose-runner](./modules/compose-runner.md)
 - [gaming](./modules/gaming.md)
 - [hardening](./modules/hardening.md)
 - [impermanence](./modules/impermanence.md)

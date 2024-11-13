@@ -15,7 +15,7 @@ in {
       shellAliases = {
         "b1" = "ssh -p23 u342919@u342919.${hetznerStoragebox}";
         "b2" = "ssh -p23 u358867@u358867.${hetznerStoragebox}";
-        "c" = "ssh ${user}@cup-dragon";
+        "c" = "ssh -p666 ${user}@cup-dragon";
         "g1" = "ssh -p666 ${user}@${immortalis}";
         "g2" = "ssh ${user}@${immortalis}";
         "g3" = "ssh -p1022 ${user}@216.158.66.108";
@@ -36,7 +36,7 @@ in {
       shellAbbrs = {
         "b1" = "ssh -p23 u342919@u342919.${hetznerStoragebox}";
         "b2" = "ssh -p23 u358867@u358867.${hetznerStoragebox}";
-        "c" = "ssh ${user}@cup-dragon";
+        "c" = "ssh -p666 ${user}@cup-dragon";
         "g1" = "ssh -p666 ${user}@${immortalis}";
         "g2" = "ssh ${user}@${immortalis}";
         "g3" = "ssh -p1022 ${user}@216.158.66.108";

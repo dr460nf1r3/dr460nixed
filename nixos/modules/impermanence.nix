@@ -182,6 +182,7 @@
         ".firedragon"
         ".gitkraken"
         ".java"
+        ".local/share/AyuGramDesktop"
         ".local/share/JetBrains"
         ".local/share/Nextcloud"
         ".local/share/PrismLauncher"

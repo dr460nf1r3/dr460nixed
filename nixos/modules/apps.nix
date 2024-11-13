@@ -64,6 +64,7 @@ in {
       hunspell
       hunspellDicts.de_DE
       hunspellDicts.en_US
+      inputs.ayugram-desktop.packages.${pkgs.system}.ayugram-desktop
       inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
       libreoffice-qt6-fresh
       kde-rounded-corners
@@ -82,7 +83,6 @@ in {
       rustdesk-flutter
       signal-desktop
       syncthingtray
-      telegram-desktop_git
       trayscale
       usbutils
       vesktop

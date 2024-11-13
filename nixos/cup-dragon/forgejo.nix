@@ -11,19 +11,22 @@
     sha256 = "sha256-et5luA3SI7iOcEIQ3CVIu0+eiLs8C/8mOitYlWQa/uI=";
     stripRoot = false;
   };
+  woodpecker-server = "ci.dr460nf1r3.org";
 in {
   services.nginx = {
-    virtualHosts.${cfg.settings.server.DOMAIN} = {
-      extraConfig = ''
-        client_max_body_size 512M;
-      '';
-      forceSSL = true;
-      http3 = true;
-      http3_hq = true;
-      kTLS = true;
-      locations."/".proxyPass = "http://localhost:${toString srv.HTTP_PORT}";
-      quic = true;
-      useACMEHost = "dr460nf1r3.org";
+    virtualHosts = {
+      ${cfg.settings.server.DOMAIN} = {
+        extraConfig = ''
+          client_max_body_size 512M;
+        '';
+        forceSSL = true;
+        http3 = true;
+        http3_hq = true;
+        kTLS = true;
+        locations."/".proxyPass = "http://localhost:${toString srv.HTTP_PORT}";
+        quic = true;
+        useACMEHost = "dr460nf1r3.org";
+      };
     };
   };
 
@@ -104,5 +107,35 @@ in {
   sops.secrets."api_keys/forgejo_runner" = {
     mode = "0400";
     path = "/var/lib/gitea-runner/.token";
+  };
+
+  # Woodpecker CI/CD, just because why not?
+  services.woodpecker-server = {
+    enable = true;
+    environment = {
+      WOODPECKER_FORGEJO = "true";
+      WOODPECKER_FORGEJO_URL = "https://git.dr460nf1r3.org";
+      WOODPECKER_HOST = "https://${woodpecker-server}";
+      WOODPECKER_OPEN = "true";
+      WOODPECKER_SERVER_ADDR = ":3007";
+    };
+    environmentFile = config.sops.secrets."env/woodpecker".path;
+  };
+  sops.secrets."env/woodpecker" = {
+    mode = "0400";
+    owner = config.users.users.root.name;
+    path = "/var/lib/woodpecker/.env";
+  };
+
+  services.woodpecker-agents.agents."docker" = {
+    enable = true;
+    extraGroups = ["podman"];
+    environment = {
+      DOCKER_HOST = "unix:///run/podman/podman.sock";
+      WOODPECKER_BACKEND = "docker";
+      WOODPECKER_MAX_WORKFLOWS = "4";
+      WOODPECKER_SERVER = "localhost:9000";
+    };
+    environmentFile = [config.sops.secrets."env/woodpecker".path];
   };
 }
