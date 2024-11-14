@@ -102,6 +102,9 @@
   # Enable the touchpad & secure boot, as well as add the ipman script
   environment.systemPackages = with pkgs; [libinput radeontop];
 
+  # Allow SSH via ServerBox
+  services.openssh.ports = [666];
+
   # Home-manager individual settings
   home-manager.users."nico" = import ../../home-manager/nico/nico.nix;
 
