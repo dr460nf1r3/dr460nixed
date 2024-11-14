@@ -42,10 +42,10 @@ in {
       };
       mailer = {
         ENABLED = true;
-        FROM = "noreply@${srv.DOMAIN}";
+        FROM = "noreply@dr460nf1r3.org";
         PASSWD = config.sops.secrets."mail/forgejo".path;
         SMTP_ADDR = "mail.garudalinux.net";
-        USER = "noreply@${srv.DOMAIN}";
+        USER = "noreply@dr460nf1r3.org";
       };
       other = {
         SHOW_FOOTER_VERSION = false;
