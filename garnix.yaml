@@ -4,5 +4,5 @@ builds:
     - nixosConfigurations.dev-container
     - nixosConfigurations.dr460nixed-base
     - nixosConfigurations.dr460nixed-desktop
-    - nixosConfigurations.oracle-dragon
+    - nixosConfigurations.pve-dragon-1
     - packages.*.vbox

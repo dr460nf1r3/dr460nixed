@@ -12,6 +12,8 @@
     xserver.enable = true;
   };
 
+  nixpkgs.config.allowUnfree = true;
+
   users.users.nico = {
     isNormalUser = true;
     extraGroups = ["wheel"];
