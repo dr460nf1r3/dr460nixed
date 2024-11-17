@@ -68,6 +68,8 @@
     enable = true;
     guiAddress = "cup-dragon.emperor-mercat.ts.net:8384";
     openDefaultPorts = true;
+    overrideDevices = true;
+    overrideFolders = true;
     settings.options.urAccepted = -1;
   };
 
@@ -82,7 +84,6 @@
           "ci.dr460nf1r3.org" = "http://127.0.0.1:3007";
           "dev.dr460nf1r3.org" = "http://127.0.0.1:3010";
           "searx.dr460nf1r3.org" = "http://127.0.0.1:8080";
-          "uptime.dr460nf1r3.org" = "http://127.0.0.1:3001";
         };
       };
     };
@@ -102,6 +103,46 @@
       dockerCompat = true;
       dockerSocket.enable = true;
       enable = true;
+    };
+  };
+
+  # Uptimes
+  services.nginx.virtualHosts = {
+    "uptime.dr460nf1r3.org" = {
+      forceSSL = true;
+      http3 = true;
+      http3_hq = true;
+      kTLS = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:3001";
+      };
+      quic = true;
+      serverAliases = ["uptimes.chaotic.cx"];
+      useACMEHost = "dr460nf1r3.org";
+    };
+    "chaotic.dr460nf1r3.org" = {
+      forceSSL = true;
+      http3 = true;
+      http3_hq = true;
+      kTLS = true;
+      locations = {
+        "~* ^/chaotic-aur/([^/]+)/x86_64/(?!\1\.(db|files))[^/]+$" = {
+          extraConfig = ''
+            add_header Cache-Control "max-age=150, stale-while-revalidate=150, stale-if-error=86400";
+          '';
+        };
+        "/" = {
+          extraConfig = ''
+            autoindex on;
+            autoindex_exact_size off;
+            autoindex_localtime on;
+            add_header Cache-Control 'no-cache';
+          '';
+        };
+      };
+      quic = true;
+      root = "/var/lib/syncthing/Chaotic-AUR";
+      useACMEHost = "dr460nf1r3.org";
     };
   };
 
