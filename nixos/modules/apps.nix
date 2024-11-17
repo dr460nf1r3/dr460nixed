@@ -80,7 +80,6 @@ in {
       obsidian
       okular
       plasmusic-toolbar
-      rustdesk-flutter
       signal-desktop
       syncthingtray
       trayscale
@@ -115,7 +114,7 @@ in {
       mdbook-linkcheck
       nil
       nix-prefetch-git
-      nixd
+      # nixd
       nixos-generators
       nixpkgs-lint
       nixpkgs-review

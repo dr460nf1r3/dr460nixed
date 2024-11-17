@@ -16,6 +16,7 @@
     # Needed to get the touchpad working
     blacklistedKernelModules = ["elan_i2c"];
     initrd.kernelModules = ["amdgpu"];
+    kernelParams = ["amd_pstate=active"];
     supportedFilesystems = ["btrfs"];
   };
 
@@ -69,7 +70,7 @@
   # Garuda Nix subsystem modules
   garuda = {
     btrfs-maintenance = {
-      deduplication = false;
+      deduplication = true;
       enable = true;
       uuid = "7f894697-a4e9-43a7-bdd8-00c0376ce1f9";
     };
@@ -88,7 +89,7 @@
       fallbackSpecialisation = false;
     };
     scx = {
-      enable = true;
+      enable = false;
       package = pkgs.scx.rustland;
     };
   };

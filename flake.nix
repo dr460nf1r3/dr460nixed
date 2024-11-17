@@ -12,7 +12,7 @@
 
   inputs = {
     # Ayugram
-    ayugram-desktop.url = "github:/ayugram-port/ayugram-desktop/release";
+    ayugram-desktop.url = "github:ayugram-port/ayugram-desktop/release";
 
     # Chaotic Nyx!
     chaotic-nyx = {
@@ -103,7 +103,7 @@
 
     # Lets give Lix another try
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
