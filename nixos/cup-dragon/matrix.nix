@@ -73,6 +73,81 @@ in {
     };
   };
 
-  networking.firewall.allowedTCPPorts = [80 443 8448];
-  networking.firewall.allowedUDPPorts = [80 443 8448];
+  environment.systemPackages = with pkgs; [signal-cli];
+
+  networking.firewall = {
+    allowedTCPPorts = [80 443 8448];
+    allowedUDPPorts = [80 443 8448];
+  };
+
+  # Keep Signal login up-to-date
+  home-manager.users."nico".systemd.user = {
+    services.sync-signal = {
+      Unit = {
+        Description = "Signal ensure-synced";
+      };
+      Service = {
+        ExecStart = ''
+          ${pkgs.bash}/bin/bash ${config.sops.secrets."matrix/signal_sync".path}
+        '';
+        Environment = "EXECUTABLE=${pkgs.signal-cli}/bin/signal-cli";
+      };
+    };
+    timers.sync-signal = {
+      Unit = {
+        Description = "Signal ensure-synced";
+      };
+      Timer = {
+        OnBootSec = "1min";
+        OnUnitActiveSec = "1h";
+        Unit = "sync-signal.service";
+      };
+    };
+  };
+  sops.secrets."matrix/signal_sync" = {
+    mode = "0600";
+    owner = config.users.users.nico.name;
+    path = "/home/nico/.signal_sync";
+  };
+
+  # services.mautrix-signal = {
+  #   enable = true;
+  #   environmentFile = sops.secrets."matrix/signal".path;
+  #   settings = {
+  #     appservice = {
+  #       as_token = "";
+  #       bot = {
+  #         displayname = "Signal Bridge Bot";
+  #         username = "signalbot";
+  #       };
+  #       hostname = "[::]";
+  #       hs_token = "";
+  #       id = "signal";
+  #       port = 29328;
+  #       username_template = "signal_{{.}}";
+  #     };
+  #     bridge = {
+  #       command_prefix = "!signal";
+  #       permissions = {
+  #         "${matrix_hostname}" = "full";
+  #         "@admin:${matrix_hostname}" = "admin";
+  #       };
+  #       relay = {
+  #         enabled = true;
+  #       };
+  #     };
+  #     database = {
+  #       type = "sqlite3";
+  #       uri = "file:/var/lib/mautrix-signal/mautrix-signal.db?_txlock=immediate";
+  #     };
+  #     homeserver = {
+  #       address = "http://localhost:8448";
+  #     };
+  #   };
+  # };
+  # sops.secrets."matrix/signal" = {
+  #   mode = "0600";
+  #   owner = config.users.users.mautrix-signal.name;
+  #   path = "/var/lib/mautrix-signal/.secret";
+  # };
 }

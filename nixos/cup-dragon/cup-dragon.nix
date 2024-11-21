@@ -7,6 +7,7 @@
     ./forgejo.nix
     ./hardware-configuration.nix
     ./matrix.nix
+    ./redlib.nix
     ./wakapi.nix
   ];
 
@@ -141,7 +142,7 @@
         };
       };
       quic = true;
-      root = "/var/lib/syncthing/Chaotic-AUR";
+      root = "/srv/http";
       useACMEHost = "dr460nf1r3.org";
     };
   };

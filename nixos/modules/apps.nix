@@ -91,6 +91,7 @@ in {
       yt-dlp_git
     ])
     ++ lib.optionals cfg.development.enable (with pkgs; [
+      android-studio
       ansible
       beekeeper-studio
       cloudflared
