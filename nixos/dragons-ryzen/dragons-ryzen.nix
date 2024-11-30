@@ -88,10 +88,6 @@
       enable = true;
       fallbackSpecialisation = false;
     };
-    scx = {
-      enable = false;
-      package = pkgs.scx.rustland;
-    };
   };
 
   # RADV video decode & general usage

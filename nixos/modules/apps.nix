@@ -76,6 +76,7 @@ in {
       libva-utils
       lm_sensors
       movit
+      nerd-fonts.comic-shanns-mono
       obs-studio-wrapped
       obsidian
       okular
@@ -85,6 +86,11 @@ in {
       trayscale
       usbutils
       vesktop
+      (vivaldi.overrideAttrs (oldAttrs: {
+        dontPatchELF = true;
+        dontWrapQtApps = false;
+        nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [pkgs.kdePackages.wrapQtAppsHook];
+      }))
       vorta
       vulkan-tools
       xdg-utils
