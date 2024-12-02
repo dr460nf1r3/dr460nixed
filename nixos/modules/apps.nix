@@ -36,6 +36,11 @@ in {
       cached-nix-shell
       duf
       eza
+      fishPlugins.sponge
+      fishPlugins.plugin-sudope
+      fishPlugins.plugin-git
+      fishPlugins.done
+      fishPlugins.z
       jq
       killall
       micro
@@ -115,6 +120,7 @@ in {
       jetbrains.gateway
       jetbrains.idea-ultimate
       jetbrains.webstorm
+      librsvg # Tauri
       mdbook
       mdbook-admonish
       mdbook-emojicodes
@@ -129,6 +135,7 @@ in {
       nodePackages_latest.pnpm
       nodejs_latest
       # rider
+      rustup # Tauri
       shellcheck
       shfmt
       sops
