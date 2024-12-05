@@ -69,8 +69,8 @@
     enable = true;
     guiAddress = "cup-dragon.emperor-mercat.ts.net:8384";
     openDefaultPorts = true;
-    overrideDevices = true;
-    overrideFolders = true;
+    overrideDevices = false;
+    overrideFolders = false;
     settings.options.urAccepted = -1;
   };
 

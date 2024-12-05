@@ -48,7 +48,7 @@ in {
         USER = "noreply@dr460nf1r3.org";
       };
       other = {
-        SHOW_FOOTER_VERSION = false;
+        SHOW_FOOTER_VERSION = true;
       };
       server = {
         DOMAIN = "git.dr460nf1r3.org";
