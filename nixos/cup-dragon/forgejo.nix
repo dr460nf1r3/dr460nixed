@@ -34,6 +34,7 @@ in {
     enable = true;
     database.type = "postgres";
     lfs.enable = true;
+    package = pkgs.forgejo;
     settings = {
       actions.ENABLED = true;
       DEFAULT = {
