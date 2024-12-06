@@ -210,6 +210,7 @@
         ".local/share/plasma"
         ".local/share/plasma-systemmonitor"
         ".local/share/zed"
+        ".local/share/z"
         ".mozilla/native-messaging-hosts"
         ".pki"
         ".steam"
