@@ -275,11 +275,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733374943,
-        "narHash": "sha256-H1+7r87hWDYgzFQNunC7e4sazNxZGkqJqeY16m8T4/I=",
+        "lastModified": 1733461342,
+        "narHash": "sha256-bSI1v/CiDBor19/Gd3TibxcQ1Fov0hRR53ufSazSzjI=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "040c7b54fd2ae9e5d010d920049811e302eab537",
+        "rev": "7ef4ae0803ff1b354ace585176192ff7c594de3c",
         "type": "gitlab"
       },
       "original": {
@@ -316,11 +316,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733389730,
-        "narHash": "sha256-KZMu4ddMll5khS0rYkJsVD0hVqjMNHlhTM3PCQar0Ag=",
+        "lastModified": 1733484277,
+        "narHash": "sha256-i5ay20XsvpW91N4URET/nOc0VQWOAd4c4vbqYtcH8Rc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "65912bc6841cf420eb8c0a20e03df7cbbff5963f",
+        "rev": "d00c6f6d0ad16d598bf7e2956f52c1d9d5de3c3a",
         "type": "github"
       },
       "original": {
@@ -336,11 +336,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733354444,
-        "narHash": "sha256-U7RTQ6HrxCNI/cme+sC2NivHxzRh1aMPRdofMV2WmZU=",
+        "lastModified": 1733495843,
+        "narHash": "sha256-rPK7Y7Upwdus0fCK4OZLpgx9MwRt6mWP8YjNmHA9vJ8=",
         "owner": "StevenBlack",
         "repo": "hosts",
-        "rev": "97eca4c0c9639d92b5ca7803c29719a8bfaae96e",
+        "rev": "690c486fa42bc4db25150adb34ea913ce6a25548",
         "type": "github"
       },
       "original": {
@@ -406,11 +406,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1733325955,
-        "narHash": "sha256-FSyu2pQujZUa7cKsAAdWIX1DhfYf999AY3vtdy8Uvbg=",
+        "lastModified": 1733485224,
+        "narHash": "sha256-1W72eK7JC5d2Fl74O8xy3ZX1rseHfjMLda3fYBpCdeg=",
         "owner": "taj-ny",
         "repo": "kwin-effects-forceblur",
-        "rev": "8ec812b32a6e511a303323f88e390ea193c6000d",
+        "rev": "b92132bf5879d3b102c3a28d270beab4ea0ef1f1",
         "type": "github"
       },
       "original": {
@@ -454,15 +454,15 @@
     "lix": {
       "flake": false,
       "locked": {
-        "lastModified": 1729298361,
-        "narHash": "sha256-hiGtfzxFkDc9TSYsb96Whg0vnqBVV7CUxyscZNhed0U=",
-        "rev": "ad9d06f7838a25beec425ff406fe68721fef73be",
+        "lastModified": 1733448312,
+        "narHash": "sha256-id5U81bzXk/Lg900nGLM4CQb0wmTdzIvQz7CZk2OcTM=",
+        "rev": "2a9e560570982a91937d199af3e7b7a8f3cbe14b",
         "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/ad9d06f7838a25beec425ff406fe68721fef73be.tar.gz?rev=ad9d06f7838a25beec425ff406fe68721fef73be"
+        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/2a9e560570982a91937d199af3e7b7a8f3cbe14b.tar.gz?rev=2a9e560570982a91937d199af3e7b7a8f3cbe14b"
       },
       "original": {
         "type": "tarball",
-        "url": "https://git.lix.systems/lix-project/lix/archive/2.91.1.tar.gz"
+        "url": "https://git.lix.systems/lix-project/lix/archive/main.tar.gz"
       }
     },
     "lix-module": {
@@ -471,21 +471,23 @@
           "flake-utils"
         ],
         "flakey-profile": "flakey-profile",
-        "lix": "lix",
+        "lix": [
+          "lix"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1729360442,
-        "narHash": "sha256-6U0CyPycIBc04hbYy2hBINnVso58n/ZyywY2BD3hu+s=",
-        "rev": "9098ac95768f7006d7e070b88bae76939f6034e6",
+        "lastModified": 1732603698,
+        "narHash": "sha256-Jw2MhzgCCrKV2MJytehG0cCLIAosBX71p8qmQ6XQlR4=",
+        "rev": "15b999f9c958c475f71fb8c543b9fc2f36ae8730",
         "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/9098ac95768f7006d7e070b88bae76939f6034e6.tar.gz?rev=9098ac95768f7006d7e070b88bae76939f6034e6"
+        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/15b999f9c958c475f71fb8c543b9fc2f36ae8730.tar.gz?rev=15b999f9c958c475f71fb8c543b9fc2f36ae8730"
       },
       "original": {
         "type": "tarball",
-        "url": "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz"
+        "url": "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz"
       }
     },
     "nix-gaming": {
@@ -568,11 +570,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733363776,
-        "narHash": "sha256-3EZvm60PErALa91el3zRl+cJCuHmJfqiBzK+EEPnf84=",
+        "lastModified": 1733450098,
+        "narHash": "sha256-lW3YCX7plwKqc6uMsEX8zOa0umGnq+J4/qgYJ19vtMk=",
         "owner": "Infinidoge",
         "repo": "nix-minecraft",
-        "rev": "46d4b9024ccd2b36012ba074b330fd955a22295b",
+        "rev": "26752a2e936d284c6891c78c6aa5038b2ec8d397",
         "type": "github"
       },
       "original": {
@@ -635,11 +637,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1733217105,
-        "narHash": "sha256-fc6jTzIwCIVWTX50FtW6AZpuukuQWSEbPiyg6ZRGWFY=",
+        "lastModified": 1733481457,
+        "narHash": "sha256-IS3bxa4N1VMSh3/P6vhEAHQZecQ3oAlKCDvzCQSO5Is=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "cceee0a31d2f01bcc98b2fbd591327c06a4ea4f9",
+        "rev": "e563803af3526852b6b1d77107a81908c66a9fcf",
         "type": "github"
       },
       "original": {
@@ -840,6 +842,7 @@
         "keys_nico": "keys_nico",
         "kwin-effects-forceblur": "kwin-effects-forceblur",
         "lanzaboote": "lanzaboote",
+        "lix": "lix",
         "lix-module": "lix-module",
         "nix-gaming": "nix-gaming",
         "nix-index-database": "nix-index-database",
@@ -908,11 +911,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733372233,
-        "narHash": "sha256-nEpd7QFcjHXop4Km9ldh1fXq0K10/u7kPlchPXl44/g=",
+        "lastModified": 1733458623,
+        "narHash": "sha256-52PZbQysGpULrOehi4+807Qj3jSa3fXGJw0wuRxQfvo=",
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
-        "rev": "8a832957847b643f758263293ccca6e801614a1c",
+        "rev": "ebe9e466f8eb5b1ae3079d9c44cb4d8a56f8e5c2",
         "type": "github"
       },
       "original": {

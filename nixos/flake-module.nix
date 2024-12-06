@@ -23,7 +23,7 @@
       ./modules/locales.nix
       ./modules/misc.nix
       inputs.hosts.nixosModule
-      inputs.lix-module.nixosModules.lixFromNixpkgs
+      inputs.lix-module.nixosModules.default
       inputs.nixos-generators.nixosModules.all-formats
       inputs.spicetify-nix.nixosModules.default
       "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"

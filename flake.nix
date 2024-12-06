@@ -102,9 +102,14 @@
     };
 
     # Lets give Lix another try
+    lix = {
+      url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
+      flake = false;
+    };
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
       inputs.flake-utils.follows = "flake-utils";
+      inputs.lix.follows = "lix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
