@@ -8,7 +8,6 @@
     defaultModules = [
       ./modules
       inputs.disko.nixosModules.disko
-      inputs.hosts.nixosModule
       inputs.lanzaboote.nixosModules.lanzaboote
       inputs.lix-module.nixosModules.default
       inputs.sops-nix.nixosModules.sops
@@ -22,7 +21,6 @@
       ./modules/desktops.nix
       ./modules/locales.nix
       ./modules/misc.nix
-      inputs.hosts.nixosModule
       inputs.lix-module.nixosModules.default
       inputs.nixos-generators.nixosModules.all-formats
       inputs.spicetify-nix.nixosModules.default

@@ -71,12 +71,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Ad and malware blocking hosts file
-    hosts = {
-      url = "github:StevenBlack/hosts";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Reset rootfs every reboot
     impermanence.url = "github:nix-community/impermanence";
 
