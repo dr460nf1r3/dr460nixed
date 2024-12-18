@@ -4,7 +4,7 @@
   ...
 }:
 # Adapted from:
-# https://gitlab.com/famedly/conduit/-/blo  b/3bfdae795d4d9ec9aeaac7465e7535ac88e47756/nix/README.md
+# https://gitlab.com/famedly/conduit/-/blob/3bfdae795d4d9ec9aeaac7465e7535ac88e47756/nix/README.md
 let
   server_name = "dr460nf1r3.org";
   matrix_hostname = "matrix.${server_name}";
