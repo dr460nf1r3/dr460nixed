@@ -115,7 +115,6 @@ in {
       # godot
       gnumake
       heroku
-      hoppscotch
       hugo
       jetbrains.gateway
       jetbrains.idea-ultimate
@@ -134,6 +133,7 @@ in {
       nodePackages_latest.bash-language-server
       nodePackages_latest.pnpm
       nodejs_latest
+      postman
       # rider
       rustup # Tauri
       shellcheck
