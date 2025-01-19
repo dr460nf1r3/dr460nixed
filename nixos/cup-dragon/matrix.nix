@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }:
@@ -19,6 +20,10 @@ in {
       new_user_displayname_suffix = "";
     };
   };
+
+  # Fix for new binary name in 0.5.0
+  systemd.services.conduit.serviceConfig.ExecStart = lib.mkForce "${pkgs.conduwuit_git}/bin/conduwuit";
+
   services.nginx = {
     virtualHosts = {
       "${matrix_hostname}" = {

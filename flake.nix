@@ -148,7 +148,6 @@
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
       inputs.flake-compat.follows = "flake-compat";
-      inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -160,15 +159,7 @@
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.flake-compat.follows = "flake-compat";
       inputs.gitignore.follows = "gitignore";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Proxmox on NixOS - this one needs its own Nixpkgs instance
-    proxmox-nixos = {
-      url = "github:SaumonNet/proxmox-nixos";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.utils.follows = "flake-utils";
     };
 
     # Secrets management
