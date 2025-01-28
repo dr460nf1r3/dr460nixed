@@ -118,8 +118,29 @@
         proxyPass = "http://127.0.0.1:3001";
       };
       quic = true;
-      serverAliases = ["uptimes.chaotic.cx"];
       useACMEHost = "dr460nf1r3.org";
+    };
+    "status.garudalinux.org" = {
+      forceSSL = true;
+      http3 = true;
+      http3_hq = true;
+      kTLS = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:3001";
+      };
+      quic = true;
+      useACMEHost = "garudalinux.org";
+    };
+    "uptimes.chaotic.cx" = {
+      forceSSL = true;
+      http3 = true;
+      http3_hq = true;
+      kTLS = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:3001";
+      };
+      quic = true;
+      useACMEHost = "chaotic.cx";
     };
     "chaotic.dr460nf1r3.org" = {
       forceSSL = true;

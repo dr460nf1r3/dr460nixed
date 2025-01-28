@@ -185,6 +185,18 @@ in {
         dnsPropagationCheck = true;
         credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
       };
+      certs."garudalinux.org" = {
+        extraDomainNames = ["*.garudalinux.org"];
+        dnsProvider = "cloudflare";
+        dnsPropagationCheck = true;
+        credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
+      };
+      certs."chaotic.cx" = {
+        extraDomainNames = ["*.chaotic.cx"];
+        dnsProvider = "cloudflare";
+        dnsPropagationCheck = true;
+        credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
+      };
     };
     sops.secrets."api_keys/cloudflare" = {
       mode = "0400";
