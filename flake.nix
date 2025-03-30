@@ -112,7 +112,6 @@
       url = "github:fufexan/nix-gaming";
       inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.umu.follows = "";
     };
 
     # Have a local index of nixpkgs for fast launching of apps
@@ -171,7 +170,6 @@
     # Spicetify
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
-      inputs.flake-compat.follows = "flake-compat";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
