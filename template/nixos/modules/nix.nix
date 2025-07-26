@@ -91,9 +91,6 @@ in {
         # Accept flake configs by default
         accept-flake-config = true;
 
-        # Test out ca-derivations (https://nixos.wiki/wiki/Ca-derivations)
-        experimental-features = ["ca-derivations"];
-
         # For direnv GC roots
         keep-derivations = true;
         keep-outputs = true;

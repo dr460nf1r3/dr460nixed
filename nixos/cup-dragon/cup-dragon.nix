@@ -90,8 +90,7 @@
     };
   };
   sops.secrets."cloudflared/cup-dragon/cred" = {
-    mode = "0600";
-    owner = config.users.users.cloudflared.name;
+    mode = "0660";
     path = "/var/lib/cloudflared/cred";
   };
 
