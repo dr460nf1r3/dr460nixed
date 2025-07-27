@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   # VSCode settings
-  programs.vscode.userSettings = {
+  programs.vscode.profiles.default.userSettings = {
     "editor.fontFamily" = "'Jetbrains Mono Nerd Font'; 'monospace'; monospace";
     "editor.formatOnSave" = false;
     "editor.inlineSuggest.enabled" = true;

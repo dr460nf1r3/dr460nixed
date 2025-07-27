@@ -33,7 +33,6 @@
   environment.systemPackages = with pkgs; [
     acpi
     ansible
-    beekeeper-studio
     bind.dnsutils
     chntpw
     chromium-flagged

@@ -103,7 +103,6 @@ in {
     ++ lib.optionals cfg.development.enable (with pkgs; [
       android-studio
       ansible
-      beekeeper-studio
       cloudflared
       cmake
       deno
@@ -185,7 +184,6 @@ in {
       zed-editor_git
     ])
     ++ lib.optionals cfg.yubikey (with pkgs; [
-      yubikey-manager-qt
       yubioath-flutter
     ])
     ++ lib.optionals cfg.school (with pkgs; [

@@ -25,7 +25,7 @@
     enable = true;
     enableExtraSocket = true;
     enableScDaemon = true;
-    pinentryPackage = pkgs.pinentry-qt;
+    pinentry.package = pkgs.pinentry-qt;
   };
 
   # Syncthing to sync files between devices

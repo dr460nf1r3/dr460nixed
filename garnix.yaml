@@ -1,8 +1,8 @@
 ---
 builds:
   exclude:
+    - nixosConfigurations.cup-dragon
     - nixosConfigurations.dev-container
     - nixosConfigurations.dr460nixed-base
     - nixosConfigurations.dr460nixed-desktop
-    - nixosConfigurations.pve-dragon-1
     - packages.*.vbox

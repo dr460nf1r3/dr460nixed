@@ -16,7 +16,7 @@
     # Needed to get the touchpad working
     blacklistedKernelModules = ["elan_i2c"];
     initrd.kernelModules = ["amdgpu"];
-    kernelParams = ["amd_pstate=active"];
+    kernelParams = ["amd_pstate=active" "microcode.amd_sha_check=off"];
     supportedFilesystems = ["btrfs"];
   };
 

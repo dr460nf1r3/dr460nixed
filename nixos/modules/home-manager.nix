@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   ...
 }: let
@@ -12,7 +11,5 @@ in {
       (lib.mkIf cfg.desktops.enable [../../home-manager/desktops.nix])
       (lib.mkIf cfg.development.enable [../../home-manager/development.nix])
     ];
-
-    home-manager.sharedModules = [inputs.catppuccin.homeModules.catppuccin];
   };
 }
