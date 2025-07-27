@@ -7,7 +7,7 @@ src = "src"
 title = "Dr460nixed ❄️ documentation"
 
 [output.html]
-additional-css = ["./mdbook-admonish.css", "theme/css/custom.css", "./theme/catppuccin.css", "./theme/catppuccin-admonish.css"]
+additional-css = ["./theme/mdbook-admonish.css", "./theme/catppuccin.css", "./theme/catppuccin-admonish.css"]
 default-theme = "mocha"
 preferred-dark-theme = "mocha"
 git-repository-icon = "fa-github"
