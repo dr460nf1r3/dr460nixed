@@ -1,4 +1,5 @@
 {
+  inputs,
   lib,
   pkgs,
   ...
@@ -142,6 +143,10 @@
     };
   };
 
+  home-manager.users."nico".imports = [
+    inputs.catppuccin.homeModules.catppuccin
+  ];
+
   # NixOS stuff
-  system.stateVersion = "23.11";
+  system.stateVersion = "25.05";
 }

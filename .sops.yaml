@@ -3,7 +3,6 @@ keys:
   - &cup-dragon age1wh9szm8vqqh648ne8kjjetz0mfc24cuf4wq9fhzzt47682szn96s7tlj97
   - &dragons-ryzen age13rltkd4pwwrtcazm5dxpqwthlnl8e52am0ufklupvgghu00pypysq4ps6d
   - &nico age1hvfhax6eysywun0up8um52yj435z99xq3wpu2py54je263hmjfqsjguk0z
-  - &pve-dragon-1 age1e0k9ya63r9apy5mx6amk0ph4qywq9gcylyvnhf836v8ea7c2acssal6z2h
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
@@ -11,4 +10,3 @@ creation_rules:
           - *cup-dragon
           - *dragons-ryzen
           - *nico
-          - *pve-dragon-1

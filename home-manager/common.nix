@@ -91,9 +91,6 @@
   # Fastfetch config
   home.file.".config/fastfetch/config.jsonc".source = ./misc/config.jsonc;
 
-  # Theming
-  catppuccin.enable = true;
-
   # I don't use docs, so just disable them
   manual = {
     html.enable = false;

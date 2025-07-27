@@ -97,15 +97,6 @@
           ];
         inherit specialArgs;
       };
-
-      # Homeserver on Proxmox
-      pve-dragon-1 = inputs.garuda-nix.lib.garudaSystem {
-        system = "x86_64-linux";
-        modules =
-          defaultModules
-          ++ [./pve-dragon-1/pve-dragon-1.nix];
-        inherit specialArgs;
-      };
     };
 
     # Expose dr460nixed and other modules for use in other flakes
