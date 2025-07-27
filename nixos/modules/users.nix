@@ -14,6 +14,7 @@
     acme = uidGid 999;
     adbusers = uidGid 998;
     adguard = uidGid 977;
+    anubis = uidGid 961;
     avahi = uidGid 997;
     chaotic_op = uidGid 996;
     cloudflared = uidGid 972;
@@ -23,6 +24,7 @@
     flatpak = uidGid 974;
     forgejo = uidGid 963;
     gamemode = uidGid 969;
+    git = uidGid 960;
     grafana = uidGid 995;
     incus-admin = uidGid 665;
     influxdb2 = uidGid 994;

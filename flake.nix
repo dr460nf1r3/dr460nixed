@@ -14,6 +14,9 @@
     # Ayugram
     ayugram-desktop.url = "github:ayugram-port/ayugram-desktop/release";
 
+    # Catppuccin theme
+    catppuccin.url = "github:catppuccin/nix";
+
     # Chaotic Nyx!
     chaotic-nyx = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";

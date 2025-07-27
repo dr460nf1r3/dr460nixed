@@ -280,7 +280,6 @@ in {
     tmux
     traceroute
     ugrep
-    ventoy-full
     vulnix
     wget
     whois

@@ -61,6 +61,9 @@ in {
       defaultSopsFile = ../../secrets/global.yaml;
     };
 
+    # Theming
+    catppuccin.enable = true;
+
     # Increase open file limit for sudoers
     security.pam.loginLimits = [
       {

@@ -84,7 +84,6 @@ in {
       nerd-fonts.comic-shanns-mono
       obs-studio-wrapped
       obsidian
-      okular
       plasmusic-toolbar
       signal-desktop
       syncthingtray
@@ -135,13 +134,11 @@ in {
       nodejs_latest
       postman
       # rider
-      rustup # Tauri
       shellcheck
       shfmt
       sops
       speedcrunch
       termius
-      ventoy-full
       (vscode-with-extensions.override {
         vscodeExtensions =
           [
