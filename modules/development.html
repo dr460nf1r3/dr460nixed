@@ -265,7 +265,7 @@ in {
         enable = true;
         enableExtensionPack = true;
         enableHardening = true;
-        # enableKvm = true;
+        enableKvm = true;
       };
     };
 
@@ -276,6 +276,9 @@ in {
     environment.systemPackages = [
       distrobox-setup
     ];
+
+    # Make android-studio-full happy, and provide me a way to run android VMs
+    nixpkgs.config.android_sdk.accept_license = true;
 
     # Local instances
     networking.hosts = {

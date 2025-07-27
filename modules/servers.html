@@ -267,7 +267,7 @@ in {
     };
 
     # Extra Python &amp; system packages required for Netdata to function
-    services.netdata.package = pkgs.netdata.override {withCloud = true;};
+    services.netdata.package = pkgs.netdata.override {withCloudUi = true;};
     services.netdata.python.extraPackages = ps: [ps.psycopg2];
     systemd.services.netdata = {path = with pkgs; [jq];};
 
@@ -366,6 +366,18 @@ in {
       };
       certs."dr460nf1r3.org" = {
         extraDomainNames = ["*.dr460nf1r3.org"];
+        dnsProvider = "cloudflare";
+        dnsPropagationCheck = true;
+        credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
+      };
+      certs."garudalinux.org" = {
+        extraDomainNames = ["*.garudalinux.org"];
+        dnsProvider = "cloudflare";
+        dnsPropagationCheck = true;
+        credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
+      };
+      certs."chaotic.cx" = {
+        extraDomainNames = ["*.chaotic.cx"];
         dnsProvider = "cloudflare";
         dnsPropagationCheck = true;
         credentialsFile = config.sops.secrets."api_keys/cloudflare".path;

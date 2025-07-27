@@ -549,6 +549,11 @@ in {
       cached-nix-shell
       duf
       eza
+      fishPlugins.sponge
+      fishPlugins.plugin-sudope
+      fishPlugins.plugin-git
+      fishPlugins.done
+      fishPlugins.z
       jq
       killall
       micro
@@ -589,22 +594,27 @@ in {
       libva-utils
       lm_sensors
       movit
+      nerd-fonts.comic-shanns-mono
       obs-studio-wrapped
       obsidian
-      okular
       plasmusic-toolbar
-      rustdesk-flutter
       signal-desktop
       syncthingtray
       trayscale
       usbutils
       vesktop
+      (vivaldi.overrideAttrs (oldAttrs: {
+        dontPatchELF = true;
+        dontWrapQtApps = false;
+        nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [pkgs.kdePackages.wrapQtAppsHook];
+      }))
       vorta
       vulkan-tools
       xdg-utils
       yt-dlp_git
     ])
     ++ lib.optionals cfg.development.enable (with pkgs; [
+      android-studio
       ansible
       beekeeper-studio
       cloudflared
@@ -617,11 +627,11 @@ in {
       # godot
       gnumake
       heroku
-      hoppscotch
       hugo
       jetbrains.gateway
       jetbrains.idea-ultimate
       jetbrains.webstorm
+      librsvg # Tauri
       mdbook
       mdbook-admonish
       mdbook-emojicodes
@@ -635,13 +645,13 @@ in {
       nodePackages_latest.bash-language-server
       nodePackages_latest.pnpm
       nodejs_latest
+      postman
       # rider
       shellcheck
       shfmt
       sops
       speedcrunch
       termius
-      ventoy-full
       (vscode-with-extensions.override {
         vscodeExtensions =
           [
@@ -1194,6 +1204,9 @@ in {
       defaultSopsFile = ../../secrets/global.yaml;
     };
 
+    # Theming
+    catppuccin.enable = true;
+
     # Increase open file limit for sudoers
     security.pam.loginLimits = [
       {
@@ -1487,7 +1500,7 @@ in {
         enable = true;
         enableExtensionPack = true;
         enableHardening = true;
-        # enableKvm = true;
+        enableKvm = true;
       };
     };
 
@@ -1498,6 +1511,9 @@ in {
     environment.systemPackages = [
       distrobox-setup
     ];
+
+    # Make android-studio-full happy, and provide me a way to run android VMs
+    nixpkgs.config.android_sdk.accept_license = true;
 
     # Local instances
     networking.hosts = {
@@ -1769,10 +1785,10 @@ in {
         '';
       settings = {
         Ciphers = [
-          "aes256-gcm@openssh.com"
-          "aes256-ctr,aes192-ctr"
           "aes128-ctr"
           "aes128-gcm@openssh.com"
+          "aes256-ctr,aes192-ctr"
+          "aes256-gcm@openssh.com"
         ];
         KbdInteractiveAuthentication = false;
         KexAlgorithms = [
@@ -1783,8 +1799,9 @@ in {
           "sntrup761x25519-sha512@openssh.com"
         ];
         Macs = [
-          "hmac-sha2-512-etm@openssh.com"
           "hmac-sha2-256-etm@openssh.com"
+          "hmac-sha2-512"
+          "hmac-sha2-512-etm@openssh.com"
           "umac-128-etm@openssh.com"
         ];
         PasswordAuthentication = false;
@@ -2085,6 +2102,7 @@ in {
         ".local/share/plasma"
         ".local/share/plasma-systemmonitor"
         ".local/share/zed"
+        ".local/share/z"
         ".mozilla/native-messaging-hosts"
         ".pki"
         ".steam"
@@ -2310,6 +2328,14 @@ in {
     vnstat.enable = true;
   };
 
+  # Change the default MAC address, which seems to get shuffled every reboot for no reason
+  systemd.services.setmacaddr = lib.mkIf (config.networking.hostName == "dragons-ryzen") {
+    script = ''
+      /run/current-system/sw/bin/ip link set dev wlan0 address 86:83:A9:94:5A:D6
+    '';
+    wantedBy = ["basic.target"];
+  };
+
   # Enable Mosh, a replacement for OpenSSH
   programs.mosh.enable = true;
 }
@@ -2407,9 +2433,6 @@ in {
       settings = {
         # Accept flake configs by default
         accept-flake-config = true;
-
-        # Test out ca-derivations (https://nixos.wiki/wiki/Ca-derivations)
-        experimental-features = ["ca-derivations"];
 
         # Lix cache
         extra-substituters = ["https://cache.lix.systems"];
@@ -2649,7 +2672,7 @@ in {
     };
 
     # Extra Python &amp; system packages required for Netdata to function
-    services.netdata.package = pkgs.netdata.override {withCloud = true;};
+    services.netdata.package = pkgs.netdata.override {withCloudUi = true;};
     services.netdata.python.extraPackages = ps: [ps.psycopg2];
     systemd.services.netdata = {path = with pkgs; [jq];};
 
@@ -2752,6 +2775,18 @@ in {
         dnsPropagationCheck = true;
         credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
       };
+      certs."garudalinux.org" = {
+        extraDomainNames = ["*.garudalinux.org"];
+        dnsProvider = "cloudflare";
+        dnsPropagationCheck = true;
+        credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
+      };
+      certs."chaotic.cx" = {
+        extraDomainNames = ["*.chaotic.cx"];
+        dnsProvider = "cloudflare";
+        dnsPropagationCheck = true;
+        credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
+      };
     };
     sops.secrets."api_keys/cloudflare" = {
       mode = "0400";
@@ -2781,40 +2816,21 @@ in {
     };
 
   config = lib.mkIf cfg.enable {
-    # Programs &amp; global config
     programs = {
-      bash.shellAliases = {
-        "bootsda" = ''
-          sudo qemu-kvm \
-          -m 4G \
-          -drive file=/dev/sda,format=raw,index=0,media=disk \
-          -net user,hostfwd=tcp:127.0.0.1:2222-:22 \
-          -net nic
-        '';
-        "bootsdb" = ''
-          sudo qemu-kvm
-          -m 4G \
-          -drive file=/dev/sdb,format=raw,index=0,media=disk \
-          -net user,hostfwd=tcp:127.0.0.1:2222-:22 \
-          -net nic
-        '';
-        "gpl" = "${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
-        "grep" = "${pkgs.ugrep}/bin/ugrep";
+      bash = {
+        shellAliases = {
+          "gpl" = "${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
+          "grep" = "${pkgs.ugrep}/bin/ugrep";
+        };
       };
       fish = {
         shellAbbrs = {
-          "bootusb" = ''
-            sudo qemu-kvm \
-            -m 4G \
-            -drive file=/dev/sda,format=raw,index=0,media=disk \
-            -net user,hostfwd=tcp:127.0.0.1:2222-:22 \
-            -net nic
-          '';
           "gpl" = "${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";
         };
         shellAliases = {
           "grep" = "${pkgs.ugrep}/bin/ugrep";
         };
+        useBabelfish = true;
       };
     };
   };
@@ -3134,6 +3150,7 @@ in {
     acme = uidGid 999;
     adbusers = uidGid 998;
     adguard = uidGid 977;
+    anubis = uidGid 961;
     avahi = uidGid 997;
     chaotic_op = uidGid 996;
     cloudflared = uidGid 972;
@@ -3143,6 +3160,7 @@ in {
     flatpak = uidGid 974;
     forgejo = uidGid 963;
     gamemode = uidGid 969;
+    git = uidGid 960;
     grafana = uidGid 995;
     incus-admin = uidGid 665;
     influxdb2 = uidGid 994;

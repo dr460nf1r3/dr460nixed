@@ -221,6 +221,11 @@ in {
       cached-nix-shell
       duf
       eza
+      fishPlugins.sponge
+      fishPlugins.plugin-sudope
+      fishPlugins.plugin-git
+      fishPlugins.done
+      fishPlugins.z
       jq
       killall
       micro
@@ -261,22 +266,27 @@ in {
       libva-utils
       lm_sensors
       movit
+      nerd-fonts.comic-shanns-mono
       obs-studio-wrapped
       obsidian
-      okular
       plasmusic-toolbar
-      rustdesk-flutter
       signal-desktop
       syncthingtray
       trayscale
       usbutils
       vesktop
+      (vivaldi.overrideAttrs (oldAttrs: {
+        dontPatchELF = true;
+        dontWrapQtApps = false;
+        nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [pkgs.kdePackages.wrapQtAppsHook];
+      }))
       vorta
       vulkan-tools
       xdg-utils
       yt-dlp_git
     ])
     ++ lib.optionals cfg.development.enable (with pkgs; [
+      android-studio
       ansible
       beekeeper-studio
       cloudflared
@@ -289,11 +299,11 @@ in {
       # godot
       gnumake
       heroku
-      hoppscotch
       hugo
       jetbrains.gateway
       jetbrains.idea-ultimate
       jetbrains.webstorm
+      librsvg # Tauri
       mdbook
       mdbook-admonish
       mdbook-emojicodes
@@ -307,13 +317,13 @@ in {
       nodePackages_latest.bash-language-server
       nodePackages_latest.pnpm
       nodejs_latest
+      postman
       # rider
       shellcheck
       shfmt
       sops
       speedcrunch
       termius
-      ventoy-full
       (vscode-with-extensions.override {
         vscodeExtensions =
           [
