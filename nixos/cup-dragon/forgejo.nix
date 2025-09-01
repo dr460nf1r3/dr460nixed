@@ -103,7 +103,7 @@ in {
     path = "/var/lib/forgejo/.password";
   };
 
-  # Link Catppuccin themes and ensure admin user
+  # Ensure admin user
   systemd.services.forgejo.preStart = let
     adminCmd = "${lib.getExe cfg.package} admin user";
     pwd = config.sops.secrets."passwords/forgejo";
@@ -139,5 +139,9 @@ in {
       group = "git";
     };
     users.nginx.extraGroups = [config.users.groups.anubis.name];
+  };
+
+  catppuccin.forgejo = {
+    enable = false;
   };
 }
