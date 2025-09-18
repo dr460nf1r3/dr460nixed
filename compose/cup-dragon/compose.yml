@@ -19,23 +19,14 @@ services:
       MARIADB_USER: uptime_kuma
       MARIADB_DATABASE: uptime_kuma
 
-  webtop:
-    image: lscr.io/linuxserver/webtop:arch-kde
-    container_name: webtop
-    security_opt:
-      - seccomp:unconfined
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Berlin
-      - TITLE=Nico's dev space
-    volumes:
-      - ./webtop:/config
-      - /var/run/docker.sock:/var/run/docker.sock
+  protonmail_bridge:
+    container_name: protonmail_bridge
+    image: shenxn/protonmail-bridge:build
     ports:
-      - 127.0.0.1:3010:3000
-      - 127.0.0.1:3011:3001
-    shm_size: "1gb"
+      - 100.100.1.12:1025:25/tcp
+      - 100.100.1.12:1143:143/tcp
+    volumes:
+      - ./protonmail:/root
 
   searxng:
     image: ghcr.io/privau/searxng:latest
