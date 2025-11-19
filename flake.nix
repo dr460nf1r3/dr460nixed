@@ -12,10 +12,16 @@
 
   inputs = {
     # Ayugram
-    ayugram-desktop.url = "github:ayugram-port/ayugram-desktop/release";
+    ayugram-desktop = {
+      url = "github:ayugram-port/ayugram-desktop/release";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Catppuccin theme
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Chaotic Nyx!
     chaotic-nyx = {
@@ -54,7 +60,9 @@
     garuda-nix = {
       # url = "/home/nico/Documents/misc/garuda-nix-subsystem";
       url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
+      inputs.catppuccin.follows = "catppuccin";
       inputs.chaotic-nyx.follows = "chaotic-nyx";
+      inputs.devshell.follows = "devshell";
       inputs.flake-parts.follows = "flake-parts";
       inputs.home-manager.follows = "home-manager";
       inputs.nix-index-database.follows = "nix-index-database";
@@ -92,10 +100,7 @@
     # Lanzaboote for secure boot support
     lanzaboote = {
       url = "github:nix-community/lanzaboote/master";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
     };
 
     # Lets give Lix another try
@@ -174,6 +179,7 @@
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
     };
 
     # Fresh ucode packages
@@ -238,44 +244,51 @@
               inherit config;
               imports = [];
             };
-          })
-          .shell;
+          }).shell;
       in rec {
         default = dr460nixed-shell;
         dr460nixed-shell = mkShell {
           devshell.name = "dr460nixed-devshell";
-          commands = [
-            {
-              category = "dr460nixed";
-              command = "${self.packages.${system}.repl}/bin/dr460nixed-repl";
-              help = "Start a repl shell with all flake outputs available";
-              name = "repl";
-            }
-            {
-              category = "dr460nixed";
-              command = "nix build .#iso";
-              help = "Builds a NixOS ISO with all most important configurations";
-              name = "buildiso";
-            }
-            {
-              category = "dr460nixed";
-              command = "${self.packages.${system}.installer}/bin/dr460nixed-installer";
-              help = "Allows installing a basic dr460nixed installation";
-              name = "installer";
-            }
-            {package = "age";}
-            {package = "commitizen";}
-            {package = "gnupg";}
-            {package = "manix";}
-            {package = "mdbook";}
-            # {package = "nix-melt";} - currently broken due to Rust 1.80
-            {package = "nixos-anywhere";}
-            {package = "nixos-install-tools";}
-            {package = "pre-commit";}
-            {package = "rsync";}
-            {package = "sops";}
-            {package = "yamlfix";}
-          ];
+          commands =
+            [
+              {
+                category = "dr460nixed";
+                command = "${self.packages.${system}.repl}/bin/dr460nixed-repl";
+                help = "Start a repl shell with all flake outputs available";
+                name = "repl";
+              }
+              {
+                category = "dr460nixed";
+                command = "nix build .#iso";
+                help = "Builds a NixOS ISO with all most important configurations";
+                name = "buildiso";
+              }
+            ]
+            ++ (
+              if pkgs.lib.strings.hasSuffix "-linux" system
+              then [
+                {
+                  category = "dr460nixed";
+                  command = "${self.packages.${system}.installer}/bin/dr460nixed-installer";
+                  help = "Allows installing a basic dr460nixed installation";
+                  name = "installer";
+                }
+              ]
+              else []
+            )
+            ++ [
+              {package = "age";}
+              {package = "commitizen";}
+              {package = "gnupg";}
+              {package = "manix";}
+              {package = "mdbook";}
+              {package = "nix-melt";}
+              {package = "nixos-anywhere";}
+              {package = "pre-commit";}
+              {package = "rsync";}
+              {package = "sops";}
+              {package = "yamlfix";}
+            ];
           devshell.startup.preCommitHooks.text = self.checks.${system}.pre-commit-check.shellHook;
           env = [
             {
@@ -301,7 +314,12 @@
       ];
 
       # The systems currently available
-      systems = ["x86_64-linux" "aarch64-linux"];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
 
       # This applies to all systems
       inherit perSystem;

@@ -2,7 +2,7 @@
 services:
   uptime_kuma:
     container_name: uptime_kuma
-    image: louislam/uptime-kuma:beta
+    image: louislam/uptime-kuma:2
     depends_on:
       - uptime_kuma_db
     volumes:
