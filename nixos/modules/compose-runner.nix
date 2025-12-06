@@ -65,17 +65,15 @@ in {
               '';
             };
             unitConfig = {
-              After = "podman.socket";
-              Requisite = "podman.socket";
-              StopPropagatedFrom = "podman.socket";
+              After = "docker.socket";
+              Requisite = "docker.socket";
+              StopPropagatedFrom = "docker.socket";
             };
             wantedBy = ["multi-user.target"];
           }
         ))
       cfg;
     environment.systemPackages = lib.mkIf (cfg != {}) [pkgs.docker-compose];
-    virtualisation.podman.enable = lib.mkIf (cfg != {}) true;
-    networking.firewall.interfaces."podman1".allowedUDPPorts = lib.mkIf (cfg != {}) [53];
-    virtualisation.podman.defaultNetwork.settings = {dns_enabled = true;};
+    virtualisation.docker.enable = lib.mkIf (cfg != {}) true;
   };
 }

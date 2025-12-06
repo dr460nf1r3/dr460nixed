@@ -60,17 +60,10 @@ in {
     # Wireshark
     programs.wireshark.enable = true;
 
-    # Virtualbox KVM & Podman with docker alias
+    # Virtualbox KVM & Docker
     virtualisation = {
       containers.enable = true;
       lxd.enable = false;
-      podman = {
-        autoPrune.enable = true;
-        defaultNetwork.settings.dns_enabled = true;
-        # dockerCompat = true;
-        # dockerSocket.enable = true;
-        enable = true;
-      };
       docker = {
         enable = true;
         autoPrune.enable = true;

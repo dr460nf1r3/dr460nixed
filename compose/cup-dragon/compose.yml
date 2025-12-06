@@ -45,3 +45,22 @@ services:
   searxng-redis:
     image: redis:alpine
     container_name: searxng-redis
+
+  github_runner:
+    image: myoung34/github-runner:latest
+    container_name: github_runner
+    privileged: true
+    environment:
+      ACCESS_TOKEN: ${ACCESS_TOKEN:-?err}
+      EPHEMERAL: true
+      LABELS: dragon_builder,self-hosted,Linux,x64
+      RUNNER_NAME: dragon_builder
+      RUNNER_SCOPE: repo
+      REPO_URL: https://github.com/dr460nf1r3/wandel-panel
+      RUNNER_WORKDIR: /var/cache/github-runner/work
+    volumes:
+      [
+        "/var/cache/github-runner/work:/var/cache/github-runner/work",
+        "/var/run/docker.sock:/var/run/docker.sock",
+      ]
+    restart: "no"

@@ -97,13 +97,7 @@
   # For running containers from within code-server
   virtualisation = {
     containers.enable = true;
-    podman = {
-      autoPrune.enable = true;
-      defaultNetwork.settings.dns_enabled = true;
-      dockerCompat = true;
-      dockerSocket.enable = true;
-      enable = true;
-    };
+    docker.enable = true;
   };
 
   # Uptimes
