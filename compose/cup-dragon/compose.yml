@@ -10,6 +10,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
       - 127.0.0.1:3001:3001
+    restart: always
   uptime_kuma_db:
     container_name: uptime_kuma_db
     image: mariadb:latest
@@ -18,6 +19,7 @@ services:
     environment:
       MARIADB_USER: uptime_kuma
       MARIADB_DATABASE: uptime_kuma
+    restart: always
 
   protonmail_bridge:
     container_name: protonmail_bridge
@@ -27,6 +29,7 @@ services:
       - 100.100.1.12:1143:143/tcp
     volumes:
       - ./protonmail:/root
+    restart: always
 
   searxng:
     image: ghcr.io/privau/searxng:latest
@@ -42,9 +45,11 @@ services:
       - TZ=Europe/Berlin
     ports:
       - 127.0.0.1:8080:8080
+    restart: always
   searxng-redis:
     image: redis:alpine
     container_name: searxng-redis
+    restart: always
 
   github_runner:
     image: myoung34/github-runner:latest
@@ -63,4 +68,4 @@ services:
         "/var/cache/github-runner/work:/var/cache/github-runner/work",
         "/var/run/docker.sock:/var/run/docker.sock",
       ]
-    restart: "no"
+    restart: "always"

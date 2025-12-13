@@ -35,7 +35,6 @@ in {
                 PATH="${pkgs.rsync}/bin:${pkgs.coreutils}/bin:${pkgs.gnused}/bin"
                 set -e
                 mkdir "$out"
-                sed -r 's/(^\s+restart:\s*)(unless-stopped|always)(\s*($|#))/\1on-failure\3/g' "$src/docker-compose.yml" > "$out/docker-compose.yml"
                 rsync -a "$src/" "$out"
               '';
               name = "docker-compose-runner-" + name;
