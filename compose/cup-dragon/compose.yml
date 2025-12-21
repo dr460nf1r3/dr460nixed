@@ -69,3 +69,19 @@ services:
         "/var/run/docker.sock:/var/run/docker.sock",
       ]
     restart: "always"
+
+  gitlab-runner:
+    image: gitlab/gitlab-runner:alpine
+    container_name: gitlab-runner
+    volumes:
+      - /etc/gitlab-runner/no-dind:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: "always"
+
+  gitlab-runner-dind:
+    image: gitlab/gitlab-runner:alpine
+    container_name: gitlab-runner-dind
+    volumes:
+      - /etc/gitlab-runner/dind:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: "always"

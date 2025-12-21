@@ -23,12 +23,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Chaotic Nyx!
-    chaotic-nyx = {
-      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-      inputs.home-manager.follows = "home-manager";
-    };
-
     # Devshell to set up a development environment
     devshell = {
       url = "github:numtide/devshell";
@@ -61,7 +55,6 @@
       # url = "/home/nico/Documents/misc/garuda-nix-subsystem";
       url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
       inputs.catppuccin.follows = "catppuccin";
-      inputs.chaotic-nyx.follows = "chaotic-nyx";
       inputs.devshell.follows = "devshell";
       inputs.flake-parts.follows = "flake-parts";
       inputs.home-manager.follows = "home-manager";
