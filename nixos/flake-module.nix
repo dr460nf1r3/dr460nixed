@@ -122,7 +122,6 @@
         ../home-manager/nico/nico.nix
         ../home-manager/standalone.nix
         inputs.catppuccin.homeModules.catppuccin
-        inputs.chaotic-nyx.homeManagerModules.default
         inputs.spicetify-nix.homeManagerModules.default
       ];
     };

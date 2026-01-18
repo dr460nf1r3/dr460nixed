@@ -82,14 +82,6 @@
     user = "nico";
   };
 
-  # Chaotic Nyx stuff
-  chaotic = {
-    mesa-git = {
-      enable = true;
-      fallbackSpecialisation = false;
-    };
-  };
-
   # RADV video decode & general usage
   environment.variables = {
     AMD_VULKAN_ICD = "RADV";
