@@ -6,7 +6,7 @@
       createLocally = true;
       dialect = "postgres";
     };
-    passwordSaltFile = config.sops.secrets."passwords/wakapi".path;
+    environmentFiles = [config.sops.secrets."passwords/wakapi".path];
     settings = {
       db = {
         dialect = "postgres";

@@ -125,7 +125,6 @@
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
       inputs.flake-compat.follows = "flake-compat";
-      inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
