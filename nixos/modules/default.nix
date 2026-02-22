@@ -17,6 +17,7 @@
     ./msmtp.nix
     ./networking.nix
     ./nix.nix
+    ./nvidia.nix
     ./oci.nix
     ./users.nix
     ./servers.nix

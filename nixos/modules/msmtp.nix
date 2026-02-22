@@ -2,19 +2,19 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed.smtp;
-in {
+in
+{
   options.dr460nixed.smtp = with lib; {
-    enable =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Enable sending mails via CMD using msmtp.
-        '';
-      };
+    enable = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Enable sending mails via CMD using msmtp.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {

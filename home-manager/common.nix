@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}:
+{
   # Individual terminal app configs
   programs = {
     # Common Bash aliases & tmux autostart for SSH sessions
@@ -49,29 +54,14 @@
     '';
     settings = {
       # A few extra binary caches and their public keys
-      substituters = [
-        "https://cache.garnix.io" # extra things here and there
-        # "https://cache.saumon.network/proxmox-nixos" # proxmox on NixOS - SSL failure as of 240817
-        "https://catppuccin.cachix.org" # a cache for Catppuccin-nix
-        "https://nix-community.cachix.org" # nix-community cache
-        "https://nix-gaming.cachix.org" # nix-gaming
-        "https://nixpkgs-unfree.cachix.org" # unfree-package cache
-        "https://numtide.cachix.org" # another unfree package cache
-        "https://pre-commit-hooks.cachix.org" # pre-commit hooks
-      ];
-      trusted-public-keys = [
-        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-        "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-        "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
-        "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
-        "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
-        # "proxmox-nixos:nveXDuVVhFDRFx8Dn19f1WDEaNRJjPrF2CPD2D+m1ys="
-      ];
+      inherit (inputs.self.drLib.binaryCaches) substituters;
+      inherit (inputs.self.drLib.binaryCaches) trusted-public-keys;
 
       # Enable certain system features
-      system-features = ["big-parallel" "kvm"];
+      system-features = [
+        "big-parallel"
+        "kvm"
+      ];
 
       # Continue building derivations if one fails
       keep-going = true;

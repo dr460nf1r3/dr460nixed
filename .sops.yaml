@@ -2,11 +2,14 @@
 keys:
   - &cup-dragon age1wh9szm8vqqh648ne8kjjetz0mfc24cuf4wq9fhzzt47682szn96s7tlj97
   - &dragons-ryzen age13rltkd4pwwrtcazm5dxpqwthlnl8e52am0ufklupvgghu00pypysq4ps6d
-  - &nico age1hvfhax6eysywun0up8um52yj435z99xq3wpu2py54je263hmjfqsjguk0z
+  - &dragons-strix age1ptwg594d4g6mrd8rxnrwm5dvh0wzf4psf56shvjvz22a2a67yp9qp2xwxs
+  - &nico-yubikey D245D484F3578CB17FD6DA6B67DB29BFF3C96757
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
-      - age:
+      - pgp:
+          - *nico-yubikey
+        age:
           - *cup-dragon
           - *dragons-ryzen
-          - *nico
+          - *dragons-strix

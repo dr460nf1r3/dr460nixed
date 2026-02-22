@@ -2,33 +2,31 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed.zfs;
-in {
+in
+{
   options.dr460nixed.zfs = with lib; {
-    enable =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Configures common options for using ZFS on NixOS.
-        '';
-      };
-    sendMails =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Enables sending status reports about ZFS maintenance via email.
-        '';
-      };
+    enable = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Configures common options for using ZFS on NixOS.
+      '';
+    };
+    sendMails = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Enables sending status reports about ZFS maintenance via email.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
     # Support booting off ZFS
-    boot.supportedFilesystems = ["zfs"];
+    boot.supportedFilesystems = [ "zfs" ];
 
     # Always request encryption credentials to open rootfs
     boot.zfs.requestEncryptionCredentials = true;

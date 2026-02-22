@@ -115,108 +115,114 @@
     systems.url = "github:nix-systems/x86_64-linux";
   };
 
-  outputs = {
-    flake-parts,
-    nixpkgs,
-    pre-commit-hooks,
-    self,
-    ...
-  } @ inp: let
-    inputs = inp;
-    perSystem = {
-      pkgs,
-      system,
+  outputs =
+    {
+      flake-parts,
+      nixpkgs,
+      pre-commit-hooks,
+      self,
       ...
-    }: {
-      # This basically allows using the devshell as flake app
-      apps.default = self.outputs.devShells.${system}.default.flakeApp;
+    }@inp:
+    let
+      inputs = inp;
+      perSystem =
+        {
+          pkgs,
+          system,
+          ...
+        }:
+        {
+          # This basically allows using the devshell as flake app
+          apps.default = self.outputs.devShells.${system}.default.flakeApp;
 
-      # Pre-commit hooks are set up automatically via nix-shell / nix develop
-      checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
-        hooks = {
-          actionlint.enable = true;
-          alejandra-quiet = {
-            description = "Run Alejandra in quiet mode";
-            enable = true;
-            entry = ''
-              ${pkgs.alejandra}/bin/alejandra --quiet
-            '';
-            files = "\\.nix$";
-            name = "alejandra";
-          };
-          commitizen.enable = true;
-          check-json.enable = true;
-          check-yaml.enable = true;
-          detect-private-keys.enable = true;
-          deadnix.enable = true;
-          flake-checker.enable = true;
-          nil.enable = true;
-          prettier.enable = true;
-          pre-commit-hook-ensure-sops.enable = true;
-          yamllint.enable = true;
-          statix.enable = true;
-          typos.enable = true;
-        };
-        src = ./.;
-      };
-
-      # Handy devshell for working with this flake
-      devShells = let
-        # Import the devshell module as module rather than a flake input
-        makeDevshell = import "${inp.devshell}/modules" pkgs;
-        mkShell = config:
-          (makeDevshell {
-            configuration = {
-              inherit config;
-              imports = [];
+          # Pre-commit hooks are set up automatically via nix-shell / nix develop
+          checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
+            hooks = {
+              actionlint.enable = true;
+              alejandra-quiet = {
+                description = "Run Alejandra in quiet mode";
+                enable = true;
+                entry = ''
+                  ${pkgs.alejandra}/bin/alejandra --quiet
+                '';
+                files = "\\.nix$";
+                name = "alejandra";
+              };
+              commitizen.enable = true;
+              check-json.enable = true;
+              check-yaml.enable = true;
+              detect-private-keys.enable = true;
+              deadnix.enable = true;
+              flake-checker.enable = true;
+              nil.enable = true;
+              prettier.enable = true;
+              pre-commit-hook-ensure-sops.enable = true;
+              yamllint.enable = true;
+              statix.enable = true;
+              typos.enable = true;
             };
-          })
-          .shell;
-      in rec {
-        default = dr460nixed-shell;
-        dr460nixed-shell = mkShell {
-          devshell.name = "dr460nixed-devshell";
-          commands = [
-            {
-              category = "dr460nixed";
-              command = "${self.packages.${system}.repl}/bin/dr460nixed-repl";
-              help = "Start a repl shell with all flake outputs available";
-              name = "repl";
-            }
-            {
-              category = "dr460nixed";
-              command = "nix build .#iso";
-              help = "Builds a NixOS ISO with all most important configurations";
-              name = "buildiso";
-            }
-            {package = "age";}
-            {package = "commitizen";}
-            {package = "gnupg";}
-            {package = "manix";}
-            {package = "mdbook";}
-            {package = "nix-melt";}
-            {package = "pre-commit";}
-            {package = "rsync";}
-            {package = "sops";}
-            {package = "yamlfix";}
-          ];
-          devshell.startup.preCommitHooks.text = self.checks.${system}.pre-commit-check.shellHook;
-          env = [
-            {
-              name = "NIX_PATH";
-              value = "${nixpkgs}";
-            }
-          ];
-        };
-      };
+            src = ./.;
+          };
 
-      # By default, alejandra is WAY to verbose
-      formatter = pkgs.writeShellScriptBin "alejandra" ''
-        exec ${pkgs.alejandra}/bin/alejandra --quiet "$@"
-      '';
-    };
-  in
-    flake-parts.lib.mkFlake {inherit inputs;} {
+          # Handy devshell for working with this flake
+          devShells =
+            let
+              # Import the devshell module as module rather than a flake input
+              makeDevshell = import "${inp.devshell}/modules" pkgs;
+              mkShell =
+                config:
+                (makeDevshell {
+                  configuration = {
+                    inherit config;
+                    imports = [ ];
+                  };
+                }).shell;
+            in
+            rec {
+              default = dr460nixed-shell;
+              dr460nixed-shell = mkShell {
+                devshell.name = "dr460nixed-devshell";
+                commands = [
+                  {
+                    category = "dr460nixed";
+                    command = "${self.packages.${system}.repl}/bin/dr460nixed-repl";
+                    help = "Start a repl shell with all flake outputs available";
+                    name = "repl";
+                  }
+                  {
+                    category = "dr460nixed";
+                    command = "nix build .#iso";
+                    help = "Builds a NixOS ISO with all most important configurations";
+                    name = "buildiso";
+                  }
+                  { package = "age"; }
+                  { package = "commitizen"; }
+                  { package = "gnupg"; }
+                  { package = "manix"; }
+                  { package = "mdbook"; }
+                  { package = "nix-melt"; }
+                  { package = "pre-commit"; }
+                  { package = "rsync"; }
+                  { package = "sops"; }
+                  { package = "yamlfix"; }
+                ];
+                devshell.startup.preCommitHooks.text = self.checks.${system}.pre-commit-check.shellHook;
+                env = [
+                  {
+                    name = "NIX_PATH";
+                    value = "${nixpkgs}";
+                  }
+                ];
+              };
+            };
+
+          # By default, alejandra is WAY to verbose
+          formatter = pkgs.writeShellScriptBin "alejandra" ''
+            exec ${pkgs.alejandra}/bin/alejandra --quiet "$@"
+          '';
+        };
+    in
+    flake-parts.lib.mkFlake { inherit inputs; } {
       # Imports flake-modules
       imports = [
         ./nixos/flake-module.nix
@@ -225,7 +231,10 @@
       ];
 
       # The systems currently available
-      systems = ["x86_64-linux" "aarch64-linux"];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
 
       # This applies to all systems
       inherit perSystem;

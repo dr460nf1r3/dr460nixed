@@ -1,6 +1,8 @@
-_: let
+_:
+let
   mailserver = "mail.garudalinux.net";
-in {
+in
+{
   accounts.email = {
     accounts.main = {
       address = "nico@dr460nf1r3.org";

@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed;
-in {
+in
+{
   # We want to use NetworkManager on desktops
   networking = {
     # Pointing to NextDNS via Tailscale

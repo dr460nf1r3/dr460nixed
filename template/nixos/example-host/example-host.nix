@@ -1,6 +1,7 @@
-{...}: {
+{ ... }:
+{
   # Individual configuration snippets
-  imports = [./hardware-configuration.nix];
+  imports = [ ./hardware-configuration.nix ];
 
   # Hostname
   networking.hostName = "example-hostname";

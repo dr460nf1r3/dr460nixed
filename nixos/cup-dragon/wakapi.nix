@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   # Wakapi for tracking coding activity better than Wakatime
   services.wakapi = {
     enable = true;
@@ -6,7 +7,7 @@
       createLocally = true;
       dialect = "postgres";
     };
-    environmentFiles = [config.sops.secrets."passwords/wakapi".path];
+    environmentFiles = [ config.sops.secrets."passwords/wakapi".path ];
     settings = {
       db = {
         dialect = "postgres";

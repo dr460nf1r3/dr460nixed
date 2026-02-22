@@ -3,19 +3,19 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed.development;
-in {
+in
+{
   options.dr460nixed.development = with lib; {
-    enable =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Enables commonly used development tools.
-        '';
-      };
+    enable = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Enables commonly used development tools.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -24,7 +24,7 @@ in {
       docker = {
         autoPrune = {
           enable = true;
-          flags = ["--all"];
+          flags = [ "--all" ];
         };
         enable = true;
         enableOnBoot = false;
@@ -36,7 +36,7 @@ in {
         qemu = {
           ovmf = {
             enable = true;
-            packages = [pkgs.OVMFFull.fd];
+            packages = [ pkgs.OVMFFull.fd ];
           };
           swtpm.enable = true;
         };
@@ -45,7 +45,7 @@ in {
     };
 
     # Allow cross-compiling to aarch64
-    boot.binfmt.emulatedSystems = ["aarch64-linux"];
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
     # In case I need to fix my phone
     programs.adb.enable = true;

@@ -1,4 +1,5 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   appdir = ".local/share/applications";
   configDir = ".config";
 
@@ -19,7 +20,8 @@
     url = "https://cloud-aio.garudalinux.org/s/wRARtXi5eXnSrQN/download/voice.irs";
     sha256 = "1b643m8v7j15ixi2g6r2909vwkq05wi74ybccbdnp4rkms640y4w";
   };
-in {
+in
+{
   # Compatibility for GNOME apps
   dconf.enable = true;
 
@@ -113,11 +115,14 @@ in {
     jamesdsp = {
       Unit = {
         Description = "JamesDSP daemon";
-        Requires = ["dbus.service"];
-        After = ["graphical-session-pre.target"];
-        PartOf = ["graphical-session.target" "pipewire.service"];
+        Requires = [ "dbus.service" ];
+        After = [ "graphical-session-pre.target" ];
+        PartOf = [
+          "graphical-session.target"
+          "pipewire.service"
+        ];
       };
-      Install.WantedBy = ["graphical-session.target"];
+      Install.WantedBy = [ "graphical-session.target" ];
       Service = {
         ExecStart = "${pkgs.jamesdsp}/bin/jamesdsp --tray";
         Restart = "on-failure";

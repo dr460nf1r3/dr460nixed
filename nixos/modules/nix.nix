@@ -3,10 +3,13 @@
   inputs,
   lib,
   pkgs,
+  self,
   ...
-}: let
+}:
+let
   cfgRemote = config.dr460nixed.remote-build;
-in {
+in
+{
   options.dr460nixed = with lib; {
     remote-build = {
       enable = mkOption {
@@ -69,8 +72,16 @@ in {
           hostName = cfgRemote.host;
           maxJobs = 16;
           protocol = "ssh-ng";
-          supportedFeatures = ["nixos-test" "benchmark" "big-parallel" "kvm"];
-          systems = ["x86_64-linux" "aarch64-linux"];
+          supportedFeatures = [
+            "nixos-test"
+            "benchmark"
+            "big-parallel"
+            "kvm"
+          ];
+          systems = [
+            "x86_64-linux"
+            "aarch64-linux"
+          ];
         }
       ];
 
@@ -84,7 +95,7 @@ in {
       '';
 
       # Set the nix path, needed e.g. for Nixd
-      nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+      nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
       # Nix.conf settings
       settings = {
@@ -92,7 +103,7 @@ in {
         accept-flake-config = true;
 
         # Lix cache
-        extra-substituters = ["https://cache.lix.systems"];
+        extra-substituters = [ "https://cache.lix.systems" ];
 
         # For direnv GC roots
         keep-derivations = true;
@@ -108,37 +119,22 @@ in {
         max-jobs = "auto";
 
         # Enable certain system features
-        system-features = ["big-parallel" "kvm"];
+        system-features = [
+          "big-parallel"
+          "kvm"
+        ];
 
         # Build inside sandboxed environments
         sandbox = pkgs.stdenv.isLinux;
 
         # Trust the remote machines cache signatures
-        trusted-substituters = lib.mkIf cfgRemote.enable ["ssh-ng://${cfgRemote.host}"];
+        trusted-substituters = lib.mkIf cfgRemote.enable [ "ssh-ng://${cfgRemote.host}" ];
 
         # Specify the path to the nix registry
         flake-registry = "/etc/nix/registry.json";
 
-        substituters = [
-          "https://cache.garnix.io" # extra things here and there
-          # "https://cache.saumon.network/proxmox-nixos" # proxmox on NixOS - SSL failure as of 240817
-          "https://catppuccin.cachix.org" # a cache for Catppuccin-nix
-          "https://nix-community.cachix.org" # nix-community cache
-          "https://nix-gaming.cachix.org" # nix-gaming
-          "https://nixpkgs-unfree.cachix.org" # unfree-package cache
-          "https://numtide.cachix.org" # another unfree package cache
-          "https://pre-commit-hooks.cachix.org" # pre-commit hooks
-        ];
-        trusted-public-keys = [
-          "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
-          "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-          "nixpkgs-unfree.cachix.org-1:hqvoInulhbV4nJ9yJOEr+4wxhDV4xq2d1DK7S6Nj6rs="
-          "numtide.cachix.org-1:2ps1kLBUWjxIneOy1Ik6cQjb41X0iXVXeHigGmycPPE="
-          "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
-          # "proxmox-nixos:nveXDuVVhFDRFx8Dn19f1WDEaNRJjPrF2CPD2D+m1ys="
-        ];
+        inherit (inputs.self.drLib.binaryCaches) substituters;
+        inherit (inputs.self.drLib.binaryCaches) trusted-public-keys;
       };
     };
 
@@ -154,12 +150,15 @@ in {
       };
 
       # Git is required for flakes, and cachix for binary substituters
-      systemPackages = with pkgs; [git cachix];
+      systemPackages = with pkgs; [
+        git
+        cachix
+      ];
     };
 
     # Let root ssh into the remote builder seamlessly
     home-manager.users."root" = lib.mkIf cfgRemote.enable {
-      home.stateVersion = "24.05"; # Specify this since its otherwise unset
+      home.stateVersion = "25.11"; # Specify this since its otherwise unset
       programs.ssh.extraConfig = ''
         Host ${cfgRemote.host}
           HostName ${cfgRemote.host}
@@ -167,6 +166,10 @@ in {
           User ${cfgRemote.user}
       '';
     };
+
+    nixpkgs.overlays = [
+      inputs.nix-cachyos-kernel.overlays.pinned
+    ];
 
     # Supply a shortcut for the remote builder
     programs = {

@@ -2,21 +2,21 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed.locales;
   de = "de_DE.UTF-8";
   defaultLocale = "en_GB.UTF-8";
-in {
+in
+{
   options.dr460nixed.locales = with lib; {
-    enable =
-      mkOption
-      {
-        default = true;
-        type = types.bool;
-        description = mdDoc ''
-          Whether the operating system be having a default set of locales set.
-        '';
-      };
+    enable = mkOption {
+      default = true;
+      type = types.bool;
+      description = mdDoc ''
+        Whether the operating system be having a default set of locales set.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {

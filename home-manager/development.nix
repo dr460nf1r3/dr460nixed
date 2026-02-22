@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # VSCode settings
   programs.vscode.profiles.default.userSettings = {
     "editor.fontFamily" = "'Jetbrains Mono Nerd Font'; 'monospace'; monospace";
@@ -48,18 +49,63 @@
 
   # Required for Godot to be able to find Rider
   home.file = {
-    ".local/share/applications/jetbrains-rider.desktop".source = let
-      desktopFile = pkgs.makeDesktopItem {
-        name = "jetbrains-rider";
-        desktopName = "Rider";
-        exec = "rider";
-        icon = "rider";
-        type = "Application";
-        extraConfig.NoDisplay = "true";
-      };
-    in "${desktopFile}/share/applications/jetbrains-rider.desktop";
+    ".local/share/applications/jetbrains-rider.desktop".source =
+      let
+        desktopFile = pkgs.makeDesktopItem {
+          name = "jetbrains-rider";
+          desktopName = "Rider";
+          exec = "rider";
+          icon = "rider";
+          type = "Application";
+          extraConfig.NoDisplay = "true";
+        };
+      in
+      "${desktopFile}/share/applications/jetbrains-rider.desktop";
+
+    # Declarative Distrobox Arch launcher (instead of generated entry)
+    ".local/share/applications/Arch.desktop".text = ''
+      [Desktop Entry]
+      Version=1.0
+      Type=Application
+      Name=Arch (Distrobox)
+      Comment=Open Arch Linux in Distrobox
+      Exec=${pkgs.distrobox}/bin/distrobox-enter --name arch
+      Icon=utilities-terminal
+      Terminal=true
+      Categories=System;Utility;TerminalEmulator;
+      StartupNotify=true
+    '';
+
+    # Declarative autostart for Arch container warm-up
+    ".config/autostart/Arch.desktop".text = ''
+      [Desktop Entry]
+      Version=1.0
+      Type=Application
+      Name=Arch (Distrobox)
+      Comment=Warm up Arch Distrobox session on login
+      Exec=${pkgs.distrobox}/bin/distrobox-enter --name arch -- true
+      Icon=utilities-terminal
+      Terminal=false
+      X-GNOME-Autostart-enabled=true
+      X-KDE-autostart-after=panel
+      X-KDE-autostart-phase=2
+    '';
   };
 
   # GitHub CLI
   programs.gh.settings.git_protocol = "ssh";
+
+  # Claude
+  programs.claude-code = {
+    enable = true;
+    memory.text = ''
+      This user has Nix installed, for simple things you can `nix run nixpkgs#pkgname -- args`.
+
+      If new ad-hoc environments are interesting, check https://devenv.sh/ad-hoc-developer-environments/
+    '';
+    settings = {
+      theme = "dark";
+      includeCoAuthoredBy = true;
+    };
+  };
 }

@@ -2,19 +2,19 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed.oci;
-in {
+in
+{
   options.dr460nixed.oci = with lib; {
-    enable =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Enable common options for Oracle cloud instances.
-        '';
-      };
+    enable = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Enable common options for Oracle cloud instances.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -44,7 +44,7 @@ in {
     };
 
     # https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/configuringntpservice.htm#Configuring_the_Oracle_Cloud_Infrastructure_NTP_Service_for_an_Instance
-    networking.timeServers = ["169.254.169.254"];
+    networking.timeServers = [ "169.254.169.254" ];
 
     # Slows down write operations considerably
     nix.settings.auto-optimise-store = lib.mkForce false;

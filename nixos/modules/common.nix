@@ -3,44 +3,40 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed;
-in {
+in
+{
   options.dr460nixed = with lib; {
     common = {
-      enable =
-        mkOption
-        {
-          default = true;
-          type = types.bool;
-          description = mdDoc ''
-            Whether to enable common system configurations.
-          '';
-        };
-    };
-    rpi =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this is a Raspberry Pi.
-        '';
-      };
-    nodocs =
-      mkOption
-      {
+      enable = mkOption {
         default = true;
         type = types.bool;
         description = mdDoc ''
-          Whether to disable the documentation.
+          Whether to enable common system configurations.
         '';
       };
+    };
+    rpi = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this is a Raspberry Pi.
+      '';
+    };
+    nodocs = mkOption {
+      default = true;
+      type = types.bool;
+      description = mdDoc ''
+        Whether to disable the documentation.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.common.enable {
     # A few kernel tweaks
-    boot.kernelParams = ["noresume"];
+    boot.kernelParams = [ "noresume" ];
 
     # Disable unprivileged user namespaces, unless containers are enabled
     security = {
@@ -57,7 +53,7 @@ in {
 
     # This is the default sops file that will be used for all secrets
     sops = {
-      age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+      age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
       defaultSopsFile = ../../secrets/global.yaml;
     };
 
@@ -118,6 +114,8 @@ in {
     garuda.garuda-nix-manager.enable = false;
 
     # Custom label for boot menu entries (otherwise set to "garuda-nix-subsystem")
-    system.nixos.label = lib.mkForce (builtins.concatStringsSep "-" ["dr460nixed-"] + config.system.nixos.version);
+    system.nixos.label = lib.mkForce (
+      builtins.concatStringsSep "-" [ "dr460nixed-" ] + config.system.nixos.version
+    );
   };
 }

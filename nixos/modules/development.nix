@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed.development;
 
   # Distrobox setup scripts
@@ -14,23 +15,21 @@
     distrobox create --name arch \
       --init --image quay.io/toolbx/arch-toolbox:latest \
       --additional-packages "git tmux micro fish base-devel pacman-contrib fastfetch"
-    distrobox generate-entry arch
     distrobox create --name kali \
       --init --image docker.io/kalilinux/kali-rolling:latest \
       ${additionalPackages}
     distrobox generate-entry kali
   '';
-in {
+in
+{
   options.dr460nixed.development = with lib; {
-    enable =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Enables commonly used development tools.
-        '';
-      };
+    enable = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Enables commonly used development tools.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -63,7 +62,6 @@ in {
     # Virtualbox KVM & Docker
     virtualisation = {
       containers.enable = true;
-      lxd.enable = false;
       docker = {
         enable = true;
         autoPrune.enable = true;
@@ -78,7 +76,9 @@ in {
     };
 
     # For Redis
-    boot.kernel.sysctl = {"vm.overcommit_memory" = "1";};
+    boot.kernel.sysctl = {
+      "vm.overcommit_memory" = "1";
+    };
 
     # Archlinux development
     environment.systemPackages = [
@@ -90,13 +90,13 @@ in {
 
     # Local instances
     networking.hosts = {
-      "127.0.0.1" = ["metrics.chaotic.local" "backend.chaotic.local"];
+      "127.0.0.1" = [
+        "metrics.chaotic.local"
+        "backend.chaotic.local"
+      ];
     };
 
     # Allow cross-compiling to aarch64
-    boot.binfmt.emulatedSystems = ["aarch64-linux"];
-
-    # In case I need to fix my phone
-    programs.adb.enable = true;
+    boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 }

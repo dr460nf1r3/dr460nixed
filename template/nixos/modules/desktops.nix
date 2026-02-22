@@ -4,20 +4,20 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed.desktops;
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
-in {
+in
+{
   options.dr460nixed.desktops = with lib; {
-    enable =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether to enable basic dr460nized desktop theming.
-        '';
-      };
+    enable = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether to enable basic dr460nized desktop theming.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {

@@ -3,15 +3,15 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed.tailscale;
 
-  tailscaleJoinArgsList =
-    [
-      "-authkey"
-      "$(cat ${cfg.authFile})"
-    ]
-    ++ cfg.extraUpArgs;
+  tailscaleJoinArgsList = [
+    "-authkey"
+    "$(cat ${cfg.authFile})"
+  ]
+  ++ cfg.extraUpArgs;
 
   tailscaleJoinArgsString = builtins.concatStringsSep " " tailscaleJoinArgsList;
 
@@ -23,7 +23,8 @@
     fi
     ${pkgs.tailscale}/bin/tailscale up ${tailscaleJoinArgsString}
   '';
-in {
+in
+{
   options.dr460nixed.tailscale = with lib; {
     enable = mkEnableOption "Tailscale client daemon";
 
@@ -41,7 +42,7 @@ in {
 
     extraUpArgs = mkOption {
       type = with types; listOf str;
-      default = [];
+      default = [ ];
       description = "Extra args for tailscale up";
     };
   };
@@ -51,19 +52,25 @@ in {
     services.tailscale.enable = true;
 
     # Install Tailscale systray
-    environment.systemPackages = lib.mkIf config.dr460nixed.desktops.enable [pkgs.tailscale-systray];
+    environment.systemPackages = lib.mkIf config.dr460nixed.desktops.enable [ pkgs.tailscale-systray ];
 
     # Allow Tailscale devices to connect
-    networking.firewall.trustedInterfaces = ["tailscale0"];
+    networking.firewall.trustedInterfaces = [ "tailscale0" ];
 
     # Connect to Tailnet automatically
     systemd.services.tailscale-autoconnect = lib.mkIf cfg.autoConnect {
       description = "Automatic connection to Tailscale";
 
       # Make sure tailscale is running before trying to connect to tailscale
-      after = ["network-pre.target" "tailscale.service"];
-      wants = ["network-pre.target" "tailscale.service"];
-      wantedBy = ["multi-user.target"];
+      after = [
+        "network-pre.target"
+        "tailscale.service"
+      ];
+      wants = [
+        "network-pre.target"
+        "tailscale.service"
+      ];
+      wantedBy = [ "multi-user.target" ];
 
       serviceConfig.Type = "oneshot";
       script = tailscaleUpScript;

@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   services.nginx = {
     virtualHosts = {
       "reddit.dr460nf1r3.org" = {

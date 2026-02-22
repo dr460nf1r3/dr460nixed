@@ -3,28 +3,26 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed.servers;
-in {
+in
+{
   options.dr460nixed.servers = with lib; {
-    enable =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this device is a server.
-        '';
-      };
-    monitoring =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether to enable monitoring via Netdata.
-        '';
-      };
+    enable = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this device is a server.
+      '';
+    };
+    monitoring = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether to enable monitoring via Netdata.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -56,7 +54,9 @@ in {
         "memory mode" = "dbengine";
         "update every" = "2";
       };
-      ml = {"enabled" = "yes";};
+      ml = {
+        "enabled" = "yes";
+      };
     };
     services.netdata.configDir = {
       "go.d.conf" = pkgs.writeText "go.d.conf" ''
@@ -69,19 +69,21 @@ in {
         postgres: no
         web_log: no
       '';
-      "go.d/nginx.conf" =
-        lib.mkIf config.services.nginx.enable
-        (pkgs.writeText "nginx.conf" ''
+      "go.d/nginx.conf" = lib.mkIf config.services.nginx.enable (
+        pkgs.writeText "nginx.conf" ''
           jobs:
             - name: local
               url: http://127.0.0.1/nginx_status
-        '');
+        ''
+      );
     };
 
     # Extra Python & system packages required for Netdata to function
-    services.netdata.package = pkgs.netdata.override {withCloudUi = true;};
-    services.netdata.python.extraPackages = ps: [ps.psycopg2];
-    systemd.services.netdata = {path = with pkgs; [jq];};
+    services.netdata.package = pkgs.netdata.override { withCloudUi = true; };
+    services.netdata.python.extraPackages = ps: [ ps.psycopg2 ];
+    systemd.services.netdata = {
+      path = with pkgs; [ jq ];
+    };
 
     # Connect to Netdata Cloud easily
     services.netdata.claimTokenFile = config.sops.secrets."api_keys/netdata".path;
@@ -92,7 +94,7 @@ in {
     };
 
     # The Nginx QUIC package with Brotli modules
-    services.nginx.additionalModules = with pkgs; [nginxModules.brotli];
+    services.nginx.additionalModules = with pkgs; [ nginxModules.brotli ];
 
     # Recommended settings replacing custom configuration
     services.nginx = {
@@ -106,7 +108,7 @@ in {
 
     # Upstream resolvers
     services.nginx.resolver = {
-      addresses = ["100.100.100.100"];
+      addresses = [ "100.100.100.100" ];
       valid = "60s";
     };
 
@@ -140,7 +142,7 @@ in {
     security.dhparams = lib.mkIf config.services.nginx.enable {
       defaultBitSize = 3072;
       enable = true;
-      params.nginx = {};
+      params.nginx = { };
     };
     services.nginx.sslDhparam = config.security.dhparams.params.nginx.path;
 
@@ -158,8 +160,11 @@ in {
 
     # Need to explicitly open our web server ports
     networking.firewall = lib.mkIf config.services.nginx.enable {
-      allowedTCPPorts = [80 443];
-      allowedUDPPorts = [443];
+      allowedTCPPorts = [
+        80
+        443
+      ];
+      allowedUDPPorts = [ 443 ];
     };
 
     # Make cloudflared happy (https://github.com/lucas-clemente/quic-go/wiki/UDP-Receive-Buffer-Size)
@@ -176,19 +181,19 @@ in {
         email = "root@dr460nf1r3.org";
       };
       certs."dr460nf1r3.org" = {
-        extraDomainNames = ["*.dr460nf1r3.org"];
+        extraDomainNames = [ "*.dr460nf1r3.org" ];
         dnsProvider = "cloudflare";
         dnsPropagationCheck = true;
         credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
       };
       certs."garudalinux.org" = {
-        extraDomainNames = ["*.garudalinux.org"];
+        extraDomainNames = [ "*.garudalinux.org" ];
         dnsProvider = "cloudflare";
         dnsPropagationCheck = true;
         credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
       };
       certs."chaotic.cx" = {
-        extraDomainNames = ["*.chaotic.cx"];
+        extraDomainNames = [ "*.chaotic.cx" ];
         dnsProvider = "cloudflare";
         dnsPropagationCheck = true;
         credentialsFile = config.sops.secrets."api_keys/cloudflare".path;

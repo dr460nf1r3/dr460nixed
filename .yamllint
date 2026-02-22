@@ -31,5 +31,6 @@ rules:
     check-keys: false
 
 ignore: |
+  .github/workflows/*
   .pre-commit-config.yaml
   secrets/global.yaml

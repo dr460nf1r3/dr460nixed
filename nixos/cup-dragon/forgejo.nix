@@ -3,10 +3,12 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.services.forgejo;
   woodpecker-server = "ci.dr460nf1r3.org";
-in {
+in
+{
   services.nginx = {
     virtualHosts = {
       ${cfg.settings.server.DOMAIN} = {
@@ -19,9 +21,7 @@ in {
         kTLS = true;
         locations."/" = {
           recommendedProxySettings = true;
-          proxyPass =
-            "http://unix:"
-            + config.services.anubis.instances.forgejo.settings.BIND;
+          proxyPass = "http://unix:" + config.services.anubis.instances.forgejo.settings.BIND;
         };
         quic = true;
         useACMEHost = "dr460nf1r3.org";
@@ -104,14 +104,16 @@ in {
   };
 
   # Ensure admin user
-  systemd.services.forgejo.preStart = let
-    adminCmd = "${lib.getExe cfg.package} admin user";
-    pwd = config.sops.secrets."passwords/forgejo";
-    user = "root";
-  in ''
-    ${adminCmd} create --admin --email "root@localhost" --username ${user} --password "$(tr -d '\n' < ${pwd.path})" || true
-    # ${adminCmd} change-password --username ${user} --password "$(tr -d '\n' < ${pwd.path})" || true
-  '';
+  systemd.services.forgejo.preStart =
+    let
+      adminCmd = "${lib.getExe cfg.package} admin user";
+      pwd = config.sops.secrets."passwords/forgejo";
+      user = "root";
+    in
+    ''
+      ${adminCmd} create --admin --email "root@localhost" --username ${user} --password "$(tr -d '\n' < ${pwd.path})" || true
+      # ${adminCmd} change-password --username ${user} --password "$(tr -d '\n' < ${pwd.path})" || true
+    '';
 
   # Woodpecker CI/CD, just because why not?
   services.woodpecker-server = {
@@ -132,13 +134,13 @@ in {
   };
 
   users = {
-    groups.git = {};
+    groups.git = { };
     users.git = {
       isSystemUser = true;
       createHome = false;
       group = "git";
     };
-    users.nginx.extraGroups = [config.users.groups.anubis.name];
+    users.nginx.extraGroups = [ config.users.groups.anubis.name ];
   };
 
   catppuccin.forgejo = {

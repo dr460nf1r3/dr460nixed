@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed;
-in {
+in
+{
   # We want to use NetworkManager on desktops
   networking = {
     # Pointing to NextDNS via Tailscale
@@ -48,14 +50,6 @@ in {
   services = {
     openssh.enable = true;
     vnstat.enable = true;
-  };
-
-  # Change the default MAC address, which seems to get shuffled every reboot for no reason
-  systemd.services.setmacaddr = lib.mkIf (config.networking.hostName == "dragons-ryzen") {
-    script = ''
-      /run/current-system/sw/bin/ip link set dev wlan0 address 86:83:A9:94:5A:D6
-    '';
-    wantedBy = ["basic.target"];
   };
 
   # Enable Mosh, a replacement for OpenSSH

@@ -8,9 +8,11 @@
 #   genericName = "Remote Desktop";
 #   categories = ["Network"];
 # }) ];
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   appdir = ".local/share/applications";
-in {
+in
+{
   # All of these either have no BeautyLine icon or their description sucks
   home.file = {
     "${appdir}/btop.desktop".text = ''

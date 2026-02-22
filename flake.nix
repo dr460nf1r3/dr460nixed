@@ -3,56 +3,44 @@
 
   nixConfig = {
     extra-substituters = [
+      "https://cache.nixos.org/"
       "https://cache.garnix.io"
     ];
     extra-trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
   };
 
   inputs = {
-    # Ayugram
-    ayugram-desktop = {
-      url = "github:ayugram-port/ayugram-desktop/release";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Catppuccin theme
     catppuccin = {
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Devshell to set up a development environment
     devshell = {
       url = "github:numtide/devshell";
       flake = false;
     };
 
-    # Disko for Nix-managed partition management
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Required by some other flakes
     flake-compat.url = "github:edolstra/flake-compat";
 
-    # Required by some other flakes
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
-    # Another thing required by other flakes
     flake-utils = {
       url = "github:numtide/flake-utils";
       inputs.systems.follows = "systems";
     };
 
-    # Garuda Linux flake - most of my system settings are here
     garuda-nix = {
-      # url = "/home/nico/Documents/misc/garuda-nix-subsystem";
       url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
       inputs.catppuccin.follows = "catppuccin";
       inputs.devshell.follows = "devshell";
@@ -63,44 +51,61 @@
       inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     };
 
-    # Gitignore common input
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    github-actions-nix = {
+      url = "github:synapdeck/github-actions-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     gitignore = {
       url = "github:hercules-ci/gitignore.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Home-manager for managing my home directory
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Reset rootfs every reboot
-    impermanence.url = "github:nix-community/impermanence";
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs.home-manager.follows = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    # My SSH keys
     keys_nico = {
       url = "https://github.com/dr460nf1r3.keys";
       flake = false;
     };
 
-    # Kwin effects for blur
     kwin-effects-forceblur = {
-      url = "github:taj-ny/kwin-effects-forceblur";
+      url = "github:xarblu/kwin-effects-better-blur-dx";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Lanzaboote for secure boot support
     lanzaboote = {
       url = "github:nix-community/lanzaboote/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Lets give Lix another try
+    colmena = {
+      url = "github:zhaofengli/colmena";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.stable.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
+
     lix = {
       url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
       flake = false;
     };
+
     lix-module = {
       url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
       inputs.flake-utils.follows = "flake-utils";
@@ -108,52 +113,41 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Nix gaming-related packages and modules
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
       inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Have a local index of nixpkgs for fast launching of apps
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Declarative Minecraft server management
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
       inputs.flake-compat.follows = "flake-compat";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
     };
 
-    # Convenient system hardening
-    nix-mineral = {
-      url = "github:cynicsketch/nix-mineral";
-      flake = false;
-    };
-
-    # NixOS generators to build system images
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NixOS hardware database
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    # NixOS WSL
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
       inputs.flake-compat.follows = "flake-compat";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # The source of all truth!
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Easy linting of the flake and all kind of other stuff
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.flake-compat.follows = "flake-compat";
@@ -161,151 +155,58 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Secrets management
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Spicetify
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
     };
 
-    # Fresh ucode packages
-    ucodenix.url = "github:e-tho/ucodenix";
-
-    # Systems flake
     systems.url = "github:nix-systems/x86_64-linux";
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ucodenix.url = "github:e-tho/ucodenix";
   };
 
-  outputs = {
-    flake-parts,
-    nixpkgs,
-    pre-commit-hooks,
-    self,
-    ...
-  } @ inp: let
-    inputs = inp;
-    perSystem = {
-      pkgs,
-      system,
+  outputs =
+    {
+      flake-parts,
+      nixpkgs,
+      self,
       ...
-    }: {
-      # This basically allows using the devshell as flake app
-      apps.default = self.outputs.devShells.${system}.default.flakeApp;
+    }@inputs:
+    let
 
-      # Pre-commit hooks are set up automatically via nix-shell / nix develop
-      checks.pre-commit-check = pre-commit-hooks.lib.${system}.run {
-        hooks = {
-          actionlint.enable = true;
-          alejandra-quiet = {
-            description = "Run Alejandra in quiet mode";
-            enable = true;
-            entry = ''
-              ${pkgs.alejandra}/bin/alejandra --quiet
-            '';
-            files = "\\.nix$";
-            name = "alejandra";
-          };
-          commitizen.enable = true;
-          check-json.enable = true;
-          check-yaml.enable = true;
-          detect-private-keys.enable = true;
-          deadnix.enable = true;
-          flake-checker.enable = true;
-          nil.enable = true;
-          prettier.enable = true;
-          pre-commit-hook-ensure-sops.enable = true;
-          yamllint.enable = true;
-          statix.enable = true;
-          typos.enable = true;
-        };
-        src = ./.;
+      keys = {
+        nico = inputs.keys_nico;
       };
 
-      # Handy devshell for working with this flake
-      devShells = let
-        # Import the devshell module as module rather than a flake input
-        makeDevshell = import "${inp.devshell}/modules" pkgs;
-        mkShell = config:
-          (makeDevshell {
-            configuration = {
-              inherit config;
-              imports = [];
-            };
-          }).shell;
-      in rec {
-        default = dr460nixed-shell;
-        dr460nixed-shell = mkShell {
-          devshell.name = "dr460nixed-devshell";
-          commands =
-            [
-              {
-                category = "dr460nixed";
-                command = "${self.packages.${system}.repl}/bin/dr460nixed-repl";
-                help = "Start a repl shell with all flake outputs available";
-                name = "repl";
-              }
-              {
-                category = "dr460nixed";
-                command = "nix build .#iso";
-                help = "Builds a NixOS ISO with all most important configurations";
-                name = "buildiso";
-              }
-            ]
-            ++ (
-              if pkgs.lib.strings.hasSuffix "-linux" system
-              then [
-                {
-                  category = "dr460nixed";
-                  command = "${self.packages.${system}.installer}/bin/dr460nixed-installer";
-                  help = "Allows installing a basic dr460nixed installation";
-                  name = "installer";
-                }
-              ]
-              else []
-            )
-            ++ [
-              {package = "age";}
-              {package = "commitizen";}
-              {package = "gnupg";}
-              {package = "manix";}
-              {package = "mdbook";}
-              {package = "nix-melt";}
-              {package = "nixos-anywhere";}
-              {package = "pre-commit";}
-              {package = "rsync";}
-              {package = "sops";}
-              {package = "yamlfix";}
-            ];
-          devshell.startup.preCommitHooks.text = self.checks.${system}.pre-commit-check.shellHook;
-          env = [
-            {
-              name = "NIX_PATH";
-              value = "${nixpkgs}";
-            }
-          ];
-        };
+      drLib = import ./lib {
+        inherit inputs self;
+        outputs = self;
+        inherit keys;
       };
-
-      # By default, alejandra is WAY to verbose
-      formatter = pkgs.writeShellScriptBin "alejandra" ''
-        exec ${pkgs.alejandra}/bin/alejandra --quiet "$@"
-      '';
-    };
-  in
-    flake-parts.lib.mkFlake {inherit inputs;} {
-      # Imports flake-modules
+    in
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      _module.args.drLib = drLib;
       imports = [
         ./nixos/flake-module.nix
         ./packages/flake-module.nix
-        inputs.pre-commit-hooks.flakeModule
+        inputs.git-hooks.flakeModule
+        inputs.disko.flakeModules.default
+        inputs.github-actions-nix.flakeModules.default
+        inputs.home-manager.flakeModules.home-manager
+        inputs.treefmt-nix.flakeModule
       ];
 
-      # The systems currently available
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -313,7 +214,85 @@
         "aarch64-darwin"
       ];
 
-      # This applies to all systems
-      inherit perSystem;
+      perSystem =
+        {
+          system,
+          config,
+          ...
+        }:
+        let
+          pkgsLix = import nixpkgs {
+            inherit system;
+            overlays = [ inputs.lix-module.overlays.default ];
+          };
+        in
+        {
+          imports = [ ./maintenance/workflows.nix ];
+
+          treefmt = {
+            projectRootFile = "flake.nix";
+            package = pkgsLix.treefmt;
+            programs = {
+              actionlint.enable = true;
+              deadnix.enable = true;
+              nixfmt.enable = true;
+              prettier.enable = true;
+              statix.enable = true;
+              typos.enable = true;
+              yamllint.enable = true;
+            };
+          };
+
+          pre-commit.settings = {
+            package = pkgsLix.prek;
+            hooks = {
+              actionlint.enable = true;
+              commitizen.enable = true;
+              check-json.enable = true;
+              check-yaml.enable = true;
+              detect-private-keys.enable = true;
+              deadnix.enable = true;
+              flake-checker.enable = true;
+              nil = {
+                enable = true;
+                package = pkgsLix.nil;
+              };
+              nixfmt.enable = true;
+              prettier.enable = true;
+              pre-commit-hook-ensure-sops.enable = true;
+              statix.enable = true;
+              typos.enable = true;
+              yamllint.enable = true;
+            };
+          };
+
+          legacyPackages = {
+            inherit (config) githubActions;
+          };
+
+          devShells = import ./maintenance/dev-shells {
+            inherit
+              inputs
+              self
+              system
+              config
+              ;
+            pkgs = pkgsLix;
+          };
+        };
+
+      flake = {
+        inherit drLib;
+
+        colmenaHive = self.drLib.mkColmenaHive nixpkgs.legacyPackages.x86_64-linux { };
+
+        diskoConfigurations = {
+          btrfs-subvolumes = import ./nixos/modules/disko/btrfs-subvolumes.nix { };
+          luks-btrfs-subvolumes = import ./nixos/modules/disko/luks-btrfs-subvolumes.nix { };
+          simple-efi = import ./nixos/modules/disko/simple-efi.nix { };
+          zfs-encrypted = import ./nixos/modules/disko/zfs-encrypted.nix { };
+          zfs = import ./nixos/modules/disko/zfs.nix { };
+        };
+      };
     };
 }

@@ -1,28 +1,16 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
-}: let
+}:
+let
   configDir = ".config";
 
   # JamesDSP Dolby presets
-  game = pkgs.fetchurl {
-    url = "https://cloud.garudalinux.org/s/eimgmWmN485tHGw/download/game.irs";
-    sha256 = "0d1lfbzca6wqfqxd6knzshc00khhgfqmk36s5xf1wyh703sdxk79";
-  };
-  movie = pkgs.fetchurl {
-    url = "https://cloud.garudalinux.org/s/K8CpHZYTiLyXLSd/download/movie.irs";
-    sha256 = "1r3s8crbmvzm71yqrkp8d8x4xyd3najz82ck6vbh1v9kq6jclc0w";
-  };
-  music = pkgs.fetchurl {
-    url = "https://cloud.garudalinux.org/s/cbPLFeAMeJazKxC/download/music-balanced.irs";
-    sha256 = "1szssbqk3dnaqhg3syrzq9zqfb18phph5yy5m3xfnjgllj2yphy0";
-  };
-  voice = pkgs.fetchurl {
-    url = "https://cloud.garudalinux.org/s/wJSs9gckrNidTBo/download/voice.irs";
-    sha256 = "1b643m8v7j15ixi2g6r2909vwkq05wi74ybccbdnp4rkms640y4w";
-  };
-in {
+  jamesdsp = inputs.self.drLib.jamesdsp pkgs;
+in
+{
   # Import individual configuration snippets
   imports = [
     ./common.nix
@@ -30,10 +18,10 @@ in {
   ];
   # Enable Kvantum theme and GTK & place a few bigger files
   home.file = {
-    "${configDir}/jamesdsp/irs/game.irs".source = game;
-    "${configDir}/jamesdsp/irs/movie.irs".source = movie;
-    "${configDir}/jamesdsp/irs/music.irs".source = music;
-    "${configDir}/jamesdsp/irs/voice.irs".source = voice;
+    "${configDir}/jamesdsp/irs/game.irs".source = jamesdsp.game;
+    "${configDir}/jamesdsp/irs/movie.irs".source = jamesdsp.movie;
+    "${configDir}/jamesdsp/irs/music.irs".source = jamesdsp.music;
+    "${configDir}/jamesdsp/irs/voice.irs".source = jamesdsp.voice;
   };
   # Compatibility for GNOME apps
   dconf.enable = true;

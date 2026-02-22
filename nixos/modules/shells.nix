@@ -3,12 +3,14 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed.shells;
-in {
-  options.dr460nixed.shells.enable = with lib;
-    mkOption
-    {
+in
+{
+  options.dr460nixed.shells.enable =
+    with lib;
+    mkOption {
       default = true;
       type = types.bool;
       description = mdDoc ''

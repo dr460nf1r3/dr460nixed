@@ -4,7 +4,8 @@
   config,
   sources,
   ...
-}: let
+}:
+let
   cfg = config.services.chaotic-mirror;
   repo = derivation {
     name = "chaotic-mirror";
@@ -12,11 +13,7 @@
     envfile = pkgs.writeText "envfile" ''
       DOMAIN_NAME=${cfg.domain}
       EMAIL=${cfg.email}
-      ${
-        if pkgs.hostPlatform.system == "aarch64-linux"
-        then "LETSENCRYPT_TAG=arm64v8-latest"
-        else ""
-      }
+      ${if pkgs.hostPlatform.system == "aarch64-linux" then "LETSENCRYPT_TAG=arm64v8-latest" else ""}
       RESTART=on-failure
     '';
     builder = pkgs.writeShellScript "build" ''
@@ -28,18 +25,25 @@
     '';
     inherit (pkgs.hostPlatform) system;
   };
-in {
+in
+{
   options.services.chaotic-mirror = with lib; {
     enable = mkEnableOption "Chaotic Mirror service";
-    domain = mkOption {type = types.str;};
-    email = mkOption {type = types.str;};
+    domain = mkOption { type = types.str; };
+    email = mkOption { type = types.str; };
   };
 
   config = lib.mkIf cfg.enable {
     systemd.services.chaotic-mirror = {
-      wantedBy = ["multi-user.target"];
+      wantedBy = [ "multi-user.target" ];
       description = "Start the chaotic-aur mirror";
-      path = with pkgs; [rsync docker-compose docker bash gawk];
+      path = with pkgs; [
+        rsync
+        docker-compose
+        docker
+        bash
+        gawk
+      ];
       serviceConfig = {
         CacheDirectory = "chaotic-mirror";
         CacheDirectoryMode = "0755";

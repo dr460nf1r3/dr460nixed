@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./forgejo.nix
     ./hardware-configuration.nix
@@ -32,7 +33,7 @@
   # This machine is a VM
   services = {
     nginx.enable = true;
-    openssh.ports = [666];
+    openssh.ports = [ 666 ];
     qemuGuest.enable = true;
   };
 

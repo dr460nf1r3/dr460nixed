@@ -1,6 +1,8 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   appdir = ".local/share/applications";
-in {
+in
+{
   # The apps themes not everyone might want
   home.file = {
     "${appdir}/teams-for-linux.desktop".text = ''

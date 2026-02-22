@@ -2,16 +2,17 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   # Import base configuration
-  imports = [./base.nix];
+  imports = [ ./base.nix ];
 
   # Enable a few selected custom settings
   dr460nixed.desktops.enable = true;
 
   # Home-manager configuration for desktops
   garuda = {
-    home-manager.modules = [../../home-manager/desktops.nix];
+    home-manager.modules = [ ../../home-manager/desktops.nix ];
     noSddmAutologin = {
       enable = true;
       startupCommand = "startplasma-wayland";
@@ -48,7 +49,8 @@
     tdesktop
     usbutils
     (vscode-with-extensions.override {
-      vscodeExtensions = with vscode-extensions;
+      vscodeExtensions =
+        with vscode-extensions;
         [
           bbenoist.nix
           davidanson.vscode-markdownlint

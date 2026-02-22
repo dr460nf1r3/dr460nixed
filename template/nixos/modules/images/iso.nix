@@ -2,9 +2,10 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   # Import base configuration
-  imports = [./base.nix];
+  imports = [ ./base.nix ];
 
   # Enable a few selected custom settings
   dr460nixed = {
@@ -57,7 +58,8 @@
     tdesktop
     usbutils
     (vscode-with-extensions.override {
-      vscodeExtensions = with vscode-extensions;
+      vscodeExtensions =
+        with vscode-extensions;
         [
           bbenoist.nix
           davidanson.vscode-markdownlint

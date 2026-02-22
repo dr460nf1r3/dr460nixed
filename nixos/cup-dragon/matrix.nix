@@ -9,7 +9,8 @@
 let
   server_name = "dr460nf1r3.org";
   matrix_hostname = "matrix.${server_name}";
-in {
+in
+{
   services.matrix-conduit = {
     enable = true;
     package = pkgs.matrix-continuwuity;
@@ -22,7 +23,8 @@ in {
   };
 
   # Fix for new binary name in 0.5.0
-  systemd.services.conduit.serviceConfig.ExecStart = lib.mkForce "${pkgs.matrix-continuwuity}/bin/conduwuit";
+  systemd.services.conduit.serviceConfig.ExecStart =
+    lib.mkForce "${pkgs.matrix-continuwuity}/bin/conduwuit";
 
   services.nginx = {
     virtualHosts = {
@@ -72,14 +74,22 @@ in {
     upstreams = {
       "backend_conduit" = {
         servers = {
-          "[::1]:${toString config.services.matrix-conduit.settings.global.port}" = {};
+          "[::1]:${toString config.services.matrix-conduit.settings.global.port}" = { };
         };
       };
     };
   };
 
   networking.firewall = {
-    allowedTCPPorts = [80 443 8448];
-    allowedUDPPorts = [80 443 8448];
+    allowedTCPPorts = [
+      80
+      443
+      8448
+    ];
+    allowedUDPPorts = [
+      80
+      443
+      8448
+    ];
   };
 }

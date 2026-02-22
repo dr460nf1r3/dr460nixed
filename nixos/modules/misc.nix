@@ -3,107 +3,54 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed;
-  chromium-gate = pkgs.writeShellScriptBin "chromium-gate" ''
-    set -o errexit
-
-    CHROMIUM="${pkgs.chromium-flagged}/bin/chromium"
-    KDIALOG="${pkgs.libsForQt5.kdialog}/bin/kdialog"
-    ZFS="${pkgs.zfs}/bin/zfs"
-
-    echo 'Handling encrypted Chromium profile'
-    if [ "$USER" != 'nico' ] || [ -f "$HOME/.config/chromium" ]; then
-      exec "$CHROMIUM" "$@"
-    else
-      "$KDIALOG" --title "Chromium gatekeeper" --password "Please provide the password for the Chromium vault 🔑" |\
-        (sudo "$ZFS" load-key zroot/data/chromium \
-        || ("$KDIALOG" --title "Chromium gatekeeper" --error "Unable to load ZFS key, loading fresh profile instead!" \
-        && "$CHROMIUM" "$@" && false))
-      sudo "$ZFS" mount zroot/data/chromium \
-        || ("$KDIALOG" --title "Chromium gatekeeper" --error "Unable to mount ZFS partition, loading fresh profile instead!" \
-        && "$CHROMIUM" "$@" && false)
-
-      "$CHROMIUM" "$@"
-
-      sudo "$ZFS" umount -f zroot/data/chromium
-      sudo "$ZFS" unload-key zroot/data/chromium
-    fi
-  '';
-in {
+in
+{
   options.dr460nixed = with lib; {
-    auto-upgrade =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this device automatically upgrades.
-        '';
-      };
-    chromium =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this device uses should use Chromium.
-        '';
-      };
-    chromium-gate =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether to protect Chromium with a password with a ZFS encrypted partition.
-        '';
-      };
-    live-cd =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this is live CD.
-        '';
-      };
-    performance =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this device should be optimized for performance.
-        '';
-      };
-    school =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this device uses should be used for school.
-        '';
-      };
-    tor =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this device should be using the tor network.
-        '';
-      };
-    yubikey =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this device uses a Yubikey.
-        '';
-      };
+    auto-upgrade = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this device automatically upgrades.
+      '';
+    };
+    chromium = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this device uses should use Chromium.
+      '';
+    };
+    live-cd = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this is live CD.
+      '';
+    };
+    performance = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this device should be optimized for performance.
+      '';
+    };
+    tor = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this device should be using the tor network.
+      '';
+    };
+    yubikey = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this device uses a Yubikey.
+      '';
+    };
   };
 
   config = {
@@ -132,9 +79,9 @@ in {
     hardware.gpgSmartcards.enable = lib.mkIf cfg.yubikey true;
     services.pcscd = {
       enable = lib.mkIf cfg.yubikey true;
-      plugins = [pkgs.ccid];
+      plugins = [ pkgs.ccid ];
     };
-    services.udev.packages = lib.mkIf cfg.yubikey [pkgs.yubikey-personalization];
+    services.udev.packages = lib.mkIf cfg.yubikey [ pkgs.yubikey-personalization ];
 
     # Configure as challenge-response for instant login,
     # can't provide the secrets as the challenge gets updated
@@ -150,6 +97,7 @@ in {
       defaultSearchProviderSearchURL = "https://searx.garudalinux.org/search?q=%s";
       defaultSearchProviderSuggestURL = "https://searx.garudalinux.org/autocomplete?q=%s";
       enable = true;
+      enablePlasmaBrowserIntegration = true;
       extensions = [
         "bkkmolkhemgaeaeggcmfbghljjjoofoh" # Catppuccin theme
         # "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock origin
@@ -173,14 +121,8 @@ in {
     # SUID Sandbox
     security.chromiumSuidSandbox.enable = lib.mkIf cfg.chromium true;
 
-    # Chromium gate (thanks Pedro!)
-    environment.systemPackages = lib.mkIf cfg.chromium-gate [chromium-gate];
-
     # Enhance performance tweaks
     garuda.performance-tweaks.enable = lib.mkIf cfg.performance true;
-    boot.kernelPackages = lib.mkIf cfg.performance pkgs.linuxPackages_cachyos;
-
-    # School stuff uses Teams / OneDrive, sadly
-    # services.onedrive.enable = lib.mkIf cfg.school true;
+    boot.kernelPackages = lib.mkIf cfg.performance pkgs.cachyosKernels.linuxPackages-cachyos-latest;
   };
 }

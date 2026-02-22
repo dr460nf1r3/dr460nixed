@@ -3,63 +3,55 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed.systemd-boot;
   cfgGrub = config.dr460nixed.grub;
   cfgLanza = config.dr460nixed.lanzaboote;
   inherit (pkgs) plymouth;
-in {
+in
+{
   options.dr460nixed.grub = with lib; {
-    enable =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Configures the system to install GRUB to a particular device, which enables booting
-          on non-UEFI systems.
-        '';
-      };
-    enableCryptodisk =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether to enable GRUB cryptodisk support.
-        '';
-      };
-    device =
-      mkOption
-      {
-        default = null;
-        type = types.str;
-        description = mdDoc ''
-          Defines which device to install GRUB to.
-        '';
-      };
+    enable = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Configures the system to install GRUB to a particular device, which enables booting
+        on non-UEFI systems.
+      '';
+    };
+    enableCryptodisk = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether to enable GRUB cryptodisk support.
+      '';
+    };
+    device = mkOption {
+      default = null;
+      type = types.str;
+      description = mdDoc ''
+        Defines which device to install GRUB to.
+      '';
+    };
   };
   options.dr460nixed.systemd-boot = with lib; {
-    enable =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Configures common options for a quiet systemd-boot.
-        '';
-      };
+    enable = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Configures common options for a quiet systemd-boot.
+      '';
+    };
   };
   options.dr460nixed.lanzaboote = with lib; {
-    enable =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Configures common options using Lanzaboote as secure boot manager.
-        '';
-      };
+    enable = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Configures common options using Lanzaboote as secure boot manager.
+      '';
+    };
   };
 
   config = {
@@ -78,15 +70,12 @@ in {
       ];
       lanzaboote = lib.mkIf cfgLanza.enable {
         enable = true;
-        pkiBundle = "/etc/secureboot";
+        pkiBundle = "/var/lib/sbctl";
       };
       loader = {
         grub = {
           device = lib.mkIf cfgGrub.enable cfgGrub.device;
-          enable =
-            if cfgGrub.enable
-            then true
-            else false;
+          enable = if cfgGrub.enable then true else false;
           enableCryptodisk = true;
           useOSProber = false;
         };
@@ -110,6 +99,6 @@ in {
       '';
     };
 
-    environment.systemPackages = lib.mkIf cfgLanza.enable [pkgs.sbctl];
+    environment.systemPackages = lib.mkIf cfgLanza.enable [ pkgs.sbctl ];
   };
 }

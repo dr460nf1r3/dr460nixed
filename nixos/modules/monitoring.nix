@@ -2,102 +2,82 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed;
-  # adguardExporter = builtins.fetchurl {
-  #   url = "https://github.com/ebrianne/adguard-exporter/releases/latest/download/adguard_exporter-linux-arm64";
-  #   sha256 = "sha256:0y2gyw1xc366a70sblpjybl7alx70ppjzi5s4zzbm7swsa5vqqds";
-  # };
-in {
+in
+{
   options.dr460nixed = with lib; {
     grafanaStack = {
-      enable =
-        mkOption
-        {
-          default = false;
-          type = types.bool;
-          description = mdDoc ''
-            Enables the Grafana stack (Grafana, Prometheus and Loki).
-          '';
-        };
-      address =
-        mkOption
-        {
-          default = "";
-          type = types.str;
-          description = mdDoc ''
-            The address of the Grafana frontend.
-          '';
-        };
+      enable = mkOption {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enables the Grafana stack (Grafana, Prometheus and Loki).
+        '';
+      };
+      address = mkOption {
+        default = "";
+        type = types.str;
+        description = mdDoc ''
+          The address of the Grafana frontend.
+        '';
+      };
     };
     prometheus = {
       adguardExporter = {
-        enable =
-          mkOption
-          {
-            default = false;
-            type = types.bool;
-            description = mdDoc ''
-              Enables Prometheus' AdGuard home exporter.
-            '';
-          };
-        configfile =
-          mkOption
-          {
-            default = "";
-            type = types.str;
-            description = mdDoc ''
-              The path to the AdGuard home exporter config file.
-            '';
-          };
-      };
-      blackboxExporter =
-        mkOption
-        {
+        enable = mkOption {
           default = false;
           type = types.bool;
           description = mdDoc ''
-            Enables Prometheus' blackbox exporter.
+            Enables Prometheus' AdGuard home exporter.
           '';
         };
-      enable =
-        mkOption
-        {
-          default = false;
-          type = types.bool;
-          description = mdDoc ''
-            Enables Prometheus' node_exporter.
-          '';
-        };
-      nginxExporter =
-        mkOption
-        {
-          default = false;
-          type = types.bool;
-          description = mdDoc ''
-            Enables Prometheus' Nginx exporter.
-          '';
-        };
-    };
-    promtail = {
-      enable =
-        mkOption
-        {
-          default = false;
-          type = types.bool;
-          description = mdDoc ''
-            Enables shipping systemd journal logs to Loki.
-          '';
-        };
-      lokiAddress =
-        mkOption
-        {
+        configfile = mkOption {
           default = "";
           type = types.str;
           description = mdDoc ''
-            The address of the Loki frontend.
+            The path to the AdGuard home exporter config file.
           '';
         };
+      };
+      blackboxExporter = mkOption {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enables Prometheus' blackbox exporter.
+        '';
+      };
+      enable = mkOption {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enables Prometheus' node_exporter.
+        '';
+      };
+      nginxExporter = mkOption {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enables Prometheus' Nginx exporter.
+        '';
+      };
+    };
+    promtail = {
+      enable = mkOption {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enables shipping systemd journal logs to Loki.
+        '';
+      };
+      lokiAddress = mkOption {
+        default = "";
+        type = types.str;
+        description = mdDoc ''
+          The address of the Loki frontend.
+        '';
+      };
     };
   };
 
@@ -114,7 +94,7 @@ in {
         };
         node = {
           port = 3021;
-          enabledCollectors = ["systemd"];
+          enabledCollectors = [ "systemd" ];
           enable = true;
         };
         nginx = lib.mkIf cfg.prometheus.nginxExporter {
@@ -266,31 +246,31 @@ in {
             };
             relabel_configs = [
               {
-                source_labels = ["__journal__hostname"];
+                source_labels = [ "__journal__hostname" ];
                 target_label = "host";
               }
               {
-                source_labels = ["__journal_priority"];
+                source_labels = [ "__journal_priority" ];
                 target_label = "priority";
               }
               {
-                source_labels = ["__journal_priority_keyword"];
+                source_labels = [ "__journal_priority_keyword" ];
                 target_label = "level";
               }
               {
-                source_labels = ["__journal__systemd_unit"];
+                source_labels = [ "__journal__systemd_unit" ];
                 target_label = "unit";
               }
               {
-                source_labels = ["__journal__systemd_user_unit"];
+                source_labels = [ "__journal__systemd_user_unit" ];
                 target_label = "user_unit";
               }
               {
-                source_labels = ["__journal__boot_id"];
+                source_labels = [ "__journal__boot_id" ];
                 target_label = "boot_id";
               }
               {
-                source_labels = ["__journal__comm"];
+                source_labels = [ "__journal__comm" ];
                 target_label = "command";
               }
             ];
@@ -340,7 +320,7 @@ in {
       settings = {
         analytics.reporting_enabled = false;
         live = {
-          allowed_origins = ["http://${config.dr460nixed.grafanaStack.address}:8010"]; # Needed to get WS to work
+          allowed_origins = [ "http://${config.dr460nixed.grafanaStack.address}:8010" ]; # Needed to get WS to work
         };
         security.admin_email = "root@dr460nf1r3.org";
         server = {
@@ -361,22 +341,22 @@ in {
       upstreams = {
         "grafana" = {
           servers = {
-            "127.0.0.1:${toString config.services.grafana.settings.server.http_port}" = {};
+            "127.0.0.1:${toString config.services.grafana.settings.server.http_port}" = { };
           };
         };
         "prometheus" = {
           servers = {
-            "${config.dr460nixed.grafanaStack.address}:${toString config.services.prometheus.port}" = {};
+            "${config.dr460nixed.grafanaStack.address}:${toString config.services.prometheus.port}" = { };
           };
         };
         "loki" = {
           servers = {
-            "127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}" = {};
+            "127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}" = { };
           };
         };
         "promtail" = {
           servers = {
-            "127.0.0.1:${toString config.services.promtail.configuration.server.http_listen_port}" = {};
+            "127.0.0.1:${toString config.services.promtail.configuration.server.http_listen_port}" = { };
           };
         };
       };

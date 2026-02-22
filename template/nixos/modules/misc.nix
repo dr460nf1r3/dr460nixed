@@ -3,91 +3,75 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.dr460nixed;
-in {
+in
+{
   options.dr460nixed = with lib; {
-    adblock =
-      mkOption
-      {
-        default = true;
-        type = types.bool;
-        description = mdDoc ''
-          Whether hosts-based ad blocking should be set up.
-        '';
-      };
-    auto-upgrade =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this device automatically upgrades.
-        '';
-      };
-    chromium =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this device uses should use Chromium.
-        '';
-      };
-    chromium-gate =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether to protect Chromium with a password with a ZFS encrypted partition.
-        '';
-      };
-    live-cd =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this is live CD.
-        '';
-      };
-    performance =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this device should be optimized for performance.
-        '';
-      };
-    school =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this device uses should be used for school.
-        '';
-      };
-    tor =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this device should be using the tor network.
-        '';
-      };
-    yubikey =
-      mkOption
-      {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether this device uses a Yubikey.
-        '';
-      };
+    adblock = mkOption {
+      default = true;
+      type = types.bool;
+      description = mdDoc ''
+        Whether hosts-based ad blocking should be set up.
+      '';
+    };
+    auto-upgrade = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this device automatically upgrades.
+      '';
+    };
+    chromium = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this device uses should use Chromium.
+      '';
+    };
+    chromium-gate = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether to protect Chromium with a password with a ZFS encrypted partition.
+      '';
+    };
+    live-cd = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this is live CD.
+      '';
+    };
+    performance = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this device should be optimized for performance.
+      '';
+    };
+    school = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this device uses should be used for school.
+      '';
+    };
+    tor = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this device should be using the tor network.
+      '';
+    };
+    yubikey = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc ''
+        Whether this device uses a Yubikey.
+      '';
+    };
   };
 
   config = {
@@ -116,9 +100,9 @@ in {
     hardware.gpgSmartcards.enable = lib.mkIf cfg.yubikey true;
     services.pcscd = {
       enable = lib.mkIf cfg.yubikey true;
-      plugins = [pkgs.ccid];
+      plugins = [ pkgs.ccid ];
     };
-    services.udev.packages = lib.mkIf cfg.yubikey [pkgs.yubikey-personalization];
+    services.udev.packages = lib.mkIf cfg.yubikey [ pkgs.yubikey-personalization ];
 
     # Configure as challenge-response for instant login,
     # can't provide the secrets as the challenge gets updated

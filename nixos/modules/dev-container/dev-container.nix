@@ -2,8 +2,13 @@
   lib,
   pkgs,
   ...
-}: {
-  environment.systemPackages = with pkgs; [chromium jetbrains.webstorm nodejs_latest];
+}:
+{
+  environment.systemPackages = with pkgs; [
+    chromium
+    jetbrains.webstorm
+    nodejs_latest
+  ];
 
   # Enable Plasma
   services = {
@@ -16,7 +21,7 @@
 
   users.users.nico = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = [ "wheel" ];
     password = "password";
   };
 

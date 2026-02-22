@@ -1,11 +1,13 @@
-_: let
+_:
+let
   forwardPostgres = "-L 5433:127.0.0.1:5432";
   hetznerStoragebox = "your-storagebox.de";
   immortalis = "immortalis.kanyu-bushi.ts.net";
   user = "nico";
-in {
+in
+{
   # Import individual configuration snippets
-  imports = [./email.nix];
+  imports = [ ./email.nix ];
 
   # I'm working with git a lot
   programs = {
@@ -49,20 +51,28 @@ in {
       enable = true;
       settings.git_protocol = "ssh";
     };
+    # Git configuration has been reorganised following  home-manager
+    # renames. the old `userEmail`, `userName`, and `extraConfig`
+    # options now live under `settings` and we move `difftastic` out of
+    # the git namespace completely.
     git = {
-      difftastic.enable = true;
       enable = true;
-      extraConfig = {
+      settings = {
+        user = {
+          email = "root@dr460nf1r3.org";
+          name = "Nico Jensch";
+        };
         color.ui = "auto";
         help.autocorrect = 10;
         pull.rebase = true;
+        push.autoSetupRemote = true;
       };
       signing = {
         key = "D245D484F3578CB17FD6DA6B67DB29BFF3C96757";
         signByDefault = true;
       };
-      userEmail = "root@dr460nf1r3.org";
-      userName = "Nico Jensch";
     };
+    # difftastic is now its own program
+    difftastic.enable = true;
   };
 }

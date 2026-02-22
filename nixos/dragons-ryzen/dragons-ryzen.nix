@@ -2,22 +2,25 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   # Individual settings + low-latency Pipewire
   imports = [
     ./hardware-configuration.nix
     ../modules/impermanence.nix
-    # "${inputs.nix-mineral}/nix-mineral.nix"
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
 
   # Boot options
   boot = {
     # Needed to get the touchpad working
-    blacklistedKernelModules = ["elan_i2c"];
-    initrd.kernelModules = ["amdgpu"];
-    kernelParams = ["amd_pstate=active" "microcode.amd_sha_check=off"];
-    supportedFilesystems = ["btrfs"];
+    blacklistedKernelModules = [ "elan_i2c" ];
+    initrd.kernelModules = [ "amdgpu" ];
+    kernelParams = [
+      "amd_pstate=active"
+      "microcode.amd_sha_check=off"
+    ];
+    supportedFilesystems = [ "btrfs" ];
   };
 
   # Hostname of this machine
@@ -54,7 +57,6 @@
       trustedPublicKey = "immortalis:8vrLBvFoMiKVKRYD//30bhUBTEEiuupfdQzl2UoMms4=";
       user = "nico";
     };
-    school = true;
     tailscale = {
       enable = true;
       extraUpArgs = [
@@ -89,10 +91,21 @@
   };
 
   # Enable the touchpad & secure boot, as well as add the ipman script
-  environment.systemPackages = with pkgs; [libinput radeontop];
+  environment.systemPackages = with pkgs; [
+    libinput
+    radeontop
+  ];
 
   # Allow SSH via ServerBox
-  services.openssh.ports = [666];
+  services.openssh.ports = [ 666 ];
+
+  # Change the default MAC address, which seems to get shuffled every reboot for no reason
+  systemd.services.setmacaddr = {
+    script = ''
+      /run/current-system/sw/bin/ip link set dev wlan0 address 86:83:A9:94:5A:D6
+    '';
+    wantedBy = [ "basic.target" ];
+  };
 
   # Home-manager individual settings
   home-manager.users."nico" = import ../../home-manager/nico/nico.nix;
@@ -100,9 +113,9 @@
   # For some reason Bluetooth only works after un-/reloading
   # the btusb kernel module
   systemd.services.fix-bluetooth = {
-    wantedBy = ["multi-user.target"];
+    wantedBy = [ "multi-user.target" ];
     description = "Fix bluetooth connection";
-    path = with pkgs; [kmod];
+    path = with pkgs; [ kmod ];
     serviceConfig = {
       Type = "oneshot";
       ExecStart = pkgs.writeShellScript "execstart" ''
