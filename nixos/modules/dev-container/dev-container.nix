@@ -44,6 +44,7 @@
     });
   '';
 
-  # Fix conflict
   programs.ssh.setXAuthLocation = lib.mkForce true;
+
+  system.stateVersion = "26.05";
 }

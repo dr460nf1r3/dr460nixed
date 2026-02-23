@@ -55,7 +55,6 @@
     rustdesk
     speedcrunch
     tcpdump
-    tdesktop
     usbutils
     (vscode-with-extensions.override {
       vscodeExtensions =

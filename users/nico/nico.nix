@@ -1,4 +1,4 @@
-_:
+{ lib, ... }:
 let
   forwardPostgres = "-L 5433:127.0.0.1:5432";
   hetznerStoragebox = "your-storagebox.de";
@@ -78,5 +78,5 @@ in
     difftastic.enable = true;
   };
 
-  home.stateVersion = "26.05";
+  home.stateVersion = lib.mkForce "26.05";
 }

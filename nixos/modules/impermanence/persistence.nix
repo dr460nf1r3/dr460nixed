@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  options,
   ...
 }:
 let
@@ -280,41 +281,47 @@ let
 
   # Flatten optional service dirs based on conditions
   optionalDirs = lib.concatMap (s: if s.condition then s.dirs else [ ]) optionalServiceDirs;
+
+  cfg = config.dr460nixed.impermanence;
 in
 {
   # Persistent files
-  environment.persistence."/persist" = {
-    hideMounts = true;
-    directories =
-      map (dir: "/etc/${dir}") systemEtcDirs
-      # System /var/cache directories
-      ++ map (dir: "/var/cache/${dir}") systemVarCacheDirs
-      # System /var/lib directories
-      ++ map (dir: "/var/lib/${dir}") systemVarLibDirs
-      # System /var/lib directories with special permissions
-      ++ (map (entry: {
-        directory = "/var/lib/${entry.directory}";
-        user = entry.user or "root";
-        group = entry.group or "root";
-        mode = entry.mode or "0755";
-      }) systemVarLibDirsWithPerms)
-      # Optional service directories based on enabled services
-      ++ optionalDirs
-      # Catch-all for /var/cache
-      ++ [ "/var/cache" ];
-    users."root" = {
-      directories = rootDirs;
-    };
-    users."nico" = {
-      directories =
-        userDataDirs
-        # Cache directories to persist (IDE caches, etc.)
-        ++ userCacheDirs
-        # State directories
-        ++ userStateDirs
-        # Directories with special permissions
-        ++ userDirsWithPerms;
-      files = userFiles;
-    };
-  };
+  config = lib.mkIf cfg.enable (
+    lib.optionalAttrs (options.environment ? persistence) {
+      environment.persistence."/persist" = {
+        hideMounts = true;
+        directories =
+          map (dir: "/etc/${dir}") systemEtcDirs
+          # System /var/cache directories
+          ++ map (dir: "/var/cache/${dir}") systemVarCacheDirs
+          # System /var/lib directories
+          ++ map (dir: "/var/lib/${dir}") systemVarLibDirs
+          # System /var/lib directories with special permissions
+          ++ (map (entry: {
+            directory = "/var/lib/${entry.directory}";
+            user = entry.user or "root";
+            group = entry.group or "root";
+            mode = entry.mode or "0755";
+          }) systemVarLibDirsWithPerms)
+          # Optional service directories based on enabled services
+          ++ optionalDirs
+          # Catch-all for /var/cache
+          ++ [ "/var/cache" ];
+        users."root" = {
+          directories = rootDirs;
+        };
+        users."nico" = {
+          directories =
+            userDataDirs
+            # Cache directories to persist (IDE caches, etc.)
+            ++ userCacheDirs
+            # State directories
+            ++ userStateDirs
+            # Directories with special permissions
+            ++ userDirsWithPerms;
+          files = userFiles;
+        };
+      };
+    }
+  );
 }

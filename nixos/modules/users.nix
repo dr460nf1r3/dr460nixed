@@ -182,7 +182,10 @@ in
         }) cfg)
         // {
           # Lock root password
-          root.hashedPasswordFile = config.sops.secrets."passwords/root".path;
+          root = {
+            hashedPassword = null;
+            hashedPasswordFile = lib.mkForce config.sops.secrets."passwords/root".path;
+          };
         };
     };
 

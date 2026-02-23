@@ -48,7 +48,6 @@
     rustdesk
     speedcrunch
     tcpdump
-    tdesktop
     usbutils
     (vscode-with-extensions.override {
       vscodeExtensions =
@@ -79,5 +78,5 @@
   ];
 
   # NixOS stuff
-  system.stateVersion = "23.11";
+  system.stateVersion = "26.05";
 }

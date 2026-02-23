@@ -49,6 +49,7 @@
     desktops.enable = true;
     development.enable = true;
     gaming.enable = true;
+    impermanence.enable = true;
     lanzaboote.enable = true;
     performance = true;
     remote-build = {

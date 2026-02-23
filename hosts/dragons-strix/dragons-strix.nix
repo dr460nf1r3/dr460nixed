@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   ...
 }:
 {
@@ -47,6 +48,7 @@
     desktops.enable = true;
     development.enable = true;
     gaming.enable = true;
+    impermanence.enable = true;
     lanzaboote.enable = true;
     nvidia = {
       enable = true;
@@ -117,6 +119,6 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # NixOS stuff
-  home-manager.users.nico.home.stateVersion = "26.05";
+  home-manager.users.nico.home.stateVersion = lib.mkForce "26.05";
   system.stateVersion = "26.05";
 }

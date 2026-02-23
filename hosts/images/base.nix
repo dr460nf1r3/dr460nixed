@@ -35,6 +35,11 @@ in
   dr460nixed.garuda.home-manager.modules = [ ../../home-manager/common.nix ];
 
   # Image configuration
+  image = {
+    baseName = lib.mkForce "dr460nixed";
+    fileName = lib.mkForce "${config.image.baseName}-${config.system.nixos.label}.iso";
+  };
+
   isoImage = {
     # Add memtest86+ to the ISO
     contents = [
@@ -46,8 +51,6 @@ in
 
     # The ISO image name and edition label
     edition = "dr460nixed";
-    isoBaseName = lib.mkForce "dr460nixed";
-    isoName = lib.mkForce "${config.isoImage.isoBaseName}-${config.system.nixos.label}.iso";
 
     # Speed up the insanely slow compression process
     squashfsCompression = "gzip -Xcompression-level 1";
@@ -245,5 +248,5 @@ in
   networking.wireless.enable = lib.mkForce false;
 
   # NixOS stuff
-  system.stateVersion = "23.11";
+  system.stateVersion = "26.05";
 }
