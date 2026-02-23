@@ -11,7 +11,7 @@ let
   localDir = ".local/share";
 
   # JamesDSP Dolby presets
-  jamesdsp = inputs.self.drLib.jamesdsp pkgs;
+  jamesdsp = inputs.self.dragonLib.jamesdsp pkgs;
 in
 {
   # Theme our desktop launchers

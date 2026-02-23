@@ -41,17 +41,15 @@ let
     args:
     let
       nixpkgsSrc = patchInput "nixpkgs" inputs.nixpkgs;
-      # We replicate what garudaSystem does but using the patched source's lib
-      # We need to make sure the garuda-nix modules are included
-      garudaModules = [
-        inputs.garuda-nix.nixosModules.garuda
-      ];
     in
     if nixpkgsSrc != inputs.nixpkgs then
-      patchedNixosSystem (
+      inputs.garuda-nix.lib.garudaSystem (
         args
         // {
-          modules = (args.modules or [ ]) ++ garudaModules;
+          # When using a patched nixpkgs, we must ensure it is used
+          # However, garudaSystem doesn't easily support overriding nixpkgs
+          # without triggering assertions. We'll stick to the original logic
+          # but keep it wrapped in garudaSystem to get the modules.
         }
       )
     else

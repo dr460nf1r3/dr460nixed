@@ -22,7 +22,7 @@ in
 
   config = lib.mkIf cfg.enable {
     # Enable the Catppuccinified desktops settings
-    garuda.catppuccin.enable = true;
+    dr460nixed.garuda.catppuccin.enable = true;
 
     environment = {
       variables = {
@@ -30,6 +30,7 @@ in
       };
     };
 
+    services.desktopManager.plasma6.enable = true;
     services.displayManager.plasma-login-manager.enable = true;
     services.displayManager.sddm.enable = lib.mkForce false;
 

@@ -54,8 +54,8 @@
     '';
     settings = {
       # A few extra binary caches and their public keys
-      inherit (inputs.self.drLib.binaryCaches) substituters;
-      inherit (inputs.self.drLib.binaryCaches) trusted-public-keys;
+      inherit (inputs.self.dragonLib.binaryCaches) substituters;
+      inherit (inputs.self.dragonLib.binaryCaches) trusted-public-keys;
 
       # Enable certain system features
       system-features = [

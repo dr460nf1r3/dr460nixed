@@ -7,8 +7,10 @@
 {
   # Import common configurations
   imports = [
-    ../modules/nix.nix
-    ../modules/shells.nix
+    ../../nixos/modules/nix.nix
+    ../../nixos/modules/shells.nix
+    ../../users/nico/nixos.nix
+    inputs.impermanence.nixosModules.impermanence
   ];
 
   # WSL flake settings
@@ -28,6 +30,9 @@
       network.generateResolvConf = false;
     };
   };
+
+  # WSL does not use initrd
+  boot.initrd.enable = lib.mkForce false;
 
   # Required by nixos-wsl
   networking.nftables.enable = lib.mkForce false;
@@ -144,10 +149,6 @@
     };
   };
 
-  home-manager.users."nico".imports = [
-    inputs.catppuccin.homeModules.catppuccin
-  ];
-
   # NixOS stuff
-  system.stateVersion = "25.05";
+  system.stateVersion = "26.05";
 }

@@ -454,8 +454,7 @@ in
       ];
     in
     lib.mkForce (
-      # Overriding garuda-nix flakes defaults here
-      (lib.genAttrs code (_: [ "code.desktop" ]))
+      (lib.genAttrs code (_: [ "zed.desktop" ]))
       // (lib.genAttrs archives (_: [ "ark.desktop" ]))
       // (lib.genAttrs audioVideo (_: [ "vlc.desktop" ]))
       // (lib.genAttrs documents (_: [ "okular.desktop" ]))

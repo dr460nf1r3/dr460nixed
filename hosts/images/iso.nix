@@ -7,11 +7,13 @@
   # Import base configuration
   imports = [ ./base.nix ];
 
+  users.users.nixos.autoSubUidGidRange = false;
+
   # Enable a few selected custom settings
   dr460nixed.desktops.enable = true;
 
   # Home-manager configuration for desktops
-  garuda = {
+  dr460nixed.garuda = {
     home-manager.modules = [ ../../home-manager/desktops.nix ];
     noSddmAutologin = {
       enable = true;
@@ -21,7 +23,7 @@
   };
 
   # Fix conflict with the cd-graphical-base module (we use Pipewire)
-  hardware.pulseaudio.enable = lib.mkForce false;
+  services.pulseaudio.enable = lib.mkForce false;
 
   # Desktop environment packages
   environment.systemPackages = with pkgs; [

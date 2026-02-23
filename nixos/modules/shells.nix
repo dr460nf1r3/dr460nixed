@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -8,6 +9,8 @@ let
   cfg = config.dr460nixed.shells;
 in
 {
+  imports = [ inputs.direnv-instant.nixosModules.direnv-instant ];
+
   options.dr460nixed.shells.enable =
     with lib;
     mkOption {
@@ -26,6 +29,9 @@ in
           "grep" = "${pkgs.ugrep}/bin/ugrep";
         };
       };
+
+      direnv-instant.enable = true;
+
       fish = {
         shellAbbrs = {
           "gpl" = "${pkgs.curl}/bin/curl https://www.gnu.org/licenses/gpl-3.0.txt -o LICENSE";

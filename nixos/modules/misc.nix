@@ -122,7 +122,7 @@ in
     security.chromiumSuidSandbox.enable = lib.mkIf cfg.chromium true;
 
     # Enhance performance tweaks
-    garuda.performance-tweaks.enable = lib.mkIf cfg.performance true;
+    dr460nixed.garuda.performance-tweaks.enable = lib.mkIf cfg.performance true;
     boot.kernelPackages = lib.mkIf cfg.performance pkgs.cachyosKernels.linuxPackages-cachyos-latest;
   };
 }

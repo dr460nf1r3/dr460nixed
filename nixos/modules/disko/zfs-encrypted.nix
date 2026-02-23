@@ -1,4 +1,5 @@
 {
+  lib,
   disks ? [ "/dev/nvme0n1" ],
   ...
 }:
@@ -12,7 +13,7 @@
             ESP = {
               content = {
                 format = "vfat";
-                mountpoint = "/boot";
+                mountpoint = lib.mkDefault "/boot";
                 type = "filesystem";
               };
               size = "1024M";

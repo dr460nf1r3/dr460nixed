@@ -66,7 +66,7 @@ All custom options live under the `dr460nixed` namespace (e.g., `dr460nixed.desk
 - `nixos/modules/disko/` - Disk partitioning presets (btrfs, luks-btrfs, zfs, zfs-encrypted, simple-efi)
 - `nixos/<hostname>/` - Per-host configuration + hardware-configuration
 - `home-manager/` - Shared home-manager modules
-- `home-manager/nico/` - Personal user config (git, shells, email)
+- `users/nico/` - Personal user config (git, shells, email, NixOS user settings)
 - `overlays/default.nix` - Package overlays (chromium, OBS, KDE applet patches)
 - `template/` - Starter flake for `nix flake init`
 

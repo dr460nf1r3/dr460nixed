@@ -7,7 +7,9 @@ let
 in
 {
   # Import individual configuration snippets
-  imports = [ ./email.nix ];
+  imports = [
+    ./email.nix
+  ];
 
   # I'm working with git a lot
   programs = {
@@ -75,4 +77,6 @@ in
     # difftastic is now its own program
     difftastic.enable = true;
   };
+
+  home.stateVersion = "26.05";
 }

@@ -1,30 +1,16 @@
+{ lib, ... }:
+let
+  # Find all .nix files in the current directory, excluding default.nix
+  # We only take top-level files to avoid importing mutually exclusive modules from subdirs
+  files = builtins.readDir ./.;
+  nixFiles = lib.filterAttrs (
+    name: type: name != "default.nix" && type == "regular" && lib.hasSuffix ".nix" name
+  ) files;
+  validModules = lib.mapAttrsToList (name: _: ./. + "/${name}") nixFiles;
+in
 {
   imports = [
     ../../overlays
-    ./apps.nix
-    ./boot.nix
-    ./common.nix
-    ./compose-runner.nix
-    ./desktops.nix
-    ./deterministic-ids.nix
-    ./development.nix
-    ./gaming.nix
-    ./hardening.nix
-    ./home-manager.nix
-    ./locales.nix
-    ./misc.nix
-    ./monitoring.nix
-    ./msmtp.nix
-    ./networking.nix
-    ./nix.nix
-    ./nvidia.nix
-    ./oci.nix
-    ./users.nix
-    ./servers.nix
-    ./shells.nix
-    ./syncthing.nix
-    ./tailscale.nix
-    ./tailscale-tls.nix
-    ./zfs.nix
-  ];
+  ]
+  ++ validModules;
 }

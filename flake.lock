@@ -151,6 +151,32 @@
         "type": "github"
       }
     },
+    "direnv-instant": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": [
+          "treefmt-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1771225960,
+        "narHash": "sha256-JnMhZ4HrpBzzDY6pDCsDXrlljhW+Y/bwlC7lG8ExUMo=",
+        "owner": "Mic92",
+        "repo": "direnv-instant",
+        "rev": "36f1e18aebf51392347ea05b3d69bb2ab9540523",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "direnv-instant",
+        "type": "github"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -334,11 +360,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1771736639,
-        "narHash": "sha256-Lz9QfT+cIXeDE6YPZUkO40SX15zaBarEPyj/2arJRao=",
+        "lastModified": 1771823065,
+        "narHash": "sha256-0PjO6WSTPJ7sUpKmAxr+SCMC4BS5/BAKaf+sist555g=",
         "owner": "garuda-linux",
         "repo": "garuda-nix-subsystem",
-        "rev": "979ba66bffce87a86aa84cb83655cc9ed4863886",
+        "rev": "883cccd83f37da4f8d0acd55b42a2009c2334271",
         "type": "gitlab"
       },
       "original": {
@@ -359,11 +385,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1770726378,
-        "narHash": "sha256-kck+vIbGOaM/dHea7aTBxdFYpeUl/jHOy5W3eyRvVx8=",
+        "lastModified": 1771858127,
+        "narHash": "sha256-Gtre9YoYl3n25tJH2AoSdjuwcqij5CPxL3U3xysYD08=",
         "owner": "cachix",
         "repo": "git-hooks.nix",
-        "rev": "5eaaedde414f6eb1aea8b8525c466dc37bba95ae",
+        "rev": "49bbbfc218bf3856dfa631cead3b052d78248b83",
         "type": "github"
       },
       "original": {
@@ -463,11 +489,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1771756436,
-        "narHash": "sha256-Tl2I0YXdhSTufGqAaD1ySh8x+cvVsEI1mJyJg12lxhI=",
+        "lastModified": 1771851181,
+        "narHash": "sha256-gFgE6mGUftwseV3DUENMb0k0EiHd739lZexPo5O/sdQ=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "5bd3589390b431a63072868a90c0f24771ff4cbb",
+        "rev": "9a4b494b1aa1b93d8edf167f46dc8e0c0011280c",
         "type": "github"
       },
       "original": {
@@ -542,11 +568,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1771492583,
-        "narHash": "sha256-nQzvnU4BGu8dA6BsPPCqmVcab/3ebVmHtX3ZWbW3Hxc=",
+        "lastModified": 1771834715,
+        "narHash": "sha256-5VI2KiMifx3Dca7nDJzctO3HpnS6zrvesdkLoZBrQRY=",
         "owner": "nix-community",
         "repo": "lanzaboote",
-        "rev": "5e9380994665ef66c87ab8e22c913ff837174ce4",
+        "rev": "b798c53da0f7e521317a5413335096a21070cf0b",
         "type": "github"
       },
       "original": {
@@ -559,11 +585,11 @@
     "lix": {
       "flake": false,
       "locked": {
-        "lastModified": 1771714213,
-        "narHash": "sha256-xn3J+bJHrfufHzHeaMcaTHnZW1sFwlpv9Mgq39j9Euc=",
-        "rev": "01ff67595bb138b8d1db866d2c5cedd17627f16c",
+        "lastModified": 1771865702,
+        "narHash": "sha256-Omv7QkDiSTV3CkF6xvbob15Bt3fEN1k7FrVDa9ZDdgU=",
+        "rev": "864c5e75077a9806a37654bb12aec50160e51da9",
         "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/01ff67595bb138b8d1db866d2c5cedd17627f16c.tar.gz?rev=01ff67595bb138b8d1db866d2c5cedd17627f16c"
+        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/864c5e75077a9806a37654bb12aec50160e51da9.tar.gz?rev=864c5e75077a9806a37654bb12aec50160e51da9"
       },
       "original": {
         "type": "tarball",
@@ -628,11 +654,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1771728260,
-        "narHash": "sha256-WNa4vTrY1QdOciYsgOUpuzvWpRnTeiL71Q5Dz8OGXHI=",
+        "lastModified": 1771830876,
+        "narHash": "sha256-18G4VyxjjQ/fM7yjBIbHQEdJlodUd/J5KlG5RuFqRG0=",
         "owner": "fufexan",
         "repo": "nix-gaming",
-        "rev": "e43670cf52bdad1846e0b9b411c81776c0b2668f",
+        "rev": "e70ef8581abe41fc62428cd4a5da47405233b19d",
         "type": "github"
       },
       "original": {
@@ -828,6 +854,34 @@
         "type": "github"
       }
     },
+    "nixpkgs-nvidia": {
+      "locked": {
+        "lastModified": 1771170098,
+        "narHash": "sha256-xWU7EFeR+OQk4UcykJD5pOjhHle6/VPAHQqsNUWj4Rc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ab9ad415916a0fb89d1f539a9291d9737e95148e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ab9ad415916a0fb89d1f539a9291d9737e95148e",
+        "type": "github"
+      }
+    },
+    "nixpkgs-patch-nvidia-590": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-tf5RDCzWiJWxmP6y66lUQkmLAtcubZDpCQWKR31WGRM=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/490123.patch"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/490123.patch"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1771369470,
@@ -880,11 +934,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1770726378,
-        "narHash": "sha256-kck+vIbGOaM/dHea7aTBxdFYpeUl/jHOy5W3eyRvVx8=",
+        "lastModified": 1771858127,
+        "narHash": "sha256-Gtre9YoYl3n25tJH2AoSdjuwcqij5CPxL3U3xysYD08=",
         "owner": "cachix",
         "repo": "pre-commit-hooks.nix",
-        "rev": "5eaaedde414f6eb1aea8b8525c466dc37bba95ae",
+        "rev": "49bbbfc218bf3856dfa631cead3b052d78248b83",
         "type": "github"
       },
       "original": {
@@ -898,6 +952,7 @@
         "catppuccin": "catppuccin",
         "colmena": "colmena",
         "devshell": "devshell",
+        "direnv-instant": "direnv-instant",
         "disko": "disko",
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
@@ -921,6 +976,8 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-nvidia": "nixpkgs-nvidia",
+        "nixpkgs-patch-nvidia-590": "nixpkgs-patch-nvidia-590",
         "pre-commit-hooks": "pre-commit-hooks",
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",

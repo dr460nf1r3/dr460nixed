@@ -8,7 +8,7 @@ let
   configDir = ".config";
 
   # JamesDSP Dolby presets
-  jamesdsp = inputs.self.drLib.jamesdsp pkgs;
+  jamesdsp = inputs.self.dragonLib.jamesdsp pkgs;
 in
 {
   # Import individual configuration snippets

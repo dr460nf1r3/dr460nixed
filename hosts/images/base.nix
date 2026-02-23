@@ -29,8 +29,10 @@ in
   # Use CachyOS kernel & a few things like ZRAM
   dr460nixed.performance = true;
 
+  users.users.nixos.autoSubUidGidRange = false;
+
   # Basic home-manager configuration, also importing garuda-nix dotfiles
-  garuda.home-manager.modules = [ ../../home-manager/common.nix ];
+  dr460nixed.garuda.home-manager.modules = [ ../../home-manager/common.nix ];
 
   # Image configuration
   isoImage = {
@@ -44,7 +46,7 @@ in
 
     # The ISO image name and edition label
     edition = "dr460nixed";
-    isoBaseName = "dr460nixed";
+    isoBaseName = lib.mkForce "dr460nixed";
     isoName = lib.mkForce "${config.isoImage.isoBaseName}-${config.system.nixos.label}.iso";
 
     # Speed up the insanely slow compression process
@@ -240,7 +242,7 @@ in
   hardware.enableRedistributableFirmware = true;
 
   # We use iwd instead
-  networking.wireless.enable = false;
+  networking.wireless.enable = lib.mkForce false;
 
   # NixOS stuff
   system.stateVersion = "23.11";

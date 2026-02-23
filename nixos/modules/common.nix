@@ -18,13 +18,6 @@ in
         '';
       };
     };
-    rpi = mkOption {
-      default = false;
-      type = types.bool;
-      description = mdDoc ''
-        Whether this is a Raspberry Pi.
-      '';
-    };
     nodocs = mkOption {
       default = true;
       type = types.bool;
@@ -35,6 +28,8 @@ in
   };
 
   config = lib.mkIf cfg.common.enable {
+    nixpkgs.config.allowUnfree = true;
+
     # A few kernel tweaks
     boot.kernelParams = [ "noresume" ];
 
@@ -58,7 +53,7 @@ in
     };
 
     # Theming
-    catppuccin.enable = true;
+    dr460nixed.garuda.catppuccin.enable = true;
 
     # Increase open file limit for sudoers
     security.pam.loginLimits = [
@@ -111,7 +106,7 @@ in
     hardware.enableRedistributableFirmware = true;
 
     # No need for that in real NixOS systems
-    garuda.garuda-nix-manager.enable = false;
+    dr460nixed.garuda.garuda-nix-manager.enable = false;
 
     # Custom label for boot menu entries (otherwise set to "garuda-nix-subsystem")
     system.nixos.label = lib.mkForce (

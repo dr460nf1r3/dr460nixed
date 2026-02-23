@@ -38,7 +38,7 @@ in
           type = "basic";
         }
       ];
-      dns = "none";
+      dns = lib.mkForce "none";
       enable = true;
     };
 

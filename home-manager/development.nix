@@ -94,18 +94,4 @@
 
   # GitHub CLI
   programs.gh.settings.git_protocol = "ssh";
-
-  # Claude
-  programs.claude-code = {
-    enable = true;
-    memory.text = ''
-      This user has Nix installed, for simple things you can `nix run nixpkgs#pkgname -- args`.
-
-      If new ad-hoc environments are interesting, check https://devenv.sh/ad-hoc-developer-environments/
-    '';
-    settings = {
-      theme = "dark";
-      includeCoAuthoredBy = true;
-    };
-  };
 }

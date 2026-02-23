@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -74,7 +75,15 @@ in
           modesetting.enable = true;
           inherit (cfg) open;
           nvidiaSettings = true;
-          package = config.boot.kernelPackages.nvidiaPackages.stable;
+          package =
+            let
+              nvidia-fixed-pkgs = import inputs.nixpkgs-nvidia {
+                inherit (pkgs) system;
+                config.allowUnfree = true;
+              };
+              fixedKernelPackages = nvidia-fixed-pkgs.linuxKernel.packagesFor config.boot.kernelPackages.kernel;
+            in
+            fixedKernelPackages.nvidiaPackages.beta;
           powerManagement.enable = true;
         };
 

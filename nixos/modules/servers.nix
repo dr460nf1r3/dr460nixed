@@ -39,7 +39,7 @@ in
     dr460nixed.shells.enable = lib.mkDefault false;
 
     # These aren't needed on servers, but default on GNS
-    garuda = {
+    dr460nixed.garuda = {
       audio.pipewire.enable = false;
       hardware.enable = false;
       networking.enable = false;

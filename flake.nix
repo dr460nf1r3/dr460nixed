@@ -23,6 +23,13 @@
       flake = false;
     };
 
+    direnv-instant = {
+      url = "github:Mic92/direnv-instant";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+    };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -174,6 +181,14 @@
     };
 
     ucodenix.url = "github:e-tho/ucodenix";
+
+    nixpkgs-nvidia.url = "github:NixOS/nixpkgs/ab9ad415916a0fb89d1f539a9291d9737e95148e";
+
+    # Patches
+    nixpkgs-patch-nvidia-590 = {
+      url = "https://github.com/NixOS/nixpkgs/pull/490123.patch";
+      flake = false;
+    };
   };
 
   outputs =
@@ -189,15 +204,16 @@
         nico = inputs.keys_nico;
       };
 
-      drLib = import ./lib {
+      dragonLib = import ./lib {
         inherit inputs self;
         outputs = self;
         inherit keys;
       };
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
-      _module.args.drLib = drLib;
+      _module.args.dragonLib = dragonLib;
       imports = [
+        ./hosts/flake-module.nix
         ./nixos/flake-module.nix
         ./packages/flake-module.nix
         inputs.git-hooks.flakeModule
@@ -282,9 +298,9 @@
         };
 
       flake = {
-        inherit drLib;
+        inherit dragonLib;
 
-        colmenaHive = self.drLib.mkColmenaHive nixpkgs.legacyPackages.x86_64-linux { };
+        colmenaHive = self.dragonLib.mkColmenaHive nixpkgs.legacyPackages.x86_64-linux { };
 
         diskoConfigurations = {
           btrfs-subvolumes = import ./nixos/modules/disko/btrfs-subvolumes.nix { };

@@ -10,6 +10,7 @@
     ./matrix.nix
     ./redlib.nix
     ./wakapi.nix
+    ../../users/nico/nixos.nix
   ];
 
   # Boot options
@@ -142,7 +143,7 @@
       http3_hq = true;
       kTLS = true;
       locations = {
-        "~* ^/chaotic-aur/([^/]+)/x86_64/(?!\1\.(db|files))[^/]+$" = {
+        "~* ^/chaotic-aur/([^/]+)/x86_64/(?!1.(db|files))[^/]+$" = {
           extraConfig = ''
             add_header Cache-Control "max-age=150, stale-while-revalidate=150, stale-if-error=86400";
           '';

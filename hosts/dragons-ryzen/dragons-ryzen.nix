@@ -7,7 +7,8 @@
   # Individual settings + low-latency Pipewire
   imports = [
     ./hardware-configuration.nix
-    ../modules/impermanence.nix
+    ../../nixos/modules/impermanence.nix
+    ../../users/nico/nixos.nix
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
 
@@ -57,20 +58,20 @@
       trustedPublicKey = "immortalis:8vrLBvFoMiKVKRYD//30bhUBTEEiuupfdQzl2UoMms4=";
       user = "nico";
     };
-    tailscale = {
-      enable = true;
-      extraUpArgs = [
-        "--accept-dns"
-        "--accept-risk=lose-ssh"
-        "--accept-routes"
-        "--ssh"
-      ];
-    };
+    tailscale.enable = true;
     yubikey = true;
   };
 
+  # Tailscale auto-connect
+  services.tailscale.extraUpFlags = [
+    "--accept-dns"
+    "--accept-risk=lose-ssh"
+    "--accept-routes"
+    "--ssh"
+  ];
+
   # Garuda Nix subsystem modules
-  garuda = {
+  dr460nixed.garuda = {
     btrfs-maintenance = {
       deduplication = true;
       enable = true;
@@ -106,9 +107,6 @@
     '';
     wantedBy = [ "basic.target" ];
   };
-
-  # Home-manager individual settings
-  home-manager.users."nico" = import ../../home-manager/nico/nico.nix;
 
   # For some reason Bluetooth only works after un-/reloading
   # the btusb kernel module

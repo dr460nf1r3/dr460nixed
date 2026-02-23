@@ -133,8 +133,8 @@ in
         # Specify the path to the nix registry
         flake-registry = "/etc/nix/registry.json";
 
-        inherit (inputs.self.drLib.binaryCaches) substituters;
-        inherit (inputs.self.drLib.binaryCaches) trusted-public-keys;
+        inherit (inputs.self.dragonLib.binaryCaches) substituters;
+        inherit (inputs.self.dragonLib.binaryCaches) trusted-public-keys;
       };
     };
 
@@ -158,7 +158,7 @@ in
 
     # Let root ssh into the remote builder seamlessly
     home-manager.users."root" = lib.mkIf cfgRemote.enable {
-      home.stateVersion = "25.11"; # Specify this since its otherwise unset
+      home.stateVersion = "26.05";
       programs.ssh.extraConfig = ''
         Host ${cfgRemote.host}
           HostName ${cfgRemote.host}

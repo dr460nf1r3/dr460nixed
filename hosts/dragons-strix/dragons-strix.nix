@@ -6,7 +6,8 @@
   # Individual settings + low-latency Pipewire
   imports = [
     ./hardware-configuration.nix
-    ../modules/impermanence.nix
+    ../../nixos/modules/impermanence.nix
+    ../../users/nico/nixos.nix
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
 
@@ -58,10 +59,27 @@
     performance = true;
     yubikey = true;
     tailscale.enable = true;
+    wireguard = {
+      enable = true;
+      interfaces.nws = {
+        address = [ "10.100.1.3/16" ];
+        privateKeySecretName = "wireguard/nws";
+        peers = [
+          {
+            publicKey = "4f8Qr2M09vJn8ag6EM9MTK6bYS8jRfz1bqQLeCJ5izo=";
+            allowedIPs = [
+              "10.100.0.1/32"
+              "172.16.0.0/16"
+            ];
+            endpoint = "138.201.36.152:51820";
+          }
+        ];
+      };
+    };
   };
 
   # Garuda Nix subsystem modules
-  garuda = {
+  dr460nixed.garuda = {
     btrfs-maintenance = {
       deduplication = true;
       enable = true;
@@ -74,6 +92,7 @@
     enable = true;
     user = "nico";
   };
+  services.displayManager.defaultSession = "plasma";
 
   # Force KWin to use the AMD GPU as the primary DRM device
   # This fixes GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT errors on hybrid graphics
@@ -97,9 +116,7 @@
   # AMD as primary GPU driver
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  # Home-manager individual settings
-  home-manager.users."nico" = import ../../home-manager/nico/nico.nix;
-
   # NixOS stuff
-  system.stateVersion = "25.11";
+  home-manager.users.nico.home.stateVersion = "26.05";
+  system.stateVersion = "26.05";
 }
