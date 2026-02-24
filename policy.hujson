@@ -1,7 +1,5 @@
 // This tailnet's ACLs are maintained in https://github.com/dr460nf1r3/dr460nixed
 {
-	// Define access control lists for users, groups, autogroups, tags,
-	// Tailscale IP addresses, and subnet ranges
 	"acls": [
 		// All tagged devices can access each other
 		{
@@ -27,44 +25,62 @@
 			"src":    ["dr460nf1r3@github"],
 			"dst":    ["*:*"],
 		},
-		// Allow scraping metrics via node_exporter
+		// Devices tagged dev-untrusted can communicate amongst themselves
 		{
 			"action": "accept",
-			"src":    ["100.86.102.115"],
-			"dst":    ["100.97.58.140:3021"],
+			"src":    ["tag:dev-untrusted"],
+			"dst":    ["tag:dev-untrusted:*"],
 		},
 	],
 
-	// Allow the usage of Tailscale SSH - enabling VSCode extension
+	// Allow the usage of Tailscale SSH
 	"ssh": [
 		{
 			"action": "accept",
 			"src":    ["dr460nf1r3@github"],
-			"dst":    ["dr460nf1r3@github", "tag:dragons", "tag:others", "tag:connector"],
-			"users":  ["nico"],
+
+			"dst": [
+				"dr460nf1r3@github",
+				"tag:dragons",
+				"tag:others",
+				"tag:connector",
+			],
+
+			"users": ["nico"],
 		},
 	],
 
 	// Allow my personal devices to use Mullvad exit nodes
-	"nodeAttrs": [{
-		"target": ["dr460nf1r3@github", "tag:dragons"],
-		"attr":   ["mullvad"],
-	}, {"target": ["*"], "app": {"tailscale.com/app-connectors": [
+	"nodeAttrs": [
 		{
-			"name":       "reddit",
-			"connectors": ["tag:connector"],
-			"domains":    ["reddit.com", "*.reddit.com"],
+			"target": ["dr460nf1r3@github", "tag:dragons"],
+			"attr":   ["mullvad"],
 		},
 		{
-			"name":       "netflix",
-			"connectors": ["tag:dragons"],
-			"domains":    ["netflix.com", "*.netflix.com"],
+			"target": ["*"],
+
+			"app": {
+				"tailscale.com/app-connectors": [
+					{
+						"name":       "reddit",
+						"connectors": ["tag:connector"],
+						"domains":    ["reddit.com", "*.reddit.com"],
+					},
+					{
+						"name":       "netflix",
+						"connectors": ["tag:dragons"],
+						"domains":    ["netflix.com", "*.netflix.com"],
+					},
+				],
+			},
 		},
-	]}}, {
-		// Funnel policy, allowing the use this feature
-		"target": ["autogroup:member", "tag:dragons", "tag:others"],
-		"attr":   ["funnel"],
-	}],
+		{
+			// Funnel policy, allowing the use this feature
+			"target": ["autogroup:member", "tag:dragons", "tag:others"],
+
+			"attr": ["funnel"],
+		},
+	],
 
 	// Auto approver for connector nodes
 	"autoApprovers": {
@@ -78,9 +94,40 @@
 	"tagOwners": {
 		// Tag for connector nodes
 		"tag:connector": ["dr460nf1r3@github"],
+
 		// Admins own devices with tag:dragons
 		"tag:dragons": ["dr460nf1r3@github"],
+
 		// Admins own devices with tag:others
 		"tag:others": ["dr460nf1r3@github"],
+
+		// Admins own devices tagged dev-untrusted as well
+		"tag:dev-untrusted": ["dr460nf1r3@github"],
 	},
+
+	// Do some tests to verify important functionality
+	"tests": [
+		{
+			"src":   "tag:dev-untrusted",
+			"deny":  ["tag:dragons:80"],
+			"proto": "tcp",
+		},
+		// SSH should also be blocked from untrusted dev hosts
+		{
+			"src":   "tag:dev-untrusted",
+			"deny":  ["tag:dragons:22"],
+			"proto": "tcp",
+		},
+		// Peers within dev-untrusted may talk freely
+		{
+			"src":   "tag:dev-untrusted",
+			"allow": ["tag:dev-untrusted:1234"],
+			"proto": "tcp",
+		},
+		// Ensure the admin account still has full access
+		{
+			"src":   "dr460nf1r3@github",
+			"allow": ["tag:dev-untrusted:22"],
+		},
+	],
 }
