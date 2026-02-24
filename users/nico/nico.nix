@@ -9,13 +9,24 @@ in
   # Import individual configuration snippets
   imports = [
     ./email.nix
+    ../../home-manager
   ];
+
+  dr460nixed.hm = {
+    common.enable = true;
+    git = {
+      enable = true;
+      userEmail = "root@dr460nf1r3.org";
+      userName = "Nico Jensch";
+      signingKey = "D245D484F3578CB17FD6DA6B67DB29BFF3C96757";
+    };
+    shell.enable = true;
+  };
 
   # I'm working with git a lot
   programs = {
     # Bash receives aliases
     bash = {
-      enable = true;
       shellAliases = {
         "b1" = "ssh -p23 u342919@u342919.${hetznerStoragebox}";
         "b2" = "ssh -p23 u358867@u358867.${hetznerStoragebox}";
@@ -33,7 +44,6 @@ in
     };
     # Fish receives auto-expanding abbreviations (much cooler!)
     fish = {
-      enable = true;
       shellAbbrs = {
         "b1" = "ssh -p23 u342919@u342919.${hetznerStoragebox}";
         "b2" = "ssh -p23 u358867@u358867.${hetznerStoragebox}";
@@ -49,33 +59,6 @@ in
         "g9" = "ssh -p229 ${user}@${immortalis} ${forwardPostgres}";
       };
     };
-    gh = {
-      enable = true;
-      settings.git_protocol = "ssh";
-    };
-    # Git configuration has been reorganised following  home-manager
-    # renames. the old `userEmail`, `userName`, and `extraConfig`
-    # options now live under `settings` and we move `difftastic` out of
-    # the git namespace completely.
-    git = {
-      enable = true;
-      settings = {
-        user = {
-          email = "root@dr460nf1r3.org";
-          name = "Nico Jensch";
-        };
-        color.ui = "auto";
-        help.autocorrect = 10;
-        pull.rebase = true;
-        push.autoSetupRemote = true;
-      };
-      signing = {
-        key = "D245D484F3578CB17FD6DA6B67DB29BFF3C96757";
-        signByDefault = true;
-      };
-    };
-    # difftastic is now its own program
-    difftastic.enable = true;
   };
 
   home.stateVersion = lib.mkForce "26.05";

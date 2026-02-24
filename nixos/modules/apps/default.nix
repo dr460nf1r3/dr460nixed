@@ -6,5 +6,6 @@
     ./desktops.nix
     ./development.nix
     ./gaming.nix
+    ./mime.nix
   ];
 }

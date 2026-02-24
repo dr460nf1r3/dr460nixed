@@ -52,6 +52,11 @@
     ];
   };
 
+  nix.settings.system-features = [
+    "big-parallel"
+    "kvm"
+  ];
+
   dr460nixed = {
     compose-runner = {
       "cup-dragon" = {
@@ -64,6 +69,28 @@
     };
     smtp.enable = true;
     tailscale.enable = true;
+  };
+
+  # SSL certs for the server
+  security.acme.certs = {
+    "dr460nf1r3.org" = {
+      extraDomainNames = [ "*.dr460nf1r3.org" ];
+      dnsProvider = "cloudflare";
+      dnsPropagationCheck = true;
+      credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
+    };
+    "garudalinux.org" = {
+      extraDomainNames = [ "*.garudalinux.org" ];
+      dnsProvider = "cloudflare";
+      dnsPropagationCheck = true;
+      credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
+    };
+    "chaotic.cx" = {
+      extraDomainNames = [ "*.chaotic.cx" ];
+      dnsProvider = "cloudflare";
+      dnsPropagationCheck = true;
+      credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
+    };
   };
 
   # Some of the services I require

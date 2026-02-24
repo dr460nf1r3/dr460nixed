@@ -13,7 +13,7 @@
   dr460nixed.desktops.enable = true;
 
   # Home-manager configuration for desktops
-  dr460nixed.garuda = {
+  garuda = {
     home-manager.modules = [ ../../home-manager/desktops.nix ];
     noSddmAutologin = {
       enable = true;

@@ -100,6 +100,23 @@ let
       sha256 = "1b643m8v7j15ixi2g6r2909vwkq05wi74ybccbdnp4rkms640y4w";
     };
   };
+
+  # Patching helper for desktop entries
+  patchDesktop =
+    pkgs: pkg: appName: from: to:
+    lib.hiPrio (
+      pkgs.runCommand "$patched-desktop-entry-for-${appName}" { } ''
+        ${pkgs.coreutils}/bin/mkdir -p $out/share/applications
+        ${pkgs.gnused}/bin/sed 's#${from}#${to}#g' < ${pkg}/share/applications/${appName}.desktop > $out/share/applications/${appName}.desktop
+      ''
+    );
+
+  # Helper for GPU offloading
+  GPUOffloadApp =
+    config: pkgs: pkg: desktopName:
+    lib.mkIf (config.hardware.nvidia.prime.offload.enable or false) (
+      patchDesktop pkgs pkg desktopName "^Exec=" "Exec=nvidia-offload "
+    );
 in
 {
   inherit
@@ -108,6 +125,8 @@ in
     patchedGarudaSystem
     binaryCaches
     jamesdsp
+    patchDesktop
+    GPUOffloadApp
     ;
 
   mkColmenaHive =

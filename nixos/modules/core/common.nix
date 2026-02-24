@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -30,6 +31,10 @@ in
   config = lib.mkIf cfg.common.enable {
     nixpkgs.config.allowUnfree = true;
 
+    nixpkgs.overlays = [
+      inputs.nix-cachyos-kernel.overlays.pinned
+    ];
+
     # A few kernel tweaks
     boot.kernelParams = [ "noresume" ];
 
@@ -53,7 +58,7 @@ in
     };
 
     # Theming
-    dr460nixed.garuda.catppuccin.enable = true;
+    garuda.catppuccin.enable = true;
 
     # Increase open file limit for sudoers
     security.pam.loginLimits = [
@@ -98,15 +103,15 @@ in
       doc.enable = false;
       enable = true;
       info.enable = false;
-      man.enable = false;
-      nixos.enable = true;
+      man.enable = true;
+      nixos.enable = false;
     };
 
     # Enable all hardware drivers
     hardware.enableRedistributableFirmware = true;
 
     # No need for that in real NixOS systems
-    dr460nixed.garuda.garuda-nix-manager.enable = false;
+    garuda.garuda-nix-manager.enable = false;
 
     # Custom label for boot menu entries (otherwise set to "garuda-nix-subsystem")
     system.nixos.label = lib.mkForce (

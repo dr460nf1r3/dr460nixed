@@ -27,6 +27,11 @@
   # Hostname of this machine
   networking.hostName = "dragons-ryzen";
 
+  nix.settings.system-features = [
+    "big-parallel"
+    "kvm"
+  ];
+
   # Ucode updates for the CPU
   services.ucodenix = {
     enable = true;
@@ -52,13 +57,6 @@
     impermanence.enable = true;
     lanzaboote.enable = true;
     performance.enable = true;
-    remote-build = {
-      enable = true;
-      host = "remote-build";
-      port = 666;
-      trustedPublicKey = "immortalis:8vrLBvFoMiKVKRYD//30bhUBTEEiuupfdQzl2UoMms4=";
-      user = "nico";
-    };
     tailscale.enable = true;
     yubikey.enable = true;
   };
@@ -72,7 +70,7 @@
   ];
 
   # Garuda Nix subsystem modules
-  dr460nixed.garuda = {
+  garuda = {
     btrfs-maintenance = {
       deduplication = true;
       enable = true;

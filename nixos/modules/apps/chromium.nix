@@ -12,7 +12,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # Basic chromium settings (system-wide)
     programs.chromium = {
       defaultSearchProviderEnabled = true;
       defaultSearchProviderSearchURL = "https://searx.garudalinux.org/search?q=%s";
@@ -36,7 +35,6 @@ in
       };
     };
 
-    # SUID Sandbox
     security.chromiumSuidSandbox.enable = true;
   };
 }

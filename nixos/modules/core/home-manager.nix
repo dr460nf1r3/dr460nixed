@@ -24,13 +24,17 @@ in
       inherit inputs self;
       inherit (inputs.self) dragonLib;
     };
-    dr460nixed.garuda.home-manager.modules =
-      let
-        moduleNames =
-          cfg.home-manager.modules
-          ++ lib.optional cfg.desktops.enable "desktops"
-          ++ lib.optional cfg.development.enable "development";
-      in
-      map (name: self.homeModules.${name}) moduleNames;
+    garuda.home-manager.modules = [
+      self.homeModules.default
+      (_: {
+        dr460nixed.hm = {
+          common.enable = true;
+          development.enable = cfg.development.enable;
+          kde.enable = cfg.desktops.enable;
+          misc.enable = true;
+          theme-launchers.enable = cfg.desktops.enable;
+        };
+      })
+    ];
   };
 }

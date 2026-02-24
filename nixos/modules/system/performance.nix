@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf cfg.enable {
     # Enhance performance tweaks
-    dr460nixed.garuda.performance-tweaks.enable = true;
+    garuda.performance-tweaks.enable = true;
     boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
   };
 }

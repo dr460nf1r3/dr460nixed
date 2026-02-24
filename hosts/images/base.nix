@@ -32,7 +32,7 @@ in
   users.users.nixos.autoSubUidGidRange = false;
 
   # Basic home-manager configuration, also importing garuda-nix dotfiles
-  dr460nixed.garuda.home-manager.modules = [ ../../home-manager/common.nix ];
+  garuda.home-manager.modules = [ ../../home-manager/common.nix ];
 
   # Image configuration
   image = {

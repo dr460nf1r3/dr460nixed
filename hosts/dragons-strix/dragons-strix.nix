@@ -25,6 +25,11 @@
   # Hostname of this machine
   networking.hostName = "dragons-strix";
 
+  nix.settings.system-features = [
+    "big-parallel"
+    "kvm"
+  ];
+
   # Ucode updates for the CPU
   services.ucodenix = {
     enable = true;
@@ -77,15 +82,6 @@
           }
         ];
       };
-    };
-  };
-
-  # Garuda Nix subsystem modules
-  dr460nixed.garuda = {
-    btrfs-maintenance = {
-      deduplication = true;
-      enable = true;
-      uuid = "b32bdea7-52c3-4885-a088-c427aa05ae1c";
     };
   };
 
