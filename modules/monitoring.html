@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Installer - Dr460nixed ❄️ documentation</title>
+        <title>monitoring - Dr460nixed ❄️ documentation</title>
 
 
         <!-- Custom HTML head -->
@@ -12,34 +12,34 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="favicon-8114d1fc.png">
-        <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-2459343d.css">
-        <link rel="stylesheet" href="css/chrome-ae938929.css">
-        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-2459343d.css">
+        <link rel="stylesheet" href="../css/chrome-ae938929.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="./theme/catppuccin.css">
+        <link rel="stylesheet" href=".././theme/catppuccin.css">
 
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "searchindex-af691922.js";
+            window.path_to_searchindex_js = "../searchindex-af691922.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-ad66474f.js"></script>
+        <script src="../toc-ad66474f.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -106,7 +106,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
             </noscript>
             <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -145,7 +145,7 @@
                     <h1 class="menu-title">Dr460nixed ❄️ documentation</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
                         <a href="https://github.com/dr460nf1r3/dr460nixed" title="Git repository" aria-label="Git repository">
@@ -182,37 +182,431 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="the-installer"><a class="header" href="#the-installer">The installer</a></h1>
-<p>This flake features an installer, which may be used to set up a basic dr460nixed NixOS installation. Both the dr460nixed ISO and regular NixOS live CDs are supported.
-The installer uses the files of the <code>templates</code> folder to run <code>nix init -t</code> from and proceeds to customize the installation with users’ choices.
-Multiple disk formats are available via <a href="https://github.com/dr460nf1r3/dr460nixed/tree/main/template/nixos/modules/disko">pre-configured disko configurations</a>.
-Choices during the execution of the script currently include:</p>
-<ul>
-<li>the disk to install NixOS on</li>
-<li>the partition layout to use during the process</li>
-<li>hostname</li>
-<li>username</li>
-</ul>
-<p>The installer may only install by wiping the destination disk, custom partition layouts are currently unsupported.
-Both UEFI and legacy systems are supported. <a href="https://nixos.wiki/wiki/Nix_command">Nix command</a> and <a href="https://nixos.wiki/wiki/flakes">flakes</a> need to be enabled.</p>
-<p>To begin, simply run the installer:</p>
-<pre><code class="language-sh">sudo installer # use this if booted into a dr460nixed ISO
-sudo nix run github:dr460nf1r3/dr460nixed#installer # regular NixOS systems
+                        <h1 id="monitoring"><a class="header" href="#monitoring">Monitoring</a></h1>
+<pre><code class="language-nix">{
+  config,
+  lib,
+  ...
+}:
+let
+  cfg = config.dr460nixed;
+in
+{
+  options.dr460nixed = with lib; {
+    grafanaStack = {
+      enable = mkOption {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enables the Grafana stack (Grafana, Prometheus and Loki).
+        '';
+      };
+      address = mkOption {
+        default = "";
+        type = types.str;
+        description = mdDoc ''
+          The address of the Grafana frontend.
+        '';
+      };
+    };
+    prometheus = {
+      adguardExporter = {
+        enable = mkOption {
+          default = false;
+          type = types.bool;
+          description = mdDoc ''
+            Enables Prometheus' AdGuard home exporter.
+          '';
+        };
+        configfile = mkOption {
+          default = "";
+          type = types.str;
+          description = mdDoc ''
+            The path to the AdGuard home exporter config file.
+          '';
+        };
+      };
+      blackboxExporter = mkOption {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enables Prometheus' blackbox exporter.
+        '';
+      };
+      enable = mkOption {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enables Prometheus' node_exporter.
+        '';
+      };
+      nginxExporter = mkOption {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enables Prometheus' Nginx exporter.
+        '';
+      };
+    };
+    promtail = {
+      enable = mkOption {
+        default = false;
+        type = types.bool;
+        description = mdDoc ''
+          Enables shipping systemd journal logs to Loki.
+        '';
+      };
+      lokiAddress = mkOption {
+        default = "";
+        type = types.str;
+        description = mdDoc ''
+          The address of the Loki frontend.
+        '';
+      };
+    };
+  };
+
+  config = {
+    services.prometheus = {
+      port = 3020;
+      enable = lib.mkIf cfg.grafanaStack.enable true;
+
+      exporters = lib.mkIf cfg.prometheus.enable {
+        blackbox = lib.mkIf cfg.prometheus.blackboxExporter {
+          enable = true;
+          port = 9115;
+          configFile = "/var/lib/prometheus/blackbox.yml";
+        };
+        node = {
+          port = 3021;
+          enabledCollectors = [ "systemd" ];
+          enable = true;
+        };
+        nginx = lib.mkIf cfg.prometheus.nginxExporter {
+          enable = true;
+        };
+      };
+
+      # ingest the published nodes
+      scrapeConfigs = [
+        {
+          job_name = "nodes";
+          static_configs = [
+            {
+              targets = [
+                "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
+                "100.97.58.140:${toString config.services.prometheus.exporters.node.port}"
+              ];
+            }
+          ];
+        }
+        {
+          job_name = "adguard";
+          static_configs = [
+            {
+              targets = [
+                "127.0.0.1:9617"
+              ];
+            }
+          ];
+        }
+        {
+          job_name = "loki";
+          static_configs = [
+            {
+              targets = [
+                "${cfg.grafanaStack.address}:8030"
+              ];
+            }
+          ];
+        }
+        {
+          job_name = "prometheus";
+          static_configs = [
+            {
+              targets = [
+                "127.0.0.1:9113"
+              ];
+            }
+          ];
+        }
+      ];
+    };
+
+    # Loki for system logs
+    services.loki = lib.mkIf cfg.grafanaStack.enable {
+      enable = true;
+      configuration = {
+        auth_enabled = false;
+        ingester = {
+          chunk_idle_period = "1h";
+          chunk_retain_period = "30s";
+          chunk_target_size = 999999;
+          lifecycler = {
+            address = "${cfg.grafanaStack.address}";
+            ring = {
+              kvstore = {
+                store = "inmemory";
+              };
+              replication_factor = 1;
+            };
+          };
+          max_chunk_age = "24h";
+        };
+        schema_config = {
+          configs = [
+            {
+              from = "2022-06-06";
+              store = "boltdb-shipper";
+              object_store = "filesystem";
+              schema = "v11";
+              index = {
+                prefix = "index_";
+                period = "24h";
+              };
+            }
+          ];
+        };
+        server.http_listen_port = 3030;
+        storage_config = {
+          boltdb_shipper = {
+            active_index_directory = "/var/lib/loki/boltdb-shipper-active";
+            cache_location = "/var/lib/loki/boltdb-shipper-cache";
+            cache_ttl = "24h";
+            shared_store = "filesystem";
+          };
+          filesystem = {
+            directory = "/var/lib/loki/chunks";
+          };
+        };
+        limits_config = {
+          ingestion_burst_size_mb = 512;
+          ingestion_rate_mb = 1024;
+          reject_old_samples = true;
+          reject_old_samples_max_age = "168h";
+        };
+        chunk_store_config = {
+          max_look_back_period = "0s";
+        };
+        table_manager = {
+          retention_deletes_enabled = false;
+          retention_period = "0s";
+        };
+        compactor = {
+          working_directory = "/var/lib/loki";
+          shared_store = "filesystem";
+          compactor_ring = {
+            kvstore = {
+              store = "inmemory";
+            };
+          };
+        };
+      };
+    };
+
+    # promtail: port 3031 (8031)
+    #
+    services.promtail = lib.mkIf cfg.promtail.enable {
+      enable = true;
+      configuration = {
+        server = {
+          http_listen_port = 3031;
+          grpc_listen_port = 0;
+        };
+        clients = [
+          {
+            url = "http://${config.dr460nixed.promtail.lokiAddress}:3030/loki/api/v1/push";
+          }
+        ];
+        scrape_configs = [
+          {
+            job_name = "journal";
+            journal = {
+              path = "/var/log/journal";
+              max_age = "24h";
+              labels = {
+                job = "systemd-journal";
+                host = "${config.networking.hostName}";
+              };
+            };
+            relabel_configs = [
+              {
+                source_labels = [ "__journal__hostname" ];
+                target_label = "host";
+              }
+              {
+                source_labels = [ "__journal_priority" ];
+                target_label = "priority";
+              }
+              {
+                source_labels = [ "__journal_priority_keyword" ];
+                target_label = "level";
+              }
+              {
+                source_labels = [ "__journal__systemd_unit" ];
+                target_label = "unit";
+              }
+              {
+                source_labels = [ "__journal__systemd_user_unit" ];
+                target_label = "user_unit";
+              }
+              {
+                source_labels = [ "__journal__boot_id" ];
+                target_label = "boot_id";
+              }
+              {
+                source_labels = [ "__journal__comm" ];
+                target_label = "command";
+              }
+            ];
+          }
+        ];
+        pipeline_stages = [
+          {
+            json.expressions = {
+              transport = "_TRANSPORT";
+              unit = "_SYSTEMD_UNIT";
+              msg = "MESSAGE";
+              coredump_cgroup = "COREDUMP_CGROUP";
+              coredump_exe = "COREDUMP_EXE";
+              coredump_cmdline = "COREDUMP_CMDLINE";
+              coredump_uid = "COREDUMP_UID";
+              coredump_gid = "COREDUMP_GID";
+            };
+          }
+        ];
+      };
+    };
+    systemd.services.promtail.serviceConfig.RestartSec = "600"; # Retry every 10 minutes
+
+    # Grafana on port 3010 (8010)
+    services.grafana = lib.mkIf cfg.grafanaStack.enable {
+      enable = true;
+      provision = {
+        enable = true;
+        datasources.settings = {
+          apiVersion = 1;
+          datasources = [
+            {
+              access = "proxy";
+              name = "Prometheus";
+              type = "prometheus";
+              url = "http://127.0.0.1:${toString config.services.prometheus.port}";
+            }
+            {
+              access = "proxy";
+              name = "Loki";
+              type = "loki";
+              url = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}";
+            }
+          ];
+        };
+      };
+      settings = {
+        analytics.reporting_enabled = false;
+        live = {
+          allowed_origins = [ "http://${config.dr460nixed.grafanaStack.address}:8010" ]; # Needed to get WS to work
+        };
+        security.admin_email = "root@dr460nf1r3.org";
+        server = {
+          http_addr = "127.0.0.1";
+          http_port = 3010;
+          protocol = "http";
+          rootUrl = "http://${config.dr460nixed.grafanaStack.address}:8010";
+        };
+      };
+    };
+
+    # Also enable promtail on the Grafana host
+    dr460nixed.promtail.enable = lib.mkIf cfg.grafanaStack.enable true;
+
+    # Nginx reverse proxy
+    services.nginx = lib.mkIf cfg.grafanaStack.enable {
+      enable = true;
+      upstreams = {
+        "grafana" = {
+          servers = {
+            "127.0.0.1:${toString config.services.grafana.settings.server.http_port}" = { };
+          };
+        };
+        "prometheus" = {
+          servers = {
+            "${config.dr460nixed.grafanaStack.address}:${toString config.services.prometheus.port}" = { };
+          };
+        };
+        "loki" = {
+          servers = {
+            "127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}" = { };
+          };
+        };
+        "promtail" = {
+          servers = {
+            "127.0.0.1:${toString config.services.promtail.configuration.server.http_listen_port}" = { };
+          };
+        };
+      };
+      virtualHosts.grafana = {
+        locations."/" = {
+          proxyPass = "http://grafana";
+          extraConfig = ''
+            proxy_set_header Host $host;
+          '';
+        };
+        locations."/api/live/" = {
+          proxyPass = "http://grafana";
+          proxyWebsockets = true;
+          extraConfig = ''
+            proxy_set_header Host $host;
+          '';
+        };
+        listen = [
+          {
+            addr = "${config.dr460nixed.grafanaStack.address}";
+            port = 8010;
+          }
+        ];
+      };
+      virtualHosts.prometheus = {
+        locations."/".proxyPass = "http://prometheus";
+        listen = [
+          {
+            addr = "${config.dr460nixed.grafanaStack.address}";
+            port = 8020;
+          }
+        ];
+      };
+      virtualHosts.loki = {
+        locations."/".proxyPass = "http://loki";
+        listen = [
+          {
+            addr = "${config.dr460nixed.grafanaStack.address}";
+            port = 8030;
+          }
+        ];
+      };
+      virtualHosts.promtail = {
+        locations."/".proxyPass = "http://promtail";
+        listen = [
+          {
+            addr = "${config.dr460nixed.grafanaStack.address}";
+            port = 8031;
+          }
+        ];
+      };
+    };
+  };
+}
 </code></pre>
-<p>Provide the needed input. After completion, a dr460nixed system is ready for you to use.
-You may customize it with configurations found in the main repository since the template has been kept as generic as possible.</p>
-<p>Users are expected to continue building their own flake after the installation is finished. To do so, the dr460nixed repository has many exemplary configurations available.
-They may be inspected by browsing the “modules” section of this documentation.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="generating-images.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../modules/locales.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="installer/script.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../modules/msmtp.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -222,11 +616,11 @@ They may be inspected by browsing the “modules” section of this documentatio
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="generating-images.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../modules/locales.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="installer/script.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../modules/msmtp.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
@@ -246,13 +640,13 @@ They may be inspected by browsing the “modules” section of this documentatio
         </script>
 
 
-        <script src="elasticlunr-ef4e11c1.min.js"></script>
-        <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-c2a407aa.js"></script>
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-c2a407aa.js"></script>
 
-        <script src="clipboard-1626706a.min.js"></script>
-        <script src="highlight-abc7f01d.js"></script>
-        <script src="book-a0b12cfe.js"></script>
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-a0b12cfe.js"></script>
 
         <!-- Custom JS scripts -->
 
