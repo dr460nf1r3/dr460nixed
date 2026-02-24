@@ -6,5 +6,6 @@
     ./msmtp.nix
     ./oci.nix
     ./syncthing.nix
+    ./tor.nix
   ];
 }

@@ -45,13 +45,13 @@
 
   # Enable a few selected custom settings
   dr460nixed = {
-    chromium = true;
+    chromium.enable = true;
     desktops.enable = true;
     development.enable = true;
     gaming.enable = true;
     impermanence.enable = true;
     lanzaboote.enable = true;
-    performance = true;
+    performance.enable = true;
     remote-build = {
       enable = true;
       host = "remote-build";
@@ -60,7 +60,7 @@
       user = "nico";
     };
     tailscale.enable = true;
-    yubikey = true;
+    yubikey.enable = true;
   };
 
   # Tailscale auto-connect

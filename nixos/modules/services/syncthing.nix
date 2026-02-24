@@ -82,6 +82,22 @@ in
         The user to run syncthing as.
       '';
     };
+    folders = lib.mkOption {
+      default = { };
+      type = lib.types.attrsOf (
+        lib.types.submodule {
+          options = {
+            id = lib.mkOption { type = lib.types.str; };
+            path = lib.mkOption { type = lib.types.str; };
+            devices = lib.mkOption {
+              type = lib.types.listOf lib.types.str;
+              default = [ ];
+            };
+          };
+        }
+      );
+      description = lib.mdDoc "Folders to sync.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -92,28 +108,9 @@ in
       inherit (cfg) key;
       settings = {
         inherit (cfg) devices;
-        folders = {
-          "/home/nico/Music" = {
-            id = "ybqqh-as53c";
-            devices = cfg.devicesNames;
-          };
-          "/home/nico/Pictures" = {
-            id = "9gj2u-j3m9s";
-            devices = cfg.devicesNames;
-          };
-          "/home/nico/School" = {
-            id = "g5jha-cnrr4";
-            devices = cfg.devicesNames;
-          };
-          "/home/nico/Sync" = {
-            id = "u62ge-wzsau";
-            devices = cfg.devicesNames;
-          };
-          "/home/nico/Videos" = {
-            id = "nxhpo-c2j5b";
-            devices = cfg.devicesNames;
-          };
-        };
+        folders = lib.mapAttrs (_name: folder: {
+          inherit (folder) id path devices;
+        }) cfg.folders;
         options = {
           localAnnounceEnabled = true;
           urAccepted = -1;

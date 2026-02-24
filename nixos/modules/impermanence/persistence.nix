@@ -307,10 +307,12 @@ in
           ++ optionalDirs
           # Catch-all for /var/cache
           ++ [ "/var/cache" ];
-        users."root" = {
-          directories = rootDirs;
-        };
-        users."nico" = {
+        users = {
+          "root" = {
+            directories = rootDirs;
+          };
+        }
+        // (lib.genAttrs cfg.persistentUsers (_name: {
           directories =
             userDataDirs
             # Cache directories to persist (IDE caches, etc.)
@@ -320,7 +322,7 @@ in
             # Directories with special permissions
             ++ userDirsWithPerms;
           files = userFiles;
-        };
+        }));
       };
     }
   );

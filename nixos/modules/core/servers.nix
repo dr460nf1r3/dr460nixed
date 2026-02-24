@@ -33,7 +33,7 @@ in
     '';
 
     # Automatic server upgrades
-    dr460nixed.auto-upgrade = lib.mkDefault true;
+    dr460nixed.auto-upgrade.enable = lib.mkDefault true;
 
     # No custom aliases
     dr460nixed.shells.enable = lib.mkDefault false;

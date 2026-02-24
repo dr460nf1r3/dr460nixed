@@ -735,8 +735,10 @@
   --search-mark-bg: #fe640b;
   --warning-border: #fe640b;
   --color-scheme: light;
-  --copy-button-filter: brightness(0) saturate(100%) invert(47%) sepia(6%) saturate(1263%) hue-rotate(195deg) brightness(90%) contrast(81%);
-  --copy-button-filter-hover: brightness(0) saturate(100%) invert(30%) sepia(80%) saturate(1850%) hue-rotate(209deg) brightness(94%) contrast(105%);
+  --copy-button-filter: brightness(0) saturate(100%) invert(47%) sepia(6%)
+    saturate(1263%) hue-rotate(195deg) brightness(90%) contrast(81%);
+  --copy-button-filter-hover: brightness(0) saturate(100%) invert(30%)
+    sepia(80%) saturate(1850%) hue-rotate(209deg) brightness(94%) contrast(105%);
   --blockquote-note-color: #1e66f5;
   --blockquote-tip-color: #40a02b;
   --blockquote-important-color: #8839ef;
@@ -776,8 +778,10 @@
   --search-mark-bg: #ef9f76;
   --warning-border: #ef9f76;
   --color-scheme: dark;
-  --copy-button-filter: brightness(0) saturate(100%) invert(82%) sepia(6%) saturate(1287%) hue-rotate(192deg) brightness(86%) contrast(85%);
-  --copy-button-filter-hover: brightness(0) saturate(100%) invert(68%) sepia(16%) saturate(1070%) hue-rotate(185deg) brightness(96%) contrast(95%);
+  --copy-button-filter: brightness(0) saturate(100%) invert(82%) sepia(6%)
+    saturate(1287%) hue-rotate(192deg) brightness(86%) contrast(85%);
+  --copy-button-filter-hover: brightness(0) saturate(100%) invert(68%)
+    sepia(16%) saturate(1070%) hue-rotate(185deg) brightness(96%) contrast(95%);
   --blockquote-note-color: #8caaee;
   --blockquote-tip-color: #a6d189;
   --blockquote-important-color: #ca9ee6;
@@ -817,8 +821,10 @@
   --search-mark-bg: #f5a97f;
   --warning-border: #f5a97f;
   --color-scheme: dark;
-  --copy-button-filter: brightness(0) saturate(100%) invert(75%) sepia(18%) saturate(361%) hue-rotate(190deg) brightness(91%) contrast(86%);
-  --copy-button-filter-hover: brightness(0) saturate(100%) invert(67%) sepia(17%) saturate(1007%) hue-rotate(183deg) brightness(99%) contrast(94%);
+  --copy-button-filter: brightness(0) saturate(100%) invert(75%) sepia(18%)
+    saturate(361%) hue-rotate(190deg) brightness(91%) contrast(86%);
+  --copy-button-filter-hover: brightness(0) saturate(100%) invert(67%)
+    sepia(17%) saturate(1007%) hue-rotate(183deg) brightness(99%) contrast(94%);
   --blockquote-note-color: #8aadf4;
   --blockquote-tip-color: #a6da95;
   --blockquote-important-color: #c6a0f6;
@@ -858,8 +864,10 @@
   --search-mark-bg: #fab387;
   --warning-border: #fab387;
   --color-scheme: dark;
-  --copy-button-filter: brightness(0) saturate(100%) invert(84%) sepia(9%) saturate(767%) hue-rotate(192deg) brightness(84%) contrast(84%);
-  --copy-button-filter-hover: brightness(0) saturate(100%) invert(68%) sepia(18%) saturate(951%) hue-rotate(180deg) brightness(98%) contrast(100%);
+  --copy-button-filter: brightness(0) saturate(100%) invert(84%) sepia(9%)
+    saturate(767%) hue-rotate(192deg) brightness(84%) contrast(84%);
+  --copy-button-filter-hover: brightness(0) saturate(100%) invert(68%)
+    sepia(18%) saturate(951%) hue-rotate(180deg) brightness(98%) contrast(100%);
   --blockquote-note-color: #89b4fa;
   --blockquote-tip-color: #a6e3a1;
   --blockquote-important-color: #cba6f7;

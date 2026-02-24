@@ -9,9 +9,8 @@ in
 {
   config = lib.mkIf cfg.enable {
     boot.loader.grub = {
-      device = cfg.device;
+      inherit (cfg) device enableCryptodisk;
       enable = true;
-      enableCryptodisk = cfg.enableCryptodisk;
       useOSProber = false;
     };
   };

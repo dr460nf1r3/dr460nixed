@@ -69,8 +69,8 @@ A lot of those have been moved to the [Garuda Nix Subsystem](https://gitlab.com/
     └── zfs.nix
 ```
 
-- `dr460nixed.auto-upgrade` (default false) - whether this device automatically upgrades daily via pulling the updated Nix flake from the repo
-- `dr460nixed.chromium` (default false) - configures Chromium with a set of default extensions and settings
+- `dr460nixed.auto-upgrade.enable` (default false) - whether this device automatically upgrades daily via pulling the updated Nix flake from the repo
+- `dr460nixed.chromium.enable` (default false) - configures Chromium with a set of default extensions and settings
 - `dr460nixed.common.enable` (default true) - common options for every system
 - `dr460nixed.compose-runner` (default { }) - runs a docker-compose.yml and supplies an additional .env file for secrets if desired
 - `dr460nixed.desktops.enable` (default false) - options for desktop systems including Plasma 6 and various apps
@@ -81,33 +81,36 @@ A lot of those have been moved to the [Garuda Nix Subsystem](https://gitlab.com/
 - `dr460nixed.hardening.duosec` (default false) - protects logins and sudo via Duo Security
 - `dr460nixed.impermanence.enable` (default false) - enables impermanence for a stateless system
 - `dr460nixed.lanzaboote.enable` (default false) - enables Lanzaboote instead of systemd-boot for secure-boot support
-- `dr460nixed.live-cd` (default false) - live CD applications and configurations
+- `dr460nixed.live-cd.enable` (default false) - live CD applications and configurations
 - `dr460nixed.locales.enable` (default true) - default set of locales and console font configuration
 - `dr460nixed.nodocs` (default true) - removes unneeded documentation to save space
-- `dr460nixed.performance` (default false) - optimizes the system for performance including CachyOS kernels
+- `dr460nixed.performance.enable` (default false) - optimizes the system for performance including CachyOS kernels
 - `dr460nixed.servers.enable` (default false) - common server options
 - `dr460nixed.servers.monitoring` (default false) - enables some basic monitoring via Netdata
 - `dr460nixed.shells.enable` (default true) - enables common shell aliases, direnv and fish
 - `dr460nixed.systemd-boot.enable` (default false) - a quiet systemd-boot configuration
 - `dr460nixed.tailscale.enable` (default false) - enables the Tailscale client daemon
 - `dr460nixed.tailscale-tls.enable` (default false) - enables automatic management of Tailscale certificates
-- `dr460nixed.tor` (default false) - configures the system to use the Tor network
-- `dr460nixed.yubikey` (default false) - options for using the Yubikey as login
+- `dr460nixed.tor.enable` (default false) - configures the system to use the Tor network
+- `dr460nixed.yubikey.enable` (default false) - options for using the Yubikey as login
 
 ## Individual modules
 
 - [apps](./modules/apps.md)
+- [auto-upgrade](./modules/auto-upgrade.md)
 - [boot](./modules/boot.md)
+- [chromium](./modules/chromium.md)
 - [common](./modules/common.md)
+- [compose-runner](./modules/compose-runner.md)
 - [desktops](./modules/desktops.md)
 - [dev-container](./modules/dev-container.md)
 - [deterministic-ids](./modules/deterministic-ids.md)
 - [development](./modules/development.md)
 - [disko](./modules/disko.md)
-- [compose-runner](./modules/compose-runner.md)
 - [gaming](./modules/gaming.md)
 - [hardening](./modules/hardening.md)
 - [impermanence](./modules/impermanence.md)
+- [live-cd](./modules/live-cd.md)
 - [locales](./modules/locales.md)
 - [monitoring](./modules/monitoring.md)
 - [msmtp](./modules/msmtp.md)
@@ -115,11 +118,14 @@ A lot of those have been moved to the [Garuda Nix Subsystem](https://gitlab.com/
 - [nix](./modules/nix.md)
 - [nvidia](./modules/nvidia.md)
 - [oci](./modules/oci.md)
+- [performance](./modules/performance.md)
 - [servers](./modules/servers.md)
 - [shells](./modules/shells.md)
 - [syncthing](./modules/syncthing.md)
 - [tailscale-tls](./modules/tailscale-tls.md)
 - [tailscale](./modules/tailscale.md)
+- [tor](./modules/tor.md)
 - [users](./modules/users.md)
 - [wireguard](./modules/wireguard.md)
+- [yubikey](./modules/yubikey.md)
 - [zfs](./modules/zfs.md)

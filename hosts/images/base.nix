@@ -27,7 +27,7 @@ in
   };
 
   # Use CachyOS kernel & a few things like ZRAM
-  dr460nixed.performance = true;
+  dr460nixed.performance.enable = true;
 
   users.users.nixos.autoSubUidGidRange = false;
 

@@ -33,10 +33,16 @@
           };
         }
         ../nixos/modules/apps
+        ../nixos/modules/boot
         ../nixos/modules/core
+        ../nixos/modules/impermanence
+        ../nixos/modules/security
+        ../nixos/modules/services
         ../nixos/modules/shells
+        ../nixos/modules/system
         ../users/nico/nixos.nix
         inputs.home-manager.nixosModules.home-manager
+        inputs.lanzaboote.nixosModules.lanzaboote
         inputs.lix-module.nixosModules.default
         inputs.sops-nix.nixosModules.sops
         inputs.nixos-generators.nixosModules.all-formats
@@ -67,6 +73,7 @@
           modules = [
             "${inputs.nixpkgs}/nixos/modules/virtualisation/lxc-container.nix"
             ../nixos/modules/dev-container/dev-container.nix
+            { dr460nixed.dev-container.enable = true; }
           ];
           inherit specialArgs;
         };

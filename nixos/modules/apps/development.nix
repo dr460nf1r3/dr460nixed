@@ -30,26 +30,14 @@ in
         Enables commonly used development tools.
       '';
     };
+    user = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = mdDoc "The user to configure development tools for.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
-    # Import secrets needed for development
-    sops.secrets."api_keys/sops" = {
-      mode = "0600";
-      owner = config.users.users.nico.name;
-      path = "/home/nico/.config/sops/age/keys.txt";
-    };
-    sops.secrets."api_keys/heroku" = {
-      mode = "0600";
-      owner = config.users.users.nico.name;
-      path = "/home/nico/.netrc";
-    };
-    sops.secrets."api_keys/cloudflared" = {
-      mode = "0600";
-      owner = config.users.users.nico.name;
-      path = "/home/nico/.cloudflared/cert.pem";
-    };
-
     # Conflicts with virtualisation.containers if enabled
     boot.enableContainers = false;
 

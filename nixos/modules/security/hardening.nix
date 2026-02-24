@@ -27,6 +27,16 @@ in
         Whether logins should be protected by Duo Security.
       '';
     };
+    duosecHost = mkOption {
+      type = types.str;
+      default = "api-a7b9f5f3.duosecurity.com";
+      description = mdDoc "The Duo Security API host.";
+    };
+    duosecIntegrationKey = mkOption {
+      type = types.str;
+      default = "DID3CH2NCQ2H24L1GUUN";
+      description = mdDoc "The Duo Security integration key.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -98,8 +108,8 @@ in
       acceptEnvFactor = true;
       autopush = true;
       failmode = "safe";
-      host = "api-a7b9f5f3.duosecurity.com";
-      integrationKey = "DID3CH2NCQ2H24L1GUUN";
+      host = cfg.duosecHost;
+      integrationKey = cfg.duosecIntegrationKey;
       pam.enable = true;
       prompts = 1;
       pushinfo = true;

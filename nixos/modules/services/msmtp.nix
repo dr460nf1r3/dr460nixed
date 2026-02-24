@@ -15,6 +15,23 @@ in
         Enable sending mails via CMD using msmtp.
       '';
     };
+    user = mkOption {
+      type = types.str;
+      description = mdDoc "The SMTP user.";
+    };
+    host = mkOption {
+      type = types.str;
+      default = "mail.garudalinux.net";
+      description = mdDoc "The SMTP host.";
+    };
+    from = mkOption {
+      type = types.str;
+      description = mdDoc "The default from address.";
+    };
+    passwordeval = mkOption {
+      type = types.str;
+      description = mdDoc "The command to evaluate to get the password.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -31,16 +48,18 @@ in
       };
       accounts = {
         default = {
-          from = "nico@dr460nf1r3.org";
-          host = "mail.garudalinux.net";
-          passwordeval = "cat /run/secrets/passwords/nico@dr460nf1r3.org";
-          user = "nico@dr460nf1r3.org";
+          inherit (cfg)
+            from
+            host
+            user
+            passwordeval
+            ;
         };
       };
     };
     environment.etc = {
       "aliases".text = ''
-        root: nico@dr460nf1r3.org
+        root: ${cfg.from}
       '';
     };
   };

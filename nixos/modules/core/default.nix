@@ -6,7 +6,6 @@
     ./home-manager.nix
     ./ids.nix
     ./locales.nix
-    ./misc.nix
     ./nix.nix
     ./servers.nix
     ./users.nix

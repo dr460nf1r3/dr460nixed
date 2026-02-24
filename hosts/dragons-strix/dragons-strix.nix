@@ -44,7 +44,7 @@
 
   # Enable a few selected custom settings
   dr460nixed = {
-    chromium = true;
+    chromium.enable = true;
     desktops.enable = true;
     development.enable = true;
     gaming.enable = true;
@@ -58,8 +58,8 @@
         nvidiaBusId = "PCI:1:0:0";
       };
     };
-    performance = true;
-    yubikey = true;
+    performance.enable = true;
+    yubikey.enable = true;
     tailscale.enable = true;
     wireguard = {
       enable = true;

@@ -36,10 +36,10 @@ in
       ];
     in
     required-packages
-    ++ lib.optionals cfg.yubikey [
+    ++ lib.optionals cfg.yubikey.enable [
       pkgs.yubioath-flutter
     ]
-    ++ lib.optionals cfg.live-cd (
+    ++ lib.optionals cfg.live-cd.enable (
       with pkgs;
       [
         btrfs-progs
