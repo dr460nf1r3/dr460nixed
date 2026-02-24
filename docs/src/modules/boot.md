@@ -1,5 +1,5 @@
 # Boot
 
 ```nix
-{{#include ../../../nixos/modules/boot.nix}}
+{{#include ../../../nixos/modules/boot/default.nix}}
 ```

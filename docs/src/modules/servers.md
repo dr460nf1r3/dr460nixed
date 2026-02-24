@@ -1,5 +1,5 @@
 # Servers
 
 ```nix
-{{#include ../../../nixos/modules/servers.nix}}
+{{#include ../../../nixos/modules/core/servers.nix}}
 ```

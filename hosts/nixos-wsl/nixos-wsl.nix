@@ -7,8 +7,8 @@
 {
   # Import common configurations
   imports = [
-    ../../nixos/modules/nix.nix
-    ../../nixos/modules/shells.nix
+    ../../nixos/modules/core/nix.nix
+    ../../nixos/modules/shells
     ../../users/nico/nixos.nix
     inputs.impermanence.nixosModules.impermanence
   ];

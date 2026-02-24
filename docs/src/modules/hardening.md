@@ -1,5 +1,5 @@
 # Hardening
 
 ```nix
-{{#include ../../../nixos/modules/hardening.nix}}
+{{#include ../../../nixos/modules/security/hardening.nix}}
 ```

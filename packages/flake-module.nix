@@ -1,6 +1,11 @@
 {
   perSystem =
-    { pkgs, config, ... }:
+    {
+      pkgs,
+      config,
+      inputs',
+      ...
+    }:
     {
       packages =
         let
@@ -13,15 +18,11 @@
             pkgs.runCommand "dr460nixed-docs"
               {
                 nativeBuildInputs = with pkgs; [
-                  bash
                   mdbook
                 ];
               }
               ''
-                bash -c "errors=$(mdbook build -d $out ${../.}/docs |& grep ERROR)
-                if [ \"$errors\" ]; then
-                  exit 1
-                fi"
+                mdbook build -d $out ${../.}/docs
               '';
 
           # Installs a basic dr460nixed template

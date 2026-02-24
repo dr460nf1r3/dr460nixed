@@ -1,5 +1,5 @@
 # Impermanence
 
 ```nix
-{{#include ../../../nixos/modules/impermanence.nix}}
+{{#include ../../../nixos/modules/impermanence/persistence.nix}}
 ```

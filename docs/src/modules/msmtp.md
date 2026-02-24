@@ -1,5 +1,5 @@
 # MSMTP
 
 ```nix
-{{#include ../../../nixos/modules/msmtp.nix}}
+{{#include ../../../nixos/modules/services/msmtp.nix}}
 ```

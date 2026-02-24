@@ -1,5 +1,5 @@
 # Shells
 
 ```nix
-{{#include ../../../nixos/modules/shells.nix}}
+{{#include ../../../nixos/modules/shells/default.nix}}
 ```

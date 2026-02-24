@@ -10,7 +10,6 @@
       # Default modules to use in all systems
       defaultModules = [
         ../nixos/modules
-        ../nixos/modules/garuda-compat.nix
         {
           _module.args = {
             inherit inputs self dragonLib;
@@ -33,16 +32,9 @@
             inherit inputs self dragonLib;
           };
         }
-        ../nixos/modules/common.nix
-        ../nixos/modules/desktops.nix
-        ../nixos/modules/deterministic-ids.nix
-        ../nixos/modules/development.nix
-        ../nixos/modules/garuda-compat.nix
-        ../nixos/modules/home-manager.nix
-        ../nixos/modules/locales.nix
-        ../nixos/modules/misc.nix
-        ../nixos/modules/nix.nix
-        ../nixos/modules/users.nix
+        ../nixos/modules/apps
+        ../nixos/modules/core
+        ../nixos/modules/shells
         ../users/nico/nixos.nix
         inputs.home-manager.nixosModules.home-manager
         inputs.lix-module.nixosModules.default

@@ -1,5 +1,5 @@
 # Syncthing
 
 ```nix
-{{#include ../../../nixos/modules/syncthing.nix}}
+{{#include ../../../nixos/modules/services/syncthing.nix}}
 ```

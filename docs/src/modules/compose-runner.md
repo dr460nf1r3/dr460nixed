@@ -1,5 +1,5 @@
 # Compose runner
 
 ```nix
-{{#include ../../../nixos/modules/compose-runner.nix}}
+{{#include ../../../nixos/modules/services/compose-runner.nix}}
 ```

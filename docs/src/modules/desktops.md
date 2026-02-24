@@ -1,5 +1,5 @@
 # Desktops
 
 ```nix
-{{#include ../../../nixos/modules/desktops.nix}}
+{{#include ../../../nixos/modules/apps/desktops.nix}}
 ```

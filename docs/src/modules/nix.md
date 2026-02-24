@@ -1,5 +1,5 @@
 # Nix
 
 ```nix
-{{#include ../../../nixos/modules/nix.nix}}
+{{#include ../../../nixos/modules/core/nix.nix}}
 ```

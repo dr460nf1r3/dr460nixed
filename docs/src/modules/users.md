@@ -1,5 +1,5 @@
 # Users
 
 ```nix
-{{#include ../../../nixos/modules/users.nix}}
+{{#include ../../../nixos/modules/core/users.nix}}
 ```

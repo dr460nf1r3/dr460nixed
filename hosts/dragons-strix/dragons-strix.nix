@@ -7,7 +7,7 @@
   # Individual settings + low-latency Pipewire
   imports = [
     ./hardware-configuration.nix
-    ../../nixos/modules/impermanence.nix
+    ../../nixos/modules/impermanence
     ../../users/nico/nixos.nix
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];

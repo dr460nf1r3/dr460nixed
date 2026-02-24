@@ -1,5 +1,5 @@
 # Tailscale TLS
 
 ```nix
-{{#include ../../../nixos/modules/tailscale-tls.nix}}
+{{#include ../../../nixos/modules/networking/tailscale-tls.nix}}
 ```

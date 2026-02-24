@@ -1,5 +1,5 @@
 # Gaming
 
 ```nix
-{{#include ../../../nixos/modules/gaming.nix}}
+{{#include ../../../nixos/modules/apps/gaming.nix}}
 ```

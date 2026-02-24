@@ -1,5 +1,5 @@
 # Locales
 
 ```nix
-{{#include ../../../nixos/modules/locales.nix}}
+{{#include ../../../nixos/modules/core/locales.nix}}
 ```

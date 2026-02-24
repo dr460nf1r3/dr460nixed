@@ -1,5 +1,5 @@
 # OCI
 
 ```nix
-{{#include ../../../nixos/modules/oci.nix}}
+{{#include ../../../nixos/modules/services/oci.nix}}
 ```

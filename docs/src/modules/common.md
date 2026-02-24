@@ -1,5 +1,5 @@
-# COmmon
+# Common
 
 ```nix
-{{#include ../../../nixos/modules/common.nix}}
+{{#include ../../../nixos/modules/core/common.nix}}
 ```

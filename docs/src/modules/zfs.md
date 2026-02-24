@@ -1,5 +1,5 @@
 # ZFS
 
 ```nix
-{{#include ../../../nixos/modules/zfs.nix}}
+{{#include ../../../nixos/modules/system/zfs.nix}}
 ```

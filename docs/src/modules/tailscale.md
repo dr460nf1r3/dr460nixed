@@ -1,5 +1,5 @@
 # Tailscale
 
 ```nix
-{{#include ../../../nixos/modules/tailscale.nix}}
+{{#include ../../../nixos/modules/networking/tailscale.nix}}
 ```

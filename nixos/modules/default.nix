@@ -1,12 +1,18 @@
 { lib, ... }:
 let
-  # Find all .nix files in the current directory, excluding default.nix
-  # We only take top-level files to avoid importing mutually exclusive modules from subdirs
   files = builtins.readDir ./.;
+
+  # Top-level .nix files (excluding default.nix itself)
   nixFiles = lib.filterAttrs (
     name: type: name != "default.nix" && type == "regular" && lib.hasSuffix ".nix" name
   ) files;
-  validModules = lib.mapAttrsToList (name: _: ./. + "/${name}") nixFiles;
+
+  # Subdirectories — each must have a default.nix
+  nixDirs = lib.filterAttrs (_name: type: type == "directory") files;
+
+  validModules =
+    lib.mapAttrsToList (name: _: ./. + "/${name}") nixFiles
+    ++ lib.mapAttrsToList (name: _: ./. + "/${name}") nixDirs;
 in
 {
   imports = [
