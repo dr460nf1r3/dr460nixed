@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "../searchindex-af691922.js";
+            window.path_to_searchindex_js = "../searchindex-040deef1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-ad66474f.js"></script>
@@ -193,10 +193,7 @@ let
   cfg = config.dr460nixed;
 in
 {
-  # We want to use NetworkManager on desktops
   networking = {
-    # Pointing to NextDNS via Tailscale
-    # if not, Cloudflare would still be my choice
     nameservers = [
       "1.1.1.1"
       "2606:4700:4700::1111"
@@ -227,17 +224,14 @@ in
       enable = true;
     };
 
-    # Enable nftables instead of iptables
     nftables.enable = true;
   };
 
-  # Enable SSHD &amp; bandwidth usage tracking
   services = {
     openssh.enable = true;
     vnstat.enable = true;
   };
 
-  # Enable Mosh, a replacement for OpenSSH
   programs.mosh.enable = true;
 }
 </code></pre>

@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "../searchindex-af691922.js";
+            window.path_to_searchindex_js = "../searchindex-040deef1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-ad66474f.js"></script>
@@ -185,6 +185,7 @@
                         <h1 id="common"><a class="header" href="#common">Common</a></h1>
 <pre><code class="language-nix">{
   config,
+  inputs,
   lib,
   pkgs,
   ...
@@ -195,12 +196,8 @@ in
 {
   options.dr460nixed = with lib; {
     common = {
-      enable = mkOption {
+      enable = mkEnableOption "Whether to enable common system configurations." // {
         default = true;
-        type = types.bool;
-        description = mdDoc ''
-          Whether to enable common system configurations.
-        '';
       };
     };
     nodocs = mkOption {
@@ -214,6 +211,10 @@ in
 
   config = lib.mkIf cfg.common.enable {
     nixpkgs.config.allowUnfree = true;
+
+    nixpkgs.overlays = [
+      inputs.nix-cachyos-kernel.overlays.pinned
+    ];
 
     # A few kernel tweaks
     boot.kernelParams = [ "noresume" ];
@@ -238,7 +239,7 @@ in
     };
 
     # Theming
-    dr460nixed.garuda.catppuccin.enable = true;
+    garuda.catppuccin.enable = true;
 
     # Increase open file limit for sudoers
     security.pam.loginLimits = [
@@ -283,15 +284,15 @@ in
       doc.enable = false;
       enable = true;
       info.enable = false;
-      man.enable = false;
-      nixos.enable = true;
+      man.enable = true;
+      nixos.enable = false;
     };
 
     # Enable all hardware drivers
     hardware.enableRedistributableFirmware = true;
 
     # No need for that in real NixOS systems
-    dr460nixed.garuda.garuda-nix-manager.enable = false;
+    garuda.garuda-nix-manager.enable = false;
 
     # Custom label for boot menu entries (otherwise set to "garuda-nix-subsystem")
     system.nixos.label = lib.mkForce (

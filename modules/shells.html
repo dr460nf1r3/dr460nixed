@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "../searchindex-af691922.js";
+            window.path_to_searchindex_js = "../searchindex-040deef1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-ad66474f.js"></script>
@@ -197,13 +197,9 @@ in
   imports = [ inputs.direnv-instant.nixosModules.direnv-instant ];
 
   options.dr460nixed.shells.enable =
-    with lib;
-    mkOption {
+    lib.mkEnableOption "Whether the shell should receive our aliases and themes."
+    // {
       default = true;
-      type = types.bool;
-      description = mdDoc ''
-        Whether the shell should receive our aliases and themes.
-      '';
     };
 
   config = lib.mkIf cfg.enable {
@@ -215,6 +211,7 @@ in
         };
       };
 
+      direnv.enable = lib.mkForce false;
       direnv-instant.enable = true;
 
       fish = {

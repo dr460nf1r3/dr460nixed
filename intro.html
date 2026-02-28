@@ -36,7 +36,7 @@
             const path_to_root = "";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "searchindex-af691922.js";
+            window.path_to_searchindex_js = "searchindex-040deef1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-ad66474f.js"></script>
@@ -184,50 +184,21 @@
                     <main>
                         <h1 id="dr460nixed-nixos-"><a class="header" href="#dr460nixed-nixos-">Dr460nixed NixOS ❄️</a></h1>
 <p><a href="https://builtwithnix.org"><img src="https://img.shields.io/static/v1?logo=nixos&amp;logoColor=white&amp;label=&amp;message=Built%20with%20Nix&amp;color=41439a" alt="built with nix"></a> <a href="https://garnix.io"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fdr460nf1r3%2Fdr460nixed%3Fbranch%3Dmain" alt="built with garnix"></a> <a href="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml"><img src="https://github.com/dr460nf1r3/dr460nixed/actions/workflows/tailscale.yml/badge.svg" alt="Sync Tailscale ACLs"></a></p>
-<p>This repository contains a framework to get started with NixOS quickly, featuring opinionated and selected default
-settings.
-It also contains my personal NixOS configuration, which might serve as inspiration for other people’s setups.</p>
-<p>While starting out with NixOS, especially reading other peoples flakes proved to be very helpful, so I figured sharing
-my personal setup my help other people as well!
-Those who like the “dr460nized” look of Garuda will definitely like this one as well ☺️</p>
-<h2 id="so-how-does-it-work"><a class="header" href="#so-how-does-it-work">So how does it work?</a></h2>
-<p>ISO builds are available as well as a simple installer, which employs <code>nix flake init</code> to deploy a basic and generic
-version of this flake’s template based on user’s choices.
-Partitioning is achieved via <a href="https://github.com/nix-community/disko">disko</a> presets, and the installer may be used on
-regular NixOS live mediums as well.
-Users may then continue building their own version of NixOS using code snippets of this repository and further linked
-sources.
-Furthermore, the flakes’ outputs are automatically built and cached via <a href="https://garnix.io">garnix</a>.</p>
-<p>There is a <a href="https://nixed.dr460nf1r3.org">documentation available about various topics</a>, which also contains the code
-snippets that might provide further useful customization options.</p>
+<p>This repository contains a framework for NixOS configuration, featuring opinionated and selected default
+settings. It also includes my personal NixOS setup, which may serve as inspiration for others.</p>
+<p>While starting out with NixOS, reading other people’s flakes proved very helpful, so I’m sharing my own configuration.
+Those who like the “dr460nized” look of Garuda will definitely enjoy this one ☺️</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>This flake provides various NixOS configurations, modules, and helper utilities. Outputs are automatically built and
+cached via <a href="https://garnix.io">garnix</a>. You can adapt snippets from the documentation to craft your own setup.</p>
+<p>There is <a href="https://nixed.dr460nf1r3.org">documentation available</a>, which contains code snippets and other topics that
+might be useful for customization.</p>
 <h2 id="how-does-it-look-like"><a class="header" href="#how-does-it-look-like">How does it look like?</a></h2>
 <p><img src="https://i.imgur.com/h3WGSJ4.jpg" alt="desktop-kde"></p>
-<h2 id="what-settings-does-the-installer-provide"><a class="header" href="#what-settings-does-the-installer-provide">What settings does the installer provide?</a></h2>
-<p>Right now, it basically just bootstraps a basic desktop environment with theming,
-Nix, and OS-related defaults to have common things working out of the box.</p>
-<pre><code class="language-nix">{
-  dr460nixed = {
-    chromium = true;
-    desktops.enable = true;
-    example-boot.enable = true;
-    performance = true;
-  };
-}
-</code></pre>
-<p>Which translates to:</p>
-<ul>
-<li>Enjoying a fully pre-configured <a href="https://garudalinux.org">Garuda dr460nized KDE</a> themed setup: <strong>Dr460nixed</strong> !</li>
-<li>Being able to use all of <a href="https://github.com/garuda-linux/garuda-nix-subsystem">Garuda Nix Subsystems</a> modules</li>
-<li>The custom <strong>Linux-cachyos BORE EEVDF</strong> kernel of the <a href="https://cachyos.org">Linux CachyOS</a> developers</li>
-<li>Having access to additional packages not existing in Nixpkgs (yet) via <a href="https://nyx.chaotic.cx">Chaotic Nyx</a></li>
-<li>Using <strong>Garnix CI cache</strong> for this flakes’ outputs</li>
-<li>Keeping all of it well organized via <strong>flake-parts</strong></li>
-</ul>
-<p>It might receive more module options in the future, though I currently believe that showing people how to achieve things
-in Nix might be more useful than just providing a toggle for it.</p>
 <h2 id="what-kind-of-configuration-is-available-via-code-snippets"><a class="header" href="#what-kind-of-configuration-is-available-via-code-snippets">What kind of configuration is available via code snippets?</a></h2>
 <ul>
-<li>Multiple <strong>NixOS configurations</strong>, including <strong>desktop</strong>, <strong>server</strong>, <strong>nixos-wsl</strong> , <strong>raspberry pi</strong> &amp; <strong>live-usb</strong></li>
+<li>Multiple <strong>NixOS configurations</strong> such as <code>cup-dragon</code>, <code>dev-container</code>, <code>dragons-ryzen</code>, <code>dragons-strix</code>,
+<code>dr460nixed-base</code>, <code>dr460nixed-desktop</code>, and <code>nixos-wsl</code>.</li>
 <li>Root-on-ZFS and secure-boot enabled systems via <strong>Lanzaboote</strong></li>
 <li><strong>Opt-in persistence</strong> through impermanence + ZFS snapshots</li>
 <li><strong>Mesh networked</strong> hosts with <strong>Tailscale</strong></li>
@@ -240,22 +211,21 @@ in Nix might be more useful than just providing a toggle for it.</p>
 <li>Custom <strong>bleeding-edge Mesa</strong> builds</li>
 </ul>
 <h2 id="structure"><a class="header" href="#structure">Structure</a></h2>
-<pre><code class="language-sh">├── docker-compose
-│   ├── oracle-dragon
-│   └── tv-nixos
-├── home-manager
-├── nixos
-│   ├── dragons-ryzen
-│   ├── images
-│   ├── modules
-│   │   ├── chaotic
-│   │   └── disko
-│   ├── nixos-wsl
-│   ├── oracle-dragon
-│   ├── rpi-dragon
-│   └── tv-nixos
-├── overlays
-└── secrets
+<pre><code class="language-sh">├── compose/
+│   └── cup-dragon/
+├── docs/
+├── garuda-nix-subsystem/
+├── home-manager/
+├── hosts/
+├── lib/
+├── maintenance/
+├── nixos/
+│   ├── modules/
+│   └── flake-module.nix
+├── overlays/
+├── packages/
+├── secrets/
+└── users/
 </code></pre>
 <h2 id="credits"><a class="header" href="#credits">Credits</a></h2>
 <p>Inspiration for parts of this configuration came from these awesome people’s setups ❄️</p>

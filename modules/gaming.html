@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "../searchindex-af691922.js";
+            window.path_to_searchindex_js = "../searchindex-040deef1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-ad66474f.js"></script>
@@ -185,26 +185,13 @@
                         <h1 id="gaming"><a class="header" href="#gaming">Gaming</a></h1>
 <pre><code class="language-nix">{
   config,
+  dragonLib,
   lib,
   pkgs,
   ...
 }:
 let
   cfg = config.dr460nixed.gaming;
-
-  patchDesktop =
-    pkg: appName: from: to:
-    lib.hiPrio (
-      pkgs.runCommand "$patched-desktop-entry-for-${appName}" { } ''
-        ${pkgs.coreutils}/bin/mkdir -p $out/share/applications
-        ${pkgs.gnused}/bin/sed 's#${from}#${to}#g' &lt; ${pkg}/share/applications/${appName}.desktop &gt; $out/share/applications/${appName}.desktop
-      ''
-    );
-  GPUOffloadApp =
-    pkg: desktopName:
-    lib.mkIf (config.hardware.nvidia.prime.offload.enable or false) (
-      patchDesktop pkg desktopName "^Exec=" "Exec=nvidia-offload "
-    );
 in
 {
   options.dr460nixed.gaming = with lib; {
@@ -218,10 +205,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # Gamemode
     programs.gamemode.enable = true;
 
-    # Enable Steam
     programs.steam = {
       enable = true;
       extraCompatPackages = with pkgs; [ ];
@@ -231,8 +216,8 @@ in
       protonplus
       lutris
       prismlauncher
-      (GPUOffloadApp prismlauncher "org.prismlauncher.PrismLauncher")
-      (GPUOffloadApp steam "steam")
+      (dragonLib.GPUOffloadApp config pkgs prismlauncher "org.prismlauncher.PrismLauncher")
+      (dragonLib.GPUOffloadApp config pkgs steam "steam")
     ];
   };
 }

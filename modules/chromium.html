@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "../searchindex-af691922.js";
+            window.path_to_searchindex_js = "../searchindex-040deef1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-ad66474f.js"></script>
@@ -197,7 +197,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # Basic chromium settings (system-wide)
     programs.chromium = {
       defaultSearchProviderEnabled = true;
       defaultSearchProviderSearchURL = "https://searx.garudalinux.org/search?q=%s";
@@ -221,7 +220,6 @@ in
       };
     };
 
-    # SUID Sandbox
     security.chromiumSuidSandbox.enable = true;
   };
 }

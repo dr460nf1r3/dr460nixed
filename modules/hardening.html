@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "../searchindex-af691922.js";
+            window.path_to_searchindex_js = "../searchindex-040deef1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-ad66474f.js"></script>
@@ -204,24 +204,6 @@ in
         Whether the operating system should be hardened.
       '';
     };
-    duosec = mkOption {
-      default = false;
-      example = true;
-      type = types.bool;
-      description = mdDoc ''
-        Whether logins should be protected by Duo Security.
-      '';
-    };
-    duosecHost = mkOption {
-      type = types.str;
-      default = "api-a7b9f5f3.duosecurity.com";
-      description = mdDoc "The Duo Security API host.";
-    };
-    duosecIntegrationKey = mkOption {
-      type = types.str;
-      default = "DID3CH2NCQ2H24L1GUUN";
-      description = mdDoc "The Duo Security integration key.";
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -287,49 +269,14 @@ in
       "vivid"
     ];
 
-    # Protect logins and sudo on servers via DUO
-    # leaving EnvFactor enabled for other apps
-    security.duosec = lib.mkIf cfg.duosec {
-      acceptEnvFactor = true;
-      autopush = true;
-      failmode = "safe";
-      host = cfg.duosecHost;
-      integrationKey = cfg.duosecIntegrationKey;
-      pam.enable = true;
-      prompts = 1;
-      pushinfo = true;
-      secretKeyFile = config.sops.secrets."api_keys/duo".path;
-      ssh.enable = true;
-    };
-    sops.secrets."api_keys/duo" = lib.mkIf cfg.duosec {
-      mode = "0600";
-      path = "/run/secrets/api_keys/duo";
-    };
-    security.pam.services = lib.mkIf cfg.duosec {
-      "login".duoSecurity.enable = true;
-      "sddm".duoSecurity.enable = lib.mkIf config.dr460nixed.desktops.enable true;
-      "sudo".duoSecurity.enable = lib.mkIf config.dr460nixed.servers.enable true;
-    };
-
     # Disable root login &amp; password authentication on sshd
-    # also, apply recommendations of ssh-audit.com and enable Duo 2FA
-    # (for whatever reason the default config did not work a at all?
-    # maybe related to https://github.com/NixOS/nixpkgs/issues/115044)
+    # also, apply recommendations of ssh-audit.com
     services.openssh = {
-      extraConfig =
-        if cfg.duosec then
-          ''
-            AllowTcpForwarding no
-            ForceCommand /usr/bin/env login_duo
-            HostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,rsa-sha2-256,rsa-sha2-512,rsa-sha2-256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com
-            PermitTunnel no
-          ''
-        else
-          ''
-            AllowTcpForwarding no
-            HostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,rsa-sha2-256,rsa-sha2-512,rsa-sha2-256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com
-            PermitTunnel no
-          '';
+      extraConfig = ''
+        AllowTcpForwarding no
+        HostKeyAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com,rsa-sha2-256,rsa-sha2-512,rsa-sha2-256-cert-v01@openssh.com,rsa-sha2-512-cert-v01@openssh.com
+        PermitTunnel no
+      '';
       settings = {
         Ciphers = [
           "aes128-ctr"

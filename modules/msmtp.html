@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "../searchindex-af691922.js";
+            window.path_to_searchindex_js = "../searchindex-040deef1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-ad66474f.js"></script>
@@ -193,13 +193,7 @@ let
 in
 {
   options.dr460nixed.smtp = with lib; {
-    enable = mkOption {
-      default = false;
-      type = types.bool;
-      description = mdDoc ''
-        Enable sending mails via CMD using msmtp.
-      '';
-    };
+    enable = mkEnableOption "Enable sending mails via CMD using msmtp.";
     user = mkOption {
       type = types.str;
       description = mdDoc "The SMTP user.";

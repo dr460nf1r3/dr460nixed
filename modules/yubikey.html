@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "../searchindex-af691922.js";
+            window.path_to_searchindex_js = "../searchindex-040deef1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-ad66474f.js"></script>
@@ -198,7 +198,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # Enable the smartcard daemon
     hardware.gpgSmartcards.enable = true;
     services.pcscd = {
       enable = true;
@@ -206,8 +205,8 @@ in
     };
     services.udev.packages = [ pkgs.yubikey-personalization ];
 
-    # Configure as challenge-response for instant login,
-    # can't provide the secrets as the challenge gets updated
+    environment.systemPackages = [ pkgs.yubioath-flutter ];
+
     security.pam.yubico = {
       debug = false;
       enable = true;

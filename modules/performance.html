@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "../searchindex-af691922.js";
+            window.path_to_searchindex_js = "../searchindex-040deef1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-ad66474f.js"></script>
@@ -198,9 +198,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # Enhance performance tweaks
-    dr460nixed.garuda.performance-tweaks.enable = true;
-    boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+    garuda.performance-tweaks.enable = true;
+    boot.kernelPackages = pkgs.linuxPackagesFor pkgs.cachyosKernels.linux-cachyos-latest;
   };
 }
 </code></pre>

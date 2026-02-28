@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "../searchindex-af691922.js";
+            window.path_to_searchindex_js = "../searchindex-040deef1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-ad66474f.js"></script>
@@ -184,95 +184,19 @@
                     <main>
                         <h1 id="nix"><a class="header" href="#nix">Nix</a></h1>
 <pre><code class="language-nix">{
-  config,
   inputs,
-  lib,
   pkgs,
   self,
+  lib,
   ...
 }:
 let
-  cfgRemote = config.dr460nixed.remote-build;
+  corePkgs = import ../apps/core-packages.nix { inherit pkgs lib; };
 in
 {
-  options.dr460nixed = with lib; {
-    remote-build = {
-      enable = mkOption {
-        default = false;
-        example = true;
-        type = types.bool;
-        description = mdDoc ''
-          Enable the capability of building via nix on a remote machine when specified via command line flag.
-        '';
-      };
-      enableGlobally = mkOption {
-        default = false;
-        example = true;
-        type = types.bool;
-        description = mdDoc ''
-          Enables remote builds via enableDistributedBuild rather than making it opt-in via command line.
-        '';
-      };
-      host = mkOption {
-        default = "";
-        type = types.str;
-        example = "dragons-ryzen";
-        description = mdDoc ''
-          Specifies the target host for remote builds.
-        '';
-      };
-      port = mkOption {
-        default = 22;
-        type = types.int;
-        example = 1022;
-        description = mdDoc ''
-          Specifies the target port for remote builds.
-        '';
-      };
-      trustedPublicKey = mkOption {
-        default = null;
-        type = types.str;
-        example = "remote-build:8vrLBvFoMiKVKRYD//30bhUBTEEiuupfdQzl2UoMms4=";
-        description = mdDoc ''
-          Specifies the substitutors cache signing key for remote builds.
-        '';
-      };
-      user = mkOption {
-        default = null;
-        type = types.str;
-        example = "build";
-        description = mdDoc ''
-          Specifies the target user for remote builds.
-        '';
-      };
-    };
-  };
-
   config = {
     # General nix settings
     nix = {
-      # The remote builder to use for distributed builds
-      buildMachines = lib.mkIf cfgRemote.enable [
-        {
-          hostName = cfgRemote.host;
-          maxJobs = 16;
-          protocol = "ssh-ng";
-          supportedFeatures = [
-            "nixos-test"
-            "benchmark"
-            "big-parallel"
-            "kvm"
-          ];
-          systems = [
-            "x86_64-linux"
-            "aarch64-linux"
-          ];
-        }
-      ];
-
-      # Allow distributed builds
-      distributedBuilds = lib.mkIf cfgRemote.enableGlobally true;
-
       # Dont warn about dirty flakes and accept flake configs by default
       extraOptions = ''
         http-connections = 0
@@ -308,17 +232,8 @@ in
         # Max number of parallel jobs
         max-jobs = "auto";
 
-        # Enable certain system features
-        system-features = [
-          "big-parallel"
-          "kvm"
-        ];
-
         # Build inside sandboxed environments
         sandbox = pkgs.stdenv.isLinux;
-
-        # Trust the remote machines cache signatures
-        trusted-substituters = lib.mkIf cfgRemote.enable [ "ssh-ng://${cfgRemote.host}" ];
 
         # Specify the path to the nix registry
         flake-registry = "/etc/nix/registry.json";
@@ -339,40 +254,11 @@ in
         "nixos/flake".source = self;
       };
 
-      # Git is required for flakes, and cachix for binary substituters
-      systemPackages = with pkgs; [
-        git
-        cachix
-      ];
-    };
-
-    # Let root ssh into the remote builder seamlessly
-    home-manager.users."root" = lib.mkIf cfgRemote.enable {
-      home.stateVersion = "26.05";
-      programs.ssh.extraConfig = ''
-        Host ${cfgRemote.host}
-          HostName ${cfgRemote.host}
-          Port ${toString cfgRemote.port}
-          User ${cfgRemote.user}
-      '';
-    };
-
-    nixpkgs.overlays = [
-      inputs.nix-cachyos-kernel.overlays.pinned
-    ];
-
-    # Supply a shortcut for the remote builder
-    programs = {
-      bash.shellAliases = {
-        "rem" = "sudo nix build -v --builders ssh://${cfgRemote.host}";
-        "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake";
-      };
-      fish = {
-        shellAbbrs = {
-          "rem" = "sudo nix build -v --builders ssh://${cfgRemote.host}";
-          "remb" = "sudo nixos-rebuild switch -v --builders ssh://${cfgRemote.host} --flake";
-        };
-      };
+      # Git is required for flakes, and cachix for binary substituters.
+      # the full list is shared with home-manager so that the same set of
+      # "core" tools is available whether the configuration is evaluated on
+      # a NixOS host or a standalone machine.
+      systemPackages = corePkgs;
     };
   };
 }

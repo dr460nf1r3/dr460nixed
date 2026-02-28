@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "../searchindex-af691922.js";
+            window.path_to_searchindex_js = "../searchindex-040deef1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-ad66474f.js"></script>
@@ -275,17 +275,6 @@
       # Open firewall ports
       networking.firewall.allowedUDPPorts = lib.mapAttrsToList (
         _name: value: value.listenPort
-      ) cfg.interfaces;
-
-      # Configure sops secrets for each interface
-      sops.secrets = mapAttrs' (
-        _name: value:
-        (nameValuePair value.privateKeySecretName {
-          neededForUsers = false;
-          owner = "systemd-network";
-          group = "systemd-network";
-          mode = "0640";
-        })
       ) cfg.interfaces;
 
       # systemd-networkd configuration
