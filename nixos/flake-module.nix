@@ -36,6 +36,7 @@
     homeConfigurations."nico" = inputs.home-manager.lib.homeManagerConfiguration {
       extraSpecialArgs = {
         inherit inputs self dragonLib;
+        dr460nixedUserConfig = { };
       };
       pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
       modules = [
