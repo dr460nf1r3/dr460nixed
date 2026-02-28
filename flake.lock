@@ -394,16 +394,18 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "dirtyRev": "530e6cb7f2a17b77841aafffb7952e6f20d4f4d9-dirty",
-        "dirtyShortRev": "530e6cb-dirty",
-        "lastModified": 1772293698,
+        "lastModified": 1772295557,
         "narHash": "sha256-PDlj1rEtmh34p6vF0ZoiUFtVqAKWQzWIrzW4qbshpH0=",
-        "type": "git",
-        "url": "file:///home/nico/Documents/dr460nixed/garuda-nix-subsystem"
+        "owner": "garuda-linux",
+        "repo": "garuda-nix-subsystem",
+        "rev": "c68a6b43b0de6ddc3d98edd80d135f966e54425a",
+        "type": "gitlab"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/nico/Documents/dr460nixed/garuda-nix-subsystem"
+        "owner": "garuda-linux",
+        "ref": "main",
+        "repo": "garuda-nix-subsystem",
+        "type": "gitlab"
       }
     },
     "git-hooks": {

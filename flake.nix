@@ -48,7 +48,8 @@
     };
 
     garuda-nix = {
-      url = "git+file:///home/nico/Documents/dr460nixed/garuda-nix-subsystem";
+      url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
+      # url = "git+file:///home/nico/Documents/dr460nixed/garuda-nix-subsystem";
       inputs.catppuccin.follows = "catppuccin";
       inputs.flake-parts.follows = "flake-parts";
       inputs.git-hooks.follows = "git-hooks";
