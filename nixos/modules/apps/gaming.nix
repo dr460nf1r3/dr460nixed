@@ -24,11 +24,13 @@ in
 
     programs.steam = {
       enable = true;
-      extraCompatPackages = with pkgs; [ ];
+      extraCompatPackages = with pkgs; [
+        proton-cachyos
+        proton-cachyos_x86_64_v3
+      ];
     };
 
     environment.systemPackages = with pkgs; [
-      protonplus
       lutris
       prismlauncher
       (dragonLib.GPUOffloadApp config pkgs prismlauncher "org.prismlauncher.PrismLauncher")
