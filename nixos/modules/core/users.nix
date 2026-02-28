@@ -7,7 +7,6 @@ let
   inherit (lib) mkOption types mdDoc;
   cfg = config.dr460nixed.users;
 
-  # Add groups to user only if they exist
   ifTheyExist = groups: builtins.filter (group: builtins.hasAttr group config.users.groups) groups;
 in
 {
@@ -48,8 +47,49 @@ in
           };
           authorizedKeyFiles = mkOption {
             type = types.listOf types.path;
-            default = [ ]; # No keys by default
+            default = [ ];
             description = mdDoc "SSH authorized key files.";
+          };
+          homeManager = mkOption {
+            type = types.submodule (_: {
+              options = {
+                enable = lib.mkEnableOption "Enable home-manager for this user.";
+                shellAliases = mkOption {
+                  type = types.attrsOf types.str;
+                  default = { };
+                  description = mdDoc "User-specific shell aliases.";
+                };
+                fishAbbreviations = mkOption {
+                  type = types.attrsOf types.str;
+                  default = { };
+                  description = mdDoc "User-specific fish abbreviations.";
+                };
+                git = {
+                  userName = mkOption {
+                    type = types.str;
+                    default = "";
+                    description = mdDoc "Git user name.";
+                  };
+                  userEmail = mkOption {
+                    type = types.str;
+                    default = "";
+                    description = mdDoc "Git user email.";
+                  };
+                  signingKey = mkOption {
+                    type = types.nullOr types.str;
+                    default = null;
+                    description = mdDoc "GPG signing key for git.";
+                  };
+                };
+                stateVersion = mkOption {
+                  type = types.str;
+                  default = "26.05";
+                  description = mdDoc "Home-manager state version.";
+                };
+              };
+            });
+            default = { };
+            description = mdDoc "Home-manager configuration for this user.";
           };
         };
       })
@@ -103,6 +143,8 @@ in
         jellyfin.gid = 970;
         loki.uid = 993;
         loki.gid = 993;
+        mandb.uid = 954;
+        mandb.gid = 954;
         minecraft.uid = 973;
         minecraft.gid = 973;
         netdata.uid = 979;
@@ -123,6 +165,8 @@ in
         paperless.gid = 966;
         plasmalogin.uid = 958;
         plasmalogin.gid = 958;
+        pcscd.uid = 953;
+        pcscd.gid = 953;
         podman.uid = 968;
         podman.gid = 968;
         proc.uid = 971;
@@ -157,16 +201,9 @@ in
       };
 
     # This is needed for early set up of user accounts
-    sops.secrets =
-      (lib.mapAttrs' (
-        name: _:
-        lib.nameValuePair "passwords/${name}" {
-          neededForUsers = true;
-        }
-      ) cfg)
-      // {
-        "passwords/root".neededForUsers = true;
-      };
+    sops.secrets = {
+      "passwords/root".neededForUsers = true;
+    };
 
     users = {
       # All users are immuntable; if a password is required it needs to be set via passwordFile

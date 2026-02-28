@@ -7,14 +7,13 @@
 {
   flake =
     let
-      # Default modules to use in all systems
       defaultModules = [
-        ../nixos/modules
         {
           _module.args = {
             inherit inputs self dragonLib;
           };
         }
+        ../nixos/modules
         inputs.disko.nixosModules.disko
         inputs.home-manager.nixosModules.home-manager
         inputs.lanzaboote.nixosModules.lanzaboote
@@ -24,9 +23,7 @@
         inputs.ucodenix.nixosModules.ucodenix
       ];
 
-      # Our images should be cleaner, so we use a different set of modules
       imageModules = [
-        ../overlays/default.nix
         {
           _module.args = {
             inherit inputs self dragonLib;
@@ -40,12 +37,12 @@
         ../nixos/modules/services
         ../nixos/modules/shells
         ../nixos/modules/system
+        ../overlays/default.nix
         ../users/nico/nixos.nix
         inputs.home-manager.nixosModules.home-manager
         inputs.lanzaboote.nixosModules.lanzaboote
         inputs.lix-module.nixosModules.default
         inputs.sops-nix.nixosModules.sops
-        inputs.nixos-generators.nixosModules.all-formats
         inputs.spicetify-nix.nixosModules.default
         "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
       ];
@@ -60,25 +57,26 @@
       };
     in
     {
-      # All the system configurations
       nixosConfigurations = {
+        # Netcup VPS
         cup-dragon = dragonLib.patchedGarudaSystem {
           system = "x86_64-linux";
           modules = defaultModules ++ [ ./cup-dragon/cup-dragon.nix ];
           inherit specialArgs;
         };
 
+        # Development container
         dev-container = dragonLib.patchedNixosSystem {
           system = "x86_64-linux";
           modules = [
-            "${inputs.nixpkgs}/nixos/modules/virtualisation/lxc-container.nix"
-            ../nixos/modules/dev-container/dev-container.nix
             { dr460nixed.dev-container.enable = true; }
+            ../nixos/modules/dev-container/dev-container.nix
+            "${inputs.nixpkgs}/nixos/modules/virtualisation/lxc-container.nix"
           ];
           inherit specialArgs;
         };
 
-        # My main device (Lenovo Slim 7)
+        # My old device (Lenovo Slim 7)
         dragons-ryzen = dragonLib.patchedGarudaSystem {
           system = "x86_64-linux";
           modules = defaultModules ++ [
@@ -91,7 +89,7 @@
           inherit specialArgs;
         };
 
-        # My main device (Lenovo Slim 7)
+        # My main device (ROG Strix G16 2025)
         dragons-strix = dragonLib.patchedGarudaSystem {
           system = "x86_64-linux";
           modules = defaultModules ++ [

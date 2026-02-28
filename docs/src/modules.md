@@ -9,7 +9,12 @@ A lot of those have been moved to the [Garuda Nix Subsystem](https://gitlab.com/
 │   ├── cli.nix
 │   ├── default.nix
 │   ├── desktops.nix
-│   ├── development.nix
+│   ├── development
+│   │   ├── default.nix
+│   │   ├── docker.nix
+│   │   ├── jetbrains.nix
+│   │   ├── tools.nix
+│   │   └── vms.nix
 │   └── gaming.nix
 ├── boot
 │   ├── common.nix
@@ -78,7 +83,6 @@ A lot of those have been moved to the [Garuda Nix Subsystem](https://gitlab.com/
 - `dr460nixed.gaming.enable` (default false) - enables gaming-related options like Steam and Gamemode
 - `dr460nixed.grub.enable` (default false) - enables GRUB as bootloader
 - `dr460nixed.hardening.enable` (default true) - system hardening options
-- `dr460nixed.hardening.duosec` (default false) - protects logins and sudo via Duo Security
 - `dr460nixed.impermanence.enable` (default false) - enables impermanence for a stateless system
 - `dr460nixed.lanzaboote.enable` (default false) - enables Lanzaboote instead of systemd-boot for secure-boot support
 - `dr460nixed.live-cd.enable` (default false) - live CD applications and configurations

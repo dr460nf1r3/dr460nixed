@@ -10,23 +10,17 @@ let
 in
 {
   options.dr460nixed.locales = with lib; {
-    enable = mkOption {
+    enable = mkEnableOption "Whether the operating system be having a default set of locales set." // {
       default = true;
-      type = types.bool;
-      description = mdDoc ''
-        Whether the operating system be having a default set of locales set.
-      '';
     };
   };
 
   config = lib.mkIf cfg.enable {
-    # Timezone
     time = {
       hardwareClockInLocalTime = true;
       timeZone = "Europe/Berlin";
     };
 
-    # Common locale settings
     i18n = {
       inherit defaultLocale;
 

@@ -12,7 +12,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # Automatic system upgrades via git and flakes
     system.autoUpgrade = {
       allowReboot = true;
       dates = "04:00";

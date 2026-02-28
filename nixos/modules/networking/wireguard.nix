@@ -92,17 +92,6 @@
         _name: value: value.listenPort
       ) cfg.interfaces;
 
-      # Configure sops secrets for each interface
-      sops.secrets = mapAttrs' (
-        _name: value:
-        (nameValuePair value.privateKeySecretName {
-          neededForUsers = false;
-          owner = "systemd-network";
-          group = "systemd-network";
-          mode = "0640";
-        })
-      ) cfg.interfaces;
-
       # systemd-networkd configuration
       systemd.network = {
         networks = mapAttrs' (

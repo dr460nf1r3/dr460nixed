@@ -5,21 +5,28 @@
 }:
 let
   cfg = config.dr460nixed.hm.git;
+  userCfg = config.dr460nixed.hm.user;
 in
 {
   options.dr460nixed.hm.git = {
-    enable = lib.mkEnableOption "Git configuration";
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = userCfg.enable;
+      description = "Enable Git configuration";
+    };
     userName = lib.mkOption {
       type = lib.types.str;
+      default = userCfg.name;
       description = "The name to use for git commits";
     };
     userEmail = lib.mkOption {
       type = lib.types.str;
+      default = userCfg.email;
       description = "The email to use for git commits";
     };
     signingKey = lib.mkOption {
       type = lib.types.nullOr lib.types.str;
-      default = null;
+      default = userCfg.signingKey;
       description = "The GPG key to use for signing commits";
     };
   };

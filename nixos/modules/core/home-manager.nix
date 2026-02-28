@@ -7,6 +7,7 @@
 }:
 let
   cfg = config.dr460nixed;
+  hmUsers = lib.filterAttrs (_: u: u.homeManager.enable or false) cfg.users;
 in
 {
   options.dr460nixed.home-manager = with lib; {
@@ -23,16 +24,32 @@ in
     home-manager.extraSpecialArgs = {
       inherit inputs self;
       inherit (inputs.self) dragonLib;
+      dr460nixedUserConfig = lib.mapAttrs (_: u: u.homeManager or { }) cfg.users;
     };
+
+    home-manager.users = lib.mapAttrs (name: _userCfg: {
+      imports = [
+        self.homeModules.default
+        (self.homeModules.${name} or { })
+      ];
+    }) hmUsers;
+
     garuda.home-manager.modules = [
       self.homeModules.default
       (_: {
         dr460nixed.hm = {
-          common.enable = true;
-          development.enable = cfg.development.enable;
-          kde.enable = cfg.desktops.enable;
-          misc.enable = true;
-          theme-launchers.enable = cfg.desktops.enable;
+          common.enable = lib.mkDefault true;
+          core.enable = lib.mkDefault true;
+          development.enable = lib.mkDefault cfg.development.enable;
+          desktop = {
+            enable = lib.mkDefault cfg.desktops.enable;
+            jamesdsp = lib.mkDefault cfg.desktops.enable;
+            launchers = lib.mkDefault cfg.desktops.enable;
+          };
+          sync = {
+            enable = lib.mkDefault cfg.syncthing.enable;
+            syncthing = lib.mkDefault cfg.syncthing.enable;
+          };
         };
       })
     ];

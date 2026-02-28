@@ -12,13 +12,9 @@ in
   imports = [ inputs.direnv-instant.nixosModules.direnv-instant ];
 
   options.dr460nixed.shells.enable =
-    with lib;
-    mkOption {
+    lib.mkEnableOption "Whether the shell should receive our aliases and themes."
+    // {
       default = true;
-      type = types.bool;
-      description = mdDoc ''
-        Whether the shell should receive our aliases and themes.
-      '';
     };
 
   config = lib.mkIf cfg.enable {
@@ -30,6 +26,7 @@ in
         };
       };
 
+      direnv.enable = lib.mkForce false;
       direnv-instant.enable = true;
 
       fish = {

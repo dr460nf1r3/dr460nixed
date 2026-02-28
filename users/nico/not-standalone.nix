@@ -1,10 +1,17 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   appdir = ".local/share/applications";
+  hasZen =
+    lib.elem pkgs.zenmonitor (config.home.packages or [ ])
+    || lib.elem pkgs.zenmonitor (config.environment.systemPackages or [ ]);
 in
 {
-  # The apps themes not everyone might want
-  home.file = {
+  home.file = lib.mkIf hasZen {
     "${appdir}/zenmonitor.desktop".text = ''
       [Desktop Entry]
       Categories=GTK;System;

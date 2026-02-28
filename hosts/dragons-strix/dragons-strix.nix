@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   lib,
   ...
@@ -53,7 +54,10 @@
     desktops.enable = true;
     development.enable = true;
     gaming.enable = true;
-    impermanence.enable = true;
+    impermanence = {
+      enable = true;
+      persistentUsers = [ "nico" ];
+    };
     lanzaboote.enable = true;
     nvidia = {
       enable = true;
@@ -66,6 +70,38 @@
     performance.enable = true;
     yubikey.enable = true;
     tailscale.enable = true;
+    syncthing = {
+      enable = true;
+      user = "nico";
+      folders = {
+        "Music" = {
+          id = "ybqqh-as53c";
+          path = "/home/nico/Music";
+          devices = config.dr460nixed.syncthing.devicesNames;
+        };
+        "Pictures" = {
+          id = "9gj2u-j3m9s";
+          path = "/home/nico/Pictures";
+          devices = config.dr460nixed.syncthing.devicesNames;
+        };
+        "Sync" = {
+          id = "u62ge-wzsau";
+          path = "/home/nico/Sync";
+          devices = config.dr460nixed.syncthing.devicesNames;
+        };
+        "Videos" = {
+          id = "nxhpo-c2j5b";
+          path = "/home/nico/Videos";
+          devices = config.dr460nixed.syncthing.devicesNames;
+        };
+      };
+    };
+    smtp = {
+      enable = true;
+      from = "nico@dr460nf1r3.org";
+      passwordeval = "cat /run/secrets/passwords/nico@dr460nf1r3.org";
+      user = "nico@dr460nf1r3.org";
+    };
     wireguard = {
       enable = true;
       interfaces.nws = {
@@ -85,6 +121,28 @@
     };
   };
 
+  sops.secrets."wireguard/nws" = {
+    neededForUsers = false;
+    owner = "systemd-network";
+    group = "systemd-network";
+    mode = "0640";
+  };
+  sops.secrets."api_keys/sops" = lib.mkIf config.dr460nixed.development.enable {
+    mode = "0600";
+    owner = "nico";
+    path = "/home/nico/.config/sops/age/keys.txt";
+  };
+  sops.secrets."api_keys/heroku" = lib.mkIf config.dr460nixed.development.enable {
+    mode = "0600";
+    owner = "nico";
+    path = "/home/nico/.netrc";
+  };
+  sops.secrets."api_keys/cloudflared" = lib.mkIf config.dr460nixed.development.enable {
+    mode = "0600";
+    owner = "nico";
+    path = "/home/nico/.cloudflared/cert.pem";
+  };
+
   # Autologin due to FDE
   services.displayManager.autoLogin = {
     enable = true;
@@ -93,7 +151,6 @@
   services.displayManager.defaultSession = "plasma";
 
   # Force KWin to use the AMD GPU as the primary DRM device
-  # This fixes GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT errors on hybrid graphics
   environment.sessionVariables = {
     KWIN_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
     KWIN_DRM_USE_MODIFIERS = "0";
@@ -102,14 +159,13 @@
 
   services = {
     supergfxd.enable = false;
-    asusd = {
-      enable = true;
-      enableUserService = true;
-    };
+    asusd.enable = true;
   };
 
-  programs.rog-control-center.enable = true;
-  programs.rog-control-center.autoStart = true;
+  programs.rog-control-center = {
+    autoStart = true;
+    enable = true;
+  };
 
   # AMD as primary GPU driver
   services.xserver.videoDrivers = [ "amdgpu" ];

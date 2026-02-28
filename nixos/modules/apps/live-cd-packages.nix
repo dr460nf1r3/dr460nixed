@@ -1,0 +1,41 @@
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.dr460nixed.live-cd;
+in
+{
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      btrfs-progs
+      chntpw
+      cryptsetup
+      dosfstools
+      e2fsprogs
+      efibootmgr
+      flashrom
+      gnutar
+      gparted
+      hexedit
+      home-manager
+      hwinfo
+      inxi
+      memtest86-efi
+      ntfs3g
+      nvme-cli
+      p7zip
+      pciutils
+      perl
+      qemu-utils
+      rsync
+      tcpdump
+      testdisk
+      util-linux
+      wipe
+      xfsprogs
+    ];
+  };
+}

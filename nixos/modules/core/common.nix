@@ -11,12 +11,8 @@ in
 {
   options.dr460nixed = with lib; {
     common = {
-      enable = mkOption {
+      enable = mkEnableOption "Whether to enable common system configurations." // {
         default = true;
-        type = types.bool;
-        description = mdDoc ''
-          Whether to enable common system configurations.
-        '';
       };
     };
     nodocs = mkOption {

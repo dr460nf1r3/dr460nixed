@@ -8,22 +8,8 @@ let
 in
 {
   options.dr460nixed.remote-build = with lib; {
-    enable = mkOption {
-      default = false;
-      example = true;
-      type = types.bool;
-      description = mdDoc ''
-        Enable the capability of building via nix on a remote machine when specified via command line flag.
-      '';
-    };
-    enableGlobally = mkOption {
-      default = false;
-      example = true;
-      type = types.bool;
-      description = mdDoc ''
-        Enables remote builds via enableDistributedBuild rather than making it opt-in via command line.
-      '';
-    };
+    enable = mkEnableOption "Enable the capability of building via nix on a remote machine when specified via command line flag.";
+    enableGlobally = mkEnableOption "Enables remote builds via enableDistributedBuild rather than making it opt-in via command line.";
     host = mkOption {
       default = "";
       type = types.str;
@@ -60,7 +46,6 @@ in
 
   config = lib.mkIf cfgRemote.enable {
     nix = {
-      # The remote builder to use for distributed builds
       buildMachines = [
         {
           hostName = cfgRemote.host;
@@ -79,16 +64,13 @@ in
         }
       ];
 
-      # Allow distributed builds
       distributedBuilds = lib.mkIf cfgRemote.enableGlobally true;
 
       settings = {
-        # Trust the remote machines cache signatures
         trusted-substituters = [ "ssh-ng://${cfgRemote.host}" ];
       };
     };
 
-    # Let root ssh into the remote builder seamlessly
     home-manager.users."root" = {
       home.stateVersion = "26.05";
       programs.ssh.extraConfig = ''
@@ -99,7 +81,6 @@ in
       '';
     };
 
-    # Supply a shortcut for the remote builder
     programs = {
       bash.shellAliases = {
         "rem" = "sudo nix build -v --builders ssh://${cfgRemote.host}";

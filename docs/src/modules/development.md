@@ -1,5 +1,5 @@
 # Development
 
 ```nix
-{{#include ../../../nixos/modules/apps/development.nix}}
+{{#include ../../../nixos/modules/apps/development/default.nix}}
 ```

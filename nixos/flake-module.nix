@@ -32,16 +32,7 @@
       in
       hmModules // nicoModules;
 
-    # The default template for this flake
-    templates = {
-      default = self.templates.dr460nixed;
-      dr460nixed = {
-        description = "A basic dr460nixed flake to build a custom flake from ❄️🐉";
-        path = ../template;
-      };
-    };
-
-    # Home configuration for my Garuda Linux
+    # Home configuration for my Garuda Linux (standalone, non-NixOS)
     homeConfigurations."nico" = inputs.home-manager.lib.homeManagerConfiguration {
       extraSpecialArgs = {
         inherit inputs self dragonLib;
@@ -49,7 +40,12 @@
       pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
       modules = [
         self.homeModules.nico
-        self.homeModules.standalone
+        {
+          dr460nixed.hm.standalone.enable = true;
+          home.username = "nico";
+          home.homeDirectory = "/home/nico";
+          home.stateVersion = "26.05";
+        }
       ];
     };
   };

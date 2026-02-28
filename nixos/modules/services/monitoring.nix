@@ -9,13 +9,7 @@ in
 {
   options.dr460nixed = with lib; {
     grafanaStack = {
-      enable = mkOption {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Enables the Grafana stack (Grafana, Prometheus and Loki).
-        '';
-      };
+      enable = mkEnableOption "Enables the Grafana stack (Grafana, Prometheus and Loki).";
       address = mkOption {
         default = "";
         type = types.str;
@@ -26,13 +20,7 @@ in
     };
     prometheus = {
       adguardExporter = {
-        enable = mkOption {
-          default = false;
-          type = types.bool;
-          description = mdDoc ''
-            Enables Prometheus' AdGuard home exporter.
-          '';
-        };
+        enable = mkEnableOption "Enables Prometheus' AdGuard home exporter.";
         configfile = mkOption {
           default = "";
           type = types.str;
@@ -41,36 +29,12 @@ in
           '';
         };
       };
-      blackboxExporter = mkOption {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Enables Prometheus' blackbox exporter.
-        '';
-      };
-      enable = mkOption {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Enables Prometheus' node_exporter.
-        '';
-      };
-      nginxExporter = mkOption {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Enables Prometheus' Nginx exporter.
-        '';
-      };
+      blackboxExporter = lib.mkEnableOption "Enables Prometheus' blackbox exporter.";
+      enable = mkEnableOption "Enables Prometheus' node_exporter.";
+      nginxExporter = lib.mkEnableOption "Enables Prometheus' Nginx exporter.";
     };
     promtail = {
-      enable = mkOption {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Enables shipping systemd journal logs to Loki.
-        '';
-      };
+      enable = mkEnableOption "Enables shipping systemd journal logs to Loki.";
       lokiAddress = mkOption {
         default = "";
         type = types.str;

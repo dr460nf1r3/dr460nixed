@@ -37,19 +37,30 @@ let
       inputs.nixpkgs.lib.nixosSystem args;
 
   # Patched garudaSystem helper
+  #
+  # When nixpkgs-patch-* inputs are present, we can't call garuda-nix's
+  # garudaSystem directly (it always uses its own nixpkgs closure).  Instead
+  # we replicate its behaviour — injecting its modules and garuda-lib — but
+  # drive evaluation from eval-config.nix in the patched source tree so that
+  # *all* pkgs and lib come from the patched nixpkgs.
+  #
+  # garuda-nix exports both `internal` and `lib.garuda-lib`, so no local
+  # copy of the subsystem is needed.
   patchedGarudaSystem =
     args:
     let
       nixpkgsSrc = patchInput "nixpkgs" inputs.nixpkgs;
+      hasPatch = nixpkgsSrc != inputs.nixpkgs;
     in
-    if nixpkgsSrc != inputs.nixpkgs then
-      inputs.garuda-nix.lib.garudaSystem (
+    if hasPatch then
+      import (nixpkgsSrc + "/nixos/lib/eval-config.nix") (
         args
         // {
-          # When using a patched nixpkgs, we must ensure it is used
-          # However, garudaSystem doesn't easily support overriding nixpkgs
-          # without triggering assertions. We'll stick to the original logic
-          # but keep it wrapped in garudaSystem to get the modules.
+          extraModules = [ inputs.garuda-nix.internal.modules.default ] ++ args.extraModules or [ ];
+          specialArgs = {
+            inherit (inputs.garuda-nix.lib) garuda-lib;
+          }
+          // args.specialArgs or { };
         }
       )
     else

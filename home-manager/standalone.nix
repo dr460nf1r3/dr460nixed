@@ -1,38 +1,28 @@
 {
   lib,
   pkgs,
-  inputs,
   config,
   ...
 }:
 let
   cfg = config.dr460nixed.hm.standalone;
-  configDir = ".config";
-  jamesdsp = inputs.self.dragonLib.jamesdsp pkgs;
 in
 {
   options.dr460nixed.hm.standalone = {
-    enable = lib.mkEnableOption "standalone Home Manager configuration";
+    enable = lib.mkEnableOption "standalone Home Manager configuration (non-NixOS hosts only)";
   };
 
   config = lib.mkIf cfg.enable {
-    dr460nixed.hm = {
-      common.enable = true;
-      misc.enable = true;
-      shell.enable = true;
-    };
+    # Pull in the shared core; everything else here is standalone-specific
+    dr460nixed.hm.core.enable = true;
 
-    home.file = {
-      "${configDir}/jamesdsp/irs/game.irs".source = jamesdsp.game;
-      "${configDir}/jamesdsp/irs/movie.irs".source = jamesdsp.movie;
-      "${configDir}/jamesdsp/irs/music.irs".source = jamesdsp.music;
-      "${configDir}/jamesdsp/irs/voice.irs".source = jamesdsp.voice;
-    };
-
-    dconf.enable = true;
-
+    # On NixOS, allowUnfree is set globally; here we must opt-in ourselves
     nixpkgs.config.allowUnfree = true;
 
+    # Required when home-manager manages nix.* options outside of NixOS
+    nix.package = pkgs.nix;
+
+    # Nix daemon settings that NixOS manages for us on NixOS hosts
     nix.settings = {
       auto-optimise-store = true;
       builders-use-substitutes = true;
@@ -43,80 +33,20 @@ in
       ];
     };
 
+    # Services that are managed by NixOS modules when running on NixOS;
+    # disable or tone down the HM variants so they don't conflict
     services = {
       gpg-agent = {
         enableExtraSocket = lib.mkForce false;
         enableScDaemon = lib.mkForce false;
       };
-      syncthing = {
-        enable = lib.mkForce false;
-      };
-    };
-    programs.mangohud.enable = lib.mkForce false;
-
-    home.sessionVariables = {
-      ALSOFT_DRIVERS = "pipewire";
-      EDITOR = "micro";
-      GTK_THEME = "Sweet-Dark";
-      MOZ_USE_XINPUT2 = "1";
-      QT_STYLE_OVERRIDE = "kvantum";
-      SDL_AUDIODRIVER = "pipewire";
-      VISUAL = "micro";
+      syncthing.enable = lib.mkForce false;
     };
 
     programs = {
       home-manager.enable = true;
+      mangohud.enable = lib.mkForce false;
       nix-index.enable = true;
     };
-
-    home.packages = with pkgs; [
-      age
-      alejandra
-      ansible
-      appimage-run
-      asciinema
-      bind
-      bind.dnsutils
-      btop
-      cached-nix-shell
-      cloudflared
-      deadnix
-      duf
-      eza
-      gh
-      heroku
-      hugo
-      jq
-      killall
-      manix
-      micro
-      mongodb-compass
-      mosh
-      nerdctl
-      nettools
-      nix-prefetch-git
-      nixd
-      nixos-generators
-      nixpkgs-lint
-      nixpkgs-review
-      nmap
-      nodePackages_latest.prettier
-      nodejs
-      nvd
-      ruff
-      shellcheck
-      shfmt
-      sops
-      sqlite
-      statix
-      tldr
-      tmux
-      traceroute
-      ugrep
-      vulnix
-      wget
-      whois
-      yarn
-    ];
   };
 }

@@ -66,8 +66,14 @@
     servers = {
       enable = true;
       monitoring = true;
+      claimTokenSecret = "api_keys/netdata";
     };
-    smtp.enable = true;
+    smtp = {
+      enable = true;
+      from = "nico@dr460nf1r3.org";
+      passwordeval = "cat /run/secrets/passwords/nico@dr460nf1r3.org";
+      user = "nico@dr460nf1r3.org";
+    };
     tailscale.enable = true;
   };
 
@@ -117,6 +123,16 @@
         };
       };
     };
+  };
+  sops.secrets."api_keys/netdata" = {
+    mode = "0600";
+    owner = "netdata";
+    path = "/run/secrets/api_keys/netdata";
+  };
+  sops.secrets."api_keys/cloudflare" = {
+    mode = "0400";
+    owner = "acme";
+    path = "/run/secrets/api_keys/cloudflare";
   };
   sops.secrets."cloudflared/cup-dragon/cred" = {
     mode = "0660";

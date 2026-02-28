@@ -10,21 +10,7 @@ let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
 in
 {
-  options.dr460nixed.desktops = with lib; {
-    enable = mkOption {
-      default = false;
-      type = types.bool;
-      description = mdDoc ''
-        Whether to enable basic dr460nized desktop theming.
-      '';
-    };
-  };
-
-  config = lib.mkIf cfg.enable {
-    # Enable the dr460nized desktops settings
-    garuda.dr460nized.enable = true;
-
-    # Fancy themed, enhanced Spotify
+  config = lib.mkIf cfg.spicetify {
     programs.spicetify = {
       colorScheme = "catppuccin-mocha";
       enable = true;
@@ -47,11 +33,6 @@ in
         songStats
       ];
       theme = spicePkgs.themes.comfy;
-    };
-
-    # Disable QML cache for better performance / less issues
-    environment.variables = {
-      QML_DISABLE_DISK_CACHE = "1";
     };
   };
 }

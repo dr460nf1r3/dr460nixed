@@ -13,7 +13,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # Enable the smartcard daemon
     hardware.gpgSmartcards.enable = true;
     services.pcscd = {
       enable = true;
@@ -21,8 +20,8 @@ in
     };
     services.udev.packages = [ pkgs.yubikey-personalization ];
 
-    # Configure as challenge-response for instant login,
-    # can't provide the secrets as the challenge gets updated
+    environment.systemPackages = [ pkgs.yubioath-flutter ];
+
     security.pam.yubico = {
       debug = false;
       enable = true;

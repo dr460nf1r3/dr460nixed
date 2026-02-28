@@ -2,8 +2,12 @@
   inputs,
   pkgs,
   self,
+  lib,
   ...
 }:
+let
+  corePkgs = import ../apps/core-packages.nix { inherit pkgs lib; };
+in
 {
   config = {
     # General nix settings
@@ -65,11 +69,11 @@
         "nixos/flake".source = self;
       };
 
-      # Git is required for flakes, and cachix for binary substituters
-      systemPackages = with pkgs; [
-        git
-        cachix
-      ];
+      # Git is required for flakes, and cachix for binary substituters.
+      # the full list is shared with home-manager so that the same set of
+      # "core" tools is available whether the configuration is evaluated on
+      # a NixOS host or a standalone machine.
+      systemPackages = corePkgs;
     };
   };
 }

@@ -2,12 +2,7 @@ _: {
   # Override applications with useful things I want to have
   nixpkgs.overlays =
     let
-      thisConfigsOverlay = final: prev: {
-        kdePackages = prev.kdePackages // {
-          applet-window-buttons6 = prev.kdePackages.applet-window-buttons6.overrideAttrs (old: {
-            patches = (old.patches or [ ]) ++ [ ../patches/applet-window-buttons6-pr31.patch ];
-          });
-        };
+      thisConfigsOverlay = final: _prev: {
         # Enable dark mode, hardware acceleration & add WideVine plugin
         chromium-flagged = final.chromium.override {
           commandLineArgs = [

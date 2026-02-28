@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -10,28 +9,12 @@ let
 in
 {
   options.dr460nixed.nvidia = with lib; {
-    enable = mkOption {
-      default = false;
-      type = types.bool;
-      description = mdDoc ''
-        Whether to enable NVIDIA GPU support with proprietary drivers.
-      '';
-    };
-    open = mkOption {
+    enable = mkEnableOption "Whether to enable NVIDIA GPU support with proprietary drivers.";
+    open = lib.mkEnableOption "Whether to use the open-source NVIDIA kernel module (Turing+)." // {
       default = true;
-      type = types.bool;
-      description = mdDoc ''
-        Whether to use the open-source NVIDIA kernel module (Turing+).
-      '';
     };
     prime = {
-      enable = mkOption {
-        default = false;
-        type = types.bool;
-        description = mdDoc ''
-          Whether to enable PRIME offload for hybrid graphics.
-        '';
-      };
+      enable = mkEnableOption "Whether to enable PRIME offload for hybrid graphics.";
       nvidiaBusId = mkOption {
         default = "";
         type = types.str;
@@ -75,15 +58,7 @@ in
           modesetting.enable = true;
           inherit (cfg) open;
           nvidiaSettings = true;
-          package =
-            let
-              nvidia-fixed-pkgs = import inputs.nixpkgs-nvidia {
-                inherit (pkgs) system;
-                config.allowUnfree = true;
-              };
-              fixedKernelPackages = nvidia-fixed-pkgs.linuxKernel.packagesFor config.boot.kernelPackages.kernel;
-            in
-            fixedKernelPackages.nvidiaPackages.beta;
+          package = config.boot.kernelPackages.nvidiaPackages.beta;
           powerManagement.enable = true;
         };
 

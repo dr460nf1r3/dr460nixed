@@ -1,0 +1,3 @@
+[submodule "garuda-nix-subsystem"]
+	path = garuda-nix-subsystem
+	url = git@gitlab.com:garuda-linux/garuda-nix-subsystem.git

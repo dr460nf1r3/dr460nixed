@@ -64,6 +64,7 @@ let
   userDataDirs = [
     ".android"
     ".ansible"
+    ".claude"
     ".config"
     ".firedragon"
     ".gemini"
@@ -89,6 +90,7 @@ let
     ".local/share/kscreen"
     ".local/share/kwalletd"
     ".local/share/lutris"
+    ".local/share/opencode"
     ".local/share/plasma"
     ".local/share/plasma-systemmonitor"
     ".local/share/zed"
@@ -117,8 +119,11 @@ let
   userCacheDirs = [
     ".cache/BraveSoftware"
     ".cache/JetBrains"
+    ".cache/bat"
+    ".cache/.bun"
     ".cache/bookmarksrunner"
     ".cache/distrobox"
+    ".cache/electron"
     ".cache/fastfetch"
     ".cache/firedragon"
     ".cache/github-copilot"
@@ -127,6 +132,7 @@ let
     ".cache/mesa_shader_cache"
     ".cache/mozilla"
     ".cache/nix"
+    ".cache/pnpm"
     ".cache/spotify"
     ".cache/systemsettings"
     ".cache/tldr"
@@ -144,7 +150,6 @@ let
   # User files to persist
   userFiles = [
     ".bash_history"
-    ".claude.json"
     ".wakatime.bdb"
     ".wakatime.cfg"
   ];

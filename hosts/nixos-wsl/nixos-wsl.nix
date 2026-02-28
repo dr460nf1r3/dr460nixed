@@ -62,7 +62,6 @@
   # Often needed apps
   environment.systemPackages = with pkgs; [
     age
-    alejandra
     ansible
     asciinema
     bat
@@ -144,7 +143,6 @@
       };
       shellInit = ''
         set fish_greeting
-        fastfetch -l nixos --load-config neofetch
       '';
     };
   };

@@ -59,7 +59,6 @@
           esbenp.prettier-vscode
           foxundermoon.shell-format
           jnoortheen.nix-ide
-          kamadorueda.alejandra
           pkief.material-icon-theme
           redhat.vscode-yaml
           tyriar.sort-lines

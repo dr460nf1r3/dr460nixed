@@ -8,13 +8,7 @@ let
 in
 {
   options.dr460nixed.smtp = with lib; {
-    enable = mkOption {
-      default = false;
-      type = types.bool;
-      description = mdDoc ''
-        Enable sending mails via CMD using msmtp.
-      '';
-    };
+    enable = mkEnableOption "Enable sending mails via CMD using msmtp.";
     user = mkOption {
       type = types.str;
       description = mdDoc "The SMTP user.";

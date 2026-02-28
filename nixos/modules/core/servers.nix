@@ -8,13 +8,7 @@ let
 in
 {
   options.dr460nixed.servers = with lib; {
-    enable = mkOption {
-      default = false;
-      type = types.bool;
-      description = mdDoc ''
-        Whether this device is a server.
-      '';
-    };
+    enable = mkEnableOption "Whether this device is a server.";
   };
 
   config = lib.mkIf cfg.enable {

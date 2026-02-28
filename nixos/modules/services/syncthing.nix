@@ -10,13 +10,7 @@ let
 in
 {
   options.dr460nixed.syncthing = {
-    enable = lib.mkOption {
-      default = false;
-      type = lib.types.bool;
-      description = lib.mdDoc ''
-        Enable common file synchronisation between devices.
-      '';
-    };
+    enable = lib.mkEnableOption "Enable common file synchronisation between devices.";
     key = lib.mkOption {
       default = "";
       type = lib.types.str;
@@ -32,7 +26,7 @@ in
       '';
     };
     devices = lib.mkOption {
-      default = [ ];
+      default = { };
       type = lib.types.attrsOf (
         lib.types.submodule (
           { name, ... }:

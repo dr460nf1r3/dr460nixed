@@ -12,7 +12,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # Enable the tor network
     services.tor = {
       client.dns.enable = true;
       client.enable = true;

@@ -13,8 +13,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    # Enhance performance tweaks
     garuda.performance-tweaks.enable = true;
-    boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
+    boot.kernelPackages = pkgs.linuxPackagesFor pkgs.cachyosKernels.linux-cachyos-latest;
   };
 }

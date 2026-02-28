@@ -9,17 +9,14 @@ let
 in
 {
   options.dr460nixed.servers = with lib; {
-    monitoring = mkOption {
-      default = false;
-      type = types.bool;
-      description = mdDoc ''
-        Whether to enable monitoring via Netdata.
-      '';
+    monitoring = lib.mkEnableOption "Whether to enable monitoring via Netdata.";
+    claimTokenSecret = mkOption {
+      type = types.str;
+      description = mdDoc "The sops secret name for Netdata claim token.";
     };
   };
 
   config = lib.mkIf (cfg.enable && cfg.monitoring) {
-    # Enable the Netdata daemon
     services.netdata.enable = true;
     services.netdata.config = {
       global = {
@@ -51,19 +48,12 @@ in
       );
     };
 
-    # Extra Python & system packages required for Netdata to function
     services.netdata.package = pkgs.netdata.override { withCloudUi = true; };
     services.netdata.python.extraPackages = ps: [ ps.psycopg2 ];
     systemd.services.netdata = {
       path = with pkgs; [ jq ];
     };
 
-    # Connect to Netdata Cloud easily
-    services.netdata.claimTokenFile = config.sops.secrets."api_keys/netdata".path;
-    sops.secrets."api_keys/netdata" = {
-      mode = "0600";
-      owner = "netdata";
-      path = "/run/secrets/api_keys/netdata";
-    };
+    services.netdata.claimTokenFile = config.sops.secrets.${cfg.claimTokenSecret}.path;
   };
 }

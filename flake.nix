@@ -48,14 +48,13 @@
     };
 
     garuda-nix = {
-      url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
+      url = "git+file:///home/nico/Documents/dr460nixed/garuda-nix-subsystem";
       inputs.catppuccin.follows = "catppuccin";
-      inputs.devshell.follows = "devshell";
       inputs.flake-parts.follows = "flake-parts";
+      inputs.git-hooks.follows = "git-hooks";
       inputs.home-manager.follows = "home-manager";
       inputs.nix-index-database.follows = "nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     };
 
     git-hooks = {
@@ -140,11 +139,6 @@
       inputs.systems.follows = "systems";
     };
 
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     nixos-wsl = {
@@ -153,7 +147,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
@@ -182,9 +176,7 @@
 
     ucodenix.url = "github:e-tho/ucodenix";
 
-    nixpkgs-nvidia.url = "github:NixOS/nixpkgs/ab9ad415916a0fb89d1f539a9291d9737e95148e";
-
-    # Patches
+    # Patches (auto-applying to inputs)
     nixpkgs-patch-nvidia-590 = {
       url = "https://github.com/NixOS/nixpkgs/pull/490123.patch";
       flake = false;
