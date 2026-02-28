@@ -856,17 +856,17 @@
     },
     "nixpkgs-nvidia": {
       "locked": {
-        "lastModified": 1771170098,
-        "narHash": "sha256-xWU7EFeR+OQk4UcykJD5pOjhHle6/VPAHQqsNUWj4Rc=",
+        "lastModified": 1772281186,
+        "narHash": "sha256-97eX6Rw1s6V5Ubn8hiSF4ahp4Z7GPQ94bAA0Tlzj04w=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ab9ad415916a0fb89d1f539a9291d9737e95148e",
+        "rev": "6dad0a079090340ccdf0cd133980c23561e0c24e",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ab9ad415916a0fb89d1f539a9291d9737e95148e",
+        "rev": "6dad0a079090340ccdf0cd133980c23561e0c24e",
         "type": "github"
       }
     },

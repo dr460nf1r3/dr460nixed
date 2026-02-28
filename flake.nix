@@ -182,7 +182,7 @@
 
     ucodenix.url = "github:e-tho/ucodenix";
 
-    nixpkgs-nvidia.url = "github:NixOS/nixpkgs/ab9ad415916a0fb89d1f539a9291d9737e95148e";
+    nixpkgs-nvidia.url = "github:NixOS/nixpkgs/6dad0a079090340ccdf0cd133980c23561e0c24e";
 
     # Patches
     nixpkgs-patch-nvidia-590 = {
