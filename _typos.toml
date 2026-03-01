@@ -3,6 +3,7 @@ extend-ignore-identifiers-re = [
   "crypted",
   "immortalis",
   "odf",
+  "PN3HVFK",
   "uage"
 ]
 

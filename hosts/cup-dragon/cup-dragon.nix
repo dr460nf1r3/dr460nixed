@@ -1,5 +1,6 @@
 {
   config,
+  dragonLib,
   lib,
   ...
 }:
@@ -13,9 +14,7 @@
     ../../users/nico/nixos.nix
   ];
 
-  # Boot options
   boot = {
-    # Required for using app connectors in Tailscale
     kernel.sysctl = {
       "net.ipv4.ip_forward" = 1;
       "net.ipv6.conf.all.forwarding" = 1;
@@ -31,7 +30,6 @@
     };
   };
 
-  # This machine is a VM
   services = {
     nginx.enable = true;
     openssh.ports = [ 666 ];
@@ -77,7 +75,6 @@
     tailscale.enable = true;
   };
 
-  # SSL certs for the server
   security.acme.certs = {
     "dr460nf1r3.org" = {
       extraDomainNames = [ "*.dr460nf1r3.org" ];
@@ -99,14 +96,51 @@
     };
   };
 
-  # Some of the services I require
   services.syncthing = {
     enable = true;
+    cert = config.sops.secrets."syncthing/cup-dragon/cert".path;
+    key = config.sops.secrets."syncthing/cup-dragon/key".path;
     guiAddress = "cup-dragon.emperor-mercat.ts.net:8384";
     openDefaultPorts = true;
     overrideDevices = false;
     overrideFolders = false;
-    settings.options.urAccepted = -1;
+    settings = {
+      options.urAccepted = -1;
+      devices = dragonLib.syncthing.getDevicesFor config.networking.hostName;
+      folders = {
+        "chaotic-aur" = {
+          id = "jhcrt-m2dra";
+          path = "/srv/http/chaotic-aur";
+          type = "receiveonly";
+          order = "oldestFirst";
+        };
+        "Music" = {
+          id = "ybqqh-as53c";
+          path = "/home/nico/Music";
+          devices = lib.attrNames (dragonLib.syncthing.getDevicesFor config.networking.hostName);
+        };
+        "Pictures" = {
+          id = "9ymwn-cz5ze";
+          path = "/home/nico/Pictures";
+          devices = lib.attrNames (dragonLib.syncthing.getDevicesFor config.networking.hostName);
+        };
+        "School" = {
+          id = "g5jha-cnrr4";
+          path = "/home/nico/School";
+          devices = lib.attrNames (dragonLib.syncthing.getDevicesFor config.networking.hostName);
+        };
+        "Sync" = {
+          id = "u62ge-wzsau";
+          path = "/home/nico/Sync";
+          devices = lib.attrNames (dragonLib.syncthing.getDevicesFor config.networking.hostName);
+        };
+        "Videos" = {
+          id = "nxhpo-c2j5b";
+          path = "/home/nico/Videos";
+          devices = lib.attrNames (dragonLib.syncthing.getDevicesFor config.networking.hostName);
+        };
+      };
+    };
   };
 
   # Cloudflared tunnel configurations
@@ -124,6 +158,15 @@
       };
     };
   };
+
+  sops.secrets."syncthing/cup-dragon/cert" = {
+    mode = "0644";
+    owner = config.services.syncthing.user;
+  };
+  sops.secrets."syncthing/cup-dragon/key" = {
+    mode = "0600";
+    owner = config.services.syncthing.user;
+  };
   sops.secrets."api_keys/netdata" = {
     mode = "0600";
     owner = "netdata";
@@ -139,13 +182,11 @@
     path = "/var/lib/cloudflared/cred";
   };
 
-  # For running containers from within code-server
   virtualisation = {
     containers.enable = true;
     docker.enable = true;
   };
 
-  # Uptimes
   services.nginx.virtualHosts = {
     "uptime.dr460nf1r3.org" = {
       forceSSL = true;
@@ -206,6 +247,6 @@
     };
   };
 
-  # NixOS stuff
+  home-manager.users.nico.home.stateVersion = lib.mkForce "24.05";
   system.stateVersion = "24.05";
 }

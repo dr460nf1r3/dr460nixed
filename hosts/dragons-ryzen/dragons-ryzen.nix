@@ -29,45 +29,6 @@
     path = "/home/nico/.cloudflared/cert.pem";
   };
 
-  dr460nixed.impermanence.persistentUsers = [ "nico" ];
-
-  dr460nixed.smtp = {
-    from = "nico@dr460nf1r3.org";
-    passwordeval = "cat /run/secrets/passwords/nico@dr460nf1r3.org";
-    user = "nico@dr460nf1r3.org";
-  };
-
-  dr460nixed.syncthing = {
-    user = "nico";
-    folders = {
-      "Music" = {
-        id = "ybqqh-as53c";
-        path = "/home/nico/Music";
-        devices = config.dr460nixed.syncthing.devicesNames;
-      };
-      "Pictures" = {
-        id = "9gj2u-j3m9s";
-        path = "/home/nico/Pictures";
-        devices = config.dr460nixed.syncthing.devicesNames;
-      };
-      "School" = {
-        id = "g5jha-cnrr4";
-        path = "/home/nico/School";
-        devices = config.dr460nixed.syncthing.devicesNames;
-      };
-      "Sync" = {
-        id = "u62ge-wzsau";
-        path = "/home/nico/Sync";
-        devices = config.dr460nixed.syncthing.devicesNames;
-      };
-      "Videos" = {
-        id = "nxhpo-c2j5b";
-        path = "/home/nico/Videos";
-        devices = config.dr460nixed.syncthing.devicesNames;
-      };
-    };
-  };
-
   boot = {
     blacklistedKernelModules = [ "elan_i2c" ];
     initrd.kernelModules = [ "amdgpu" ];
@@ -104,11 +65,51 @@
     desktops.enable = true;
     development.enable = true;
     gaming.enable = true;
-    impermanence.enable = true;
+    impermanence = {
+      enable = true;
+      persistentUsers = [ "nico" ];
+    };
     lanzaboote.enable = true;
     performance.enable = true;
     tailscale.enable = true;
     yubikey.enable = true;
+    smtp = {
+      enable = true;
+      from = "nico@dr460nf1r3.org";
+      passwordeval = "cat /run/secrets/passwords/nico@dr460nf1r3.org";
+      user = "nico@dr460nf1r3.org";
+    };
+    syncthing = {
+      enable = true;
+      user = "nico";
+      folders = {
+        "Music" = {
+          id = "ybqqh-as53c";
+          path = "/home/nico/Music";
+          devices = config.dr460nixed.syncthing.devicesNames;
+        };
+        "Pictures" = {
+          id = "9gj2u-j3m9s";
+          path = "/home/nico/Pictures";
+          devices = config.dr460nixed.syncthing.devicesNames;
+        };
+        "School" = {
+          id = "g5jha-cnrr4";
+          path = "/home/nico/School";
+          devices = config.dr460nixed.syncthing.devicesNames;
+        };
+        "Sync" = {
+          id = "u62ge-wzsau";
+          path = "/home/nico/Sync";
+          devices = config.dr460nixed.syncthing.devicesNames;
+        };
+        "Videos" = {
+          id = "nxhpo-c2j5b";
+          path = "/home/nico/Videos";
+          devices = config.dr460nixed.syncthing.devicesNames;
+        };
+      };
+    };
   };
 
   services.tailscale.extraUpFlags = [

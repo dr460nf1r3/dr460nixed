@@ -7,5 +7,6 @@ in
     localOverlays.overlay
     localOverlays.linuxPackagesOverlay
     inputs.nix-cachyos-kernel.overlays.pinned
+    inputs.nix-gaming-edge.overlays.default
   ];
 }

@@ -128,6 +128,24 @@ let
     lib.mkIf (config.hardware.nvidia.prime.offload.enable or false) (
       patchDesktop pkgs pkg desktopName "^Exec=" "Exec=nvidia-offload "
     );
+
+  syncthing = rec {
+    devices = {
+      "cup-dragon" = {
+        id = "GNQFVZZ-XAGOWKF-PZPU3IN-W5FD557-JW56VG7-DKOR3UI-56TV4AZ-M7QXCQQ";
+      };
+      "dragons-strix" = {
+        id = "QCUPS44-GCT2ITB-PN3HVFK-THOL6X4-NB7R6AH-W7GFHNS-MH26XTZ-BQ6SZAE";
+      };
+      "dragons-ryzen" = {
+        id = "TBAC4NJ-F36QTJG-PSZMSEW-OAZQSWR-65CYJPE-AZ5VI5T-3Z34D4B-H2QMRQZ";
+      };
+      "dragons-pixel" = {
+        id = "UURR5YB-OKRGL74-3VHQLBQ-KUXX4T3-AE74U2Z-IXCZVKF-KHOCOO5-KO7JBAD";
+      };
+    };
+    getDevicesFor = hostName: lib.filterAttrs (name: _: name != hostName) devices;
+  };
 in
 {
   inherit
@@ -137,6 +155,7 @@ in
     binaryCaches
     jamesdsp
     patchDesktop
+    syncthing
     GPUOffloadApp
     ;
 

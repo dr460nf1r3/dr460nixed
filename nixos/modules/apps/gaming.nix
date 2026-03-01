@@ -25,8 +25,7 @@ in
     programs.steam = {
       enable = true;
       extraCompatPackages = with pkgs; [
-        proton-cachyos
-        proton-cachyos_x86_64_v3
+        proton-cachyos-x86_64_v4
       ];
     };
 
@@ -36,5 +35,16 @@ in
       (dragonLib.GPUOffloadApp config pkgs prismlauncher "org.prismlauncher.PrismLauncher")
       (dragonLib.GPUOffloadApp config pkgs steam "steam")
     ];
+
+    drivers.mesa-git = {
+      enable = true;
+      cacheCleanup = {
+        enable = true;
+        protonPackage = pkgs.proton-cachyos-x86_64_v4;
+      };
+      steamOrphanCleanup = {
+        enable = true;
+      };
+    };
   };
 }

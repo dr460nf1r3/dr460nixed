@@ -18,6 +18,7 @@
       "btusb"
       "bluetooth"
     ];
+    kernelParams = [ "microcode.amd_sha_check=off" ];
     supportedFilesystems = [ "btrfs" ];
   };
 

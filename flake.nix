@@ -51,6 +51,7 @@
       url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
       # url = "git+file:///home/nico/Documents/dr460nixed/garuda-nix-subsystem";
       inputs.catppuccin.follows = "catppuccin";
+      inputs.flake-compat.follows = "flake-compat";
       inputs.flake-parts.follows = "flake-parts";
       inputs.git-hooks.follows = "git-hooks";
       inputs.home-manager.follows = "home-manager";
@@ -61,11 +62,13 @@
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.flake-compat.follows = "flake-compat";
+      inputs.gitignore.follows = "gitignore";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     github-actions-nix = {
       url = "github:synapdeck/github-actions-nix";
+      inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -120,6 +123,12 @@
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
       inputs.flake-parts.follows = "flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-gaming-edge = {
+      url = "github:powerofthe69/nix-gaming-edge";
+      inputs.millennium.follows = "";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

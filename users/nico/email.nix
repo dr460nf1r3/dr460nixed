@@ -1,6 +1,7 @@
 _:
 let
   mailserver = "mail.garudalinux.net";
+  mailserverNws = "mail.nextweb-software.com";
 
   mkAccount =
     {
@@ -8,17 +9,18 @@ let
       realName,
       gpgKey ? null,
       primary ? false,
+      server ? mailserver,
     }:
     let
       base = {
         inherit address;
         inherit realName;
         imap = {
-          host = mailserver;
+          host = server;
           port = 993;
         };
         smtp = {
-          host = mailserver;
+          host = server;
           port = 465;
         };
         thunderbird.enable = true;
@@ -54,6 +56,17 @@ in
     accounts.chaotic-personal = mkAccount {
       address = "dr460nf1r3@chaotic.cx";
       realName = "Nico (dr460nf1r3)";
+    };
+
+    accounts.chaotic-h = mkAccount {
+      address = "h@chaotic.cx";
+      realName = "Nico (dr460nf1r3)";
+    };
+
+    accounts.nws = mkAccount {
+      address = "n.jensch@nextweb-software.com";
+      realName = "Nico Jensch";
+      server = mailserverNws;
     };
   };
 }

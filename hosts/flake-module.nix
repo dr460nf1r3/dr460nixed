@@ -18,6 +18,7 @@
         inputs.home-manager.nixosModules.home-manager
         inputs.lanzaboote.nixosModules.lanzaboote
         inputs.lix-module.nixosModules.default
+        inputs.nix-gaming-edge.nixosModules.default
         inputs.sops-nix.nixosModules.sops
         inputs.spicetify-nix.nixosModules.default
         inputs.ucodenix.nixosModules.ucodenix
@@ -37,11 +38,11 @@
         ../nixos/modules/services
         ../nixos/modules/shells
         ../nixos/modules/system
-        ../overlays/default.nix
         ../users/nico/nixos.nix
         inputs.home-manager.nixosModules.home-manager
         inputs.lanzaboote.nixosModules.lanzaboote
         inputs.lix-module.nixosModules.default
+        inputs.nix-gaming-edge.nixosModules.default
         inputs.sops-nix.nixosModules.sops
         inputs.spicetify-nix.nixosModules.default
         "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"

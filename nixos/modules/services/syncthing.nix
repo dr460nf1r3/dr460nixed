@@ -1,5 +1,6 @@
 {
   config,
+  dragonLib,
   lib,
   pkgs,
   ...
@@ -12,21 +13,21 @@ in
   options.dr460nixed.syncthing = {
     enable = lib.mkEnableOption "Enable common file synchronisation between devices.";
     key = lib.mkOption {
-      default = "";
-      type = lib.types.str;
+      default = null;
+      type = lib.types.nullOr lib.types.str;
       description = lib.mdDoc ''
         The key to use for Syncthing.
       '';
     };
     cert = lib.mkOption {
-      default = "";
-      type = lib.types.str;
+      default = null;
+      type = lib.types.nullOr lib.types.str;
       description = lib.mdDoc ''
         The cert to use for Syncthing.
       '';
     };
     devices = lib.mkOption {
-      default = { };
+      default = dragonLib.syncthing.getDevicesFor config.networking.hostName;
       type = lib.types.attrsOf (
         lib.types.submodule (
           { name, ... }:
@@ -63,15 +64,15 @@ in
       '';
     };
     devicesNames = lib.mkOption {
-      default = [ ];
+      default = lib.attrNames cfg.devices;
       type = lib.types.listOf lib.types.str;
       description = lib.mdDoc ''
         The names of the devices to sync with.
       '';
     };
     user = lib.mkOption {
-      default = "";
-      type = lib.types.str;
+      default = null;
+      type = lib.types.nullOr lib.types.str;
       description = lib.mdDoc ''
         The user to run syncthing as.
       '';
@@ -87,6 +88,13 @@ in
               type = lib.types.listOf lib.types.str;
               default = [ ];
             };
+            ignorePatterns = lib.mkOption {
+              type = lib.types.listOf lib.types.str;
+              default = [
+                ".directory"
+                ".thumbnails"
+              ];
+            };
           };
         }
       );
@@ -97,20 +105,25 @@ in
   config = lib.mkIf cfg.enable {
     services.syncthing = {
       inherit (cfg) cert;
-      dataDir = "/home/${cfg.user}";
+      dataDir = lib.mkIf (cfg.user != null) "/home/${cfg.user}";
       enable = true;
       inherit (cfg) key;
       settings = {
         inherit (cfg) devices;
         folders = lib.mapAttrs (_name: folder: {
-          inherit (folder) id path devices;
+          inherit (folder)
+            id
+            path
+            devices
+            ignorePatterns
+            ;
         }) cfg.folders;
         options = {
           localAnnounceEnabled = true;
           urAccepted = -1;
         };
       };
-      inherit (cfg) user;
+      user = lib.mkIf (cfg.user != null) cfg.user;
     };
   };
 }

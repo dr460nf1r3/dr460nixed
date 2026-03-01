@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -26,10 +25,6 @@ in
 
   config = lib.mkIf cfg.common.enable {
     nixpkgs.config.allowUnfree = true;
-
-    nixpkgs.overlays = [
-      inputs.nix-cachyos-kernel.overlays.pinned
-    ];
 
     # A few kernel tweaks
     boot.kernelParams = [ "noresume" ];
