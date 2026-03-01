@@ -12,6 +12,7 @@ in
     development.enable = true;
     email.enable = true;
     shell.enable = true;
+    kde.enable = true;
     user = lib.mkIf (userCfg.enable or false) {
       enable = true;
       name = userCfg.git.userName;

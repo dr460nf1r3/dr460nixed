@@ -1,7 +1,6 @@
 {
   config,
   dragonLib,
-  inputs,
   lib,
   pkgs,
   ...
@@ -31,7 +30,6 @@ in
       hunspell
       hunspellDicts.de_DE
       hunspellDicts.en_US
-      inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
       kdePackages.kdenlive
       kdePackages.kleopatra
       kdePackages.krdc

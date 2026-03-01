@@ -164,5 +164,6 @@
     };
   };
 
+  home-manager.users.nico.home.stateVersion = lib.mkForce "23.11";
   system.stateVersion = "23.11";
 }

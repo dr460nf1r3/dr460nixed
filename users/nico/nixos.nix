@@ -38,6 +38,7 @@ in
         "c" = "ssh -p666 nico@cup-dragon";
         "g1" = "ssh -p666 nico@aerialis.garudalinux.org";
         "g2" = "ssh -p666 nico@stormwing.garudalinux.org";
+        "g3" = "ssh -p220 -L 5433:127.0.0.1:5432 nico@aerialis.garudalinux.org";
       };
       fishAbbreviations = {
         "b1" = "ssh -p23 u342919@u342919.${hetznerStorageBox}";
@@ -45,6 +46,7 @@ in
         "c" = "ssh -p666 nico@cup-dragon";
         "g1" = "ssh -p666 nico@aerialis.garudalinux.org";
         "g2" = "ssh -p666 nico@stormwing.garudalinux.org";
+        "g3" = "ssh -p220 -L 5433:127.0.0.1:5432 nico@aerialis.garudalinux.org";
       };
       stateVersion = "26.05";
     };

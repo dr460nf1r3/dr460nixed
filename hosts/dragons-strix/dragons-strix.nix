@@ -5,7 +5,6 @@
   ...
 }:
 {
-  # Individual settings + low-latency Pipewire
   imports = [
     ./hardware-configuration.nix
     ../../nixos/modules/impermanence
@@ -13,7 +12,6 @@
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
 
-  # Boot options
   boot = {
     initrd.kernelModules = [ "amdgpu" ];
     kernelModules = [
@@ -23,7 +21,6 @@
     supportedFilesystems = [ "btrfs" ];
   };
 
-  # Hostname of this machine
   networking.hostName = "dragons-strix";
 
   nix.settings.system-features = [
@@ -31,13 +28,11 @@
     "kvm"
   ];
 
-  # Ucode updates for the CPU
   services.ucodenix = {
     enable = true;
     cpuModelId = "00B40F40";
   };
 
-  # The services to use on this machine
   services = {
     pipewire.lowLatency = {
       enable = true;
@@ -48,7 +43,6 @@
 
   hardware.bluetooth.enable = true;
 
-  # Enable a few selected custom settings
   dr460nixed = {
     chromium.enable = true;
     desktops.enable = true;
@@ -73,6 +67,8 @@
     syncthing = {
       enable = true;
       user = "nico";
+      cert = config.sops.secrets."syncthing/dragons-strix/cert".path;
+      key = config.sops.secrets."syncthing/dragons-strix/key".path;
       folders = {
         "Music" = {
           id = "ybqqh-as53c";
@@ -80,8 +76,13 @@
           devices = config.dr460nixed.syncthing.devicesNames;
         };
         "Pictures" = {
-          id = "9gj2u-j3m9s";
+          id = "9ymwn-cz5ze";
           path = "/home/nico/Pictures";
+          devices = config.dr460nixed.syncthing.devicesNames;
+        };
+        "School" = {
+          id = "g5jha-cnrr4";
+          path = "/home/nico/Documents/school";
           devices = config.dr460nixed.syncthing.devicesNames;
         };
         "Sync" = {
@@ -121,6 +122,14 @@
     };
   };
 
+  sops.secrets."syncthing/dragons-strix/cert" = {
+    mode = "0644";
+    owner = "nico";
+  };
+  sops.secrets."syncthing/dragons-strix/key" = {
+    mode = "0600";
+    owner = "nico";
+  };
   sops.secrets."wireguard/nws" = {
     neededForUsers = false;
     owner = "systemd-network";
@@ -143,14 +152,12 @@
     path = "/home/nico/.cloudflared/cert.pem";
   };
 
-  # Autologin due to FDE
   services.displayManager.autoLogin = {
     enable = true;
     user = "nico";
   };
   services.displayManager.defaultSession = "plasma";
 
-  # Force KWin to use the AMD GPU as the primary DRM device
   environment.sessionVariables = {
     KWIN_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
     KWIN_DRM_USE_MODIFIERS = "0";
@@ -167,10 +174,13 @@
     enable = true;
   };
 
-  # AMD as primary GPU driver
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  # NixOS stuff
+  # https://www.kernel.org/doc/html/v6.18/admin-guide/thunderbolt.html#dma-protection-utilizing-iommu
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="thunderbolt", ATTRS{iommu_dma_protection}=="1", ATTR{authorized}=="0", ATTR{authorized}="1"
+  '';
+
   home-manager.users.nico.home.stateVersion = lib.mkForce "26.05";
   system.stateVersion = "26.05";
 }

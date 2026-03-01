@@ -41,6 +41,7 @@ in
           common.enable = lib.mkDefault true;
           core.enable = lib.mkDefault true;
           development.enable = lib.mkDefault cfg.development.enable;
+          git.enable = lib.mkDefault true;
           desktop = {
             enable = lib.mkDefault cfg.desktops.enable;
             jamesdsp = lib.mkDefault cfg.desktops.enable;
@@ -48,7 +49,7 @@ in
           };
           sync = {
             enable = lib.mkDefault cfg.syncthing.enable;
-            syncthing = lib.mkDefault cfg.syncthing.enable;
+            syncthing = lib.mkDefault false;
           };
         };
       })

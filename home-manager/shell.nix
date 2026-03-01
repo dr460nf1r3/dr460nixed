@@ -97,8 +97,5 @@ in
         set fish_greeting
       '';
     };
-
-    programs.starship.enable = true;
-    programs.eza.enable = true;
   };
 }
