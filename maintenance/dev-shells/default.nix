@@ -1,44 +1,51 @@
 {
-  inputs,
-  self,
-  pkgs,
-  system,
   config,
+  inputs,
+  pkgs,
+  ...
 }:
 let
   inherit (config.pre-commit.settings)
     enabledPackages
     ;
-  shellHook = config.pre-commit.installationScript;
 
   preCommitCompat = pkgs.writeShellScriptBin "pre-commit" ''
     exec ${pkgs.lib.getExe pkgs.prek} "$@"
   '';
 
   linter = pkgs.callPackage ../tools/linter {
-    formatter = self.formatter.${system};
+    formatter = config.treefmt.build.wrapper;
   };
 in
 {
-  default = pkgs.mkShell {
-    inherit shellHook;
+  default = {
+    name = "dr460nixed";
 
-    buildInputs = [
-      pkgs.sops
-      inputs.colmena.defaultPackage.${system}
-      self.formatter.${system}
-      self.packages.${system}.write-workflows
+    env.NIX_PATH = "nixpkgs=${inputs.nixpkgs}";
+
+    packages = [
       linter
-    ];
+      pkgs.nh
+      pkgs.sops
+      config.treefmt.build.wrapper
+      preCommitCompat
+    ]
+    ++ enabledPackages;
 
-    packages = enabledPackages ++ [ preCommitCompat ];
+    enterShell = config.pre-commit.installationScript;
   };
 
-  linter = pkgs.mkShell {
-    inherit shellHook;
+  linter = {
+    name = "dr460nixed-linter";
 
-    buildInputs = [ linter ];
+    env.NIX_PATH = "nixpkgs=${inputs.nixpkgs}";
 
-    packages = enabledPackages ++ [ preCommitCompat ];
+    packages = [
+      linter
+      preCommitCompat
+    ]
+    ++ enabledPackages;
+
+    enterShell = config.pre-commit.installationScript;
   };
 }

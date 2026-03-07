@@ -13,6 +13,9 @@ in
 
     environment.systemPackages = with pkgs; [
       ansible
+      (bash-language-server.override {
+        nodejs = pkgs.nodejs_latest;
+      })
       bruno
       cloudflared
       cmake
@@ -33,11 +36,17 @@ in
       nixpkgs-lint
       nixpkgs-review
       nmap
-      nodePackages_latest.bash-language-server
-      nodePackages_latest.pnpm
-      nodePackages_latest.prettier
       nodejs_latest
       opencode
+      opencode-desktop
+      (pnpm.override {
+        nodejs = pkgs.nodejs_latest;
+      })
+      (prettier.override {
+        nodejs = pkgs.nodejs_latest;
+      })
+      rust-analyzer
+      rustup
       shellcheck
       shfmt
       sops
@@ -55,6 +64,11 @@ in
         "metrics.chaotic.local"
         "backend.chaotic.local"
       ];
+    };
+
+    environment.variables = {
+      CARGO_HOME = "$HOME/.cargo";
+      PNPM_HOME = "$HOME/.local/share/pnpm";
     };
   };
 }

@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -14,6 +13,5 @@ in
 
   config = lib.mkIf cfg.enable {
     garuda.performance-tweaks.enable = true;
-    boot.kernelPackages = pkgs.linuxPackagesFor pkgs.cachyosKernels.linux-cachyos-latest;
   };
 }

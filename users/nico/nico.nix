@@ -1,6 +1,12 @@
-{ lib, dr460nixedUserConfig, ... }:
+{
+  osConfig ? { },
+  lib,
+  dr460nixedUserConfig,
+  ...
+}:
 let
   userCfg = dr460nixedUserConfig.nico or { };
+  isDesktop = osConfig.dr460nixed.desktops.enable or true;
 in
 {
   imports = [
@@ -9,10 +15,11 @@ in
   ];
 
   dr460nixed.hm = {
-    development.enable = true;
-    email.enable = true;
+    development.enable = isDesktop;
+    email.enable = isDesktop;
     shell.enable = true;
-    kde.enable = true;
+    kde.enable = isDesktop;
+    sync.nextcloud = isDesktop;
     user = lib.mkIf (userCfg.enable or false) {
       enable = true;
       name = userCfg.git.userName;

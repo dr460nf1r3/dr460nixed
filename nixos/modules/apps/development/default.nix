@@ -9,6 +9,7 @@ in
 {
   imports = [
     ./docker.nix
+    ./podman.nix
     ./vms.nix
     ./tools.nix
     ./jetbrains.nix
@@ -26,6 +27,11 @@ in
       default = false;
       type = types.bool;
       description = mdDoc "Enable Docker and containers";
+    };
+    podman = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc "Enable Podman and Quadlet containers";
     };
     vms = mkOption {
       default = false;
@@ -51,7 +57,7 @@ in
 
   config = lib.mkIf cfg.enable {
     dr460nixed.development = {
-      docker = true;
+      podman = true;
       tools = true;
       vms = true;
       jetbrains = true;

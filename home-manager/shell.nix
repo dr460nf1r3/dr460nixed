@@ -51,12 +51,11 @@ let
     "gpr" = "git pull --rebase";
     "gpull" = "git pull";
     "gpush" = "git push";
-    "reb" = " sudo nixos-rebuild switch -L";
-    "roll" = "sudo nixos-rebuild switch --rollback";
+    "reb" = " nh os switch";
     "run" = "nix run nixpkgs#";
     "su" = "sudo su -";
     "tarnow" = "tar acf ";
-    "test" = "sudo nixos-rebuild switch --test";
+    "test" = "nh os test";
     "tree" = "eza --git --color always -T";
     "untar" = "tar zxvf ";
     "use" = "nix shell nixpkgs#";

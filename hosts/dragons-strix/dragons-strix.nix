@@ -2,6 +2,7 @@
   config,
   inputs,
   lib,
+  pkgs,
   ...
 }:
 {
@@ -13,12 +14,21 @@
   ];
 
   boot = {
-    initrd.kernelModules = [ "amdgpu" ];
-    kernelModules = [
-      "btusb"
-      "bluetooth"
+    blacklistedKernelModules = [
+      "ucsi_acpi"
+      "typec_ucsi"
     ];
-    kernelParams = [ "microcode.amd_sha_check=off" ];
+    initrd.kernelModules = [
+      "amdgpu"
+      "thunderbolt"
+    ];
+    kernelPackages = pkgs.linuxPackagesFor pkgs.cachyosKernels.linux-cachyos-latest-zen4;
+    kernelParams = [
+      "microcode.amd_sha_check=off"
+      "typec_ucsi.timeout_ms=5000"
+      "pcie_port_pm=off"
+      "amdgpu.sg_display=0"
+    ];
     supportedFilesystems = [ "btrfs" ];
   };
 
@@ -43,6 +53,7 @@
   };
 
   hardware.bluetooth.enable = true;
+  services.hardware.bolt.enable = true;
 
   dr460nixed = {
     chromium.enable = true;
@@ -175,12 +186,9 @@
     enable = true;
   };
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  programs.nh.flake = "/home/nico/Projects/misc/dr460nixed";
 
-  # https://www.kernel.org/doc/html/v6.18/admin-guide/thunderbolt.html#dma-protection-utilizing-iommu
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="thunderbolt", ATTRS{iommu_dma_protection}=="1", ATTR{authorized}=="0", ATTR{authorized}="1"
-  '';
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   home-manager.users.nico.home.stateVersion = lib.mkForce "26.05";
   system.stateVersion = "26.05";

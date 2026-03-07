@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -9,8 +8,6 @@ let
   cfg = config.dr460nixed.shells;
 in
 {
-  imports = [ inputs.direnv-instant.nixosModules.direnv-instant ];
-
   options.dr460nixed.shells.enable =
     lib.mkEnableOption "Whether the shell should receive our aliases and themes."
     // {
@@ -25,9 +22,6 @@ in
           "grep" = "${pkgs.ugrep}/bin/ugrep";
         };
       };
-
-      direnv.enable = lib.mkForce false;
-      direnv-instant.enable = true;
 
       fish = {
         shellAbbrs = {

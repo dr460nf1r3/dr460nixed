@@ -2,7 +2,6 @@
   perSystem =
     {
       pkgs,
-      config,
       ...
     }:
     {
@@ -44,26 +43,6 @@
           vbox = pkgs.writeShellScriptBin "dr460nixed-vbox" ''
             nix build .#nixosConfigurations.dr460nixed-base.config.formats.virtualbox
           '';
-
-          workflows = pkgs.runCommand "copy-workflows" { } ''
-            mkdir -p $out/.github/workflows
-            cp -r ${config.githubActions.workflowsDir}/* $out/.github/workflows/
-          '';
-
-          write-workflows = pkgs.writeShellApplication {
-            name = "write-workflows";
-            text = ''
-              dest=".github/workflows"
-              mkdir -p "$dest"
-              # Ensure we are in the flake root or can find the .github directory
-              if [ ! -d ".github" ]; then
-                echo "Error: .github directory not found. Please run this from the project root."
-                exit 1
-              fi
-              cp -v ${config.githubActions.workflowsDir}/* "$dest/"
-              chmod +w "$dest"/*
-            '';
-          };
         };
     };
 }

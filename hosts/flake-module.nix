@@ -1,7 +1,7 @@
 {
+  dragonLib,
   inputs,
   self,
-  dragonLib,
   ...
 }:
 {
@@ -19,6 +19,7 @@
         inputs.lanzaboote.nixosModules.lanzaboote
         inputs.lix-module.nixosModules.default
         inputs.nix-gaming-edge.nixosModules.default
+        inputs.quadlet-nix.nixosModules.quadlet
         inputs.sops-nix.nixosModules.sops
         inputs.spicetify-nix.nixosModules.default
         inputs.ucodenix.nixosModules.ucodenix
@@ -43,6 +44,7 @@
         inputs.lanzaboote.nixosModules.lanzaboote
         inputs.lix-module.nixosModules.default
         inputs.nix-gaming-edge.nixosModules.default
+        inputs.quadlet-nix.nixosModules.quadlet
         inputs.sops-nix.nixosModules.sops
         inputs.spicetify-nix.nixosModules.default
         "${toString inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"

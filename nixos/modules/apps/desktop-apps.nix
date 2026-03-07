@@ -35,6 +35,7 @@ in
       kdePackages.krdc
       kdePackages.krfb
       kdePackages.okular
+      kdePackages.plasma-thunderbolt
       libreoffice-qt6-fresh
       libsecret
       libva-utils

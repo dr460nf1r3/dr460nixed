@@ -8,6 +8,7 @@
 let
   cfg = config.dr460nixed.hm.kde;
   configDir = ".config";
+  localDir = ".local/share";
   jamesdsp = inputs.self.dragonLib.jamesdsp pkgs;
 in
 {
@@ -26,10 +27,10 @@ in
           XftHintStyle = "hintslight";
           XftSubPixel = "none";
           fixed = "JetBrainsMonoNL Nerd Font,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-          font = "Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-          menuFont = "Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-          smallestReadableFont = "Inter,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
-          toolBarFont = "Inter,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
+          font = "Inter,10,-1,5,700,0,0,0,0,0,0,0,0,0,0,1,Bold";
+          menuFont = "Inter,10,-1,5,700,0,0,0,0,0,0,0,0,0,0,1,Bold";
+          smallestReadableFont = "Inter,8,-1,5,700,0,0,0,0,0,0,0,0,0,0,1,Bold";
+          toolBarFont = "Inter,10,-1,5,700,0,0,0,0,0,0,0,0,0,0,1,Bold";
         };
         Icons = {
           Theme = "Papirus-Dark";
@@ -279,6 +280,7 @@ in
         export XDG_DATA_DIRS=$XDG_DATA_DIRS_MOD
         export XDG_CONFIG_DIRS=$XDG_CONFIG_DIRS_MOD
       '';
+      "${localDir}/user-places.xbel".source = ./misc/user-places.xbel;
     };
 
     home.sessionVariables = {

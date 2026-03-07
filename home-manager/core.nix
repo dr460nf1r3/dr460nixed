@@ -26,6 +26,5 @@ in
     # referencing a location outside home-manager makes this suitable for
     # both NixOS and standalone use.
     home.packages = corePkgs;
-
   };
 }

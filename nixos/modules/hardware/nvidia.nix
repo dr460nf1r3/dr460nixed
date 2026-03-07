@@ -61,6 +61,7 @@ in
           package = config.boot.kernelPackages.nvidiaPackages.beta;
           powerManagement.enable = true;
         };
+        services.lact.enable = true;
 
         hardware.graphics = {
           extraPackages = with pkgs; [

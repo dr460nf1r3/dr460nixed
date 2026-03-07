@@ -97,7 +97,6 @@ in
   };
 
   config = {
-    # Use fixed UIDs/GIDs
     users.deterministicIds =
       (lib.mapAttrs (_name: u: {
         inherit (u) uid gid;
@@ -200,15 +199,13 @@ in
         msr.gid = 955;
       };
 
-    # This is needed for early set up of user accounts
     sops.secrets = {
       "passwords/root".neededForUsers = true;
     };
 
     users = {
-      # All users are immuntable; if a password is required it needs to be set via passwordFile
       mutableUsers = false;
-      users =
+      users = lib.mkMerge [
         (lib.mapAttrs (name: u: {
           inherit (u) isNormalUser;
           extraGroups = u.extraGroups ++ ifTheyExist u.shellGroups;
@@ -229,18 +226,17 @@ in
             }
           ];
         }) cfg)
-        // {
-          # Lock root password
+        {
           root = {
             hashedPassword = null;
             hashedPasswordFile = lib.mkForce config.sops.secrets."passwords/root".path;
           };
-        };
+        }
+      ];
     };
 
     security.sudo.extraRules = [
       {
-        # allow wheel group to run nixos-rebuild without password
         groups = [ "wheel" ];
         commands =
           let
@@ -267,7 +263,6 @@ in
               options = [ "NOPASSWD" ];
             }
             {
-              # let wheel group collect garbage without password
               command = "${currentSystem}/sw/bin/nix-collect-garbage";
               options = [
                 "SETENV"
@@ -275,7 +270,6 @@ in
               ];
             }
             {
-              # let wheel group interact with systemd without password
               command = "${currentSystem}/sw/bin/systemctl";
               options = [ "NOPASSWD" ];
             }

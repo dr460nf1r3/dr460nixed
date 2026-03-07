@@ -21,6 +21,17 @@ in
             CONTEXT7_API_KEY = "{env:CONTEXT7_API_KEY}";
           };
         };
+        deepwiki = {
+          url = "https://mcp.deepwiki.com/mcp";
+        };
+        nixos = {
+          command = "nix";
+          args = [
+            "run"
+            "github:utensils/mcp-nixos"
+            "--"
+          ];
+        };
       };
     };
   };

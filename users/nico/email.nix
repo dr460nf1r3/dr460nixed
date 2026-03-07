@@ -2,6 +2,7 @@ _:
 let
   mailserver = "mail.garudalinux.net";
   mailserverNws = "mail.nextweb-software.com";
+  mailserverProtonBridge = "100.100.1.12";
 
   mkAccount =
     {
@@ -10,6 +11,8 @@ let
       gpgKey ? null,
       primary ? false,
       server ? mailserver,
+      imapPort ? 993,
+      smtpPort ? 465,
     }:
     let
       base = {
@@ -17,11 +20,11 @@ let
         inherit realName;
         imap = {
           host = server;
-          port = 993;
+          port = imapPort;
         };
         smtp = {
           host = server;
-          port = 465;
+          port = smtpPort;
         };
         thunderbird.enable = true;
         userName = address;
@@ -42,8 +45,16 @@ let
 in
 {
   accounts.email = {
-    accounts.garuda-personal = mkAccount {
+    accounts.main = mkAccount {
       primary = true;
+      address = "nico@dr460nf1r3.org";
+      server = mailserverProtonBridge;
+      realName = "Nico Jensch";
+      imapPort = 1143;
+      smtpPort = 1025;
+    };
+
+    accounts.garuda-personal = mkAccount {
       address = "dr460nf1r3@garudalinux.org";
       realName = "Nico (dr460nf1r3)";
     };

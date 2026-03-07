@@ -40,7 +40,10 @@ in
         dr460nixed.hm = {
           common.enable = lib.mkDefault true;
           core.enable = lib.mkDefault true;
-          development.enable = lib.mkDefault cfg.development.enable;
+          development.enable = lib.mkDefault cfg.desktops.enable;
+          email.enable = lib.mkDefault cfg.desktops.enable;
+          kde.enable = lib.mkDefault cfg.desktops.enable;
+          shell.enable = lib.mkDefault true;
           git.enable = lib.mkDefault true;
           desktop = {
             enable = lib.mkDefault cfg.desktops.enable;
@@ -50,6 +53,7 @@ in
           sync = {
             enable = lib.mkDefault cfg.syncthing.enable;
             syncthing = lib.mkDefault false;
+            nextcloud = lib.mkDefault cfg.desktops.enable;
           };
         };
       })

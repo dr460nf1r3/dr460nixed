@@ -26,7 +26,7 @@
         # Also include modules from subdirectories if any (e.g. nico/nico.nix)
         nicoModules = {
           nico = import ../users/nico/nico.nix;
-          email = import ../users/nico/email.nix;
+          nico-email = import ../users/nico/email.nix;
           not-standalone = import ../users/nico/not-standalone.nix;
         };
       in

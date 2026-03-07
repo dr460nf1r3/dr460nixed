@@ -4,10 +4,12 @@
   nixConfig = {
     extra-substituters = [
       "https://cache.nixos.org/"
+      "https://devenv.cachix.org"
       "https://cache.garnix.io"
     ];
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
     ];
   };
@@ -18,16 +20,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    devshell = {
-      url = "github:numtide/devshell";
-      flake = false;
-    };
-
-    direnv-instant = {
-      url = "github:Mic92/direnv-instant";
-      inputs.nixpkgs.follows = "nixpkgs";
+    devenv = {
+      url = "github:cachix/devenv";
+      inputs.flake-compat.follows = "flake-compat";
       inputs.flake-parts.follows = "flake-parts";
-      inputs.treefmt-nix.follows = "treefmt-nix";
+      inputs.git-hooks.follows = "git-hooks";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     disko = {
@@ -49,7 +47,7 @@
 
     garuda-nix = {
       url = "gitlab:garuda-linux/garuda-nix-subsystem/main";
-      # url = "git+file:///home/nico/Documents/dr460nixed/garuda-nix-subsystem";
+      # url = "git+file:///home/nico/Projects/misc/dr460nixed/garuda-nix-subsystem";
       inputs.catppuccin.follows = "catppuccin";
       inputs.flake-compat.follows = "flake-compat";
       inputs.flake-parts.follows = "flake-parts";
@@ -57,18 +55,13 @@
       inputs.home-manager.follows = "home-manager";
       inputs.nix-index-database.follows = "nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.treefmt-nix.follows = "treefmt-nix";
     };
 
     git-hooks = {
       url = "github:cachix/git-hooks.nix";
       inputs.flake-compat.follows = "flake-compat";
       inputs.gitignore.follows = "gitignore";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    github-actions-nix = {
-      url = "github:synapdeck/github-actions-nix";
-      inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -96,14 +89,7 @@
     lanzaboote = {
       url = "github:nix-community/lanzaboote/master";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    colmena = {
-      url = "github:zhaofengli/colmena";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.stable.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
+      inputs.pre-commit.follows = "pre-commit-hooks";
     };
 
     lix = {
@@ -118,11 +104,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+    nix-cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel/release";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.flake-parts.follows = "flake-parts";
+    };
 
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
       inputs.flake-parts.follows = "flake-parts";
+      inputs.git-hooks.follows = "git-hooks";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -159,6 +150,10 @@
       inputs.flake-compat.follows = "flake-compat";
       inputs.gitignore.follows = "gitignore";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    quadlet-nix = {
+      url = "github:SEIAROTg/quadlet-nix";
     };
 
     sops-nix = {
@@ -213,9 +208,9 @@
         ./hosts/flake-module.nix
         ./nixos/flake-module.nix
         ./packages/flake-module.nix
+        inputs.devenv.flakeModule
         inputs.git-hooks.flakeModule
         inputs.disko.flakeModules.default
-        inputs.github-actions-nix.flakeModules.default
         inputs.home-manager.flakeModules.home-manager
         inputs.treefmt-nix.flakeModule
       ];
@@ -240,8 +235,6 @@
           };
         in
         {
-          imports = [ ./maintenance/workflows.nix ];
-
           treefmt = {
             projectRootFile = "flake.nix";
             package = pkgsLix.treefmt;
@@ -283,10 +276,9 @@
             inherit (config) githubActions;
           };
 
-          devShells = import ./maintenance/dev-shells {
+          devenv.shells = import ./maintenance/dev-shells {
             inherit
               inputs
-              self
               system
               config
               ;
@@ -296,8 +288,6 @@
 
       flake = {
         inherit dragonLib;
-
-        colmenaHive = self.dragonLib.mkColmenaHive nixpkgs.legacyPackages.x86_64-linux { };
 
         diskoConfigurations = {
           btrfs-subvolumes = import ./nixos/modules/disko/btrfs-subvolumes.nix { };
