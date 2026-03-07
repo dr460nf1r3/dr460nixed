@@ -1,10 +1,16 @@
 ---
 builds:
   exclude:
+    - devShells.*.default
+    - devShells.*.linter
     - nixosConfigurations.cup-dragon
     - nixosConfigurations.dev-container
-    - nixosConfigurations.dragons-ryzen
-    - nixosConfigurations.dragons-strix
     - nixosConfigurations.dr460nixed-base
     - nixosConfigurations.dr460nixed-desktop
+    - nixosConfigurations.dragons-ryzen
+    - nixosConfigurations.dragons-strix
+    - packages.*.container-processes
+    - packages.*.container-shell
+    - packages.*.linter-container-processes
+    - packages.*.linter-container-shell
     - packages.*.vbox
