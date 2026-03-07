@@ -37,7 +37,7 @@
             const path_to_root = "";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "searchindex-040deef1.js";
+            window.path_to_searchindex_js = "searchindex-7d206069.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-ad66474f.js"></script>
@@ -623,7 +623,6 @@ in
 <h1 id="common"><a class="header" href="#common">Common</a></h1>
 <pre><code class="language-nix">{
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -649,10 +648,6 @@ in
 
   config = lib.mkIf cfg.common.enable {
     nixpkgs.config.allowUnfree = true;
-
-    nixpkgs.overlays = [
-      inputs.nix-cachyos-kernel.overlays.pinned
-    ];
 
     # A few kernel tweaks
     boot.kernelParams = [ "noresume" ];
@@ -1062,6 +1057,7 @@ in
 {
   imports = [
     ./docker.nix
+    ./podman.nix
     ./vms.nix
     ./tools.nix
     ./jetbrains.nix
@@ -1079,6 +1075,11 @@ in
       default = false;
       type = types.bool;
       description = mdDoc "Enable Docker and containers";
+    };
+    podman = mkOption {
+      default = false;
+      type = types.bool;
+      description = mdDoc "Enable Podman and Quadlet containers";
     };
     vms = mkOption {
       default = false;
@@ -1104,7 +1105,7 @@ in
 
   config = lib.mkIf cfg.enable {
     dr460nixed.development = {
-      docker = true;
+      podman = true;
       tools = true;
       vms = true;
       jetbrains = true;
@@ -1245,16 +1246,28 @@ in
 
     programs.steam = {
       enable = true;
-      extraCompatPackages = with pkgs; [ ];
+      extraCompatPackages = with pkgs; [
+        proton-cachyos-x86_64_v4
+      ];
     };
 
     environment.systemPackages = with pkgs; [
-      protonplus
       lutris
       prismlauncher
       (dragonLib.GPUOffloadApp config pkgs prismlauncher "org.prismlauncher.PrismLauncher")
       (dragonLib.GPUOffloadApp config pkgs steam "steam")
     ];
+
+    drivers.mesa-git = {
+      enable = true;
+      cacheCleanup = {
+        enable = true;
+        protonPackage = pkgs.proton-cachyos-x86_64_v4;
+      };
+      steamOrphanCleanup = {
+        enable = true;
+      };
+    };
   };
 }
 </code></pre>
@@ -1477,35 +1490,20 @@ let
     "pacman.d/gnupg"
   ];
 
-  systemVarCacheDirs = [
-    "tailscale"
-  ];
+  systemVarCacheDirs = [ ];
 
   systemVarLibDirs = [
     "AccountsService/icons"
-    "bluetooth"
-    "containers"
-    "flatpak"
-    "fwupd"
-    "libvirt"
     "machines"
     "NetworkManager"
     "sbctl"
     "plasmalogin"
     "systemd"
-    "tailscale"
     "nixos"
     "upower"
-    "vnstat"
   ];
 
   systemVarLibDirsWithPerms = [
-    {
-      directory = "docker";
-      user = "root";
-      group = "root";
-      mode = "0700";
-    }
     {
       directory = "iwd";
       mode = "u=rwx,g=,o=";
@@ -1526,87 +1524,43 @@ let
 
   # User important data directories
   userDataDirs = [
-    ".android"
-    ".ansible"
+    ".cargo"
     ".claude"
     ".config"
-    ".firedragon"
-    ".gemini"
-    ".gitkraken"
     ".java"
-    ".local/share/AyuGramDesktop"
-    ".local/share/JetBrains"
-    ".local/share/Nextcloud"
-    ".local/share/PrismLauncher"
-    ".local/share/Steam"
-    ".local/share/Vorta"
-    ".local/share/baloo"
     ".local/share/direnv"
-    ".local/share/dolphin"
     ".local/share/fish"
-    ".local/share/heroku"
-    ".local/share/kactivitymanagerd"
-    ".local/share/klipper"
-    ".local/share/knewstuff3"
-    ".local/share/konsole"
-    ".local/share/kpeoplevcard"
-    ".local/share/krita"
-    ".local/share/kscreen"
-    ".local/share/kwalletd"
-    ".local/share/lutris"
-    ".local/share/opencode"
-    ".local/share/plasma"
-    ".local/share/plasma-systemmonitor"
-    ".local/share/zed"
     ".local/state"
-    ".mozilla/native-messaging-hosts"
     ".pki"
-    ".steam"
-    ".thunderbird/default"
     ".tldrc"
-    ".vscode"
     ".wakatime"
-    ".yubico"
     "Documents"
     "Downloads"
-    "Games"
     "Music"
-    "Nextcloud"
     "Pictures"
     "Projects"
     "Sync"
     "Videos"
-    "VirtualBox VMs"
   ];
 
   # User cache directories to persist (important for IDE caches, etc.)
   userCacheDirs = [
-    ".cache/BraveSoftware"
-    ".cache/JetBrains"
     ".cache/bat"
     ".cache/.bun"
     ".cache/bookmarksrunner"
-    ".cache/distrobox"
     ".cache/electron"
     ".cache/fastfetch"
-    ".cache/firedragon"
     ".cache/github-copilot"
-    ".cache/konsole"
-    ".cache/lutris"
     ".cache/mesa_shader_cache"
-    ".cache/mozilla"
     ".cache/nix"
     ".cache/pnpm"
-    ".cache/spotify"
     ".cache/systemsettings"
     ".cache/tldr"
-    ".cache/thunderbird"
   ];
 
   # User state directories
   userStateDirs = [
     ".local/share/icons/distrobox"
-    ".local/share/Trash"
     ".local/state/syncthing"
     ".local/state/wireplumber"
   ];
@@ -1746,10 +1700,178 @@ let
         }
       ];
     }
+    {
+      condition = config.virtualisation.docker.enable;
+      dirs = [
+        {
+          directory = "/var/lib/docker";
+          user = "root";
+          group = "root";
+          mode = "0700";
+        }
+      ];
+    }
+    {
+      condition = config.virtualisation.podman.enable;
+      dirs = [ "/var/lib/containers" ];
+    }
+    {
+      condition = config.services.flatpak.enable;
+      dirs = [ "/var/lib/flatpak" ];
+    }
+    {
+      condition = config.services.fwupd.enable;
+      dirs = [ "/var/lib/fwupd" ];
+    }
+    {
+      condition = config.virtualisation.libvirtd.enable;
+      dirs = [ "/var/lib/libvirt" ];
+    }
+    {
+      condition = config.services.tailscale.enable;
+      dirs = [ "/var/lib/tailscale" ];
+    }
+    {
+      condition = config.services.tailscale.enable;
+      dirs = [ "/var/cache/tailscale" ];
+    }
+    {
+      condition = config.hardware.bluetooth.enable;
+      dirs = [ "/var/lib/bluetooth" ];
+    }
+    {
+      condition = config.services.vnstat.enable;
+      dirs = [ "/var/lib/vnstat" ];
+    }
   ];
 
-  # Flatten optional service dirs based on conditions
+  # Optional user data directories (gated by config)
+  optionalUserDataDirs = [
+    {
+      condition = config.virtualisation.podman.enable;
+      dirs = [ ".local/share/containers" ];
+    }
+    {
+      condition = config.dr460nixed.development.jetbrains or false;
+      dirs = [
+        ".local/share/DBeaverData"
+        ".local/share/JetBrains"
+        ".eclipse"
+      ];
+    }
+    {
+      condition = config.dr460nixed.gaming.enable or false;
+      dirs = [
+        ".local/share/PrismLauncher"
+        ".local/share/Steam"
+        ".local/share/lutris"
+        ".steam"
+        "Games"
+      ];
+    }
+    {
+      condition = config.dr460nixed.desktops.kde or false;
+      dirs = [
+        ".local/share/baloo"
+        ".local/share/dolphin"
+        ".local/share/kactivitymanagerd"
+        ".local/share/klipper"
+        ".local/share/knewstuff3"
+        ".local/share/konsole"
+        ".local/share/kpeoplevcard"
+        ".local/share/kscreen"
+        ".local/share/kwalletd"
+        ".local/share/plasma"
+        ".local/share/plasma-systemmonitor"
+      ];
+    }
+    {
+      condition = config.dr460nixed.development.tools or false;
+      dirs = [
+        ".ansible"
+        ".gemini"
+        ".local/share/heroku"
+        ".local/share/opencode"
+        ".local/share/pnpm"
+        ".local/share/yarn"
+        ".local/share/zed"
+        ".vscode"
+      ];
+    }
+    {
+      condition = config.dr460nixed.development.vms or false;
+      dirs = [ "VirtualBox VMs" ];
+    }
+    {
+      condition = config.dr460nixed.desktops.enable or false;
+      dirs = [
+        ".firedragon"
+        ".gitkraken"
+        ".local/share/AyuGramDesktop"
+        ".local/share/Vorta"
+        ".local/share/krita"
+        ".mozilla"
+        ".thunderbird"
+      ];
+    }
+    {
+      condition = config.dr460nixed.sync.nextcloud or config.dr460nixed.misc.nextcloud or false;
+      dirs = [
+        ".local/share/Nextcloud"
+        "Nextcloud"
+      ];
+    }
+    {
+      condition = config.dr460nixed.development.enable or false;
+      dirs = [
+        ".android"
+      ];
+    }
+    {
+      condition = config.dr460nixed.yubikey.enable or false;
+      dirs = [
+        ".yubico"
+      ];
+    }
+  ];
+
+  # Optional user cache directories (gated by config)
+  optionalUserCacheDirs = [
+    {
+      condition = config.dr460nixed.gaming.enable or false;
+      dirs = [ ".cache/lutris" ];
+    }
+    {
+      condition = config.dr460nixed.desktops.kde or false;
+      dirs = [ ".cache/konsole" ];
+    }
+    {
+      condition = config.dr460nixed.development.tools or false;
+      dirs = [ ".cache/distrobox" ];
+    }
+    {
+      condition = config.dr460nixed.desktops.enable or false;
+      dirs = [
+        ".cache/BraveSoftware"
+        ".cache/firedragon"
+        ".cache/mozilla"
+        ".cache/thunderbird"
+      ];
+    }
+    {
+      condition = config.dr460nixed.desktops.spicetify or false;
+      dirs = [ ".cache/spotify" ];
+    }
+    {
+      condition = config.dr460nixed.development.jetbrains or false;
+      dirs = [ ".cache/JetBrains" ];
+    }
+  ];
+
+  # Flatten optional dirs based on conditions
   optionalDirs = lib.concatMap (s: if s.condition then s.dirs else [ ]) optionalServiceDirs;
+  optionalUserDirs = lib.concatMap (s: if s.condition then s.dirs else [ ]) optionalUserDataDirs;
+  optionalUserCache = lib.concatMap (s: if s.condition then s.dirs else [ ]) optionalUserCacheDirs;
 
   cfg = config.dr460nixed.impermanence;
 in
@@ -1784,8 +1906,12 @@ in
         // (lib.genAttrs cfg.persistentUsers (_name: {
           directories =
             userDataDirs
+            # Optional user data directories
+            ++ optionalUserDirs
             # Cache directories to persist (IDE caches, etc.)
             ++ userCacheDirs
+            # Optional user cache directories
+            ++ optionalUserCache
             # State directories
             ++ userStateDirs
             # Directories with special permissions
@@ -2387,47 +2513,26 @@ let
 in
 {
   config = {
-    # General nix settings
     nix = {
-      # Dont warn about dirty flakes and accept flake configs by default
       extraOptions = ''
         http-connections = 0
         warn-dirty = false
       '';
 
-      # Set the nix path, needed e.g. for Nixd
       nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
-      # Nix.conf settings
       settings = {
         experimental-features = [
           "nix-command"
           "flakes"
         ];
-
-        # Accept flake configs by default
         accept-flake-config = true;
-
-        # Lix cache
-        extra-substituters = [ "https://cache.lix.systems" ];
-
-        # For direnv GC roots
         keep-derivations = true;
         keep-outputs = true;
-
-        # Continue building derivations if one fails
         keep-going = true;
-
-        # Show more log lines for failed builds
         log-lines = 20;
-
-        # Max number of parallel jobs
         max-jobs = "auto";
-
-        # Build inside sandboxed environments
         sandbox = pkgs.stdenv.isLinux;
-
-        # Specify the path to the nix registry
         flake-registry = "/etc/nix/registry.json";
 
         inherit (inputs.self.dragonLib.binaryCaches) substituters;
@@ -2437,19 +2542,11 @@ in
 
     environment = {
       etc = with inputs; {
-        # set channels (backwards compatibility)
         "nix/flake-channels/home-manager".source = home-manager;
         "nix/flake-channels/nixpkgs".source = nixpkgs;
         "nix/flake-channels/system".source = self;
-
-        # preserve current flake in /etc
         "nixos/flake".source = self;
       };
-
-      # Git is required for flakes, and cachix for binary substituters.
-      # the full list is shared with home-manager so that the same set of
-      # "core" tools is available whether the configuration is evaluated on
-      # a NixOS host or a standalone machine.
       systemPackages = corePkgs;
     };
   };
@@ -2520,6 +2617,7 @@ in
           package = config.boot.kernelPackages.nvidiaPackages.beta;
           powerManagement.enable = true;
         };
+        services.lact.enable = true;
 
         hardware.graphics = {
           extraPackages = with pkgs; [
@@ -2602,7 +2700,6 @@ in
 <pre><code class="language-nix">{
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -2615,7 +2712,6 @@ in
 
   config = lib.mkIf cfg.enable {
     garuda.performance-tweaks.enable = true;
-    boot.kernelPackages = pkgs.linuxPackagesFor pkgs.cachyosKernels.linux-cachyos-latest;
   };
 }
 </code></pre>
@@ -2661,7 +2757,6 @@ in
 <h1 id="shells"><a class="header" href="#shells">Shells</a></h1>
 <pre><code class="language-nix">{
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -2670,8 +2765,6 @@ let
   cfg = config.dr460nixed.shells;
 in
 {
-  imports = [ inputs.direnv-instant.nixosModules.direnv-instant ];
-
   options.dr460nixed.shells.enable =
     lib.mkEnableOption "Whether the shell should receive our aliases and themes."
     // {
@@ -2686,9 +2779,6 @@ in
           "grep" = "${pkgs.ugrep}/bin/ugrep";
         };
       };
-
-      direnv.enable = lib.mkForce false;
-      direnv-instant.enable = true;
 
       fish = {
         shellAbbrs = {
@@ -2707,6 +2797,7 @@ in
 <h1 id="syncthing"><a class="header" href="#syncthing">Syncthing</a></h1>
 <pre><code class="language-nix">{
   config,
+  dragonLib,
   lib,
   pkgs,
   ...
@@ -2719,21 +2810,21 @@ in
   options.dr460nixed.syncthing = {
     enable = lib.mkEnableOption "Enable common file synchronisation between devices.";
     key = lib.mkOption {
-      default = "";
-      type = lib.types.str;
+      default = null;
+      type = lib.types.nullOr lib.types.str;
       description = lib.mdDoc ''
         The key to use for Syncthing.
       '';
     };
     cert = lib.mkOption {
-      default = "";
-      type = lib.types.str;
+      default = null;
+      type = lib.types.nullOr lib.types.str;
       description = lib.mdDoc ''
         The cert to use for Syncthing.
       '';
     };
     devices = lib.mkOption {
-      default = { };
+      default = dragonLib.syncthing.getDevicesFor config.networking.hostName;
       type = lib.types.attrsOf (
         lib.types.submodule (
           { name, ... }:
@@ -2770,15 +2861,15 @@ in
       '';
     };
     devicesNames = lib.mkOption {
-      default = [ ];
+      default = lib.attrNames cfg.devices;
       type = lib.types.listOf lib.types.str;
       description = lib.mdDoc ''
         The names of the devices to sync with.
       '';
     };
     user = lib.mkOption {
-      default = "";
-      type = lib.types.str;
+      default = null;
+      type = lib.types.nullOr lib.types.str;
       description = lib.mdDoc ''
         The user to run syncthing as.
       '';
@@ -2794,6 +2885,13 @@ in
               type = lib.types.listOf lib.types.str;
               default = [ ];
             };
+            ignorePatterns = lib.mkOption {
+              type = lib.types.listOf lib.types.str;
+              default = [
+                ".directory"
+                ".thumbnails"
+              ];
+            };
           };
         }
       );
@@ -2804,20 +2902,25 @@ in
   config = lib.mkIf cfg.enable {
     services.syncthing = {
       inherit (cfg) cert;
-      dataDir = "/home/${cfg.user}";
+      dataDir = lib.mkIf (cfg.user != null) "/home/${cfg.user}";
       enable = true;
       inherit (cfg) key;
       settings = {
         inherit (cfg) devices;
         folders = lib.mapAttrs (_name: folder: {
-          inherit (folder) id path devices;
+          inherit (folder)
+            id
+            path
+            devices
+            ignorePatterns
+            ;
         }) cfg.folders;
         options = {
           localAnnounceEnabled = true;
           urAccepted = -1;
         };
       };
-      inherit (cfg) user;
+      user = lib.mkIf (cfg.user != null) cfg.user;
     };
   };
 }
@@ -3077,7 +3180,6 @@ in
   };
 
   config = {
-    # Use fixed UIDs/GIDs
     users.deterministicIds =
       (lib.mapAttrs (_name: u: {
         inherit (u) uid gid;
@@ -3180,15 +3282,13 @@ in
         msr.gid = 955;
       };
 
-    # This is needed for early set up of user accounts
     sops.secrets = {
       "passwords/root".neededForUsers = true;
     };
 
     users = {
-      # All users are immuntable; if a password is required it needs to be set via passwordFile
       mutableUsers = false;
-      users =
+      users = lib.mkMerge [
         (lib.mapAttrs (name: u: {
           inherit (u) isNormalUser;
           extraGroups = u.extraGroups ++ ifTheyExist u.shellGroups;
@@ -3209,18 +3309,17 @@ in
             }
           ];
         }) cfg)
-        // {
-          # Lock root password
+        {
           root = {
             hashedPassword = null;
             hashedPasswordFile = lib.mkForce config.sops.secrets."passwords/root".path;
           };
-        };
+        }
+      ];
     };
 
     security.sudo.extraRules = [
       {
-        # allow wheel group to run nixos-rebuild without password
         groups = [ "wheel" ];
         commands =
           let
@@ -3247,7 +3346,6 @@ in
               options = [ "NOPASSWD" ];
             }
             {
-              # let wheel group collect garbage without password
               command = "${currentSystem}/sw/bin/nix-collect-garbage";
               options = [
                 "SETENV"
@@ -3255,7 +3353,6 @@ in
               ];
             }
             {
-              # let wheel group interact with systemd without password
               command = "${currentSystem}/sw/bin/systemctl";
               options = [ "NOPASSWD" ];
             }

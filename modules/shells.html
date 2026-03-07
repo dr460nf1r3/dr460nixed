@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "mocha";
             const default_dark_theme = "mocha";
-            window.path_to_searchindex_js = "../searchindex-040deef1.js";
+            window.path_to_searchindex_js = "../searchindex-7d206069.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-ad66474f.js"></script>
@@ -185,7 +185,6 @@
                         <h1 id="shells"><a class="header" href="#shells">Shells</a></h1>
 <pre><code class="language-nix">{
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -194,8 +193,6 @@ let
   cfg = config.dr460nixed.shells;
 in
 {
-  imports = [ inputs.direnv-instant.nixosModules.direnv-instant ];
-
   options.dr460nixed.shells.enable =
     lib.mkEnableOption "Whether the shell should receive our aliases and themes."
     // {
@@ -210,9 +207,6 @@ in
           "grep" = "${pkgs.ugrep}/bin/ugrep";
         };
       };
-
-      direnv.enable = lib.mkForce false;
-      direnv-instant.enable = true;
 
       fish = {
         shellAbbrs = {
