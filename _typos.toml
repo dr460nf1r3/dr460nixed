@@ -4,6 +4,7 @@ extend-ignore-identifiers-re = [
   "immortalis",
   "odf",
   "PN3HVFK",
+  "EHR",
   "uage"
 ]
 

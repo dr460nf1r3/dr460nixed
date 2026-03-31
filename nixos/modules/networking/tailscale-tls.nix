@@ -44,6 +44,8 @@ in
 
     users.groups.tailscale-tls = { };
 
+    systemd.services.nginx.after = [ "tailscale-tls.service" ];
+
     systemd.services.tailscale-tls = {
       description = "Automatic Tailscale certificates";
 
@@ -75,7 +77,7 @@ in
           --key-file "${cfg.target}/key.key" \
           "$DOMAIN"
 
-        chown -R tailscale-tls:tailscale-tls "${cfg.target}"
+        chown -R tailscale-tls:nginx "${cfg.target}"
 
         chmod ${cfg.mode} "${cfg.target}/cert.crt" "${cfg.target}/key.key"
       '';

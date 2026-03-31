@@ -57,7 +57,7 @@
       enable = true;
       params.nginx = { };
     };
-    services.nginx.sslDhparam = config.security.dhparams.params.nginx.path;
+    services.nginx.sslDhparam = "/var/lib/dhparams/nginx.pem";
 
     # Default catch-all for unknown domains
     services.nginx.virtualHosts."_" = {

@@ -181,6 +181,9 @@
       url = "https://github.com/NixOS/nixpkgs/pull/490123.patch";
       flake = false;
     };
+
+    # Workarounds
+    syncthing-nixpkgs.url = "github:NixOS/nixpkgs/b40629efe5d6ec48dd1efba650c797ddbd39ace0";
   };
 
   outputs =

@@ -1,7 +1,9 @@
 {
   config,
   dragonLib,
+  inputs,
   lib,
+  pkgs,
   ...
 }:
 {
@@ -73,6 +75,10 @@
       user = "nico@dr460nf1r3.org";
     };
     tailscale.enable = true;
+    tailscale-tls = {
+      enable = true;
+      domain-override = "cup-dragon.emperor-mercat.ts.net";
+    };
   };
 
   security.acme.certs = {
@@ -100,7 +106,8 @@
     enable = true;
     cert = config.sops.secrets."syncthing/cup-dragon/cert".path;
     key = config.sops.secrets."syncthing/cup-dragon/key".path;
-    guiAddress = "cup-dragon.emperor-mercat.ts.net:8384";
+    package = inputs.syncthing-nixpkgs.legacyPackages.${pkgs.system}.syncthing;
+    guiAddress = "127.0.0.1:8384";
     openDefaultPorts = true;
     overrideDevices = false;
     overrideFolders = false;
@@ -116,27 +123,22 @@
         };
         "Music" = {
           id = "ybqqh-as53c";
-          path = "/home/nico/Music";
+          path = "~/Music";
           devices = lib.attrNames (dragonLib.syncthing.getDevicesFor config.networking.hostName);
         };
         "Pictures" = {
           id = "9ymwn-cz5ze";
-          path = "/home/nico/Pictures";
-          devices = lib.attrNames (dragonLib.syncthing.getDevicesFor config.networking.hostName);
-        };
-        "School" = {
-          id = "g5jha-cnrr4";
-          path = "/home/nico/School";
+          path = "~/Pictures";
           devices = lib.attrNames (dragonLib.syncthing.getDevicesFor config.networking.hostName);
         };
         "Sync" = {
           id = "u62ge-wzsau";
-          path = "/home/nico/Sync";
+          path = "~/Sync";
           devices = lib.attrNames (dragonLib.syncthing.getDevicesFor config.networking.hostName);
         };
         "Videos" = {
           id = "nxhpo-c2j5b";
-          path = "/home/nico/Videos";
+          path = "~/Videos";
           devices = lib.attrNames (dragonLib.syncthing.getDevicesFor config.networking.hostName);
         };
       };

@@ -14,6 +14,9 @@ in
   config = lib.mkIf cfg.enable {
     services.tailscale.enable = true;
 
-    networking.firewall.trustedInterfaces = [ "tailscale0" ];
+    networking.firewall = {
+      allowedUDPPorts = [ config.services.tailscale.port ];
+      trustedInterfaces = [ "tailscale0" ];
+    };
   };
 }
