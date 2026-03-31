@@ -183,7 +183,7 @@
     };
 
     # Workarounds
-    syncthing-nixpkgs.url = "github:NixOS/nixpkgs/b40629efe5d6ec48dd1efba650c797ddbd39ace0";
+    syncthing-nixpkgs.url = "github:NixOS/nixpkgs/90c93f32066ca8fdcb0ee5b568363b7e10c52eaf";
   };
 
   outputs =
