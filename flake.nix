@@ -275,10 +275,6 @@
             };
           };
 
-          legacyPackages = {
-            inherit (config) githubActions;
-          };
-
           devenv.shells = import ./maintenance/dev-shells {
             inherit
               inputs
