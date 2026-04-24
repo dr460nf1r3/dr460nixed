@@ -49,7 +49,7 @@ in
     };
 
     # Theming
-    garuda.catppuccin.enable = true;
+    garuda.catppuccin.enable = cfg.desktops.enable or false;
 
     # Increase open file limit for sudoers
     security.pam.loginLimits = [

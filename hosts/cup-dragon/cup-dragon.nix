@@ -86,19 +86,19 @@
       extraDomainNames = [ "*.dr460nf1r3.org" ];
       dnsProvider = "cloudflare";
       dnsPropagationCheck = true;
-      credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
+      environmentFile = config.sops.secrets."api_keys/cloudflare".path;
     };
     "garudalinux.org" = {
       extraDomainNames = [ "*.garudalinux.org" ];
       dnsProvider = "cloudflare";
       dnsPropagationCheck = true;
-      credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
+      environmentFile = config.sops.secrets."api_keys/cloudflare".path;
     };
     "chaotic.cx" = {
       extraDomainNames = [ "*.chaotic.cx" ];
       dnsProvider = "cloudflare";
       dnsPropagationCheck = true;
-      credentialsFile = config.sops.secrets."api_keys/cloudflare".path;
+      environmentFile = config.sops.secrets."api_keys/cloudflare".path;
     };
   };
 

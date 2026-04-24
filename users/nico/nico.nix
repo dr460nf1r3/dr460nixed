@@ -6,7 +6,7 @@
 }:
 let
   userCfg = dr460nixedUserConfig.nico or { };
-  isDesktop = osConfig.dr460nixed.desktops.enable or true;
+  isDesktop = osConfig.dr460nixed.desktops.enable or false;
 in
 {
   imports = [
