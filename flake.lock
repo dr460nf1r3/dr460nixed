@@ -214,19 +214,13 @@
         "lastModified": 1772186516,
         "narHash": "sha256-8s28pzmQ6TOIUzznwFibtW1CMieMUl1rYJIxoQYor58=",
         "owner": "rossng",
-        "lastModified": 1772186516,
-        "narHash": "sha256-8s28pzmQ6TOIUzznwFibtW1CMieMUl1rYJIxoQYor58=",
-        "owner": "rossng",
         "repo": "crate2nix",
-        "rev": "ba5dd398e31ee422fbe021767eb83b0650303a6e",
         "rev": "ba5dd398e31ee422fbe021767eb83b0650303a6e",
         "type": "github"
       },
       "original": {
         "owner": "rossng",
-        "owner": "rossng",
         "repo": "crate2nix",
-        "rev": "ba5dd398e31ee422fbe021767eb83b0650303a6e",
         "rev": "ba5dd398e31ee422fbe021767eb83b0650303a6e",
         "type": "github"
       }
@@ -475,11 +469,8 @@
       "locked": {
         "lastModified": 1775087534,
         "narHash": "sha256-91qqW8lhL7TLwgQWijoGBbiD4t7/q75KTi8NxjVmSmA=",
-        "lastModified": 1775087534,
-        "narHash": "sha256-91qqW8lhL7TLwgQWijoGBbiD4t7/q75KTi8NxjVmSmA=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "3107b77cd68437b9a76194f0f7f9c55f2329ca5b",
         "rev": "3107b77cd68437b9a76194f0f7f9c55f2329ca5b",
         "type": "github"
       },
@@ -801,11 +792,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777004352,
-        "narHash": "sha256-SV+9PgNwZ8jHVCjK6YaCBzaheLSW7cDnm5DpOYrD8Vw=",
+        "lastModified": 1777054018,
+        "narHash": "sha256-tTNS7V6xN/LX1KZ0TrdOnj375ZrsUlLoce4qxZwDN9U=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6012cf1fed3eba66115f3fd117b9be6bd2a15b2f",
+        "rev": "ffbd94a1c9d7d3e1258e51c084ab2109da04f2b1",
         "type": "github"
       },
       "original": {
@@ -950,7 +941,6 @@
       "original": {
         "owner": "cachix",
         "ref": "devenv-2.34",
-        "ref": "devenv-2.34",
         "repo": "nix",
         "type": "github"
       }
@@ -1016,11 +1006,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1776830860,
-        "narHash": "sha256-R4lBaF09BsHMGj5TPpVOcuhq8St2fryDnlKCzQIMviM=",
+        "lastModified": 1777052216,
+        "narHash": "sha256-Ign2HBoAwp/WvycrYINo6HERpx5lk5fTNhN2+eX043U=",
         "owner": "powerofthe69",
         "repo": "nix-gaming-edge",
-        "rev": "8576b1e1426cdf84ad3d053940d3df31d8b26744",
+        "rev": "b552d0ae908274d1826b443555ba5141488e43e4",
         "type": "github"
       },
       "original": {
@@ -1571,11 +1561,8 @@
       "locked": {
         "lastModified": 1775636079,
         "narHash": "sha256-pc20NRoMdiar8oPQceQT47UUZMBTiMdUuWrYu2obUP0=",
-        "lastModified": 1775636079,
-        "narHash": "sha256-pc20NRoMdiar8oPQceQT47UUZMBTiMdUuWrYu2obUP0=",
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "rev": "790751ff7fd3801feeaf96d7dc416a8d581265ba",
         "rev": "790751ff7fd3801feeaf96d7dc416a8d581265ba",
         "type": "github"
       },
