@@ -1408,7 +1408,6 @@
         "quadlet-nix": "quadlet-nix",
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",
-        "syncthing-nixpkgs": "syncthing-nixpkgs",
         "systems": "systems",
         "treefmt-nix": "treefmt-nix_2",
         "ucodenix": "ucodenix"
@@ -1496,22 +1495,6 @@
       "original": {
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
-        "type": "github"
-      }
-    },
-    "syncthing-nixpkgs": {
-      "locked": {
-        "lastModified": 1773821835,
-        "narHash": "sha256-TJ3lSQtW0E2JrznGVm8hOQGVpXjJyXY2guAxku2O9A4=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b40629efe5d6ec48dd1efba650c797ddbd39ace0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "b40629efe5d6ec48dd1efba650c797ddbd39ace0",
         "type": "github"
       }
     },
