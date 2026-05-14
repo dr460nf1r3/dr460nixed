@@ -174,12 +174,6 @@
     };
 
     ucodenix.url = "github:e-tho/ucodenix";
-
-    # Patches (auto-applying to inputs)
-    nixpkgs-patch-nvidia-590 = {
-      url = "https://github.com/NixOS/nixpkgs/pull/490123.patch";
-      flake = false;
-    };
   };
 
   outputs =

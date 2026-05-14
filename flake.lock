@@ -1235,18 +1235,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-patch-nvidia-590": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-tf5RDCzWiJWxmP6y66lUQkmLAtcubZDpCQWKR31WGRM=",
-        "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/pull/490123.patch"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/pull/490123.patch"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1765186076,
@@ -1477,7 +1465,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_8",
-        "nixpkgs-patch-nvidia-590": "nixpkgs-patch-nvidia-590",
         "pre-commit-hooks": "pre-commit-hooks_3",
         "quadlet-nix": "quadlet-nix",
         "sops-nix": "sops-nix",
